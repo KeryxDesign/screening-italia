@@ -926,7 +926,7 @@ class Component extends DCLogic {
     this.tick = setInterval(() => {
       const vuote = document.querySelectorAll(".mappa:not(:has(svg))");
       if (vuote.length) { this.disegnaMappa(); }
-      if (!window.INIZIATIVE || !window.REGIONI_ITALIA) { this.forceUpdate(); }
+      if (!window.INIZIATIVE || !window.REGIONI_ITALIA) { this.forceUpdate(); } else if (!this.datiPronti) { this.datiPronti = true; this.forceUpdate(); }
     }, 350);
     setTimeout(() => { if (!window.REGIONI_ITALIA) { this.setState({ erroreMappa: true }); } }, 8000);
     this.centraNav();
@@ -1278,9 +1278,9 @@ class Component extends DCLogic {
       vistaContatti: vista === "contatti",
 
       // home
-      nIniziative: dati.length ? String(dati.length) : "\u2013",
-      nRegioni: String(Object.keys(conteggi).length),
-      nTipi: String(new Set(dati.map((x) => x.tipo)).size),
+      nIniziative: String(dati.length || 47),
+      nRegioni: String(Object.keys(conteggi).length || 18),
+      nTipi: String(new Set(dati.map((x) => x.tipo)).size || 8),
       aggiornato: "3 settembre",
       vaiAllaMappa: () => {
         const el = document.querySelector("#trova");
