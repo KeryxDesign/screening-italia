@@ -44,7 +44,7 @@ a:hover{color:var(--verde-scuro);text-decoration-thickness:2.5px}
 
 .hdr{background:linear-gradient(180deg,#0F5F4C 0%,#0B4A3B 100%);color:#fff;position:sticky;top:0;z-index:30;
   box-shadow:0 2px 12px rgba(1,30,25,0.18)}
-.hdr-riga{position:relative;display:flex;align-items:stretch;gap:10px;min-height:60px;max-width:960px;padding:0 20px}
+.hdr-riga{position:relative;display:flex;align-items:stretch;gap:10px;min-height:60px;max-width:1400px;padding:0 20px}
 .marchio{flex:1;min-width:0;display:flex;align-items:center;white-space:nowrap;color:#fff;
   text-decoration:none;cursor:pointer;font-size:19px;font-weight:600;letter-spacing:-0.015em;line-height:1.1}
 .marchio:hover span{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px}
@@ -234,7 +234,7 @@ a:hover{color:var(--verde-scuro);text-decoration-thickness:2.5px}
 /* --- Da tablet in su la colonna respira, i bottoni non diventano barre --- */
 @media (min-width:860px){
   .wrap{max-width:680px;padding:0 24px}
-  .hdr-riga{max-width:1040px;padding:0 24px}
+  .hdr-riga{max-width:1400px;padding:0 24px}
   .sezione{padding-top:76px;padding-bottom:76px}
   h1{font-size:42px}
   h2{font-size:38px}
