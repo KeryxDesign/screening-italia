@@ -1,0 +1,81 @@
+/* Versione grezza in bianco e nero. Sovrascrive stile.css, che resta intatto. */
+:root{
+  --verde:#1A1A1A; --verde-scuro:#000000; --verde-tenue:#F2F2F2;
+  --terracotta:#1A1A1A; --inchiostro:#111111; --soft:#4A4A4A;
+  --carta:#FFFFFF; --carta2:#F0F0F0; --bordo:#111111;
+}
+/* Fondi piatti, nessun gradiente */
+.b-bianco{background:#fff;box-shadow:0 0 0 100vmax #fff}
+.b-crema{background:#F1F1F1;box-shadow:0 0 0 100vmax #F1F1F1}
+.b-verde{background:#E7E7E7;box-shadow:0 0 0 100vmax #E7E7E7}
+.b-carta{background:#F7F7F7;box-shadow:0 0 0 100vmax #F7F7F7}
+.hdr{background:#111;box-shadow:none}
+.ftr{background:#111}
+h2{color:#111}
+
+/* Fotografie: fuori. Restano i riquadri con la didascalia. */
+.hero-sfondo image-slot,.hero-sfondo img{display:none}
+.hero-sfondo{background:#EDEDED}
+.hero-velo{background:none}
+.hero h1,.hero p,.hero .occhiello,.hero .nota{color:#111;text-shadow:none}
+.hero a{color:#111;text-decoration-color:#111}
+.hero a:hover{color:#000}
+.art-img{background:#E4E4E4;
+  background-image:repeating-linear-gradient(135deg,transparent 0 10px,rgba(0,0,0,0.07) 10px 20px)}
+.art-img image-slot{display:none}
+.art-img::after{content:"immagine";display:flex;align-items:center;justify-content:center;
+  width:100%;height:100%;font-size:15px;letter-spacing:0.08em;text-transform:uppercase;color:#666}
+
+/* Bottoni e superfici: contorno, niente rilievo */
+.cta,.tel,.scelta.on,.filtro.on{background:#111;color:#fff;box-shadow:none;border-color:#111}
+.cta:hover,.tel:hover{background:#000;color:#fff;transform:none;box-shadow:none}
+.cta-2{background:#fff;color:#111;border-color:#111;box-shadow:none}
+.cta-2:hover{background:#EFEFEF;color:#000;transform:none;box-shadow:none}
+.wa{background:#fff;color:#111;border:2px solid #111;box-shadow:none}
+.wa:hover{background:#EFEFEF;color:#111;transform:none;box-shadow:none}
+.wa-i,.wa-tit,.wa-sub{color:#111}
+.card,.art{background:#fff;box-shadow:none;border-color:#111}
+.art:hover{transform:none;box-shadow:none;border-color:#111}
+.passo .num{background:#111;box-shadow:none}
+.scelta:hover{background:#F0F0F0}
+.dato .et svg{color:#111}
+.tag,.tag-gratis,.tag-paga,.tag-invito{background:#fff;color:#111;border-color:#111}
+.finto{background:#fff;border-color:#111;color:#111}
+.mappa svg{filter:none}
+.avviso{background:#F7F7F7;border-color:#111}
+
+.b-pieno{background:#111;box-shadow:0 0 0 100vmax #111}
+.trust-occhiello{color:#CFCFCF}
+.trust-nota{color:#BDBDBD}
+
+.wa-float{background:#111;box-shadow:none;color:#fff}
+.wa-float:hover{background:#000;color:#fff}
+.testi-virg{color:#777}
+
+.testi{background:#fff}
+
+.testi-foto image-slot{display:none}
+.testi-foto{background:#E4E4E4;
+  background-image:repeating-linear-gradient(135deg,transparent 0 8px,rgba(0,0,0,0.07) 8px 16px)}
+
+.scad,.scad-gialla,.scad-chiusa{background:transparent;color:#111;border-color:#111}
+.scad-calma{background:transparent;color:#3A3A3A;border-color:transparent}
+.scad-posti{background:transparent;color:#111;border-color:#111;border-style:dashed}
+.scad-rossa{background:#111;color:#fff;border-color:#111}
+.urgenza{color:#111}
+
+.card{background:#fff;border:1.5px solid #111;box-shadow:none}
+.card > h3{color:#111}
+.dato{border-bottom-color:#DADADA}
+.tel{background:#111;color:#fff}
+.tel:hover{background:#000;transform:none;box-shadow:none}
+
+.cta,.tel{background:#111 !important;color:#fff !important;border:none !important;box-shadow:none !important}
+.cta:hover,.tel:hover{background:#000 !important;color:#fff !important;transform:none;box-shadow:none !important}
+.cta-2{background:#fff !important;color:#111 !important;border:none !important;box-shadow:inset 0 0 0 2px #111 !important}
+.cta-2:hover{background:#EFEFEF !important;color:#000 !important;transform:none;box-shadow:none !important}
+
+.ftr-tit,.ftr-wa{color:#CFCFCF !important}
+.ftr-claim,.ftr-legale{color:#C4C4C4 !important}
+.ftr-avviso{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.3)}
+.ftr-avviso svg{color:#fff}
