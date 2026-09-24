@@ -44,15 +44,15 @@ a:hover{color:var(--verde-scuro);text-decoration-thickness:2.5px}
 
 .hdr{background:linear-gradient(180deg,#0F5F4C 0%,#0B4A3B 100%);color:#fff;position:sticky;top:0;z-index:30;
   box-shadow:0 2px 12px rgba(1,30,25,0.18)}
-.hdr-riga{position:relative;display:flex;align-items:stretch;gap:10px;min-height:60px;max-width:1400px;padding:0 20px}
-.marchio{flex:1;min-width:0;display:flex;align-items:center;white-space:nowrap;color:#fff;
+.hdr-riga{position:relative;display:flex;flex-wrap:nowrap;align-items:stretch;gap:10px;min-height:88px;max-width:none;padding:0 20px}
+.marchio{flex:0 0 auto;margin-right:auto;display:flex;align-items:center;white-space:nowrap;color:#fff;
   text-decoration:none;cursor:pointer;font-size:19px;font-weight:600;letter-spacing:-0.015em;line-height:1.1}
 .marchio:hover span{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px}
 .marchio:focus-visible{outline:3px solid var(--terracotta);outline-offset:2px;border-radius:6px}
 .marchio:hover{color:#fff;text-decoration:none}
 
 .nav-riga{display:flex;gap:2px}
-.nav-riga a{display:flex;align-items:center;min-height:60px;padding:0 10px;white-space:nowrap;
+.nav-riga a{display:flex;align-items:center;min-height:88px;padding:0 10px;white-space:nowrap;
   color:#D9E9E1;font-size:17px;font-weight:500;text-decoration:none;border-bottom:4px solid transparent}
 .nav-riga a:hover{color:#fff;background:rgba(255,255,255,0.10);text-decoration:none}
 .nav-riga a[aria-current="page"]{color:#fff;font-weight:600;border-bottom-color:var(--terracotta)}
@@ -60,8 +60,8 @@ a:hover{color:var(--verde-scuro);text-decoration-thickness:2.5px}
 .menu-chk,.hamb{display:none}
 
 /* Sotto i 860px il menu diventa un pannello a comparsa. */
-@media (max-width:999px){
-  .menu-chk{display:block;position:absolute;right:16px;top:8px;width:44px;height:44px;margin:0;opacity:0;cursor:pointer;z-index:2}
+@media (max-width:1199px){
+  .menu-chk{display:block;position:absolute;right:16px;top:50%;transform:translateY(-50%);width:44px;height:44px;margin:0;opacity:0;cursor:pointer;z-index:2}
   .hamb{display:flex;align-items:center;justify-content:center;width:44px;height:44px;
     align-self:center;color:#fff;border-radius:8px;border:1.5px solid rgba(255,255,255,0.35)}
   .i-chiudi{display:none}
@@ -234,7 +234,8 @@ a:hover{color:var(--verde-scuro);text-decoration-thickness:2.5px}
 /* --- Da tablet in su la colonna respira, i bottoni non diventano barre --- */
 @media (min-width:860px){
   .wrap{max-width:680px;padding:0 24px}
-  .hdr-riga{max-width:1400px;padding:0 24px}
+  .hdr-riga{max-width:none;padding:0 32px;min-height:88px}
+  .nav-riga a{min-height:88px}
   .sezione{padding-top:76px;padding-bottom:76px}
   h1{font-size:42px}
   h2{font-size:38px}
@@ -538,8 +539,13 @@ html.contrasto .wa-float{background:#005C2E;border:2.5px solid #000;box-shadow:n
 @media (min-width:860px){.car-pista > .testi{width:380px;flex:0 0 380px;margin-right:24px}}
 @keyframes scorri{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){
-  .car-pista{animation:none;overflow-x:auto;width:100%}
-  .carosello{mask-image:none;-webkit-mask-image:none}
+  /* Il contenitore che scorre e SEMPRE .carosello: e quello che riceve il fuoco.
+     La pista resta piu larga, altrimenti non ci sarebbe nulla da scorrere. */
+  .car-pista{animation:none}
+  .carosello{mask-image:none;-webkit-mask-image:none;
+    overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+  .car-pista > *{scroll-snap-align:center}
+  .carosello:focus-visible{outline:3px solid var(--terracotta);outline-offset:3px}
 }
 
 /* --- Ritratto nella testimonianza --- */
@@ -610,7 +616,7 @@ html.contrasto .numeri-hero{border-top-color:#fff}
 .art-figura-img{display:block;width:100%;aspect-ratio:16 / 9;border-radius:10px;overflow:hidden;background:var(--carta2)}
 .art-figura-img image-slot{width:100%;height:100%;display:block}
 .art-didascalia{font-size:15px;color:var(--soft);line-height:1.4}
-.art-sez{scroll-margin-top:80px}
+.art-sez{scroll-margin-top:96px}
 .art-sub{text-align:left;margin-left:0;max-width:30ch;font-size:24px;line-height:1.26;
   letter-spacing:-0.01em;color:var(--verde-scuro)}
 @media (min-width:860px){.art-sub{font-size:28px}}
@@ -825,7 +831,7 @@ html.contrasto .sel-discreto .campo-sel{background:#00291F;border-color:#fff;bac
 .ftr-col{display:flex;flex-direction:column}
 .ftr-tit{font-size:15px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
   color:#8FD3B9;margin:0 0 6px}
-.ftr-col a{display:inline-flex;align-items:center;min-height:40px;font-size:17px;
+.ftr-col a{display:inline-flex;align-items:center;min-height:44px;font-size:17px;
   color:#DCEBE3 !important;text-decoration:none;align-self:flex-start}
 .ftr-col a:hover{color:#fff !important;text-decoration:underline;text-underline-offset:4px}
 .ftr-avviso{display:flex;gap:12px;align-items:flex-start;margin-top:36px;padding:18px 20px;
@@ -836,7 +842,7 @@ html.contrasto .sel-discreto .campo-sel{background:#00291F;border-color:#fff;bac
   gap:8px 24px;margin-top:26px;padding-top:20px;border-top:1.5px solid rgba(255,255,255,0.16)}
 .ftr-legale{font-size:15px !important;line-height:1.5;color:#A9C3B9 !important;margin:0;max-width:none}
 .ftr-legale-link{display:flex;flex-wrap:wrap;align-items:center;gap:2px 4px}
-.ftr-legale a{color:#C9DED5 !important;min-height:40px;padding:0 4px;display:inline-flex;align-items:center}
+.ftr-legale a{color:#C9DED5 !important;min-height:44px;padding:0 4px;display:inline-flex;align-items:center}
 .ftr-legale a:hover{color:#fff !important}
 .ftr-legale span{color:rgba(255,255,255,0.35)}
 html.contrasto .ftr-tit,html.contrasto .ftr-wa{color:#fff !important}
@@ -887,8 +893,10 @@ html.contrasto .mappa-bianca path.piena{fill:#FFD100;stroke:#000;stroke-width:1.
 /* Domande frequenti: tre per riga, senza tratteggio intorno alle foto */
 @media (min-width:640px){.art-griglia{grid-template-columns:1fr 1fr;gap:20px}}
 @media (min-width:1000px){.art-griglia{grid-template-columns:repeat(3,1fr);gap:22px}}
-.art-img image-slot,.art-img image-slot::part(placeholder),.art-figura-img image-slot{
-  border:0 !important;outline:0 !important;background:#E9EFF4}
+/* Il tratteggio vive su part="ring" dentro lo shadow DOM del segnaposto:
+   e l'unico modo di raggiungerlo. Le foto sono impostate, il tratteggio e solo rumore. */
+image-slot::part(ring){display:none !important}
+.art-img image-slot,.art-figura-img image-slot{border:0 !important;outline:0 !important;background:#E9EFF4}
 .art-img{background:#E9EFF4}
 
 /* Il numero da chiamare resta un pulsante anche da centrato. */
@@ -919,3 +927,166 @@ html.contrasto .mappa-bianca path.piena{fill:#FFD100;stroke:#000;stroke-width:1.
   .trust-riga{gap:64px}
 }
 @media (max-width:699px){.trust-riga{gap:22px 34px}}
+
+/* ============ Sostenitori: leggibili a ogni larghezza ============
+   Il nome di un ente non si tronca mai. Sotto i 1000px la fila va a piu righe. */
+.trust-nome{font-size:14px !important;white-space:normal !important;
+  overflow:visible !important;text-overflow:clip !important;line-height:1.18}
+.trust-marchio{width:30px !important;height:30px !important}
+.trust-riga{flex-wrap:wrap !important;justify-content:center;row-gap:22px}
+.trust-logo{flex:0 0 auto;min-width:0}
+@media (min-width:1000px){
+  .trust-nome{font-size:15px !important}
+  .trust-marchio{width:38px !important;height:38px !important}
+  /* Nessun nowrap: se i cinque marchi non stanno su una riga, vanno a capo
+     invece di sbordare. Da 1200px ci stanno tutti con 64px di respiro. */
+  .trust-riga{column-gap:clamp(28px,4vw,64px)}
+}
+@media (min-width:700px) and (max-width:999px){
+  .banda:has(.trust-riga){max-width:900px}
+  .trust-riga{column-gap:40px}
+}
+
+/* La risposta a soffietto senza wrapper: allineata alla domanda e staccata dal filetto. */
+.elenco > p{padding:12px 16px 18px;margin:0}
+
+/* Interruttore di sicurezza: vince anche su una transizione gia avviata,
+   perche una transizione congelata non si sblocca togliendo una classe. */
+html.senza-anim .rivela,html.senza-anim .rivela.dentro{
+  opacity:1 !important;transform:none !important;transition:none !important;animation:none !important}
+html.senza-anim .hero-sfondo img,html.senza-anim .hero-sfondo image-slot,
+html.senza-anim .car-pista{animation:none !important}
+/* Senza animazione il carosello si scorre a mano: nessuna testimonianza
+   resta irraggiungibile dietro un overflow nascosto. */
+html.senza-anim .carosello{overflow-x:auto !important;scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;scrollbar-width:thin}
+html.senza-anim .car-pista > *{scroll-snap-align:center}
+html.senza-anim .carosello:focus-visible{outline:3px solid var(--terracotta);outline-offset:3px}
+
+/* Il marchio vero, estratto dalla presentazione di Angelo. */
+/* A 76px il marchio supera i 160px di larghezza della testata mobile
+   (sistema_visivo.md §6). */
+.marchio-img{display:block;height:76px;width:auto;flex-shrink:0}
+.marchio:hover .marchio-img{opacity:0.88}
+/* Nel piede il margine resta 1/3 (sistema_visivo.md §6): la deroga 1/8 vale solo in testata. */
+.ftr-marchio-img{display:block;height:72px;width:auto;background:#FFFFFF;padding:12px;border-radius:8px;box-sizing:content-box}
+.ftr-marchio-img{align-self:flex-start}
+.marchio-vetrina{width:100%;max-width:26rem;align-self:center;padding:22px 26px;
+  border-radius:12px;background:#fff;box-shadow:0 3px 12px rgba(4,40,64,0.09)}
+.marchio-vetrina img{display:block;width:100%;height:auto}
+html.contrasto .marchio-vetrina{border:2.5px solid #000;box-shadow:none}
+
+/* ============ Consenso ai cookie ============ */
+.ck{position:fixed;left:0;right:0;bottom:0;z-index:70;
+  background:linear-gradient(180deg,#04251E 0%,#01170F 100%);
+  border-top:2px solid rgba(255,255,255,0.16);
+  box-shadow:0 -10px 34px rgba(1,18,14,0.38)}
+.ck-corpo{max-width:1040px;margin:0 auto;padding:20px 24px;
+  display:flex;flex-direction:column;gap:18px}
+@media (min-width:900px){
+  .ck-corpo{flex-direction:row;align-items:center;justify-content:space-between;gap:32px;padding:22px 24px}
+  .ck-testo{flex:1 1 auto;min-width:0}
+}
+.ck-tit{font-size:20px;font-weight:600;line-height:1.25;color:#fff;margin:0 0 6px;
+  text-align:left;max-width:none;letter-spacing:-0.008em}
+.ck-txt{font-size:17px;line-height:1.55;color:#EDF5F2;margin:0;max-width:72ch;text-align:left}
+.ck-txt a{color:#A9E2CD;text-decoration:underline;text-underline-offset:3px}
+.ck-txt a:hover{color:#fff}
+.ck-azioni{display:flex;flex-wrap:wrap;gap:12px;align-items:center;flex-shrink:0}
+.ck-btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 22px;
+  border-radius:10px;font-family:inherit;font-size:17px;font-weight:700;cursor:pointer;
+  transition:transform .12s ease,box-shadow .12s ease,background .12s ease}
+.ck-btn:hover{transform:translateY(-1px)}
+.ck-btn:active{transform:none}
+/* Pari dignita: accettare e rifiutare hanno lo stesso peso visivo. */
+.ck-btn-si{background:linear-gradient(180deg,#FFD34F 0%,#F0A800 100%);color:#14100A;
+  border:1.5px solid rgba(122,80,0,0.5);box-shadow:0 2px 6px rgba(0,0,0,0.26),inset 0 1px 0 rgba(255,255,255,0.5)}
+.ck-btn-no{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.72)}
+.ck-btn-no:hover{background:rgba(255,255,255,0.12);border-color:#fff}
+.ck-link{min-height:50px;padding:0 6px;background:none;border:0;cursor:pointer;
+  font-family:inherit;font-size:17px;font-weight:600;color:#A9E2CD;
+  text-decoration:underline;text-underline-offset:4px}
+.ck-link:hover{color:#fff}
+@media (max-width:899px){
+  .ck-azioni{flex-direction:column;align-items:stretch}
+  .ck-btn{width:100%}
+  .ck-link{text-align:center}
+}
+
+/* Pannello delle preferenze */
+.ck-velo{position:fixed;inset:0;z-index:80;background:rgba(2,20,16,0.6);backdrop-filter:blur(2px)}
+.ck-pannello{position:fixed;z-index:81;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:calc(100% - 32px);max-width:36rem;max-height:calc(100vh - 48px);overflow-y:auto;
+  background:#fff;border-radius:16px;padding:24px;
+  box-shadow:0 24px 60px rgba(2,24,18,0.42)}
+.ck-p-testa{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;
+  padding-bottom:16px;border-bottom:1.5px solid var(--bordo)}
+.ck-p-testa .ck-tit{color:var(--inchiostro);margin:0;font-size:23px}
+.ck-x{flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  background:none;border:1.5px solid var(--bordo);border-radius:10px;color:var(--inchiostro);cursor:pointer}
+.ck-x:hover{background:var(--carta2)}
+.ck-voce{display:flex;gap:18px;align-items:flex-start;justify-content:space-between;
+  padding:20px 0;border-bottom:1.5px solid var(--bordo)}
+.ck-voce-testo{min-width:0}
+.ck-voce-tit{font-size:19px;font-weight:600;line-height:1.3;margin:0 0 5px;max-width:none}
+.ck-voce-txt{font-size:16px;line-height:1.55;color:var(--soft);margin:0;max-width:60ch}
+.ck-sempre{flex-shrink:0;font-size:15px;font-weight:700;color:var(--verde);margin:2px 0 0;max-width:none}
+/* Bersaglio da 44px come tutti gli altri comandi del sito.
+   Lo stato NON passa da proprieta animate: la pallina si sposta con «left» e
+   la traccia cambia colore piatto, cosi resta giusto anche dove le transizioni
+   non avanzano e dove il gradiente non e interpolabile. */
+.ck-sw{flex-shrink:0;position:relative;width:78px;height:44px;border-radius:999px;cursor:pointer;
+  background-color:#C8D4DC;background-image:none;border:1.5px solid rgba(11,60,93,0.28)}
+.ck-sw-pallina{position:absolute;top:4px;left:4px;width:34px;height:34px;border-radius:999px;
+  background:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.28);transform:none}
+.ck-sw.on{background-color:#0E5C48;background-image:none;border-color:var(--verde-scuro)}
+.ck-sw.on .ck-sw-pallina{left:38px;transform:none}
+/* Un segno che non dipende dal colore: la traccia accesa porta la spunta. */
+.ck-sw::after{content:"";position:absolute;top:50%;left:13px;width:11px;height:6px;
+  margin-top:-5px;border-left:2.5px solid #fff;border-bottom:2.5px solid #fff;
+  transform:rotate(-45deg);opacity:0}
+.ck-sw.on::after{opacity:1}
+.ck-p-fondo{display:flex;flex-direction:column;gap:10px;padding-top:20px}
+.ck-p-fondo .ck-btn{align-self:stretch}
+.ck-nota{font-size:15px;line-height:1.5;color:var(--soft);margin:0;max-width:none;text-align:center}
+
+/* Il banner non copre i due pulsanti flottanti. */
+.ck ~ .wa-float{bottom:auto}
+.ftr-btn-link{background:none;border:0;padding:0 4px;min-height:44px;cursor:pointer;
+  font-family:inherit;font-size:15px;color:#C9DED5;display:inline-flex;align-items:center;
+  text-decoration:underline;text-underline-offset:3px}
+.ftr-btn-link:hover{color:#fff}
+
+html.contrasto .ck{background:#00291F;border-top:2px solid #fff}
+html.contrasto .ck-btn-si{background:#FFD100;color:#000;border:2.5px solid #fff;box-shadow:none}
+html.contrasto .ck-btn-no{border-color:#fff}
+html.contrasto .ck-txt,html.contrasto .ck-link{color:#fff}
+html.contrasto .ck-pannello{border:3px solid #000}
+html.contrasto .ck-sw.on{background:#00453A}
+
+/* ============ Card delle iniziative cliccabili (brief LORI 24/09/2026) ============ */
+/* Stesso schema delle card articolo: link sul titolo, ::after steso sulla card.
+   Il telefono sta sopra lo strato e resta un bersaglio a se. Nessun valore nuovo. */
+.card-ini{position:relative;transition:transform .18s ease,box-shadow .18s ease}
+.card-ini:hover,.card-ini:focus-within{transform:translateY(-2px);
+  box-shadow:0 2px 4px rgba(4,40,64,0.08),0 14px 30px rgba(4,40,64,0.16)}
+.ini-tit a{color:inherit;text-decoration:none}
+.ini-tit a::after{content:"";position:absolute;inset:0;border-radius:14px}
+.ini-tit a:hover{text-decoration:underline;text-underline-offset:3px}
+.card-ini:has(.ini-tit a:focus-visible){outline:3px solid var(--terracotta);outline-offset:3px}
+@supports selector(:has(a)){.ini-tit a:focus-visible{outline:none}}
+.card-ini .tel{position:relative;z-index:1}
+.card-ini .tel:focus-visible{outline:3px solid var(--terracotta);outline-offset:3px}
+.ini-vai{pointer-events:none;align-self:center}
+html.contrasto .card-ini:has(.ini-tit a:focus-visible),html.contrasto .card-ini .tel:focus-visible{outline-color:#000}
+@media (prefers-reduced-motion:reduce){
+  .card-ini{transition:none}
+  .card-ini:hover,.card-ini:focus-within{transform:none}
+}
+/* Pagina dell'iniziativa: il titolo riceve il fuoco dal codice, non e un comando. */
+.ini-fuoco:focus{outline:none}
+/* Correzioni LORI, giro 1: occhiello del dettaglio e testo della pagina non trovata a sinistra. */
+.banda:not(.hero) .ini-reg{text-align:left}
+/* Prefisso .banda:not(.hero) .fx: serve a battere la regola di centratura
+   .banda:not(.hero) .fx:not(.lettura):has(> h2) > p (0,4,2). Colpisce sempre e solo questo avviso. */
+.banda:not(.hero) .fx.avviso:has(> h2.ini-fuoco) > p{text-align:left;margin-left:0}

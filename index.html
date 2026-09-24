@@ -4,12 +4,11 @@
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="googlebot" content="noindex, nofollow">
 
-<style data-omelette-injected>html,body{background:transparent}</style><script data-omelette-injected>(()=>{{const n=new URLSearchParams(location.search).get("theme");if(n==="light"||n==="dark"){document.documentElement.dataset.theme=n}}{if(new URLSearchParams(location.search).get("_omthumb")==="1"){const n=(f)=>{const g=f.focus;if(!g)return;f.focus=function(h){g.call(this,{...h,preventScroll:true})}};n(HTMLElement.prototype);n(SVGElement.prototype);if(typeof MathMLElement!=="undefined"){n(MathMLElement.prototype)}const d=(f)=>{f.removeAttribute("autofocus");f.inert=true;if(!(f instanceof HTMLElement))f.removeAttribute("tabindex")};const p=(f)=>{if(f.hasAttribute("autofocus"))d(f);for(const g of f.querySelectorAll("[autofocus]")){d(g)}};p(document.documentElement);new MutationObserver((f)=>{for(const g of f){for(const h of g.addedNodes){if(h.nodeType===1)p(h)}}}).observe(document,{childList:true,subtree:true})}}{const n=()=>{try{if(document.querySelector('meta[name="color-scheme"]'))return;const d=getComputedStyle(document.documentElement).getPropertyValue("color-scheme").trim();if(d&&d!=="normal")return;const p=(y)=>{if(!y)return null;const m=getComputedStyle(y).backgroundColor.match(/^rgba?\(\s*(\d+)[,\s]+(\d+)[,\s]+(\d+)(?:[,\s/]+([\d.]+%?))?\s*\)$/);if(!m)return null;const w=m[4]==null?1:parseFloat(m[4])/(m[4].endsWith("%")?100:1);if(w<0.99)return null;return[+m[1],+m[2],+m[3]]};const f=p(document.body)||p(document.documentElement);if(!f)return;const g=(y)=>{const m=y/255;return m<=0.04045?m/12.92:((m+0.055)/1.055)**2.4};const h=0.2126*g(f[0])+0.7152*g(f[1])+0.0722*g(f[2]);document.documentElement.style.setProperty("color-scheme",h<0.4?"dark":"light")}catch{}};if(document.readyState==="complete")n();else window.addEventListener("load",n)}var I=["https://claude.ai","https://preview.claude.ai","https://1a378226-3412-4468-857f-52b3f2959e23.claudeusercontent.com"];var B=true;var K=false;var C=()=>{};if(K===true){try{const n=setTimeout.bind(window);const d=1e4;const p=15;const f=1e4;const g=120000;const h=200;const y=(o)=>{try{let r;if(typeof o==="string")r=o;else if(o instanceof URL)r=o.href;else if(typeof Request!=="undefined"&&o instanceof Request)r=o.url;else return null;if(!r)return null;const l=document.baseURI;const i=new URL(r,l);if(i.protocol!=="http:"&&i.protocol!=="https:")return null;if(i.origin!==new URL(l).origin)return null;return i.origin+i.pathname}catch{return null}};const m=new Map;const w=(o)=>{let r=m.get(o);if(!r){if(m.size>=h){const l=m.keys().next().value;if(l!==undefined)m.delete(l)}r={fails:[],until:0,cooldown:f,hard:false};m.set(o,r)}return r};const R=(o)=>{const r=m.get(o);return r!==undefined&&r.until>Date.now()};const O=(o,r)=>{const l=Date.now();const i=w(o);if(r)i.hard=true;if(i.until>l)return;i.fails.push(l);while(i.fails.length>0&&i.fails[0]<=l-d)i.fails.shift();if(i.fails.length>=p){i.until=l+i.cooldown;if(i.hard)i.cooldown=Math.min(i.cooldown*2,g);i.fails.length=0;try{n(()=>{try{S(true)}catch{}},i.until-l+100)}catch{}console.warn("[omelette] asset circuit breaker: pausing requests to "+o+" for "+Math.round((i.until-l)/1000)+"s after "+p+" failures in "+d/1000+"s")}};const e=(o)=>{m.delete(o)};const t=100;const a=new WeakMap;const u=new Set;let s=null;const S=(o)=>{for(const r of Array.from(u)){try{const l=a.get(r);if(l===undefined){u.delete(r);continue}if(o){const i=y(l);if(i!==null&&R(i))continue}a.delete(r);u.delete(r);if(s!==null)s.call(r,l)}catch{}}};C=()=>{try{m.clear();S(false)}catch{}};document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")C()});const _=window.fetch;if(typeof _==="function"){const o=function(...r){let l=null;try{l=y(r[0])}catch{}if(l!==null&&R(l)){let c;try{if(r[1]&&r[1].signal!==undefined){c=r[1].signal||undefined}else if(typeof Request!=="undefined"&&r[0]instanceof Request){c=r[0].signal||undefined}}catch{c=undefined}return new Promise((k,b)=>{const E=()=>{try{return c.reason!==undefined?c.reason:new DOMException("The operation was aborted.","AbortError")}catch{return new DOMException("The operation was aborted.","AbortError")}};try{if(c&&c.aborted){b(E());return}}catch{}let T=false;const j=()=>{if(T)return;T=true;b(E())};try{if(c)c.addEventListener("abort",j,{once:true})}catch{}n(()=>{if(T)return;T=true;try{if(c)c.removeEventListener("abort",j)}catch{}let L;try{L=new Response(null,{status:429,statusText:"Too Many Requests",headers:{"Retry-After":"10"}})}catch{L={ok:false,status:429}}k(L)},250)})}const i=_.apply(window,r);if(l!==null){const c=l;i.then((k)=>{try{if(k.ok)e(c);else if(k.status===401||k.status===403||k.status===404||k.status===429){O(c,k.status!==404)}}catch{}},()=>{})}return i};window.fetch=o}const v=Object.getOwnPropertyDescriptor(HTMLImageElement.prototype,"src");if(v!==undefined&&v.set!==undefined&&v.get!==undefined){const o=v.set;s=o;Object.defineProperty(HTMLImageElement.prototype,"src",{configurable:true,enumerable:v.enumerable,get:v.get,set(r){const l=`${r}`;try{const i=y(l);if(i!==null&&R(i)){a.set(this,l);if(u.size<t)u.add(this);return}}catch{}try{a.delete(this);u.delete(this)}catch{}o.call(this,l)}})}try{const o=HTMLImageElement.prototype.setAttribute;HTMLImageElement.prototype.setAttribute=function(r,l){if(arguments.length<2){o.apply(this,arguments);return}if(typeof r==="string"&&r.toLowerCase()==="src"){const i=`${l}`;try{const c=y(i);if(c!==null&&R(c)){a.set(this,i);if(u.size<t)u.add(this);return}a.delete(this);u.delete(this)}catch{}o.call(this,r,i);return}o.call(this,r,l)}}catch{}window.addEventListener("error",(o)=>{try{const r=o.target;if(r instanceof HTMLImageElement){const l=y(r.currentSrc||r.src||"");if(l!==null)O(l,true)}}catch{}},true);window.addEventListener("load",(o)=>{try{const r=o.target;if(r instanceof HTMLImageElement){const l=y(r.currentSrc||r.src||"");if(l!==null)e(l);const i=a.get(r);if(i!==undefined){let c=false;try{c=new URL(i,document.baseURI).href===new URL(r.currentSrc||r.src||"",document.baseURI).href}catch{c=false}if(c){a.delete(r);u.delete(r)}}}}catch{}},true)}catch{}}var J=30000;var G=3000;document.addEventListener("DOMContentLoaded",()=>{const n=window.Babel;const d="om-src-id";if(n&&n.registerPlugin&&!(n.availablePlugins&&n.availablePlugins[d])){n.registerPlugin(d,({types:h})=>({visitor:{JSXOpeningElement(y,m){const w=y.node;if(w.name&&w.name.type==="JSXMemberExpression")return;for(let t=0;t<w.attributes.length;t++){const a=w.attributes[t];if(a.type==="JSXAttribute"&&a.name&&a.name.name==="data-om-id")return}const R=m.file&&m.file.opts&&m.file.opts.filename||"?";const O=w.loc&&w.loc.start;const e=`jsx:${R}:${w.start??0}:${O?O.line:0}:${O?O.column+1:0}`;w.attributes.push(h.jsxAttribute(h.jsxIdentifier("data-om-id"),h.stringLiteral(e)))}}}))}const p="om-text-extract";let f=false;if(B&&n&&n.registerPlugin&&!(n.availablePlugins&&n.availablePlugins[p])){const h=window.React;if(h&&h.useSyncExternalStore&&h.createElement){f=true;const y={};const m=new Set;let w=0;window.__omTextO=y;window.__omTextSet=(e)=>{for(const t in e){const a=e[t];if(a==null)delete y[t];else y[t]=a}w++;m.forEach((t)=>t())};const R=(e)=>{m.add(e);return()=>m.delete(e)};const O=()=>w;window.__OmT=function e(t){h.useSyncExternalStore(R,O,O);return h.createElement("span",{"data-om-text":t.i,className:"__om-t"},t.i in y?y[t.i]:t.children)};n.registerPlugin(p,({types:e})=>{const t={style:1,script:1,noscript:1,textarea:1,title:1,option:1,text:1,tspan:1,textPath:1};const a={placeholder:1,alt:1,title:1,label:1,"aria-label":1,"aria-description":1,"aria-placeholder":1};const u=(o,r)=>e.logicalExpression("??",e.memberExpression(e.logicalExpression("||",e.memberExpression(e.identifier("window"),e.identifier("__omTextO")),e.objectExpression([])),e.stringLiteral(o),true),r);const s=(o)=>o.file&&o.file.opts&&o.file.opts.filename||"?";const S=(o)=>o.file&&o.file.code||"";const _=(o,r)=>{const l=(c)=>c&&c.start!=null&&c.end!=null&&(c.type==="StringLiteral"||c.type==="TemplateLiteral"&&c.expressions.length===0)?[c.start,c.end]:null;const i=l(r);if(i)return i;if(r&&r.type==="Identifier"){const c=o.scope.getBinding(r.name);if(c&&c.constant&&c.path.node.type==="VariableDeclarator"){return l(c.path.node.init)}}return null};const v=(o,r,l)=>{const i=o.node;let c=false;const k=(E,T)=>{c=true;return e.jsxElement(e.jsxOpeningElement(e.jsxIdentifier("__OmT"),[e.jsxAttribute(e.jsxIdentifier("i"),e.stringLiteral(E))],false),e.jsxClosingElement(e.jsxIdentifier("__OmT")),[T],false)};const b=i.children.map((E)=>{if(E.type==="JSXText"){if(E.start==null||E.end==null)return E;const T=l.slice(E.start,E.end);const j=T.length-T.trimStart().length;const L=T.length-T.trimEnd().length;if(j+L>=T.length)return E;return k(`txt:${r}:${E.start+j}:${E.end-L}`,E)}if(E.type==="JSXExpressionContainer"){const T=_(o,E.expression);if(T)return k(`str:${r}:${T[0]}:${T[1]}`,E)}return E});if(c)i.children=b};return{visitor:{JSXOpeningElement(o,r){const l=o.node;const i=s(r);const c={};for(let k=0;k<l.attributes.length;k++){const b=l.attributes[k];if(b.type!=="JSXAttribute"||!b.name)continue;const E=b.name.name;if(!a[E])continue;if(!b.value||b.value.type!=="StringLiteral")continue;if(b.value.start==null||b.value.end==null)continue;const T=`txt:${i}:${b.value.start}:${b.value.end}`;c[E]=T;b.value=e.jsxExpressionContainer(u(T,e.stringLiteral(b.value.value)))}if(Object.keys(c).length){l.attributes.push(e.jsxAttribute(e.jsxIdentifier("data-om-text-attrs"),e.stringLiteral(JSON.stringify(c))))}},JSXElement(o,r){const l=o.node.openingElement;const i=l&&l.name&&l.name.name;if(i==="__OmT")return;if(typeof i==="string"&&t[i])return;v(o,s(r),S(r))},JSXFragment(o,r){v(o,s(r),S(r))}}}})}}const g=f?["transform-react-jsx-source",d,p]:["transform-react-jsx-source",d];document.querySelectorAll('script[type="text/babel"],script[type="text/jsx"]').forEach((h,y)=>{const m=h.getAttribute("data-plugins")||"";const w=g.filter((R)=>m.indexOf(R)<0);if(w.length){h.setAttribute("data-plugins",m?`${m},${w.join(",")}`:w.join(","))}if(!h.hasAttribute("data-filename")){h.setAttribute("data-filename",h.getAttribute("src")||`inline-${y}`)}})});var A=window.parent;var U="not editable here — open the project in the Claude Design editor to save";var W=()=>Promise.resolve({persisted:false,noHost:true,reason:U});var H=W;var M="data/storage.json";var z=()=>{try{const n=new URL(document.baseURI);const d=n.pathname.match(/\/projects\/([^/]+)\/serve\//);if(d)return d[1];return n.hostname.split(".")[0]||""}catch{return location.hostname.split(".")[0]||""}};var Z=()=>{try{const n=new URL(document.baseURI);const d=n.pathname.indexOf("/serve/");if(d>=0)return n.origin+n.pathname.slice(0,d+"/serve/".length)+M}catch{}return"./"+M};var x=null;var N=()=>{if(!x){x=fetch(Z(),{cache:"no-store"}).then((n)=>{if(n.ok)return n.text();return n.status===404?"":null}).catch(()=>null).then((n)=>{if(n===null){x=null;return null}const d=new Map;if(!n)return d;let p;try{p=JSON.parse(n)}catch{console.warn("[omelette.storage] "+M+" is not valid JSON; treating the store as unreadable so a save cannot overwrite the "+"hand-edited bytes. Fix the JSON (or delete the file) to re-enable persistence.");x=null;return null}if(p===null||typeof p!=="object"||Array.isArray(p)){console.warn("[omelette.storage] "+M+" doesn't hold a JSON object; treating the store as unreadable so a save cannot "+"overwrite the hand-edited bytes. Make the top level a JSON object to re-enable persistence.");x=null;return null}const f=p;if("data"in f){const g=f.data;if(g===null||typeof g!=="object"||Array.isArray(g)){console.warn("[omelette.storage] "+M+' has a "data" field that is not a JSON object; treating the store as unreadable so a '+'save cannot overwrite the hand-edited bytes. Make "data" a JSON object to re-enable persistence.');x=null;return null}const h=f._meta;const y=h!==null&&typeof h==="object"?h.project:undefined;if(typeof y==="string"&&y!==""&&y!==z())return d;for(const m of Object.keys(g))d.set(m,g[m]);return d}for(const g of Object.keys(f)){if(g!=="_meta")d.set(g,f[g])}return d})}return x};var F=(n)=>H(M,JSON.stringify({_meta:{project:z(),version:1},data:Object.fromEntries(n)},null,2));var D=Promise.resolve();var $=(n)=>{const d=D.then(n);D=d.then(()=>{return},()=>{return});return d};var V=/sk-(?:ant-)?[A-Za-z0-9_-]{16,}|AKIA[0-9A-Z]{16}|gh[pousr]_[A-Za-z0-9]{20,}|xox[a-z]-[A-Za-z0-9][A-Za-z0-9-]{9,}|AIza[0-9A-Za-z_-]{30,}|-----BEGIN [A-Z ]*PRIVATE KEY-----/;var Y=/password|passwd|secret|api[_-]?key|access[_-]?token|auth[_-]?token|credential/i;var Q=(n,d,p)=>{if(V.test(d)||Y.test(n)&&typeof p==="string"&&p.length>=8){console.warn('[omelette.storage] the value for "'+n+'" looks like a credential. The storage file is a plaintext project file — visible to '+"everyone with project access and copied when the project is duplicated. Do not store secrets here.")}};var q={persisted:false,reason:"could not load the existing store — not overwriting it"};var X={persisted:false,reason:"stored value changed since a failed read — re-read this key before saving"};var P=new Set;var ee={get:(n)=>{if(typeof n!=="string"){return Promise.reject(new TypeError("storage.get: key must be a string"))}return $(N).then((d)=>{if(d===null){P.add(n);return null}P.delete(n);if(!d.has(n))return null;const p=d.get(n);return p==null?null:JSON.parse(JSON.stringify(p))})},set:(n,d)=>{if(typeof n!=="string"){return Promise.reject(new TypeError("storage.set: key must be a string"))}let p;try{p=JSON.stringify(d)}catch(g){return Promise.reject(new TypeError("storage.set: value must be JSON-serializable ("+String(g)+")"))}if(p===undefined){return Promise.reject(new TypeError("storage.set: value must be JSON-serializable"))}Q(n,p,d);const f=JSON.parse(p);return $(()=>N().then((g)=>{if(g===null)return q;if(P.has(n)){if(g.has(n))return X;P.delete(n)}g.set(n,f);return F(g)}))},delete:(n)=>{if(typeof n!=="string"){return Promise.reject(new TypeError("storage.delete: key must be a string"))}return $(()=>N().then((d)=>{if(d===null)return q;if(P.has(n)){if(d.has(n))return X;P.delete(n)}d.delete(n);return F(d)}))},keys:()=>$(N).then((n)=>n===null?[]:Array.from(n.keys()))};window.omelette={writeFile:(n,d)=>H(n,d).then((p)=>{if(!p.persisted&&!p.noHost){throw new Error(p.reason||"write failed")}}),storage:ee};if(A&&A!==window){const n=(e,t)=>{try{A.postMessage({__omelette_log:true,type:e,data:t},"*")}catch{}};["log","warn","error"].forEach((e)=>{const t=console[e];console[e]=(...a)=>{const u=a.map((s)=>{try{return typeof s==="object"?JSON.stringify(s):String(s)}catch{try{return String(s)}catch{return"[unstringifiable]"}}}).join(" ");n(e,u);t.apply(console,a)}});window.addEventListener("error",(e)=>{const t=e.target;if(t&&t!==window&&t.tagName){const a=t.src||t.href||"";n("resource_error",`${t.tagName} failed to load: ${a}`)}else{n("error",`${e.message||"Unknown error"} at ${e.filename||"?"}:${e.lineno||0}:${e.colno||0}`)}},true);window.addEventListener("unhandledrejection",(e)=>{const t=e.reason;const a=t instanceof Error?`${t.message} ${t.stack}`:String(t);n("error",`Unhandled rejection: ${a}`)});window.addEventListener("click",(e)=>{if(e.defaultPrevented||e.button!==0)return;if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;const t=e.composedPath?e.composedPath():[];const a=["button","input","select","textarea","summary","label"];let u=null;for(const v of t){if(!(v instanceof Element))continue;if(v.localName==="a"){if(!(v instanceof HTMLAnchorElement))return;u=v;break}if(a.indexOf(v.localName)!==-1)return}if(!u)return;if(u.isContentEditable)return;const s=u.closest("[contenteditable]");if(s&&s.getAttribute("contenteditable")!=="false")return;const S=(u.getAttribute("target")||"_self").toLowerCase();if(S!=="_self"&&S!=="_top"&&S!=="_parent")return;let _;try{_=new URL(u.href)}catch{return}if(_.protocol!=="http:"&&_.protocol!=="https:")return;if(location.origin==="null")return;if(_.origin===location.origin)return;e.preventDefault();window.open(_.href,"_blank","noopener,noreferrer")});const d=()=>{try{A.postMessage({type:"omelette:height",height:document.documentElement.scrollHeight},"*")}catch{}};if(window.ResizeObserver)new ResizeObserver(d).observe(document.documentElement);const p=()=>{d();if(!document.querySelector('script[type="text/babel"],script[type="text/jsx"]'))return;const e=()=>document.getElementById("root")||document.querySelector("body > div[id]");const t=e()?.firstElementChild??null;let a=0;const u=()=>{const s=e();if(s&&s.firstElementChild!==t||++a>30){d();return}setTimeout(u,100)};setTimeout(u,100)};if(document.readyState==="complete")p();else window.addEventListener("load",p);const f={};let g=0;const h=(e)=>new Promise((t,a)=>{if(!I.length){a(new Error("claude.complete: no parent origin"));return}const u=`c${++g}`;const s=()=>setTimeout(()=>{delete f[u];a(new Error(`claude.complete: no data for ${J/1000}s`))},J);const S=s();f[u]={resolve:t,reject:a,text:"",t:S,arm:s};try{for(const _ of I){A.postMessage({__om_api:true,id:u,body:e},_)}}catch(_){clearTimeout(S);delete f[u];a(_)}});const y=8;const m=async(e,t)=>{if(!Array.isArray(e.messages)){throw new Error("claude.complete: tools require a messages array")}const a=e.messages.slice();const u={...e,tools:e.tools.map((_)=>{if(_===null||typeof _!=="object")return _;const v={};for(const o of Object.keys(_)){if(typeof _[o]!=="function")v[o]=_[o]}return v})};const s=u.tool_choice;const S=s!=null&&(s.type==="any"||s.type==="tool")?{...u,tool_choice:s.disable_parallel_tool_use!==undefined?{type:"auto",disable_parallel_tool_use:s.disable_parallel_tool_use}:{type:"auto"}}:u;for(let _=0;_<y;_++){const v=await h({..._===0?u:S,messages:a});const o=v.message;const r=o&&Array.isArray(o.content)?o.content:null;const l=r?r.filter((c)=>c?.type==="tool_use"):[];if(o?.stop_reason!=="tool_use"||l.length===0){return v.text}const i=[];for(const c of l){const k=t.get(c.name);if(!k){i.push({type:"tool_result",tool_use_id:c.id,content:`no handler for tool "${c.name}"`,is_error:true});continue}try{const b=await k(c.input);const E=typeof b==="string"?b:O(b)??"";i.push({type:"tool_result",tool_use_id:c.id,content:E})}catch(b){i.push({type:"tool_result",tool_use_id:c.id,content:String(b?.message??b??"tool handler failed"),is_error:true})}}a.push({role:"assistant",content:r},{role:"user",content:i})}throw new Error(`claude.complete: exceeded ${y} tool turns`)};window.claude={complete(e){const t=e;if(t!==null&&typeof t==="object"&&Array.isArray(t.tools)&&t.tools.some((a)=>a!==null&&typeof a==="object"&&typeof a.run==="function")){const a=new Map;for(const u of t.tools){if(u!==null&&typeof u==="object"&&typeof u.run==="function"){a.set(String(u.name),u.run)}}return m(t,a)}return h(e).then((a)=>a.text)}};const w={};let R=0;H=(e,t)=>new Promise((a)=>{if(!I.length){a({persisted:false,noHost:true,reason:U});return}const u=`f${++R}`;const s=setTimeout(()=>{delete w[u];a({persisted:false,noHost:true,reason:U})},G);w[u]={settle:a,t:s};try{for(const S of I){A.postMessage({__om_file:true,id:u,op:"write",path:e,content:t},S)}}catch{clearTimeout(s);delete w[u];a({persisted:false,noHost:true,reason:U})}});const O=(e)=>{try{return JSON.stringify(e)}catch{return JSON.stringify(String(e))}};window.addEventListener("message",(e)=>{if(I.indexOf(e.origin)<0)return;if(e.source!==A)return;const t=e.data;if(!t)return;if(t.type==="omelette-preview-refresh"){if(typeof t.token!=="string"||!/^[0-9a-f.-]+(\.(rc|pr-[0-9]+))?(\.[0-9]+\.[0-9a-f]{16})?$/.test(t.token))return;const s=Math.max(1,Math.floor((t.expiresAt||0)-Date.now()/1000));document.cookie="__Host-omelette-preview="+t.token+"; Path=/; Secure; SameSite=None; Partitioned; Max-Age="+s;C();return}if(t.__om_file_r){const s=w[t.id];if(!s)return;clearTimeout(s.t);delete w[t.id];s.settle(t.ok?{persisted:true}:{persisted:false,reason:t.error||"write failed"});return}if(t.__om_api_r){const s=f[t.id];if(!s)return;if(t.error!=null){clearTimeout(s.t);delete f[t.id];s.reject(new Error(t.error));return}if(t.chunk!=null){clearTimeout(s.t);s.t=s.arm();s.text+=t.chunk;return}if(t.done){clearTimeout(s.t);delete f[t.id];s.resolve({text:t.text!=null?t.text:s.text,message:t.message});return}return}if(!t.__om_eval)return;const a=t;const u=(s)=>{e.source.postMessage({...s,__om_eval_r:1,id:a.id},e.origin)};try{const s=(0,eval)(a.code);if(s&&typeof s.then==="function"){s.then((S)=>u({ok:1,v:O(S)}),(S)=>u({ok:0,e:String(S)}))}else{u({ok:1,v:O(s)})}}catch(s){u({ok:0,e:String(s)})}})}})();
-</script>
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<script src="./logica-render.js"></script>
+<script src="./logica-classe.js"></script>
 </head>
 <body>
 <x-dc>
@@ -39,6 +38,13 @@
         <script src="./regioni-italia.js"></script>
         <script src="./mappa.js"></script>
         <script src="./image-slot.js"></script>
+        <style>
+          /* Marcatore di bozza (sezione articoli sotto le Domande frequenti, 23/09/2026):
+             esce insieme al testo di prova, prima del build. */
+          .prova{align-self:flex-start;font-size:15px;line-height:1.35;font-weight:700;
+            letter-spacing:.06em;text-transform:uppercase;color:var(--terracotta);
+            background:#fff;border:1.5px solid var(--terracotta);border-radius:8px;padding:4px 8px}
+        </style>
       </helmet>
 
       <template id="__bundler_thumbnail">
@@ -77,9 +83,9 @@
               </div>
               <div class="hero-due">
                 <div class="fx col gap16">
-                  <div class="occhiello">Prevenzione oncologica</div>
+                  <div class="occhiello">Screening in Italia</div>
                   <h1 style="width: 531px; height: 211px">La diagnosi precoce salva la vita. Qui trovi gli screening attivi vicino a te.</h1>
-                  <p>Il portale raccoglie i programmi di screening oncologico aperti in Italia, regione per regione, promossi da aziende sanitarie, ospedali e associazioni.</p>
+                  <p>Il portale raccoglie gli screening aperti in Italia, regione per regione: oncologici, neonatali e pediatrici. Li promuovono aziende sanitarie, ospedali e associazioni.</p>
                   <button type="button" class="cta" onClick="{{ vaiAllaMappa }}">Consulta le iniziative attive</button>
                   <div class="numeri-hero">
                     <div class="numero-h"><span class="numero-hn">{{ nIniziative }}</span><span class="numero-het">iniziative aperte</span></div>
@@ -139,7 +145,7 @@
                     <span class="num">2</span>
                     <span class="passo-txt">
                       <span class="passo-tit">Indica gli screening che ti interessano</span>
-                      <span class="passo-desc">Mammografico, colon-retto, prostata e gli altri. Puoi sceglierne più di uno alla volta.</span>
+                      <span class="passo-desc">Sono sei, dai neonati agli adulti. Puoi sceglierne più di uno alla volta.</span>
                     </span>
                   </li>
                   <li class="passo">
@@ -297,7 +303,7 @@
               <div class="fx col gap20">
                 <div class="fx col gap8">
                   <h2>{{ titoloElenco }}</h2>
-                  <p class="nota">Per ciascuna iniziativa sono indicati l’ente organizzatore, la sede, il periodo e il recapito telefonico. In cima quelle che chiudono prima.</p>
+                  <p class="nota">Per partecipare si chiama il numero indicato: il portale non gestisce appuntamenti. In cima le iniziative che chiudono prima; nella scheda di ognuna c’è anche l’ente organizzatore.</p>
                   <sc-if value="{{ haAvvisoScadenza }}" hint-placeholder-val="{{ false }}">
                     <p class="urgenza">
                       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"></circle><path d="M12 7.6V12l3 2"></path></svg>
@@ -307,7 +313,7 @@
                 </div>
 
                 <sc-for list="{{ iniziative }}" as="i" hint-placeholder-count="3">
-                  <div class="card fx col gap14">
+                  <div class="card card-ini fx col gap14">
                     <div class="fx gap8" style="flex-wrap:wrap">
                       <span class="{{ i.tagCls }}">{{ i.tagTesto }}</span>
                       <span class="tag tag-tipo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ i.icona }}"></path></svg>{{ i.tipo }}</span>
@@ -320,9 +326,8 @@
                         <span class="scad scad-posti">{{ i.posti }}</span>
                       </sc-if>
                     </div>
-                    <h3>{{ i.titolo }}</h3>
+                    <h3 class="ini-tit"><a href="{{ i.hrefDettaglio }}">{{ i.titolo }}</a></h3>
                     <div class="fx col gap8">
-                      <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12.6a4.05 4.05 0 100-8.1 4.05 4.05 0 000 8.1M4.5 20.2c0-3.3 3.4-5.2 7.5-5.2s7.5 1.9 7.5 5.2"></path></svg>Chi</span><span class="vl">{{ i.ente }}</span></div>
                       <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.4 7-11a7 7 0 10-14 0c0 5.6 7 11 7 11zM12 12.4a2.6 2.6 0 100-5.2 2.6 2.6 0 000 5.2"></path></svg>Dove</span><span class="vl">{{ i.dove }}</span></div>
                       <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v3M17 3v3M3.5 9.5h17M4.5 6h15a1 1 0 011 1v12a1 1 0 01-1 1h-15a1 1 0 01-1-1V7a1 1 0 011-1z"></path></svg>Quando</span><span class="vl">{{ i.quando }}</span></div>
                       <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21a9 9 0 100-18 9 9 0 000 18M8.5 12.2l2.4 2.4 4.6-5.2"></path></svg>Chi può</span><span class="vl">{{ i.chi }}</span></div>
@@ -331,7 +336,9 @@
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.2 3.5H4.9a1.4 1.4 0 00-1.4 1.5c.5 8.2 7.3 15 15.5 15.5a1.4 1.4 0 001.5-1.4v-2.3a1.4 1.4 0 00-1.2-1.4l-2.8-.4a1.4 1.4 0 00-1.4.7l-.8 1.4a11.6 11.6 0 01-5.6-5.6l1.4-.8a1.4 1.4 0 00.7-1.4l-.4-2.8a1.4 1.4 0 00-1.4-1.2z"></path></svg>
                       {{ i.tel }}
                     </a>
-                    <p class="nota">La prenotazione avviene telefonicamente al numero indicato. Il portale non gestisce appuntamenti.</p>
+                    <span class="link-cta ini-vai" aria-hidden="true">Mostra i dettagli
+                      <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+                    </span>
                   </div>
                 </sc-for>
 
@@ -372,6 +379,60 @@
                 </div>
               </div>
             </div>
+
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ vistaIniziativa }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Dettaglio iniziativa">
+
+            <sc-if value="{{ iniTrovata }}" hint-placeholder-val="{{ true }}">
+            <div class="banda b-bianco wrap sezione" data-screen-label="Apertura iniziativa">
+              <div class="fx col gap20">
+                <p class="nota art-torna"><a href="{{ ini.hrefRegione }}">← Torna alle iniziative</a></p>
+                <p class="occhiello ini-reg">{{ ini.reg }}</p>
+                <div class="fx gap8" style="flex-wrap:wrap">
+                      <span class="{{ ini.tagCls }}">{{ ini.tagTesto }}</span>
+                      <span class="tag tag-tipo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ ini.icona }}"></path></svg>{{ ini.tipo }}</span>
+                      <sc-if value="{{ ini.haScadenza }}" hint-placeholder-val="{{ true }}">
+                        <span class="{{ ini.scadenzaCls }}">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"></circle><path d="M12 7.6V12l3 2"></path></svg>{{ ini.scadenza }}
+                        </span>
+                      </sc-if>
+                      <sc-if value="{{ ini.haPosti }}" hint-placeholder-val="{{ false }}">
+                        <span class="scad scad-posti">{{ ini.posti }}</span>
+                      </sc-if>
+                    </div>
+                <h1 class="ini-fuoco" tabindex="-1">{{ ini.titolo }}</h1>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" data-screen-label="Dati iniziativa">
+              <div class="card fx col gap14">
+                <div class="fx col gap8">
+                      <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12.6a4.05 4.05 0 100-8.1 4.05 4.05 0 000 8.1M4.5 20.2c0-3.3 3.4-5.2 7.5-5.2s7.5 1.9 7.5 5.2"></path></svg>Chi</span><span class="vl">{{ ini.ente }}</span></div>
+                      <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.4 7-11a7 7 0 10-14 0c0 5.6 7 11 7 11zM12 12.4a2.6 2.6 0 100-5.2 2.6 2.6 0 000 5.2"></path></svg>Dove</span><span class="vl">{{ ini.dove }}</span></div>
+                      <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v3M17 3v3M3.5 9.5h17M4.5 6h15a1 1 0 011 1v12a1 1 0 01-1 1h-15a1 1 0 01-1-1V7a1 1 0 011-1z"></path></svg>Quando</span><span class="vl">{{ ini.quando }}</span></div>
+                      <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21a9 9 0 100-18 9 9 0 000 18M8.5 12.2l2.4 2.4 4.6-5.2"></path></svg>Chi può</span><span class="vl">{{ ini.chi }}</span></div>
+                </div>
+                    <a class="tel" href="{{ ini.href }}">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.2 3.5H4.9a1.4 1.4 0 00-1.4 1.5c.5 8.2 7.3 15 15.5 15.5a1.4 1.4 0 001.5-1.4v-2.3a1.4 1.4 0 00-1.2-1.4l-2.8-.4a1.4 1.4 0 00-1.4.7l-.8 1.4a11.6 11.6 0 01-5.6-5.6l1.4-.8a1.4 1.4 0 00.7-1.4l-.4-2.8a1.4 1.4 0 00-1.4-1.2z"></path></svg>
+                      {{ ini.tel }}
+                    </a>
+                    <p class="nota">La prenotazione avviene telefonicamente al numero indicato. Il portale non gestisce appuntamenti.</p>
+              </div>
+            </div>
+            </sc-if>
+
+            <sc-if value="{{ iniMancante }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-bianco wrap sezione" data-screen-label="Iniziativa non trovata">
+              <div class="avviso fx col gap12">
+                <h2 class="ini-fuoco" tabindex="-1">Questa iniziativa non è più in elenco</h2>
+                <p>Le iniziative vengono attivate e chiuse con frequenza. Quelle attive sono tutte negli elenchi per regione.</p>
+                <a class="cta-2" href="#/">Scegli la regione</a>
+              </div>
+            </div>
+            </sc-if>
 
           </div>
         </sc-if>
@@ -614,8 +675,8 @@
                 </div>
 
                 <div class="avviso fx col gap12">
-                  <h3>Gli altri screening funzionano diversamente</h3>
-                  <p>Prostata, melanoma, polmone, tiroide e osteoporosi non hanno un programma con invito: nessuno ti convoca. Si fanno su iniziativa tua, con il medico di famiglia, oppure nelle giornate organizzate da ospedali e associazioni — quelle che trovi su questo portale.</p>
+                  <h3>Gli altri tre screening funzionano diversamente</h3>
+                  <p>Lo screening neonatale si fa in ospedale, alla nascita, senza che tu lo chieda. Diabete tipo 1 e celiachia nei bambini passano dal pediatra. La prostata non ha un programma con invito: si fa su iniziativa tua, con il medico, oppure nelle giornate organizzate da ospedali e associazioni. Queste le trovi qui, regione per regione.</p>
                   <a class="cta-2" href="{{ hrefIniziative }}">Vedi le iniziative aperte</a>
                 </div>
               </div>
@@ -666,6 +727,78 @@
                     <h3>Nessuna risposta per «{{ q }}».</h3>
                     <p>Prova con un solo termine, oppure scrivici: se la domanda è di interesse generale la inseriamo.</p>
                     <a class="cta-2" href="#/contatti">Invia la tua domanda</a>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+
+            <div class="banda b-verde wrap sezione" id="elenco-articoli" data-screen-label="Articoli sugli screening">
+              <div class="fx col gap20">
+                <div class="fx col gap16">
+                  <div class="occhiello">Informazione chiara sugli screening</div>
+                  <h2 id="titolo-articoli">Articoli sugli screening gratuiti</h2>
+                  <p style="margin-left:auto;margin-right:auto;text-align:center">Cosa sono gli screening gratuiti, chi ne ha diritto, come si fa a farli. Spiegato senza burocrazia.</p>
+                </div>
+
+                <sc-if value="{{ artMostraFiltro }}" hint-placeholder-val="{{ true }}">
+                  <div class="fx col gap8">
+                    <p class="nota" id="et-argomento">Argomento</p>
+                    <div class="fx gap8" style="flex-wrap:wrap" role="group" aria-labelledby="et-argomento">
+                      <sc-for list="{{ artArgomenti }}" as="g" hint-placeholder-count="4">
+                        <button type="button" class="{{ g.cls }}" aria-pressed="{{ g.attivo }}" onClick="{{ g.scegli }}">{{ g.nome }}</button>
+                      </sc-for>
+                    </div>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ artOk }}" hint-placeholder-val="{{ true }}">
+                  <div class="fx col gap20">
+                    <div class="art-griglia">
+                      <sc-for list="{{ articoli }}" as="a" hint-placeholder-count="3">
+                        <div class="art">
+                          <sc-if value="{{ a.haFoto }}" hint-placeholder-val="{{ false }}">
+                            <div class="art-img"><image-slot id="{{ a.slot }}" src="" shape="rect" placeholder="Foto dell articolo"></image-slot></div>
+                          </sc-if>
+                          <div class="art-corpo">
+                            <div class="prova">[TESTO DI PROVA] titolo e sommario</div>
+                            <p class="art-meta">{{ a.meta }}</p>
+                            <h3 class="art-tit"><a href="{{ a.href }}" aria-label="{{ a.aria }}">{{ a.titolo }}</a></h3>
+                            <p class="art-som">{{ a.estratto }}</p>
+                            <a class="art-vai" href="{{ a.href }}">Leggi l'articolo
+                              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+                            </a>
+                          </div>
+                        </div>
+                      </sc-for>
+                    </div>
+                    <sc-if value="{{ artAltri }}" hint-placeholder-val="{{ true }}">
+                      <button type="button" class="cta" onClick="{{ artMostraAltri }}">Mostra altri articoli</button>
+                    </sc-if>
+                    <sc-if value="{{ artFiniti }}" hint-placeholder-val="{{ false }}">
+                      <p class="nota" aria-live="polite">Hai visto tutti gli articoli.</p>
+                    </sc-if>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ artVuotoTutto }}" hint-placeholder-val="{{ false }}">
+                  <div class="avviso fx col gap12" data-screen-label="Stato vuoto - nessun articolo">
+                    <h3>Non ci sono ancora articoli</h3>
+                    <p>Stiamo preparando i primi. Intanto ci sono le domande qui sopra. Oppure guarda quali screening sono attivi nella tua regione.</p>
+                    <a class="cta" href="#/">Vai alla tua regione</a>
+                    <p class="nota" style="text-align:center;margin-left:auto;margin-right:auto"><a href="#/domande">Torna alle domande qui sopra</a></p>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ artVuotoFiltro }}" hint-placeholder-val="{{ false }}">
+                  <div class="avviso fx col gap12" data-screen-label="Stato vuoto - filtro senza risultati">
+                    <p>Su questo argomento non abbiamo ancora scritto niente. Prova con un altro argomento.</p>
+                    <button type="button" class="cta-2" onClick="{{ artAzzera }}">Vedi tutti gli articoli</button>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ artErrore }}" hint-placeholder-val="{{ false }}">
+                  <div class="avviso fx col gap12" data-screen-label="Stato errore e offline" role="status">
+                    <p>Non riusciamo a mostrare gli articoli in questo momento. Riprova tra qualche minuto.</p>
                   </div>
                 </sc-if>
               </div>
@@ -839,7 +972,7 @@
               <div class="fx col gap20">
                 <h2>Scrivici ora su WhatsApp</h2>
                 <a class="wa" href="https://wa.me/393000000000" target="_blank" rel="noopener">
-                  <svg class="wa-i" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 3.2C9 3.2 3.3 8.9 3.3 15.94c0 2.25.6 4.45 1.72 6.39L3.2 28.8l6.65-1.74a12.7 12.7 0 006.19 1.58h.01c7.03 0 12.74-5.7 12.74-12.74 0-3.4-1.33-6.6-3.73-9a12.66 12.66 0 00-9.02-3.7zm0 23.24h-.01a10.6 10.6 0 01-5.4-1.48l-.39-.23-4.01 1.05 1.07-3.91-.25-.4a10.55 10.55 0 01-1.62-5.63c0-5.84 4.76-10.6 10.61-10.6 2.83 0 5.5 1.11 7.5 3.11a10.53 10.53 0 013.1 7.5c0 5.85-4.76 10.6-10.6 10.6zm5.82-7.94c-.32-.16-1.96-.97-2.27-1.08-.3-.11-.53-.17-.75.16-.22.32-.86 1.08-1.06 1.3-.19.22-.39.24-.71.08-.32-.16-1.36-.5-2.58-1.6a9.7 9.7 0 01-1.8-2.23c-.19-.32-.02-.5.14-.66.16-.16.35-.4.53-.61.12-.14.2-.28.3-.47.1-.19.05-.36-.03-.5-.08-.16-.72-1.8-.99-2.44-.26-.63-.52-.54-.71-.55h-.64c-.22 0-.58.08-.88.4-.3.32-1.15 1.12-1.15 2.73s1.17 3.17 1.34 3.39c.16.21 2.3 3.66 5.6 4.99.78.34 1.4.54 1.88.69.79.25 1.51.21 2.08.13.63-.09 2.09-.85 2.39-1.68.29-.83.29-1.53.2-1.68-.08-.16-.29-.24-.6-.4z"></path></svg>
+                  <svg class="wa-i" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 3.2C9 3.2 3.3 8.9 3.3 15.94c0 2.25.6 4.45 1.72 6.39L3.2 28.8l6.65-1.74a12.7 12.7 0 006.19 1.58h.01c7.03 0 12.74-5.7 12.74-12.74 0-3.4-1.33-6.6-3.73-9a12.66 12.66 0 00-9.02-3.7zm0 23.24h-.01a10.6 10.6 0 01-5.4-1.48l-.39-.23-4.01 1.05 1.07-3.91-.25-.4a10.55 10.55 0 01-1.62-5.630c0-5.84 4.76-10.6 10.61-10.6 2.83 0 5.5 1.11 7.5 3.11a10.53 10.53 0 013.1 7.5c0 5.85-4.76 10.6-10.6 10.6zm5.82-7.94c-.32-.16-1.96-.97-2.27-1.08-.3-.11-.53-.17-.75.16-.22.32-.86 1.08-1.06 1.3-.19.22-.39.24-.71.08-.32-.16-1.36-.5-2.58-1.6a9.7 9.7 0 01-1.8-2.23c-.19-.32-.02-.5.14-.66.16-.16.35-.4.53-.61.12-.14.2-.28.3-.47.1-.19.05-.36-.03-.5-.08-.16-.72-1.8-.99-2.44-.26-.63-.52-.54-.71-.55h-.64c-.22 0-.58.08-.88.4-.3.32-1.150 1.12-1.15 2.73s1.17 3.17 1.34 3.39c.16.21 2.3 3.66 5.6 4.99.78.34 1.4.54 1.88.69.79.25 1.51.21 2.08.13.63-.09 2.09-.85 2.39-1.68.29-.83.29-1.53.2-1.68-.08-.16-.29-.24-.6-.4z"></path></svg>
                   <span class="wa-txt">
                     <span class="wa-tit">Scrivici su WhatsApp</span>
                     <span class="wa-sub">La via più rapida: risposta in giornata negli orari di apertura</span>
@@ -1148,7 +1281,7 @@
                 <img class="ftr-marchio-img" src="./marchio/screening-italia-chiaro.png" alt="Screening Italia" width="1169" height="440">
                 <p class="ftr-claim">Un elenco curato a mano delle iniziative di screening aperte in Italia. Ogni segnalazione è verificata sulla fonte ufficiale prima di essere pubblicata.</p>
                 <a class="ftr-wa" href="https://wa.me/393000000000" target="_blank" rel="noopener">
-                  <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 3.2C9 3.2 3.3 8.9 3.3 15.94c0 2.25.6 4.45 1.72 6.39L3.2 28.8l6.65-1.74a12.7 12.7 0 006.19 1.58h.01c7.03 0 12.74-5.7 12.74-12.74 0-3.4-1.33-6.6-3.73-9a12.66 12.66 0 00-9.02-3.7zm0 23.24h-.01a10.6 10.6 0 01-5.4-1.48l-.39-.23-4.01 1.05 1.07-3.91-.25-.4a10.55 10.55 0 01-1.62-5.63c0-5.84 4.76-10.6 10.61-10.6 2.83 0 5.5 1.11 7.5 3.11a10.53 10.53 0 013.1 7.5c0 5.85-4.76 10.6-10.6 10.6zm5.82-7.94c-.32-.16-1.96-.97-2.27-1.08-.3-.11-.53-.17-.75.16-.22.32-.86 1.08-1.06 1.3-.19.22-.39.24-.71.08-.32-.16-1.36-.5-2.58-1.6a9.7 9.7 0 01-1.8-2.23c-.19-.32-.02-.5.14-.66.16-.16.35-.4.53-.61.12-.14.2-.28.3-.47.1-.19.05-.36-.03-.5-.08-.16-.72-1.8-.99-2.44-.26-.63-.52-.54-.71-.55h-.64c-.22 0-.58.08-.88.4-.3.32-1.15 1.12-1.15 2.73s1.17 3.17 1.34 3.39c.16.21 2.3 3.66 5.6 4.99.78.34 1.4.54 1.88.69.79.25 1.51.21 2.08.13.63-.09 2.09-.85 2.39-1.68.29-.83.29-1.53.2-1.68-.08-.16-.29-.24-.6-.4z"></path></svg>
+                  <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 3.2C9 3.2 3.3 8.9 3.3 15.94c0 2.25.6 4.45 1.72 6.39L3.2 28.8l6.65-1.74a12.7 12.7 0 006.19 1.58h.01c7.03 0 12.74-5.7 12.74-12.74 0-3.4-1.33-6.6-3.73-9a12.66 12.66 0 00-9.02-3.7zm0 23.24h-.01a10.6 10.6 0 01-5.4-1.48l-.39-.23-4.01 1.05 1.07-3.91-.25-.4a10.55 10.55 0 01-1.62-5.63c0-5.84 4.76-10.6 10.61-10.6 2.83 0 5.5 1.11 7.5 3.11a10.53 10.53 0 013.1 7.5c0 5.850-4.76 10.6-10.6 10.6zm5.82-7.94c-.32-.16-1.96-.97-2.27-1.08-.3-.11-.53-.17-.75.16-.22.32-.86 1.08-1.06 1.3-.19.22-.39.24-.71.08-.32-.16-1.36-.5-2.58-1.6a9.7 9.7 0 01-1.8-2.23c-.19-.32-.02-.5.14-.66.16-.16.35-.4.53-.61.12-.14.2-.28.3-.47.1-.19.05-.36-.03-.5-.08-.16-.72-1.8-.99-2.44-.26-.63-.52-.54-.71-.55h-.64c-.22 0-.58.08-.88.4-.3.32-1.15 1.12-1.15 2.73s1.17 3.17 1.34 3.39c.16.21 2.3 3.66 5.6 4.99.78.34 1.4.54 1.88.69.79.25 1.51.21 2.08.13.63-.09 2.09-.85 2.39-1.68.29-.83.29-1.53.2-1.68-.08-.16-.29-.24-.6-.4z"></path></svg>
                   Scrivici su WhatsApp
                 </a>
               </div>
@@ -1209,656 +1342,10 @@
 
       </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844}}">
-class Component extends DCLogic {
-  constructor(props) {
-    super(props);
-    this.state = { rotta: this.leggiRotta(), tipi: [], q: "", cat: null, mail: "", inviato: false };
-    this.mappaRef = (el) => { this.mapEl = el; this.disegnaMappa(); };
-  }
-  /* ---- Consenso ai cookie ----
-     Il tag di misurazione parte SOLO dopo il consenso: Consent Mode con
-     default negato, e nessuno script di Google caricato prima del si. */
-  /* «Domande frequenti» apre la pagina degli screening direttamente sull'elenco.
-     Vale per ogni ingresso: clic, ricarica, link condiviso, tasto indietro. */
-  portaAllElenco(vista) {
-    if (vista !== "domande") { return; }
-    // Al primo caricamento il browser ripristina la posizione da solo e le foto
-    // cambiano l'altezza della pagina: si insiste finche la posizione tiene.
-    try { window.history.scrollRestoration = "manual"; } catch (e) {}
-    const tenta = (giri) => {
-      if (this.state.rotta.vista !== "domande") { return; }
-      const el = document.querySelector("#elenco-domande");
-      if (el) {
-        const meta = el.getBoundingClientRect().top + window.pageYOffset - 96;
-        if (Math.abs(window.pageYOffset - meta) > 4) { window.scrollTo(0, meta); }
-      }
-      if (giri > 0) { setTimeout(() => tenta(giri - 1), 260); }
-    };
-    setTimeout(() => tenta(10), 260);
-  }
-  leggiConsenso() {
-    try {
-      const v = window.localStorage.getItem("si-consenso-cookie");
-      return v ? JSON.parse(v) : null;
-    } catch (e) { return null; }
-  }
-  scriviConsenso(stat) {
-    const dato = { stat: !!stat, data: new Date().toISOString(), versione: 1 };
-    try { window.localStorage.setItem("si-consenso-cookie", JSON.stringify(dato)); } catch (e) {}
-    this.applicaConsenso(dato);
-    this.setState({ consenso: dato, bannerAperto: false, scelteAperte: false });
-  }
-  avviaConsentMode() {
-    if (window.__siConsentPronto) { return; }
-    window.__siConsentPronto = true;
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function () { window.dataLayer.push(arguments); };
-    // Default: tutto negato finche l'utente non sceglie.
-    window.gtag("consent", "default", {
-      ad_storage: "denied",
-      ad_user_data: "denied",
-      ad_personalization: "denied",
-      analytics_storage: "denied",
-      wait_for_update: 500
-    });
-    window.gtag("js", new Date());
-  }
-  applicaConsenso(dato) {
-    if (!dato) { return; }
-    this.avviaConsentMode();
-    window.gtag("consent", "update", {
-      analytics_storage: dato.stat ? "granted" : "denied"
-    });
-    if (dato.stat) { this.caricaMisurazione(); }
-  }
-  caricaMisurazione() {
-    if (this.misurazioneCaricata) { return; }
-    this.misurazioneCaricata = true;
-    // ⚠️ Segnaposto: in anteprima gli script girano davvero, e un ID di produzione
-    // sparerebbe eventi veri da un dominio che non e quello del cliente.
-    // L'ID reale (G-…) lo mette SENTINEL in fase di build.
-    const ID = "G-XXXXXXXXXX";
-    if (ID.indexOf("X") !== -1) {
-      this.setState({ misurazioneFinta: true });
-      window.gtag("config", ID, { send_page_view: false });
-      return;
-    }
-    const s = document.createElement("script");
-    s.async = true;
-    s.src = "https://www.googletagmanager.com/gtag/js?id=" + ID;
-    document.head.appendChild(s);
-    window.gtag("config", ID);
-  }
-
-  componentDidMount() {
-    const c = this.leggiConsenso();
-    this.avviaConsentMode();
-    if (c) { this.applicaConsenso(c); } else { setTimeout(() => this.setState({ bannerAperto: true }), 900); }
-    this.setState({ consenso: c });
-    this.portaAllElenco(this.state.rotta.vista);
-
-    this.onHash = () => {
-      const r = this.leggiRotta();
-      this.setState({ rotta: r, tipi: [], inviato: false, mail: "" });
-      window.scrollTo(0, 0);
-      this.portaAllElenco(r.vista);
-    };
-    window.addEventListener("hashchange", this.onHash);
-    // In certe anteprime in iframe il cambio di indirizzo e bloccato:
-    // i clic sui link interni vengono gestiti qui, senza dipendere dall hash.
-    this.onClickInterno = (e) => {
-      const a = e.target && e.target.closest ? e.target.closest('a[href^="#/"]') : null;
-      if (!a) { return; }
-      e.preventDefault();
-      this.vaiA(a.getAttribute("href"));
-    };
-    document.addEventListener("click", this.onClickInterno);
-    this.tick = setInterval(() => {
-      const vuote = document.querySelectorAll(".mappa:not(:has(svg))");
-      if (vuote.length) { this.disegnaMappa(); }
-      if (!window.INIZIATIVE || !window.REGIONI_ITALIA) { this.forceUpdate(); }
-    }, 350);
-    setTimeout(() => { if (!window.REGIONI_ITALIA) { this.setState({ erroreMappa: true }); } }, 8000);
-    this.centraNav();
-    // L'effetto di comparsa si accende SOLO se in questo ambiente le transizioni
-    // avanzano davvero. Altrimenti non si nasconde nulla: il contenuto e la priorita.
-    this.provaAnimazioni();
-    this.osserva();
-  }
-  osserva() {
-    // Comparsa graduale dei blocchi quando entrano nello schermo.
-    const applica = () => {
-      // Solo i blocchi strutturali: mai le schede generate dai filtri,
-      // altrimenti un contenuto rigenerato potrebbe restare invisibile.
-      const nodi = document.querySelectorAll(".banda > div > *");
-      nodi.forEach((n, i) => {
-        if (n.closest(".hero")) { return; }
-        if (n.classList.contains("card") || n.classList.contains("art")) { return; }
-        if (n.classList.contains("rivela")) { return; }
-        n.classList.add("rivela");
-        if (i % 3 === 1) { n.classList.add("d1"); }
-        if (i % 3 === 2) { n.classList.add("d2"); }
-        // Se e gia in vista (o quasi) si mostra subito: la visibilita non dipende dall osservatore.
-        const b = n.getBoundingClientRect();
-        if (b.top < window.innerHeight * 1.05) {
-          requestAnimationFrame(() => n.classList.add("dentro"));
-          return;
-        }
-        if (this.occhio) { this.occhio.observe(n); } else { n.classList.add("dentro"); }
-      });
-    };
-    if (!this.occhio && window.IntersectionObserver) {
-      this.occhio = new IntersectionObserver((voci) => {
-        voci.forEach((v) => {
-          if (v.isIntersecting) { v.target.classList.add("dentro"); this.occhio.unobserve(v.target); }
-        });
-      }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
-    }
-    applica();
-    this.riapplica = applica;
-    setTimeout(applica, 400);
-    this.rete();
-    // Anche durante lo scorrimento: cio che entra in vista si mostra, sempre.
-    this.onScroll = () => {
-      document.querySelectorAll(".rivela:not(.dentro)").forEach((n) => {
-        const b = n.getBoundingClientRect();
-        // Basta che il blocco abbia superato la soglia: se e gia stato oltrepassato
-        // (bottom negativo) deve comunque restare visibile, non tornare invisibile.
-        if (b.top < window.innerHeight * 0.94) { n.classList.add("dentro"); }
-      });
-    };
-    window.addEventListener("scroll", this.onScroll, { passive: true });
-    window.addEventListener("resize", this.onScroll);
-    // Un cambio di altezza senza scorrimento (un soffietto che si apre) spinge
-    // il blocco successivo in vista senza generare alcun evento: lo intercettiamo.
-    if (window.ResizeObserver) {
-      this.occhioAltezza = new ResizeObserver(() => {
-        clearTimeout(this.timerAltezza);
-        this.timerAltezza = setTimeout(this.onScroll, 60);
-      });
-      const radice = document.querySelector("x-dc") || document.body;
-      if (radice) { this.occhioAltezza.observe(radice); }
-    }
-    document.addEventListener("toggle", this.onScroll, true);
-
-    // Guardiano: se in questo ambiente le transizioni non avanzano, un blocco
-    // marcato come visibile resta a opacita zero. In quel caso l'effetto di
-    // comparsa si spegne del tutto: meglio nessuna animazione che testo invisibile.
-    const guardiano = () => {
-      const marcati = document.querySelectorAll(".rivela.dentro");
-      for (let i = 0; i < marcati.length; i++) {
-        const o = parseFloat(window.getComputedStyle(marcati[i]).opacity);
-        if (o < 0.5) { this.spegniAnimazioni(); return; }
-      }
-    };
-    this.guardiaTimer = setInterval(guardiano, 1400);
-    setTimeout(guardiano, 1600);
-    // Se la pagina non e in primo piano le animazioni non girano: niente effetto.
-    this.onVis = () => {
-      if (document.visibilityState !== "visible") {
-        this.spegniAnimazioni();
-      } else if (document.documentElement.classList.contains("senza-anim")) {
-        // Reversibile: se la pagina torna in primo piano si riprova.
-        document.documentElement.classList.remove("senza-anim");
-        this.provaAnimazioni();
-      }
-    };
-    document.addEventListener("visibilitychange", this.onVis);
-    this.onVis();
-  }
-  provaAnimazioni() {
-    const p = document.createElement("div");
-    p.setAttribute("aria-hidden", "true");
-    p.style.cssText = "position:fixed;left:-9999px;top:0;width:8px;height:8px;pointer-events:none;opacity:0;transition:opacity 80ms linear";
-    document.body.appendChild(p);
-    void p.offsetHeight;
-    p.style.opacity = "1";
-    setTimeout(() => {
-      const avanzata = parseFloat(window.getComputedStyle(p).opacity) > 0.3;
-      p.remove();
-      if (avanzata && document.visibilityState === "visible") {
-        document.documentElement.classList.add("js-anim");
-      } else {
-        this.spegniAnimazioni();
-      }
-    }, 300);
-  }
-  spegniAnimazioni() {
-    // senza-anim vince con !important anche su una transizione gia avviata.
-    document.documentElement.classList.remove("js-anim");
-    document.documentElement.classList.add("senza-anim");
-  }
-  rete() {
-    // Nulla resta invisibile: dopo poco si mostra tutto cio che e in vista.
-    clearTimeout(this.reteTimer);
-    this.reteTimer = setTimeout(() => {
-      document.querySelectorAll(".rivela:not(.dentro)").forEach((n) => {
-        const b = n.getBoundingClientRect();
-        if (b.top < window.innerHeight * 1.3) { n.classList.add("dentro"); }
-      });
-    }, 1200);
-  }
-  componentDidUpdate() {
-    if (this.riapplica) { this.riapplica(); this.rete(); }
-    this.disegnaMappa();
-    const s = document.querySelector("#scegli-reg");
-    if (s && s.options.length > 1 && s.value !== this.reg()) { s.value = this.reg(); }
-  }
-  componentWillUnmount() {
-    window.removeEventListener("hashchange", this.onHash);
-    document.removeEventListener("click", this.onClickInterno);
-    window.removeEventListener("scroll", this.onScroll);
-    window.removeEventListener("resize", this.onScroll);
-    document.removeEventListener("toggle", this.onScroll, true);
-    if (this.occhioAltezza) { this.occhioAltezza.disconnect(); }
-    clearTimeout(this.timerAltezza);
-    clearInterval(this.guardiaTimer);
-    document.removeEventListener("visibilitychange", this.onVis);
-    clearInterval(this.tick);
-  }
-  centraNav() {
-    setTimeout(() => {
-      const nav = document.querySelector(".nav-riga");
-      const att = nav && nav.querySelector('[aria-current="page"]');
-      if (nav && att) { nav.scrollLeft = att.offsetLeft - (nav.clientWidth - att.offsetWidth) / 2; }
-    }, 150);
-  }
-
-  vaiA(rotta) {
-    const pulita = String(rotta).replace(/^#\/?/, "");
-    const p = pulita.split("/");
-    let vista = p[0] || "";
-    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande"];
-    if (note.indexOf(vista) === -1) { vista = ""; }
-    const arg = p[1] ? decodeURIComponent(p[1]) : "";
-    this.setState({ rotta: { vista: vista, arg: arg }, tipi: [], inviato: false, mail: "" });
-    window.scrollTo(0, 0);
-    this.portaAllElenco(vista);
-    try { window.history.replaceState(null, "", rotta); } catch (e) {}
-  }
-  leggiRotta() {
-    let h = "";
-    try { h = String(window.location.hash || "").replace(/^#\/?/, ""); } catch (e) {}
-    const p = h.split("/");
-    let vista = p[0] || "";
-    const arg = p[1] ? decodeURIComponent(p[1]) : "";
-    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande"];
-    if (note.indexOf(vista) === -1) { vista = ""; }
-    return { vista: vista, arg: arg };
-  }
-  vista() { return this.state.rotta.vista; }
-  reg() { return this.state.rotta.arg || "Lombardia"; }
-
-  nomiRegioni() {
-    return ["Abruzzo","Basilicata","Calabria","Campania","Emilia-Romagna","Friuli-Venezia Giulia","Lazio","Liguria","Lombardia","Marche","Molise","Piemonte","Puglia","Sardegna","Sicilia","Toscana","Trentino-Alto Adige","Umbria","Valle d'Aosta","Veneto"];
-  }
-  conteggi() {
-    const c = {};
-    (window.INIZIATIVE || []).forEach((x) => { c[x.reg] = (c[x.reg] || 0) + 1; });
-    return c;
-  }
-  rottaRegione(n) {
-    const q = this.conteggi()[n] || 0;
-    return "#/" + (q > 0 ? "regione" : "vuota") + "/" + encodeURIComponent(n);
-  }
-  etichettaConta(n) {
-    const q = this.conteggi()[n] || 0;
-    if (q === 0) { return "nessuna iniziativa segnalata"; }
-    if (q === 1) { return "1 iniziativa aperta"; }
-    return q + " iniziative aperte";
-  }
-  parola(n, uno, molte) { return n + " " + (n === 1 ? uno : molte); }
-
-  disegnaMappa() {
-    // Tutte le mappe presenti nella schermata, non solo la prima.
-    const tutte = Array.prototype.slice.call(document.querySelectorAll(".mappa"));
-    if (this.mapEl && this.mapEl.isConnected && tutte.indexOf(this.mapEl) === -1) { tutte.push(this.mapEl); }
-    if (!tutte.length || !window.MappaItalia || !window.MappaItalia.pronta()) { return; }
-    const marca = this.vista() === "regione" ? this.reg() : "";
-    tutte.forEach((el) => {
-      if (el.querySelector("svg") && el.dataset.reg === marca) { return; }
-      el.dataset.reg = marca;
-      window.MappaItalia.disegna(el, {
-        conteggi: this.conteggi(),
-        attiva: this.vista() === "regione" ? this.reg() : null,
-        href: (n) => this.rottaRegione(n),
-        vai: (n) => this.vaiA(this.rottaRegione(n)),
-        etichetta: (n) => this.etichettaConta(n)
-      });
-    });
-  }
-
-  icona(tipo) {
-    const I = {
-      "Mammografico": "M12 3a9 9 0 100 18 9 9 0 000-18M12 10.6a1.4 1.4 0 100 2.8 1.4 1.4 0 000-2.8",
-      "Colon-retto": "M6 4c0 4.5 5.5 3.5 5.5 8S5 15.5 5 19h14",
-      "Cervice uterina": "M12 3.5l7 3v5.2c0 4.2-3 6.9-7 8.3-4-1.4-7-4.1-7-8.3V6.5z",
-      "Prostata": "M12 3.5c3.2 4.2 5.2 6.4 5.2 9A5.2 5.2 0 0112 17.7 5.2 5.2 0 016.8 12.5c0-2.6 2-4.8 5.2-9z",
-      "Melanoma": "M12 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9M12 2.5v2M12 19.5v2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M2.5 12h2M19.5 12h2M5.2 18.8l1.4-1.4M17.4 6.6l1.4-1.4",
-      "Polmone": "M12 3.5v9M9 8.5c-2.2 1.2-3.2 3.4-3.2 6.4v5H9v-7M15 8.5c2.2 1.2 3.2 3.4 3.2 6.4v5H15v-7",
-      "Osteoporosi": "M8 5.5a2.2 2.2 0 00-2.2 2.2A2.2 2.2 0 008 9.9h8a2.2 2.2 0 002.2-2.2A2.2 2.2 0 0016 5.5M8 14.1a2.2 2.2 0 00-2.2 2.2A2.2 2.2 0 008 18.5h8a2.2 2.2 0 002.2-2.2 2.2 2.2 0 00-2.2-2.2M9.5 9.9v4.2M14.5 9.9v4.2",
-      "Tiroide": "M12 7.5v8M9.2 8c-2.9 0-4.2 2-4.2 4.2S6.3 16.5 9.2 16.5s2.8-2 2.8-4.3S12.1 8 9.2 8M14.8 8c2.9 0 4.2 2 4.2 4.2s-1.3 4.3-4.2 4.3-2.8-2-2.8-4.3S11.9 8 14.8 8"
-    };
-    return I[tipo] || "M12 3a9 9 0 100 18 9 9 0 000-18";
-  }
-  scheda(x) {
-    let cls = "tag tag-gratis";
-    if (x.stato === "a pagamento") { cls = "tag tag-paga"; }
-    if (x.stato === "su invito") { cls = "tag tag-invito"; }
-    return {
-      tipo: x.tipo, icona: this.icona(x.tipo), titolo: x.titolo, ente: x.ente, dove: x.dove,
-      quando: x.quando, chi: x.chi, tel: x.tel, href: "tel:" + x.tel.split(" ").join(""),
-      tagTesto: x.stato, tagCls: cls,
-      scadenza: this.scadenza(x).testo, scadenzaCls: this.scadenza(x).cls,
-      haScadenza: !!this.scadenza(x).testo,
-      posti: x.posti || "", haPosti: !!x.posti
-    };
-  }
-  giorniAllaChiusura(x) {
-    if (!x.chiude) { return null; }
-    const oggi = new Date();
-    oggi.setHours(0, 0, 0, 0);
-    const p = x.chiude.split("-");
-    const fine = new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
-    return Math.round((fine - oggi) / 86400000);
-  }
-  scadenza(x) {
-    const g = this.giorniAllaChiusura(x);
-    if (g === null) { return { testo: "", cls: "" }; }
-    const MESI = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
-    const p = x.chiude.split("-");
-    const data = Number(p[2]) + " " + MESI[Number(p[1]) - 1];
-    if (g < 0) { return { testo: "chiusa", cls: "scad scad-chiusa" }; }
-    if (g === 0) { return { testo: "ultimo giorno, oggi", cls: "scad scad-rossa" }; }
-    if (g === 1) { return { testo: "chiude domani", cls: "scad scad-rossa" }; }
-    if (g <= 7) { return { testo: "chiude fra " + g + " giorni", cls: "scad scad-rossa" }; }
-    if (g <= 21) { return { testo: "chiude il " + data, cls: "scad scad-gialla" }; }
-    return { testo: "aperta fino al " + data, cls: "scad scad-calma" };
-  }
-
-  testimonianze() {
-    const F = "https://img.magnific.com/free-photo/";
-    const foto = [
-      F + "close-up-portrait-beautiful-smiling-old-woman-blue-shirt_171337-7899.jpg",
-      F + "portrait-caucasian-man_641386-12.jpg",
-      F + "adult-woman-with-gray-hair-smiling_23-2148277910.jpg",
-      F + "portrait-smiley-mature-man_23-2148465219.jpg",
-      F + "medium-shot-smiley-woman-portrait_23-2149361949.jpg",
-      F + "good-mood-mature-man-burgundy-shirt-looking-positive_259150-56976.jpg",
-      F + "portrait-happy-smiley-older-woman_23-2149022611.jpg",
-      F + "portrait-man-laughing_23-2148859448.jpg"
-    ];
-    const lista = this.voci ? this.voci : (this.voci = [
-      { nome: "Anna R.", ruolo: "58 anni, Bologna", testo: "Grazie a Screening Italia ho trovato una giornata di screening a due fermate di autobus da casa. Prima cercavo sui siti delle ASL e non capivo mai se l\u2019iniziativa fosse ancora aperta. Qui era tutto in una schermata: dove, quando, e il numero da chiamare." },
-      { nome: "Marco T.", ruolo: "34 anni, figlio di un utente", testo: "Mio padre ha 71 anni e non usa internet. Ho aperto il sito, scelto la Puglia, spuntato colon-retto e in un minuto avevo il numero da chiamare. L\u2019ho prenotato io per lui mentre eravamo al telefono." },
-      { nome: "Giulia S.", ruolo: "46 anni, Torino", testo: "Stavo per prenotare una mammografia in una clinica privata a 130 euro. Ho scoperto qui che nella mia zona c\u2019era la stessa cosa, gratuita. Dormo sonni tranquilli grazie alla prevenzione, e senza spendere." },
-      { nome: "Salvatore P.", ruolo: "63 anni, Palermo", testo: "Il sito \u00e8 chiaro anche per chi come me non \u00e8 pratico. Caratteri grandi, poche cose per pagina, e il pulsante per ingrandire il testo mi ha risolto la giornata." },
-      { nome: "Chiara M.", ruolo: "41 anni, figlia di un\u2019utente", testo: "Ho aiutato mia madre a capire cosa fosse il kit del colon-retto: la spiegazione qui era pi\u00f9 comprensibile della lettera arrivata a casa. Le ho letto la pagina al telefono e ha fatto tutto da sola." },
-      { nome: "Davide L.", ruolo: "52 anni, Verona", testo: "Cercavo un controllo della prostata e non sapevo che non esistesse l\u2019invito. Averlo scritto chiaro, senza allarmismi, mi ha fatto prendere appuntamento dal medico invece di rimandare un altro anno." },
-      { nome: "Rosa D.", ruolo: "67 anni, Napoli", testo: "Non mi era mai arrivata la lettera. Qui ho letto cosa fare e a chi telefonare: in mezz\u2019ora avevo l\u2019appuntamento. Pensavo di aver perso il turno." },
-      { nome: "Federico B.", ruolo: "29 anni, figlio di un utente", testo: "Di solito nei siti pubblici mi perdo. Questo si capisce al primo colpo: clicchi la regione sulla mappa e vedi solo quello che ti serve. L\u2019ho girato a tutta la famiglia." }
-    ]);
-    return lista.map((t, i) => ({ nome: t.nome, ruolo: t.ruolo, testo: t.testo, foto: foto[i % foto.length], slot: "testi-" + i }));
-  }
-  corpi() {
-    return {
-      "faq-1": [
-        { h: "Perch\u00e9 la lettera pu\u00f2 non arrivare", p: ["L\u2019invito viene spedito all\u2019indirizzo che risulta all\u2019anagrafe sanitaria, non a quello dove abiti di fatto. Se hai cambiato casa senza aggiornare la residenza, o se il nome sul citofono non corrisponde, la lettera torna al mittente.", "Capita anche per un semplice mancato recapito postale. In tutti questi casi resti comunque nell\u2019elenco delle persone da invitare: non sei stato escluso."] , chiave: "Non sei stato escluso: la tua posizione resta nell’elenco delle persone da invitare." },
-        { h: "Cosa fare, in concreto", p: ["Chiama il centro screening della tua azienda sanitaria e di\u2019 che non hai ricevuto l\u2019invito: il numero si trova sul sito dell\u2019ASL alla voce screening, oppure lo chiedi in farmacia.", "Tieni a portata di mano la tessera sanitaria: servono codice fiscale e indirizzo aggiornato. Nella stessa telefonata puoi gi\u00e0 fissare l\u2019appuntamento."] , corsivo: "Chiedi anche di aggiornare l’indirizzo: eviti che salti anche il prossimo invito." },
-        { h: "Hai perso il turno?", p: ["No. Il programma richiama a intervalli regolari e l\u2019adesione fuori invito \u00e8 prevista: l\u2019esame resta gratuito e senza impegnativa."] , chiave: "L’esame resta gratuito e senza impegnativa, anche fuori invito." }
-      ],
-      "faq-3": [
-        { h: "L\u2019invito non \u00e8 un buono da esibire", p: ["La lettera serve a informarti, non \u00e8 un titolo di accesso. Se l\u2019hai buttata, persa o cestinata per errore, la prenotazione resta possibile: la tua posizione \u00e8 registrata nell\u2019elenco del centro screening."] , chiave: "La lettera informa, non autorizza: senza di essa la prenotazione resta possibile." },
-        { h: "Come recuperare l\u2019appuntamento", p: ["Telefona al centro screening della tua ASL. Comunichi nome, codice fiscale e data di nascita, e ti viene assegnata una nuova data.", "Se nella lettera c\u2019era un appuntamento gi\u00e0 fissato e non ci sei andato, dillo: viene semplicemente riprogrammato."] , corsivo: "Una telefonata basta: non serve ripresentare domanda né passare dal medico." },
-        { h: "Se non ricordi di quale ASL sei", p: ["Fa riferimento al comune di residenza. In farmacia o dal medico di medicina generale te lo dicono in un minuto."]  }
-      ],
-      "faq-4": [
-        { h: "Ogni quanto si fa", p: ["Nel programma pubblico la mammografia si ripete ogni due anni. \u00c8 l\u2019intervallo su cui il programma \u00e8 costruito: pi\u00f9 spesso non porta benefici dimostrati, pi\u00f9 raramente riduce l\u2019efficacia della diagnosi precoce."] , chiave: "Due anni è l’intervallo su cui il programma è costruito." },
-        { h: "Da quale et\u00e0 \u00e8 gratuita", p: ["La fascia invitata comprende in genere le donne fra i 50 e i 69 anni; diverse regioni la estendono dai 45 ai 74. Dentro la fascia prevista l\u2019esame \u00e8 gratuito e non richiede impegnativa.", "Fuori dalla fascia il controllo pu\u00f2 comunque essere indicato: se hai familiarit\u00e0 o hai notato qualcosa, parlane col medico senza aspettare l\u2019invito."] , chiave: "Dentro la fascia prevista l’esame è gratuito e non richiede impegnativa." },
-        { h: "Come ci si prepara", p: ["Non serve digiuno n\u00e9 alcuna preparazione. Meglio evitare deodoranti o talco sotto le ascelle il giorno dell\u2019esame, e portare con te le mammografie precedenti se le hai."] , corsivo: "Porta con te le mammografie precedenti: il confronto è più informativo del singolo esame." }
-      ],
-      "faq-5": [
-        { h: "Che cosa cerca il kit", p: ["Cerca tracce di sangue non visibili nelle feci, un segno che pu\u00f2 comparire molto prima dei sintomi. Non \u00e8 un esame che diagnostica un tumore: indica se serve approfondire con una colonscopia."] , chiave: "Non diagnostica un tumore: dice se serve approfondire." },
-        { h: "Come si usa", p: ["Il kit \u00e8 una provetta con un bastoncino nel tappo. Raccogli un piccolo campione di feci sfiorando la superficie in tre punti diversi, richiudi bene e conserva in frigorifero fino alla riconsegna.", "Non serve dieta, non serve sospendere farmaci. Evita la raccolta durante il ciclo mestruale o in presenza di emorroidi sanguinanti: aspetta qualche giorno."] , corsivo: "Niente dieta, niente sospensione di farmaci." },
-        { h: "Dove si ritira e si riporta", p: ["Nella maggior parte delle regioni si ritira e si riconsegna in farmacia, gratuitamente. In alcune arriva a casa con la lettera di invito. L\u2019esito arriva per posta entro poche settimane."] , chiave: "Il ritiro e la riconsegna in farmacia sono gratuiti." }
-      ],
-      "faq-6": [
-        { h: "Gratuito", p: ["Sono gli esami del programma pubblico rivolti a una fascia di et\u00e0 precisa: mammella, colon-retto e cervice uterina. Non si paga nulla, non serve impegnativa, e sei tu a essere chiamato."] , chiave: "Non si paga nulla, e sei tu a essere chiamato." },
-        { h: "Su invito", p: ["Vuol dire che ci si accede solo se convocati, perch\u00e9 il programma segue un calendario per fasce di et\u00e0. Se rientri nei requisiti ma l\u2019invito non \u00e8 arrivato, puoi chiamare e aderire comunque."] , chiave: "Se rientri nei requisiti ma l’invito non è arrivato, puoi aderire comunque." },
-        { h: "A pagamento", p: ["Sono controlli fuori programma: prescritti dal medico con ticket, oppure privati. Nelle giornate organizzate da ospedali e associazioni gli stessi esami sono spesso gratuiti: le trovi elencate qui, regione per regione."] , corsivo: "Nelle giornate organizzate lo stesso esame è spesso gratuito." }
-      ],
-      "faq-7": [
-        { h: "Chi ti prende in carico", p: ["Il programma di screening segue la residenza. Appena la nuova residenza \u00e8 registrata, l\u2019azienda sanitaria del comune dove sei andato ad abitare ti inserisce nei suoi elenchi e ti invita quando tocca a te."] , chiave: "Il programma di screening segue la residenza." },
-        { h: "I tempi, e cosa fare nel frattempo", p: ["Il passaggio non \u00e8 immediato: fra il cambio di residenza e il primo invito possono passare mesi. Se nel frattempo il tuo turno scade, chiama il centro screening della nuova ASL e chiedi di aderire.", "Porta con te gli esiti degli esami fatti prima: servono a capire a che punto del percorso ti trovi ed evitano di ripetere un esame gi\u00e0 fatto."] , corsivo: "Gli esiti precedenti valgono: portarli evita di ripetere un esame già fatto." }
-      ],
-      "faq-8": [
-        { h: "Che cosa vuol dire", p: ["Vuol dire che l\u2019esame ha mostrato qualcosa che va guardato meglio, non che \u00e8 stato trovato un tumore. Gli esami di screening sono costruiti per essere prudenti: preferiscono richiamare qualche persona in pi\u00f9 piuttosto che lasciare passare qualcosa."] , chiave: "Vuol dire guardare meglio, non che sia stato trovato un tumore." },
-        { h: "Che cosa succede adesso", p: ["Il centro screening ti contatta per un secondo esame, pi\u00f9 accurato del primo: una mammografia di approfondimento o un\u2019ecografia, una colonscopia, una colposcopia, a seconda del programma. Anche questo passaggio \u00e8 gratuito.", "Nella maggior parte dei casi l\u2019approfondimento chiude la questione e si torna al calendario normale."] , chiave: "Anche l’approfondimento è gratuito." },
-        { h: "Quanto si aspetta", p: ["I percorsi di approfondimento hanno tempi riservati, in genere poche settimane. Se l\u2019appuntamento tarda, chiama il centro screening: la priorit\u00e0 \u00e8 prevista dal programma."] , corsivo: "Se l’appuntamento tarda, chiama: la priorità è prevista dal programma." }
-      ]
-    };
-  }
-  domande() {
-    return [
-      { id: "faq-1", foto: "https://img.magnific.com/free-photo/happy-mature-woman-her-doctor-communicating-while-going-through-paperwork-hospital-hallway_637285-5300.jpg", sommario: "La posizione è recuperabile e il turno non viene perso.", cat: "Inviti e lettere", data: "28 agosto 2026", titolo: "Mancato recapito della lettera di invito: come procedere", href: "#/articolo/faq-1", chiavi: "invito lettera posta asl convocazione" },
-      { id: "faq-2", foto: "https://img.magnific.com/free-photo/positive-man-with-grey-hair-light-shirt-jeans-with-camera-laughing-with-blonde-lady-hat-sunglasses-striped-blue-shirt-park_197531-19160.jpg", sommario: "Non è previsto invito: il primo passo del controllo spetta a te.", cat: "Prostata", data: "21 agosto 2026", titolo: "Screening della prostata: a chi \u00e8 rivolto e da quale et\u00e0", href: "#/prostata", chiavi: "psa uomini urologo eta" },
-      { id: "faq-3", foto: "https://img.magnific.com/free-photo/portrait-female-health-specialist-working-with-laptop-plan-patient-appointment-medical-office-general-practitioner-using-medication-notes-help-with-diagnosis-treatment_482257-45642.jpg", sommario: "Sì: il recapito di riferimento resta quello dell’azienda sanitaria.", cat: "Inviti e lettere", data: "14 agosto 2026", titolo: "Invito smarrito: \u00e8 ancora possibile prenotare?", href: "#/articolo/faq-3", chiavi: "invito perso prenotare numero verde" },
-      { id: "faq-4", foto: "https://img.magnific.com/free-photo/old-grey-haired-female-cabinet-modern-clinic_7502-9557.jpg", sommario: "Con cadenza biennale, gratuita nella fascia di età prevista.", cat: "Mammografia", data: "7 agosto 2026", titolo: "Mammografia: periodicit\u00e0 ed et\u00e0 di accesso gratuito", href: "#/articolo/faq-4", chiavi: "seno donne gratis eta due anni" },
-      { id: "faq-5", foto: "https://img.magnific.com/free-photo/thank-you-your-prescription_329181-2225.jpg", sommario: "Si ritira e si riconsegna in farmacia: la raccolta richiede pochi minuti.", cat: "Colon-retto", data: "31 luglio 2026", titolo: "Kit per la ricerca del sangue occulto: uso e riconsegna", href: "#/articolo/faq-5", chiavi: "kit feci farmacia sangue occulto" },
-      { id: "faq-6", foto: "https://img.magnific.com/free-photo/thank-you-your-visit-my-office_329181-2204.jpg", sommario: "Tre condizioni che determinano il costo e le modalità di accesso.", cat: "Come funziona", data: "24 luglio 2026", titolo: "Gratuito, a pagamento, su invito: le differenze", href: "#/articolo/faq-6", chiavi: "costo ticket invito differenza" },
-      { id: "faq-7", foto: "https://img.magnific.com/free-photo/charming-woman-with-short-hairstyle-hat-blue-blouse-holds-map-points-side-smiles-with-grey-haired-man-with-camera-park_197531-19155.jpg", sommario: "La presa in carico passa all’azienda sanitaria del nuovo domicilio.", cat: "Come funziona", data: "17 luglio 2026", titolo: "Trasferimento di residenza: a quale azienda sanitaria rivolgersi", href: "#/articolo/faq-7", chiavi: "trasferimento residenza regione asl nuova" },
-      { id: "faq-8", foto: "https://img.magnific.com/free-photo/senior-woman-answering-doctor-questions-examination-hospital-room_482257-8442.jpg", sommario: "Non indica una diagnosi: comporta un secondo accertamento.", cat: "Come funziona", data: "10 luglio 2026", titolo: "Esito \u00abda approfondire\u00bb: che cosa comporta", href: "#/articolo/faq-8", chiavi: "esito risultato approfondimento richiamo" }
-    ];
-  }
-  normalizza(s) {
-    return String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-  }
-
-  renderVals() {
-    const vista = this.vista();
-    const reg = this.reg();
-    const dati = window.INIZIATIVE || [];
-    const conteggi = this.conteggi();
-
-    // --- regione ---
-    const tutte = dati.filter((x) => x.reg === reg);
-    const sel = this.state.tipi;
-    const nomiTipi = [];
-    tutte.forEach((x) => { if (nomiTipi.indexOf(x.tipo) === -1) { nomiTipi.push(x.tipo); } });
-    // Massimo sei filtri: oltre quel numero la fila diventa illeggibile.
-    // Restano i sei tipi con piu iniziative nella regione.
-    nomiTipi.sort((a, b) => {
-      const d = tutte.filter((x) => x.tipo === b).length - tutte.filter((x) => x.tipo === a).length;
-      return d !== 0 ? d : a.localeCompare(b);
-    });
-    nomiTipi.splice(6);
-    nomiTipi.sort();
-    const scelte = nomiTipi.map((t) => {
-      const n = tutte.filter((x) => x.tipo === t).length;
-      const on = sel.indexOf(t) !== -1;
-      return {
-        nome: t, on: on ? "true" : "false", icona: this.icona(t),
-        conta: this.parola(n, "iniziativa", "iniziative"),
-        cls: on ? "scelta on" : "scelta",
-        pick: () => this.setState((s) => ({
-          tipi: s.tipi.indexOf(t) === -1 ? s.tipi.concat([t]) : s.tipi.filter((x) => x !== t)
-        }))
-      };
-    });
-    // Chi chiude prima sta in cima: e l'informazione che fa agire.
-    const viste = (sel.length ? tutte.filter((x) => sel.indexOf(x.tipo) !== -1) : tutte)
-      .slice().sort((a, b) => String(a.chiude || "9").localeCompare(String(b.chiude || "9")));
-    const inScadenza = viste.filter((x) => {
-      const g = this.giorniAllaChiusura(x);
-      return g !== null && g >= 0 && g <= 7;
-    }).length;
-    let quante = "Nessuna iniziativa aperta in " + reg + ".";
-    if (tutte.length) {
-      quante = sel.length
-        ? this.parola(viste.length, "iniziativa aperta", "iniziative aperte") + " per la tua scelta."
-        : this.parola(tutte.length, "iniziativa aperta", "iniziative aperte") + " in " + reg + ". Seleziona uno screening per restringere l’elenco.";
-    }
-
-    // --- domande frequenti ---
-    const tutteFaq = this.domande();
-    const ago = this.normalizza(this.state.q).trim();
-    const cat = this.state.cat;
-    const nomiCat = [];
-    tutteFaq.forEach((a) => { if (nomiCat.indexOf(a.cat) === -1) { nomiCat.push(a.cat); } });
-    const categorie = [{ nome: "Tutti", val: null }].concat(nomiCat.map((c) => ({ nome: c, val: c }))).map((c) => ({
-      nome: c.nome,
-      cls: cat === c.val ? "filtro on" : "filtro",
-      pick: () => this.setState({ cat: c.val })
-    }));
-    const trovate = tutteFaq.filter((a) => {
-      if (cat && a.cat !== cat) { return false; }
-      if (!ago) { return true; }
-      return this.normalizza(a.titolo + " " + a.cat + " " + a.chiavi).indexOf(ago) !== -1;
-    });
-    let quanteFaq = this.parola(trovate.length, "risposta", "risposte");
-    if (trovate.length === 0) { quanteFaq = "Nessuna risposta"; }
-    quanteFaq = quanteFaq + (cat ? " in \u00ab" + cat + "\u00bb" : "") + (ago ? " per \u00ab" + this.state.q + "\u00bb" : "") + ".";
-
-    return {
-      // navigazione
-      navReg: (vista === "regione" || vista === "vuota") ? "page" : "false",
-      navTesti: vista === "testimonianze" ? "page" : "false",
-      navEnti: vista === "enti" ? "page" : "false",
-      navChi: vista === "chi" ? "page" : "false",
-      navContatti: vista === "contatti" ? "page" : "false",
-      navFaq: (vista === "faq" || vista === "prostata" || vista === "articolo") ? "page" : "false",
-      navDomande: vista === "domande" ? "page" : "false",
-      hrefIniziative: this.rottaRegione("Lombardia"),
-      vistaHome: vista === "",
-      vistaRegione: vista === "regione",
-      vistaVuota: vista === "vuota",
-      vistaFaq: vista === "faq" || vista === "domande",
-      vistaProstata: vista === "prostata",
-      vistaChi: vista === "chi",
-      vistaContatti: vista === "contatti",
-
-      // home
-      nIniziative: dati.length ? String(dati.length) : "\u2013",
-      nRegioni: String(Object.keys(conteggi).length),
-      nTipi: String(new Set(dati.map((x) => x.tipo)).size),
-      aggiornato: "3 settembre",
-      vaiAllaMappa: () => {
-        const el = document.querySelector("#trova");
-        if (el) { window.scrollTo(0, el.getBoundingClientRect().top + window.pageYOffset - 70); }
-      },
-      mappaRef: this.mappaRef,
-      erroreMappa: !!this.state.erroreMappa,
-      regioni: this.nomiRegioni().map((n) => ({ nome: n, href: this.rottaRegione(n) })),
-      faqHome: tutteFaq.slice(0, 3).map((a) => ({ slot: "home-" + a.id, cat: a.cat, data: a.data, titolo: a.titolo, sommario: a.sommario, foto: a.foto, href: a.href })),
-
-      // regione
-      reg: reg,
-      hrefVuota: "#/vuota/" + encodeURIComponent(reg),
-      apertura: tutte.length
-        ? "Seleziona gli screening che ti interessano: di seguito sono riportate le sole iniziative attualmente attive, con l’ente organizzatore e il recapito telefonico."
-        : "Per questa regione non risultano iniziative segnalate.",
-      elencoRegioni: this.nomiRegioni().map((n) => {
-        const q = conteggi[n] || 0;
-        return { nome: n, etichetta: n + " \u2014 " + (q ? this.parola(q, "iniziativa", "iniziative") : "nessuna iniziativa") };
-      }),
-      vaiA: (e) => { this.vaiA(this.rottaRegione(e.target.value)); },
-      scelte: scelte,
-      azzera: () => this.setState({ tipi: [] }),
-      quante: quante,
-      titoloElenco: tutte.length === 0
-        ? "Nessuna iniziativa in " + reg
-        : (sel.length ? "Le iniziative corrispondenti alla tua scelta" : "Tutte le iniziative attive in " + reg),
-      iniziative: viste.map((x) => this.scheda(x)),
-      avvisoScadenza: inScadenza > 0
-        ? (inScadenza === 1 ? "Una di queste chiude entro una settimana." : inScadenza + " di queste chiudono entro una settimana.")
-        : "",
-      haAvvisoScadenza: inScadenza > 0,
-      vuotoPerScelta: tutte.length > 0 && viste.length === 0,
-
-      // regione vuota
-      mail: this.state.mail,
-      inviato: this.state.inviato,
-      daCompilare: !this.state.inviato,
-      scriviMail: (e) => this.setState({ mail: e.target.value }),
-      inviaMail: () => { if (this.state.mail) { this.setState({ inviato: true }); } },
-
-      // domande frequenti
-      q: this.state.q,
-      haQ: this.state.q.length > 0,
-      scrivi: (e) => this.setState({ q: e.target.value }),
-      pulisci: () => this.setState({ q: "" }),
-      categorie: categorie,
-      quanteFaq: quanteFaq,
-      vuotoFaq: trovate.length === 0,
-      risposte: trovate.map((a) => ({ slot: a.id, cat: a.cat, data: a.data, titolo: a.titolo, sommario: a.sommario, foto: a.foto, href: a.href })),
-
-      // articolo
-      vistaArticolo: vista === "articolo",
-      art: (() => {
-        const id = this.state.rotta.arg || "faq-1";
-        const d = tutteFaq.filter((x) => x.id === id)[0] || tutteFaq[0];
-        const corpo = (this.corpi()[d.id] || []).map((s) => ({
-          h: s.h, p: s.p, chiave: s.chiave || "", corsivo: s.corsivo || "",
-          haChiave: !!s.chiave, haCorsivo: !!s.corsivo
-        }));
-        return {
-          slot: "art-" + d.id, foto: d.foto, cat: d.cat, titolo: d.titolo,
-          sommario: d.sommario, data: d.data, corpo: corpo
-        };
-      })(),
-
-      vistaEnti: vista === "enti",
-
-      // testimonianze
-      vistaTesti: vista === "testimonianze",
-      testiGiro: this.testimonianze(),
-      testiTutte: this.testimonianze(),
-
-      // consenso ai cookie
-      bannerAperto: !!this.state.bannerAperto,
-      scelteAperte: !!this.state.scelteAperte,
-      statOn: this.state.statBozza ? "true" : "false",
-      statCls: this.state.statBozza ? "ck-sw on" : "ck-sw",
-      giraStat: () => this.setState({ statBozza: !this.state.statBozza }),
-      apriScelte: () => {
-        const c = this.leggiConsenso();
-        this.setState({ scelteAperte: true, bannerAperto: false, statBozza: c ? !!c.stat : false });
-      },
-      chiudiScelte: () => this.setState({ scelteAperte: false, bannerAperto: !this.leggiConsenso() }),
-      salvaScelte: () => this.scriviConsenso(this.state.statBozza),
-      accettaTutti: () => this.scriviConsenso(true),
-      rifiutaTutti: () => this.scriviConsenso(false),
-      vistaCookie: vista === "cookie",
-      statoConsenso: (() => {
-        const c = this.state.consenso;
-        if (!c) { return "Non hai ancora scelto: i cookie di statistica sono spenti."; }
-        return c.stat
-          ? "Hai accettato i cookie di statistica."
-          : "Hai scelto solo i cookie tecnici: le statistiche sono spente.";
-      })(),
-      misurazioneFinta: !!this.state.misurazioneFinta,
-
-      // modulo dei contatti
-      mNome: this.state.mNome || "",
-      mMail: this.state.mMail || "",
-      mTipo: this.state.mTipo || "Segnalo un\u2019iniziativa",
-      mTesto: this.state.mTesto || "",
-      msgInviato: !!this.state.msgInviato,
-      msgDaCompilare: !this.state.msgInviato,
-      scriviNome: (e) => this.setState({ mNome: e.target.value }),
-      scriviIndirizzo: (e) => this.setState({ mMail: e.target.value }),
-      scriviTipo: (e) => this.setState({ mTipo: e.target.value }),
-      scriviTesto: (e) => this.setState({ mTesto: e.target.value }),
-      inviaModulo: () => {
-        if (this.state.mMail && this.state.mTesto) { this.setState({ msgInviato: true }); }
-      },
-
-      // articolo prostata
-      prostata: dati.filter((x) => x.tipo === "Prostata").map((x) => this.scheda(x))
-    };
-  }
-}
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844},&quot;statoArticoli&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;vuoto&quot;,&quot;ok&quot;,&quot;offline&quot;,&quot;errore&quot;],&quot;default&quot;:&quot;vuoto&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;filtroArticoli&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const Component = window.__siLogica(DCLogic);
 </script>
 </body>
 </html>
+
+
