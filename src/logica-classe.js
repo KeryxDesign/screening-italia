@@ -96,11 +96,9 @@ class Component extends DCLogic {
     /* Articoli: i dati veri arrivano da window.Articoli (articoli.js, SENTINEL):
        lista({pagina, perPagina, categoria}) risponde {esito:"ok"|"vuoto"|"offline"|"errore", articoli, totale}.
        In bozza articoli.js non e caricato: lo stato si sceglie dal pannello Tweaks, prop "statoArticoli". */
-    if (window.Articoli) {
-      window.Articoli.lista({ pagina: 1, perPagina: 10 }).then((r) => {
-        this.setState({ artStato: r.esito, artDati: r.articoli });
-      });
-    }
+    // Gli script del prototipo arrivano in ordine sparso: se articoli.js non e ancora
+    // caricato, ci riprova il giro del tick qui sotto (SENTINEL, 24/09/2026).
+    this.caricaArticoli();
 
     this.onHash = () => {
       const r = this.leggiRotta();
@@ -121,6 +119,16 @@ class Component extends DCLogic {
       const vuote = document.querySelectorAll(".mappa:not(:has(svg))");
       if (vuote.length) { this.disegnaMappa(); }
       if (!window.INIZIATIVE || !window.REGIONI_ITALIA) { this.forceUpdate(); }
+      this.caricaArticoli();
+      // Iniziative vere da WordPress (iniziative-wp.js): arrivano dopo il montaggio.
+      // Se iniziative.js arriva in ritardo e le copre con gli esempi, si rimettono.
+      if (window.__siIniziativeWP && window.INIZIATIVE !== window.__siIniziativeWP) { window.INIZIATIVE = window.__siIniziativeWP; this.iniVer = -1; }
+      if ((window.__siIniziativeVer || 0) !== (this.iniVer || 0)) {
+        this.iniVer = window.__siIniziativeVer || 0;
+        // La mappa si ridisegna solo se cambia regione: si azzera il segno per i nuovi conteggi.
+        document.querySelectorAll(".mappa").forEach((el) => { delete el.dataset.reg; });
+        this.forceUpdate();
+      }
     }, 350);
     setTimeout(() => { if (!window.REGIONI_ITALIA) { this.setState({ erroreMappa: true }); } }, 8000);
     this.centraNav();
@@ -129,6 +137,13 @@ class Component extends DCLogic {
     this.provaAnimazioni();
     this.osserva();
     setTimeout(() => this.curaDettaglio(), 0);
+  }
+  caricaArticoli() {
+    if (this.artChiesti || !window.Articoli) { return; }
+    this.artChiesti = true;
+    window.Articoli.lista({ pagina: 1, perPagina: 10 }).then((r) => {
+      this.setState({ artStato: r.esito, artDati: r.articoli });
+    });
   }
   osserva() {
     // Comparsa graduale dei blocchi quando entrano nello schermo.

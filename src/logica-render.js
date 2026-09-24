@@ -85,7 +85,7 @@ window.__siLogicaRender = class {
       vistaIniziativa: vista === "iniziativa",
       iniTrovata: vista === "iniziativa" && dati.some((x) => x.id === this.state.rotta.arg),
       // Finche i dati non sono caricati non si dichiara «non trovata».
-      iniMancante: vista === "iniziativa" && dati.length > 0 && !dati.some((x) => x.id === this.state.rotta.arg),
+      iniMancante: vista === "iniziativa" && dati.length > 0 && window.__siIniziativeStato !== "attesa" && !dati.some((x) => x.id === this.state.rotta.arg),
       ini: (() => {
         const d = dati.filter((x) => x.id === this.state.rotta.arg)[0];
         return d ? this.scheda(d) : this.scheda({ reg: "", tipo: "", titolo: "", tel: "", stato: "" });
