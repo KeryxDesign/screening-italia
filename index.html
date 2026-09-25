@@ -5,9 +5,11 @@
 <meta name="googlebot" content="noindex, nofollow">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=4664ca0"></script>
-<script src="./logica-render.js?v=4664ca0"></script>
-<script src="./logica-classe.js?v=4664ca0"></script>
+<script src="./support.js?v=d04e079"></script>
+<script src="./logica-render.js?v=d04e079"></script>
+<script src="./logica-classe.js?v=d04e079"></script>
+<script src="./screening-pagine.js?v=d04e079"></script>
+<script src="./logica-screening.js?v=d04e079"></script>
 </head>
 <body>
 <x-dc>
@@ -31,14 +33,15 @@
         <meta name="ext-resource-dependency" content="https://img.magnific.com/free-photo/thank-you-your-visit-my-office_329181-2204.jpg">
         <meta name="ext-resource-dependency" content="https://img.magnific.com/free-photo/charming-woman-with-short-hairstyle-hat-blue-blouse-holds-map-points-side-smiles-with-grey-haired-man-with-camera-park_197531-19155.jpg">
         <meta name="ext-resource-dependency" content="https://img.magnific.com/free-photo/senior-woman-answering-doctor-questions-examination-hospital-room_482257-8442.jpg">
-        <link rel="stylesheet" href="./stile.css?v=4664ca0">
-        <script src="./accessibilita.js?v=4664ca0"></script>
-        <script src="./iniziative.js?v=4664ca0"></script>
-        <script src="./iniziative-wp.js?v=4664ca0"></script>
-        <script src="./articoli.js?v=4664ca0"></script>
-        <script src="./regioni-italia.js?v=4664ca0"></script>
-        <script src="./mappa.js?v=4664ca0"></script>
-        <script src="./image-slot.js?v=4664ca0"></script>
+        <link rel="stylesheet" href="./stile.css?v=d04e079">
+        <link rel="stylesheet" href="./screening.css?v=d04e079">
+        <script src="./accessibilita.js?v=d04e079"></script>
+        <script src="./iniziative.js?v=d04e079"></script>
+        <script src="./iniziative-wp.js?v=d04e079"></script>
+        <script src="./articoli.js?v=d04e079"></script>
+        <script src="./regioni-italia.js?v=d04e079"></script>
+        <script src="./mappa.js?v=d04e079"></script>
+        <script src="./image-slot.js?v=d04e079"></script>
         <style>
           /* Marcatore di bozza (sezione articoli sotto le Domande frequenti, 23/09/2026):
              esce insieme al testo di prova, prima del build. */
@@ -74,7 +77,7 @@
 
         <div class="hdr">
           <div class="wrap hdr-riga">
-            <a class="marchio" href="#/" title="Torna alla home" aria-label="Screening Italia, torna alla home"><img class="marchio-img" src="./marchio/screening-italia-chiaro.png?v=4664ca0" alt="Screening Italia" width="1169" height="440" /></a>
+            <a class="marchio" href="#/" title="Torna alla home" aria-label="Screening Italia, torna alla home"><img class="marchio-img" src="./marchio/screening-italia-chiaro.png?v=d04e079" alt="Screening Italia" width="1169" height="440" /></a>
             <input class="menu-chk" type="checkbox" id="menu-chk" aria-label="Apri il menu">
             <label class="hamb" for="menu-chk">
               <svg class="i-apri" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
@@ -200,6 +203,24 @@
                     </sc-for>
                   </div>
                 </details>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione scr-home" id="screening" data-screen-label="Tipologie di screening">
+              <div class="fx col gap20">
+                <h2>{{ scrHome.h2 }}</h2>
+                <div class="scr-carte">
+                  <sc-for list="{{ scrHome.card }}" as="k" hint-placeholder-count="6">
+                    <a class="scr-carta" href="{{ k.href }}">
+                      <svg class="scr-ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ k.icona }}"></path></svg>
+                      <span class="scr-ctx">
+                        <span class="scr-ctit">{{ k.titolo }}</span>
+                        <span class="scr-criga">{{ k.riga }}</span>
+                      </span>
+                      <svg class="scr-cf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+                    </a>
+                  </sc-for>
+                </div>
               </div>
             </div>
 
@@ -833,81 +854,485 @@
           </div>
         </sc-if>
 
-        <sc-if value="{{ vistaProstata }}" hint-placeholder-val="{{ false }}">
-          <div data-screen-label="Articolo prostata">
+        <!-- Pagine screening (brief LORI 25/09/2026): tre modelli (ONCO e PROSTATA condividono i blocchi uguali) guidati dai dati di screening-pagine.js. -->
+        <sc-if value="{{ scrAdulti }}" hint-placeholder-val="{{ false }}">
+          <div class="pag-scr" data-screen-label="Screening ONCO e PROSTATA">
 
-            <div class="banda hero wrap sezione" data-screen-label="Apertura articolo">
-              <div class="hero-sfondo" aria-hidden="true">
-                <image-slot id="hero-5" src="https://img.magnific.com/free-photo/mature-man-talking-african-american-doctor-home-visit_637285-11352.jpg" shape="rect" placeholder="Foto di sezione"></image-slot>
-                <span class="hero-velo"></span>
-              </div>
+            <div class="banda b-carta wrap sezione" data-screen-label="Apertura screening">
               <div class="fx col gap16">
-                <p class="nota"><a href="#/domande">← Torna alle domande frequenti</a></p>
-                <div class="occhiello">Screening della prostata</div>
-                <h1>Per la prostata non è previsto invito: che cosa comporta</h1>
-                <p>In Italia i programmi di screening organizzati riguardano tre tumori: mammella, colon-retto e cervice uterina. La prostata non rientra fra questi: non ricevi alcuna convocazione, e il primo passo del controllo spetta a te.</p>
+                <p class="nota"><a href="#/screening">{{ scr.ritorno }}</a></p>
+                <div class="occhiello">{{ scr.occhiello }}</div>
+                <h1>{{ scr.h1 }}</h1>
+                <p>{{ scr.sommario }}</p>
+                <p class="nota">{{ scr.orient }}</p>
+                <button type="button" class="cta" onClick="{{ scr.scendiRegione }}">{{ scr.cta }}</button>
               </div>
             </div>
 
-            <div class="banda b-verde wrap sezione" data-screen-label="Le domande sulla prostata">
-              <div class="fx col gap24">
-                <div class="fx col gap12">
-                  <h2>Da quale età è indicato il controllo</h2>
-                  <p>Il primo controllo si colloca abitualmente intorno ai 50 anni. Se hai familiarità di primo grado, è opportuno anticipare il confronto con il medico verso i 45 anni.</p>
-                </div>
-                <div class="fx col gap12">
-                  <h2>In che cosa consiste l’esame</h2>
-                  <p>Si tratta di un prelievo di sangue per il dosaggio del PSA. Richiede pochi minuti e non è doloroso. Il valore, da solo, non indica la presenza di un tumore: segnala l’opportunità di ulteriori accertamenti.</p>
-                </div>
-                <div class="fx col gap12">
-                  <h2>Chi prescrive l’esame</h2>
-                  <p>Il medico di medicina generale. Per il primo esame non serve la visita specialistica: in presenza di valori alterati sarà lui a indirizzarti dall’urologo.</p>
-                </div>
-                <div class="fx col gap12">
-                  <h2>È previsto un costo</h2>
-                  <p>Con l’impegnativa del medico è dovuto il ticket. Nelle giornate organizzate da ospedali e associazioni l’esame è spesso gratuito: le iniziative attive sono riportate di seguito.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="banda b-bianco wrap sezione" data-screen-label="Dove si fa adesso">
+            <div class="banda b-bianco wrap sezione" data-screen-label="Ti riguarda">
               <div class="fx col gap20">
-                <h2>Dove è possibile effettuarlo</h2>
-                <div class="finto">Dati dimostrativi. Le iniziative riportate non sono reali: servono a verificare il funzionamento della pagina.</div>
+                <h2>{{ scr.s2h2 }}</h2>
+                <p>{{ scr.s2p }}</p>
+                <div class="{{ scr.celleCls }}">
+                  <sc-for list="{{ scr.celle }}" as="c" hint-placeholder-count="3">
+                    <div class="scr-cella">
+                      <div class="scr-ico">
+                        <span class="scr-ico-c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ c.icona }}"></path></svg></span>
+                        <span class="scr-et">{{ c.et }}</span>
+                      </div>
+                      <div class="scr-testo">
+                        <h3>{{ c.h3 }}</h3>
+                        <p>{{ c.p }}</p>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
 
-                <sc-for list="{{ prostata }}" as="i" hint-placeholder-count="2">
-                  <div class="card fx col gap14">
-                    <div class="fx gap8" style="flex-wrap:wrap">
-                      <span class="{{ i.tagCls }}">{{ i.tagTesto }}</span>
-                      <sc-if value="{{ i.haScadenza }}" hint-placeholder-val="{{ true }}">
-                        <span class="{{ i.scadenzaCls }}">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"></circle><path d="M12 7.6V12l3 2"></path></svg>{{ i.scadenza }}
-                        </span>
-                      </sc-if>
-                    </div>
-                    <h3>{{ i.titolo }}</h3>
+            <sc-if value="{{ scrOnco }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-crema wrap sezione" data-screen-label="Passi">
+              <div class="fx col gap20">
+                <h2>{{ scr.s3h2 }}</h2>
+                <ol class="passi">
+                  <sc-for list="{{ scr.passi }}" as="s" hint-placeholder-count="4">
+                    <li class="passo">
+                      <span class="num">{{ s.n }}</span>
+                      <div class="passo-txt">
+                        <h3 class="passo-tit">{{ s.h3 }}</h3>
+                        <span class="passo-desc">{{ s.p }}</span>
+                      </div>
+                    </li>
+                  </sc-for>
+                </ol>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Dentro l ambulatorio">
+              <div class="fx col gap20">
+                <h2>{{ scr.s4h2 }}</h2>
+                <p>{{ scr.s4p }}</p>
+                <ul class="scr-lista">
+                  <sc-for list="{{ scr.s4Voci }}" as="v" hint-placeholder-count="3">
+                    <li class="{{ v.cls }}">{{ v.t }}</li>
+                  </sc-for>
+                </ul>
+              </div>
+            </div>
+            </sc-if>
+            <sc-if value="{{ scrProstata }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-crema wrap sezione" data-screen-label="Cosa esiste">
+              <div class="fx col gap20">
+                <h2>{{ scr.bish2 }}</h2>
+                <p>{{ scr.bisp }}</p>
+                <ul class="scr-lista">
+                  <sc-for list="{{ scr.bisVoci }}" as="v" hint-placeholder-count="3">
+                    <li class="{{ v.cls }}">{{ v.t }}</li>
+                  </sc-for>
+                </ul>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Passi">
+              <div class="fx col gap20">
+                <h2>{{ scr.s3h2 }}</h2>
+                <ol class="passi">
+                  <sc-for list="{{ scr.passi }}" as="s" hint-placeholder-count="4">
+                    <li class="passo">
+                      <span class="num">{{ s.n }}</span>
+                      <div class="passo-txt">
+                        <h3 class="passo-tit">{{ s.h3 }}</h3>
+                        <span class="passo-desc">{{ s.p }}</span>
+                      </div>
+                    </li>
+                  </sc-for>
+                </ol>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" data-screen-label="Dentro l ambulatorio">
+              <div class="fx col gap20">
+                <h2>{{ scr.s4h2 }}</h2>
+                <p>{{ scr.s4p }}</p>
+                <ul class="scr-lista">
+                  <sc-for list="{{ scr.s4Voci }}" as="v" hint-placeholder-count="3">
+                    <li class="{{ v.cls }}">{{ v.t }}</li>
+                  </sc-for>
+                </ul>
+              </div>
+            </div>
+            </sc-if>
+
+            <div class="banda b-verde wrap sezione" data-screen-label="La risposta">
+              <div class="fx col gap20">
+                <h2>{{ scr.s5h2 }}</h2>
+                <p>{{ scr.s5p }}</p>
+                <div class="avviso fx col gap8">
+                  <h3>{{ scr.s5h3 }}</h3>
+                  <p>{{ scr.s5prosa }}</p>
+                </div>
+                <sc-if value="{{ scr.haHpv }}" hint-placeholder-val="{{ false }}">
+                  <p class="nota"><a href="{{ scr.hrefHpv }}">{{ scr.hpv }}</a></p>
+                </sc-if>
+              </div>
+            </div>
+
+            <sc-if value="{{ scr.haInvito }}" hint-placeholder-val="{{ false }}">
+              <div class="banda b-bianco wrap sezione" data-screen-label="Lettera non arrivata">
+                <div class="fx col gap20">
+                  <h2>{{ scr.s6h2 }}</h2>
+                  <p>{{ scr.s6p }}</p>
+                  <a class="cta-2" href="{{ scr.hrefInvito }}">{{ scr.s6btn }}</a>
+                </div>
+              </div>
+            </sc-if>
+
+            <div class="banda b-crema wrap sezione" data-screen-label="Domande">
+              <div class="fx col gap20">
+                <h2>{{ scr.s7h2 }}</h2>
+                <div class="scr-domande">
+                  <sc-for list="{{ scr.domande }}" as="q" hint-placeholder-count="4">
                     <div class="fx col gap8">
-                      <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12.6a4.05 4.05 0 100-8.1 4.05 4.05 0 000 8.1M4.5 20.2c0-3.3 3.4-5.2 7.5-5.2s7.5 1.9 7.5 5.2"></path></svg>Chi</span><span class="vl">{{ i.ente }}</span></div>
-                      <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.4 7-11a7 7 0 10-14 0c0 5.6 7 11 7 11zM12 12.4a2.6 2.6 0 100-5.2 2.6 2.6 0 000 5.2"></path></svg>Dove</span><span class="vl">{{ i.dove }}</span></div>
-                      <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v3M17 3v3M3.5 9.5h17M4.5 6h15a1 1 0 011 1v12a1 1 0 01-1 1h-15a1 1 0 01-1-1V7a1 1 0 011-1z"></path></svg>Quando</span><span class="vl">{{ i.quando }}</span></div>
-                      <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21a9 9 0 100-18 9 9 0 000 18M8.5 12.2l2.4 2.4 4.6-5.2"></path></svg>Chi può</span><span class="vl">{{ i.chi }}</span></div>
+                      <h3>{{ q.d }}</h3>
+                      <p>{{ q.r }}</p>
                     </div>
-                    <a class="tel" href="{{ i.href }}">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.2 3.5H4.9a1.4 1.4 0 00-1.4 1.5c.5 8.2 7.3 15 15.5 15.5a1.4 1.4 0 001.5-1.4v-2.3a1.4 1.4 0 00-1.2-1.4l-2.8-.4a1.4 1.4 0 00-1.4.7l-.8 1.4a11.6 11.6 0 01-5.6-5.6l1.4-.8a1.4 1.4 0 00.7-1.4l-.4-2.8a1.4 1.4 0 00-1.4-1.2z"></path></svg>
-                      {{ i.tel }}
-                    </a>
-                    <p class="nota">La prenotazione avviene telefonicamente al numero indicato. Il portale non gestisce appuntamenti.</p>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione scr-bersaglio" id="scr-regione" data-screen-label="Nella tua regione">
+              <div class="fx col gap20">
+                <h2 tabindex="-1">{{ scr.s8h2 }}</h2>
+                <p>{{ scr.s8p }}</p>
+                <div class="griglia-reg">
+                  <sc-for list="{{ scr.regioni }}" as="r" hint-placeholder-count="20">
+                    <button type="button" class="{{ r.cls }}" onClick="{{ r.pick }}" aria-pressed="{{ r.on }}">
+                      <span>{{ r.nome }}</span>
+                      <sc-if value="{{ r.haN }}" hint-placeholder-val="{{ false }}"><span class="n">{{ r.n }}</span></sc-if>
+                    </button>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ scr.esempi }}" hint-placeholder-val="{{ false }}">
+                  <div class="finto">Dati dimostrativi. Le iniziative riportate non sono reali: servono a verificare il funzionamento della pagina.</div>
+                </sc-if>
+                <sc-if value="{{ scr.haCarte }}" hint-placeholder-val="{{ false }}">
+                  <div class="fx col gap20">
+                  <sc-for list="{{ scr.carte }}" as="i" hint-placeholder-count="3">
+                    <div class="card card-ini fx col gap14 scr-ris">
+                      <div class="fx gap8" style="flex-wrap:wrap">
+                        <span class="{{ i.tagCls }}">{{ i.tagTesto }}</span>
+                        <span class="tag tag-tipo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ i.icona }}"></path></svg>{{ i.tipo }}</span>
+                        <sc-if value="{{ i.haScadenza }}" hint-placeholder-val="{{ true }}">
+                          <span class="{{ i.scadenzaCls }}">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"></circle><path d="M12 7.6V12l3 2"></path></svg>{{ i.scadenza }}
+                          </span>
+                        </sc-if>
+                        <sc-if value="{{ i.haPosti }}" hint-placeholder-val="{{ false }}">
+                          <span class="scad scad-posti">{{ i.posti }}</span>
+                        </sc-if>
+                      </div>
+                      <h3 class="ini-tit"><a href="{{ i.hrefDettaglio }}">{{ i.titolo }}</a></h3>
+                      <div class="fx col gap8">
+                        <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.4 7-11a7 7 0 10-14 0c0 5.6 7 11 7 11zM12 12.4a2.6 2.6 0 100-5.2 2.6 2.6 0 000 5.2"></path></svg>Dove</span><span class="vl">{{ i.dove }}</span></div>
+                        <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v3M17 3v3M3.5 9.5h17M4.5 6h15a1 1 0 011 1v12a1 1 0 01-1 1h-15a1 1 0 01-1-1V7a1 1 0 011-1z"></path></svg>Quando</span><span class="vl">{{ i.quando }}</span></div>
+                        <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21a9 9 0 100-18 9 9 0 000 18M8.5 12.2l2.4 2.4 4.6-5.2"></path></svg>Chi può</span><span class="vl">{{ i.chi }}</span></div>
+                      </div>
+                      <a class="tel" href="{{ i.href }}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.2 3.5H4.9a1.4 1.4 0 00-1.4 1.5c.5 8.2 7.3 15 15.5 15.5a1.4 1.4 0 001.5-1.4v-2.3a1.4 1.4 0 00-1.2-1.4l-2.8-.4a1.4 1.4 0 00-1.4.7l-.8 1.4a11.6 11.6 0 01-5.6-5.6l1.4-.8a1.4 1.4 0 00.7-1.4l-.4-2.8a1.4 1.4 0 00-1.4-1.2z"></path></svg>
+                        {{ i.tel }}
+                      </a>
+                      <span class="link-cta ini-vai" aria-hidden="true">Mostra i dettagli
+                        <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+                      </span>
+                    </div>
+                  </sc-for>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ scr.vuoto }}" hint-placeholder-val="{{ false }}">
+                  <div class="avviso fx col gap12 scr-ris">
+                    <h2>{{ scr.s8bh2 }}</h2>
+                    <p>{{ scr.s8bp }}</p>
+                    <a class="cta" href="#/contatti">{{ scr.s8bPiena }}</a>
+                    <button type="button" class="cta-2" onClick="{{ scr.tornaMappa }}">{{ scr.s8bContorno }}</button>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" data-screen-label="Cosa non facciamo">
+              <p class="scr-cosa">{{ scr.s9 }}</p>
+            </div>
+            <!-- S10 Articoli: nascosto (mostraArticoli:false), gli articoli non esistono. -->
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Chiusura">
+              <div class="fx col gap12">
+                <p class="nota">{{ scr.s11 }}</p>
+                <p class="nota">{{ scr.nonAff }}</p>
+              </div>
+            </div>
+
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ scrGenitori }}" hint-placeholder-val="{{ false }}">
+          <div class="pag-scr" data-screen-label="Screening GENITORI">
+
+            <sc-if value="{{ scrNeo }}" hint-placeholder-val="{{ false }}">
+            <div data-screen-label="Neonatale">
+            <div class="banda b-carta wrap sezione" data-screen-label="Apertura screening">
+              <div class="fx col gap16">
+                <p class="nota"><a href="#/screening">{{ scr.ritorno }}</a></p>
+                <div class="occhiello">{{ scr.occhiello }}</div>
+                <h1>{{ scr.h1 }}</h1>
+                <p>{{ scr.sommario }}</p>
+                <button type="button" class="cta" onClick="{{ scr.scendiDir }}">{{ scr.cta }}</button>
+                <div class="avviso fx col gap8">
+                  <h3>{{ scr.riqH3 }}</h3>
+                  <p>{{ scr.riqP }}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="N2">
+              <div class="fx col gap20">
+                <h2>{{ scr.n2h2 }}</h2>
+                <p>{{ scr.n2p }}</p>
+                <ul class="scr-lista">
+                  <sc-for list="{{ scr.n2Voci }}" as="v" hint-placeholder-count="3">
+                    <li class="{{ v.cls }}">{{ v.t }}</li>
+                  </sc-for>
+                </ul>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" data-screen-label="N3">
+              <div class="fx col gap20">
+                <h2>{{ scr.n3h2 }}</h2>
+                <p>{{ scr.n3p }}</p>
+                <div class="avviso fx col gap8">
+                  <h3>{{ scr.n3h3 }}</h3>
+                  <p>{{ scr.n3prosa }}</p>
+                </div>
+                <ul class="scr-lista">
+                  <sc-for list="{{ scr.n3Voci }}" as="v" hint-placeholder-count="3">
+                    <li class="{{ v.cls }}">{{ v.t }}</li>
+                  </sc-for>
+                </ul>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione scr-bersaglio scr-dir" id="scr-dir" data-screen-label="Direttorio neonatale">
+              <div class="fx col gap20">
+                <h2 tabindex="-1">{{ scr.n4h2 }}</h2>
+                <p>{{ scr.n4p }}</p>
+                <sc-if value="{{ scr.dirGriglia }}" hint-placeholder-val="{{ false }}">
+                <div class="griglia-reg">
+                  <sc-for list="{{ scr.regioni }}" as="r" hint-placeholder-count="20">
+                    <button type="button" class="{{ r.cls }}" onClick="{{ r.pick }}" aria-pressed="{{ r.on }}">
+                      <span>{{ r.nome }}</span>
+                      <sc-if value="{{ r.haN }}" hint-placeholder-val="{{ false }}"><span class="n">{{ r.n }}</span></sc-if>
+                    </button>
+                  </sc-for>
+                </div>
+                </sc-if>
+                <sc-for list="{{ scr.dirSchede }}" as="d" hint-placeholder-count="1">
+                  <div class="card fx col gap14 scr-ris">
+                    <h3>{{ d.ente }}</h3>
+                    <p>{{ scr.n4cosa }}</p>
+                    <sc-if value="{{ d.haLab }}" hint-placeholder-val="{{ false }}">
+                      <div class="dato"><span class="et">{{ scr.n4lab }}</span><span class="vl">{{ d.lab }}</span></div>
+                    </sc-if>
+                    <sc-if value="{{ d.haTel }}" hint-placeholder-val="{{ false }}">
+                      <a class="tel" href="{{ d.href }}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.2 3.5H4.9a1.4 1.4 0 00-1.4 1.5c.5 8.2 7.3 15 15.5 15.5a1.4 1.4 0 001.5-1.4v-2.3a1.4 1.4 0 00-1.2-1.4l-2.8-.4a1.4 1.4 0 00-1.4.7l-.8 1.4a11.6 11.6 0 01-5.6-5.6l1.4-.8a1.4 1.4 0 00.7-1.4l-.4-2.8a1.4 1.4 0 00-1.4-1.2z"></path></svg>
+                        {{ scr.telEt }}
+                      </a>
+                    </sc-if>
+                    <p class="nota">{{ scr.n4nota }}</p>
                   </div>
                 </sc-for>
+                <sc-if value="{{ scr.dirVuoto }}" hint-placeholder-val="{{ false }}">
+                  <div class="avviso fx col gap8 scr-ris">
+                    <h3>{{ scr.dirVuotoH3 }}</h3>
+                    <p>{{ scr.dirVuotoP }}</p>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
 
-                <div class="avviso fx col gap12">
-                  <h3>Nessuna iniziativa nella tua regione?</h3>
-                  <p>Le giornate vengono attivate e chiuse con frequenza. Consulta la tua regione oppure attiva il servizio di avviso.</p>
-                  <a class="cta-2" href="#/trova">Consulta la tua regione</a>
+            <div class="banda b-verde wrap sezione" data-screen-label="Passi">
+              <div class="fx col gap20">
+                <h2>{{ scr.n5h2 }}</h2>
+                <ol class="passi">
+                  <sc-for list="{{ scr.passi }}" as="s" hint-placeholder-count="4">
+                    <li class="passo">
+                      <span class="num">{{ s.n }}</span>
+                      <div class="passo-txt">
+                        <h3 class="passo-tit">{{ s.h3 }}</h3>
+                        <span class="passo-desc">{{ s.p }}</span>
+                      </div>
+                    </li>
+                  </sc-for>
+                </ol>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Domande">
+              <div class="fx col gap20">
+                <h2>{{ scr.n6h2 }}</h2>
+                <div class="scr-domande">
+                  <sc-for list="{{ scr.domande }}" as="q" hint-placeholder-count="4">
+                    <div class="fx col gap8">
+                      <h3>{{ q.d }}</h3>
+                      <p>{{ q.r }}</p>
+                    </div>
+                  </sc-for>
                 </div>
               </div>
             </div>
 
+            <div class="banda b-crema wrap sezione" data-screen-label="N7">
+              <div class="fx col gap20">
+                <h2>{{ scr.n7h2 }}</h2>
+                <p>{{ scr.n7p }}</p>
+                <ul class="scr-lista">
+                  <sc-for list="{{ scr.n7Voci }}" as="v" hint-placeholder-count="3">
+                    <li class="{{ v.cls }}">{{ v.t }}</li>
+                  </sc-for>
+                </ul>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Cosa non facciamo">
+              <p class="scr-cosa">{{ scr.n9 }}</p>
+            </div>
+
+            <div class="banda b-crema wrap sezione" data-screen-label="Chiusura">
+              <div class="fx col gap12">
+                <p class="nota">{{ scr.n8 }}</p>
+                <p class="nota">{{ scr.nonAff }}</p>
+              </div>
+            </div>
+            </div>
+            </sc-if>
+
+            <sc-if value="{{ scrDia }}" hint-placeholder-val="{{ false }}">
+            <div data-screen-label="Diabete e celiachia">
+            <div class="banda b-carta wrap sezione" data-screen-label="Apertura screening">
+              <div class="fx col gap16">
+                <p class="nota"><a href="#/screening">{{ scr.ritorno }}</a></p>
+                <div class="occhiello">{{ scr.occhiello }}</div>
+                <h1>{{ scr.h1 }}</h1>
+                <p>{{ scr.sommario }}</p>
+                <button type="button" class="cta" onClick="{{ scr.scendiDomanda }}">{{ scr.cta }}</button>
+                <div class="avviso">
+                  <p>{{ scr.riqP }}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="D2">
+              <div class="fx col gap20">
+                <h2>{{ scr.d2h2 }}</h2>
+                <p>{{ scr.d2p }}</p>
+                <ul class="scr-lista">
+                  <sc-for list="{{ scr.d2Voci }}" as="v" hint-placeholder-count="3">
+                    <li class="{{ v.cls }}">{{ v.t }}</li>
+                  </sc-for>
+                </ul>
+                <p class="nota">{{ scr.d2cautela }}</p>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" data-screen-label="D3 Stato">
+              <div class="card fx col gap12 scr-stato">
+                <h3>{{ scr.d3h3 }}</h3>
+                <p class="scr-data">{{ scr.d3data }}</p>
+                <p class="{{ scr.d3pCls }}">{{ scr.d3p }}</p>
+                <p class="{{ scr.d3notaCls }}">{{ scr.d3nota }}</p>
+              </div>
+            </div>
+
+            <div class="banda b-verde wrap sezione scr-bersaglio" id="scr-domanda" data-screen-label="D4 La domanda">
+              <div class="fx col gap20">
+                <h2 tabindex="-1">{{ scr.d4h2 }}</h2>
+                <p>{{ scr.d4p }}</p>
+                <p class="scr-frase">{{ scr.d4frase }}</p>
+                <p class="nota">{{ scr.d4nota }}</p>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione scr-bersaglio scr-dir" id="scr-dir" data-screen-label="Direttorio diabete">
+              <div class="fx col gap20">
+                <h2 tabindex="-1">{{ scr.d5h2 }}</h2>
+                <p>{{ scr.d5p }}</p>
+                <sc-if value="{{ scr.dirGriglia }}" hint-placeholder-val="{{ false }}">
+                <div class="griglia-reg">
+                  <sc-for list="{{ scr.regioni }}" as="r" hint-placeholder-count="20">
+                    <button type="button" class="{{ r.cls }}" onClick="{{ r.pick }}" aria-pressed="{{ r.on }}">
+                      <span>{{ r.nome }}</span>
+                      <sc-if value="{{ r.haN }}" hint-placeholder-val="{{ false }}"><span class="n">{{ r.n }}</span></sc-if>
+                    </button>
+                  </sc-for>
+                </div>
+                </sc-if>
+                <sc-for list="{{ scr.dirSchede }}" as="d" hint-placeholder-count="1">
+                  <div class="card fx col gap14 scr-ris">
+                    <div><span class="{{ d.tagCls }}">{{ d.stato }}</span></div>
+                    <h3>{{ d.ente }}</h3>
+                  </div>
+                </sc-for>
+                <sc-if value="{{ scr.haSchede }}" hint-placeholder-val="{{ false }}">
+                  <p class="nota scr-d5nota">{{ scr.d5nota }}</p>
+                </sc-if>
+                <sc-if value="{{ scr.dirVuoto }}" hint-placeholder-val="{{ false }}">
+                  <div class="avviso fx col gap8 scr-ris">
+                    <h3>{{ scr.dirVuotoH3 }}</h3>
+                    <p>{{ scr.dirVuotoP }}</p>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" data-screen-label="D6 Esito positivo">
+              <div class="fx col gap20">
+                <h2>{{ scr.d6h2 }}</h2>
+                <p>{{ scr.d6p }}</p>
+                <div class="avviso fx col gap8">
+                  <h3>{{ scr.d6h3 }}</h3>
+                  <p>{{ scr.d6prosa }}</p>
+                </div>
+                <!-- Numero D6 e sua spiegazione: nascosti finche non c'e una fonte pubblica (brief §2.3). -->
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Domande">
+              <div class="fx col gap20">
+                <h2>{{ scr.d7h2 }}</h2>
+                <div class="scr-domande">
+                  <sc-for list="{{ scr.domande }}" as="q" hint-placeholder-count="4">
+                    <div class="fx col gap8">
+                      <h3>{{ q.d }}</h3>
+                      <p>{{ q.r }}</p>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" data-screen-label="Cosa non facciamo">
+              <p class="scr-cosa">{{ scr.n9 }}</p>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Chiusura">
+              <div class="fx col gap12">
+                <p class="nota">{{ scr.n8 }}</p>
+                <p class="nota">{{ scr.nonAff }}</p>
+              </div>
+            </div>
+            </div>
+            </sc-if>
           </div>
         </sc-if>
 
@@ -951,7 +1376,7 @@
                 <h2>Il marchio</h2>
                 <p class="nota">Area di servizio del prototipo: trascina qui il file del logo. Una volta caricato lo portiamo nell’intestazione al posto della scritta.</p>
                 <div class="marchio-vetrina">
-                  <img src="./marchio/screening-italia.png?v=4664ca0" alt="Marchio Screening Italia su fondo chiaro" width="1169" height="440">
+                  <img src="./marchio/screening-italia.png?v=d04e079" alt="Marchio Screening Italia su fondo chiaro" width="1169" height="440">
                 </div>
                 <div class="fx col gap8">
                   <div class="dato"><span class="et">Colori</span><span class="vl">nero #1E1E1E · verde #226E46 · rosso #DA2627</span></div>
@@ -1317,7 +1742,7 @@
 
             <div class="ftr-alto">
               <div class="ftr-marchio fx col gap12">
-                <img class="ftr-marchio-img" src="./marchio/screening-italia-chiaro.png?v=4664ca0" alt="Screening Italia" width="1169" height="440">
+                <img class="ftr-marchio-img" src="./marchio/screening-italia-chiaro.png?v=d04e079" alt="Screening Italia" width="1169" height="440">
                 <p class="ftr-claim">Un elenco curato a mano delle iniziative di screening aperte in Italia. Ogni segnalazione è verificata sulla fonte ufficiale prima di essere pubblicata.</p>
                 <a class="ftr-wa" href="https://wa.me/393000000000" target="_blank" rel="noopener">
                   <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 3.2C9 3.2 3.3 8.9 3.3 15.94c0 2.25.6 4.45 1.72 6.39L3.2 28.8l6.65-1.74a12.7 12.7 0 006.19 1.58h.01c7.03 0 12.74-5.7 12.74-12.74 0-3.4-1.33-6.6-3.73-9a12.66 12.66 0 00-9.02-3.7zm0 23.24h-.01a10.6 10.6 0 01-5.4-1.48l-.39-.23-4.01 1.05 1.07-3.91-.25-.4a10.55 10.55 0 01-1.62-5.63c0-5.84 4.76-10.6 10.61-10.6 2.83 0 5.5 1.11 7.5 3.11a10.53 10.53 0 013.1 7.5c0 5.850-4.76 10.6-10.6 10.6zm5.82-7.94c-.32-.16-1.96-.97-2.27-1.08-.3-.11-.53-.17-.75.16-.22.32-.86 1.08-1.06 1.3-.19.22-.39.24-.71.08-.32-.16-1.36-.5-2.58-1.6a9.7 9.7 0 01-1.8-2.23c-.19-.32-.02-.5.14-.66.16-.16.35-.4.53-.61.12-.14.2-.28.3-.47.1-.19.05-.36-.03-.5-.08-.16-.72-1.8-.99-2.44-.26-.63-.52-.54-.71-.55h-.64c-.22 0-.58.08-.88.4-.3.32-1.15 1.12-1.15 2.73s1.17 3.17 1.34 3.39c.16.21 2.3 3.66 5.6 4.99.78.34 1.4.54 1.88.69.79.25 1.51.21 2.08.13.63-.09 2.09-.85 2.39-1.68.29-.83.29-1.53.2-1.68-.08-.16-.29-.24-.6-.4z"></path></svg>
@@ -1340,7 +1765,7 @@
                 <a href="#/faq">Gli screening</a>
                 <a href="#/articolo/faq-1">Se l’invito non arriva</a>
                 <a href="#/articolo/faq-5">Il kit del colon-retto</a>
-                <a href="#/prostata">Screening della prostata</a>
+                <a href="#/screening/prostata">Screening della prostata</a>
                 <a href="#/testimonianze">Testimonianze</a>
               </nav>
 

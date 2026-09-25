@@ -1,0 +1,100 @@
+/* Le sei pagine screening (brief LORI 25/09/2026, §3). SENTINEL, 25/09/2026.
+   Tutte le regole stanno sotto .pag-scr: il resto del sito non cambia.
+   Unica eccezione: la sezione nuova della Home (§4.2), sotto .scr-home, che non deve
+   ereditare le misure delle pagine screening. Nessun esadecimale nuovo tranne #8F3A10 (§3.4).
+   Valori non nel brief: risposti da LORI al giro 1 (25/09/2026). */
+
+/* §3.2 — misure per larghezza (il sito sotto 700 scende a h1 28 / h2 25 / sezione 40: qui no) */
+.pag-scr p{max-width:60ch}
+.pag-scr h1{font-size:32px;line-height:1.24;font-weight:600}
+.pag-scr h2{font-size:30px}
+@media (max-width:699px){.pag-scr .sezione{padding-top:48px;padding-bottom:48px}}
+@media (min-width:860px){.pag-scr h1{font-size:42px}.pag-scr h2{font-size:38px}}
+
+/* Prosa, voci, domande e risposte a sinistra; h2 resta centrato come nel sito.
+   Serve a battere .banda:not(.hero) .fx:not(.lettura):has(> h2) > p di stile.css. */
+.pag-scr .banda:not(.hero) .fx:not(.lettura):has(> h2) > p,
+.pag-scr .banda:not(.hero) .fx:not(.lettura):has(> h2) > .nota,
+.pag-scr .banda:not(.hero) .fx:not(.lettura):has(> h2) > .finto{text-align:left;margin-left:0;margin-right:0}
+
+/* S9 · N9 · D9 — «cosa non facciamo»: 19px, centrato, 34em */
+.pag-scr .scr-cosa{font-size:19px;text-align:center;max-width:34em;margin-left:auto;margin-right:auto}
+
+/* §3.4 — correzioni di pavimento, solo qui */
+.pag-scr .occhiello{font-size:17px}
+.pag-scr .banda:not(.hero) .occhiello{text-align:left}
+.pag-scr .dato .et{font-size:17px}
+@media (min-width:700px){.pag-scr .dato{grid-template-columns:112px 1fr}}
+.pag-scr .cta,.pag-scr .cta:hover{background-image:none !important;background-color:#8F3A10 !important}
+.pag-scr .cta:hover,.pag-scr .cta:focus-visible{background-color:#8A2600 !important;text-decoration:underline;
+  text-decoration-thickness:2px;text-underline-offset:3px}
+html.contrasto .pag-scr .cta{background-color:#8A2600 !important}
+.pag-scr .b-carta .cta{align-self:flex-start}
+.pag-scr .num{font-weight:700}
+.pag-scr .scad{font-size:17px}
+.pag-scr .scad svg{width:17px;height:17px}
+/* §3.2 «altro testo 17»: .card .nota del sito e 16 */
+.pag-scr .card .nota{font-size:17px}
+/* §3.2 «prosa 19/1.65»: .passo-desc del sito e 18/1.5 (confermato da LORI, giro 1) */
+.pag-scr .passo-desc{font-size:19px;line-height:1.65}
+
+/* §3.3 — .scr-celle / .scr-cella (S2) */
+.pag-scr .scr-celle{display:grid;grid-template-columns:1fr;gap:24px}
+.pag-scr .scr-cella{display:flex;flex-direction:column;gap:12px;
+  padding:20px;background:var(--carta);border-radius:10px}
+html.contrasto .pag-scr .scr-cella{border:2.5px solid #000}
+.pag-scr .scr-ico{display:flex;flex-direction:row;align-items:center;gap:12px;flex:0 0 auto}
+.pag-scr .scr-ico-c{width:48px;height:48px;border-radius:50%;background:var(--verde-tenue);color:var(--verde);
+  display:flex;align-items:center;justify-content:center}
+.pag-scr .scr-ico-c svg{width:32px;height:32px}
+.pag-scr .scr-et{font-size:17px;font-weight:700;color:var(--soft);line-height:1.3;
+  width:auto;text-align:left;white-space:nowrap}
+.pag-scr .scr-testo{display:flex;flex-direction:column;gap:8px;min-width:0}
+
+/* §3.3 — .scr-lista (S4, S2-bis, N2, N3, N7, D2) */
+.pag-scr .scr-lista{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.pag-scr .scr-lista li{position:relative;padding-left:32px;font-size:19px;line-height:1.55;max-width:60ch}
+.pag-scr .scr-lista li::before{content:"";position:absolute;left:0;top:0.6em;width:10px;height:10px;
+  border-radius:50%;background:var(--verde)}
+
+/* §3.3 — .scr-frase (D4) */
+.pag-scr .scr-frase{background:#fff;box-shadow:inset 4px 0 0 var(--verde);padding:20px 20px 20px 24px;
+  border-radius:10px;font-size:21px;line-height:1.4;font-weight:700;color:var(--inchiostro)}
+
+/* S7 · N6 · D7 — domande sempre aperte: 8 tra domanda e risposta, 32 tra coppie */
+.pag-scr .scr-domande{display:flex;flex-direction:column;gap:32px}
+
+/* D3 — data di aggiornamento sopra la prosa */
+.pag-scr .scr-data{font-size:17px;font-weight:700;color:var(--inchiostro)}
+/* D5: nota una volta sola, sotto l'elenco (LORI giro 2) */
+.pag-scr .scr-d5nota{font-size:17px;margin-top:12px}
+.pag-scr .scr-stato > h3{font-size:20px;line-height:1.4;font-weight:600;color:var(--inchiostro)}
+
+/* §4.1 — griglia regioni: 3 colonne da 1280 */
+@media (min-width:1280px){.pag-scr .griglia-reg{grid-template-columns:1fr 1fr 1fr}}
+/* S8-b: titolo h2 con lo stile h3 del sito, a sinistra */
+.pag-scr .avviso h2{font-size:20px;line-height:1.4;font-weight:600;max-width:none}
+/* N3 e D6: riquadro bianco sulla fascia crema */
+.pag-scr .b-crema .avviso{background:#fff}
+/* §4.1-bis — recapito del direttorio, alto almeno 62 */
+.pag-scr .scr-dir .tel{min-height:62px}
+
+/* §3.6 — bersagli della CTA d'apertura: compensa l'header sticky */
+.pag-scr .scr-bersaglio,.pag-scr .scr-ris{scroll-margin-top:96px}
+/* Il titolo riceve il fuoco dal codice, non e un comando (stesso trattamento di .ini-fuoco) */
+.pag-scr h2[tabindex="-1"]:focus{outline:none}
+
+/* §4.2 — Home, sezione «Tipologie di screening» */
+.scr-home .scr-carte{display:grid;grid-template-columns:1fr;gap:16px}
+.scr-home .scr-carta{display:flex;align-items:flex-start;gap:16px;min-height:88px;padding:20px;
+  background:#fff;border-radius:14px;color:var(--inchiostro);text-decoration:none}
+.scr-home .scr-carta:hover,.scr-home .scr-carta:focus-visible{box-shadow:inset 0 0 0 2px var(--verde)}
+.scr-home .scr-carta:hover .scr-ctit,.scr-home .scr-carta:focus-visible .scr-ctit{text-decoration:underline;
+  text-decoration-thickness:2px;text-underline-offset:3px}
+.scr-home .scr-carta svg{flex-shrink:0}
+.scr-home .scr-carta .scr-ci{width:32px;height:32px;color:var(--verde)}
+.scr-home .scr-carta .scr-cf{width:19px;height:19px;margin-left:auto;align-self:center;color:var(--verde)}
+.scr-home .scr-ctx{display:flex;flex-direction:column;gap:4px;min-width:0}
+.scr-home .scr-ctit{font-size:20px;font-weight:700;line-height:1.3;color:var(--inchiostro)}
+.scr-home .scr-criga{font-size:17px;line-height:1.45;color:var(--soft)}
+html.contrasto .scr-home .scr-carta{border:2.5px solid #000}

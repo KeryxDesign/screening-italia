@@ -75,7 +75,7 @@ window.__siLogicaRender = class {
       navEnti: vista === "enti" ? "page" : "false",
       navChi: vista === "chi" ? "page" : "false",
       navContatti: vista === "contatti" ? "page" : "false",
-      navFaq: (vista === "faq" || vista === "prostata" || vista === "articolo" || vista === "articoli") ? "page" : "false",
+      navFaq: (vista === "faq" || vista === "screening" || vista === "articolo" || vista === "articoli") ? "page" : "false",
       navDomande: vista === "domande" ? "page" : "false",
       hrefIniziative: this.rottaRegione("Lombardia"),
       hrefLombardia: this.rottaRegione("Lombardia"),
@@ -95,7 +95,6 @@ window.__siLogicaRender = class {
         return d ? this.scheda(d) : this.scheda({ reg: "", tipo: "", titolo: "", tel: "", stato: "" });
       })(),
       vistaFaq: vista === "faq" || vista === "domande" || vista === "articoli",
-      vistaProstata: vista === "prostata",
       vistaChi: vista === "chi",
       vistaContatti: vista === "contatti",
 
@@ -237,8 +236,9 @@ window.__siLogicaRender = class {
         if (this.state.mMail && this.state.mTesto) { this.setState({ msgInviato: true }); }
       },
 
-      // articolo prostata
-      prostata: dati.filter((x) => x.tipo === "Prostata").map((x) => this.scheda(x))
+      // pagine screening (25/09/2026): vistaScr, scrOnco, scrProstata, scrGenitori, scr, scrHome
+      ...(window.__siScreening ? window.__siScreening.vals(this.state, this.state.rotta, this)
+        : { vistaScr: false, scrAdulti: false, scrOnco: false, scrProstata: false, scrGenitori: false, scrNeo: false, scrDia: false, scr: {}, scrHome: { card: [] } })
     };
   }
 };

@@ -5,7 +5,9 @@ class Component extends DCLogic {
   constructor(props) {
     super(props);
     this.state = { rotta: this.leggiRotta(), tipi: [], q: "", cat: null, mail: "", inviato: false,
-      artArg: null, artQuanti: 3, artStato: null, artDati: null };
+      artArg: null, artQuanti: 3, artStato: null, artDati: null,
+      // Pagine screening (25/09/2026): regione scelta nella pagina, resta per la sessione.
+      regScr: null };
     this.mappaRef = (el) => { this.mapEl = el; this.disegnaMappa(); };
     // Corpo dell'articolo WordPress: lo scrive mettiTesto(), non il modello.
     this.artTestoRef = (el) => { this.artTestoEl = el; this.mettiTesto(); };
@@ -19,13 +21,15 @@ class Component extends DCLogic {
   portaAllElenco(vista) {
     // «articoli» (23/09/2026) fa lo stesso: apre gli screening sul titolo della sezione articoli.
     // «trova» (25/09/2026): apre la Home sulla scelta della regione (#trova).
-    if (vista !== "domande" && vista !== "articoli" && vista !== "trova") { return; }
-    const bersaglio = vista === "domande" ? "#elenco-domande" : (vista === "trova" ? "#trova" : "#elenco-articoli");
+    // «screening» (25/09/2026): #/screening senza pagina valida apre la Home sulla sezione #screening.
+    if (vista !== "domande" && vista !== "articoli" && vista !== "trova" && vista !== "screening") { return; }
+    const bersaglio = vista === "domande" ? "#elenco-domande" : (vista === "trova" ? "#trova" : (vista === "screening" ? "#screening" : "#elenco-articoli"));
     // Al primo caricamento il browser ripristina la posizione da solo e le foto
     // cambiano l'altezza della pagina: si insiste finche la posizione tiene.
     try { window.history.scrollRestoration = "manual"; } catch (e) {}
     const tenta = (giri) => {
       if (this.state.rotta.vista !== vista) { return; }
+      if (vista === "screening" && this.state.rotta.arg) { return; }
       const el = document.querySelector(bersaglio);
       if (el) {
         const meta = el.getBoundingClientRect().top + window.pageYOffset - 96;
@@ -361,9 +365,12 @@ class Component extends DCLogic {
     const pulita = String(rotta).replace(/^#\/?/, "");
     const p = pulita.split("/");
     let vista = p[0] || "";
-    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova"];
+    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening"];
     if (note.indexOf(vista) === -1) { vista = ""; }
-    const arg = p[1] ? decodeURIComponent(p[1]) : "";
+    let arg = p[1] ? decodeURIComponent(p[1]) : "";
+    // Alias permanente (brief LORI 25/09/2026): #/prostata e ora #/screening/prostata.
+    if (vista === "prostata") { vista = "screening"; arg = "prostata"; rotta = "#/screening/prostata"; }
+    if (vista === "screening" && !this.scrValido(arg)) { arg = ""; }
     this.setState({ rotta: { vista: vista, arg: arg }, tipi: [], inviato: false, mail: "" });
     window.scrollTo(0, 0);
     this.portaAllElenco(vista);
@@ -376,13 +383,26 @@ class Component extends DCLogic {
     try { h = String(window.location.hash || "").replace(/^#\/?/, ""); } catch (e) {}
     const p = h.split("/");
     let vista = p[0] || "";
-    const arg = p[1] ? decodeURIComponent(p[1]) : "";
-    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova"];
+    let arg = p[1] ? decodeURIComponent(p[1]) : "";
+    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening"];
     if (note.indexOf(vista) === -1) { vista = ""; }
+    // Alias permanente: #/prostata diventa #/screening/prostata senza voce doppia nella cronologia.
+    if (vista === "prostata") {
+      vista = "screening"; arg = "prostata";
+      try { window.history.replaceState(null, "", "#/screening/prostata"); } catch (e) {}
+    }
+    // Pagina screening sconosciuta: vale come #/screening (Home, sezione delle tipologie).
+    if (vista === "screening" && !this.scrValido(arg)) { arg = ""; }
     return { vista: vista, arg: arg };
   }
+  scrValido(arg) { return !!(window.__siScreening && window.__siScreening.slugValido(arg)); }
   // «trova» e la Home scesa su #trova: per pagina e menu vale come Home.
-  vista() { return this.state.rotta.vista === "trova" ? "" : this.state.rotta.vista; }
+  // «screening» senza pagina valida e la Home scesa su #screening.
+  vista() {
+    const v = this.state.rotta.vista;
+    if (v === "trova" || (v === "screening" && !this.state.rotta.arg)) { return ""; }
+    return v;
+  }
   reg() { return this.state.rotta.arg || "Lombardia"; }
 
   nomiRegioni() {
@@ -477,6 +497,8 @@ class Component extends DCLogic {
   curaDettaglio() {
     if (this.titoloBase === undefined) { this.titoloBase = document.title; }
     const r = this.state.rotta;
+    // Pagine screening: titolo e descrizione per Google dal copy (logica-screening.js).
+    if (window.__siScreening && window.__siScreening.titolo(this)) { this.fuocoFatto = null; return; }
     if (r.vista !== "iniziativa") {
       this.fuocoFatto = null;
       if (document.title !== this.titoloBase) { document.title = this.titoloBase; }
@@ -648,7 +670,7 @@ class Component extends DCLogic {
   domande() {
     return [
       { id: "faq-1", foto: "https://img.magnific.com/free-photo/happy-mature-woman-her-doctor-communicating-while-going-through-paperwork-hospital-hallway_637285-5300.jpg", sommario: "La posizione è recuperabile e il turno non viene perso.", cat: "Inviti e lettere", data: "28 agosto 2026", titolo: "Mancato recapito della lettera di invito: come procedere", href: "#/articolo/faq-1", chiavi: "invito lettera posta asl convocazione" },
-      { id: "faq-2", foto: "https://img.magnific.com/free-photo/positive-man-with-grey-hair-light-shirt-jeans-with-camera-laughing-with-blonde-lady-hat-sunglasses-striped-blue-shirt-park_197531-19160.jpg", sommario: "Non è previsto invito: il primo passo del controllo spetta a te.", cat: "Prostata", data: "21 agosto 2026", titolo: "Screening della prostata: a chi è rivolto e da quale età", href: "#/prostata", chiavi: "psa uomini urologo eta" },
+      { id: "faq-2", foto: "https://img.magnific.com/free-photo/positive-man-with-grey-hair-light-shirt-jeans-with-camera-laughing-with-blonde-lady-hat-sunglasses-striped-blue-shirt-park_197531-19160.jpg", sommario: "Non è previsto invito: il primo passo del controllo spetta a te.", cat: "Prostata", data: "21 agosto 2026", titolo: "Screening della prostata: a chi è rivolto e da quale età", href: "#/screening/prostata", chiavi: "psa uomini urologo eta" },
       { id: "faq-3", foto: "https://img.magnific.com/free-photo/portrait-female-health-specialist-working-with-laptop-plan-patient-appointment-medical-office-general-practitioner-using-medication-notes-help-with-diagnosis-treatment_482257-45642.jpg", sommario: "Sì: il recapito di riferimento resta quello dell’azienda sanitaria.", cat: "Inviti e lettere", data: "14 agosto 2026", titolo: "Invito smarrito: è ancora possibile prenotare?", href: "#/articolo/faq-3", chiavi: "invito perso prenotare numero verde" },
       { id: "faq-4", foto: "https://img.magnific.com/free-photo/old-grey-haired-female-cabinet-modern-clinic_7502-9557.jpg", sommario: "Con cadenza biennale, gratuita nella fascia di età prevista.", cat: "Mammografia", data: "7 agosto 2026", titolo: "Mammografia: periodicità ed età di accesso gratuito", href: "#/articolo/faq-4", chiavi: "seno donne gratis eta due anni" },
       { id: "faq-5", foto: "https://img.magnific.com/free-photo/thank-you-your-prescription_329181-2225.jpg", sommario: "Si ritira e si riconsegna in farmacia: la raccolta richiede pochi minuti.", cat: "Colon-retto", data: "31 luglio 2026", titolo: "Kit per la ricerca del sangue occulto: uso e riconsegna", href: "#/articolo/faq-5", chiavi: "kit feci farmacia sangue occulto" },
