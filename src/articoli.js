@@ -234,7 +234,7 @@ window.Articoli = (function () {
      Restituisce una promessa che NON viene mai rifiutata: torna sempre un
      oggetto con .esito, cosi la pagina non puo rompersi per una eccezione
      non raccolta. */
-  function chiedi(percorso, parametri) {
+  function chiediUnaVolta(percorso, parametri) {
     var q = [];
     var chiavi = Object.keys(parametri || {});
     for (var i = 0; i < chiavi.length; i++) {
@@ -290,10 +290,26 @@ window.Articoli = (function () {
            pagina di errore dell'hosting. */
         return { esito: ESITO.ERRORE, dati: null, intestazioni: null };
       });
-    }, function () {
+    }, function (e) {
       if (sveglia) { clearTimeout(sveglia); }
       var giu = (typeof navigator !== "undefined" && navigator.onLine === false);
-      return { esito: giu ? ESITO.OFFLINE : ESITO.ERRORE, dati: null, intestazioni: null };
+      return { esito: giu ? ESITO.OFFLINE : ESITO.ERRORE, dati: null, intestazioni: null,
+               scaduta: !!(e && e.name === "AbortError") };
+    });
+  }
+
+  /* Un secondo tentativo, uno solo. Il WordPress su Hostinger, quando riceve
+     molte richieste insieme, risponde 500 «Error establishing a database
+     connection» senza intestazioni CORS: il browser la vede come errore di
+     rete. Si riprova dopo una breve pausa su errore di rete o 5xx; mai su
+     4xx (risposta vera), mai dopo i 12 s di attesa scaduti, mai offline
+     (SENTINEL, 25/09/2026). */
+  function chiedi(percorso, parametri) {
+    return chiediUnaVolta(percorso, parametri).then(function (r) {
+      if (r.esito !== ESITO.ERRORE || r.scaduta || (r.stato && r.stato < 500)) { return r; }
+      return new Promise(function (ok) {
+        setTimeout(ok, 700 + Math.floor(Math.random() * 600));
+      }).then(function () { return chiediUnaVolta(percorso, parametri); });
     });
   }
 

@@ -1,0 +1,11 @@
+# screeningitalia.it - www -> apex, 301 permanente (decisione Davide 25/09/2026, opzione A)
+# Tocca SOLO l'host www.screeningitalia.it: apex e pannello.screeningitalia.it (WordPress,
+# che ha una sua document root) non corrispondono alla condizione, quindi nessun loop.
+# Destinazione sempre https: nessun salto su http. Il percorso passa da REQUEST_URI,
+# la query string resta perche la regola non ne scrive una nuova. L'#hash non arriva
+# mai al server: lo conserva il browser da solo.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.screeningitalia\.it$ [NC]
+RewriteRule ^ https://screeningitalia.it%{REQUEST_URI} [R=301,L]
+</IfModule>
