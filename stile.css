@@ -529,6 +529,18 @@ html.contrasto .testi-ruolo{color:#000}
 html.contrasto .wa-float{background:#005C2E;border:2.5px solid #000;box-shadow:none;color:#fff}
 @media print{.wa-float{display:none}}
 
+/* Sotto i 1200px (stessa soglia dell'hamburger): accessibilita in testata,
+   WhatsApp visibile solo dopo i numeri dell'hero. Posizione del floater nel blocco <=699. */
+@media (max-width:1199px){
+  .a11y{top:22px;bottom:auto;left:auto;right:74px;z-index:31;flex-direction:column-reverse;align-items:flex-end;gap:28px}
+  .a11y-apri{width:44px;height:44px;border-radius:8px;border:1.5px solid rgba(255,255,255,0.35);box-shadow:none}
+  .a11y-apri svg{width:26px;height:26px}
+  .wa-float{visibility:hidden;opacity:0;transition:opacity .2s ease,visibility 0s linear .2s,transform .14s ease,box-shadow .14s ease}
+  .wa-float.in-vista{visibility:visible;opacity:1;transition:opacity .2s ease,transform .14s ease,box-shadow .14s ease}
+}
+@media (min-width:860px) and (max-width:1199px){.a11y{right:86px}}
+@media (prefers-reduced-motion:reduce){.wa-float,.wa-float.in-vista{transition:none}}
+
 /* --- Carosello infinito (solo in home) --- */
 .carosello{overflow:hidden;width:100%;
   mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);
@@ -881,13 +893,13 @@ html.contrasto .ftr-avviso svg{color:#fff}
 .mappa-bianca{max-width:340px}
 @media (min-width:1000px){.mappa-bianca{max-width:none;width:80%;margin:0 auto}}
 .mappa-bianca svg{filter:drop-shadow(0 6px 18px rgba(0,0,0,0.45))}
-.mappa-bianca path.vuota{fill:rgba(255,255,255,0.34);stroke:#0F6B52;stroke-width:1.3}
-.mappa-bianca path.piena{fill:#FFFFFF;stroke:#0F6B52;stroke-width:1.3}
-.mappa-bianca path.vuota:hover,.mappa-bianca path.vuota:focus{fill:rgba(255,255,255,0.6);stroke:#0A4739;stroke-width:2.4}
+.mappa-bianca path.vuota{fill:#FFFFFF;stroke:#0F6B52;stroke-width:1.3}
+.mappa-bianca path.piena{fill:var(--verde-mappa);stroke:#FFFFFF;stroke-width:1.3}
+.mappa-bianca path.vuota:hover,.mappa-bianca path.vuota:focus{fill:var(--verde-tenue);stroke:#0A4739;stroke-width:2.4}
 .mappa-bianca path.piena:hover,.mappa-bianca path.piena:focus{fill:#FFD34F;stroke:#0A4739;stroke-width:2.4}
 .mappa-bianca path:focus{stroke:#FFD34F;stroke-width:2.6}
 html.contrasto .mappa-bianca path.vuota{fill:#fff;stroke:#000;stroke-width:1.5}
-html.contrasto .mappa-bianca path.piena{fill:#FFD100;stroke:#000;stroke-width:1.8}
+html.contrasto .mappa-bianca path.piena{fill:#2F7A63;stroke:#FFFFFF;stroke-width:1.8}
 .mappa-bianca path.attiva{fill:#FFD34F;stroke:#0A4739}
 @media (max-width:999px){.hero-mappa{display:none}}
 

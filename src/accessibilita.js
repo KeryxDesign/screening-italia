@@ -114,9 +114,42 @@
     aggiorna();
   }
 
+  /* Floater WhatsApp sotto i 1200px: compare solo quando i numeri dell'hero
+     sono scorsi via (o la pagina non li ha). Sopra, la classe non ha effetto. */
+  var MARGINE_WA = 76;
+  var inCoda = false;
+
+  function vistaWa() {
+    inCoda = false;
+    var wa = document.querySelector(".wa-float");
+    if (!wa) { return; }
+    var numeri = document.querySelector(".numeri-hero");
+    var mostra = !numeri ||
+      numeri.getBoundingClientRect().bottom <= window.innerHeight - MARGINE_WA;
+    wa.classList.toggle("in-vista", mostra);
+  }
+
+  function chiediVistaWa() {
+    if (inCoda) { return; }
+    inCoda = true;
+    requestAnimationFrame(vistaWa);
+  }
+
+  function avviaVistaWa() {
+    window.addEventListener("scroll", chiediVistaWa, { passive: true });
+    window.addEventListener("resize", chiediVistaWa);
+    window.addEventListener("hashchange", chiediVistaWa);
+    // Il routing ridisegna la pagina: si ricalcola dopo ogni cambio di nodi.
+    if (window.MutationObserver) {
+      new MutationObserver(chiediVistaWa).observe(document.body, { childList: true, subtree: true });
+    }
+    chiediVistaWa();
+  }
+
   function avvia() {
     applica();
     costruisci();
+    avviaVistaWa();
     // La pagina si ricostruisce dopo il montaggio: si ricontrolla per un po'.
     var n = 0;
     var t = setInterval(function () {
