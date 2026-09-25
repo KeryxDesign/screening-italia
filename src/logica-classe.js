@@ -18,8 +18,9 @@ class Component extends DCLogic {
      sempre in cima (Davide, 24/09/2026): per questo onHash non chiama portaAllElenco. */
   portaAllElenco(vista) {
     // «articoli» (23/09/2026) fa lo stesso: apre gli screening sul titolo della sezione articoli.
-    if (vista !== "domande" && vista !== "articoli") { return; }
-    const bersaglio = vista === "domande" ? "#elenco-domande" : "#elenco-articoli";
+    // «trova» (25/09/2026): apre la Home sulla scelta della regione (#trova).
+    if (vista !== "domande" && vista !== "articoli" && vista !== "trova") { return; }
+    const bersaglio = vista === "domande" ? "#elenco-domande" : (vista === "trova" ? "#trova" : "#elenco-articoli");
     // Al primo caricamento il browser ripristina la posizione da solo e le foto
     // cambiano l'altezza della pagina: si insiste finche la posizione tiene.
     try { window.history.scrollRestoration = "manual"; } catch (e) {}
@@ -360,7 +361,7 @@ class Component extends DCLogic {
     const pulita = String(rotta).replace(/^#\/?/, "");
     const p = pulita.split("/");
     let vista = p[0] || "";
-    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa"];
+    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova"];
     if (note.indexOf(vista) === -1) { vista = ""; }
     const arg = p[1] ? decodeURIComponent(p[1]) : "";
     this.setState({ rotta: { vista: vista, arg: arg }, tipi: [], inviato: false, mail: "" });
@@ -376,11 +377,12 @@ class Component extends DCLogic {
     const p = h.split("/");
     let vista = p[0] || "";
     const arg = p[1] ? decodeURIComponent(p[1]) : "";
-    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa"];
+    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova"];
     if (note.indexOf(vista) === -1) { vista = ""; }
     return { vista: vista, arg: arg };
   }
-  vista() { return this.state.rotta.vista; }
+  // «trova» e la Home scesa su #trova: per pagina e menu vale come Home.
+  vista() { return this.state.rotta.vista === "trova" ? "" : this.state.rotta.vista; }
   reg() { return this.state.rotta.arg || "Lombardia"; }
 
   nomiRegioni() {

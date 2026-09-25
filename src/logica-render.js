@@ -78,6 +78,10 @@ window.__siLogicaRender = class {
       navFaq: (vista === "faq" || vista === "prostata" || vista === "articolo" || vista === "articoli") ? "page" : "false",
       navDomande: vista === "domande" ? "page" : "false",
       hrefIniziative: this.rottaRegione("Lombardia"),
+      hrefLombardia: this.rottaRegione("Lombardia"),
+      hrefLazio: this.rottaRegione("Lazio"),
+      hrefVeneto: this.rottaRegione("Veneto"),
+      hrefCampania: this.rottaRegione("Campania"),
       vistaHome: vista === "",
       vistaRegione: vista === "regione",
       vistaVuota: vista === "vuota",
@@ -176,7 +180,7 @@ window.__siLogicaRender = class {
         return {
           slot: "art-" + d.id, foto: d.foto, haFoto: true, cat: d.cat, titolo: d.titolo,
           sommario: d.sommario, data: d.data, corpo: corpo,
-          tornaHref: "#/faq", tornaTesto: "← Torna alle domande frequenti"
+          tornaHref: "#/domande", tornaTesto: "← Torna alle domande frequenti"
         };
       })(),
 

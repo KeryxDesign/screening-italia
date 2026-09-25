@@ -101,8 +101,8 @@
               <div class="hero-due">
                 <div class="fx col gap16">
                   <div class="occhiello">Screening in Italia</div>
-                  <h1 style="width: 531px; height: 211px">La diagnosi precoce salva la vita. Qui trovi gli screening attivi vicino a te.</h1>
-                  <p>Il portale raccoglie gli screening aperti in Italia, regione per regione: oncologici, neonatali e pediatrici. Li promuovono aziende sanitarie, ospedali e associazioni.</p>
+                  <h1>Gli screening gratuiti della tua regione</h1>
+                  <p>Oncologici, neonatali e pediatrici: li raccogliamo in un posto solo. A promuoverli sono aziende sanitarie, ospedali e associazioni.</p>
                   <button type="button" class="cta" onClick="{{ vaiAllaMappa }}">Consulta le iniziative attive</button>
                   <div class="numeri-hero">
                     <div class="numero-h"><span class="numero-hn">{{ nIniziative }}</span><span class="numero-het">iniziative aperte</span></div>
@@ -256,7 +256,7 @@
                     </div>
                   </sc-for>
                 </div>
-                <a class="cta-2" href="#/faq">Consulta tutte le domande</a>
+                <a class="cta-2" href="#/domande">Consulta tutte le domande</a>
               </div>
             </div>
 
@@ -265,7 +265,7 @@
                 <div class="occhiello">Per chi organizza</div>
                 <h2>Sei un’ASL, un ospedale, un’associazione?</h2>
                 <p style="margin-left:auto;margin-right:auto;text-align:center">Segnalaci la tua iniziativa: controlliamo i dati sulla fonte ufficiale e la pubblichiamo qui, gratuitamente.</p>
-                <a class="cta" href="#/enti">Segnala un’iniziativa</a>
+                <a class="cta" href="#/contatti">Segnala un’iniziativa</a>
               </div>
             </div>
 
@@ -281,7 +281,7 @@
                 <span class="hero-velo"></span>
               </div>
               <div class="fx col gap16">
-                <p class="nota"><a href="#/">← Torna a tutte le regioni</a></p>
+                <p class="nota"><a href="#/trova">← Torna a tutte le regioni</a></p>
                 <h1>Screening in {{ reg }}</h1>
                 <p>{{ apertura }}</p>
                 <div class="sel-box sel-discreto">
@@ -446,7 +446,7 @@
               <div class="avviso fx col gap12">
                 <h2 class="ini-fuoco" tabindex="-1">Questa iniziativa non è più in elenco</h2>
                 <p>Le iniziative vengono attivate e chiuse con frequenza. Quelle attive sono tutte negli elenchi per regione.</p>
-                <a class="cta-2" href="#/">Scegli la regione</a>
+                <a class="cta-2" href="#/trova">Scegli la regione</a>
               </div>
             </div>
             </sc-if>
@@ -463,7 +463,7 @@
                 <span class="hero-velo"></span>
               </div>
               <div class="fx col gap16">
-                <p class="nota"><a href="#/">← Torna a tutte le regioni</a></p>
+                <p class="nota"><a href="#/trova">← Torna a tutte le regioni</a></p>
                 <h1>In {{ reg }} non risultano iniziative segnalate.</h1>
                 <p>Significa che nessuna iniziativa ci è stata segnalata, non che in {{ reg }} manchi l’attività di prevenzione: i programmi di screening dell’azienda sanitaria proseguono comunque. Di seguito le modalità di accesso.</p>
               </div>
@@ -481,7 +481,7 @@
                 <div class="avviso fx col gap12">
                   <h3>La lettera di invito non è pervenuta?</h3>
                   <p>Accade di frequente: cambio di domicilio, residenza non aggiornata, mancato recapito postale. La tua posizione è recuperabile e non perdi il turno.</p>
-                  <a class="cta-2" href="#/faq">Come procedere in caso di mancato recapito</a>
+                  <a class="cta-2" href="#/articolo/faq-1">Come procedere in caso di mancato recapito</a>
                 </div>
                 <a class="cta-2" href="#/faq">Il portale screening della Regione {{ reg }}</a>
               </div>
@@ -800,7 +800,7 @@
                   <div class="avviso fx col gap12" data-screen-label="Stato vuoto - nessun articolo">
                     <h3>Non ci sono ancora articoli</h3>
                     <p>Stiamo preparando i primi. Intanto ci sono le domande qui sopra. Oppure guarda quali screening sono attivi nella tua regione.</p>
-                    <a class="cta" href="#/">Vai alla tua regione</a>
+                    <a class="cta" href="#/trova">Vai alla tua regione</a>
                     <p class="nota" style="text-align:center;margin-left:auto;margin-right:auto"><a href="#/domande">Torna alle domande qui sopra</a></p>
                   </div>
                 </sc-if>
@@ -824,7 +824,7 @@
               <div class="fx col gap16">
                 <h2>Cerchi un esame, non una risposta?</h2>
                 <p>Sulla mappa sono riportate le iniziative attualmente attive, regione per regione.</p>
-                <a class="cta" href="#/">Vai alla mappa delle regioni</a>
+                <a class="cta" href="#/trova">Vai alla mappa delle regioni</a>
               </div>
             </div>
 
@@ -840,7 +840,7 @@
                 <span class="hero-velo"></span>
               </div>
               <div class="fx col gap16">
-                <p class="nota"><a href="#/faq">← Torna alle domande frequenti</a></p>
+                <p class="nota"><a href="#/domande">← Torna alle domande frequenti</a></p>
                 <div class="occhiello">Screening della prostata</div>
                 <h1>Per la prostata non è previsto invito: che cosa comporta</h1>
                 <p>In Italia i programmi di screening organizzati riguardano tre tumori: mammella, colon-retto e cervice uterina. La prostata non rientra fra questi: non ricevi alcuna convocazione, e il primo passo del controllo spetta a te.</p>
@@ -901,7 +901,7 @@
                 <div class="avviso fx col gap12">
                   <h3>Nessuna iniziativa nella tua regione?</h3>
                   <p>Le giornate vengono attivate e chiuse con frequenza. Consulta la tua regione oppure attiva il servizio di avviso.</p>
-                  <a class="cta-2" href="#/">Consulta la tua regione</a>
+                  <a class="cta-2" href="#/trova">Consulta la tua regione</a>
                 </div>
               </div>
             </div>
@@ -1326,11 +1326,11 @@
               <nav class="ftr-col" aria-label="Trova un’iniziativa">
                 <h3 class="ftr-tit">Trova un’iniziativa</h3>
                 <a href="{{ hrefIniziative }}">Iniziative per regione</a>
-                <a href="#/regione/Lombardia">Lombardia</a>
-                <a href="#/regione/Lazio">Lazio</a>
-                <a href="#/regione/Veneto">Veneto</a>
-                <a href="#/regione/Campania">Campania</a>
-                <a href="#/">Tutte le regioni</a>
+                <a href="{{ hrefLombardia }}">Lombardia</a>
+                <a href="{{ hrefLazio }}">Lazio</a>
+                <a href="{{ hrefVeneto }}">Veneto</a>
+                <a href="{{ hrefCampania }}">Campania</a>
+                <a href="#/trova">Tutte le regioni</a>
               </nav>
 
               <nav class="ftr-col" aria-label="Come funziona">
