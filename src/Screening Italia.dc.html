@@ -1112,7 +1112,7 @@
             <sc-if value="{{ artPronto }}" hint-placeholder-val="{{ true }}">
             <div class="banda b-bianco wrap sezione art-testa" data-screen-label="Apertura articolo">
               <div class="lettura fx col gap16">
-                <p class="nota art-torna"><a href="#/faq">← Torna alle domande frequenti</a></p>
+                <p class="nota art-torna"><a href="{{ art.tornaHref }}">{{ art.tornaTesto }}</a></p>
                 <p class="art-cat">{{ art.cat }}</p>
                 <h1 class="art-headline">{{ art.titolo }}</h1>
                 <p class="art-standfirst">{{ art.sommario }}</p>
@@ -1121,7 +1121,7 @@
                 <sc-if value="{{ art.haFoto }}" hint-placeholder-val="{{ true }}">
                 <figure class="art-figura">
                   <span class="art-figura-img"><image-slot id="{{ art.slot }}" src="{{ art.foto }}" shape="rect" placeholder="Foto dell articolo"></image-slot></span>
-                  <figcaption class="art-didascalia">Immagine di esempio, non riferita a un caso reale.</figcaption>
+                  <figcaption class="art-didascalia">Foto di repertorio: non ritrae pazienti né casi reali.</figcaption>
                 </figure>
                 </sc-if>
               </div>
@@ -1147,7 +1147,7 @@
                 <sc-if value="{{ artHaTesto }}" hint-placeholder-val="{{ false }}">
                   <div class="art-wp fx col gap28" ref="{{ artTestoRef }}"></div>
                 </sc-if>
-                <p class="art-avvertenza"><em>Testo dimostrativo scritto per il prototipo: non sostituisce le indicazioni della tua azienda sanitaria.</em></p>
+                <p class="art-avvertenza"><em>Qui trovi informazioni generali. Non sostituiscono il medico né le indicazioni della tua ASL: per il tuo caso, chiedi a loro.</em></p>
               </div>
             </div>
             </sc-if>

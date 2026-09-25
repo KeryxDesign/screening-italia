@@ -175,7 +175,8 @@ window.__siLogicaRender = class {
         }));
         return {
           slot: "art-" + d.id, foto: d.foto, haFoto: true, cat: d.cat, titolo: d.titolo,
-          sommario: d.sommario, data: d.data, corpo: corpo
+          sommario: d.sommario, data: d.data, corpo: corpo,
+          tornaHref: "#/faq", tornaTesto: "← Torna alle domande frequenti"
         };
       })(),
 

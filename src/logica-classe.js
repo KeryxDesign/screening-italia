@@ -633,13 +633,14 @@ class Component extends DCLogic {
   // Vista articolo riempita con un articolo WordPress: stessi campi delle FAQ, corpo vuoto.
   voceArticolo() {
     const v = this.statoVoce() === "ok" ? this.state.voce : null;
-    if (!v) { return { slot: "art-wp", foto: "", haFoto: false, cat: "", titolo: "", sommario: "", data: "", corpo: [] }; }
+    if (!v) { return { slot: "art-wp", foto: "", haFoto: false, cat: "", titolo: "", sommario: "", data: "", corpo: [], tornaHref: "#/articoli", tornaTesto: "← Torna agli articoli" }; }
     const c = (v.categorie || [])[0];
     return {
       slot: "art-wp-" + v.id, foto: v.immagine && v.immagine.url ? v.immagine.url : "",
       haFoto: !!(v.immagine && v.immagine.url),
       cat: c ? c.nome : "", titolo: v.titolo, sommario: v.estratto,
-      data: this.dataArticolo(v.dataIso), corpo: []
+      data: this.dataArticolo(v.dataIso), corpo: [],
+      tornaHref: "#/articoli", tornaTesto: "← Torna agli articoli"
     };
   }
   domande() {
