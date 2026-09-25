@@ -166,6 +166,7 @@ window.__siLogicaRender = class {
       // articolo
       vistaArticolo: vista === "articolo",
       art: (() => {
+        if (vista === "articolo" && !this.eFaq(this.state.rotta.arg)) { return this.voceArticolo(); }
         const id = this.state.rotta.arg || "faq-1";
         const d = tutteFaq.filter((x) => x.id === id)[0] || tutteFaq[0];
         const corpo = (this.corpi()[d.id] || []).map((s) => ({
@@ -173,10 +174,17 @@ window.__siLogicaRender = class {
           haChiave: !!s.chiave, haCorsivo: !!s.corsivo
         }));
         return {
-          slot: "art-" + d.id, foto: d.foto, cat: d.cat, titolo: d.titolo,
+          slot: "art-" + d.id, foto: d.foto, haFoto: true, cat: d.cat, titolo: d.titolo,
           sommario: d.sommario, data: d.data, corpo: corpo
         };
       })(),
+
+      // articolo WordPress (#/articolo/<slug>): vuoto mentre carica, avviso se manca
+      artPronto: this.statoVoce() === "faq" || this.statoVoce() === "ok",
+      artNonTrovato: vista === "articolo" && this.statoVoce() === "errore",
+      artFinito: this.statoVoce() !== "attesa",
+      artHaTesto: this.statoVoce() === "ok",
+      artTestoRef: this.artTestoRef,
 
       vistaEnti: vista === "enti",
 

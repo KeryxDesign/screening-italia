@@ -43,6 +43,24 @@
           .prova{align-self:flex-start;font-size:15px;line-height:1.35;font-weight:700;
             letter-spacing:.06em;text-transform:uppercase;color:var(--terracotta);
             background:#fff;border:1.5px solid var(--terracotta);border-radius:8px;padding:4px 8px}
+          /* Testo da WordPress (.art-wp), LORI giro 1 del 24/09/2026: stesso aspetto del corpo FAQ.
+             Liste: corpo e interlinea di .art-p (stesse soglie), margine 0, rientro 20, 8 fra le voci. */
+          .art-wp ul,.art-wp ol{margin:0;padding-left:20px;font-size:19px;line-height:1.68}
+          @media (min-width:860px){.art-wp ul,.art-wp ol{font-size:20px}}
+          @media (max-width:699px){.art-wp ul,.art-wp ol{font-size:18px;line-height:1.62}}
+          .art-wp li + li{margin-top:8px}
+          /* Citazione: come .art-aside, anche il paragrafo che WordPress ci mette dentro. */
+          .art-wp blockquote{margin:0;font-size:18px;line-height:1.55;color:#2C3A34;font-style:italic;
+            padding-left:16px;border-left:3px solid var(--verde-tenue)}
+          .art-wp blockquote p{font-size:inherit;line-height:inherit;color:inherit}
+          html.contrasto .art-wp blockquote{border-left-color:#000;color:#000}
+          /* Immagini nel testo: piena larghezza, proporzioni del file, nessun aspect-ratio. */
+          .art-wp figure{margin:0}
+          .art-wp img{width:100%;height:auto;border-radius:10px}
+          .art-wp figcaption{font-size:15px;color:var(--soft);line-height:1.4}
+          /* Card di #/articoli: «Leggi l'articolo» in fondo, allineato fra card della stessa riga. */
+          #elenco-articoli .art-corpo{flex-grow:1}
+          #elenco-articoli .art-vai{margin-top:auto}
         </style>
       </helmet>
 
@@ -756,10 +774,9 @@
                       <sc-for list="{{ articoli }}" as="a" hint-placeholder-count="3">
                         <div class="art">
                           <sc-if value="{{ a.haFoto }}" hint-placeholder-val="{{ false }}">
-                            <div class="art-img"><image-slot id="{{ a.slot }}" src="" shape="rect" placeholder="Foto dell articolo"></image-slot></div>
+                            <div class="art-img"><image-slot id="{{ a.slot }}" src="{{ a.foto }}" shape="rect" placeholder="Foto dell articolo"></image-slot></div>
                           </sc-if>
                           <div class="art-corpo">
-                            <div class="prova">[TESTO DI PROVA] titolo e sommario</div>
                             <p class="art-meta">{{ a.meta }}</p>
                             <h3 class="art-tit"><a href="{{ a.href }}" aria-label="{{ a.aria }}">{{ a.titolo }}</a></h3>
                             <p class="art-som">{{ a.estratto }}</p>
@@ -1091,6 +1108,8 @@
         <sc-if value="{{ vistaArticolo }}" hint-placeholder-val="{{ false }}">
           <div data-screen-label="Articolo">
 
+            <!-- Articoli da WordPress (#/articolo/<slug>): mentre carica la vista resta vuota (24/09/2026). -->
+            <sc-if value="{{ artPronto }}" hint-placeholder-val="{{ true }}">
             <div class="banda b-bianco wrap sezione art-testa" data-screen-label="Apertura articolo">
               <div class="lettura fx col gap16">
                 <p class="nota art-torna"><a href="#/faq">← Torna alle domande frequenti</a></p>
@@ -1098,10 +1117,13 @@
                 <h1 class="art-headline">{{ art.titolo }}</h1>
                 <p class="art-standfirst">{{ art.sommario }}</p>
                 <p class="art-firma">Redazione Screening Italia · {{ art.data }}</p>
+                <!-- Nessuna immagine = nessuna cornice (LORI giro 1, 24/09/2026). -->
+                <sc-if value="{{ art.haFoto }}" hint-placeholder-val="{{ true }}">
                 <figure class="art-figura">
                   <span class="art-figura-img"><image-slot id="{{ art.slot }}" src="{{ art.foto }}" shape="rect" placeholder="Foto dell articolo"></image-slot></span>
                   <figcaption class="art-didascalia">Immagine di esempio, non riferita a un caso reale.</figcaption>
                 </figure>
+                </sc-if>
               </div>
             </div>
 
@@ -1121,9 +1143,24 @@
                     </sc-if>
                   </section>
                 </sc-for>
+                <!-- testoHtml gia passato da ripulisciHtml() (articoli.js): lo inserisce artTestoRef. -->
+                <sc-if value="{{ artHaTesto }}" hint-placeholder-val="{{ false }}">
+                  <div class="art-wp fx col gap28" ref="{{ artTestoRef }}"></div>
+                </sc-if>
                 <p class="art-avvertenza"><em>Testo dimostrativo scritto per il prototipo: non sostituisce le indicazioni della tua azienda sanitaria.</em></p>
               </div>
             </div>
+            </sc-if>
+
+            <sc-if value="{{ artNonTrovato }}" hint-placeholder-val="{{ false }}">
+              <div class="banda b-bianco wrap sezione" data-screen-label="Articolo non disponibile">
+                <div class="avviso fx col gap12" role="status">
+                  <p>Non riusciamo a mostrare gli articoli in questo momento. Riprova tra qualche minuto.</p>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ artFinito }}" hint-placeholder-val="{{ true }}">
 
             <div class="banda b-crema wrap sezione" data-screen-label="Scegli la regione">
               <div class="fx col gap20">
@@ -1143,6 +1180,7 @@
                 </details>
               </div>
             </div>
+            </sc-if>
 
           </div>
         </sc-if>

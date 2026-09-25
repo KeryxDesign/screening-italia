@@ -7,6 +7,8 @@ class Component extends DCLogic {
     this.state = { rotta: this.leggiRotta(), tipi: [], q: "", cat: null, mail: "", inviato: false,
       artArg: null, artQuanti: 3, artStato: null, artDati: null };
     this.mappaRef = (el) => { this.mapEl = el; this.disegnaMappa(); };
+    // Corpo dell'articolo WordPress: lo scrive mettiTesto(), non il modello.
+    this.artTestoRef = (el) => { this.artTestoEl = el; this.mettiTesto(); };
   }
   /* ---- Consenso ai cookie ----
      Il tag di misurazione parte SOLO dopo il consenso: Consent Mode con
@@ -99,6 +101,7 @@ class Component extends DCLogic {
     // Gli script del prototipo arrivano in ordine sparso: se articoli.js non e ancora
     // caricato, ci riprova il giro del tick qui sotto (SENTINEL, 24/09/2026).
     this.caricaArticoli();
+    this.caricaVoce();
 
     this.onHash = () => {
       const r = this.leggiRotta();
@@ -120,6 +123,7 @@ class Component extends DCLogic {
       if (vuote.length) { this.disegnaMappa(); }
       if (!window.INIZIATIVE || !window.REGIONI_ITALIA) { this.forceUpdate(); }
       this.caricaArticoli();
+      this.caricaVoce();
       // Iniziative vere da WordPress (iniziative-wp.js): arrivano dopo il montaggio.
       // Se iniziative.js arriva in ritardo e le copre con gli esempi, si rimettono.
       if (window.__siIniziativeWP && window.INIZIATIVE !== window.__siIniziativeWP) { window.INIZIATIVE = window.__siIniziativeWP; this.iniVer = -1; }
@@ -137,6 +141,71 @@ class Component extends DCLogic {
     this.provaAnimazioni();
     this.osserva();
     setTimeout(() => this.curaDettaglio(), 0);
+  }
+  /* Articolo singolo da WordPress, rotta #/articolo/<slug> (24/09/2026).
+     Le FAQ interne (faq-N, o nessun argomento) restano sui dati di corpi(). */
+  eFaq(arg) { return !arg || /^faq-\d+$/.test(arg); }
+  caricaVoce() {
+    const r = this.state.rotta;
+    if (r.vista !== "articolo" || this.eFaq(r.arg)) { this.voceChiesta = null; return; }
+    if (this.voceChiesta === r.arg || !window.Articoli) { return; }
+    const slug = r.arg;
+    this.voceChiesta = slug;
+    this.setState({ voceSlug: slug, voceStato: "attesa", voce: null });
+    const fine = (a) => {
+      if (this.voceChiesta !== slug) { return; }
+      // Gli articoli protetti da password non si mostrano: il contenuto arriva vuoto.
+      const buono = a && !a.protetto;
+      this.setState({ voceStato: buono ? "ok" : "errore", voce: buono ? a : null });
+    };
+    window.Articoli.perSlug(slug).then((x) => fine(x.esito === "ok" ? x.articolo : null), () => fine(null));
+  }
+  // Stato della vista articolo: «attesa» finche la risposta per QUESTO slug non c'e.
+  statoVoce() {
+    const r = this.state.rotta;
+    if (r.vista !== "articolo" || this.eFaq(r.arg)) { return "faq"; }
+    return this.state.voceSlug === r.arg && this.state.voceStato !== "attesa" ? this.state.voceStato : "attesa";
+  }
+  /* L'unico innerHTML della pagina: testoHtml e gia passato da ripulisciHtml().
+     Nessun'altra stringa entra qui. Ai paragrafi e ai sottotitoli si danno le
+     classi che il corpo delle FAQ usa gia: stesso aspetto, nessuna classe nuova.
+     Poi i nodi gia inseriti si spostano (nessun HTML nuovo) in una section
+     .art-sez per ogni h2, come le FAQ; cio che sta prima del primo h2 fa sezione a se. */
+  mettiTesto() {
+    const el = this.artTestoEl;
+    if (!el) { return; }
+    const v = this.statoVoce() === "ok" ? this.state.voce : null;
+    const chiave = v ? v.slug : "";
+    if (el.dataset.slug === chiave) { return; }
+    el.dataset.slug = chiave;
+    el.innerHTML = v ? v.testoHtml : "";
+    el.querySelectorAll("p").forEach((n) => n.classList.add("art-p"));
+    el.querySelectorAll("h2").forEach((n) => n.classList.add("art-sub"));
+    this.dividiSezioni(el);
+  }
+  dividiSezioni(el) {
+    const nodi = Array.prototype.slice.call(el.childNodes);
+    let sez = null;
+    nodi.forEach((n) => {
+      const vuoto = n.nodeType === 3 && !n.textContent.trim();
+      if (n.nodeType === 1 && n.tagName === "H2") { sez = null; }
+      if (!sez) {
+        if (vuoto || n.nodeType === 8) { el.removeChild(n); return; }
+        sez = document.createElement("section");
+        sez.className = "art-sez fx col gap12";
+        el.insertBefore(sez, n);
+      }
+      sez.appendChild(n);
+    });
+  }
+  // «23 settembre 2026», fuso di Roma: lo stesso formato delle date gia sul sito.
+  dataArticolo(iso) {
+    if (!iso) { return ""; }
+    try {
+      const d = new Date(iso);
+      if (isNaN(d.getTime())) { return ""; }
+      return new Intl.DateTimeFormat("it-IT", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Rome" }).format(d);
+    } catch (e) { return ""; }
   }
   caricaArticoli() {
     if (this.artChiesti || !window.Articoli) { return; }
@@ -264,6 +333,8 @@ class Component extends DCLogic {
     const s = document.querySelector("#scegli-reg");
     if (s && s.options.length > 1 && s.value !== this.reg()) { s.value = this.reg(); }
     this.curaDettaglio();
+    this.caricaVoce();
+    this.mettiTesto();
   }
   componentWillUnmount() {
     window.removeEventListener("hashchange", this.onHash);
@@ -508,59 +579,67 @@ class Component extends DCLogic {
       ]
     };
   }
-  /* TESTO DI PROVA - nessuna di queste stringhe e copy: ogni frase dichiara la funzione
-     della propria casella e sta dentro il tetto in battute misurato.
-     Tetti: titolo scheda 70 - estratto 150 - nome argomento 24.
-     I marcatori .prova e queste stringhe escono insieme, prima del build. */
-  articoliDiProva() {
-    const t = "Titolo dell’articolo: dice il vantaggio promesso a chi lo legge";
-    const e = "Sommario che spiega meglio la promessa del titolo e vende la lettura dell’articolo, senza ripetere le stesse parole che stanno qui sopra.";
-    return [
-      { id: 1, titolo: t, estratto: e, haFoto: true },
-      { id: 2, titolo: t, estratto: e, haFoto: false },
-      { id: 3, titolo: t, estratto: e, haFoto: false },
-      { id: 4, titolo: t, estratto: e, haFoto: true }
-    ];
-  }
+  /* Articoli veri da window.Articoli.lista(). Gli argomenti del filtro sono le
+     categorie WordPress degli articoli gia caricati: il filtro lavora in pagina,
+     per slug di categoria, e compare solo con almeno due categorie distinte (24/09/2026). */
   articoli() {
-    const stato = this.state.artStato || this.props.statoArticoli || "vuoto";
-    const conFiltro = this.state.artArg !== null ? true : (this.props.filtroArticoli === true);
-    const nomi = [
-      { chiave: null, nome: "Tutti gli argomenti" },
-      { chiave: "a", nome: "Nome argomento uno" },
-      { chiave: "b", nome: "Nome argomento due" },
-      { chiave: "c", nome: "Nome argomento tre" }
-    ];
-    const scelto = this.state.artArg !== null ? this.state.artArg : (conFiltro ? "a" : null);
+    const tutti = (this.state.artDati || []).filter((a) => !a.protetto);
+    let stato = this.state.artStato || this.props.statoArticoli || "vuoto";
+    if (stato === "ok" && !tutti.length) { stato = "vuoto"; }
+    const cats = [];
+    tutti.forEach((a) => (a.categorie || []).forEach((c) => {
+      if (c.slug && !cats.some((x) => x.slug === c.slug)) { cats.push(c); }
+    }));
+    // Un argomento rimasto in memoria che non esiste piu vale come «tutti».
+    const scelto = cats.some((c) => c.slug === this.state.artArg) ? this.state.artArg : null;
+    const conFiltro = scelto !== null;
+    const nomi = [{ chiave: null, nome: "Tutti gli argomenti" }].concat(cats.map((c) => ({ chiave: c.slug, nome: c.nome })));
     const argomenti = nomi.map((n) => ({
       nome: n.nome,
       attivo: scelto === n.chiave ? "true" : "false",
       cls: scelto === n.chiave ? "filtro on" : "filtro",
       scegli: () => this.setState({ artArg: n.chiave, artQuanti: 3 })
     }));
-    const tutti = this.state.artDati || this.articoliDiProva();
+    const filtrati = conFiltro ? tutti.filter((a) => (a.categorie || []).some((c) => c.slug === scelto)) : tutti;
     const quanti = this.state.artQuanti;
-    const visibili = tutti.slice(0, quanti).map((a) => ({
-      slot: "art-elenco-" + a.id,
-      titolo: a.titolo,
-      estratto: a.estratto,
-      meta: "Nome dell’argomento · 23 settembre 2026",
-      href: "./Articolo.dc.html",
-      aria: "Leggi l’articolo: " + a.titolo,
-      haFoto: a.haFoto === true
-    }));
-    const ok = stato === "ok";
-    const vuoto = stato === "vuoto";
+    const visibili = filtrati.slice(0, quanti).map((a) => {
+      const c = (a.categorie || [])[0];
+      const data = this.dataArticolo(a.dataIso);
+      return {
+        slot: "art-elenco-" + a.id,
+        titolo: a.titolo,
+        estratto: a.estratto,
+        meta: [c ? c.nome : "", data].filter((x) => x).join(" · "),
+        href: "#/articolo/" + encodeURIComponent(a.slug),
+        aria: "Leggi l’articolo: " + a.titolo,
+        haFoto: !!(a.immagine && a.immagine.url),
+        foto: a.immagine && a.immagine.url ? a.immagine.url : ""
+      };
+    });
+    const ok = stato === "ok" && filtrati.length > 0;
+    const vuoto = stato === "vuoto" || (stato === "ok" && !filtrati.length);
     return {
       ok: ok,
       vuotoTutto: vuoto && !conFiltro,
       vuotoFiltro: vuoto && conFiltro,
       errore: stato === "offline" || stato === "errore",
-      mostraFiltro: ok || (vuoto && conFiltro),
+      mostraFiltro: stato === "ok" && cats.length >= 2,
       argomenti: argomenti,
       visibili: visibili,
-      altri: ok && tutti.length > quanti,
-      finiti: ok && tutti.length <= quanti
+      altri: ok && filtrati.length > quanti,
+      finiti: ok && filtrati.length <= quanti
+    };
+  }
+  // Vista articolo riempita con un articolo WordPress: stessi campi delle FAQ, corpo vuoto.
+  voceArticolo() {
+    const v = this.statoVoce() === "ok" ? this.state.voce : null;
+    if (!v) { return { slot: "art-wp", foto: "", haFoto: false, cat: "", titolo: "", sommario: "", data: "", corpo: [] }; }
+    const c = (v.categorie || [])[0];
+    return {
+      slot: "art-wp-" + v.id, foto: v.immagine && v.immagine.url ? v.immagine.url : "",
+      haFoto: !!(v.immagine && v.immagine.url),
+      cat: c ? c.nome : "", titolo: v.titolo, sommario: v.estratto,
+      data: this.dataArticolo(v.dataIso), corpo: []
     };
   }
   domande() {
