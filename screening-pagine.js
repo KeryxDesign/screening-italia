@@ -5,12 +5,12 @@
    Estratte a macchina dai file .md, non ribattute: nessuna parola scritta in build. */
 
 /* Non affiliazione al SSN: UN punto solo per gruppo (brief §1.4).
-   ⏳ DA RATIFICARE A LEX: quando arriva la formula, si cambia una riga qui e basta.
-   adulti   = S12·Testo 17 (identico nei quattro file ONCO/PROSTATA, verificato)
-   genitori = N8-b di copy_neonatale.md (identico a D8-b, verificato) */
+   ✅ Ratificate da LEX con vincoli il 25/09/2026.
+   Formule riscritte da MUSE sui vincoli LEX del 25/09/2026, approvate da Davide il 25/09:
+   microcopy_sei_pagine.md §5. */
 window.SI_NON_AFFILIAZIONE = {
-  adulti: "Screening Italia è un sito informativo indipendente. Non fa parte del Servizio Sanitario Nazionale e non parla a suo nome.",   // mammografico, cervicale, colon-retto, prostata
-  genitori: "Screening Italia è un'iniziativa privata e indipendente. Non è affiliata al Servizio Sanitario Nazionale e non prenota esami."  // neonatale, diabete-celiachia
+  adulti: "Screening Italia è un sito privato e indipendente. Non è affiliato né convenzionato con Servizio Sanitario Nazionale, Regioni, ASL, Ministero della Salute o Istituto Superiore di Sanità. Non parla a loro nome.",   // mammografico, cervicale, colon-retto, prostata
+  genitori: "Screening Italia è un'iniziativa privata e indipendente. Non è affiliata né convenzionata con Servizio Sanitario Nazionale, Regioni, ASL, Ministero della Salute o Istituto Superiore di Sanità. Non parla a loro nome."  // neonatale, diabete-celiachia
 };
 
 /* Direttorio (N4, D5): dati per regione. Vuoti: [DATO MANCANTE — Angelo].
