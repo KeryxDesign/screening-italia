@@ -10,7 +10,9 @@ class Component extends DCLogic {
       regScr: null,
       // Tendina «Gli screening»: null = stato di partenza (chiusa da desktop,
       // aperta nel pannello hamburger se la rotta e #/screening*).
-      scrAperto: null };
+      scrAperto: null,
+      // Schede dell'elenco regione aperte a fisarmonica (blocco 2, 26/09/2026): id -> true.
+      iniAperte: {} };
     this.mappaRef = (el) => { this.mapEl = el; this.disegnaMappa(); };
     // Corpo dell'articolo WordPress: lo scrive mettiTesto(), non il modello.
     this.artTestoRef = (el) => { this.artTestoEl = el; this.mettiTesto(); };
@@ -564,6 +566,39 @@ class Component extends DCLogic {
       id: x.id || "", hrefDettaglio: "#/iniziativa/" + encodeURIComponent(x.id || ""),
       reg: x.reg, hrefRegione: "#/regione/" + encodeURIComponent(x.reg)
     };
+  }
+  /* Scheda stretta dell'elenco regione (blocco 2, brief LORI 26/09/2026).
+     Fisarmonica in pagina: il bottone porta aria-expanded/aria-controls, il fuoco
+     resta sul bottone; Esc e «Chiudi la scheda» chiudono e riportano il fuoco li.
+     Piu schede aperte insieme. Solo la vista regione: le pagine screening usano scheda(). */
+  schedaReg(x) {
+    const s = this.scheda(x);
+    const chiave = String(x.id || (x.reg + "-" + x.titolo + "-" + x.chiude));
+    const sicura = chiave.replace(/[^A-Za-z0-9_-]/g, "-");
+    const aperta = !!(this.state.iniAperte || {})[chiave];
+    const bottoneId = "ini-btn-" + sicura;
+    const metti = (vuole) => {
+      const a = Object.assign({}, this.state.iniAperte || {});
+      if (vuole) { a[chiave] = true; } else { delete a[chiave]; }
+      this.setState({ iniAperte: a });
+    };
+    const alBottone = () => { const b = document.getElementById(bottoneId); if (b) { b.focus(); } };
+    s.aperta = aperta;
+    s.espanso = aperta ? "true" : "false";
+    s.chiusa = !aperta;
+    s.bottoneId = bottoneId;
+    s.pannelloId = "ini-pan-" + sicura;
+    s.indicatore = aperta ? "Nascondi i dettagli" : "Mostra i dettagli";
+    s.schedaCls = "card card-reg" + (aperta ? " aperta" : "");
+    s.apri = () => metti(!aperta);
+    s.chiudi = () => { metti(false); alBottone(); };
+    s.tasto = (e) => {
+      if (e.key !== "Escape" || !aperta) { return; }
+      e.preventDefault();
+      metti(false);
+      alBottone();
+    };
+    return s;
   }
   /* Pagina dell'iniziativa: fuoco sull'H1 all'arrivo (il lettore di schermo annuncia
      la pagina) e titolo della scheda del browser. Lo scroll resta quello di sempre:

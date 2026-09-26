@@ -124,7 +124,7 @@ window.__siLogicaRender = class {
       titoloElenco: tutte.length === 0
         ? "Nessuna iniziativa in " + reg
         : (sel.length ? "Le iniziative corrispondenti alla tua scelta" : "Tutte le iniziative attive in " + reg),
-      iniziative: viste.map((x) => this.scheda(x)),
+      iniziative: viste.map((x) => this.schedaReg(x)),
       avvisoScadenza: inScadenza > 0
         ? (inScadenza === 1 ? "Una di queste chiude entro una settimana." : inScadenza + " di queste chiudono entro una settimana.")
         : "",
