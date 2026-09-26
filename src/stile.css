@@ -57,6 +57,31 @@ a:hover{color:var(--verde-scuro);text-decoration-thickness:2.5px}
 .nav-riga a:hover{color:#fff;background:rgba(255,255,255,0.10);text-decoration:none}
 .nav-riga a[aria-current="page"]{color:#fff;font-weight:600;border-bottom-color:var(--terracotta)}
 
+/* --- Tendina «Gli screening» (brief 26/09/2026) --- */
+.nav-voce{position:relative;display:flex}
+.nav-tendina{display:flex;align-items:center;min-height:88px;padding:0 10px;white-space:nowrap;
+  margin:0;background:none;border:0;border-bottom:4px solid transparent;border-radius:0;cursor:pointer;
+  font-family:inherit;color:#D9E9E1;font-size:17px;font-weight:500;text-align:left}
+.nav-tendina:hover{color:#fff;background:rgba(255,255,255,0.10)}
+.nav-tendina[aria-current="page"]{color:#fff;font-weight:600;border-bottom-color:var(--terracotta)}
+.nav-tendina:focus-visible{outline:3px solid var(--terracotta);outline-offset:-3px}
+.nav-freccia{width:16px;height:16px;margin-left:6px;flex-shrink:0;transition:transform .15s ease}
+.nav-tendina[aria-expanded="true"] .nav-freccia{transform:rotate(180deg)}
+.nav-menu{display:none}
+.nav-tendina[aria-expanded="true"] + .nav-menu{display:flex;flex-direction:column}
+@media (min-width:1200px){
+  .nav-menu{position:absolute;top:100%;left:0;min-width:300px;z-index:31;
+    background:var(--verde-scuro);box-shadow:0 12px 24px rgba(1,18,30,0.28);border-radius:0 0 10px 10px;overflow:hidden}
+  .nav-riga .nav-menu a{min-height:56px;padding:0 20px;font-size:17px;font-weight:500;color:#D9E9E1;
+    border-bottom:0;box-shadow:inset 0 -1.5px 0 rgba(255,255,255,0.14)}
+  .nav-riga .nav-menu a:last-child{box-shadow:none}
+  .nav-riga .nav-menu a:hover{color:#fff;background:rgba(255,255,255,0.10)}
+  .nav-riga .nav-menu a[aria-current="page"]{color:#fff;font-weight:500;box-shadow:inset 4px 0 0 var(--terracotta),inset 0 -1.5px 0 rgba(255,255,255,0.14)}
+  .nav-riga .nav-menu a[aria-current="page"]:last-child{box-shadow:inset 4px 0 0 var(--terracotta)}
+  .nav-riga .nav-menu a:focus-visible{outline:3px solid var(--terracotta);outline-offset:-3px}
+}
+@media (min-width:1200px) and (max-width:1279px){.nav-riga{gap:0}.nav-riga a,.nav-tendina{padding:0 8px}}
+
 .menu-chk,.hamb{display:none}
 
 /* Sotto i 860px il menu diventa un pannello a comparsa. */
@@ -71,11 +96,18 @@ a:hover{color:var(--verde-scuro);text-decoration-thickness:2.5px}
   .nav-riga{display:none}
   .menu-chk:checked ~ .nav-riga{display:flex;flex-direction:column;gap:0;
     position:absolute;top:100%;left:0;right:0;background:var(--verde-scuro);
-    box-shadow:0 12px 24px rgba(1,18,30,0.28)}
+    box-shadow:0 12px 24px rgba(1,18,30,0.28);max-height:calc(100dvh - 88px);overflow-y:auto}
   .menu-chk:checked ~ .nav-riga a{min-height:56px;padding:0 20px;font-size:19px;font-weight:500;
     border-bottom:1.5px solid rgba(255,255,255,0.14)}
   .menu-chk:checked ~ .nav-riga a[aria-current="page"]{border-bottom-color:rgba(255,255,255,0.14);
     box-shadow:inset 4px 0 0 var(--terracotta)}
+  /* Tendina «Gli screening» come fisarmonica nel pannello */
+  .nav-voce{flex-direction:column}
+  .menu-chk:checked ~ .nav-riga .nav-tendina{width:100%;min-height:56px;padding:0 20px;font-size:19px;font-weight:500;
+    border-bottom:1.5px solid rgba(255,255,255,0.14)}
+  .menu-chk:checked ~ .nav-riga .nav-tendina[aria-current="page"]{border-bottom-color:rgba(255,255,255,0.14);
+    box-shadow:inset 4px 0 0 var(--terracotta)}
+  .menu-chk:checked ~ .nav-riga .nav-menu a{padding:0 20px 0 40px}
 }
 
 .btn-reg{
@@ -437,21 +469,21 @@ html.js-anim .hero-sfondo img{animation:respiro 18s ease-in-out infinite alterna
 .passo-tit svg{width:20px;height:20px;flex-shrink:0;color:var(--verde)}
 html.contrasto .dato .et svg,html.contrasto .passo-tit svg{color:#000}
 
-/* --- WhatsApp: invito primario --- */
+/* --- Mail: invito primario --- */
 .wa{display:flex;align-items:center;gap:16px;min-height:76px;padding:16px 22px;border-radius:14px;
   align-self:center;
-  background:linear-gradient(180deg,#0E7C41 0%,#0B6B37 100%);color:#fff;text-decoration:none;
+  background:linear-gradient(180deg,#12664F 0%,#0A4739 100%);color:#fff;text-decoration:none;
   box-shadow:0 4px 14px rgba(6,60,32,0.3),inset 0 1px 0 rgba(255,255,255,0.18);
   transition:transform .14s ease,box-shadow .14s ease;align-self:center;width:100%;max-width:34rem}
-.wa:hover{color:#fff;transform:translateY(-2px);box-shadow:0 10px 24px rgba(6,60,32,0.36);text-decoration:none}
+.wa:hover{color:#fff;background:var(--verde-scuro);transform:translateY(-2px);box-shadow:0 10px 24px rgba(6,60,32,0.36);text-decoration:none}
 .wa:active{transform:none}
 .wa-i{width:38px;height:38px;flex-shrink:0;color:#fff}
 .wa-txt{display:flex;flex-direction:column;gap:3px;min-width:0}
 .wa-tit{font-size:21px;font-weight:700;line-height:1.2;color:#fff}
-.wa-sub{font-size:16px;line-height:1.35;color:#EAFBF0}
+.wa-sub{font-size:17px;line-height:1.35;color:#EAFBF0}
 .sep-o{display:flex;align-items:center;gap:14px;color:var(--soft);font-size:16px;max-width:34rem}
 .sep-o::before,.sep-o::after{content:"";flex:1;height:1.5px;background:var(--bordo)}
-html.contrasto .wa{background:#005C2E;box-shadow:none;border:2.5px solid #000}
+html.contrasto .wa{background:#00291F;box-shadow:none;border:2.5px solid #000}
 html.contrasto .wa-tit,html.contrasto .wa-sub,html.contrasto .wa-i{color:#fff}
 
 /* --- Modulo di contatto --- */
@@ -463,25 +495,6 @@ html.contrasto .wa-tit,html.contrasto .wa-sub,html.contrasto .wa-i{color:#fff}
 .hero a:hover{color:#A9E2CD;text-decoration-color:#A9E2CD}
 .hero .nota{color:#DCEAE5}
 html.contrasto .hero a{color:#fff}
-
-/* --- Barra dei sostenitori --- */
-.b-pieno{background:#04251E;box-shadow:0 0 0 100vmax #04251E}
-.sezione-bassa{padding-top:30px;padding-bottom:30px}
-@media (min-width:860px){.sezione-bassa{padding-top:40px;padding-bottom:40px}}
-.trust-occhiello{font-size:15px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
-  color:#8FD3B9;text-align:center;margin:0 auto;max-width:none}
-.trust-riga{display:flex;flex-wrap:nowrap;justify-content:space-between;align-items:center;
-  gap:clamp(8px,2.2vw,34px);width:100%;min-width:0}
-.trust-riga::-webkit-scrollbar{display:none}
-.trust-logo{display:flex;align-items:center;gap:clamp(5px,0.9vw,9px);color:#fff;opacity:0.94;min-width:0;flex:0 1 auto}
-.trust-marchio{width:clamp(22px,2.9vw,38px);height:clamp(22px,2.9vw,38px);flex-shrink:0}
-.trust-nome{font-size:clamp(9px,1.15vw,15px);font-weight:600;line-height:1.2;letter-spacing:0.01em;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.trust-nota{font-size:14px;color:#9FBDB2;text-align:center;margin:0 auto;max-width:none}
-html.contrasto .b-pieno{background:#fff !important;box-shadow:0 0 0 100vmax #fff !important}
-html.contrasto .trust-occhiello,html.contrasto .trust-nota{color:#111}
-html.contrasto .trust-logo{color:#111}
-
 
 /* --- Pulsanti d'azione: aspetto unico e centrato --- */
 .cta-2{
@@ -515,22 +528,22 @@ html.contrasto .cta-2{background:#8A2600;color:#fff;border:2.5px solid #000;box-
 html.contrasto .testi-virg{color:#000}
 html.contrasto .testi-ruolo{color:#000}
 
-/* --- Floater WhatsApp --- */
+/* --- Floater «Contattaci» (mail) --- */
 .wa-float{position:fixed;right:16px;bottom:18px;z-index:60;
   display:flex;align-items:center;gap:10px;min-height:56px;padding:0 20px 0 16px;
-  border-radius:999px;background:linear-gradient(180deg,#0E7C41 0%,#0B6B37 100%);
-  color:#fff;font-size:17px;font-weight:700;text-decoration:none;
+  border-radius:999px;background:#fff;border:2px solid var(--verde);
+  color:var(--verde);font-size:17px;font-weight:700;text-decoration:none;
   box-shadow:0 6px 18px rgba(6,60,32,0.36),inset 0 1px 0 rgba(255,255,255,0.2);
   transition:transform .14s ease,box-shadow .14s ease}
 .wa-float svg{width:28px;height:28px;flex-shrink:0}
-.wa-float:hover{color:#fff;text-decoration:none;transform:translateY(-2px);
+.wa-float:hover{color:var(--verde);background:var(--verde-tenue);text-decoration:none;transform:translateY(-2px);
   box-shadow:0 12px 26px rgba(6,80,40,0.4)}
 .wa-float:active{transform:none}
-html.contrasto .wa-float{background:#005C2E;border:2.5px solid #000;box-shadow:none;color:#fff}
+html.contrasto .wa-float{background:#FFFFFF;color:#00291F;border:2.5px solid #000;box-shadow:none}
 @media print{.wa-float{display:none}}
 
 /* Sotto i 1200px (stessa soglia dell'hamburger): accessibilita in testata,
-   WhatsApp visibile solo dopo i numeri dell'hero. Posizione del floater nel blocco <=699. */
+   il floater mail visibile solo dopo i numeri dell'hero. Posizione del floater nel blocco <=699. */
 @media (max-width:1199px){
   .a11y{top:22px;bottom:auto;left:auto;right:74px;z-index:31;flex-direction:column-reverse;align-items:flex-end;gap:28px}
   .a11y-apri{width:44px;height:44px;border-radius:8px;border:1.5px solid rgba(255,255,255,0.35);box-shadow:none}
@@ -657,7 +670,6 @@ html.contrasto .art-aside{border-left-color:#000;color:#000}
   /* Respiro delle fasce: meno alto, il pollice arriva prima al contenuto */
   .hero{padding-top:52px;padding-bottom:52px}
   .sezione{padding-top:40px;padding-bottom:40px}
-  .sezione-bassa{padding-top:26px;padding-bottom:26px}
 
   /* Titoli: scala ridotta ma sempre sopra il pavimento di leggibilita */
   h1{font-size:28px;letter-spacing:-0.01em}
@@ -666,12 +678,6 @@ html.contrasto .art-aside{border-left-color:#000;color:#000}
   .art-standfirst{font-size:19px}
   .art-sub{font-size:22px}
   .art-p{font-size:18px;line-height:1.62}
-
-  /* Loghi dei sostenitori: due righe leggibili invece di una riga minuscola */
-  .trust-riga{flex-wrap:wrap;justify-content:center;gap:14px 20px}
-  .trust-logo{flex:0 0 auto}
-  .trust-nome{font-size:14px;white-space:normal;line-height:1.15}
-  .trust-marchio{width:28px;height:28px}
 
   /* Numeri nell'hero: due colonne, cifre piu contenute */
   .numeri-hero{gap:16px 18px;padding-top:18px}
@@ -687,11 +693,10 @@ html.contrasto .art-aside{border-left-color:#000;color:#000}
   .banda:not(.hero) .cta,.banda:not(.hero) .cta-2{align-self:stretch}
   .wa{padding:14px 18px;gap:12px}
   .wa-tit{font-size:19px}
-  .wa-sub{font-size:15px}
+  .wa-sub{font-size:17px}
 
-  /* Floater: solo icona, non copre il testo */
+  /* Floater: icona e scritta anche da telefono (Davide, 26/09/2026) */
   .wa-float{right:12px;bottom:12px;min-height:52px;padding:0 14px}
-  .wa-float span{display:none}
   .wa-float svg{width:26px;height:26px}
 
   /* Spazio in fondo alla pagina per i due pulsanti flottanti */
@@ -704,7 +709,6 @@ html.contrasto .art-aside{border-left-color:#000;color:#000}
   .lettura{max-width:none}
 }
 @media (max-width:389px){
-  .trust-nome{font-size:13px}
   h1{font-size:26px}
   .numeri-hero{grid-template-columns:1fr 1fr;gap:14px}
 }
@@ -839,7 +843,7 @@ html.contrasto .sel-discreto .campo-sel{background:#00291F;border-color:#fff;bac
 .ftr-claim{font-size:17px !important;line-height:1.55;color:#C9DED5 !important;max-width:34ch}
 .ftr-wa{display:inline-flex;align-items:center;gap:10px;min-height:48px;align-self:flex-start;
   font-size:17px;font-weight:700;color:#8FD3B9 !important;text-decoration:none}
-.ftr-wa svg{width:22px;height:22px;flex-shrink:0}
+.ftr-wa svg{width:24px;height:24px;flex-shrink:0}
 .ftr-wa:hover{color:#fff !important;text-decoration:underline;text-underline-offset:4px}
 .ftr-col{display:flex;flex-direction:column}
 .ftr-tit{font-size:15px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
@@ -931,33 +935,6 @@ image-slot::part(ring){display:none !important}
   /* Dentro la fascia allargata, ricerca e filtri restano leggibili. */
   .banda:has(.art-griglia) .cerca,
   .banda:has(.art-griglia) > .fx > .fx.col.gap8{max-width:680px}
-}
-
-/* Loghi dei sostenitori: piu aria fra un marchio e l'altro */
-.trust-riga{gap:clamp(14px,4.5vw,64px)}
-@media (min-width:1000px){
-  .banda:has(.trust-riga){max-width:1120px}
-  .trust-riga{gap:64px}
-}
-@media (max-width:699px){.trust-riga{gap:22px 34px}}
-
-/* ============ Sostenitori: leggibili a ogni larghezza ============
-   Il nome di un ente non si tronca mai. Sotto i 1000px la fila va a piu righe. */
-.trust-nome{font-size:14px !important;white-space:normal !important;
-  overflow:visible !important;text-overflow:clip !important;line-height:1.18}
-.trust-marchio{width:30px !important;height:30px !important}
-.trust-riga{flex-wrap:wrap !important;justify-content:center;row-gap:22px}
-.trust-logo{flex:0 0 auto;min-width:0}
-@media (min-width:1000px){
-  .trust-nome{font-size:15px !important}
-  .trust-marchio{width:38px !important;height:38px !important}
-  /* Nessun nowrap: se i cinque marchi non stanno su una riga, vanno a capo
-     invece di sbordare. Da 1200px ci stanno tutti con 64px di respiro. */
-  .trust-riga{column-gap:clamp(28px,4vw,64px)}
-}
-@media (min-width:700px) and (max-width:999px){
-  .banda:has(.trust-riga){max-width:900px}
-  .trust-riga{column-gap:40px}
 }
 
 /* La risposta a soffietto senza wrapper: allineata alla domanda e staccata dal filetto. */
@@ -1111,3 +1088,6 @@ html.contrasto .card-ini:has(.ini-tit a:focus-visible),html.contrasto .card-ini 
 .numero-het{font-size:17px;line-height:1.45}
 @media (min-width:860px){.hero .occhiello,.hero .nota,.numero-het{font-size:18px}
  .hero h1{font-size:48px;line-height:1.10}.hero p{font-size:20px;line-height:1.65}.numero-hn{font-size:34px}}
+
+/* Menu aperto sopra il banner cookie (z 70), accessibilita sopra la testata (collaudo LORI giro 2, 26/09/2026). */
+@media (max-width:1199px){.hdr:has(.menu-chk:checked){z-index:71} body:has(.menu-chk:checked) .a11y{z-index:72}}

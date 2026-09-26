@@ -92,7 +92,7 @@
     var apri = document.createElement("button");
     apri.type = "button";
     apri.className = "a11y-apri";
-    apri.setAttribute("aria-label", "Accessibilit\u00e0: testo e contrasto");
+    apri.setAttribute("aria-label", "Accessibilità: testo e contrasto");
     apri.setAttribute("aria-expanded", "false");
     apri.setAttribute("aria-controls", "a11y-pannello");
     apri.innerHTML = '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="7.2" r="1.4" fill="currentColor" stroke="none"></circle><path d="M6.8 10.2h10.4"></path><path d="M12 10.6v4.2"></path><path d="M12 14.8l-2.2 4"></path><path d="M12 14.8l2.2 4"></path></svg>';
@@ -114,7 +114,7 @@
     aggiorna();
   }
 
-  /* Floater WhatsApp sotto i 1200px: compare solo quando i numeri dell'hero
+  /* Floater «Contattaci» (mail) sotto i 1200px: compare solo quando i numeri dell'hero
      sono scorsi via (o la pagina non li ha). Sopra, la classe non ha effetto. */
   var MARGINE_WA = 76;
   var inCoda = false;

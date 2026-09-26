@@ -7,7 +7,10 @@ class Component extends DCLogic {
     this.state = { rotta: this.leggiRotta(), tipi: [], mail: "", inviato: false,
       artArg: null, artQuanti: 6, artStato: null, artDati: null,
       // Pagine screening (25/09/2026): regione scelta nella pagina, resta per la sessione.
-      regScr: null };
+      regScr: null,
+      // Tendina «Gli screening»: null = stato di partenza (chiusa da desktop,
+      // aperta nel pannello hamburger se la rotta e #/screening*).
+      scrAperto: null };
     this.mappaRef = (el) => { this.mapEl = el; this.disegnaMappa(); };
     // Corpo dell'articolo WordPress: lo scrive mettiTesto(), non il modello.
     this.artTestoRef = (el) => { this.artTestoEl = el; this.mettiTesto(); };
@@ -110,7 +113,8 @@ class Component extends DCLogic {
 
     this.onHash = () => {
       const r = this.leggiRotta();
-      this.setState({ rotta: r, tipi: [], inviato: false, mail: "" });
+      this.setState({ rotta: r, tipi: [], inviato: false, mail: "", scrAperto: false });
+      this.chiudiHamburger();
       window.scrollTo(0, 0);
     };
     window.addEventListener("hashchange", this.onHash);
@@ -141,6 +145,7 @@ class Component extends DCLogic {
     }, 350);
     setTimeout(() => { if (!window.REGIONI_ITALIA) { this.setState({ erroreMappa: true }); } }, 8000);
     this.centraNav();
+    this.avviaTendina();
     // L'effetto di comparsa si accende SOLO se in questo ambiente le transizioni
     // avanzano davvero. Altrimenti non si nasconde nulla: il contenuto e la priorita.
     this.provaAnimazioni();
@@ -379,6 +384,10 @@ class Component extends DCLogic {
   componentWillUnmount() {
     window.removeEventListener("hashchange", this.onHash);
     document.removeEventListener("click", this.onClickInterno);
+    document.removeEventListener("click", this.onClickFuori);
+    document.removeEventListener("keydown", this.onEscTendina);
+    document.removeEventListener("focusin", this.onFocusTendina);
+    if (this.mqDesktop) { try { this.mqDesktop.removeEventListener("change", this.onCambioLarghezza); } catch (e) {} }
     window.removeEventListener("scroll", this.onScroll);
     window.removeEventListener("resize", this.onScroll);
     document.removeEventListener("toggle", this.onScroll, true);
@@ -387,6 +396,45 @@ class Component extends DCLogic {
     clearInterval(this.guardiaTimer);
     document.removeEventListener("visibilitychange", this.onVis);
     clearInterval(this.tick);
+  }
+  /* ---- Tendina «Gli screening» (brief 26/09/2026) ----
+     Da 1200px: si apre solo al clic; chiude con Esc (focus al pulsante), clic fuori,
+     Tab che esce dal pannello, cambio rotta. Sotto 1200px e una fisarmonica
+     nel pannello hamburger, aperta in partenza sulle rotte #/screening*. */
+  eDesktop() {
+    try { return window.matchMedia("(min-width:1200px)").matches; } catch (e) { return true; }
+  }
+  scrAperto() {
+    const a = this.state.scrAperto;
+    if (a === true || a === false) { return a; }
+    return !this.eDesktop() && this.state.rotta.vista === "screening";
+  }
+  // Cambio rotta (collaudo LORI giro 1): il pannello hamburger si chiude, la pagina nuova resta visibile.
+  chiudiHamburger() {
+    const c = document.getElementById("menu-chk");
+    if (c) { c.checked = false; }
+  }
+  navScr(slug) {
+    const r = this.state.rotta;
+    return (r.vista === "screening" && (r.arg || "") === slug) ? "page" : "false";
+  }
+  avviaTendina() {
+    const dentro = (el) => !!(el && el.closest && el.closest(".nav-voce"));
+    const chiudi = () => { if (this.eDesktop() && this.scrAperto()) { this.setState({ scrAperto: false }); } };
+    this.onClickFuori = (e) => { if (!dentro(e.target)) { chiudi(); } };
+    this.onEscTendina = (e) => {
+      if (e.key !== "Escape" || !this.eDesktop() || !this.scrAperto()) { return; }
+      this.setState({ scrAperto: false });
+      const b = document.querySelector(".nav-tendina");
+      if (b) { b.focus(); }
+    };
+    this.onFocusTendina = (e) => { if (!dentro(e.target)) { chiudi(); } };
+    document.addEventListener("click", this.onClickFuori);
+    document.addEventListener("keydown", this.onEscTendina);
+    document.addEventListener("focusin", this.onFocusTendina);
+    // Passando la soglia dei 1200px la tendina torna allo stato di partenza.
+    this.onCambioLarghezza = () => this.setState({ scrAperto: null });
+    try { this.mqDesktop = window.matchMedia("(min-width:1200px)"); this.mqDesktop.addEventListener("change", this.onCambioLarghezza); } catch (e) {}
   }
   centraNav() {
     setTimeout(() => {
@@ -408,7 +456,8 @@ class Component extends DCLogic {
     // Vecchie FAQ interne e #/articolo senza argomento: portano a #/domande (brief LORI 26/09/2026).
     if (this.eVecchiaFaq(vista, arg)) { vista = "domande"; arg = ""; rotta = "#/domande"; }
     if (vista === "screening" && !this.scrValido(arg)) { arg = ""; }
-    this.setState({ rotta: { vista: vista, arg: arg }, tipi: [], inviato: false, mail: "" });
+    this.setState({ rotta: { vista: vista, arg: arg }, tipi: [], inviato: false, mail: "", scrAperto: false });
+    this.chiudiHamburger();
     window.scrollTo(0, 0);
     this.portaAllElenco(vista);
     // pushState: ogni vista entra nella cronologia, cosi il tasto indietro del browser

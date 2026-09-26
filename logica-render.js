@@ -56,7 +56,17 @@ window.__siLogicaRender = class {
       navEnti: vista === "enti" ? "page" : "false",
       navChi: vista === "chi" ? "page" : "false",
       navContatti: vista === "contatti" ? "page" : "false",
-      navFaq: (vista === "faq" || vista === "screening") ? "page" : "false",
+      // «Gli screening» e una tendina (brief 26/09/2026): corrente su tutte le rotte #/screening*.
+      navFaq: (vista === "faq" || this.state.rotta.vista === "screening") ? "page" : "false",
+      scrAperto: this.scrAperto() ? "true" : "false",
+      scrApriChiudi: () => this.setState({ scrAperto: !this.scrAperto() }),
+      navScrTutti: this.navScr(""),
+      navScrMammografico: this.navScr("mammografico"),
+      navScrCervicale: this.navScr("cervicale"),
+      navScrColon: this.navScr("colon-retto"),
+      navScrProstata: this.navScr("prostata"),
+      navScrNeonatale: this.navScr("neonatale"),
+      navScrDiabete: this.navScr("diabete-celiachia"),
       navDomande: (vista === "domande" || vista === "articoli" || vista === "articolo") ? "page" : "false",
       hrefIniziative: this.rottaRegione("Lombardia"),
       hrefLombardia: this.rottaRegione("Lombardia"),
@@ -78,6 +88,8 @@ window.__siLogicaRender = class {
       vistaFaq: vista === "faq" || vista === "domande" || vista === "articoli",
       vistaChi: vista === "chi",
       vistaContatti: vista === "contatti",
+      // Il floater mail non si rende su #/contatti: la pagina ha gia il suo bottone (collaudo LORI giro 1).
+      floaterMail: vista !== "contatti",
 
       // home
       nIniziative: dati.length ? String(dati.length) : "–",

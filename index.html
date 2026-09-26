@@ -5,11 +5,11 @@
 <meta name="googlebot" content="noindex, nofollow">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=251c004"></script>
-<script src="./logica-render.js?v=251c004"></script>
-<script src="./logica-classe.js?v=251c004"></script>
-<script src="./screening-pagine.js?v=251c004"></script>
-<script src="./logica-screening.js?v=251c004"></script>
+<script src="./support.js?v=e0b5298"></script>
+<script src="./logica-render.js?v=e0b5298"></script>
+<script src="./logica-classe.js?v=e0b5298"></script>
+<script src="./screening-pagine.js?v=e0b5298"></script>
+<script src="./logica-screening.js?v=e0b5298"></script>
 </head>
 <body>
 <x-dc>
@@ -33,15 +33,15 @@
         <meta name="ext-resource-dependency" content="https://img.magnific.com/free-photo/thank-you-your-visit-my-office_329181-2204.jpg">
         <meta name="ext-resource-dependency" content="https://img.magnific.com/free-photo/charming-woman-with-short-hairstyle-hat-blue-blouse-holds-map-points-side-smiles-with-grey-haired-man-with-camera-park_197531-19155.jpg">
         <meta name="ext-resource-dependency" content="https://img.magnific.com/free-photo/senior-woman-answering-doctor-questions-examination-hospital-room_482257-8442.jpg">
-        <link rel="stylesheet" href="./stile.css?v=251c004">
-        <link rel="stylesheet" href="./screening.css?v=251c004">
-        <script src="./accessibilita.js?v=251c004"></script>
-        <script src="./iniziative.js?v=251c004"></script>
-        <script src="./iniziative-wp.js?v=251c004"></script>
-        <script src="./articoli.js?v=251c004"></script>
-        <script src="./regioni-italia.js?v=251c004"></script>
-        <script src="./mappa.js?v=251c004"></script>
-        <script src="./image-slot.js?v=251c004"></script>
+        <link rel="stylesheet" href="./stile.css?v=e0b5298">
+        <link rel="stylesheet" href="./screening.css?v=e0b5298">
+        <script src="./accessibilita.js?v=e0b5298"></script>
+        <script src="./iniziative.js?v=e0b5298"></script>
+        <script src="./iniziative-wp.js?v=e0b5298"></script>
+        <script src="./articoli.js?v=e0b5298"></script>
+        <script src="./regioni-italia.js?v=e0b5298"></script>
+        <script src="./mappa.js?v=e0b5298"></script>
+        <script src="./image-slot.js?v=e0b5298"></script>
         <style>
           /* Marcatore di bozza (sezione articoli sotto le Domande frequenti, 23/09/2026):
              esce insieme al testo di prova, prima del build. */
@@ -76,7 +76,7 @@
 
         <div class="hdr">
           <div class="wrap hdr-riga">
-            <a class="marchio" href="#/" title="Torna alla home" aria-label="Screening Italia, torna alla home"><img class="marchio-img" src="./marchio/screening-italia-chiaro.png?v=251c004" alt="Screening Italia" width="1169" height="440" /></a>
+            <a class="marchio" href="#/" title="Torna alla home" aria-label="Screening Italia, torna alla home"><img class="marchio-img" src="./marchio/screening-italia-chiaro.png?v=e0b5298" alt="Screening Italia" width="1169" height="440" /></a>
             <input class="menu-chk" type="checkbox" id="menu-chk" aria-label="Apri il menu">
             <label class="hamb" for="menu-chk">
               <svg class="i-apri" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
@@ -84,7 +84,18 @@
             </label>
             <nav class="nav-riga" aria-label="Sezioni del sito">
               <a href="{{ hrefIniziative }}" aria-current="{{ navReg }}">Iniziative per regione</a>
-              <a href="#/faq" aria-current="{{ navFaq }}">Gli screening</a>
+              <div class="nav-voce">
+                <button type="button" class="nav-tendina" aria-expanded="{{ scrAperto }}" aria-controls="menu-screening" aria-current="{{ navFaq }}" onClick="{{ scrApriChiudi }}">Gli screening<svg class="nav-freccia" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+                <div class="nav-menu" id="menu-screening">
+                  <a href="#/screening" aria-current="{{ navScrTutti }}">Tutti gli screening</a>
+                  <a href="#/screening/mammografico" aria-current="{{ navScrMammografico }}">Mammografico</a>
+                  <a href="#/screening/cervicale" aria-current="{{ navScrCervicale }}">Cervicale</a>
+                  <a href="#/screening/colon-retto" aria-current="{{ navScrColon }}">Colon-retto</a>
+                  <a href="#/screening/prostata" aria-current="{{ navScrProstata }}">Prostata</a>
+                  <a href="#/screening/neonatale" aria-current="{{ navScrNeonatale }}">Neonatale</a>
+                  <a href="#/screening/diabete-celiachia" aria-current="{{ navScrDiabete }}">Diabete e celiachia (bambini)</a>
+                </div>
+              </div>
               <a href="#/enti" aria-current="{{ navEnti }}">Per ASL ed enti</a>
               <a href="#/testimonianze" aria-current="{{ navTesti }}">Testimonianze</a>
               <a href="#/domande" aria-current="{{ navDomande }}">Domande frequenti</a>
@@ -121,35 +132,6 @@
               </div>
             </div>
 
-
-            <div class="banda b-pieno wrap sezione-bassa" data-screen-label="Sostenitori">
-              <div class="fx col gap16">
-                <p class="trust-occhiello">Sostengono Screening Italia</p>
-                <div class="trust-riga">
-                  <span class="trust-logo">
-                    <svg class="trust-marchio" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="16" r="11.5"></circle><path d="M16 4.5v23M4.5 16h23M8 8l16 16M24 8L8 24"></path></svg>
-                    <span class="trust-nome">Rete Prevenzione<br>Insieme</span>
-                  </span>
-                  <span class="trust-logo">
-                    <svg class="trust-marchio" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 28.5s11-7 11-15.5A7.5 7.5 0 0016 8.5 7.5 7.5 0 005 13c0 8.5 11 15.5 11 15.5z"></path><path d="M10 15h4l2-4 2 8 2-4h4"></path></svg>
-                    <span class="trust-nome">Fondazione<br>Salute Attiva</span>
-                  </span>
-                  <span class="trust-logo">
-                    <svg class="trust-marchio" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 4l11 4.5v8c0 7-4.6 11.4-11 13.5C9.6 27.9 5 23.5 5 16.5v-8z"></path><path d="M11 16.5l3.5 3.5L22 12.5"></path></svg>
-                    <span class="trust-nome">Associazione Italiana<br>Volontari Prevenzione</span>
-                  </span>
-                  <span class="trust-logo">
-                    <svg class="trust-marchio" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11.5" r="4.5"></circle><circle cx="21.5" cy="11.5" r="4.5"></circle><path d="M4 26c0-4.4 3.1-7 7-7s7 2.6 7 7M18.5 19.4c3.5-.5 6.5 2.1 6.5 6.6"></path></svg>
-                    <span class="trust-nome">Consorzio Medici<br>di Comunità</span>
-                  </span>
-                  <span class="trust-logo">
-                    <svg class="trust-marchio" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 26V9.5C6 6.5 8.4 4 11.5 4h9C23.6 4 26 6.5 26 9.5V26"></path><path d="M6 26h20M13 26v-7h6v7M16 8.5v5M13.5 11h5"></path></svg>
-                    <span class="trust-nome">Lega Prevenzione<br>Territoriale</span>
-                  </span>
-                </div>
-                <p class="trust-nota">Loghi di esempio: nel prototipo non rappresentano enti reali.</p>
-              </div>
-            </div>
 
             <div class="banda b-crema wrap sezione" data-screen-label="Come funziona">
               <div class="fx col gap20">
@@ -1327,7 +1309,7 @@
                 <h2>Il marchio</h2>
                 <p class="nota">Area di servizio del prototipo: trascina qui il file del logo. Una volta caricato lo portiamo nell’intestazione al posto della scritta.</p>
                 <div class="marchio-vetrina">
-                  <img src="./marchio/screening-italia.png?v=251c004" alt="Marchio Screening Italia su fondo chiaro" width="1169" height="440">
+                  <img src="./marchio/screening-italia.png?v=e0b5298" alt="Marchio Screening Italia su fondo chiaro" width="1169" height="440">
                 </div>
                 <div class="fx col gap8">
                   <div class="dato"><span class="et">Colori</span><span class="vl">nero #1E1E1E · verde #226E46 · rosso #DA2627</span></div>
@@ -1358,21 +1340,21 @@
               <div class="fx col gap16">
                 <div class="occhiello">Contatti</div>
                 <h1>Contatti</h1>
-                <p>Hai visto un’iniziativa non presente o un dato inesatto? Segnalacelo: provvediamo alla correzione entro pochi giorni.</p>
+                <p>Se hai visto un’iniziativa che manca o un dato sbagliato, segnalalo: ogni segnalazione viene verificata e, se serve, la pagina si aggiorna.</p>
               </div>
             </div>
 
             <div class="banda b-bianco wrap sezione" data-screen-label="Recapiti">
               <div class="fx col gap20">
-                <h2>Scrivici ora su WhatsApp</h2>
-                <a class="wa" href="https://wa.me/393000000000" target="_blank" rel="noopener">
-                  <svg class="wa-i" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 3.2C9 3.2 3.3 8.9 3.3 15.94c0 2.25.6 4.45 1.72 6.39L3.2 28.8l6.65-1.74a12.7 12.7 0 006.19 1.58h.01c7.03 0 12.74-5.7 12.74-12.74 0-3.4-1.33-6.6-3.73-9a12.66 12.66 0 00-9.02-3.7zm0 23.24h-.01a10.6 10.6 0 01-5.4-1.48l-.39-.23-4.01 1.05 1.07-3.91-.25-.4a10.55 10.55 0 01-1.62-5.630c0-5.84 4.76-10.6 10.61-10.6 2.83 0 5.5 1.11 7.5 3.11a10.53 10.53 0 013.1 7.5c0 5.85-4.76 10.6-10.6 10.6zm5.82-7.94c-.32-.16-1.96-.97-2.27-1.08-.3-.11-.53-.17-.75.16-.22.32-.86 1.08-1.06 1.3-.19.22-.39.24-.71.08-.32-.16-1.36-.5-2.58-1.6a9.7 9.7 0 01-1.8-2.23c-.19-.32-.02-.5.14-.66.16-.16.35-.4.53-.61.12-.14.2-.28.3-.47.1-.19.05-.36-.03-.5-.08-.16-.72-1.8-.99-2.44-.26-.63-.52-.54-.71-.55h-.64c-.22 0-.58.08-.88.4-.3.32-1.150 1.12-1.15 2.73s1.17 3.17 1.34 3.39c.16.21 2.3 3.66 5.6 4.99.78.34 1.4.54 1.88.69.79.25 1.51.21 2.08.13.63-.09 2.09-.85 2.39-1.68.29-.83.29-1.53.2-1.68-.08-.16-.29-.24-.6-.4z"></path></svg>
+                <h2>Per segnalazioni e domande</h2>
+                <a class="wa" href="mailto:info@screeningitalia.it?subject=Messaggio%20dal%20sito%20Screening%20Italia">
+                  <svg class="wa-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg>
                   <span class="wa-txt">
-                    <span class="wa-tit">Scrivici su WhatsApp</span>
-                    <span class="wa-sub">La via più rapida: risposta in giornata negli orari di apertura</span>
+                    <span class="wa-tit">Scrivici una mail</span>
+                    <span class="wa-sub">Si apre la tua posta, con l’indirizzo già scritto</span>
                   </span>
                 </a>
-                <p class="nota">Numero WhatsApp: <strong>+39 300 000 0000</strong></p>
+                <p class="nota">Il nostro indirizzo: info@screeningitalia.it</p>
               </div>
             </div>
 
@@ -1409,7 +1391,7 @@
                       <textarea class="campo campo-area" id="m-testo" rows="5" placeholder="Scrivi qui. Se segnali un’iniziativa, indica ente, sede, date e recapito." value="{{ mTesto }}" onInput="{{ scriviTesto }}"></textarea>
                     </div>
                     <button type="button" class="cta" onClick="{{ inviaModulo }}">Invia il messaggio</button>
-                    <p class="nota">Il messaggio arriva a ciao@screeningitalia.it. Usiamo questi dati solo per risponderti: non chiediamo né registriamo informazioni sanitarie.</p>
+                    <p class="nota">Il messaggio arriva a info@screeningitalia.it. Usiamo questi dati solo per risponderti: non chiediamo né registriamo informazioni sanitarie.</p>
                   </div>
                 </sc-if>
               </div>
@@ -1419,7 +1401,7 @@
               <div class="fx col gap16">
                 <h2>Enti e associazioni</h2>
                 <p style="margin-left:auto;margin-right:auto;text-align:center">Inviaci la locandina o il collegamento alla pagina ufficiale, con ente, sede, date, requisiti di partecipazione e recapito telefonico. Dopo la verifica sarà pubblicata.</p>
-                <a class="cta" href="mailto:ciao@screeningitalia.it">Segnala un’iniziativa</a>
+                <a class="cta" href="mailto:info@screeningitalia.it">Segnala un’iniziativa</a>
               </div>
             </div>
 
@@ -1608,7 +1590,7 @@
             <div class="banda b-verde wrap sezione" data-screen-label="Diritti">
               <div class="fx col gap16">
                 <h2>I tuoi diritti</h2>
-                <p>Puoi chiedere quali dati abbiamo, farli correggere o farli cancellare. Si scrive a <a href="mailto:ciao@screeningitalia.it">ciao@screeningitalia.it</a> e rispondiamo entro 30 giorni.</p>
+                <p>Puoi chiedere quali dati abbiamo, farli correggere o farli cancellare. Si scrive a <a href="mailto:info@screeningitalia.it">info@screeningitalia.it</a> e rispondiamo entro 30 giorni.</p>
                 <a class="link-cta" href="#/contatti">Scrivici
                   <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
                 </a>
@@ -1669,21 +1651,23 @@
           </div>
         </sc-if>
 
-        <a class="wa-float" href="https://wa.me/393000000000" target="_blank" rel="noopener" aria-label="Contattaci su WhatsApp">
-          <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 3.2C9 3.2 3.3 8.9 3.3 15.94c0 2.25.6 4.45 1.72 6.39L3.2 28.8l6.65-1.74a12.7 12.7 0 006.19 1.58h.01c7.03 0 12.74-5.7 12.74-12.74 0-3.4-1.33-6.6-3.73-9a12.66 12.66 0 00-9.02-3.7zm0 23.24h-.01a10.6 10.6 0 01-5.4-1.48l-.39-.23-4.01 1.05 1.07-3.91-.25-.4a10.55 10.55 0 01-1.62-5.63c0-5.84 4.76-10.6 10.61-10.6 2.83 0 5.5 1.11 7.5 3.11a10.53 10.53 0 013.1 7.5c0 5.85-4.76 10.6-10.6 10.6zm5.82-7.94c-.32-.16-1.96-.97-2.27-1.08-.3-.11-.53-.17-.75.16-.22.32-.86 1.08-1.06 1.3-.19.22-.39.24-.71.08-.32-.16-1.36-.5-2.58-1.6a9.7 9.7 0 01-1.8-2.23c-.19-.32-.02-.5.14-.66.16-.16.35-.4.53-.61.12-.14.2-.28.3-.47.1-.19.05-.36-.03-.5-.08-.16-.72-1.8-.99-2.44-.26-.63-.52-.54-.71-.55h-.64c-.22 0-.58.08-.88.4-.3.32-1.15 1.12-1.15 2.73s1.17 3.17 1.34 3.39c.16.21 2.3 3.66 5.6 4.99.78.34 1.4.54 1.88.69.79.25 1.51.21 2.08.13.63-.09 2.09-.85 2.39-1.68.29-.83.29-1.53.2-1.68-.08-.16-.29-.24-.6-.4z"></path></svg>
+        <sc-if value="{{ floaterMail }}" hint-placeholder-val="{{ true }}">
+        <a class="wa-float" href="mailto:info@screeningitalia.it?subject=Messaggio%20dal%20sito%20Screening%20Italia" aria-label="Contattaci via mail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg>
           <span>Contattaci</span>
         </a>
+        </sc-if>
 
         <div class="ftr">
           <div class="wrap">
 
             <div class="ftr-alto">
               <div class="ftr-marchio fx col gap12">
-                <img class="ftr-marchio-img" src="./marchio/screening-italia-chiaro.png?v=251c004" alt="Screening Italia" width="1169" height="440">
+                <img class="ftr-marchio-img" src="./marchio/screening-italia-chiaro.png?v=e0b5298" alt="Screening Italia" width="1169" height="440">
                 <p class="ftr-claim">Un elenco curato a mano delle iniziative di screening aperte in Italia. Ogni segnalazione è verificata sulla fonte ufficiale prima di essere pubblicata.</p>
-                <a class="ftr-wa" href="https://wa.me/393000000000" target="_blank" rel="noopener">
-                  <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 3.2C9 3.2 3.3 8.9 3.3 15.94c0 2.25.6 4.45 1.72 6.39L3.2 28.8l6.65-1.74a12.7 12.7 0 006.19 1.58h.01c7.03 0 12.74-5.7 12.74-12.74 0-3.4-1.33-6.6-3.73-9a12.66 12.66 0 00-9.02-3.7zm0 23.24h-.01a10.6 10.6 0 01-5.4-1.48l-.39-.23-4.01 1.05 1.07-3.91-.25-.4a10.55 10.55 0 01-1.62-5.63c0-5.84 4.76-10.6 10.61-10.6 2.83 0 5.5 1.11 7.5 3.11a10.53 10.53 0 013.1 7.5c0 5.850-4.76 10.6-10.6 10.6zm5.82-7.94c-.32-.16-1.96-.97-2.27-1.08-.3-.11-.53-.17-.75.16-.22.32-.86 1.08-1.06 1.3-.19.22-.39.24-.71.08-.32-.16-1.36-.5-2.58-1.6a9.7 9.7 0 01-1.8-2.23c-.19-.32-.02-.5.14-.66.16-.16.35-.4.53-.61.12-.14.2-.28.3-.47.1-.19.05-.36-.03-.5-.08-.16-.72-1.8-.99-2.44-.26-.63-.52-.54-.71-.55h-.64c-.22 0-.58.08-.88.4-.3.32-1.15 1.12-1.15 2.73s1.17 3.17 1.34 3.39c.16.21 2.3 3.66 5.6 4.99.78.34 1.4.54 1.88.69.79.25 1.51.21 2.08.13.63-.09 2.09-.85 2.39-1.68.29-.83.29-1.53.2-1.68-.08-.16-.29-.24-.6-.4z"></path></svg>
-                  Scrivici su WhatsApp
+                <a class="ftr-wa" href="mailto:info@screeningitalia.it?subject=Messaggio%20dal%20sito%20Screening%20Italia">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg>
+                  Scrivici una mail
                 </a>
               </div>
 
@@ -1699,7 +1683,7 @@
 
               <nav class="ftr-col" aria-label="Come funziona">
                 <h3 class="ftr-tit">Come funziona</h3>
-                <a href="#/faq">Gli screening</a>
+                <a href="#/screening">Gli screening</a>
                 <a href="#/articolo/faq-1">Se l’invito non arriva</a>
                 <a href="#/articolo/faq-5">Il kit del colon-retto</a>
                 <a href="#/screening/prostata">Screening della prostata</a>
