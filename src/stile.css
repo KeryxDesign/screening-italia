@@ -363,7 +363,7 @@ html.contrasto .mappa path.attiva{fill:#8A2600;stroke:#000;stroke-width:2.5}
 
 /* --- Card articolo (domande frequenti) --- */
 .art-griglia{display:grid;grid-template-columns:1fr;gap:18px}
-@media (min-width:640px){.art-griglia{grid-template-columns:1fr 1fr;gap:20px}}
+@media (min-width:860px){.art-griglia{grid-template-columns:1fr 1fr;gap:20px}}
 .art{display:flex;flex-direction:column;background:#fff;border:0;border-radius:14px;overflow:hidden;
   color:var(--inchiostro);box-shadow:0 1px 2px rgba(4,40,64,0.06),0 6px 18px rgba(4,40,64,0.10);
   transition:transform .18s ease,box-shadow .18s ease}
@@ -904,7 +904,7 @@ html.contrasto .mappa-bianca path.piena{fill:#2F7A63;stroke:#FFFFFF;stroke-width
 @media (max-width:999px){.hero-mappa{display:none}}
 
 /* Domande frequenti: tre per riga, senza tratteggio intorno alle foto */
-@media (min-width:640px){.art-griglia{grid-template-columns:1fr 1fr;gap:20px}}
+@media (min-width:860px){.art-griglia{grid-template-columns:1fr 1fr;gap:20px}}
 @media (min-width:1000px){.art-griglia{grid-template-columns:repeat(3,1fr);gap:22px}}
 /* Il tratteggio vive su part="ring" dentro lo shadow DOM del segnaposto:
    e l'unico modo di raggiungerlo. Le foto sono impostate, il tratteggio e solo rumore. */

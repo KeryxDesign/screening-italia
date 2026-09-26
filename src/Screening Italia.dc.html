@@ -59,9 +59,8 @@
           .art-wp figure{margin:0}
           .art-wp img{width:100%;height:auto;border-radius:10px}
           .art-wp figcaption{font-size:15px;color:var(--soft);line-height:1.4}
-          /* Card delle domande (elenco e home): «Leggi la risposta» in fondo, allineato fra card della stessa riga. */
-          #elenco-domande .art-corpo,#ultimi-aggiornamenti .art-corpo{flex-grow:1}
-          #elenco-domande .art-vai,#ultimi-aggiornamenti .art-vai{margin-top:auto}
+          /* Card delle domande (elenco e home): altezza propria, allineate in alto (LORI giro 1, 26/09/2026). */
+          #elenco-domande .art-griglia,#ultimi-aggiornamenti .art-griglia{align-items:start}
           /* Home «Ultimi aggiornamenti»: quattro card, 2x2 anche da desktop (brief LORI 26/09/2026). */
           @media (min-width:1000px){#ultimi-aggiornamenti .art-griglia{grid-template-columns:1fr 1fr}}
         </style>
