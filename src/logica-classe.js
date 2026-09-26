@@ -4,8 +4,8 @@ window.__siLogica = function (DCLogic) {
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { rotta: this.leggiRotta(), tipi: [], q: "", cat: null, mail: "", inviato: false,
-      artArg: null, artQuanti: 3, artStato: null, artDati: null,
+    this.state = { rotta: this.leggiRotta(), tipi: [], mail: "", inviato: false,
+      artArg: null, artQuanti: 6, artStato: null, artDati: null,
       // Pagine screening (25/09/2026): regione scelta nella pagina, resta per la sessione.
       regScr: null };
     this.mappaRef = (el) => { this.mapEl = el; this.disegnaMappa(); };
@@ -19,11 +19,11 @@ class Component extends DCLogic {
      Vale per clic, ricarica e link condiviso. Il tasto indietro del browser riporta
      sempre in cima (Davide, 24/09/2026): per questo onHash non chiama portaAllElenco. */
   portaAllElenco(vista) {
-    // «articoli» (23/09/2026) fa lo stesso: apre gli screening sul titolo della sezione articoli.
+    // «articoli» (brief LORI 26/09/2026): un elenco solo, apre come «domande» su #elenco-domande.
     // «trova» (25/09/2026): apre la Home sulla scelta della regione (#trova).
     // «screening» (25/09/2026): #/screening senza pagina valida apre la Home sulla sezione #screening.
     if (vista !== "domande" && vista !== "articoli" && vista !== "trova" && vista !== "screening") { return; }
-    const bersaglio = vista === "domande" ? "#elenco-domande" : (vista === "trova" ? "#trova" : (vista === "screening" ? "#screening" : "#elenco-articoli"));
+    const bersaglio = (vista === "domande" || vista === "articoli") ? "#elenco-domande" : (vista === "trova" ? "#trova" : "#screening");
     // Al primo caricamento il browser ripristina la posizione da solo e le foto
     // cambiano l'altezza della pagina: si insiste finche la posizione tiene.
     try { window.history.scrollRestoration = "manual"; } catch (e) {}
@@ -148,11 +148,11 @@ class Component extends DCLogic {
     setTimeout(() => this.curaDettaglio(), 0);
   }
   /* Articolo singolo da WordPress, rotta #/articolo/<slug> (24/09/2026).
-     Le FAQ interne (faq-N, o nessun argomento) restano sui dati di corpi(). */
-  eFaq(arg) { return !arg || /^faq-\d+$/.test(arg); }
+     Le vecchie FAQ interne (faq-N) e #/articolo senza argomento portano a #/domande:
+     lo fanno leggiRotta() e vaiA() con eVecchiaFaq() (brief LORI 26/09/2026). */
   caricaVoce() {
     const r = this.state.rotta;
-    if (r.vista !== "articolo" || this.eFaq(r.arg)) { this.voceChiesta = null; return; }
+    if (r.vista !== "articolo" || !r.arg) { this.voceChiesta = null; return; }
     if (this.voceChiesta === r.arg || !window.Articoli) { return; }
     const slug = r.arg;
     this.voceChiesta = slug;
@@ -168,7 +168,7 @@ class Component extends DCLogic {
   // Stato della vista articolo: «attesa» finche la risposta per QUESTO slug non c'e.
   statoVoce() {
     const r = this.state.rotta;
-    if (r.vista !== "articolo" || this.eFaq(r.arg)) { return "faq"; }
+    if (r.vista !== "articolo" || !r.arg) { return "fuori"; }
     return this.state.voceSlug === r.arg && this.state.voceStato !== "attesa" ? this.state.voceStato : "attesa";
   }
   /* L'unico innerHTML della pagina: testoHtml e gia passato da ripulisciHtml().
@@ -186,7 +186,42 @@ class Component extends DCLogic {
     el.innerHTML = v ? v.testoHtml : "";
     el.querySelectorAll("p").forEach((n) => n.classList.add("art-p"));
     el.querySelectorAll("h2").forEach((n) => n.classList.add("art-sub"));
+    this.fraseChiave(el);
+    this.noteCorsive(el);
     this.dividiSezioni(el);
+  }
+  /* <blockquote> = frase chiave (brief LORI 26/09/2026): ogni p del blockquote, o il
+     blockquote stesso se non ha p, prende «art-p art-chiave» e i suoi figli si spostano
+     dentro strong > mark creati con createElement. Nessun HTML nuovo. */
+  fraseChiave(el) {
+    el.querySelectorAll("blockquote").forEach((bq) => {
+      const ps = bq.querySelectorAll("p");
+      const bersagli = ps.length ? Array.prototype.slice.call(ps) : [bq];
+      bersagli.forEach((n) => {
+        n.classList.add("art-p", "art-chiave");
+        const forte = document.createElement("strong");
+        const segno = document.createElement("mark");
+        forte.appendChild(segno);
+        while (n.firstChild) { segno.appendChild(n.firstChild); }
+        n.appendChild(forte);
+      });
+    });
+  }
+  /* <p> fatto solo di <em>/<i> (spazi a parte, testo non vuoto) = nota: art-aside al posto
+     di art-p. Un em dentro una frase normale resta com'e. I p della frase chiave sono esclusi. */
+  noteCorsive(el) {
+    el.querySelectorAll("p").forEach((n) => {
+      if (n.closest("blockquote")) { return; }
+      if (!n.textContent.trim()) { return; }
+      const soloCorsivo = Array.prototype.every.call(n.childNodes, (c) => {
+        if (c.nodeType === 3) { return !c.textContent.trim(); }
+        if (c.nodeType === 8) { return true; }
+        return c.nodeType === 1 && (c.tagName === "EM" || c.tagName === "I");
+      });
+      if (!soloCorsivo) { return; }
+      n.classList.remove("art-p");
+      n.classList.add("art-aside");
+    });
   }
   dividiSezioni(el) {
     const nodi = Array.prototype.slice.call(el.childNodes);
@@ -215,7 +250,7 @@ class Component extends DCLogic {
   caricaArticoli() {
     if (this.artChiesti || !window.Articoli) { return; }
     this.artChiesti = true;
-    window.Articoli.lista({ pagina: 1, perPagina: 10 }).then((r) => {
+    window.Articoli.lista({ pagina: 1, perPagina: 100 }).then((r) => {
       this.setState({ artStato: r.esito, artDati: r.articoli });
     });
   }
@@ -370,6 +405,8 @@ class Component extends DCLogic {
     let arg = p[1] ? decodeURIComponent(p[1]) : "";
     // Alias permanente (brief LORI 25/09/2026): #/prostata e ora #/screening/prostata.
     if (vista === "prostata") { vista = "screening"; arg = "prostata"; rotta = "#/screening/prostata"; }
+    // Vecchie FAQ interne e #/articolo senza argomento: portano a #/domande (brief LORI 26/09/2026).
+    if (this.eVecchiaFaq(vista, arg)) { vista = "domande"; arg = ""; rotta = "#/domande"; }
     if (vista === "screening" && !this.scrValido(arg)) { arg = ""; }
     this.setState({ rotta: { vista: vista, arg: arg }, tipi: [], inviato: false, mail: "" });
     window.scrollTo(0, 0);
@@ -391,10 +428,16 @@ class Component extends DCLogic {
       vista = "screening"; arg = "prostata";
       try { window.history.replaceState(null, "", "#/screening/prostata"); } catch (e) {}
     }
+    // Vecchie FAQ interne e #/articolo senza argomento: #/domande, senza voce doppia nella cronologia.
+    if (this.eVecchiaFaq(vista, arg)) {
+      vista = "domande"; arg = "";
+      try { window.history.replaceState(null, "", "#/domande"); } catch (e) {}
+    }
     // Pagina screening sconosciuta: vale come #/screening (Home, sezione delle tipologie).
     if (vista === "screening" && !this.scrValido(arg)) { arg = ""; }
     return { vista: vista, arg: arg };
   }
+  eVecchiaFaq(vista, arg) { return vista === "articolo" && (!arg || /^faq-\d+$/.test(arg)); }
   scrValido(arg) { return !!(window.__siScreening && window.__siScreening.slugValido(arg)); }
   // «trova» e la Home scesa su #trova: per pagina e menu vale come Home.
   // «screening» senza pagina valida e la Home scesa su #screening.
@@ -565,44 +608,6 @@ class Component extends DCLogic {
     ]);
     return lista.map((t, i) => ({ nome: t.nome, ruolo: t.ruolo, testo: t.testo, foto: foto[i % foto.length], slot: "testi-" + i }));
   }
-  corpi() {
-    return {
-      "faq-1": [
-        { h: "Perché la lettera può non arrivare", p: ["L’invito viene spedito all’indirizzo che risulta all’anagrafe sanitaria, non a quello dove abiti di fatto. Se hai cambiato casa senza aggiornare la residenza, o se il nome sul citofono non corrisponde, la lettera torna al mittente.", "Capita anche per un semplice mancato recapito postale. In tutti questi casi resti comunque nell’elenco delle persone da invitare: non sei stato escluso."] , chiave: "Non sei stato escluso: la tua posizione resta nell’elenco delle persone da invitare." },
-        { h: "Cosa fare, in concreto", p: ["Chiama il centro screening della tua azienda sanitaria e di’ che non hai ricevuto l’invito: il numero si trova sul sito dell’ASL alla voce screening, oppure lo chiedi in farmacia.", "Tieni a portata di mano la tessera sanitaria: servono codice fiscale e indirizzo aggiornato. Nella stessa telefonata puoi già fissare l’appuntamento."] , corsivo: "Chiedi anche di aggiornare l’indirizzo: eviti che salti anche il prossimo invito." },
-        { h: "Hai perso il turno?", p: ["No. Il programma richiama a intervalli regolari e l’adesione fuori invito è prevista: l’esame resta gratuito e senza impegnativa."] , chiave: "L’esame resta gratuito e senza impegnativa, anche fuori invito." }
-      ],
-      "faq-3": [
-        { h: "L’invito non è un buono da esibire", p: ["La lettera serve a informarti, non è un titolo di accesso. Se l’hai buttata, persa o cestinata per errore, la prenotazione resta possibile: la tua posizione è registrata nell’elenco del centro screening."] , chiave: "La lettera informa, non autorizza: senza di essa la prenotazione resta possibile." },
-        { h: "Come recuperare l’appuntamento", p: ["Telefona al centro screening della tua ASL. Comunichi nome, codice fiscale e data di nascita, e ti viene assegnata una nuova data.", "Se nella lettera c’era un appuntamento già fissato e non ci sei andato, dillo: viene semplicemente riprogrammato."] , corsivo: "Una telefonata basta: non serve ripresentare domanda né passare dal medico." },
-        { h: "Se non ricordi di quale ASL sei", p: ["Fa riferimento al comune di residenza. In farmacia o dal medico di medicina generale te lo dicono in un minuto."]  }
-      ],
-      "faq-4": [
-        { h: "Ogni quanto si fa", p: ["Nel programma pubblico la mammografia si ripete ogni due anni. È l’intervallo su cui il programma è costruito: più spesso non porta benefici dimostrati, più raramente riduce l’efficacia della diagnosi precoce."] , chiave: "Due anni è l’intervallo su cui il programma è costruito." },
-        { h: "Da quale età è gratuita", p: ["La fascia invitata comprende in genere le donne fra i 50 e i 69 anni; diverse regioni la estendono dai 45 ai 74. Dentro la fascia prevista l’esame è gratuito e non richiede impegnativa.", "Fuori dalla fascia il controllo può comunque essere indicato: se hai familiarità o hai notato qualcosa, parlane col medico senza aspettare l’invito."] , chiave: "Dentro la fascia prevista l’esame è gratuito e non richiede impegnativa." },
-        { h: "Come ci si prepara", p: ["Non serve digiuno né alcuna preparazione. Meglio evitare deodoranti o talco sotto le ascelle il giorno dell’esame, e portare con te le mammografie precedenti se le hai."] , corsivo: "Porta con te le mammografie precedenti: il confronto è più informativo del singolo esame." }
-      ],
-      "faq-5": [
-        { h: "Che cosa cerca il kit", p: ["Cerca tracce di sangue non visibili nelle feci, un segno che può comparire molto prima dei sintomi. Non è un esame che diagnostica un tumore: indica se serve approfondire con una colonscopia."] , chiave: "Non diagnostica un tumore: dice se serve approfondire." },
-        { h: "Come si usa", p: ["Il kit è una provetta con un bastoncino nel tappo. Raccogli un piccolo campione di feci sfiorando la superficie in tre punti diversi, richiudi bene e conserva in frigorifero fino alla riconsegna.", "Non serve dieta, non serve sospendere farmaci. Evita la raccolta durante il ciclo mestruale o in presenza di emorroidi sanguinanti: aspetta qualche giorno."] , corsivo: "Niente dieta, niente sospensione di farmaci." },
-        { h: "Dove si ritira e si riporta", p: ["Nella maggior parte delle regioni si ritira e si riconsegna in farmacia, gratuitamente. In alcune arriva a casa con la lettera di invito. L’esito arriva per posta entro poche settimane."] , chiave: "Il ritiro e la riconsegna in farmacia sono gratuiti." }
-      ],
-      "faq-6": [
-        { h: "Gratuito", p: ["Sono gli esami del programma pubblico rivolti a una fascia di età precisa: mammella, colon-retto e cervice uterina. Non si paga nulla, non serve impegnativa, e sei tu a essere chiamato."] , chiave: "Non si paga nulla, e sei tu a essere chiamato." },
-        { h: "Su invito", p: ["Vuol dire che ci si accede solo se convocati, perché il programma segue un calendario per fasce di età. Se rientri nei requisiti ma l’invito non è arrivato, puoi chiamare e aderire comunque."] , chiave: "Se rientri nei requisiti ma l’invito non è arrivato, puoi aderire comunque." },
-        { h: "A pagamento", p: ["Sono controlli fuori programma: prescritti dal medico con ticket, oppure privati. Nelle giornate organizzate da ospedali e associazioni gli stessi esami sono spesso gratuiti: le trovi elencate qui, regione per regione."] , corsivo: "Nelle giornate organizzate lo stesso esame è spesso gratuito." }
-      ],
-      "faq-7": [
-        { h: "Chi ti prende in carico", p: ["Il programma di screening segue la residenza. Appena la nuova residenza è registrata, l’azienda sanitaria del comune dove sei andato ad abitare ti inserisce nei suoi elenchi e ti invita quando tocca a te."] , chiave: "Il programma di screening segue la residenza." },
-        { h: "I tempi, e cosa fare nel frattempo", p: ["Il passaggio non è immediato: fra il cambio di residenza e il primo invito possono passare mesi. Se nel frattempo il tuo turno scade, chiama il centro screening della nuova ASL e chiedi di aderire.", "Porta con te gli esiti degli esami fatti prima: servono a capire a che punto del percorso ti trovi ed evitano di ripetere un esame già fatto."] , corsivo: "Gli esiti precedenti valgono: portarli evita di ripetere un esame già fatto." }
-      ],
-      "faq-8": [
-        { h: "Che cosa vuol dire", p: ["Vuol dire che l’esame ha mostrato qualcosa che va guardato meglio, non che è stato trovato un tumore. Gli esami di screening sono costruiti per essere prudenti: preferiscono richiamare qualche persona in più piuttosto che lasciare passare qualcosa."] , chiave: "Vuol dire guardare meglio, non che sia stato trovato un tumore." },
-        { h: "Che cosa succede adesso", p: ["Il centro screening ti contatta per un secondo esame, più accurato del primo: una mammografia di approfondimento o un’ecografia, una colonscopia, una colposcopia, a seconda del programma. Anche questo passaggio è gratuito.", "Nella maggior parte dei casi l’approfondimento chiude la questione e si torna al calendario normale."] , chiave: "Anche l’approfondimento è gratuito." },
-        { h: "Quanto si aspetta", p: ["I percorsi di approfondimento hanno tempi riservati, in genere poche settimane. Se l’appuntamento tarda, chiama il centro screening: la priorità è prevista dal programma."] , corsivo: "Se l’appuntamento tarda, chiama: la priorità è prevista dal programma." }
-      ]
-    };
-  }
   /* Articoli veri da window.Articoli.lista(). Gli argomenti del filtro sono le
      categorie WordPress degli articoli gia caricati: il filtro lavora in pagina,
      per slug di categoria, e compare solo con almeno due categorie distinte (24/09/2026). */
@@ -622,24 +627,11 @@ class Component extends DCLogic {
       nome: n.nome,
       attivo: scelto === n.chiave ? "true" : "false",
       cls: scelto === n.chiave ? "filtro on" : "filtro",
-      scegli: () => this.setState({ artArg: n.chiave, artQuanti: 3 })
+      scegli: () => this.setState({ artArg: n.chiave, artQuanti: 6 })
     }));
     const filtrati = conFiltro ? tutti.filter((a) => (a.categorie || []).some((c) => c.slug === scelto)) : tutti;
     const quanti = this.state.artQuanti;
-    const visibili = filtrati.slice(0, quanti).map((a) => {
-      const c = (a.categorie || [])[0];
-      const data = this.dataArticolo(a.dataIso);
-      return {
-        slot: "art-elenco-" + a.id,
-        titolo: a.titolo,
-        estratto: a.estratto,
-        meta: [c ? c.nome : "", data].filter((x) => x).join(" · "),
-        href: "#/articolo/" + encodeURIComponent(a.slug),
-        aria: "Leggi l’articolo: " + a.titolo,
-        haFoto: !!(a.immagine && a.immagine.url),
-        foto: a.immagine && a.immagine.url ? a.immagine.url : ""
-      };
-    });
+    const visibili = filtrati.slice(0, quanti).map((a) => this.cardArticolo(a, "art-elenco-"));
     const ok = stato === "ok" && filtrati.length > 0;
     const vuoto = stato === "vuoto" || (stato === "ok" && !filtrati.length);
     return {
@@ -654,33 +646,41 @@ class Component extends DCLogic {
       finiti: ok && filtrati.length <= quanti
     };
   }
-  // Vista articolo riempita con un articolo WordPress: stessi campi delle FAQ, corpo vuoto.
+  // Card di un articolo WordPress: la stessa in elenco e in home.
+  cardArticolo(a, prefisso) {
+    const c = (a.categorie || [])[0];
+    const data = this.dataArticolo(a.dataIso);
+    return {
+      slot: prefisso + a.id,
+      titolo: a.titolo,
+      estratto: a.estratto,
+      meta: [c ? c.nome : "", data].filter((x) => x).join(" · "),
+      href: "#/articolo/" + encodeURIComponent(a.slug),
+      aria: "Leggi la risposta: " + a.titolo,
+      haFoto: !!(a.immagine && a.immagine.url),
+      foto: a.immagine && a.immagine.url ? a.immagine.url : ""
+    };
+  }
+  /* Home «Ultimi aggiornamenti» (brief LORI 26/09/2026): i primi 4 per data.
+     Se lo stato non e «ok» o non ci sono articoli, la banda non si rende. */
+  ultimiArticoli() {
+    if (this.state.artStato !== "ok") { return []; }
+    const tutti = (this.state.artDati || []).filter((a) => !a.protetto);
+    const t = (a) => { const x = new Date(a.dataIso).getTime(); return isNaN(x) ? 0 : x; };
+    return tutti.slice().sort((a, b) => t(b) - t(a)).slice(0, 4).map((a) => this.cardArticolo(a, "home-"));
+  }
+  // Vista articolo riempita con un articolo WordPress.
   voceArticolo() {
     const v = this.statoVoce() === "ok" ? this.state.voce : null;
-    if (!v) { return { slot: "art-wp", foto: "", haFoto: false, cat: "", titolo: "", sommario: "", data: "", corpo: [], tornaHref: "#/articoli", tornaTesto: "← Torna agli articoli" }; }
+    if (!v) { return { slot: "art-wp", foto: "", haFoto: false, cat: "", titolo: "", sommario: "", data: "", corpo: [], tornaHref: "#/domande", tornaTesto: "← Torna alle domande frequenti" }; }
     const c = (v.categorie || [])[0];
     return {
       slot: "art-wp-" + v.id, foto: v.immagine && v.immagine.url ? v.immagine.url : "",
       haFoto: !!(v.immagine && v.immagine.url),
       cat: c ? c.nome : "", titolo: v.titolo, sommario: v.estratto,
       data: this.dataArticolo(v.dataIso), corpo: [],
-      tornaHref: "#/articoli", tornaTesto: "← Torna agli articoli"
+      tornaHref: "#/domande", tornaTesto: "← Torna alle domande frequenti"
     };
-  }
-  domande() {
-    return [
-      { id: "faq-1", foto: "https://img.magnific.com/free-photo/happy-mature-woman-her-doctor-communicating-while-going-through-paperwork-hospital-hallway_637285-5300.jpg", sommario: "La posizione è recuperabile e il turno non viene perso.", cat: "Inviti e lettere", data: "28 agosto 2026", titolo: "Mancato recapito della lettera di invito: come procedere", href: "#/articolo/faq-1", chiavi: "invito lettera posta asl convocazione" },
-      { id: "faq-2", foto: "https://img.magnific.com/free-photo/positive-man-with-grey-hair-light-shirt-jeans-with-camera-laughing-with-blonde-lady-hat-sunglasses-striped-blue-shirt-park_197531-19160.jpg", sommario: "Non è previsto invito: il primo passo del controllo spetta a te.", cat: "Prostata", data: "21 agosto 2026", titolo: "Screening della prostata: a chi è rivolto e da quale età", href: "#/screening/prostata", chiavi: "psa uomini urologo eta" },
-      { id: "faq-3", foto: "https://img.magnific.com/free-photo/portrait-female-health-specialist-working-with-laptop-plan-patient-appointment-medical-office-general-practitioner-using-medication-notes-help-with-diagnosis-treatment_482257-45642.jpg", sommario: "Sì: il recapito di riferimento resta quello dell’azienda sanitaria.", cat: "Inviti e lettere", data: "14 agosto 2026", titolo: "Invito smarrito: è ancora possibile prenotare?", href: "#/articolo/faq-3", chiavi: "invito perso prenotare numero verde" },
-      { id: "faq-4", foto: "https://img.magnific.com/free-photo/old-grey-haired-female-cabinet-modern-clinic_7502-9557.jpg", sommario: "Con cadenza biennale, gratuita nella fascia di età prevista.", cat: "Mammografia", data: "7 agosto 2026", titolo: "Mammografia: periodicità ed età di accesso gratuito", href: "#/articolo/faq-4", chiavi: "seno donne gratis eta due anni" },
-      { id: "faq-5", foto: "https://img.magnific.com/free-photo/thank-you-your-prescription_329181-2225.jpg", sommario: "Si ritira e si riconsegna in farmacia: la raccolta richiede pochi minuti.", cat: "Colon-retto", data: "31 luglio 2026", titolo: "Kit per la ricerca del sangue occulto: uso e riconsegna", href: "#/articolo/faq-5", chiavi: "kit feci farmacia sangue occulto" },
-      { id: "faq-6", foto: "https://img.magnific.com/free-photo/thank-you-your-visit-my-office_329181-2204.jpg", sommario: "Tre condizioni che determinano il costo e le modalità di accesso.", cat: "Come funziona", data: "24 luglio 2026", titolo: "Gratuito, a pagamento, su invito: le differenze", href: "#/articolo/faq-6", chiavi: "costo ticket invito differenza" },
-      { id: "faq-7", foto: "https://img.magnific.com/free-photo/charming-woman-with-short-hairstyle-hat-blue-blouse-holds-map-points-side-smiles-with-grey-haired-man-with-camera-park_197531-19155.jpg", sommario: "La presa in carico passa all’azienda sanitaria del nuovo domicilio.", cat: "Come funziona", data: "17 luglio 2026", titolo: "Trasferimento di residenza: a quale azienda sanitaria rivolgersi", href: "#/articolo/faq-7", chiavi: "trasferimento residenza regione asl nuova" },
-      { id: "faq-8", foto: "https://img.magnific.com/free-photo/senior-woman-answering-doctor-questions-examination-hospital-room_482257-8442.jpg", sommario: "Non indica una diagnosi: comporta un secondo accertamento.", cat: "Come funziona", data: "10 luglio 2026", titolo: "Esito «da approfondire»: che cosa comporta", href: "#/articolo/faq-8", chiavi: "esito risultato approfondimento richiamo" }
-    ];
-  }
-  normalizza(s) {
-    return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
   }
 
 }

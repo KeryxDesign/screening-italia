@@ -45,28 +45,9 @@ window.__siLogicaRender = class {
         : this.parola(tutte.length, "iniziativa aperta", "iniziative aperte") + " in " + reg + ". Seleziona uno screening per restringere l’elenco.";
     }
 
-    // --- domande frequenti ---
-    const tutteFaq = this.domande();
-    const ago = this.normalizza(this.state.q).trim();
-    const cat = this.state.cat;
-    const nomiCat = [];
-    tutteFaq.forEach((a) => { if (nomiCat.indexOf(a.cat) === -1) { nomiCat.push(a.cat); } });
-    const categorie = [{ nome: "Tutti", val: null }].concat(nomiCat.map((c) => ({ nome: c, val: c }))).map((c) => ({
-      nome: c.nome,
-      cls: cat === c.val ? "filtro on" : "filtro",
-      pick: () => this.setState({ cat: c.val })
-    }));
-    const trovate = tutteFaq.filter((a) => {
-      if (cat && a.cat !== cat) { return false; }
-      if (!ago) { return true; }
-      return this.normalizza(a.titolo + " " + a.cat + " " + a.chiavi).indexOf(ago) !== -1;
-    });
-    let quanteFaq = this.parola(trovate.length, "risposta", "risposte");
-    if (trovate.length === 0) { quanteFaq = "Nessuna risposta"; }
-    quanteFaq = quanteFaq + (cat ? " in «" + cat + "»" : "") + (ago ? " per «" + this.state.q + "»" : "") + ".";
-
-    // --- articoli sugli screening ---
+    // --- domande frequenti = articoli WordPress (brief LORI 26/09/2026) ---
     const art = this.articoli();
+    const homeArt = this.ultimiArticoli();
 
     return {
       // navigazione
@@ -75,8 +56,8 @@ window.__siLogicaRender = class {
       navEnti: vista === "enti" ? "page" : "false",
       navChi: vista === "chi" ? "page" : "false",
       navContatti: vista === "contatti" ? "page" : "false",
-      navFaq: (vista === "faq" || vista === "screening" || vista === "articolo" || vista === "articoli") ? "page" : "false",
-      navDomande: vista === "domande" ? "page" : "false",
+      navFaq: (vista === "faq" || vista === "screening") ? "page" : "false",
+      navDomande: (vista === "domande" || vista === "articoli" || vista === "articolo") ? "page" : "false",
       hrefIniziative: this.rottaRegione("Lombardia"),
       hrefLombardia: this.rottaRegione("Lombardia"),
       hrefLazio: this.rottaRegione("Lazio"),
@@ -110,7 +91,9 @@ window.__siLogicaRender = class {
       mappaRef: this.mappaRef,
       erroreMappa: !!this.state.erroreMappa,
       regioni: this.nomiRegioni().map((n) => ({ nome: n, href: this.rottaRegione(n) })),
-      faqHome: tutteFaq.slice(0, 3).map((a) => ({ slot: "home-" + a.id, cat: a.cat, data: a.data, titolo: a.titolo, sommario: a.sommario, foto: a.foto, href: a.href })),
+      // Ultimi aggiornamenti: primi 4 articoli WordPress per data; senza, la banda non c'e.
+      homeArticoli: homeArt,
+      homeOk: homeArt.length > 0,
 
       // regione
       reg: reg,
@@ -143,17 +126,7 @@ window.__siLogicaRender = class {
       scriviMail: (e) => this.setState({ mail: e.target.value }),
       inviaMail: () => { if (this.state.mail) { this.setState({ inviato: true }); } },
 
-      // domande frequenti
-      q: this.state.q,
-      haQ: this.state.q.length > 0,
-      scrivi: (e) => this.setState({ q: e.target.value }),
-      pulisci: () => this.setState({ q: "" }),
-      categorie: categorie,
-      quanteFaq: quanteFaq,
-      vuotoFaq: trovate.length === 0,
-      risposte: trovate.map((a) => ({ slot: a.id, cat: a.cat, data: a.data, titolo: a.titolo, sommario: a.sommario, foto: a.foto, href: a.href })),
-
-      // articoli sugli screening (sezione in fondo alle domande, 23/09/2026)
+      // domande frequenti (articoli WordPress, brief LORI 26/09/2026)
       artMostraFiltro: art.mostraFiltro,
       artArgomenti: art.argomenti,
       artOk: art.ok,
@@ -163,28 +136,15 @@ window.__siLogicaRender = class {
       artVuotoTutto: art.vuotoTutto,
       artVuotoFiltro: art.vuotoFiltro,
       artErrore: art.errore,
-      artMostraAltri: () => this.setState({ artQuanti: this.state.artQuanti + 10 }),
-      artAzzera: () => this.setState({ artArg: null, artQuanti: 3 }),
+      artMostraAltri: () => this.setState({ artQuanti: this.state.artQuanti + 6 }),
+      artAzzera: () => this.setState({ artArg: null, artQuanti: 6 }),
 
       // articolo
       vistaArticolo: vista === "articolo",
-      art: (() => {
-        if (vista === "articolo" && !this.eFaq(this.state.rotta.arg)) { return this.voceArticolo(); }
-        const id = this.state.rotta.arg || "faq-1";
-        const d = tutteFaq.filter((x) => x.id === id)[0] || tutteFaq[0];
-        const corpo = (this.corpi()[d.id] || []).map((s) => ({
-          h: s.h, p: s.p, chiave: s.chiave || "", corsivo: s.corsivo || "",
-          haChiave: !!s.chiave, haCorsivo: !!s.corsivo
-        }));
-        return {
-          slot: "art-" + d.id, foto: d.foto, haFoto: true, cat: d.cat, titolo: d.titolo,
-          sommario: d.sommario, data: d.data, corpo: corpo,
-          tornaHref: "#/domande", tornaTesto: "← Torna alle domande frequenti"
-        };
-      })(),
+      art: this.voceArticolo(),
 
       // articolo WordPress (#/articolo/<slug>): vuoto mentre carica, avviso se manca
-      artPronto: this.statoVoce() === "faq" || this.statoVoce() === "ok",
+      artPronto: this.statoVoce() === "ok",
       artNonTrovato: vista === "articolo" && this.statoVoce() === "errore",
       artFinito: this.statoVoce() !== "attesa",
       artHaTesto: this.statoVoce() === "ok",
