@@ -61,8 +61,8 @@ html.contrasto .pag-scr .scr-cella{border:2.5px solid #000}
 .pag-scr .scr-frase{background:#fff;box-shadow:inset 4px 0 0 var(--verde);padding:20px 20px 20px 24px;
   border-radius:10px;font-size:21px;line-height:1.4;font-weight:700;color:var(--inchiostro)}
 
-/* S7 · N6 · D7 — domande sempre aperte: 8 tra domanda e risposta, 32 tra coppie */
-.pag-scr .scr-domande{display:flex;flex-direction:column;gap:32px}
+/* S7 · N6 · D7 — fisarmonica, 14 tra card */
+.pag-scr .scr-domande{display:flex;flex-direction:column;gap:14px}
 
 /* D3 — data di aggiornamento sopra la prosa */
 .pag-scr .scr-data{font-size:17px;font-weight:700;color:var(--inchiostro)}

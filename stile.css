@@ -923,6 +923,10 @@ image-slot::part(ring){display:none !important}
 
 /* La risposta a soffietto senza wrapper: allineata alla domanda e staccata dal filetto. */
 .elenco > p{padding:12px 16px 18px;margin:0}
+/* Domande delle pagine screening a fisarmonica (brief LORI 29/09/2026) */
+.scr-domande .elenco>summary>h3{font:inherit;line-height:1.4;color:inherit;margin:0}
+.scr-domande .elenco>summary:focus-visible{outline:3px solid var(--terracotta);outline-offset:2px}
+.scr-domande .elenco>summary{padding:12px 16px}
 
 /* Interruttore di sicurezza: vince anche su una transizione gia avviata,
    perche una transizione congelata non si sblocca togliendo una classe. */

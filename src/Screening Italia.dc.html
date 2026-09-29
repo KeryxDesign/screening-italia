@@ -932,12 +932,15 @@
             <div class="banda b-crema wrap sezione" data-screen-label="Domande">
               <div class="fx col gap20">
                 <h2>{{ scr.s7h2 }}</h2>
-                <div class="scr-domande">
+                <div class="scr-domande fx col gap14">
                   <sc-for list="{{ scr.domande }}" as="q" hint-placeholder-count="4">
-                    <div class="fx col gap8">
-                      <h3>{{ q.d }}</h3>
+                    <details class="elenco">
+                      <summary>
+                        <h3>{{ q.d }}</h3>
+                        <svg class="frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                      </summary>
                       <p>{{ q.r }}</p>
-                    </div>
+                    </details>
                   </sc-for>
                 </div>
               </div>
@@ -1123,12 +1126,15 @@
             <div class="banda b-bianco wrap sezione" data-screen-label="Domande">
               <div class="fx col gap20">
                 <h2>{{ scr.n6h2 }}</h2>
-                <div class="scr-domande">
+                <div class="scr-domande fx col gap14">
                   <sc-for list="{{ scr.domande }}" as="q" hint-placeholder-count="4">
-                    <div class="fx col gap8">
-                      <h3>{{ q.d }}</h3>
+                    <details class="elenco">
+                      <summary>
+                        <h3>{{ q.d }}</h3>
+                        <svg class="frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                      </summary>
                       <p>{{ q.r }}</p>
-                    </div>
+                    </details>
                   </sc-for>
                 </div>
               </div>
@@ -1252,12 +1258,15 @@
             <div class="banda b-bianco wrap sezione" data-screen-label="Domande">
               <div class="fx col gap20">
                 <h2>{{ scr.d7h2 }}</h2>
-                <div class="scr-domande">
+                <div class="scr-domande fx col gap14">
                   <sc-for list="{{ scr.domande }}" as="q" hint-placeholder-count="4">
-                    <div class="fx col gap8">
-                      <h3>{{ q.d }}</h3>
+                    <details class="elenco">
+                      <summary>
+                        <h3>{{ q.d }}</h3>
+                        <svg class="frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                      </summary>
                       <p>{{ q.r }}</p>
-                    </div>
+                    </details>
                   </sc-for>
                 </div>
               </div>
