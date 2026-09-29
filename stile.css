@@ -413,6 +413,7 @@ html.contrasto .mappa path.attiva{fill:#8A2600;stroke:#000;stroke-width:2.5}
   display:inline-flex;align-items:center;gap:7px;text-decoration:none;align-self:flex-start}
 .art-vai:hover{color:var(--verde-scuro);text-decoration:underline;text-underline-offset:3px}
 html.contrasto .art{border:2.5px solid #000;background:#fff;box-shadow:none}
+html:not(.contrasto) #ultimi-aggiornamenti.b-bianco .art{border:1.5px solid var(--bordo)}
 
 /* Immagine di apertura */
 .foto-apertura{width:100%;aspect-ratio:16 / 9;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(4,40,64,0.16)}
