@@ -509,21 +509,36 @@ html.contrasto .hero a{color:#fff}
 .hero .cta,.hero .cta-2{align-self:flex-start}
 html.contrasto .cta-2{background:#8A2600;color:#fff;border:2.5px solid #000;box-shadow:none}
 
-/* --- Testimonianze --- */
-.carrellata,.testi-griglia{display:grid;grid-template-columns:1fr;gap:20px}
-@media (min-width:860px){.carrellata,.testi-griglia{grid-template-columns:1fr 1fr;gap:24px}}
-@media (min-width:1280px){.carrellata,.testi-griglia{grid-template-columns:repeat(3,1fr)}}
+/* --- Testimonianze (blocco 3, brief LORI 26/09/2026 §1.2-1.4) ---
+   Griglia ferma, niente carosello. Card senza foto: virgolette, testo, nome, fascia e regione. */
+.carrellata{display:grid;grid-template-columns:1fr;gap:20px}
+@media (min-width:860px){.carrellata{grid-template-columns:1fr 1fr;gap:24px}}
+@media (min-width:1280px){.carrellata{grid-template-columns:repeat(3,1fr)}}
 /* La fascia delle testimonianze usa una colonna piu larga della colonna di lettura */
 .banda-larga{max-width:1040px}
 @media (min-width:1280px){.banda-larga{max-width:1200px}}
-@media (min-width:1280px){.testi-txt{font-size:17px}}
-.testi{display:flex;flex-direction:column;gap:12px;margin:0;padding:24px 26px;
+.testi-griglia{display:grid;grid-template-columns:1fr;gap:20px;width:100%;max-width:38rem;margin:0 auto}
+@media (min-width:700px){.testi-griglia{gap:24px}}
+@media (min-width:1000px){
+  .testi-griglia{grid-template-columns:1fr 1fr;max-width:1040px}
+  .testi-griglia:has(> :only-child){grid-template-columns:1fr;max-width:38rem}
+}
+.testi{display:flex;flex-direction:column;gap:16px;margin:0;padding:20px;
   background:#fff;border:0;border-radius:14px;box-shadow:none}
-.testi-virg{width:30px;height:30px;flex-shrink:0;color:#8FB8A6}
-.testi-txt{margin:0;font-size:18px;line-height:1.55;color:var(--inchiostro);max-width:none}
-.testi-chi{display:flex;flex-direction:column;gap:2px;margin-top:auto;padding-top:4px}
-.testi-nome{font-size:17px;font-weight:700}
-.testi-ruolo{font-size:16px;color:var(--soft)}
+@media (min-width:700px){.testi{padding:28px}}
+.testi-virg{width:32px;height:32px;flex-shrink:0;color:#8FB8A6}
+.testi-txt{display:flex;flex-direction:column;gap:12px;margin:0;padding:0;border:0;
+  font-size:19px;line-height:1.6;font-weight:400;color:var(--inchiostro);max-width:none}
+.testi-txt p{margin:0;font-size:19px;line-height:1.6;max-width:none}
+.testi-chi{display:flex;flex-direction:column;gap:2px;margin-top:auto}
+.testi-nome{font-size:17px;font-weight:700;color:var(--inchiostro)}
+.testi-ruolo{font-size:17px;font-weight:400;color:var(--soft)}
+/* Frase introduttiva: sotto il titolo, prima delle card. A sinistra sotto i 700px, centrata sopra. */
+.banda:not(.hero) .fx:not(.lettura) > p.testi-intro{font-size:19px;line-height:1.6;color:var(--inchiostro);
+  max-width:38rem;margin-left:auto;margin-right:auto;text-align:center}
+@media (max-width:699px){.banda:not(.hero) .fx:not(.lettura) > p.testi-intro{text-align:left}}
+/* Bottone «Leggi tutte»: pieno a 390, max 420 centrato da 700px. */
+@media (min-width:700px){.banda:not(.hero) .testi-tutte{max-width:420px;align-self:center}}
 
 html.contrasto .testi-virg{color:#000}
 html.contrasto .testi-ruolo{color:#000}
@@ -553,32 +568,6 @@ html.contrasto .wa-float{background:#FFFFFF;color:#00291F;border:2.5px solid #00
 }
 @media (min-width:860px) and (max-width:1199px){.a11y{right:86px}}
 @media (prefers-reduced-motion:reduce){.wa-float,.wa-float.in-vista{transition:none}}
-
-/* --- Carosello infinito (solo in home) --- */
-.carosello{overflow:hidden;width:100%;
-  mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);
-  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%)}
-.car-pista{display:flex;width:max-content;animation:scorri 72s linear infinite}
-.carosello:hover .car-pista,.carosello:focus-within .car-pista{animation-play-state:paused}
-.car-pista > .testi{width:310px;flex:0 0 310px;margin-right:20px}
-@media (min-width:860px){.car-pista > .testi{width:380px;flex:0 0 380px;margin-right:24px}}
-@keyframes scorri{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@media (prefers-reduced-motion:reduce){
-  /* Il contenitore che scorre e SEMPRE .carosello: e quello che riceve il fuoco.
-     La pista resta piu larga, altrimenti non ci sarebbe nulla da scorrere. */
-  .car-pista{animation:none}
-  .carosello{mask-image:none;-webkit-mask-image:none;
-    overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
-  .car-pista > *{scroll-snap-align:center}
-  .carosello:focus-visible{outline:3px solid var(--terracotta);outline-offset:3px}
-}
-
-/* --- Ritratto nella testimonianza --- */
-.testi-testa{display:flex;align-items:center;gap:14px}
-.testi-foto{display:block;width:62px;height:62px;flex-shrink:0;border-radius:999px;overflow:hidden;background:var(--carta2)}
-.testi-foto image-slot{width:100%;height:100%;display:block}
-.testi-chi{margin-top:0;padding-top:0}
-html.contrasto .testi-foto{border:2.5px solid #000}
 
 /* --- Numeri del portale --- */
 .numeri{display:grid;grid-template-columns:1fr 1fr;gap:22px 18px}
@@ -681,12 +670,6 @@ html.contrasto .art-aside{border-left-color:#000;color:#000}
 
   /* Numeri nell'hero: due colonne, cifre piu contenute */
   .numeri-hero{gap:16px 18px;padding-top:18px}
-
-  /* Carosello: card piu strette, scorrimento piu lento da leggere */
-  .car-pista{animation-duration:96s}
-  .car-pista > .testi{width:270px;flex:0 0 270px;margin-right:16px}
-  .testi{padding:20px}
-  .testi-txt{font-size:17px}
 
   /* Bersagli d'azione a tutta larghezza: piu facili da centrare col pollice */
   .cta,.cta-2{width:100%;justify-content:center;text-align:center}
@@ -944,14 +927,7 @@ image-slot::part(ring){display:none !important}
    perche una transizione congelata non si sblocca togliendo una classe. */
 html.senza-anim .rivela,html.senza-anim .rivela.dentro{
   opacity:1 !important;transform:none !important;transition:none !important;animation:none !important}
-html.senza-anim .hero-sfondo img,html.senza-anim .hero-sfondo image-slot,
-html.senza-anim .car-pista{animation:none !important}
-/* Senza animazione il carosello si scorre a mano: nessuna testimonianza
-   resta irraggiungibile dietro un overflow nascosto. */
-html.senza-anim .carosello{overflow-x:auto !important;scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling:touch;scrollbar-width:thin}
-html.senza-anim .car-pista > *{scroll-snap-align:center}
-html.senza-anim .carosello:focus-visible{outline:3px solid var(--terracotta);outline-offset:3px}
+html.senza-anim .hero-sfondo img,html.senza-anim .hero-sfondo image-slot{animation:none !important}
 
 /* Il marchio vero, estratto dalla presentazione di Angelo. */
 /* A 76px il marchio supera i 160px di larghezza della testata mobile
@@ -1147,3 +1123,16 @@ html.contrasto .ini-tipo svg{color:#000}
   .card-reg .tel{align-self:stretch;max-width:none}
 }
 @media (prefers-reduced-motion:reduce){.ini-freccia{transition:none}}
+
+/* --- Invito a fine articolo (blocco 3, brief LORI 26/09/2026 §2) ---
+   Banda verde dopo l'avvertenza, sulla colonna del testo, tutto a sinistra. */
+.invito{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.invito .invito-tit{font-size:26px;line-height:1.24;font-weight:600;color:var(--verde-scuro);max-width:22ch}
+@media (min-width:860px){.invito .invito-tit{font-size:30px}}
+.invito .invito-p{font-size:19px;line-height:1.6;color:var(--inchiostro);max-width:38rem}
+.banda:not(.hero) .invito .cta{width:100%;align-self:stretch}
+@media (min-width:700px){
+  .banda:not(.hero) .invito .cta{width:auto;min-width:320px;align-self:flex-start;padding:16px 32px}
+}
+html.contrasto .invito-banda{border-top:2.5px solid #000}
+html.contrasto .invito .invito-tit{color:#00291F}

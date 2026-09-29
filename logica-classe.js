@@ -44,6 +44,30 @@ class Component extends DCLogic {
     };
     setTimeout(() => tenta(10), 260);
   }
+  /* Invito a fine articolo (blocco 3, 29/09/2026): #/screening/<slug>/<sezione> apre la
+     pagina dello screening sulla sezione #scr-<sezione> (regione, dir, domanda), come fa
+     scendi() in logica-screening.js: scroll al blocco, poi fuoco sul suo h2 (tabindex -1).
+     Si insiste qualche giro: le foto cambiano l'altezza della pagina mentre arrivano. */
+  portaASezione() {
+    const r = this.state.rotta;
+    if (r.vista !== "screening" || !r.arg || !r.sez) { return; }
+    const chiave = r.arg + "/" + r.sez;
+    const tenta = (giri, primo) => {
+      const q = this.state.rotta;
+      if (q.vista !== "screening" || q.arg + "/" + q.sez !== chiave) { return; }
+      const el = document.getElementById("scr-" + q.sez);
+      if (el) {
+        const meta = el.getBoundingClientRect().top + window.pageYOffset - 96;
+        if (Math.abs(window.pageYOffset - meta) > 4) { el.scrollIntoView({ block: "start", behavior: "auto" }); }
+        if (primo) {
+          const h = el.querySelector("h2");
+          if (h) { try { h.focus({ preventScroll: true }); } catch (e) { h.focus(); } }
+        }
+      }
+      if (giri > 0) { setTimeout(() => tenta(giri - 1, !el && primo), 260); }
+    };
+    setTimeout(() => tenta(10, true), 260);
+  }
   leggiConsenso() {
     try {
       const v = window.localStorage.getItem("si-consenso-cookie");
@@ -104,6 +128,7 @@ class Component extends DCLogic {
     if (c) { this.applicaConsenso(c); } else { setTimeout(() => this.setState({ bannerAperto: true }), 900); }
     this.setState({ consenso: c });
     this.portaAllElenco(this.state.rotta.vista);
+    this.portaASezione();
 
     /* Articoli: i dati veri arrivano da window.Articoli (articoli.js, SENTINEL):
        lista({pagina, perPagina, categoria}) risponde {esito:"ok"|"vuoto"|"offline"|"errore", articoli, totale}.
@@ -138,6 +163,12 @@ class Component extends DCLogic {
       // Iniziative vere da WordPress (iniziative-wp.js): arrivano dopo il montaggio.
       // Se iniziative.js arriva in ritardo e le copre con gli esempi, si rimettono.
       if (window.__siIniziativeWP && window.INIZIATIVE !== window.__siIniziativeWP) { window.INIZIATIVE = window.__siIniziativeWP; this.iniVer = -1; }
+      // Testimonianze da WordPress (testimonianze-wp.js, blocco 3): arrivano dopo il montaggio.
+      if ((window.__siTestiVer || 0) !== (this.testiVer || 0)) {
+        this.testiVer = window.__siTestiVer || 0;
+        this.forceUpdate();
+      }
+      this.curaTesti();
       if ((window.__siIniziativeVer || 0) !== (this.iniVer || 0)) {
         this.iniVer = window.__siIniziativeVer || 0;
         // La mappa si ridisegna solo se cambia regione: si azzera il segno per i nuovi conteggi.
@@ -458,7 +489,9 @@ class Component extends DCLogic {
     // Vecchie FAQ interne e #/articolo senza argomento: portano a #/domande (brief LORI 26/09/2026).
     if (this.eVecchiaFaq(vista, arg)) { vista = "domande"; arg = ""; rotta = "#/domande"; }
     if (vista === "screening" && !this.scrValido(arg)) { arg = ""; }
-    this.setState({ rotta: { vista: vista, arg: arg }, tipi: [], inviato: false, mail: "", scrAperto: false });
+    const sez = this.sezValida(vista, arg, p[2]);
+    this.setState({ rotta: { vista: vista, arg: arg, sez: sez }, tipi: [], inviato: false, mail: "", scrAperto: false },
+      () => this.portaASezione());
     this.chiudiHamburger();
     window.scrollTo(0, 0);
     this.portaAllElenco(vista);
@@ -486,7 +519,11 @@ class Component extends DCLogic {
     }
     // Pagina screening sconosciuta: vale come #/screening (Home, sezione delle tipologie).
     if (vista === "screening" && !this.scrValido(arg)) { arg = ""; }
-    return { vista: vista, arg: arg };
+    return { vista: vista, arg: arg, sez: this.sezValida(vista, arg, p[2]) };
+  }
+  // Terzo pezzo della rotta: solo sulle pagine screening, solo le tre sezioni con un h2 bersaglio.
+  sezValida(vista, arg, s) {
+    return vista === "screening" && arg && ["regione", "dir", "domanda"].indexOf(s) !== -1 ? s : "";
   }
   eVecchiaFaq(vista, arg) { return vista === "articolo" && (!arg || /^faq-\d+$/.test(arg)); }
   scrValido(arg) { return !!(window.__siScreening && window.__siScreening.slugValido(arg)); }
@@ -668,29 +705,81 @@ class Component extends DCLogic {
     return { testo: "aperta fino al " + data, cls: "scad scad-calma" };
   }
 
-  testimonianze() {
-    const F = "https://img.magnific.com/free-photo/";
-    const foto = [
-      F + "close-up-portrait-beautiful-smiling-old-woman-blue-shirt_171337-7899.jpg",
-      F + "portrait-caucasian-man_641386-12.jpg",
-      F + "adult-woman-with-gray-hair-smiling_23-2148277910.jpg",
-      F + "portrait-smiley-mature-man_23-2148465219.jpg",
-      F + "medium-shot-smiley-woman-portrait_23-2149361949.jpg",
-      F + "good-mood-mature-man-burgundy-shirt-looking-positive_259150-56976.jpg",
-      F + "portrait-happy-smiley-older-woman_23-2149022611.jpg",
-      F + "portrait-man-laughing_23-2148859448.jpg"
-    ];
-    const lista = this.voci ? this.voci : (this.voci = [
-      { nome: "Anna R.", ruolo: "58 anni, Bologna", testo: "Grazie a Screening Italia ho trovato una giornata di screening a due fermate di autobus da casa. Prima cercavo sui siti delle ASL e non capivo mai se l’iniziativa fosse ancora aperta. Qui era tutto in una schermata: dove, quando, e il numero da chiamare." },
-      { nome: "Marco T.", ruolo: "34 anni, figlio di un utente", testo: "Mio padre ha 71 anni e non usa internet. Ho aperto il sito, scelto la Puglia, spuntato colon-retto e in un minuto avevo il numero da chiamare. L’ho prenotato io per lui mentre eravamo al telefono." },
-      { nome: "Giulia S.", ruolo: "46 anni, Torino", testo: "Stavo per prenotare una mammografia in una clinica privata a 130 euro. Ho scoperto qui che nella mia zona c’era la stessa cosa, gratuita. Dormo sonni tranquilli grazie alla prevenzione, e senza spendere." },
-      { nome: "Salvatore P.", ruolo: "63 anni, Palermo", testo: "Il sito è chiaro anche per chi come me non è pratico. Caratteri grandi, poche cose per pagina, e il pulsante per ingrandire il testo mi ha risolto la giornata." },
-      { nome: "Chiara M.", ruolo: "41 anni, figlia di un’utente", testo: "Ho aiutato mia madre a capire cosa fosse il kit del colon-retto: la spiegazione qui era più comprensibile della lettera arrivata a casa. Le ho letto la pagina al telefono e ha fatto tutto da sola." },
-      { nome: "Davide L.", ruolo: "52 anni, Verona", testo: "Cercavo un controllo della prostata e non sapevo che non esistesse l’invito. Averlo scritto chiaro, senza allarmismi, mi ha fatto prendere appuntamento dal medico invece di rimandare un altro anno." },
-      { nome: "Rosa D.", ruolo: "67 anni, Napoli", testo: "Non mi era mai arrivata la lettera. Qui ho letto cosa fare e a chi telefonare: in mezz’ora avevo l’appuntamento. Pensavo di aver perso il turno." },
-      { nome: "Federico B.", ruolo: "29 anni, figlio di un utente", testo: "Di solito nei siti pubblici mi perdo. Questo si capisce al primo colpo: clicchi la regione sulla mappa e vedi solo quello che ti serve. L’ho girato a tutta la famiglia." }
-    ]);
-    return lista.map((t, i) => ({ nome: t.nome, ruolo: t.ruolo, testo: t.testo, foto: foto[i % foto.length], slot: "testi-" + i }));
+  /* Testimonianze (blocco 3, brief LORI 26/09/2026): storie vere da testimonianze-wp.js.
+     Niente foto, niente iniziali. Testo gia ridotto a paragrafi di testo semplice:
+     il modello lo stampa come testo. Zero storie = niente fascia, niente pagina, niente menu. */
+  storie() {
+    const t = window.__siTesti || {};
+    const lista = t.stato === "fatto" && Array.isArray(t.storie) ? t.storie : [];
+    return lista.map((x) => ({
+      nome: x.nome, riga: x.riga,
+      paragrafi: (x.paragrafi || []).map((p) => ({ t: p }))
+    }));
+  }
+  // Pagina #/testimonianze senza storie (anche da link salvato): si torna alla Home, senza voce doppia.
+  curaTesti() {
+    const t = window.__siTesti || {};
+    if (this.state.rotta.vista !== "testimonianze" || t.stato !== "fatto" || this.storie().length) { return; }
+    try { window.history.replaceState(null, "", "#/"); } catch (e) {}
+    this.setState({ rotta: { vista: "", arg: "", sez: "" } });
+  }
+  /* Invito a fine articolo (blocco 3): la variante la sceglie la categoria WordPress
+     dell'articolo, per slug. Una sola categoria screening = quella variante;
+     nessuna, o due screening diversi = variante a). Copy MUSE del 26/09/2026. */
+  invitoArticolo() {
+    const ALIAS = { "cervice-uterina": "cervicale", "diabete-e-celiachia": "diabete-celiachia" };
+    const SCR = ["mammografico", "cervicale", "colon-retto", "prostata", "neonatale", "diabete-celiachia"];
+    const v = this.statoVoce() === "ok" ? this.state.voce : null;
+    const trovati = [];
+    ((v && v.categorie) || []).forEach((c) => {
+      const s = ALIAS[c.slug] || c.slug;
+      if (SCR.indexOf(s) !== -1 && trovati.indexOf(s) === -1) { trovati.push(s); }
+    });
+    const scr = trovati.length === 1 ? trovati[0] : "";
+    const NOME = { "mammografico": "mammografico", "cervicale": "cervicale", "colon-retto": "del colon-retto" };
+    if (NOME[scr]) {
+      return {
+        variante: "b",
+        titolo: "Lo screening " + NOME[scr] + " nella tua regione",
+        frase: "Lettera nel cassetto o mai arrivata, il diritto resta. Qui vedi come funziona lo screening " + NOME[scr] + " nella tua regione. Decidi tu.",
+        bottone: "Trova la tua regione",
+        href: "#/screening/" + scr + "/regione"
+      };
+    }
+    if (scr === "prostata") {
+      return {
+        variante: "c",
+        titolo: "Prostata: cosa c'è oggi nella tua regione",
+        frase: "Per la prostata non arriva nessuna lettera: qui vedi cosa esiste oggi, regione per regione. Poi decidi tu.",
+        bottone: "Trova la tua regione",
+        href: "#/screening/prostata/regione"
+      };
+    }
+    if (scr === "neonatale") {
+      return {
+        variante: "d1",
+        titolo: "Tuo figlio ha diritto a questo screening",
+        frase: "Lo prevede la legge, ogni regione lo organizza a modo suo. Qui vedi come funziona lo screening neonatale da te. Così sai cosa chiedere.",
+        bottone: "Trova la tua regione",
+        href: "#/screening/neonatale/dir"
+      };
+    }
+    if (scr === "diabete-celiachia") {
+      return {
+        variante: "d2",
+        titolo: "Diabete tipo 1 e celiachia nei bambini",
+        frase: "Lo prevede una legge nazionale. Qui trovi cosa dice, così sai cosa chiedere al pediatra.",
+        bottone: "Cosa chiedere al pediatra",
+        href: "#/screening/diabete-celiachia/domanda"
+      };
+    }
+    return {
+      variante: "a",
+      titolo: "Guarda cosa c'è nella tua regione",
+      frase: "Scegli la tua regione e vedi quali screening gratuiti ci sono. Niente registrazione, niente dati da lasciare. Poi decidi tu.",
+      bottone: "Apri la mappa delle regioni",
+      href: "#/trova"
+    };
   }
   /* Articoli veri da window.Articoli.lista(). Gli argomenti del filtro sono le
      categorie WordPress degli articoli gia caricati: il filtro lavora in pagina,

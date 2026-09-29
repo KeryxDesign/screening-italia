@@ -30,8 +30,17 @@ window.Articoli = (function () {
     /* Quanti articoli per pagina se la pagina non chiede altro. */
     perPagina: 10,
     /* Oltre questi millisecondi la richiesta si considera persa. */
-    attesaMax: 12000
+    attesaMax: 12000,
+    /* Categorie che NON sono articoli (blocco 3, 29/09/2026): le storie della
+       categoria «Testimonianze» le legge testimonianze-wp.js e non compaiono
+       ne nell'elenco, ne come articolo singolo, ne nel filtro per argomento. */
+    escluse: ["testimonianze"]
   };
+
+  function esclusa(slug) { return CFG.escluse.indexOf(String(slug || "")) !== -1; }
+  function articoloEscluso(a) {
+    return !!(a && (a.categorie || []).some(function (c) { return esclusa(c.slug); }));
+  }
 
   /* Stati che la pagina deve saper leggere. Sono gli unici valori
      possibili del campo .esito di ogni risposta. */
@@ -455,8 +464,10 @@ window.Articoli = (function () {
         if (r.dati.length === 0) { return vuoto(ESITO.VUOTO); }
 
         var fuori = [];
+        var tolti = 0;
         for (var i = 0; i < r.dati.length; i++) {
           var a = componiArticolo(r.dati[i]);
+          if (a && articoloEscluso(a)) { tolti++; continue; }
           if (a) { fuori.push(a); }
         }
         if (!fuori.length) { return vuoto(ESITO.VUOTO); }
@@ -466,7 +477,7 @@ window.Articoli = (function () {
           articoli: fuori,
           pagina: pagina,
           pagine: r.intestazioni.pagine || 1,
-          totale: r.intestazioni.totale || fuori.length
+          totale: Math.max(fuori.length, (r.intestazioni.totale || fuori.length) - tolti)
         };
       });
     });
@@ -494,6 +505,8 @@ window.Articoli = (function () {
       }
       var a = componiArticolo(r.dati[0]);
       if (!a) { return { esito: ESITO.ERRORE, articolo: null }; }
+      /* Una testimonianza non si apre come articolo: per la pagina non esiste. */
+      if (articoloEscluso(a)) { return { esito: ESITO.VUOTO, articolo: null }; }
       return { esito: ESITO.OK, articolo: a };
     });
   }
@@ -517,6 +530,7 @@ window.Articoli = (function () {
         var c = r.dati[i];
         if (!c || !c.slug) { continue; }
         if (!c.count) { continue; }
+        if (esclusa(c.slug)) { continue; }
         fuori.push({
           id: c.id,
           nome: soloTesto(c.name),

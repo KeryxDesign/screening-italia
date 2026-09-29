@@ -49,6 +49,10 @@ window.__siLogicaRender = class {
     const art = this.articoli();
     const homeArt = this.ultimiArticoli();
 
+    // --- testimonianze (blocco 3): zero storie = niente fascia, pagina e voci di menu ---
+    const storie = this.storie();
+    const testiFonte = (window.__siTesti || {}).fonte;
+
     return {
       // navigazione
       navReg: (vista === "regione" || vista === "vuota" || vista === "iniziativa") ? "page" : "false",
@@ -161,13 +165,22 @@ window.__siLogicaRender = class {
       artFinito: this.statoVoce() !== "attesa",
       artHaTesto: this.statoVoce() === "ok",
       artTestoRef: this.artTestoRef,
+      // Invito a fine articolo (blocco 3): variante per categoria WordPress, solo ad articolo caricato.
+      invito: this.invitoArticolo(),
 
       vistaEnti: vista === "enti",
 
-      // testimonianze
-      vistaTesti: vista === "testimonianze",
-      testiGiro: this.testimonianze(),
-      testiTutte: this.testimonianze(),
+      // testimonianze: in home al massimo 2, le piu recenti; il bottone solo se sono di piu
+      haTesti: storie.length > 0,
+      /* Senza storie la fascia verde sparisce e due bande crema resterebbero
+         attaccate: «Ultimi aggiornamenti» passa a fondo bianco (LORI, giro 1 blocco 3). */
+      ultimiCls: "banda " + (storie.length > 0 ? "b-crema" : "b-bianco") + " wrap sezione",
+      vistaTesti: vista === "testimonianze" && storie.length > 0,
+      testiHome: storie.slice(0, 2),
+      testiTutte: storie,
+      testiAltri: storie.length > 2,
+      // Schede di prova (solo fuori produzione): resta il marcatore .finto gia esistente.
+      testiEsempi: storie.length > 0 && testiFonte === "esempi",
 
       // consenso ai cookie
       bannerAperto: !!this.state.bannerAperto,

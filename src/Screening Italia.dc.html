@@ -37,6 +37,7 @@
         <script src="./iniziative.js"></script>
         <script src="./iniziative-wp.js"></script>
         <script src="./articoli.js"></script>
+        <script src="./testimonianze-wp.js"></script>
         <script src="./regioni-italia.js"></script>
         <script src="./mappa.js"></script>
         <script src="./image-slot.js"></script>
@@ -95,7 +96,7 @@
                 </div>
               </div>
               <a href="#/enti" aria-current="{{ navEnti }}">Per ASL ed enti</a>
-              <a href="#/testimonianze" aria-current="{{ navTesti }}">Testimonianze</a>
+              <sc-if value="{{ haTesti }}" hint-placeholder-val="{{ false }}"><a href="#/testimonianze" aria-current="{{ navTesti }}">Testimonianze</a></sc-if>
               <a href="#/domande" aria-current="{{ navDomande }}">Domande frequenti</a>
               <a href="#/chi" aria-current="{{ navChi }}">Chi siamo</a>
               <a href="#/contatti" aria-current="{{ navContatti }}">Contatti</a>
@@ -204,46 +205,41 @@
             </div>
 
 
+            <!-- Testimonianze (blocco 3, brief LORI 26/09/2026): storie vere da WordPress, griglia ferma,
+                 al massimo 2 in home. Zero storie, o WordPress che non risponde: la banda non si rende. -->
+            <sc-if value="{{ haTesti }}" hint-placeholder-val="{{ false }}">
             <div class="banda b-verde wrap banda-larga sezione" data-screen-label="Testimonianze">
               <div class="fx col gap20">
-                <h2>Chi l’ha usato</h2>
+                <h2>Storie di chi ci è passato</h2>
+                <p class="testi-intro">Sono esperienze personali: nessuna ti promette lo stesso risultato e nessuna vale come consiglio medico, per decidere c'è il tuo dottore. Le pubblichiamo anonime, con il permesso di chi scrive, che non riceve compensi.</p>
+                <sc-if value="{{ testiEsempi }}" hint-placeholder-val="{{ false }}">
                 <div class="finto">Testimonianze di esempio: nel prototipo non sono persone reali.</div>
-                <div class="carosello" tabindex="0" role="region" aria-label="Testimonianze, scorrevoli in orizzontale">
-                  <div class="car-pista">
-                    <sc-for list="{{ testiGiro }}" as="t" hint-placeholder-count="3">
-                      <figure class="testi">
-                      <div class="testi-testa">
-                        <span class="testi-foto"><image-slot id="{{ t.slot }}" src="{{ t.foto }}" shape="circle" placeholder="Foto"></image-slot></span>
-                        <figcaption class="testi-chi">
-                          <span class="testi-nome">{{ t.nome }}</span>
-                          <span class="testi-ruolo">{{ t.ruolo }}</span>
-                        </figcaption>
-                      </div>
-                      <blockquote class="testi-txt">{{ t.testo }}</blockquote>
+                </sc-if>
+                <div class="testi-griglia">
+                  <sc-for list="{{ testiHome }}" as="t" hint-placeholder-count="2">
+                    <figure class="testi">
+                      <svg class="testi-virg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9 7H5v6h4v-2c0 2-1 3-3 3v2c3 0 5-2 5-5V7zm10 0h-4v6h4v-2c0 2-1 3-3 3v2c3 0 5-2 5-5V7z"></path></svg>
+                      <blockquote class="testi-txt">
+                        <sc-for list="{{ t.paragrafi }}" as="q" hint-placeholder-count="1"><p>{{ q.t }}</p></sc-for>
+                      </blockquote>
+                      <figcaption class="testi-chi">
+                        <span class="testi-nome">{{ t.nome }}</span>
+                        <span class="testi-ruolo">{{ t.riga }}</span>
+                      </figcaption>
                     </figure>
-                    </sc-for>
-                    <sc-for list="{{ testiGiro }}" as="t" hint-placeholder-count="3">
-                      <figure class="testi">
-                      <div class="testi-testa">
-                        <span class="testi-foto"><image-slot id="{{ t.slot }}" src="{{ t.foto }}" shape="circle" placeholder="Foto"></image-slot></span>
-                        <figcaption class="testi-chi">
-                          <span class="testi-nome">{{ t.nome }}</span>
-                          <span class="testi-ruolo">{{ t.ruolo }}</span>
-                        </figcaption>
-                      </div>
-                      <blockquote class="testi-txt">{{ t.testo }}</blockquote>
-                    </figure>
-                    </sc-for>
-                  </div>
+                  </sc-for>
                 </div>
-                <a class="cta-2" href="#/testimonianze">Leggi tutte le testimonianze</a>
+                <sc-if value="{{ testiAltri }}" hint-placeholder-val="{{ false }}">
+                <a class="cta-2 testi-tutte" href="#/testimonianze">Leggi tutte le testimonianze</a>
+                </sc-if>
               </div>
             </div>
+            </sc-if>
 
             <!-- Ultimi aggiornamenti (brief LORI 26/09/2026): i primi 4 articoli WordPress per data.
                  Senza articoli, o se WordPress non risponde, la banda non si rende. -->
             <sc-if value="{{ homeOk }}" hint-placeholder-val="{{ true }}">
-            <div class="banda b-crema wrap sezione" id="ultimi-aggiornamenti" data-screen-label="Ultimi aggiornamenti">
+            <div class="{{ ultimiCls }}" id="ultimi-aggiornamenti" data-screen-label="Ultimi aggiornamenti">
               <div class="fx col gap20">
                 <h2>Ultimi aggiornamenti</h2>
                 <div class="art-griglia">
@@ -1434,32 +1430,35 @@
         <sc-if value="{{ vistaTesti }}" hint-placeholder-val="{{ false }}">
           <div data-screen-label="Testimonianze">
 
+            <!-- Apertura senza foto (brief LORI §1.5): resta il fondo scuro con il velo. -->
             <div class="banda hero wrap sezione" data-screen-label="Apertura testimonianze">
               <div class="hero-sfondo" aria-hidden="true">
-                <image-slot id="hero-8" src="https://img.magnific.com/free-photo/portrait-mature-couple-stand-each-other-look-directly-camera-have-satisfied-expressions_273609-45998.jpg" shape="rect" placeholder="Foto di sezione"></image-slot>
                 <span class="hero-velo"></span>
               </div>
               <div class="fx col gap16">
-                <div class="occhiello">Testimonianze</div>
-                <h1>Chi ha trovato un esame grazie al portale</h1>
-                <p>Racconti di chi si è controllato e di chi ha aiutato un genitore a farlo. Parlano di come hanno usato il sito, non di diagnosi.</p>
+                <div class="occhiello testi-occhiello">Testimonianze</div>
+                <h1>Storie di chi ci è passato</h1>
+                <p>Chi ha fatto uno screening racconta com'è andata, con parole sue.</p>
               </div>
             </div>
 
             <div class="banda b-crema wrap banda-larga sezione" data-screen-label="Tutte le testimonianze">
               <div class="fx col gap20">
+                <p class="testi-intro">Sono esperienze personali: nessuna ti promette lo stesso risultato e nessuna vale come consiglio medico, per decidere c'è il tuo dottore. Le pubblichiamo anonime, con il permesso di chi scrive, che non riceve compensi.</p>
+                <sc-if value="{{ testiEsempi }}" hint-placeholder-val="{{ false }}">
                 <div class="finto">Testimonianze di esempio: nel prototipo non sono persone reali.</div>
+                </sc-if>
                 <div class="testi-griglia">
-                  <sc-for list="{{ testiTutte }}" as="t" hint-placeholder-count="6">
+                  <sc-for list="{{ testiTutte }}" as="t" hint-placeholder-count="2">
                     <figure class="testi">
-                      <div class="testi-testa">
-                        <span class="testi-foto"><image-slot id="{{ t.slot }}" src="{{ t.foto }}" shape="circle" placeholder="Foto"></image-slot></span>
-                        <figcaption class="testi-chi">
-                          <span class="testi-nome">{{ t.nome }}</span>
-                          <span class="testi-ruolo">{{ t.ruolo }}</span>
-                        </figcaption>
-                      </div>
-                      <blockquote class="testi-txt">{{ t.testo }}</blockquote>
+                      <svg class="testi-virg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9 7H5v6h4v-2c0 2-1 3-3 3v2c3 0 5-2 5-5V7zm10 0h-4v6h4v-2c0 2-1 3-3 3v2c3 0 5-2 5-5V7z"></path></svg>
+                      <blockquote class="testi-txt">
+                        <sc-for list="{{ t.paragrafi }}" as="q" hint-placeholder-count="1"><p>{{ q.t }}</p></sc-for>
+                      </blockquote>
+                      <figcaption class="testi-chi">
+                        <span class="testi-nome">{{ t.nome }}</span>
+                        <span class="testi-ruolo">{{ t.riga }}</span>
+                      </figcaption>
                     </figure>
                   </sc-for>
                 </div>
@@ -1468,9 +1467,9 @@
 
             <div class="banda b-bianco wrap sezione" data-screen-label="Racconta la tua">
               <div class="fx col gap16">
-                <h2>Hai usato il portale?</h2>
-                <p>Raccontaci com’è andata: le storie aiutano chi non sa da dove iniziare.</p>
-                <a class="cta" href="#/contatti">Racconta la tua esperienza</a>
+                <h2>Hai fatto uno screening?</h2>
+                <p>Racconta com'è andata: la tua storia può aiutare chi non sa da dove iniziare. Esce solo anonima, e solo dopo che hai approvato il testo finale.</p>
+                <a class="cta" href="#/contatti">Racconta la tua storia</a>
               </div>
             </div>
 
@@ -1519,24 +1518,14 @@
               </div>
             </sc-if>
 
-            <sc-if value="{{ artFinito }}" hint-placeholder-val="{{ true }}">
-
-            <div class="banda b-crema wrap sezione" data-screen-label="Scegli la regione">
-              <div class="fx col gap20">
-                <h2>Ora scegli la tua regione</h2>
-                <p class="nota">Tocca la regione sulla mappa: si apre l’elenco delle iniziative attive sul territorio.</p>
-                <div class="mappa" ref="{{ mappaRef }}"></div>
-                <details class="elenco">
-                  <summary>
-                    <span>Preferisci selezionare da un elenco?</span>
-                    <svg class="frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
-                  </summary>
-                  <div class="elenco-lista">
-                    <sc-for list="{{ regioni }}" as="r" hint-placeholder-count="8">
-                      <a href="{{ r.href }}">{{ r.nome }}</a>
-                    </sc-for>
-                  </div>
-                </details>
+            <!-- Invito a fine articolo (blocco 3, brief LORI §2): prende il posto della banda
+                 «Ora scegli la tua regione». Solo ad articolo caricato; variante per categoria WP. -->
+            <sc-if value="{{ artPronto }}" hint-placeholder-val="{{ true }}">
+            <div class="banda b-verde wrap sezione invito-banda" data-screen-label="Invito a fine articolo" data-variante="{{ invito.variante }}">
+              <div class="lettura invito">
+                <h2 class="invito-tit">{{ invito.titolo }}</h2>
+                <p class="invito-p">{{ invito.frase }}</p>
+                <a class="cta" href="{{ invito.href }}">{{ invito.bottone }}</a>
               </div>
             </div>
             </sc-if>
@@ -1700,7 +1689,7 @@
                 <a href="#/articolo/faq-1">Se l’invito non arriva</a>
                 <a href="#/articolo/faq-5">Il kit del colon-retto</a>
                 <a href="#/screening/prostata">Screening della prostata</a>
-                <a href="#/testimonianze">Testimonianze</a>
+                <sc-if value="{{ haTesti }}" hint-placeholder-val="{{ false }}"><a href="#/testimonianze">Testimonianze</a></sc-if>
               </nav>
 
               <nav class="ftr-col" aria-label="Il portale">
