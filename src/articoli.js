@@ -367,19 +367,15 @@ window.Articoli = (function () {
      ospitate nel repo), scelte per tono sereno: niente letti d'ospedale,
      niente mascherine. La scelta dipende dall'id del post, quindi lo stesso
      articolo ha sempre la stessa foto e articoli vicini hanno foto diverse.
-     Prostata: solo foto con uomini; mammografico e cervicale: solo donne. */
+     Per ora una sola lista per tutte le categorie. */
   var FOTO_DIR = "./img/foto/";
+  /* LORI 13/10/2026: niente camici ne stetoscopi. Restano solo le foto di
+     persone in contesti di tutti i giorni, finche non arrivano le nuove. */
   var FOTO_TUTTE = [
-    "foto-637285-1194.webp", "foto-329181-2204.webp", "foto-637285-1471.webp",
-    "foto-273609-45998.webp", "foto-637285-5309.webp", "foto-637285-11352.webp",
-    "foto-197531-19155.webp", "foto-637285-1891.webp", "foto-637285-5300.webp",
+    "foto-197531-19155.webp", "foto-273609-45998.webp",
     "foto-74855-23397.webp", "foto-197531-19160.webp"
   ];
-  var FOTO_PER_CATEGORIA = {
-    "prostata": ["foto-637285-1471.webp", "foto-637285-11352.webp", "foto-637285-1891.webp"],
-    "mammografico": ["foto-329181-2204.webp", "foto-637285-5300.webp", "foto-637285-5309.webp"],
-    "cervicale": ["foto-637285-5300.webp", "foto-329181-2204.webp", "foto-637285-5309.webp"]
-  };
+  var FOTO_PER_CATEGORIA = {};
 
   /* Immagine di repertorio per un articolo senza immagine in evidenza.
      alt vuoto: e decorativa, non aggiunge informazione al titolo. */
@@ -388,8 +384,10 @@ window.Articoli = (function () {
     var slug = c ? String(c.slug || "") : "";
     var lista = Object.prototype.hasOwnProperty.call(FOTO_PER_CATEGORIA, slug)
       ? FOTO_PER_CATEGORIA[slug] : FOTO_TUTTE;
+    /* Hash dell'id: articoli vicini (id consecutivi) prendono foto diverse. */
     var n = Math.abs(parseInt(id, 10) || 0);
-    var url = FOTO_DIR + lista[n % lista.length];
+    var h = Math.floor(((n * 2654435761) >>> 0) / 8);
+    var url = FOTO_DIR + lista[h % lista.length];
     var t = { url: url, larghezza: 1200, altezza: 675 };
     return {
       url: url,
