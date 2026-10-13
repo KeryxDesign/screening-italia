@@ -1436,7 +1436,7 @@
               <div class="fx col gap20">
                 <h2>Oppure mandaci una mail</h2>
                 <sc-if value="{{ msgInviato }}" hint-placeholder-val="{{ false }}">
-                  <div class="fatto">Messaggio ricevuto. Ti rispondiamo entro 3 giorni lavorativi.</div>
+                  <div class="fatto" role="status">Si è aperta la tua posta? Controlla il messaggio e premi «Invia». Se non si è aperta, scrivici a info@screeningitalia.it e copia in fondo la frase del consenso.</div>
                 </sc-if>
                 <sc-if value="{{ msgDaCompilare }}" hint-placeholder-val="{{ true }}">
                   <div class="modulo fx col gap16">
@@ -1462,9 +1462,22 @@
                     </div>
                     <div class="fx col gap6">
                       <label class="etichetta" for="m-testo">Il tuo messaggio</label>
-                      <textarea class="campo campo-area" id="m-testo" rows="5" placeholder="Scrivi qui. Se segnali un’iniziativa, indica ente, sede, date e recapito." value="{{ mTesto }}" onInput="{{ scriviTesto }}"></textarea>
+                      <textarea class="campo campo-area" id="m-testo" rows="5" required="required" placeholder="Scrivi qui. Se segnali un’iniziativa, indica ente, sede, date e recapito." value="{{ mTesto }}" onInput="{{ scriviTesto }}" aria-invalid="{{ mInvTesto }}" aria-describedby="{{ mDescTesto }}"></textarea>
+                      <sc-if value="{{ mErrTesto }}" hint-placeholder-val="{{ false }}">
+                        <p class="errore" id="m-err-testo" role="alert">Scrivi il tuo messaggio prima di andare avanti.</p>
+                      </sc-if>
                     </div>
-                    <button type="button" class="cta" onClick="{{ inviaModulo }}">Invia il messaggio</button>
+                    <div class="fx col gap6">
+                      <label class="consenso">
+                        <input type="checkbox" id="m-ok" required="required" checked="{{ mOk }}" onChange="{{ mSpunta }}" aria-invalid="{{ mInvOk }}" aria-describedby="{{ mDescOk }}">
+                        <span>Ho letto l'informativa e acconsento al trattamento dei miei dati per ricevere una risposta.</span>
+                      </label>
+                      <sc-if value="{{ mErrOk }}" hint-placeholder-val="{{ false }}">
+                        <p class="errore" id="m-err-ok" role="alert">Per mandare il messaggio devi spuntare la casella del consenso.</p>
+                      </sc-if>
+                    </div>
+                    <button type="button" class="cta" onClick="{{ inviaModulo }}">Apri la mail con il messaggio</button>
+                    <p class="nota">Si apre la tua posta con il messaggio già scritto. Parte solo quando premi «Invia» lì. Dal sito non salviamo nulla.</p>
                     <p class="nota">Il messaggio arriva a info@screeningitalia.it. Usiamo questi dati solo per risponderti: non chiediamo né registriamo informazioni sanitarie.</p>
                   </div>
                 </sc-if>
@@ -1862,6 +1875,122 @@
           </div>
         </sc-if>
 
+        <sc-if value="{{ vistaPrivacy }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Informativa privacy">
+
+            <div class="banda hero wrap sezione" data-screen-label="Apertura privacy">
+              <div class="hero-sfondo" aria-hidden="true">
+                <span class="hero-velo"></span>
+              </div>
+              <div class="fx col gap16">
+                <h1>Informativa privacy</h1>
+              </div>
+            </div>
+
+            <!-- Testo LEX (bozza 13/10/2026), inserito testualmente. -->
+            <div class="banda b-bianco wrap sezione" data-screen-label="Testo informativa">
+              <div class="lettura fx col gap16" id="privacy-testo">
+                <div class="avviso"><p><strong>BOZZA — da validare da un avvocato privacy prima della pubblicazione</strong></p></div>
+                <h2>Informativa privacy di screeningitalia.it</h2>
+                <p>Questa pagina spiega quali dati personali tratta il sito screeningitalia.it, perché, per quanto tempo e quali sono i tuoi diritti. Vale per il sito e per le mail che ci mandi partendo dal sito.</p>
+                <p>Il sito informa sugli screening. Non prenota esami, non dà consigli medici, non è affiliato al Servizio Sanitario Nazionale.</p>
+
+                <h2>Chi è il titolare del trattamento</h2>
+                <p>Il titolare è <strong>Angelo Zaglio</strong>, medico.</p>
+                <ul>
+                <li>Partita IVA: [DA COMPLETARE: P.IVA]</li>
+                <li>Indirizzo: [DA COMPLETARE: indirizzo o recapito postale]</li>
+                <li>Iscritto all'Ordine dei Medici di [DA COMPLETARE: provincia], n. [DA COMPLETARE: numero di iscrizione]</li>
+                <li>Email: <a href="mailto:info@screeningitalia.it">info@screeningitalia.it</a></li>
+                </ul>
+                <p>Non abbiamo nominato un responsabile della protezione dei dati (DPO): per qualsiasi domanda scrivi all'indirizzo qui sopra. [DA VERIFICARE: conferma che il DPO non sia obbligatorio]</p>
+
+                <h2>Quali dati trattiamo</h2>
+                <p><strong>Dati di navigazione.</strong> Quando apri il sito, il server registra in automatico alcuni dati tecnici: indirizzo IP, data e ora, pagina richiesta, tipo di browser. Servono a far funzionare il sito e a proteggerlo. Non li usiamo per sapere chi sei.</p>
+                <p><strong>Preferenze salvate sul tuo dispositivo.</strong> Il sito ricorda la regione che hai aperto, le preferenze di lettura (testo più grande, contrasto) e la tua scelta sui cookie. Restano nel tuo browser: non ci arrivano.</p>
+                <p><strong>Statistiche, solo se le accetti.</strong> Se dici sì ai cookie di statistica, usiamo Google Analytics per contare le visite, le pagine lette e la regione di provenienza. Non lo usiamo per pubblicità né per profilarti. Se dici no, Google Analytics non parte.</p>
+                <p><strong>Mail di contatto.</strong> Se ci scrivi, riceviamo il tuo indirizzo email, il nome se lo indichi e il contenuto del messaggio. Ti chiediamo di non scrivere informazioni sulla tua salute: non ci servono per rispondere.</p>
+                <p><strong>Racconti di esperienze.</strong> Se usi la pagina <a href="#/racconta">Racconta la tua esperienza</a>, riceviamo il tuo indirizzo email e il tuo racconto, con regione e tipo di screening. Il racconto può contenere dati sulla salute: per questo ti chiediamo un consenso esplicito.</p>
+                <p><strong>Richieste di avviso.</strong> [DA DECIDERE: tenere questo paragrafo solo se il servizio «Avvisami» viene attivato davvero] Se chiedi di essere avvisato quando esce una nuova iniziativa nella tua regione, riceviamo il tuo indirizzo email e la regione scelta. Non ti chiediamo dati sulla salute.</p>
+                <p>Non raccogliamo liste di indirizzi della popolazione e non riceviamo dati dalle ASL.</p>
+
+                <h2>Perché li trattiamo e su quale base</h2>
+                <ul>
+                <li><strong>Far funzionare e proteggere il sito</strong> (dati di navigazione): legittimo interesse a offrire un sito sicuro e funzionante, art. 6.1.f GDPR.</li>
+                <li><strong>Statistiche di visita</strong>: il tuo consenso, art. 6.1.a GDPR. Lo dai o lo neghi nel banner, e lo cambi quando vuoi dal collegamento «Preferenze cookie» in fondo a ogni pagina.</li>
+                <li><strong>Rispondere alle tue mail</strong>: la tua richiesta, art. 6.1.b GDPR. Quando scrivi per segnalare un'iniziativa o un dato sbagliato, anche il nostro legittimo interesse a tenere corrette le informazioni del sito, art. 6.1.f GDPR.</li>
+                <li><strong>Valutare e pubblicare i racconti</strong>: il tuo consenso esplicito, artt. 6.1.a e 9.2.a GDPR. Usiamo email e racconto solo per valutare il racconto e, se lo scegliamo, pubblicarlo senza alcun dato che ti identifichi.</li>
+                <li><strong>Mandarti l'avviso di una nuova iniziativa</strong> [DA DECIDERE: solo se il servizio è attivo]: il tuo consenso, art. 6.1.a GDPR. Ti scriviamo solo per la regione scelta, nessun altro invio.</li>
+                </ul>
+                <p>Non usiamo i tuoi dati per pubblicità, non li vendiamo e non li usiamo per altri scopi.</p>
+
+                <h2>Come trattiamo i racconti</h2>
+                <p>Il racconto ci arriva per mail, dalla tua casella di posta. Il sito non lo salva: la mail parte solo quando premi Invia nel tuo programma di posta.</p>
+                <p>In fondo alla mail c'è la frase con cui dai il consenso. Senza quella frase il racconto non si pubblica.</p>
+                <p>Ogni racconto viene letto da una persona. Può essere accorciato, riscritto in terza persona o non pubblicato. Non c'è nulla di automatico.</p>
+                <p>Se lo pubblichiamo, togliamo tutto ciò che può renderti riconoscibile: nomi, strutture, medici, date, luoghi precisi. Restano solo regione, tipo di screening e mese e anno.</p>
+                <p>Puoi chiedere la rimozione del testo pubblicato in ogni momento.</p>
+
+                <h2>A chi arrivano i dati</h2>
+                <p>Non cediamo i tuoi dati a nessuno. Li vedono solo il titolare e i fornitori tecnici che ci servono per far funzionare il sito e la posta. Questi fornitori agiscono come responsabili del trattamento, con un contratto che li obbliga a usare i dati solo per noi.</p>
+                <ul>
+                <li><strong>Hosting del sito e del pannello di gestione dei contenuti</strong>: Hostinger International Ltd. [DA VERIFICARE: sede legale e posizione dei server]</li>
+                <li><strong>Posta elettronica</strong> (casella info@screeningitalia.it): [DA COMPLETARE: fornitore della posta]</li>
+                <li><strong>Statistiche</strong>, solo col tuo consenso: Google Ireland Limited (Google Analytics).</li>
+                <li><strong>Caratteri tipografici</strong>: Google Fonts, servizio di Google. Quando apri una pagina, il tuo browser scarica i caratteri dai server di Google, che vedono il tuo indirizzo IP. [DA DECIDERE: se i caratteri vengono ospitati sul nostro server, togliere questa voce]</li>
+                <li><strong>Immagini e componenti tecnici del sito</strong>: alcune immagini e librerie vengono caricate da server esterni (img.magnific.com, unpkg.com), che vedono il tuo indirizzo IP. [DA VERIFICARE: elenco definitivo al momento della pubblicazione]</li>
+                <li><strong>Consulente tecnico</strong>: Keryx Design, che ha realizzato il sito e lo mantiene, può accedere ai dati tecnici per assistenza. [DA VERIFICARE: nomina a responsabile del trattamento]</li>
+                </ul>
+                <p>Possiamo comunicare dati alle autorità solo se la legge lo impone.</p>
+
+                <h2>Dati fuori dall'Unione Europea</h2>
+                <p>Alcuni fornitori, in particolare Google, possono trattare dati negli Stati Uniti. In quel caso il trasferimento si basa sulla decisione di adeguatezza della Commissione Europea per le aziende aderenti all'EU-US Data Privacy Framework, o sulle clausole contrattuali standard approvate dalla Commissione.</p>
+                <p>[DA VERIFICARE: per ogni fornitore (Hostinger, posta, Google, CDN delle immagini e delle librerie) dove stanno i server e quale garanzia si applica]</p>
+
+                <h2>Per quanto tempo li conserviamo</h2>
+                <ul>
+                <li><strong>Dati di navigazione</strong> nei registri del server: [DA VERIFICARE: durata dei log su Hostinger], poi si cancellano da soli.</li>
+                <li><strong>Statistiche</strong>: fino a 14 mesi, poi Google Analytics le cancella.</li>
+                <li><strong>Preferenze sul tuo dispositivo</strong>: fino a 12 mesi, oppure finché non le cancelli dal browser.</li>
+                <li><strong>Mail di contatto</strong>: il tempo necessario a rispondere e a chiudere la richiesta, e al massimo [DA DECIDERE: 12 mesi].</li>
+                <li><strong>Racconti</strong>: conserviamo la mail al massimo 12 mesi. Il testo pubblicato, che non contiene dati che ti identificano, resta online finché non chiedi di toglierlo.</li>
+                <li><strong>Richieste di avviso</strong> [DA DECIDERE: solo se il servizio è attivo]: finché non ti cancelli, e al massimo [DA DECIDERE: 24 mesi]. In ogni mail di avviso trovi come cancellarti.</li>
+                </ul>
+
+                <h2>I tuoi diritti</h2>
+                <p>Hai diritto di:</p>
+                <ul>
+                <li>sapere quali dati abbiamo su di te e averne una copia (art. 15 GDPR);</li>
+                <li>farli correggere se sono sbagliati (art. 16);</li>
+                <li>farli cancellare (art. 17);</li>
+                <li>chiedere che li usiamo solo in modo limitato (art. 18);</li>
+                <li>riceverli in un formato leggibile per darli a un altro titolare, quando la base è il consenso o la tua richiesta (art. 20);</li>
+                <li>opporti al trattamento basato sul nostro legittimo interesse (art. 21).</li>
+                </ul>
+                <p><strong>Puoi revocare il consenso in ogni momento</strong>, per le statistiche, per i racconti e per gli avvisi. La revoca vale da quel momento in poi: non rende illegittimo quello che abbiamo fatto prima. Per i racconti, revocare vuol dire anche chiedere la rimozione del testo pubblicato.</p>
+                <p>Per esercitare i tuoi diritti scrivi a <a href="mailto:info@screeningitalia.it">info@screeningitalia.it</a>. Rispondiamo entro 30 giorni. Non costa nulla.</p>
+
+                <h2>Reclamo al Garante</h2>
+                <p>Se pensi che trattiamo i tuoi dati in modo scorretto, puoi fare reclamo al Garante per la protezione dei dati personali, sul sito <a href="https://www.garanteprivacy.it">garanteprivacy.it</a>. Puoi anche scriverci prima: spesso si risolve più in fretta.</p>
+
+                <h2>Nessuna decisione automatica</h2>
+                <p>Non prendiamo decisioni su di te in modo automatico e non creiamo profili. Ogni racconto e ogni segnalazione li legge una persona.</p>
+
+                <h2>Minori</h2>
+                <p>Il sito non è pensato per chi ha meno di 14 anni, e non raccogliamo consapevolmente i loro dati. Se scrivi un racconto che riguarda un minore, per esempio uno screening neonatale, non indicare nessun dato del bambino. Se ci accorgiamo di aver ricevuto dati di un minore, li cancelliamo.</p>
+
+                <h2>Cookie</h2>
+                <p>Quali cookie usiamo, a cosa servono e come si spengono lo trovi nella pagina <a href="#/cookie">Cookie e dati</a>.</p>
+
+                <h2>Modifiche a questa informativa</h2>
+                <p>Se cambiamo il modo in cui trattiamo i dati, aggiorniamo questa pagina e la data qui sotto.</p>
+                <p>Ultimo aggiornamento: 13/10/2026.</p>
+              </div>
+            </div>
+
+          </div>
+        </sc-if>
+
         <sc-if value="{{ vistaCookie }}" hint-placeholder-val="{{ false }}">
           <div data-screen-label="Cookie e dati">
 
@@ -2043,7 +2172,7 @@
             <div class="ftr-basso">
               <p class="ftr-legale">© 2026 Screening Italia · Progetto dimostrativo senza fini di lucro</p>
               <p class="ftr-legale ftr-legale-link">
-                <a href="#/cookie">Privacy</a>
+                <a href="#/privacy">Privacy</a>
                 <span aria-hidden="true">·</span>
                 <a href="#/cookie">Cookie</a>
                 <span aria-hidden="true">·</span>

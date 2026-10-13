@@ -336,7 +336,7 @@ html.contrasto{
   --terracotta:#8A2600; --bordo:#000000;
 }
 html.contrasto .banda{background:#fff !important;box-shadow:0 0 0 100vmax #fff !important}
-html.contrasto .card,html.contrasto .avviso,html.contrasto .elenco,
+html.contrasto .card,html.contrasto .avviso,html.contrasto .fatto,html.contrasto .elenco,
 html.contrasto .campo,html.contrasto .scelta,html.contrasto .filtro,
 html.contrasto .tag,html.contrasto .mappa-nome{border-width:2.5px;border-color:#000;background:#fff}
 html.contrasto .finto{background:#fff;border-color:#000;color:#000}

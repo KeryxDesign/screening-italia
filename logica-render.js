@@ -62,6 +62,7 @@ window.__siLogicaRender = class {
     const rv = this.state.rotta.vista;
     const rcTesto = this.state.rcTesto || "";
     const rcErr = this.state.rcErr || {};
+    const mErr = this.state.mErr || {};
     const rcTipo = this.state.rcTipo;
 
     return {
@@ -283,10 +284,18 @@ window.__siLogicaRender = class {
       scriviNome: (e) => this.setState({ mNome: e.target.value }),
       scriviIndirizzo: (e) => this.setState({ mMail: e.target.value }),
       scriviTipo: (e) => this.setState({ mTipo: e.target.value }),
-      scriviTesto: (e) => this.setState({ mTesto: e.target.value }),
-      inviaModulo: () => {
-        if (this.state.mMail && this.state.mTesto) { this.setState({ msgInviato: true }); }
-      },
+      scriviTesto: (e) => this.setState({ mTesto: e.target.value, mErr: mErr.testo ? { ...mErr, testo: false } : this.state.mErr }),
+      mOk: !!this.state.mOk,
+      mSpunta: (e) => this.setState({ mOk: !!e.target.checked, mErr: mErr.ok ? { ...mErr, ok: false } : this.state.mErr }),
+      mErrTesto: !!mErr.testo,
+      mErrOk: !!mErr.ok,
+      mInvTesto: mErr.testo ? "true" : "false",
+      mInvOk: mErr.ok ? "true" : "false",
+      mDescTesto: mErr.testo ? "m-err-testo" : undefined,
+      mDescOk: mErr.ok ? "m-err-ok" : undefined,
+      // Contatti (13/10/2026): apre la posta con la mail gia scritta, come #/racconta.
+      inviaModulo: () => this.ctInvia(),
+      vistaPrivacy: vista === "privacy",
 
       // pagine screening (25/09/2026): vistaScr, scrOnco, scrProstata, scrGenitori, scr, scrHome
       ...(window.__siScreening ? window.__siScreening.vals(this.state, this.state.rotta, this)

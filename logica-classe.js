@@ -143,7 +143,7 @@ class Component extends DCLogic {
 
     this.onHash = () => {
       const r = this.leggiRotta();
-      this.setState({ rotta: r, tipi: [], inviato: false, mail: "", menuAperto: "", ...this.rcDaRotta(r) });
+      this.setState({ rotta: r, tipi: [], inviato: false, mail: "", menuAperto: "", msgInviato: false, mErr: null, ...this.rcDaRotta(r) });
       this.chiudiHamburger();
       window.scrollTo(0, 0);
     };
@@ -503,7 +503,7 @@ class Component extends DCLogic {
     // #/racconta?tipo=difficolta: la domanda preseleziona il tipo, non fa parte della vista.
     const q0 = (p[0] || "").split("?");
     let vista = q0[0];
-    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening", "buone-pratiche", "difficolta", "racconta"];
+    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening", "buone-pratiche", "difficolta", "racconta", "privacy"];
     if (note.indexOf(vista) === -1) { vista = ""; }
     let arg = p[1] ? decodeURIComponent(p[1]) : "";
     if (vista === "racconta") { arg = this.tipoDaDomanda(q0[1]); }
@@ -514,7 +514,7 @@ class Component extends DCLogic {
     if (vista === "screening" && !this.scrValido(arg)) { arg = ""; }
     const sez = this.sezValida(vista, arg, p[2]);
     const nuova = { vista: vista, arg: arg, sez: sez };
-    this.setState({ rotta: nuova, tipi: [], inviato: false, mail: "", menuAperto: "", ...this.rcDaRotta(nuova) },
+    this.setState({ rotta: nuova, tipi: [], inviato: false, mail: "", menuAperto: "", msgInviato: false, mErr: null, ...this.rcDaRotta(nuova) },
       () => this.portaASezione());
     this.chiudiHamburger();
     window.scrollTo(0, 0);
@@ -530,7 +530,7 @@ class Component extends DCLogic {
     const q0 = (p[0] || "").split("?");
     let vista = q0[0];
     let arg = p[1] ? decodeURIComponent(p[1]) : "";
-    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening", "buone-pratiche", "difficolta", "racconta"];
+    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening", "buone-pratiche", "difficolta", "racconta", "privacy"];
     if (note.indexOf(vista) === -1) { vista = ""; }
     if (vista === "racconta") { arg = this.tipoDaDomanda(q0[1]); }
     // Alias permanente: #/prostata diventa #/screening/prostata senza voce doppia nella cronologia.
@@ -796,6 +796,42 @@ class Component extends DCLogic {
     if (!url) { return; }
     this.setState({ rcErr: null, rcAperta: true });
     W.apri(url);
+  }
+  /* ---- Modulo #/contatti (SENTINEL 13/10/2026) ----
+     Come #/racconta: niente salvato, niente fetch. Costruisce la mail e apre la posta;
+     oggetto = tipo scelto, corpo = nome, email, messaggio e in fondo la frase del consenso. */
+  ctConsenso() { return "Ho letto l'informativa e acconsento al trattamento dei miei dati per ricevere una risposta."; }
+  ctMailto(d) {
+    d = d || {};
+    const corpo = [
+      "Nome: " + (String(d.nome || "").trim() || "non indicato"),
+      "Email: " + (String(d.mail || "").trim() || "non indicata"),
+      "",
+      String(d.testo || "").replace(/\r\n?/g, "\n").trim().replace(/\n/g, "\r\n"),
+      "",
+      "---",
+      this.ctConsenso()
+    ].join("\r\n");
+    return "mailto:info@screeningitalia.it?subject=" + encodeURIComponent(d.tipo || "Messaggio dal sito") +
+      "&body=" + encodeURIComponent(corpo);
+  }
+  ctInvia() {
+    const s = this.state;
+    const err = {};
+    if (!String(s.mTesto || "").trim()) { err.testo = true; }
+    if (!s.mOk) { err.ok = true; }
+    const primo = err.testo ? "m-testo" : (err.ok ? "m-ok" : "");
+    if (primo) {
+      this.setState({ mErr: err }, () => {
+        const el = document.getElementById(primo);
+        if (el) { try { el.focus(); } catch (e) {} }
+      });
+      return;
+    }
+    const url = this.ctMailto({ tipo: s.mTipo || "Segnalo un’iniziativa", nome: s.mNome, mail: s.mMail, testo: s.mTesto });
+    this.setState({ mErr: null, msgInviato: true });
+    const W = window.EsperienzeWP;
+    if (W && W.apri) { W.apri(url); } else { try { window.location.href = url; } catch (e) {} }
   }
   /* Invito a fine articolo (blocco 3): la variante la sceglie la categoria WordPress
      dell'articolo, per slug. Una sola categoria screening = quella variante;
