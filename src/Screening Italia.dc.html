@@ -1462,7 +1462,8 @@
                     </div>
                     <div class="fx col gap6">
                       <label class="etichetta" for="m-testo">Il tuo messaggio</label>
-                      <textarea class="campo campo-area" id="m-testo" rows="5" required="required" placeholder="Scrivi qui. Se segnali un’iniziativa, indica ente, sede, date e recapito." value="{{ mTesto }}" onInput="{{ scriviTesto }}" aria-invalid="{{ mInvTesto }}" aria-describedby="{{ mDescTesto }}"></textarea>
+                      <textarea class="campo campo-area" id="m-testo" rows="5" maxLength="1200" required="required" placeholder="Scrivi qui. Se segnali un’iniziativa, indica ente, sede, date e recapito." value="{{ mTesto }}" onInput="{{ scriviTesto }}" aria-invalid="{{ mInvTesto }}" aria-describedby="{{ mDescTesto }}"></textarea>
+                      <p class="nota" id="m-conta">{{ mConta }}</p>
                       <sc-if value="{{ mErrTesto }}" hint-placeholder-val="{{ false }}">
                         <p class="errore" id="m-err-testo" role="alert">Scrivi il tuo messaggio prima di andare avanti.</p>
                       </sc-if>
@@ -1477,7 +1478,7 @@
                       </sc-if>
                     </div>
                     <button type="button" class="cta" onClick="{{ inviaModulo }}">Apri la mail con il messaggio</button>
-                    <p class="nota">Si apre la tua posta con il messaggio già scritto. Parte solo quando premi «Invia» lì. Dal sito non salviamo nulla.</p>
+                    <p class="nota">Si apre la tua posta con il testo già scritto. Il messaggio parte solo quando premi «Invia» lì. Dal sito non salviamo nulla.</p>
                     <p class="nota">Il messaggio arriva a info@screeningitalia.it. Usiamo questi dati solo per risponderti: non chiediamo né registriamo informazioni sanitarie.</p>
                   </div>
                 </sc-if>

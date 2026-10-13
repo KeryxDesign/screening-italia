@@ -5,11 +5,11 @@
 <meta name="googlebot" content="noindex, nofollow">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=414542d"></script>
-<script src="./logica-render.js?v=414542d"></script>
-<script src="./logica-classe.js?v=414542d"></script>
-<script src="./screening-pagine.js?v=414542d"></script>
-<script src="./logica-screening.js?v=414542d"></script>
+<script src="./support.js?v=fca362c"></script>
+<script src="./logica-render.js?v=fca362c"></script>
+<script src="./logica-classe.js?v=fca362c"></script>
+<script src="./screening-pagine.js?v=fca362c"></script>
+<script src="./logica-screening.js?v=fca362c"></script>
 </head>
 <body>
 <x-dc>
@@ -33,17 +33,17 @@
         <meta name="ext-resource-dependency" content="https://img.magnific.com/free-photo/thank-you-your-visit-my-office_329181-2204.jpg">
         <meta name="ext-resource-dependency" content="https://img.magnific.com/free-photo/charming-woman-with-short-hairstyle-hat-blue-blouse-holds-map-points-side-smiles-with-grey-haired-man-with-camera-park_197531-19155.jpg">
         <meta name="ext-resource-dependency" content="https://img.magnific.com/free-photo/senior-woman-answering-doctor-questions-examination-hospital-room_482257-8442.jpg">
-        <link rel="stylesheet" href="./stile.css?v=414542d">
-        <link rel="stylesheet" href="./screening.css?v=414542d">
-        <script src="./accessibilita.js?v=414542d"></script>
-        <script src="./iniziative.js?v=414542d"></script>
-        <script src="./iniziative-wp.js?v=414542d"></script>
-        <script src="./articoli.js?v=414542d"></script>
-        <script src="./testimonianze-wp.js?v=414542d"></script>
-        <script src="./esperienze-wp.js?v=414542d"></script>
-        <script src="./regioni-italia.js?v=414542d"></script>
-        <script src="./mappa.js?v=414542d"></script>
-        <script src="./image-slot.js?v=414542d"></script>
+        <link rel="stylesheet" href="./stile.css?v=fca362c">
+        <link rel="stylesheet" href="./screening.css?v=fca362c">
+        <script src="./accessibilita.js?v=fca362c"></script>
+        <script src="./iniziative.js?v=fca362c"></script>
+        <script src="./iniziative-wp.js?v=fca362c"></script>
+        <script src="./articoli.js?v=fca362c"></script>
+        <script src="./testimonianze-wp.js?v=fca362c"></script>
+        <script src="./esperienze-wp.js?v=fca362c"></script>
+        <script src="./regioni-italia.js?v=fca362c"></script>
+        <script src="./mappa.js?v=fca362c"></script>
+        <script src="./image-slot.js?v=fca362c"></script>
         <style>
           /* Marcatore di bozza (sezione articoli sotto le Domande frequenti, 23/09/2026):
              esce insieme al testo di prova, prima del build. */
@@ -78,7 +78,7 @@
 
         <div class="hdr">
           <div class="wrap hdr-riga">
-            <a class="marchio" href="#/" title="Torna alla home" aria-label="Screening Italia, torna alla home"><img class="marchio-img" src="./marchio/screening-italia-chiaro.png?v=414542d" alt="Screening Italia" width="1169" height="440" /></a>
+            <a class="marchio" href="#/" title="Torna alla home" aria-label="Screening Italia, torna alla home"><img class="marchio-img" src="./marchio/screening-italia-chiaro.png?v=fca362c" alt="Screening Italia" width="1169" height="440" /></a>
             <input class="menu-chk" type="checkbox" id="menu-chk" aria-label="Apri il menu">
             <label class="hamb" for="menu-chk">
               <svg class="i-apri" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
@@ -1385,7 +1385,7 @@
                 <h2>Il marchio</h2>
                 <p class="nota">Area di servizio del prototipo: trascina qui il file del logo. Una volta caricato lo portiamo nell’intestazione al posto della scritta.</p>
                 <div class="marchio-vetrina">
-                  <img src="./marchio/screening-italia.png?v=414542d" alt="Marchio Screening Italia su fondo chiaro" width="1169" height="440">
+                  <img src="./marchio/screening-italia.png?v=fca362c" alt="Marchio Screening Italia su fondo chiaro" width="1169" height="440">
                 </div>
                 <div class="fx col gap8">
                   <div class="dato"><span class="et">Colori</span><span class="vl">nero #1E1E1E · verde #226E46 · rosso #DA2627</span></div>
@@ -1464,7 +1464,8 @@
                     </div>
                     <div class="fx col gap6">
                       <label class="etichetta" for="m-testo">Il tuo messaggio</label>
-                      <textarea class="campo campo-area" id="m-testo" rows="5" required="required" placeholder="Scrivi qui. Se segnali un’iniziativa, indica ente, sede, date e recapito." value="{{ mTesto }}" onInput="{{ scriviTesto }}" aria-invalid="{{ mInvTesto }}" aria-describedby="{{ mDescTesto }}"></textarea>
+                      <textarea class="campo campo-area" id="m-testo" rows="5" maxLength="1200" required="required" placeholder="Scrivi qui. Se segnali un’iniziativa, indica ente, sede, date e recapito." value="{{ mTesto }}" onInput="{{ scriviTesto }}" aria-invalid="{{ mInvTesto }}" aria-describedby="{{ mDescTesto }}"></textarea>
+                      <p class="nota" id="m-conta">{{ mConta }}</p>
                       <sc-if value="{{ mErrTesto }}" hint-placeholder-val="{{ false }}">
                         <p class="errore" id="m-err-testo" role="alert">Scrivi il tuo messaggio prima di andare avanti.</p>
                       </sc-if>
@@ -1479,7 +1480,7 @@
                       </sc-if>
                     </div>
                     <button type="button" class="cta" onClick="{{ inviaModulo }}">Apri la mail con il messaggio</button>
-                    <p class="nota">Si apre la tua posta con il messaggio già scritto. Parte solo quando premi «Invia» lì. Dal sito non salviamo nulla.</p>
+                    <p class="nota">Si apre la tua posta con il testo già scritto. Il messaggio parte solo quando premi «Invia» lì. Dal sito non salviamo nulla.</p>
                     <p class="nota">Il messaggio arriva a info@screeningitalia.it. Usiamo questi dati solo per risponderti: non chiediamo né registriamo informazioni sanitarie.</p>
                   </div>
                 </sc-if>
@@ -2125,7 +2126,7 @@
 
             <div class="ftr-alto">
               <div class="ftr-marchio fx col gap12">
-                <img class="ftr-marchio-img" src="./marchio/screening-italia-chiaro.png?v=414542d" alt="Screening Italia" width="1169" height="440">
+                <img class="ftr-marchio-img" src="./marchio/screening-italia-chiaro.png?v=fca362c" alt="Screening Italia" width="1169" height="440">
                 <p class="ftr-claim">Un elenco curato a mano delle iniziative di screening aperte in Italia. Ogni segnalazione è verificata sulla fonte ufficiale prima di essere pubblicata.</p>
                 <a class="ftr-wa" href="mailto:info@screeningitalia.it?subject=Messaggio%20dal%20sito%20Screening%20Italia">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg>
