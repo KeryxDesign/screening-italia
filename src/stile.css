@@ -1175,9 +1175,6 @@ html.contrasto .invito .invito-tit{color:#002445}
 .b-verde{background:var(--azzurro-tenue);box-shadow:0 0 0 100vmax var(--azzurro-tenue)}
 .occhiello{color:var(--accento)}
 .hero .occhiello{color:var(--oro-chiaro)}
-.banda:not(.hero) h2::after{content:"";display:block;width:56px;height:4px;border-radius:2px;
-  background:var(--accento);margin:16px auto 0}
-.card h2::after,.avviso h2::after,.art h2::after,.pag-scr h2::after{margin-left:0}
 .passo .num{background:linear-gradient(180deg,#FFD34F 0%,#F0A800 100%);color:#14100A;font-weight:700;
   box-shadow:0 2px 6px rgba(122,80,0,0.22),inset 0 0 0 2px var(--oro-bordo)}
 .ftr-tit{color:var(--oro-chiaro) !important}
