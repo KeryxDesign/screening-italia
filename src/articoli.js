@@ -362,37 +362,43 @@ window.Articoli = (function () {
     };
   }
 
-  /* Segnaposto di repertorio (LORI, 13/10/2026): quando l'articolo non ha
-     immagine in evidenza si usa l'illustrazione della sua prima categoria.
-     File OSPITATI NEL REPO (percorso relativo, servito da GitHub Pages):
-     ⛔ mai un indirizzo esterno, nessuna richiesta a terzi per le immagini.
-     Una categoria che non e in mappa usa la generica. Per aggiungere una
-     categoria basta il file in img/categorie/ e una riga qui sotto.
-     Categorie ancora senza illustrazione approvata da LORI (usano la
-     generica): mammografico, colon-retto, prostata, cervicale, neonatale,
-     diabete-celiachia, inviti-e-lettere, testimonianze, buone-pratiche,
-     difficolta-disservizi, polmonare, epatite-c. */
-  var SEGNAPOSTO_DIR = "./img/categorie/";
-  var SEGNAPOSTO_GENERICO = "generica.webp";
-  var SEGNAPOSTO_PER_CATEGORIA = {
-    "come-funziona": "generica.webp"
+  /* Foto di repertorio (Florbo, 13/10/2026: «le immagini degli articoli
+     sono sempre le stesse»). Si pesca tra le foto gia sul sito (img/foto,
+     ospitate nel repo), scelte per tono sereno: niente letti d'ospedale,
+     niente mascherine. La scelta dipende dall'id del post, quindi lo stesso
+     articolo ha sempre la stessa foto e articoli vicini hanno foto diverse.
+     Prostata: solo foto con uomini; mammografico e cervicale: solo donne. */
+  var FOTO_DIR = "./img/foto/";
+  var FOTO_TUTTE = [
+    "foto-637285-1194.webp", "foto-329181-2204.webp", "foto-637285-1471.webp",
+    "foto-273609-45998.webp", "foto-637285-5309.webp", "foto-637285-11352.webp",
+    "foto-197531-19155.webp", "foto-637285-1891.webp", "foto-637285-5300.webp",
+    "foto-74855-23397.webp", "foto-197531-19160.webp"
+  ];
+  var FOTO_PER_CATEGORIA = {
+    "prostata": ["foto-637285-1471.webp", "foto-637285-11352.webp", "foto-637285-1891.webp"],
+    "mammografico": ["foto-329181-2204.webp", "foto-637285-5300.webp", "foto-637285-5309.webp"],
+    "cervicale": ["foto-637285-5300.webp", "foto-329181-2204.webp", "foto-637285-5309.webp"]
   };
 
   /* Immagine di repertorio per un articolo senza immagine in evidenza.
      alt vuoto: e decorativa, non aggiunge informazione al titolo. */
-  function immagineSegnaposto(categorie) {
+  function immagineSegnaposto(categorie, id) {
     var c = categorie && categorie[0];
     var slug = c ? String(c.slug || "") : "";
-    var file = Object.prototype.hasOwnProperty.call(SEGNAPOSTO_PER_CATEGORIA, slug)
-      ? SEGNAPOSTO_PER_CATEGORIA[slug] : SEGNAPOSTO_GENERICO;
-    var url = SEGNAPOSTO_DIR + file;
+    var lista = Object.prototype.hasOwnProperty.call(FOTO_PER_CATEGORIA, slug)
+      ? FOTO_PER_CATEGORIA[slug] : FOTO_TUTTE;
+    var n = Math.abs(parseInt(id, 10) || 0);
+    var url = FOTO_DIR + lista[n % lista.length];
     var t = { url: url, larghezza: 1200, altezza: 675 };
     return {
       url: url,
       alt: "",
       larghezza: 1200,
       altezza: 675,
-      segnaposto: true,
+      /* E una foto, non un'illustrazione: la didascalia resta
+         «Foto di repertorio: non ritrae pazienti ne casi reali». */
+      segnaposto: false,
       taglie: { piccola: t, media: t, grande: t }
     };
   }
@@ -441,7 +447,7 @@ window.Articoli = (function () {
       testoSemplice: soloTesto(contenuto),
       /* Immagine in evidenza; se manca, il segnaposto della prima
          categoria (immagine.segnaposto === true). Mai null. */
-      immagine: leggiImmagine(post) || immagineSegnaposto(categorie),
+      immagine: leggiImmagine(post) || immagineSegnaposto(categorie, post.id),
       categorie: categorie,
       /* Vero se l'articolo e protetto da password: il contenuto arriva vuoto
          e la pagina non deve mostrare una scheda muta. */
