@@ -362,6 +362,41 @@ window.Articoli = (function () {
     };
   }
 
+  /* Segnaposto di repertorio (LORI, 13/10/2026): quando l'articolo non ha
+     immagine in evidenza si usa l'illustrazione della sua prima categoria.
+     File OSPITATI NEL REPO (percorso relativo, servito da GitHub Pages):
+     ⛔ mai un indirizzo esterno, nessuna richiesta a terzi per le immagini.
+     Una categoria che non e in mappa usa la generica. Per aggiungere una
+     categoria basta il file in img/categorie/ e una riga qui sotto.
+     Categorie ancora senza illustrazione approvata da LORI (usano la
+     generica): mammografico, colon-retto, prostata, cervicale, neonatale,
+     diabete-celiachia, inviti-e-lettere, testimonianze, buone-pratiche,
+     difficolta-disservizi, polmonare, epatite-c. */
+  var SEGNAPOSTO_DIR = "./img/categorie/";
+  var SEGNAPOSTO_GENERICO = "generica.webp";
+  var SEGNAPOSTO_PER_CATEGORIA = {
+    "come-funziona": "generica.webp"
+  };
+
+  /* Immagine di repertorio per un articolo senza immagine in evidenza.
+     alt vuoto: e decorativa, non aggiunge informazione al titolo. */
+  function immagineSegnaposto(categorie) {
+    var c = categorie && categorie[0];
+    var slug = c ? String(c.slug || "") : "";
+    var file = Object.prototype.hasOwnProperty.call(SEGNAPOSTO_PER_CATEGORIA, slug)
+      ? SEGNAPOSTO_PER_CATEGORIA[slug] : SEGNAPOSTO_GENERICO;
+    var url = SEGNAPOSTO_DIR + file;
+    var t = { url: url, larghezza: 1200, altezza: 675 };
+    return {
+      url: url,
+      alt: "",
+      larghezza: 1200,
+      altezza: 675,
+      segnaposto: true,
+      taglie: { piccola: t, media: t, grande: t }
+    };
+  }
+
   /* Estrae le categorie dai dati incorporati. Sempre un array, anche vuoto. */
   function leggiCategorie(post) {
     var inc = post && post._embedded;
@@ -386,6 +421,7 @@ window.Articoli = (function () {
     if (!post || typeof post !== "object") { return null; }
     var contenuto = (post.content && post.content.rendered) || "";
     var estratto = (post.excerpt && post.excerpt.rendered) || "";
+    var categorie = leggiCategorie(post);
 
     return {
       id: post.id,
@@ -403,9 +439,10 @@ window.Articoli = (function () {
       testoHtml: ripulisciHtml(contenuto),
       /* Lo stesso testo senza marcatura: utile per meta description o ricerca. */
       testoSemplice: soloTesto(contenuto),
-      /* null quando non c'e immagine in evidenza. */
-      immagine: leggiImmagine(post),
-      categorie: leggiCategorie(post),
+      /* Immagine in evidenza; se manca, il segnaposto della prima
+         categoria (immagine.segnaposto === true). Mai null. */
+      immagine: leggiImmagine(post) || immagineSegnaposto(categorie),
+      categorie: categorie,
       /* Vero se l'articolo e protetto da password: il contenuto arriva vuoto
          e la pagina non deve mostrare una scheda muta. */
       protetto: !!(post.content && post.content.protected)

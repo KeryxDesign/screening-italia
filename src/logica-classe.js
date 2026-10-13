@@ -941,7 +941,9 @@ class Component extends DCLogic {
       href: "#/articolo/" + encodeURIComponent(a.slug),
       aria: "Leggi la risposta: " + a.titolo,
       haFoto: !!(a.immagine && a.immagine.url),
-      foto: a.immagine && a.immagine.url ? a.immagine.url : ""
+      foto: a.immagine && a.immagine.url ? a.immagine.url : "",
+      // Illustrazione di repertorio della categoria (articoli.js), non foto WordPress.
+      segnaposto: !!(a.immagine && a.immagine.segnaposto)
     };
   }
   /* Home «Ultimi aggiornamenti» (brief LORI 26/09/2026): i primi 4 per data.
@@ -955,11 +957,16 @@ class Component extends DCLogic {
   // Vista articolo riempita con un articolo WordPress.
   voceArticolo() {
     const v = this.statoVoce() === "ok" ? this.state.voce : null;
-    if (!v) { return { slot: "art-wp", foto: "", haFoto: false, cat: "", titolo: "", sommario: "", data: "", corpo: [], tornaHref: "#/domande", tornaTesto: "← Torna alle domande frequenti" }; }
+    if (!v) { return { slot: "art-wp", foto: "", haFoto: false, segnaposto: false, didascalia: "", cat: "", titolo: "", sommario: "", data: "", corpo: [], tornaHref: "#/domande", tornaTesto: "← Torna alle domande frequenti" }; }
     const c = (v.categorie || [])[0];
     return {
       slot: "art-wp-" + v.id, foto: v.immagine && v.immagine.url ? v.immagine.url : "",
       haFoto: !!(v.immagine && v.immagine.url),
+      segnaposto: !!(v.immagine && v.immagine.segnaposto),
+      // Il segnaposto e un'illustrazione: «Foto di repertorio» sarebbe falso.
+      didascalia: v.immagine && v.immagine.segnaposto
+        ? "Illustrazione di repertorio."
+        : "Foto di repertorio: non ritrae pazienti né casi reali.",
       cat: c ? c.nome : "", titolo: v.titolo, sommario: v.estratto,
       data: this.dataArticolo(v.dataIso), corpo: [],
       tornaHref: "#/domande", tornaTesto: "← Torna alle domande frequenti"

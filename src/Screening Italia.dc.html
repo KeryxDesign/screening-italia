@@ -1836,7 +1836,7 @@
                 <sc-if value="{{ art.haFoto }}" hint-placeholder-val="{{ true }}">
                 <figure class="art-figura">
                   <span class="art-figura-img"><image-slot id="{{ art.slot }}" src="{{ art.foto }}" shape="rect" placeholder="Foto dell articolo"></image-slot></span>
-                  <figcaption class="art-didascalia">Foto di repertorio: non ritrae pazienti né casi reali.</figcaption>
+                  <figcaption class="art-didascalia">{{ art.didascalia }}</figcaption>
                 </figure>
                 </sc-if>
               </div>
