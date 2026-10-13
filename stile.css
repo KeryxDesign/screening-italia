@@ -787,15 +787,15 @@ html.contrasto .tel{background:#00243A}
 }
 .cta:active,.tel:active{transform:none;box-shadow:0 1px 3px rgba(80,40,16,0.3) !important}
 .cta-2{
-  background:linear-gradient(180deg,#FFFFFF 0%,#F4F7FA 100%) !important;
+  background:#FFFFFF !important;
   color:var(--azzurro) !important;
   border:none !important;
-  box-shadow:0 1px 3px rgba(4,40,64,0.12),inset 0 0 0 1.5px rgba(11,60,93,0.28) !important;
+  box-shadow:0 1px 3px rgba(4,40,64,0.12),inset 0 0 0 2px var(--verde) !important;
 }
 .cta-2:hover{
-  background:linear-gradient(180deg,#F4F8FC 0%,#E3ECF4 100%) !important;
+  background:var(--verde-tenue) !important;
   color:#072B42 !important;transform:translateY(-1px);
-  box-shadow:0 6px 14px rgba(4,40,64,0.14) !important;
+  box-shadow:0 6px 14px rgba(4,40,64,0.14),inset 0 0 0 2px var(--verde-scuro) !important;
 }
 .tel{font-weight:700;letter-spacing:0.01em}
 html.contrasto .tel{background:#FFD100 !important;color:#000 !important;border:none !important;box-shadow:inset 0 0 0 2.5px #000 !important}
@@ -1159,3 +1159,29 @@ html.contrasto .ini-tipo svg{color:#000}
 }
 html.contrasto .invito-banda{border-top:2.5px solid #000}
 html.contrasto .invito .invito-tit{color:#002445}
+
+/* ============ Accenti e bande (LORI, 2026-10-13) ============ */
+/* Terracotta = azione e segnaletica; giallo caldo = evidenza, mai come testo su chiaro.
+   Bande: bianco / sabbia calda, una sola banda azzurra chiara (b-verde). */
+:root{
+  --accento:#A63D17;        /* testo 6.36:1 su bianco, 5.17:1 su sabbia */
+  --oro:#F0B429;            /* solo riempimento con testo scuro, o su blu scuro */
+  --oro-chiaro:#FFD34F;
+  --oro-bordo:#8A5A00;      /* contorno del giallo: 4.8:1 su sabbia */
+  --sabbia:#F3E6D2;         /* 1.23:1 sul bianco, 1.15:1 sulla carta */
+  --azzurro-tenue:#DCEAF7;
+}
+.b-crema{background:var(--sabbia);box-shadow:0 0 0 100vmax var(--sabbia)}
+.b-verde{background:var(--azzurro-tenue);box-shadow:0 0 0 100vmax var(--azzurro-tenue)}
+.occhiello{color:var(--accento)}
+.hero .occhiello{color:var(--oro-chiaro)}
+.banda:not(.hero) h2::after{content:"";display:block;width:56px;height:4px;border-radius:2px;
+  background:var(--accento);margin:16px auto 0}
+.card h2::after,.avviso h2::after,.art h2::after,.pag-scr h2::after{margin-left:0}
+.passo .num{background:linear-gradient(180deg,#FFD34F 0%,#F0A800 100%);color:#14100A;font-weight:700;
+  box-shadow:0 2px 6px rgba(122,80,0,0.22),inset 0 0 0 2px var(--oro-bordo)}
+.ftr-tit{color:var(--oro-chiaro) !important}
+html.contrasto{--accento:#8A2600;--oro-bordo:#000000}
+html.contrasto .occhiello{color:#8A2600}
+html.contrasto .hero .occhiello{color:#FFD100}
+html.contrasto .passo .num{background:#FFD100;color:#000;box-shadow:inset 0 0 0 2.5px #000}
