@@ -8,9 +8,12 @@ class Component extends DCLogic {
       artArg: null, artQuanti: 6, artStato: null, artDati: null,
       // Pagine screening (25/09/2026): regione scelta nella pagina, resta per la sessione.
       regScr: null,
-      // Tendina «Gli screening»: null = stato di partenza (chiusa da desktop,
-      // aperta nel pannello hamburger se la rotta e #/screening*).
-      scrAperto: null,
+      // Tendine del menu («Gli screening», «Esperienze»): una sola aperta alla volta.
+      // menuAperto: "scr" | "esp" | "" (tutte chiuse) | null = stato di partenza
+      // (chiuse da desktop; nel pannello hamburger aperta quella della rotta).
+      menuAperto: null,
+      // Modulo #/racconta (SENTINEL 13/10/2026): niente salvato, niente fetch.
+      rcTipo: null, rcReg: "", rcScr: "", rcTesto: "", rcOk: false, rcErr: null, rcAperta: false,
       // Schede dell'elenco regione aperte a fisarmonica (blocco 2, 26/09/2026): id -> true.
       iniAperte: {} };
     this.mappaRef = (el) => { this.mapEl = el; this.disegnaMappa(); };
@@ -140,7 +143,7 @@ class Component extends DCLogic {
 
     this.onHash = () => {
       const r = this.leggiRotta();
-      this.setState({ rotta: r, tipi: [], inviato: false, mail: "", scrAperto: false });
+      this.setState({ rotta: r, tipi: [], inviato: false, mail: "", menuAperto: "", ...this.rcDaRotta(r) });
       this.chiudiHamburger();
       window.scrollTo(0, 0);
     };
@@ -169,6 +172,11 @@ class Component extends DCLogic {
         this.forceUpdate();
       }
       this.curaTesti();
+      // Buone pratiche e Difficolta (esperienze-wp.js, 13/10/2026): stesso giro.
+      if ((window.__siEspVer || 0) !== (this.espVer || 0)) {
+        this.espVer = window.__siEspVer || 0;
+        this.forceUpdate();
+      }
       if ((window.__siIniziativeVer || 0) !== (this.iniVer || 0)) {
         this.iniVer = window.__siIniziativeVer || 0;
         // La mappa si ridisegna solo se cambia regione: si azzera il segno per i nuovi conteggi.
@@ -437,11 +445,21 @@ class Component extends DCLogic {
   eDesktop() {
     try { return window.matchMedia("(min-width:1200px)").matches; } catch (e) { return true; }
   }
-  scrAperto() {
-    const a = this.state.scrAperto;
-    if (a === true || a === false) { return a; }
-    return !this.eDesktop() && this.state.rotta.vista === "screening";
+  /* Tendine «Gli screening» ed «Esperienze» (13/10/2026): un solo stato,
+     cosi le due si escludono. Sotto 1200px, in partenza, e aperta quella della rotta. */
+  menu() {
+    const a = this.state.menuAperto;
+    if (typeof a === "string") { return a; }
+    if (this.eDesktop()) { return ""; }
+    const v = this.state.rotta.vista;
+    if (v === "screening") { return "scr"; }
+    if (this.eRottaEsperienze(v)) { return "esp"; }
+    return "";
   }
+  eRottaEsperienze(v) { return ["testimonianze", "buone-pratiche", "difficolta", "racconta"].indexOf(v) !== -1; }
+  scrAperto() { return this.menu() === "scr"; }
+  espAperto() { return this.menu() === "esp"; }
+  apriChiudi(k) { this.setState({ menuAperto: this.menu() === k ? "" : k }); }
   // Cambio rotta (collaudo LORI giro 1): il pannello hamburger si chiude, la pagina nuova resta visibile.
   chiudiHamburger() {
     const c = document.getElementById("menu-chk");
@@ -453,12 +471,14 @@ class Component extends DCLogic {
   }
   avviaTendina() {
     const dentro = (el) => !!(el && el.closest && el.closest(".nav-voce"));
-    const chiudi = () => { if (this.eDesktop() && this.scrAperto()) { this.setState({ scrAperto: false }); } };
+    const chiudi = () => { if (this.eDesktop() && this.menu()) { this.setState({ menuAperto: "" }); } };
     this.onClickFuori = (e) => { if (!dentro(e.target)) { chiudi(); } };
     this.onEscTendina = (e) => {
-      if (e.key !== "Escape" || !this.eDesktop() || !this.scrAperto()) { return; }
-      this.setState({ scrAperto: false });
-      const b = document.querySelector(".nav-tendina");
+      const k = this.menu();
+      if (e.key !== "Escape" || !this.eDesktop() || !k) { return; }
+      this.setState({ menuAperto: "" });
+      // Il focus torna al pulsante della tendina aperta, non alla prima della riga.
+      const b = document.querySelector('.nav-tendina[aria-controls="' + (k === "esp" ? "menu-esperienze" : "menu-screening") + '"]');
       if (b) { b.focus(); }
     };
     this.onFocusTendina = (e) => { if (!dentro(e.target)) { chiudi(); } };
@@ -466,7 +486,7 @@ class Component extends DCLogic {
     document.addEventListener("keydown", this.onEscTendina);
     document.addEventListener("focusin", this.onFocusTendina);
     // Passando la soglia dei 1200px la tendina torna allo stato di partenza.
-    this.onCambioLarghezza = () => this.setState({ scrAperto: null });
+    this.onCambioLarghezza = () => this.setState({ menuAperto: null });
     try { this.mqDesktop = window.matchMedia("(min-width:1200px)"); this.mqDesktop.addEventListener("change", this.onCambioLarghezza); } catch (e) {}
   }
   centraNav() {
@@ -480,17 +500,21 @@ class Component extends DCLogic {
   vaiA(rotta) {
     const pulita = String(rotta).replace(/^#\/?/, "");
     const p = pulita.split("/");
-    let vista = p[0] || "";
-    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening"];
+    // #/racconta?tipo=difficolta: la domanda preseleziona il tipo, non fa parte della vista.
+    const q0 = (p[0] || "").split("?");
+    let vista = q0[0];
+    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening", "buone-pratiche", "difficolta", "racconta"];
     if (note.indexOf(vista) === -1) { vista = ""; }
     let arg = p[1] ? decodeURIComponent(p[1]) : "";
+    if (vista === "racconta") { arg = this.tipoDaDomanda(q0[1]); }
     // Alias permanente (brief LORI 25/09/2026): #/prostata e ora #/screening/prostata.
     if (vista === "prostata") { vista = "screening"; arg = "prostata"; rotta = "#/screening/prostata"; }
     // Vecchie FAQ interne e #/articolo senza argomento: portano a #/domande (brief LORI 26/09/2026).
     if (this.eVecchiaFaq(vista, arg)) { vista = "domande"; arg = ""; rotta = "#/domande"; }
     if (vista === "screening" && !this.scrValido(arg)) { arg = ""; }
     const sez = this.sezValida(vista, arg, p[2]);
-    this.setState({ rotta: { vista: vista, arg: arg, sez: sez }, tipi: [], inviato: false, mail: "", scrAperto: false },
+    const nuova = { vista: vista, arg: arg, sez: sez };
+    this.setState({ rotta: nuova, tipi: [], inviato: false, mail: "", menuAperto: "", ...this.rcDaRotta(nuova) },
       () => this.portaASezione());
     this.chiudiHamburger();
     window.scrollTo(0, 0);
@@ -503,10 +527,12 @@ class Component extends DCLogic {
     let h = "";
     try { h = String(window.location.hash || "").replace(/^#\/?/, ""); } catch (e) {}
     const p = h.split("/");
-    let vista = p[0] || "";
+    const q0 = (p[0] || "").split("?");
+    let vista = q0[0];
     let arg = p[1] ? decodeURIComponent(p[1]) : "";
-    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening"];
+    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening", "buone-pratiche", "difficolta", "racconta"];
     if (note.indexOf(vista) === -1) { vista = ""; }
+    if (vista === "racconta") { arg = this.tipoDaDomanda(q0[1]); }
     // Alias permanente: #/prostata diventa #/screening/prostata senza voce doppia nella cronologia.
     if (vista === "prostata") {
       vista = "screening"; arg = "prostata";
@@ -722,6 +748,54 @@ class Component extends DCLogic {
     if (this.state.rotta.vista !== "testimonianze" || t.stato !== "fatto" || this.storie().length) { return; }
     try { window.history.replaceState(null, "", "#/"); } catch (e) {}
     this.setState({ rotta: { vista: "", arg: "", sez: "" } });
+  }
+  /* Esperienze (13/10/2026): Buone pratiche e Difficolta da esperienze-wp.js.
+     Riga sotto il titolo: «Regione · Screening · mese anno». */
+  esperienze(chi) {
+    const e = window.__siEsperienze || {};
+    const lista = e.stato === "fatto" && Array.isArray(e[chi]) ? e[chi] : [];
+    return lista.map((x) => ({
+      titolo: x.titolo,
+      riga: [x.riga, x.meseAnno].filter(Boolean).join(" · "),
+      paragrafi: (x.paragrafi || []).map((p) => ({ t: p }))
+    }));
+  }
+  /* ---- Modulo #/racconta ----
+     Il tipo si preseleziona da #/racconta?tipo=difficolta|buona (link delle pagine). */
+  tipoDaDomanda(q) {
+    const m = /(?:^|&)tipo=([a-z-]+)/.exec(q || "");
+    return m && (m[1] === "difficolta" || m[1] === "buona") ? m[1] : "";
+  }
+  rcDaRotta(r) {
+    if (!r || r.vista !== "racconta") { return { rcErr: null, rcAperta: false }; }
+    const t = r.arg === "difficolta" ? "diff" : (r.arg === "buona" ? "bp" : null);
+    return t ? { rcTipo: t, rcErr: null, rcAperta: false } : { rcErr: null, rcAperta: false };
+  }
+  rcTipoNome(t) { return t === "bp" ? "Una cosa che ha funzionato" : (t === "diff" ? "Un disservizio" : ""); }
+  rcScreening() {
+    return ["Mammografico", "Cervice uterina", "Colon-retto", "Prostata", "Neonatale", "Diabete e celiachia pediatrici", "Polmonare", "Epatite C (HCV)", "Altro"];
+  }
+  rcInvia() {
+    const s = this.state;
+    const err = {};
+    if (!s.rcTipo) { err.tipo = true; }
+    if (!String(s.rcTesto || "").trim()) { err.testo = true; }
+    if (!s.rcOk) { err.ok = true; }
+    const primo = err.tipo ? "rc-tipo-bp" : (err.testo ? "rc-testo" : (err.ok ? "rc-ok" : ""));
+    if (primo) {
+      this.setState({ rcErr: err }, () => {
+        const el = document.getElementById(primo);
+        if (el) { try { el.focus(); } catch (e) {} }
+      });
+      return;
+    }
+    const W = window.EsperienzeWP;
+    const url = W && W.mailto ? W.mailto({
+      tipo: this.rcTipoNome(s.rcTipo), regione: s.rcReg, screening: s.rcScr, racconto: s.rcTesto
+    }) : "";
+    if (!url) { return; }
+    this.setState({ rcErr: null, rcAperta: true });
+    W.apri(url);
   }
   /* Invito a fine articolo (blocco 3): la variante la sceglie la categoria WordPress
      dell'articolo, per slug. Una sola categoria screening = quella variante;

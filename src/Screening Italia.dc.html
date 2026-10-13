@@ -38,6 +38,7 @@
         <script src="./iniziative-wp.js"></script>
         <script src="./articoli.js"></script>
         <script src="./testimonianze-wp.js"></script>
+        <script src="./esperienze-wp.js"></script>
         <script src="./regioni-italia.js"></script>
         <script src="./mappa.js"></script>
         <script src="./image-slot.js"></script>
@@ -96,7 +97,19 @@
                 </div>
               </div>
               <a href="#/enti" aria-current="{{ navEnti }}">Per ASL ed enti</a>
-              <sc-if value="{{ haTesti }}" hint-placeholder-val="{{ false }}"><a href="#/testimonianze" aria-current="{{ navTesti }}">Testimonianze</a></sc-if>
+              <!-- Tendina «Esperienze» (brief 13/10/2026): esce se almeno una categoria ha post;
+                   ogni voce solo se la sua categoria ha post, «Racconta la tua» sempre. -->
+              <sc-if value="{{ haEsperienze }}" hint-placeholder-val="{{ false }}">
+              <div class="nav-voce">
+                <button type="button" class="nav-tendina" aria-expanded="{{ espAperto }}" aria-controls="menu-esperienze" aria-current="{{ navEsp }}" onClick="{{ espApriChiudi }}">Esperienze<svg class="nav-freccia" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+                <div class="nav-menu" id="menu-esperienze">
+                  <sc-if value="{{ haTesti }}" hint-placeholder-val="{{ false }}"><a href="#/testimonianze" aria-current="{{ navTesti }}">Testimonianze</a></sc-if>
+                  <sc-if value="{{ haBp }}" hint-placeholder-val="{{ false }}"><a href="#/buone-pratiche" aria-current="{{ navBp }}">Buone pratiche</a></sc-if>
+                  <sc-if value="{{ haDiff }}" hint-placeholder-val="{{ false }}"><a href="#/difficolta" aria-current="{{ navDiff }}">Difficoltà e disservizi</a></sc-if>
+                  <a href="#/racconta" aria-current="{{ navRacconta }}">Racconta la tua</a>
+                </div>
+              </div>
+              </sc-if>
               <a href="#/domande" aria-current="{{ navDomande }}">Domande frequenti</a>
               <a href="#/chi" aria-current="{{ navChi }}">Chi siamo</a>
               <a href="#/contatti" aria-current="{{ navContatti }}">Contatti</a>
@@ -232,6 +245,49 @@
                 <sc-if value="{{ testiAltri }}" hint-placeholder-val="{{ false }}">
                 <a class="cta-2 testi-tutte" href="#/testimonianze">Leggi tutte le testimonianze</a>
                 </sc-if>
+              </div>
+            </div>
+            </sc-if>
+
+            <!-- Successi e difficoltà (brief esperienze 13/10/2026): l'ultima buona pratica e l'ultima
+                 difficoltà. Solo Difficoltà = la banda non esce (anti-paura); solo Buone pratiche = «Cosa funziona». -->
+            <sc-if value="{{ espHome }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-bianco wrap banda-larga sezione" data-screen-label="Successi e difficoltà">
+              <div class="fx col gap20">
+                <h2>{{ espHomeTitolo }}</h2>
+                <p class="testi-intro">Esperienze vere con il servizio di screening: inviti, kit, prenotazioni, referti. Senza nomi.</p>
+                <sc-if value="{{ espEsempi }}" hint-placeholder-val="{{ false }}">
+                <div class="finto">Esperienze di esempio: nel prototipo non sono casi reali.</div>
+                </sc-if>
+                <div class="testi-griglia">
+                  <sc-for list="{{ espHomeBp }}" as="b" hint-placeholder-count="1">
+                    <article class="testi esp esp-bp">
+                      <span class="tag tag-tipo tag-bp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Ha funzionato</span>
+                      <p class="testi-ruolo">{{ b.riga }}</p>
+                      <h3>{{ b.titolo }}</h3>
+                      <div class="testi-txt">
+                        <sc-for list="{{ b.paragrafi }}" as="q" hint-placeholder-count="1"><p>{{ q.t }}</p></sc-for>
+                      </div>
+                    </article>
+                  </sc-for>
+                  <sc-for list="{{ espHomeDiff }}" as="d" hint-placeholder-count="1">
+                    <article class="testi esp esp-diff">
+                      <span class="tag tag-tipo tag-diff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 11.5a7.5 7.5 0 0 1-10.9 6.7L4 19.5l1.4-4.4A7.5 7.5 0 1 1 20 11.5z"></path></svg>Da migliorare</span>
+                      <p class="testi-ruolo">{{ d.riga }}</p>
+                      <h3>{{ d.titolo }}</h3>
+                      <div class="testi-txt">
+                        <sc-for list="{{ d.paragrafi }}" as="q" hint-placeholder-count="1"><p>{{ q.t }}</p></sc-for>
+                      </div>
+                    </article>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ haBp }}" hint-placeholder-val="{{ false }}">
+                <a class="cta-2 testi-tutte" href="#/buone-pratiche">Leggi le buone pratiche</a>
+                </sc-if>
+                <sc-if value="{{ haDiff }}" hint-placeholder-val="{{ false }}">
+                <a class="cta-2 testi-tutte" href="#/difficolta">Leggi le difficoltà segnalate</a>
+                </sc-if>
+                <p class="nota"><a href="#/racconta">Racconta la tua esperienza</a></p>
               </div>
             </div>
             </sc-if>
@@ -1415,6 +1471,14 @@
               </div>
             </div>
 
+            <div class="banda b-bianco wrap sezione" data-screen-label="Racconta la tua esperienza">
+              <div class="fx col gap16">
+                <h2>Hai un'esperienza con uno screening?</h2>
+                <p>Raccontaci cosa ha funzionato o cosa no: invito, kit, prenotazione, referto. La pubblichiamo senza nomi, per aiutare chi viene dopo.</p>
+                <a class="cta-2" href="#/racconta">Racconta la tua esperienza</a>
+              </div>
+            </div>
+
             <div class="banda b-crema wrap sezione" data-screen-label="Segnala">
               <div class="fx col gap16">
                 <h2>Enti e associazioni</h2>
@@ -1485,6 +1549,262 @@
           </div>
         </sc-if>
 
+
+        <sc-if value="{{ vistaBp }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Buone pratiche">
+
+            <div class="banda hero wrap sezione" data-screen-label="Apertura Buone pratiche">
+              <div class="hero-sfondo" aria-hidden="true">
+                <span class="hero-velo"></span>
+              </div>
+              <div class="fx col gap16">
+                <div class="occhiello testi-occhiello">Esperienze</div>
+                <h1>Buone pratiche</h1>
+              </div>
+            </div>
+
+            <sc-if value="{{ haBp }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-crema wrap banda-larga sezione" data-screen-label="Elenco Buone pratiche">
+              <div class="fx col gap20">
+                <p class="testi-intro">Qui trovi le cose che nel servizio di screening hanno funzionato bene: una lettera chiara, un kit arrivato in tempo, una prenotazione semplice. Le raccontano i lettori, noi le riscriviamo senza nomi.</p>
+                <sc-if value="{{ espEsempi }}" hint-placeholder-val="{{ false }}">
+                <div class="finto">Esperienze di esempio: nel prototipo non sono casi reali.</div>
+                </sc-if>
+                <div class="testi-griglia">
+                  <sc-for list="{{ bpTutte }}" as="e" hint-placeholder-count="1">
+                    <article class="testi esp esp-bp">
+                      <span class="tag tag-tipo tag-bp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Ha funzionato</span>
+                      <p class="testi-ruolo">{{ e.riga }}</p>
+                      <h3>{{ e.titolo }}</h3>
+                      <div class="testi-txt">
+                        <sc-for list="{{ e.paragrafi }}" as="q" hint-placeholder-count="1"><p>{{ q.t }}</p></sc-for>
+                      </div>
+                    </article>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Racconta la tua">
+              <div class="fx col gap16">
+                <h2>Anche a te è andata bene una cosa? Raccontacela.</h2>
+                <a class="cta" href="#/racconta?tipo=buona">Racconta la tua esperienza</a>
+              </div>
+            </div>
+            </sc-if>
+
+            <!-- Pagina vuota raggiunta da un link salvato (LORI §3): stato vuoto con due uscite. -->
+            <sc-if value="{{ bpVuota }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-crema wrap sezione" data-screen-label="Stato vuoto Buone pratiche">
+              <div class="fx col gap16">
+                <p class="testi-intro">Qui trovi le cose che nel servizio di screening hanno funzionato bene: una lettera chiara, un kit arrivato in tempo, una prenotazione semplice. Le raccontano i lettori, noi le riscriviamo senza nomi.</p>
+                <div class="avviso fx col gap12">
+                  <p>Non abbiamo ancora pubblicato buone pratiche. La prima può essere la tua.</p>
+                  <a class="cta" href="#/racconta?tipo=buona">Racconta la tua esperienza</a>
+                  <a class="cta-2" href="#/">Torna alla home</a>
+                </div>
+              </div>
+            </div>
+            </sc-if>
+
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ vistaDiff }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Difficoltà e disservizi">
+
+            <div class="banda hero wrap sezione" data-screen-label="Apertura Difficoltà e disservizi">
+              <div class="hero-sfondo" aria-hidden="true">
+                <span class="hero-velo"></span>
+              </div>
+              <div class="fx col gap16">
+                <div class="occhiello testi-occhiello">Esperienze</div>
+                <h1>Difficoltà e disservizi</h1>
+              </div>
+            </div>
+
+            <sc-if value="{{ haDiff }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-crema wrap banda-larga sezione" data-screen-label="Elenco Difficoltà e disservizi">
+              <div class="fx col gap20">
+                <p class="testi-intro">Qui trovi le cose che nel servizio di screening si sono inceppate: un invito mai arrivato, una lettera difficile da capire, un numero che non risponde. Le pubblichiamo per far vedere dove il servizio si può migliorare, non per accusare qualcuno. Per questo non trovi nomi di persone né di strutture.</p>
+                <sc-if value="{{ espEsempi }}" hint-placeholder-val="{{ false }}">
+                <div class="finto">Esperienze di esempio: nel prototipo non sono casi reali.</div>
+                </sc-if>
+                <div class="testi-griglia">
+                  <sc-for list="{{ diffTutte }}" as="e" hint-placeholder-count="1">
+                    <article class="testi esp esp-diff">
+                      <span class="tag tag-tipo tag-diff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 11.5a7.5 7.5 0 0 1-10.9 6.7L4 19.5l1.4-4.4A7.5 7.5 0 1 1 20 11.5z"></path></svg>Da migliorare</span>
+                      <p class="testi-ruolo">{{ e.riga }}</p>
+                      <h3>{{ e.titolo }}</h3>
+                      <div class="testi-txt">
+                        <sc-for list="{{ e.paragrafi }}" as="q" hint-placeholder-count="1"><p>{{ q.t }}</p></sc-for>
+                      </div>
+                    </article>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Racconta la tua">
+              <div class="fx col gap16">
+                <h2>Ti è capitato qualcosa che non ha funzionato? Raccontacelo.</h2>
+                <a class="cta" href="#/racconta?tipo=difficolta">Racconta la tua esperienza</a>
+              </div>
+            </div>
+            </sc-if>
+
+            <!-- Pagina vuota raggiunta da un link salvato (LORI §3): stato vuoto con due uscite. -->
+            <sc-if value="{{ diffVuota }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-crema wrap sezione" data-screen-label="Stato vuoto Difficoltà e disservizi">
+              <div class="fx col gap16">
+                <p class="testi-intro">Qui trovi le cose che nel servizio di screening si sono inceppate: un invito mai arrivato, una lettera difficile da capire, un numero che non risponde. Le pubblichiamo per far vedere dove il servizio si può migliorare, non per accusare qualcuno. Per questo non trovi nomi di persone né di strutture.</p>
+                <div class="avviso fx col gap12">
+                  <p>Non abbiamo ancora pubblicato segnalazioni.</p>
+                  <a class="cta" href="#/racconta?tipo=difficolta">Racconta la tua esperienza</a>
+                  <a class="cta-2" href="#/">Torna alla home</a>
+                </div>
+              </div>
+            </div>
+            </sc-if>
+
+          </div>
+        </sc-if>
+
+        <!-- #/racconta (brief esperienze 13/10/2026, copy MUSE, struttura LORI §4).
+             Nessun dato salvato, nessuna fetch: il bottone apre la posta di chi scrive
+             con una mail gia scritta (mailto), che parte solo se lei o lui preme Invia. -->
+        <sc-if value="{{ vistaRacconta }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Racconta la tua esperienza">
+
+            <div class="banda hero wrap sezione" data-screen-label="Apertura racconta">
+              <div class="hero-sfondo" aria-hidden="true">
+                <span class="hero-velo"></span>
+              </div>
+              <div class="fx col gap16">
+                <div class="occhiello testi-occhiello">Esperienze</div>
+                <h1>Racconta la tua esperienza</h1>
+                <p>Una cosa che ha funzionato bene o una che è andata storta: tutte e due aiutano chi viene dopo di te. Leggiamo ogni racconto e, se lo pubblichiamo, lo riscriviamo senza alcun dato che ti identifichi.</p>
+              </div>
+            </div>
+
+            <div class="banda b-verde wrap sezione" data-screen-label="Modulo racconto">
+              <div class="fx col gap20">
+                <sc-if value="{{ rcAperta }}" hint-placeholder-val="{{ false }}">
+                  <div class="fatto" role="status">Si è aperta la tua posta? Controlla il messaggio e premi «Invia». Se non si è aperta, scrivici a info@screeningitalia.it e copia in fondo la frase del consenso.</div>
+                </sc-if>
+                <sc-if value="{{ rcDaCompilare }}" hint-placeholder-val="{{ true }}">
+                  <div class="modulo fx col gap16">
+                    <fieldset class="campo-gruppo fx col gap6" aria-describedby="{{ rcDescTipo }}">
+                      <legend class="etichetta">Cosa vuoi raccontare?</legend>
+                      <div class="scelte">
+                        <label class="scelta">
+                          <input class="sr" type="radio" name="rc-tipo" id="rc-tipo-bp" value="bp" checked="{{ rcTipoBp }}" onChange="{{ rcScegliBp }}" aria-invalid="{{ rcInvTipo }}">
+                          <svg class="scelta-icona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+                          <span class="scelta-nome">Una cosa che ha funzionato</span>
+                        </label>
+                        <label class="scelta">
+                          <input class="sr" type="radio" name="rc-tipo" id="rc-tipo-diff" value="diff" checked="{{ rcTipoDiff }}" onChange="{{ rcScegliDiff }}" aria-invalid="{{ rcInvTipo }}">
+                          <svg class="scelta-icona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 11.5a7.5 7.5 0 0 1-10.9 6.7L4 19.5l1.4-4.4A7.5 7.5 0 1 1 20 11.5z"></path></svg>
+                          <span class="scelta-nome">Un disservizio</span>
+                        </label>
+                      </div>
+                      <sc-if value="{{ rcErrTipo }}" hint-placeholder-val="{{ false }}">
+                        <p class="errore" id="rc-err-tipo" role="alert">Scegli se racconti una cosa che ha funzionato o un disservizio.</p>
+                      </sc-if>
+                    </fieldset>
+                    <div class="fx col gap6">
+                      <label class="etichetta" for="rc-reg">Regione (facoltativa)</label>
+                      <div class="sel-box">
+                        <select class="campo campo-sel" id="rc-reg" value="{{ rcReg }}" onChange="{{ rcScriviReg }}">
+                          <option value="">Preferisco non dirlo</option>
+                          <option value="Abruzzo">Abruzzo</option>
+                          <option value="Basilicata">Basilicata</option>
+                          <option value="Calabria">Calabria</option>
+                          <option value="Campania">Campania</option>
+                          <option value="Emilia-Romagna">Emilia-Romagna</option>
+                          <option value="Friuli-Venezia Giulia">Friuli-Venezia Giulia</option>
+                          <option value="Lazio">Lazio</option>
+                          <option value="Liguria">Liguria</option>
+                          <option value="Lombardia">Lombardia</option>
+                          <option value="Marche">Marche</option>
+                          <option value="Molise">Molise</option>
+                          <option value="Piemonte">Piemonte</option>
+                          <option value="Puglia">Puglia</option>
+                          <option value="Sardegna">Sardegna</option>
+                          <option value="Sicilia">Sicilia</option>
+                          <option value="Toscana">Toscana</option>
+                          <option value="Trentino-Alto Adige">Trentino-Alto Adige</option>
+                          <option value="Umbria">Umbria</option>
+                          <option value="Valle d&#39;Aosta">Valle d'Aosta</option>
+                          <option value="Veneto">Veneto</option>
+                        </select>
+                        <svg class="sel-frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                      </div>
+                    </div>
+                    <div class="fx col gap6">
+                      <label class="etichetta" for="rc-scr">Screening (facoltativo)</label>
+                      <div class="sel-box">
+                        <select class="campo campo-sel" id="rc-scr" value="{{ rcScr }}" onChange="{{ rcScriviScr }}">
+                          <option value="">Preferisco non dirlo</option>
+                          <option value="Mammografico">Mammografico</option>
+                          <option value="Cervice uterina">Cervice uterina</option>
+                          <option value="Colon-retto">Colon-retto</option>
+                          <option value="Prostata">Prostata</option>
+                          <option value="Neonatale">Neonatale</option>
+                          <option value="Diabete e celiachia pediatrici">Diabete e celiachia pediatrici</option>
+                          <option value="Polmonare">Polmonare</option>
+                          <option value="Epatite C (HCV)">Epatite C (HCV)</option>
+                          <option value="Altro">Altro</option>
+                        </select>
+                        <svg class="sel-frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                      </div>
+                    </div>
+                    <div class="avviso fx col gap8" id="rc-regole">
+                      <h3>Prima di scrivere</h3>
+                      <ul>
+                        <li>Niente nomi di persone, di medici o di strutture.</li>
+                        <li>Niente date, luoghi o dettagli che rendano riconoscibile te o qualcun altro.</li>
+                        <li>Niente esiti, diagnosi, farmaci, giudizi medici o consigli.</li>
+                        <li>Se scrivi per un figlio o un altro minore, non mettere nessun dato del bambino.</li>
+                        <li>Leggiamo ogni testo. Possiamo accorciarlo o non pubblicarlo: non esce nulla in automatico.</li>
+                        <li>Puoi chiederci di toglierlo quando vuoi.</li>
+                      </ul>
+                    </div>
+                    <div class="fx col gap6">
+                      <label class="etichetta" for="rc-testo">Il tuo racconto</label>
+                      <textarea class="campo campo-area" id="rc-testo" rows="6" maxLength="1200" placeholder="Cosa è successo, in poche righe. Per esempio: com'è arrivato l'invito, se la lettera era chiara, com'è andata la prenotazione o il ritiro del referto." value="{{ rcTesto }}" onInput="{{ rcScriviTesto }}" aria-invalid="{{ rcInvTesto }}" aria-describedby="{{ rcDescTesto }}"></textarea>
+                      <p class="nota" id="rc-avv"><strong>Non scrivere nomi di persone né di strutture.</strong></p>
+                      <p class="nota" id="rc-conta">{{ rcConta }}</p>
+                      <sc-if value="{{ rcErrTesto }}" hint-placeholder-val="{{ false }}">
+                        <p class="errore" id="rc-err-testo" role="alert">Scrivi il tuo racconto prima di andare avanti.</p>
+                      </sc-if>
+                    </div>
+                    <div class="fx col gap8" id="rc-info">
+                      <h3>Come usiamo i tuoi dati</h3>
+                      <p class="nota">Titolare del trattamento: [TITOLARE], info@screeningitalia.it.</p>
+                      <p class="nota">Raccogliamo il tuo indirizzo email e il tuo racconto, che può contenere dati sulla salute.</p>
+                      <p class="nota">Li usiamo solo per valutare il racconto e, se lo scegliamo, pubblicarlo senza alcun dato che ti identifichi. La base è il tuo consenso esplicito (artt. 6.1.a e 9.2.a GDPR).</p>
+                      <p class="nota">Non li diamo a nessuno e non li usiamo per altro. Teniamo la tua mail al massimo 12 mesi.</p>
+                      <p class="nota">Puoi ritirare il consenso, chiedere la cancellazione o la rimozione del testo pubblicato scrivendo a info@screeningitalia.it. Puoi anche fare reclamo al Garante per la protezione dei dati personali.</p>
+                    </div>
+                    <div class="fx col gap6">
+                      <label class="consenso">
+                        <input type="checkbox" id="rc-ok" required="required" checked="{{ rcOk }}" onChange="{{ rcSpunta }}" aria-invalid="{{ rcInvOk }}" aria-describedby="{{ rcDescOk }}">
+                        <span>Ho letto l'informativa e acconsento esplicitamente al trattamento dei dati sulla salute contenuti nel mio racconto e alla sua pubblicazione in forma anonima.</span>
+                      </label>
+                      <sc-if value="{{ rcErrOk }}" hint-placeholder-val="{{ false }}">
+                        <p class="errore" id="rc-err-ok" role="alert">Per mandare il racconto devi spuntare la casella del consenso.</p>
+                      </sc-if>
+                    </div>
+                    <button type="button" class="cta" onClick="{{ rcInvia }}">Apri la mail con il racconto</button>
+                    <p class="nota">Si apre la tua posta con il messaggio già scritto. Il racconto parte solo quando premi «Invia» lì. Dal sito non salviamo nulla.</p>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+
+          </div>
+        </sc-if>
 
         <sc-if value="{{ vistaArticolo }}" hint-placeholder-val="{{ false }}">
           <div data-screen-label="Articolo">
@@ -1590,7 +1910,7 @@
               <div class="fx col gap16">
                 <h2>Cosa non facciamo mai</h2>
                 <div class="fx col gap12">
-                  <div class="dato"><span class="et">Salute</span><span class="vl">Non registriamo quale screening hai guardato, n&eacute; nulla che riguardi la tua salute.</span></div>
+                  <div class="dato"><span class="et">Salute</span><span class="vl">Mentre navighi non registriamo quale screening guardi, n&eacute; nulla che riguardi la tua salute. Se ci mandi un racconto per mail, valgono le regole scritte nella pagina <a href="#/racconta">Racconta la tua esperienza</a>.</span></div>
                   <div class="dato"><span class="et">Pubblicit&agrave;</span><span class="vl">Nessun cookie pubblicitario, nessun pubblico da rivendere.</span></div>
                   <div class="dato"><span class="et">Liste</span><span class="vl">Nessuna lista di indirizzi della popolazione: non &egrave; percorribile e non ci serve.</span></div>
                 </div>
@@ -1699,6 +2019,8 @@
                 <a href="#/articolo/faq-5">Il kit del colon-retto</a>
                 <a href="#/screening/prostata">Screening della prostata</a>
                 <sc-if value="{{ haTesti }}" hint-placeholder-val="{{ false }}"><a href="#/testimonianze">Testimonianze</a></sc-if>
+                <sc-if value="{{ haBp }}" hint-placeholder-val="{{ false }}"><a href="#/buone-pratiche">Buone pratiche</a></sc-if>
+                <sc-if value="{{ haDiff }}" hint-placeholder-val="{{ false }}"><a href="#/difficolta">Difficoltà e disservizi</a></sc-if>
               </nav>
 
               <nav class="ftr-col" aria-label="Il portale">
@@ -1708,6 +2030,7 @@
                 <a href="#/enti">Per ASL ed enti</a>
                 <a href="#/contatti">Segnala un’iniziativa</a>
                 <a href="#/contatti">Segnala un dato sbagliato</a>
+                <a href="#/racconta">Racconta la tua esperienza</a>
                 <a href="#/chi">Come verifichiamo</a>
               </nav>
             </div>

@@ -53,6 +53,17 @@ window.__siLogicaRender = class {
     const storie = this.storie();
     const testiFonte = (window.__siTesti || {}).fonte;
 
+    // --- esperienze (13/10/2026): Buone pratiche e Difficolta, zero post = niente ---
+    const bp = this.esperienze("bp");
+    const diff = this.esperienze("diff");
+    const espFonte = (window.__siEsperienze || {}).fonte;
+    // Home: solo Difficolta = la banda non esce (anti-paura); solo Buone pratiche = «Cosa funziona».
+    const espHome = bp.length > 0;
+    const rv = this.state.rotta.vista;
+    const rcTesto = this.state.rcTesto || "";
+    const rcErr = this.state.rcErr || {};
+    const rcTipo = this.state.rcTipo;
+
     return {
       // navigazione
       navReg: (vista === "regione" || vista === "vuota" || vista === "iniziativa") ? "page" : "false",
@@ -63,7 +74,15 @@ window.__siLogicaRender = class {
       // «Gli screening» e una tendina (brief 26/09/2026): corrente su tutte le rotte #/screening*.
       navFaq: (vista === "faq" || this.state.rotta.vista === "screening") ? "page" : "false",
       scrAperto: this.scrAperto() ? "true" : "false",
-      scrApriChiudi: () => this.setState({ scrAperto: !this.scrAperto() }),
+      scrApriChiudi: () => this.apriChiudi("scr"),
+      // Tendina «Esperienze» (13/10/2026): esce se almeno una categoria ha post.
+      haEsperienze: storie.length > 0 || bp.length > 0 || diff.length > 0,
+      espAperto: this.espAperto() ? "true" : "false",
+      espApriChiudi: () => this.apriChiudi("esp"),
+      navEsp: this.eRottaEsperienze(rv) ? "page" : "false",
+      navBp: rv === "buone-pratiche" ? "page" : "false",
+      navDiff: rv === "difficolta" ? "page" : "false",
+      navRacconta: rv === "racconta" ? "page" : "false",
       navScrTutti: this.navScr(""),
       navScrMammografico: this.navScr("mammografico"),
       navScrCervicale: this.navScr("cervicale"),
@@ -174,13 +193,61 @@ window.__siLogicaRender = class {
       haTesti: storie.length > 0,
       /* Senza storie la fascia verde sparisce e due bande crema resterebbero
          attaccate: «Ultimi aggiornamenti» passa a fondo bianco (LORI, giro 1 blocco 3). */
-      ultimiCls: "banda " + (storie.length > 0 ? "b-crema" : "b-bianco") + " wrap sezione",
+      // Con la banda esperienze (bianca) davanti, «Ultimi aggiornamenti» torna crema (LORI §2).
+      ultimiCls: "banda " + (storie.length > 0 || espHome ? "b-crema" : "b-bianco") + " wrap sezione",
       vistaTesti: vista === "testimonianze" && storie.length > 0,
       testiHome: storie.slice(0, 2),
       testiTutte: storie,
       testiAltri: storie.length > 2,
       // Schede di prova (solo fuori produzione): resta il marcatore .finto gia esistente.
       testiEsempi: storie.length > 0 && testiFonte === "esempi",
+
+      // esperienze: banda home, pagine #/buone-pratiche e #/difficolta
+      haBp: bp.length > 0,
+      haDiff: diff.length > 0,
+      espHome: espHome,
+      espHomeTitolo: diff.length > 0 ? "Cosa funziona e cosa si può migliorare" : "Cosa funziona",
+      espHomeBp: bp.slice(0, 1),
+      espHomeDiff: diff.slice(0, 1),
+      espEsempi: espFonte === "esempi" && (bp.length > 0 || diff.length > 0),
+      vistaBp: rv === "buone-pratiche",
+      vistaDiff: rv === "difficolta",
+      bpTutte: bp,
+      diffTutte: diff,
+      bpVuota: bp.length === 0,
+      diffVuota: diff.length === 0,
+
+      // modulo #/racconta: niente salvato, niente fetch; la mail la apre chi scrive
+      vistaRacconta: rv === "racconta",
+      rcDaCompilare: !this.state.rcAperta,
+      rcAperta: !!this.state.rcAperta,
+      rcTipoBp: rcTipo === "bp",
+      rcTipoDiff: rcTipo === "diff",
+      rcSceltaBp: rcTipo === "bp" ? "scelta on" : "scelta",
+      rcSceltaDiff: rcTipo === "diff" ? "scelta on" : "scelta",
+      rcScegliBp: () => this.setState({ rcTipo: "bp", rcErr: rcErr.tipo ? { ...rcErr, tipo: false } : this.state.rcErr }),
+      rcScegliDiff: () => this.setState({ rcTipo: "diff", rcErr: rcErr.tipo ? { ...rcErr, tipo: false } : this.state.rcErr }),
+      rcRegioni: this.nomiRegioni().map((n) => ({ nome: n })),
+      rcScreeningOpz: this.rcScreening().map((n) => ({ nome: n })),
+      rcReg: this.state.rcReg || "",
+      rcScr: this.state.rcScr || "",
+      rcScriviReg: (e) => this.setState({ rcReg: e.target.value }),
+      rcScriviScr: (e) => this.setState({ rcScr: e.target.value }),
+      rcTesto: rcTesto,
+      rcScriviTesto: (e) => this.setState({ rcTesto: String(e.target.value || "").slice(0, 1200), rcErr: rcErr.testo ? { ...rcErr, testo: false } : this.state.rcErr }),
+      rcConta: rcTesto.length.toLocaleString("it-IT") + " caratteri su 1.200",
+      rcOk: !!this.state.rcOk,
+      rcSpunta: (e) => this.setState({ rcOk: !!e.target.checked, rcErr: rcErr.ok ? { ...rcErr, ok: false } : this.state.rcErr }),
+      rcErrTipo: !!rcErr.tipo,
+      rcErrTesto: !!rcErr.testo,
+      rcErrOk: !!rcErr.ok,
+      rcInvTipo: rcErr.tipo ? "true" : "false",
+      rcInvTesto: rcErr.testo ? "true" : "false",
+      rcInvOk: rcErr.ok ? "true" : "false",
+      rcDescTesto: "rc-regole rc-conta" + (rcErr.testo ? " rc-err-testo" : ""),
+      rcDescOk: rcErr.ok ? "rc-err-ok" : undefined,
+      rcDescTipo: rcErr.tipo ? "rc-err-tipo" : undefined,
+      rcInvia: () => this.rcInvia(),
 
       // consenso ai cookie
       bannerAperto: !!this.state.bannerAperto,

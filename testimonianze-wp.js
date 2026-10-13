@@ -174,12 +174,14 @@
     });
   }
 
-  /* Torna l'elenco dei post (anche vuoto) o null se WordPress non risponde. */
-  function chiediStorie() {
-    return chiedi("/categories", ["slug=" + CFG.categoria, "_fields=id,slug"]).then(function (cat) {
+  /* Torna l'elenco dei post (anche vuoto) o null se WordPress non risponde.
+     Parametrica per slug di categoria: la usa anche esperienze-wp.js
+     (Buone pratiche, Difficolta e disservizi), SENTINEL 13/10/2026. */
+  function chiediCategoria(slug) {
+    return chiedi("/categories", ["slug=" + encodeURIComponent(slug), "_fields=id,slug"]).then(function (cat) {
       if (!cat) { return null; }
-      var c = cat.filter(function (x) { return x && x.slug === CFG.categoria && typeof x.id === "number"; })[0];
-      if (!c) { return []; }   /* categoria assente: zero storie, non un guasto */
+      var c = cat.filter(function (x) { return x && x.slug === slug && typeof x.id === "number"; })[0];
+      if (!c) { return []; }   /* categoria assente: zero post, non un guasto */
       return chiedi("/posts", [
         "categories=" + c.id,
         "status=publish",
@@ -191,6 +193,8 @@
       ]);
     });
   }
+
+  function chiediStorie() { return chiediCategoria(CFG.categoria); }
 
   /* ---------------------------------------------------------------
      4. Schede di prova (solo fuori produzione)
@@ -218,7 +222,11 @@
   }
 
   /* Esposto per le prove: provaEsempi lo usa il file di prova in src/prove/. */
-  window.TestimonianzeWP = { CFG: CFG, componi: componi, paragrafi: paragrafi, provaEsempi: provaEsempi };
+  window.TestimonianzeWP = {
+    CFG: CFG, componi: componi, paragrafi: paragrafi, provaEsempi: provaEsempi,
+    /* Attrezzi riusati da esperienze-wp.js (stessa pulizia, stesso dialogo). */
+    soloTesto: soloTesto, riassuntoAutomatico: riassuntoAutomatico, chiediCategoria: chiediCategoria
+  };
 
   /* Se il file di prova e stato caricato prima di questo, ha lasciato le schede qui. */
   if (Array.isArray(window.__siTestiProva)) { provaEsempi(window.__siTestiProva); }
