@@ -1182,3 +1182,18 @@ html.contrasto{--accento:#8A2600;--oro-bordo:#000000}
 html.contrasto .occhiello{color:#8A2600}
 html.contrasto .hero .occhiello{color:#FFD100}
 html.contrasto .passo .num{background:#FFD100;color:#000;box-shadow:inset 0 0 0 2.5px #000}
+
+/* Scheda regione cliccabile (Florbo 13/10/2026): tutta la card porta a #/iniziativa/<id>.
+   Nella card solo tipo, titolo, luogo, condizione e chiusura; il resto sta nella pagina. */
+.card.card-vai{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:24px 28px;
+  text-decoration:none;color:inherit;transition:box-shadow .15s ease,transform .15s ease}
+.card-vai:hover{box-shadow:0 6px 18px rgba(4,50,93,.14);transform:translateY(-1px)}
+.card-vai:hover .ini-nome{text-decoration:underline;text-underline-offset:3px}
+.card-vai:focus-visible{outline:3px solid var(--terracotta);outline-offset:3px}
+html.contrasto .card-vai:focus-visible{outline-color:#000}
+.card-vai .ini-nome{margin:0}
+.ini-luogo{display:flex;gap:7px;align-items:flex-start;font-size:17px;line-height:1.45;color:#181A1B;
+  overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.ini-luogo svg{width:17px;height:17px;flex-shrink:0;margin:3px 7px 0 0;color:var(--azzurro);vertical-align:-3px}
+html.contrasto .ini-luogo svg{color:#000}
+.card-vai .ini-indica{margin-top:auto;padding-top:4px}
