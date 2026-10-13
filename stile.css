@@ -1197,3 +1197,160 @@ html.contrasto .card-vai:focus-visible{outline-color:#000}
 .ini-luogo svg{width:17px;height:17px;flex-shrink:0;margin:3px 7px 0 0;color:var(--azzurro);vertical-align:-3px}
 html.contrasto .ini-luogo svg{color:#000}
 .card-vai .ini-indica{margin-top:auto;padding-top:4px}
+
+/* ======================================================================
+   Gerarchia visiva (LORI, 13/10/2026) — priorita 1, 2, 3 e 5.
+   Blocco finale: vince sulle regole precedenti. Foto e logo non si toccano.
+   ====================================================================== */
+
+/* --- 5. Un solo azzurro: #064A8B. #04325D solo per hover e piede. --- */
+:root{--azzurro:#064A8B}
+.hdr{background:#064A8B;box-shadow:0 2px 12px rgba(0,27,51,0.18)}
+.ftr{background:#04325D}
+.filtro.on,.scelta.on,.scelta:has(:checked){background:#064A8B;border-color:#064A8B}
+.wa{background:#064A8B;box-shadow:none}
+.link-cta{color:#064A8B}
+.link-cta:hover{color:#04325D}
+.art-sub,.invito .invito-tit,.numero-n{color:#064A8B}
+.ck-sw.on{background-color:#064A8B}
+
+/* --- 3. Un solo sistema di pulsanti ---
+   Primario: terracotta piatto. Secondario: bianco con contorno azzurro. Giallo mai pulsante. */
+.cta,.hero .cta,.tel{
+  background:#A63D17 !important;color:#fff !important;border:none !important;box-shadow:none !important;
+  min-height:62px;border-radius:10px;font-size:19px;font-weight:700;transform:none;text-decoration:none}
+.cta:hover,.hero .cta:hover,.tel:hover{background:#8A3212 !important;color:#fff !important;
+  transform:none;box-shadow:none !important;text-decoration:none}
+.cta:active,.tel:active{background:#8A3212 !important;box-shadow:none !important}
+.cta-2{background:#fff !important;color:#064A8B !important;border:1.5px solid #064A8B !important;
+  box-shadow:none !important;transform:none}
+.cta-2:hover{background:#E3EEF8 !important;color:#04325D !important;border-color:#04325D !important;
+  box-shadow:none !important;transform:none}
+.cta:focus-visible,.cta-2:focus-visible,.tel:focus-visible{outline:3px solid #14202B;outline-offset:3px}
+.hero .cta:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+.ck-btn-si{background:#A63D17;color:#fff;border:1.5px solid #A63D17;box-shadow:none}
+.ck-btn-si:hover{background:#8A3212;border-color:#8A3212;transform:none}
+.ck-btn:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+html.contrasto .cta,html.contrasto .hero .cta,html.contrasto .tel{background:#8A2600 !important;color:#fff !important;box-shadow:none !important}
+html.contrasto .cta-2{background:#fff !important;color:#000 !important;border:2.5px solid #000 !important}
+html.contrasto .ck-btn-si{background:#8A2600;color:#fff;border:2.5px solid #fff}
+.occhiello-neutro,.banda:not(.hero) .occhiello-neutro{color:#33414F}
+html.contrasto .occhiello-neutro{color:#000}
+
+/* --- Evidenza gialla al posto del rosso (priorita 1) --- */
+.scad-ultimi,.scad-rossa{background:#F0B429;color:#14202B;border-color:#F0B429}
+.pill-ultimi{display:inline-flex;align-items:center;min-height:34px;padding:4px 12px;border-radius:999px;
+  background:#F0B429;color:#14202B;font-size:17px;font-weight:700;line-height:1.3;white-space:nowrap}
+html.contrasto .pill-ultimi{background:#FFD100;color:#000;box-shadow:inset 0 0 0 2.5px #000}
+
+/* --- 1. Card delle iniziative nella pagina regione --- */
+.card.card-vai{gap:8px;padding:24px 24px 0;border-radius:12px;align-items:stretch;text-align:left}
+.card-vai .ini-tipo{font-size:17px;font-weight:600;color:#064A8B;line-height:1.4}
+.card-vai .ini-tipo svg{color:#064A8B}
+.card-vai .ini-nome{font-size:21px;font-weight:700;line-height:1.25;color:#14202B;letter-spacing:-0.005em;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-width:none}
+@media (min-width:860px){.card-vai .ini-nome{font-size:24px}}
+.ini-ente{font-size:17px;font-weight:400;line-height:1.45;color:#33414F}
+.card-vai .ini-luogo{font-size:17px;color:#14202B}
+.card-vai .ini-luogo svg{color:#064A8B}
+.ini-periodo{font-size:17px;font-weight:600;line-height:1.45;color:#14202B}
+.card-vai .ini-riga{gap:8px}
+.card-vai .tag{min-height:34px;padding:4px 12px;line-height:1.3;border-width:0}
+.card-vai .tag-gratis{background:#E3EEF8;color:#04386A}
+.ini-posti{font-size:17px;line-height:1.45;color:#33414F}
+.ini-piede{display:flex;align-items:center;min-height:56px;margin:8px -24px 0;padding:12px 24px;
+  border-top:1.5px solid rgba(20,32,43,0.2);font-size:19px;font-weight:700;line-height:1.3;color:#064A8B;text-align:left;margin-top:auto}
+.card-vai .ini-riga + .ini-piede,.card-vai > .ini-piede{margin-top:auto}
+.card-vai .ini-riga{margin-bottom:8px}
+.card-vai:hover{transform:none;box-shadow:0 6px 18px rgba(4,50,93,.14),inset 0 0 0 2px #064A8B}
+.card-vai:hover .ini-nome{text-decoration:none}
+.card-vai:hover .ini-piede{text-decoration:underline;text-underline-offset:4px}
+.card-vai:focus-visible{outline:3px solid #A63D17;outline-offset:3px}
+html.contrasto .card-vai .ini-nome,html.contrasto .ini-ente,html.contrasto .ini-piede{color:#000}
+/* Griglia: 2 colonne; 3 solo da 3 iniziative in su e da 1280px. Tutto a sinistra. */
+.ini-griglia{align-items:stretch}
+@media (min-width:768px){.ini-griglia{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}}
+@media (min-width:1280px){
+  .ini-larga{max-width:1088px}
+  .ini-griglia{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+  .ini-griglia:has(> :nth-child(3)){grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+/* --- 2. Pagina dell'iniziativa: telefono subito sotto il titolo --- */
+.ini-occhiello{font-size:17px;font-weight:700;line-height:1.4;color:#064A8B;max-width:none;text-transform:none;letter-spacing:0}
+.ini-riassunto{font-size:19px;line-height:1.55;color:#33414F;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+@media (min-width:860px){.ini-riassunto{font-size:20px}}
+.ini-chiama{display:flex;flex-direction:column;gap:12px;align-items:stretch;width:100%}
+.ini-chiama .nota{font-size:17px;max-width:none;text-align:left}
+.tel.tel-grande{width:100%;max-width:420px;min-height:62px;align-self:flex-start;justify-content:flex-start;
+  gap:12px;padding:0 24px;font-size:24px;letter-spacing:0.01em;margin-top:0}
+.tel.tel-grande svg{width:26px;height:26px}
+@media (max-width:699px){.tel.tel-grande{max-width:none;align-self:stretch}}
+.ini-apertura{padding-bottom:48px}
+@media (min-width:860px){.ini-apertura{padding-bottom:64px}}
+.dato .et{font-size:17px !important;font-weight:700 !important;letter-spacing:0 !important;text-transform:none !important;color:#33414F !important}
+.dato .et svg{color:#064A8B}
+@media (min-width:700px){.dato{grid-template-columns:120px 1fr}}
+@media (max-width:699px){.dato{grid-template-columns:1fr;gap:4px}}
+.vl-righe{display:flex;flex-direction:column;gap:12px}
+.vl-riga{display:block}
+html.contrasto .ini-occhiello,html.contrasto .dato .et{color:#000 !important}
+/* Telefono in tutte le card: stesso primario terracotta */
+.card .tel,.avviso .tel{font-size:22px}
+
+/* --- 5. Allineamento a sinistra --- */
+h2,.banda:not(.hero) h2{text-align:left;margin-left:0;margin-right:0;max-width:632px}
+.banda:not(.hero) .occhiello{text-align:left}
+.banda:not(.hero) .fx:not(.lettura):has(> h2) > p,
+.banda:not(.hero) .fx:not(.lettura):has(> h2) > .nota,
+.banda:not(.hero) .fx:not(.lettura):has(> h2) > .finto,
+.banda:not(.hero) .fx:not(.lettura):has(> .occhiello) > .finto,
+.banda:not(.hero) .fx:not(.lettura) > p.testi-intro,
+.pag-scr .scr-cosa{text-align:left;margin-left:0;margin-right:0}
+.banda:not(.hero) .cta,.banda:not(.hero) .cta-2,.banda:not(.hero) .link-cta,
+.avviso .cta,.avviso .cta-2,.card .cta,.card .cta-2{align-self:flex-start}
+@media (max-width:699px){
+  .banda:not(.hero) .cta,.banda:not(.hero) .cta-2{align-self:stretch}
+  .link-cta{align-self:flex-start;text-align:left}
+  .banda:not(.hero) .link-cta{align-self:flex-start}
+}
+.urgenza{justify-content:flex-start}
+/* Griglia di 1040px: la colonna di prosa (632px) sta sul bordo sinistro, non al centro.
+   Le fasce con griglie di card usano tutta la larghezza. */
+@media (min-width:1000px){
+  .wrap{max-width:1088px}
+  .banda.wrap:not(.hero):not(.ini-larga):not(.banda-larga):not(:has(.art-griglia)):not(:has(.testi-griglia)):not(:has(.carrellata)) > *{max-width:632px}
+  .banda:has(.art-griglia),.banda-larga,.ini-larga{max-width:1088px}
+  .banda.wrap:not(.hero) > .fx > .fx.col.gap8,
+  .banda.wrap:not(.hero) > .fx > h2,
+  .banda.wrap:not(.hero) > .fx > p,
+  .banda.wrap:not(.hero) > .fx > .nota{max-width:632px}
+  .testi-griglia{margin-left:0;margin-right:0}
+  .testi-griglia:has(> :only-child){max-width:632px}
+  .hero:not(:has(.hero-due)) > :not(.hero-sfondo){max-width:632px}
+}
+
+/* --- 5. Piede piu largo: marchio 320px, link in 3 colonne da 200px --- */
+@media (min-width:1000px){
+  .ftr-alto{grid-template-columns:minmax(0,320px) repeat(3,minmax(0,200px));justify-content:space-between;gap:40px 24px}
+}
+.ftr-col a{min-height:44px;line-height:1.35}
+.ftr-legale,.ftr-legale span{font-size:17px !important;color:#D1DAE3 !important}
+
+/* --- 5. Su telefono niente «Contattaci» fluttuante: Contatti sta nel menu e nel piede --- */
+@media (max-width:699px){
+  .wa-float,.wa-float.in-vista{display:none !important}
+  .ftr{padding-bottom:36px}
+}
+/* Apertura della home sulla stessa griglia di 1040px */
+@media (min-width:1000px){.hero:has(.hero-due){max-width:1088px}}
+.ftr-btn-link{font-size:17px;color:#D1DAE3}
+.ini-apertura h1{font-size:34px;line-height:1.15;font-weight:700;max-width:none}
+@media (min-width:860px){.ini-apertura h1{font-size:48px;line-height:1.1}}
+@media (min-width:1000px){.ini-apertura h1{max-width:832px}}
+/* Pagine screening: stesso terracotta #A63D17 piatto (vince su screening.css) */
+html body .pag-scr .cta{background-color:#A63D17 !important}
+html body .pag-scr .cta:hover{background-color:#8A3212 !important}
+html.contrasto body .pag-scr .cta{background-color:#8A2600 !important}
+/* Piu numeri nello stesso campo: il pulsante va a capo senza toccare i bordi */
+.tel.tel-grande{padding-top:12px;padding-bottom:12px;line-height:1.3}

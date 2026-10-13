@@ -625,6 +625,15 @@ class Component extends DCLogic {
       scadenza: this.scadenza(x).testo, scadenzaCls: this.scadenza(x).cls,
       haScadenza: !!this.scadenza(x).testo,
       posti: x.posti || "", haPosti: !!x.posti,
+      // Gerarchia visiva LORI 13/10/2026: periodo per esteso, evidenza gialla negli ultimi giorni,
+      // «Quando» una riga per data solo se il dato e gia diviso da «;».
+      periodo: this.periodo(x), haPeriodo: !!this.periodo(x),
+      ultimi: this.ultimiGiorni(x), haUltimi: !!this.ultimiGiorni(x),
+      occhiello: [x.tipo, x.reg].filter(Boolean).join(" · "),
+      riassunto: this.riassunto(x),
+      quandoRighe: this.righeQuando(x.quando).map((t) => ({ t: t })),
+      quandoUnaRiga: this.righeQuando(x.quando).length < 2,
+      quandoPiuRighe: this.righeQuando(x.quando).length > 1,
       // Card cliccabile (24/09/2026): la card apre la pagina dell'iniziativa.
       id: x.id || "", hrefDettaglio: "#/iniziativa/" + encodeURIComponent(x.id || ""),
       reg: x.reg, hrefRegione: "#/regione/" + encodeURIComponent(x.reg)
@@ -724,11 +733,46 @@ class Component extends DCLogic {
     const p = x.chiude.split("-");
     const data = Number(p[2]) + " " + MESI[Number(p[1]) - 1];
     if (g < 0) { return { testo: "chiusa", cls: "scad scad-chiusa" }; }
-    if (g === 0) { return { testo: "ultimo giorno, oggi", cls: "scad scad-rossa" }; }
-    if (g === 1) { return { testo: "chiude domani", cls: "scad scad-rossa" }; }
-    if (g <= 7) { return { testo: "chiude fra " + g + " giorni", cls: "scad scad-rossa" }; }
+    if (g === 0) { return { testo: "ultimo giorno, oggi", cls: "scad scad-ultimi" }; }
+    if (g === 1) { return { testo: "chiude domani", cls: "scad scad-ultimi" }; }
+    if (g <= 7) { return { testo: "chiude fra " + g + " giorni", cls: "scad scad-ultimi" }; }
     if (g <= 21) { return { testo: "chiude il " + data, cls: "scad scad-gialla" }; }
     return { testo: "aperta fino al " + data, cls: "scad scad-calma" };
+  }
+
+  /* Card e pagina dell'iniziativa (LORI 13/10/2026). Solo dati gia presenti: x.chiude e x.quando. */
+  periodo(x) {
+    const g = this.giorniAllaChiusura(x);
+    if (g === null) { return ""; }
+    if (g < 0) { return this.scadenza(x).testo; }
+    const MESI = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
+    const p = x.chiude.split("-");
+    const giorno = Number(p[2]) === 1 ? "1º" : String(Number(p[2]));
+    // L'anno si scrive solo se non e quello in corso (es. chiusura nel 2030).
+    const anno = Number(p[0]) !== new Date().getFullYear() ? " " + p[0] : "";
+    return "Fino al " + giorno + " " + MESI[Number(p[1]) - 1] + anno;
+  }
+  // Riga sotto il titolo della pagina: stato · periodo · posti, solo dati esistenti.
+  riassunto(x) {
+    const minuscola = (t) => t ? t.charAt(0).toLowerCase() + t.slice(1) : "";
+    const parti = [x.stato, minuscola(this.periodo(x)), x.posti].filter(Boolean);
+    if (!parti.length) { return ""; }
+    parti[0] = parti[0].charAt(0).toUpperCase() + parti[0].slice(1);
+    return parti.join(" · ");
+  }
+  // Evidenza gialla, mai rossa: solo nell'ultima settimana.
+  ultimiGiorni(x) {
+    const g = this.giorniAllaChiusura(x);
+    if (g === null || g < 0 || g > 7) { return ""; }
+    if (g === 0) { return "Ultimo giorno, oggi"; }
+    if (g === 1) { return "Chiude domani"; }
+    return "Ultimi " + g + " giorni";
+  }
+  righeQuando(q) {
+    const t = String(q || "");
+    if (t.indexOf(";") === -1) { return [t]; }
+    const r = t.split(";").map((v) => v.trim()).filter(Boolean);
+    return r.length ? r : [t];
   }
 
   /* Testimonianze (blocco 3, brief LORI 26/09/2026): storie vere da testimonianze-wp.js.
