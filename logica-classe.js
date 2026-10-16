@@ -23,15 +23,17 @@ class Component extends DCLogic {
   /* ---- Consenso ai cookie ----
      Il tag di misurazione parte SOLO dopo il consenso: Consent Mode con
      default negato, e nessuno script di Google caricato prima del si. */
-  /* «Domande frequenti» apre la pagina degli screening direttamente sull'elenco.
+  /* Ancoraggi della Home: #/trova scende alla mappa, #/screening alle tipologie.
      Vale per clic, ricarica e link condiviso. Il tasto indietro del browser riporta
      sempre in cima (Davide, 24/09/2026): per questo onHash non chiama portaAllElenco. */
   portaAllElenco(vista) {
     // «articoli» (brief LORI 26/09/2026): un elenco solo, apre come «domande» su #elenco-domande.
     // «trova» (25/09/2026): apre la Home sulla scelta della regione (#trova).
     // «screening» (25/09/2026): #/screening senza pagina valida apre la Home sulla sezione #screening.
-    if (vista !== "domande" && vista !== "articoli" && vista !== "trova" && vista !== "screening") { return; }
-    const bersaglio = (vista === "domande" || vista === "articoli") ? "#elenco-domande" : (vista === "trova" ? "#trova" : "#screening");
+    // Florbo 16/10/2026: ogni sezione nuova si apre in alto. «Domande» e «articoli» non
+    // scendono piu all'elenco; restano solo i due ancoraggi della Home (mappa e screening).
+    if (vista !== "trova" && vista !== "screening") { return; }
+    const bersaglio = vista === "trova" ? "#trova" : "#screening";
     // Al primo caricamento il browser ripristina la posizione da solo e le foto
     // cambiano l'altezza della pagina: si insiste finche la posizione tiene.
     try { window.history.scrollRestoration = "manual"; } catch (e) {}

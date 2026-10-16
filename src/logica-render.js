@@ -92,7 +92,8 @@ window.__siLogicaRender = class {
       navScrNeonatale: this.navScr("neonatale"),
       navScrDiabete: this.navScr("diabete-celiachia"),
       navDomande: (vista === "domande" || vista === "articoli" || vista === "articolo") ? "page" : "false",
-      hrefIniziative: this.rottaRegione("Lombardia"),
+      // Florbo 16/10/2026: dall'header si sceglie la regione sulla mappa, niente Lombardia di default.
+      hrefIniziative: "#/trova",
       hrefLombardia: this.rottaRegione("Lombardia"),
       hrefLazio: this.rottaRegione("Lazio"),
       hrefVeneto: this.rottaRegione("Veneto"),

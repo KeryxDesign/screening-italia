@@ -1354,3 +1354,7 @@ html body .pag-scr .cta:hover{background-color:#8A3212 !important}
 html.contrasto body .pag-scr .cta{background-color:#8A2600 !important}
 /* Piu numeri nello stesso campo: il pulsante va a capo senza toccare i bordi */
 .tel.tel-grande{padding-top:12px;padding-bottom:12px;line-height:1.3}
+
+/* Pagina regione (Florbo 16/10/2026): il filtro e la prima cosa, con il titolo della pagina. */
+.reg-h1{white-space:normal;margin:0}
+.reg-torna{margin:0}

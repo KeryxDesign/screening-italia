@@ -338,30 +338,13 @@
         <sc-if value="{{ vistaRegione }}" hint-placeholder-val="{{ false }}">
           <div data-screen-label="Iniziative della regione">
 
-            <div class="banda hero wrap sezione" data-screen-label="Apertura">
-              <div class="hero-sfondo" aria-hidden="true">
-                <image-slot id="hero-2" src="../img/foto/foto-637285-5309.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
-                <span class="hero-velo"></span>
-              </div>
-              <div class="fx col gap16">
-                <p class="nota"><a href="#/trova">← Torna a tutte le regioni</a></p>
-                <h1>Screening in {{ reg }}</h1>
-                <p>{{ apertura }}</p>
-                <div class="sel-box sel-discreto">
-                  <select class="campo campo-sel" id="cambia-reg-alto" defaultValue="{{ reg }}" onChange="{{ vaiA }}" aria-label="Cambia regione">
-                    <sc-for list="{{ elencoRegioni }}" as="o" hint-placeholder-count="6">
-                      <option value="{{ o.nome }}">{{ o.etichetta }}</option>
-                    </sc-for>
-                  </select>
-                  <svg class="sel-frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
-                </div>
-              </div>
-            </div>
-
+            <!-- Florbo 16/10/2026: niente apertura con foto e cambio regione in cima.
+                 Ordine: filtro, iniziative, «nessuna iniziativa», cambia regione. -->
             <div class="banda b-bianco wrap sezione" data-screen-label="Scelta dello screening">
               <div class="fx col gap20">
+                <p class="nota reg-torna"><a href="#/trova">← Tutte le regioni</a></p>
                 <div class="fx col gap8">
-                  <h2 class="scelta-h2">Quali screening ti interessano?</h2>
+                  <h1 class="scelta-h2 reg-h1">Quali screening ti interessano in {{ reg }}?</h1>
                   <p class="nota">Puoi selezionarne più di uno. L’elenco sottostante mostrerà le sole iniziative corrispondenti.</p>
                 </div>
                 <div class="scelte">
