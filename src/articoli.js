@@ -373,15 +373,15 @@ window.Articoli = (function () {
      persone in contesti di tutti i giorni, finche non arrivano le nuove. */
   var FOTO_TUTTE = [
     "foto-197531-19155.webp", "foto-273609-45998.webp", "foto-197531-19160.webp",
-    /* Foto nuove senza camici (Magnific, selezione LORI 16/10/2026).
-       Fuori dalla lista le foto gia usate nelle aperture delle sezioni
-       (piazza, balcone, telefono, panchina, lettera, foto-74855-23397):
-       nelle card degli articoli sembrerebbero ripetute. */
-    "foto-si-piazza-2.webp",
-    "foto-si-balcone-2.webp",
-    "foto-si-telefono-2.webp",
-    "foto-si-panchina-2.webp",
-    "foto-si-lettera-2.webp",
+    /* Scene solo per le card degli articoli (Magnific, 16/10/2026): orto,
+       cucina, lungomare, bici, nonna. Fuori dalla lista le foto delle aperture
+       delle sezioni e le loro varianti -2 (stessa scena): nelle card
+       sembrerebbero ripetute. */
+    "foto-art-orto.webp",
+    "foto-art-cucina.webp",
+    "foto-art-mare.webp",
+    "foto-art-bici.webp",
+    "foto-art-nonna.webp",
     "foto-si-caffe.webp"
   ];
   var FOTO_PER_CATEGORIA = {};
