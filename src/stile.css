@@ -1361,14 +1361,14 @@ html.contrasto body .pag-scr .cta{background-color:#8A2600 !important}
 
 /* ======================================================================
    Contrasto tra le sezioni (LORI, 16/10/2026). Blocco finale: vince sui precedenti.
-   Tre fondi: bianco, sabbia #ECD8B8 (1,39:1 sul bianco), una sola banda blu #064A8B.
+   Tre fondi: bianco, sabbia #F5EBD8 (1,18:1 sul bianco; schiarita il 16/10 su richiesta di Davide, prima #ECD8B8), una sola banda blu #064A8B.
    Bianco e sabbia si alternano per posizione tra le bande visibili (sc-if toglie dal DOM
    le sezioni nascoste); l'apertura con la foto (.hero), la banda blu e il corpo
    dell'articolo (continua la sua apertura) non contano. La prima banda e bianca.
    Le classi b-bianco / b-crema / b-verde / b-carta restano solo come segnaposto.
    Alto contrasto (html.contrasto) invariato: tutto bianco e nero.
    ====================================================================== */
-:root{--sabbia:#ECD8B8;--carta:#FFFFFF;--filo-card:#727980}
+:root{--sabbia:#F5EBD8;--carta:#FFFFFF;--filo-card:#727980}
 body{background:#fff}
 
 /* --- Fondi: un solo strato a tutta larghezza (border-image), niente cuciture sui bordi --- */
