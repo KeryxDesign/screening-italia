@@ -372,22 +372,42 @@ window.Articoli = (function () {
   /* LORI 13/10/2026: niente camici ne stetoscopi. Restano solo le foto di
      persone in contesti di tutti i giorni, finche non arrivano le nuove. */
   var FOTO_TUTTE = [
-    "foto-197531-19155.webp", "foto-273609-45998.webp",
-    "foto-74855-23397.webp", "foto-197531-19160.webp",
-    /* Foto nuove senza camici (Magnific, selezione LORI 16/10/2026) */
-    "foto-si-piazza.webp",
+    "foto-197531-19155.webp", "foto-273609-45998.webp", "foto-197531-19160.webp",
+    /* Foto nuove senza camici (Magnific, selezione LORI 16/10/2026).
+       Fuori dalla lista le foto gia usate nelle aperture delle sezioni
+       (piazza, balcone, telefono, panchina, lettera, foto-74855-23397):
+       nelle card degli articoli sembrerebbero ripetute. */
     "foto-si-piazza-2.webp",
-    "foto-si-balcone.webp",
     "foto-si-balcone-2.webp",
-    "foto-si-telefono.webp",
     "foto-si-telefono-2.webp",
-    "foto-si-panchina.webp",
     "foto-si-panchina-2.webp",
-    "foto-si-lettera.webp",
     "foto-si-lettera-2.webp",
     "foto-si-caffe.webp"
   ];
   var FOTO_PER_CATEGORIA = {};
+
+  /* Nella stessa lista due articoli non mostrano la stessa foto di repertorio:
+     l'hash dell'id puo coincidere (id 6 e 46 davano la stessa foto).
+     Se la foto e gia presa, l'articolo prende la successiva libera. */
+  function fotoDiverse(articoli) {
+    var prese = {};
+    for (var i = 0; i < articoli.length; i++) {
+      var img = articoli[i].immagine;
+      if (!img || !img.repertorio) { if (img) { prese[img.url] = true; } continue; }
+      var url = img.url;
+      var k = FOTO_TUTTE.indexOf(url.slice(FOTO_DIR.length));
+      for (var j = 0; prese[url] && k >= 0 && j < FOTO_TUTTE.length; j++) {
+        k = (k + 1) % FOTO_TUTTE.length;
+        url = FOTO_DIR + FOTO_TUTTE[k];
+      }
+      prese[url] = true;
+      if (url !== img.url) {
+        var t = { url: url, larghezza: img.larghezza, altezza: img.altezza };
+        img.url = url;
+        img.taglie = { piccola: t, media: t, grande: t };
+      }
+    }
+  }
 
   /* Immagine di repertorio per un articolo senza immagine in evidenza.
      alt vuoto: e decorativa, non aggiunge informazione al titolo. */
@@ -409,6 +429,7 @@ window.Articoli = (function () {
       /* E una foto, non un'illustrazione: la didascalia resta
          «Foto di repertorio: non ritrae pazienti ne casi reali». */
       segnaposto: false,
+      repertorio: true,
       taglie: { piccola: t, media: t, grande: t }
     };
   }
@@ -523,6 +544,7 @@ window.Articoli = (function () {
           if (a && articoloEscluso(a)) { tolti++; continue; }
           if (a) { fuori.push(a); }
         }
+        fotoDiverse(fuori);
         if (!fuori.length) { return vuoto(ESITO.VUOTO); }
 
         return {

@@ -1423,3 +1423,14 @@ html:not(.contrasto) .banda.b-blu :is(.cta,.cta-2,a):focus-visible{outline:3px s
 .banda:not(.hero) > .fx.col > :is(h1,h2,p,.nota,.fx.col:has(> :is(h1,h2)))
   + :not(h1,h2,h3,p,.nota,.occhiello,a:not(.cta):not(.cta-2)){margin-top:8px}
 .banda:not(.hero) > .fx.col > .fx.col.gap8:has(> :is(h1,h2)) > :is(h1,h2) + :is(p,.nota){margin-top:8px}
+
+/* ======================================================================
+   Colonna al centro su desktop (Davide, 16/10/2026). Blocco finale.
+   La colonna di prosa resta di 632px con il testo allineato a sinistra,
+   ma sta al centro della griglia invece che sul bordo sinistro:
+   prima a 1440px restavano 400px vuoti a destra.
+   ====================================================================== */
+@media (min-width:1000px){
+  .banda.wrap:not(.hero):not(.ini-larga):not(.banda-larga):not(:has(.art-griglia)):not(:has(.testi-griglia)):not(:has(.carrellata)) > *{margin-left:auto;margin-right:auto;width:100%}
+  /* Le fasce larghe (griglie di card) restano allineate al bordo della griglia. */
+}
