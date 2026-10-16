@@ -373,7 +373,19 @@ window.Articoli = (function () {
      persone in contesti di tutti i giorni, finche non arrivano le nuove. */
   var FOTO_TUTTE = [
     "foto-197531-19155.webp", "foto-273609-45998.webp",
-    "foto-74855-23397.webp", "foto-197531-19160.webp"
+    "foto-74855-23397.webp", "foto-197531-19160.webp",
+    /* Foto nuove senza camici (Magnific, selezione LORI 16/10/2026) */
+    "foto-si-piazza.webp",
+    "foto-si-piazza-2.webp",
+    "foto-si-balcone.webp",
+    "foto-si-balcone-2.webp",
+    "foto-si-telefono.webp",
+    "foto-si-telefono-2.webp",
+    "foto-si-panchina.webp",
+    "foto-si-panchina-2.webp",
+    "foto-si-lettera.webp",
+    "foto-si-lettera-2.webp",
+    "foto-si-caffe.webp"
   ];
   var FOTO_PER_CATEGORIA = {};
 
