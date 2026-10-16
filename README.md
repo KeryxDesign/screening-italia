@@ -21,7 +21,6 @@ Il file `.nojekyll` serve a impedire a GitHub di reinterpretare i file: lascialo
 |---|---|
 | `index.html` | Il sito completo, autonomo. È l'unico file necessario per pubblicare. |
 | `src/Screening Italia.dc.html` | Il sorgente da cui `index.html` viene generato. |
-| `src/Screening Italia - bozza bn.dc.html` | La stessa pagina in bianco e nero, per le revisioni su carta. |
 | `src/stile.css` | Colori, tipografia, componenti. |
 | `src/bianconero.css` | Sovrascritture della versione in bianco e nero. |
 | `src/iniziative.js` | Le iniziative dimostrative, con data di chiusura. |
