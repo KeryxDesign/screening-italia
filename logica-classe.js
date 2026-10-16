@@ -897,7 +897,7 @@ class Component extends DCLogic {
       return {
         variante: "b",
         titolo: "Lo screening " + NOME[scr] + " nella tua regione",
-        frase: "Lettera nel cassetto o mai arrivata, il diritto resta. Qui vedi come funziona lo screening " + NOME[scr] + " nella tua regione. Decidi tu.",
+        frase: "Che la lettera sia arrivata o no, il diritto resta. Qui vedi come funziona lo screening " + NOME[scr] + " nella tua regione. Decidi tu.",
         bottone: "Trova la tua regione",
         href: "#/screening/" + scr + "/regione"
       };
@@ -914,8 +914,8 @@ class Component extends DCLogic {
     if (scr === "neonatale") {
       return {
         variante: "d1",
-        titolo: "Tuo figlio ha diritto a questo screening",
-        frase: "Lo prevede la legge, ogni regione lo organizza a modo suo. Qui vedi come funziona lo screening neonatale da te. Così sai cosa chiedere.",
+        titolo: "Ogni neonato ha diritto a questo screening",
+        frase: "Lo prevede la legge, ogni regione lo organizza a modo suo. Qui vedi come funziona lo screening neonatale nella tua regione. Così sai cosa chiedere.",
         bottone: "Trova la tua regione",
         href: "#/screening/neonatale/dir"
       };
@@ -932,7 +932,7 @@ class Component extends DCLogic {
     return {
       variante: "a",
       titolo: "Guarda cosa c'è nella tua regione",
-      frase: "Scegli la tua regione e vedi quali screening gratuiti ci sono. Niente registrazione, niente dati da lasciare. Poi decidi tu.",
+      frase: "Scegli la tua regione e vedi quali iniziative di screening ci sono. Niente registrazione, niente dati da lasciare. Poi decidi tu.",
       bottone: "Apri la mappa delle regioni",
       href: "#/trova"
     };

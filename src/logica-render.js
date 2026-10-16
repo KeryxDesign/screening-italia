@@ -136,7 +136,7 @@ window.__siLogicaRender = class {
       reg: reg,
       hrefVuota: "#/vuota/" + encodeURIComponent(reg),
       apertura: tutte.length
-        ? "Seleziona gli screening che ti interessano: di seguito sono riportate le sole iniziative attualmente attive, con l’ente organizzatore e il recapito telefonico."
+        ? "Scegli gli screening che ti interessano: sotto trovi le iniziative aperte adesso, con chi le organizza e il numero da chiamare."
         : "Per questa regione non risultano iniziative segnalate.",
       elencoRegioni: this.nomiRegioni().map((n) => {
         const q = conteggi[n] || 0;
