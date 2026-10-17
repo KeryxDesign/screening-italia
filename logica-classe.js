@@ -616,12 +616,18 @@ class Component extends DCLogic {
     };
     return I[tipo] || "M12 3a9 9 0 100 18 9 9 0 000-18";
   }
+  /* Nome a schermo del tipo, scritto da Angelo (note del 17/10/2026). Il valore salvato
+     nel pannello non cambia: cambia solo come lo legge il cittadino. */
+  nomeTipo(tipo) {
+    const N = { "Prostata": "Prostatico (PSA)", "Diabete e celiachia pediatrici": "Diabete", "Epatite C (HCV)": "HCV (Epatite C)" };
+    return N[tipo] || tipo;
+  }
   scheda(x) {
     let cls = "tag tag-gratis";
     if (x.stato === "a pagamento") { cls = "tag tag-paga"; }
     if (x.stato === "su invito") { cls = "tag tag-invito"; }
     return {
-      tipo: x.tipo, icona: this.icona(x.tipo), titolo: x.titolo, ente: x.ente, dove: x.dove,
+      tipo: this.nomeTipo(x.tipo), icona: this.icona(x.tipo), titolo: x.titolo, ente: x.ente, dove: x.dove,
       quando: x.quando, chi: x.chi, tel: x.tel, href: "tel:" + x.tel.split(" ").join(""),
       tagTesto: x.stato, tagCls: cls,
       scadenza: this.scadenza(x).testo, scadenzaCls: this.scadenza(x).cls,
@@ -631,7 +637,7 @@ class Component extends DCLogic {
       // «Quando» una riga per data solo se il dato e gia diviso da «;».
       periodo: this.periodo(x), haPeriodo: !!this.periodo(x),
       ultimi: this.ultimiGiorni(x), haUltimi: !!this.ultimiGiorni(x),
-      occhiello: [x.tipo, x.reg].filter(Boolean).join(" · "),
+      occhiello: [this.nomeTipo(x.tipo), x.reg].filter(Boolean).join(" · "),
       riassunto: this.riassunto(x),
       quandoRighe: this.righeQuando(x.quando).map((t) => ({ t: t })),
       quandoUnaRiga: this.righeQuando(x.quando).length < 2,
@@ -892,7 +898,7 @@ class Component extends DCLogic {
       if (SCR.indexOf(s) !== -1 && trovati.indexOf(s) === -1) { trovati.push(s); }
     });
     const scr = trovati.length === 1 ? trovati[0] : "";
-    const NOME = { "mammografico": "mammografico", "cervicale": "cervicale", "colon-retto": "del colon-retto" };
+    const NOME = { "mammografico": "mammografico", "cervicale": "della cervice uterina", "colon-retto": "del colon-retto" };
     if (NOME[scr]) {
       return {
         variante: "b",

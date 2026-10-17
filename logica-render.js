@@ -23,7 +23,7 @@ window.__siLogicaRender = class {
       const n = tutte.filter((x) => x.tipo === t).length;
       const on = sel.indexOf(t) !== -1;
       return {
-        nome: t, on: on ? "true" : "false", icona: this.icona(t),
+        nome: t, etichetta: this.nomeTipo(t), on: on ? "true" : "false", icona: this.icona(t),
         conta: this.parola(n, "iniziativa", "iniziative"),
         cls: on ? "scelta on" : "scelta",
         pick: () => this.setState((s) => ({

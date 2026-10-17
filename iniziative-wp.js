@@ -160,8 +160,13 @@
       chiude: data(f.chiude)
     };
 
+    /* Data di chiusura facoltativa (Angelo, 17/10/2026): le iniziative delle ASL
+       non hanno una fine. Senza data l'iniziativa resta aperta e non mostra scadenze.
+       Una data scritta ma non valida invece scarta l'iniziativa, come prima. */
     var manca = [];
-    ["id", "reg", "tipo", "titolo", "ente", "dove", "quando", "chi", "tel", "stato", "chiude"]
+    if (f.chiude != null && String(f.chiude).trim() !== "" && !x.chiude) { manca.push("chiude"); }
+    if (!x.chiude) { delete x.chiude; }
+    ["id", "reg", "tipo", "titolo", "ente", "dove", "quando", "chi", "tel", "stato"]
       .forEach(function (k) { if (!x[k]) { manca.push(k); } });
     if (manca.length) {
       console.warn("Iniziativa scartata (" + (post.slug || post.id) + "): campi non validi -> " + manca.join(", "));

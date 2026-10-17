@@ -84,7 +84,7 @@
 
         <div class="hdr">
           <div class="wrap hdr-riga">
-            <a class="marchio" href="#/" title="Torna alla home" aria-label="Screening Italia, torna alla home"><img class="marchio-img" src="./marchio/screening-italia-chiaro.png" alt="Screening Italia" width="1169" height="440" /></a>
+            <a class="marchio" href="#/" title="Torna alla home" aria-label="Screening Italia, torna alla home"><img class="marchio-img" src="./marchio/screening-italia-chiaro.png" alt="Screening Italia" width="1169" height="440" /><span class="motto">Screening Italia, un SI alla prevenzione</span></a>
             <input class="menu-chk" type="checkbox" id="menu-chk" aria-label="Apri il menu">
             <label class="hamb" for="menu-chk">
               <svg class="i-apri" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
@@ -96,12 +96,13 @@
                 <button type="button" class="nav-tendina" aria-expanded="{{ scrAperto }}" aria-controls="menu-screening" aria-current="{{ navFaq }}" onClick="{{ scrApriChiudi }}">Gli screening<svg class="nav-freccia" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
                 <div class="nav-menu" id="menu-screening">
                   <a href="#/screening" aria-current="{{ navScrTutti }}">Tutti gli screening</a>
+                  <!-- Nomi e ordine scritti da Angelo (note del 17/10/2026). -->
                   <a href="#/screening/mammografico" aria-current="{{ navScrMammografico }}">Mammografico</a>
-                  <a href="#/screening/cervicale" aria-current="{{ navScrCervicale }}">Cervicale</a>
                   <a href="#/screening/colon-retto" aria-current="{{ navScrColon }}">Colon-retto</a>
-                  <a href="#/screening/prostata" aria-current="{{ navScrProstata }}">Prostata</a>
+                  <a href="#/screening/cervicale" aria-current="{{ navScrCervicale }}">Cervice uterina</a>
+                  <a href="#/screening/prostata" aria-current="{{ navScrProstata }}">Prostatico (PSA)</a>
                   <a href="#/screening/neonatale" aria-current="{{ navScrNeonatale }}">Neonatale</a>
-                  <a href="#/screening/diabete-celiachia" aria-current="{{ navScrDiabete }}">Diabete e celiachia (bambini)</a>
+                  <a href="#/screening/diabete-celiachia" aria-current="{{ navScrDiabete }}">Diabete</a>
                 </div>
               </div>
               <a href="#/enti" aria-current="{{ navEnti }}">Per ASL ed enti</a>
@@ -356,7 +357,7 @@
                     <button type="button" class="{{ s.cls }}" onClick="{{ s.pick }}" aria-pressed="{{ s.on }}">
                       <svg class="scelta-icona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ s.icona }}"></path></svg>
                       <span class="scelta-txt">
-                        <span class="scelta-nome">{{ s.nome }}</span>
+                        <span class="scelta-nome">{{ s.etichetta }}</span>
                         <span class="scelta-n">{{ s.conta }}</span>
                       </span>
                     </button>
@@ -1705,11 +1706,11 @@
                           <option value="Mammografico">Mammografico</option>
                           <option value="Cervice uterina">Cervice uterina</option>
                           <option value="Colon-retto">Colon-retto</option>
-                          <option value="Prostata">Prostata</option>
+                          <option value="Prostata">Prostatico (PSA)</option>
                           <option value="Neonatale">Neonatale</option>
-                          <option value="Diabete e celiachia pediatrici">Diabete e celiachia pediatrici</option>
+                          <option value="Diabete e celiachia pediatrici">Diabete</option>
                           <option value="Polmonare">Polmonare</option>
-                          <option value="Epatite C (HCV)">Epatite C (HCV)</option>
+                          <option value="Epatite C (HCV)">HCV (Epatite C)</option>
                           <option value="Altro">Altro</option>
                         </select>
                         <svg class="sel-frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
@@ -2089,7 +2090,7 @@
                 <a href="#/screening">Gli screening</a>
                 <a href="#/articolo/faq-1">Se l’invito non arriva</a>
                 <a href="#/articolo/faq-5">Il kit del colon-retto</a>
-                <a href="#/screening/prostata">Screening della prostata</a>
+                <a href="#/screening/prostata">Screening prostatico (PSA)</a>
                 <sc-if value="{{ haTesti }}" hint-placeholder-val="{{ false }}"><a href="#/testimonianze">Testimonianze</a></sc-if>
                 <sc-if value="{{ haBp }}" hint-placeholder-val="{{ false }}"><a href="#/buone-pratiche">Buone pratiche</a></sc-if>
                 <sc-if value="{{ haDiff }}" hint-placeholder-val="{{ false }}"><a href="#/difficolta">Difficoltà e disservizi</a></sc-if>
