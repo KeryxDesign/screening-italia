@@ -55,6 +55,7 @@ window.__siLogicaRender = class {
 
     // --- esperienze (13/10/2026): Buone pratiche e Difficolta, zero post = niente ---
     const bp = this.esperienze("bp");
+    const centri = this.centriGruppi();
     const diff = this.esperienze("diff");
     const espFonte = (window.__siEsperienze || {}).fonte;
     // Home: solo Difficolta = la banda non esce (anti-paura); solo Buone pratiche = «Cosa funziona».
@@ -82,6 +83,7 @@ window.__siLogicaRender = class {
       espApriChiudi: () => this.apriChiudi("esp"),
       navEsp: this.eRottaEsperienze(rv) ? "page" : "false",
       navBp: rv === "buone-pratiche" ? "page" : "false",
+      navCentri: rv === "centri" ? "page" : "false",
       navDiff: rv === "difficolta" ? "page" : "false",
       navRacconta: rv === "racconta" ? "page" : "false",
       navScrTutti: this.navScr(""),
@@ -91,6 +93,7 @@ window.__siLogicaRender = class {
       navScrProstata: this.navScr("prostata"),
       navScrNeonatale: this.navScr("neonatale"),
       navScrDiabete: this.navScr("diabete-celiachia"),
+      navScrCardio: this.navScr("cardiovascolare"),
       navDomande: (vista === "domande" || vista === "articoli" || vista === "articolo") ? "page" : "false",
       // Florbo 16/10/2026: dall'header si sceglie la regione sulla mappa, niente Lombardia di default.
       hrefIniziative: "#/trova",
@@ -213,6 +216,11 @@ window.__siLogicaRender = class {
       espHomeDiff: diff.slice(0, 1),
       espEsempi: espFonte === "esempi" && (bp.length > 0 || diff.length > 0),
       vistaBp: rv === "buone-pratiche",
+      // Centri screening delle ASL (17/10/2026): voce di menu solo con almeno un centro.
+      haCentri: centri.length > 0,
+      vistaCentri: rv === "centri",
+      centriGruppi: centri,
+      centriVuota: centri.length === 0,
       vistaDiff: rv === "difficolta",
       bpTutte: bp,
       diffTutte: diff,
@@ -301,7 +309,7 @@ window.__siLogicaRender = class {
 
       // pagine screening (25/09/2026): vistaScr, scrOnco, scrProstata, scrGenitori, scr, scrHome
       ...(window.__siScreening ? window.__siScreening.vals(this.state, this.state.rotta, this)
-        : { vistaScr: false, scrAdulti: false, scrOnco: false, scrProstata: false, scrGenitori: false, scrNeo: false, scrDia: false, scr: {}, scrHome: { card: [] } })
+        : { vistaScr: false, scrAdulti: false, scrOnco: false, scrProstata: false, scrSenzaInvito: false, scrGenitori: false, scrNeo: false, scrDia: false, scr: {}, scrHome: { card: [] } })
     };
   }
 };

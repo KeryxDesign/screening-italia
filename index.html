@@ -49,6 +49,7 @@
         <script src="./articoli.js?v=angelo1017"></script>
         <script src="./testimonianze-wp.js?v=angelo1017"></script>
         <script src="./esperienze-wp.js?v=angelo1017"></script>
+        <script src="./centri-wp.js?v=angelo1017"></script>
         <script src="./regioni-italia.js?v=angelo1017"></script>
         <script src="./mappa.js?v=angelo1017"></script>
         <script src="./image-slot.js?v=angelo1017"></script>
@@ -105,8 +106,10 @@
                   <a href="#/screening/prostata" aria-current="{{ navScrProstata }}">Prostatico (PSA)</a>
                   <a href="#/screening/neonatale" aria-current="{{ navScrNeonatale }}">Neonatale</a>
                   <a href="#/screening/diabete-celiachia" aria-current="{{ navScrDiabete }}">Diabete</a>
+                  <a href="#/screening/cardiovascolare" aria-current="{{ navScrCardio }}">Cardiovascolare</a>
                 </div>
               </div>
+              <sc-if value="{{ haCentri }}" hint-placeholder-val="{{ false }}"><a href="#/centri" aria-current="{{ navCentri }}">Centri screening</a></sc-if>
               <a href="#/enti" aria-current="{{ navEnti }}">Per ASL ed enti</a>
               <!-- Tendina «Esperienze» (brief 13/10/2026): esce se almeno una categoria ha post;
                    ogni voce solo se la sua categoria ha post, «Racconta la tua» sempre. -->
@@ -170,7 +173,7 @@
                     <span class="num">2</span>
                     <span class="passo-txt">
                       <span class="passo-tit">Indica gli screening che ti interessano</span>
-                      <span class="passo-desc">Sono sei, dai neonati agli adulti. Puoi sceglierne più di uno alla volta.</span>
+                      <span class="passo-desc">Dai neonati agli adulti. Puoi sceglierne più di uno alla volta.</span>
                     </span>
                   </li>
                   <li class="passo">
@@ -188,7 +191,28 @@
               <div class="fx col gap20">
                 <h2>Seleziona la tua regione</h2>
                 <p class="nota">Seleziona la regione sulla mappa: si aprirà l’elenco delle iniziative attive sul territorio.</p>
+                <div class="trova-due">
                 <div class="mappa" ref="{{ mappaRef }}"></div>
+                <!-- Tabella degli screening accanto alla mappa (note di Angelo, 17/10/2026): nomi e gruppi
+                     scritti da lui. Le voci senza pagina restano visibili ma non cliccabili. -->
+                <nav class="tab-scr" aria-labelledby="tab-scr-tit">
+                  <h3 class="tab-scr-tit" id="tab-scr-tit">Gli screening</h3>
+                  <ul class="tab-scr-lista">
+                      <li class="tab-scr-gruppo" aria-hidden="true">Oncologici</li>
+                      <li><a class="tab-scr-r tab-scr-sub" href="#/screening/mammografico"><span class="tab-scr-n">Mammografico</span><svg class="tab-scr-f" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></a></li>
+                      <li><a class="tab-scr-r tab-scr-sub" href="#/screening/colon-retto"><span class="tab-scr-n">Colon-retto</span><svg class="tab-scr-f" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></a></li>
+                      <li><a class="tab-scr-r tab-scr-sub" href="#/screening/cervicale"><span class="tab-scr-n">Cervice uterina<span class="tab-scr-sotto">PAP test e HPV</span></span><svg class="tab-scr-f" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></a></li>
+                      <li><span class="tab-scr-r tab-scr-sub tab-scr-off"><span class="tab-scr-n">Polmonare</span><span class="tab-scr-presto">Pagina in arrivo</span></span></li>
+                      <li><a class="tab-scr-r tab-scr-sub" href="#/screening/prostata"><span class="tab-scr-n">Prostatico (PSA)</span><svg class="tab-scr-f" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></a></li>
+                      <li class="tab-scr-gruppo tab-scr-gruppo-altri" aria-hidden="true">Altri screening</li>
+                      <li><span class="tab-scr-r tab-scr-off"><span class="tab-scr-n">Nutrizionale</span><span class="tab-scr-presto">Pagina in arrivo</span></span></li>
+                      <li><a class="tab-scr-r" href="#/screening/neonatale"><span class="tab-scr-n">Neonatale</span><svg class="tab-scr-f" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></a></li>
+                      <li><span class="tab-scr-r tab-scr-off"><span class="tab-scr-n">HCV (Epatite C)</span><span class="tab-scr-presto">Pagina in arrivo</span></span></li>
+                      <li><a class="tab-scr-r" href="#/screening/diabete-celiachia"><span class="tab-scr-n">Diabete</span><svg class="tab-scr-f" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></a></li>
+                      <li><a class="tab-scr-r" href="#/screening/cardiovascolare"><span class="tab-scr-n">Cardiovascolare</span><svg class="tab-scr-f" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg></a></li>
+                  </ul>
+                </nav>
+                </div>
                 <sc-if value="{{ erroreMappa }}" hint-placeholder-val="{{ false }}">
                   <div class="avviso fx col gap8">
                     <h3>La mappa non risulta disponibile.</h3>
@@ -877,7 +901,7 @@
               </div>
             </div>
             </sc-if>
-            <sc-if value="{{ scrProstata }}" hint-placeholder-val="{{ false }}">
+            <sc-if value="{{ scrSenzaInvito }}" hint-placeholder-val="{{ false }}">
             <div class="banda b-crema wrap sezione" data-screen-label="Cosa esiste">
               <div class="fx col gap20">
                 <h2>{{ scr.bish2 }}</h2>
@@ -1509,6 +1533,67 @@
         </sc-if>
 
 
+        <!-- Centri screening delle ASL (note di Angelo, 17/10/2026). Dati dal pannello (centri-wp.js):
+             schede per regione, ogni riga solo se il dato c'e. Testi da far rivedere a MUSE. -->
+        <sc-if value="{{ vistaCentri }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Centri screening">
+
+            <div class="banda hero wrap sezione" data-screen-label="Apertura Centri screening">
+              <div class="hero-sfondo" aria-hidden="true">
+                <span class="hero-velo"></span>
+              </div>
+              <div class="fx col gap16">
+                <div class="occhiello">Centri screening</div>
+                <h1>I centri screening delle ASL</h1>
+                <p>Gli indirizzi e i recapiti dei centri screening, regione per regione. Per prenotare o chiedere informazioni si contatta direttamente il centro.</p>
+              </div>
+            </div>
+
+            <sc-if value="{{ haCentri }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-crema wrap sezione" data-screen-label="Elenco centri">
+              <div class="fx col gap32">
+                <sc-for list="{{ centriGruppi }}" as="g" hint-placeholder-count="1">
+                  <section class="centri-reg fx col gap16">
+                    <h2>{{ g.reg }}</h2>
+                    <div class="centri-griglia">
+                      <sc-for list="{{ g.centri }}" as="c" hint-placeholder-count="2">
+                        <article class="centro">
+                          <h3>{{ c.nome }}</h3>
+                          <sc-if value="{{ c.haAsl }}" hint-placeholder-val="{{ true }}"><p class="centro-asl">{{ c.asl }}</p></sc-if>
+                          <sc-if value="{{ c.haScreening }}" hint-placeholder-val="{{ true }}"><p class="centro-scr">{{ c.screening }}</p></sc-if>
+                          <dl class="centro-dati">
+                            <sc-if value="{{ c.haIndirizzo }}" hint-placeholder-val="{{ true }}"><div><dt>Dove</dt><dd>{{ c.indirizzo }}</dd></div></sc-if>
+                            <sc-if value="{{ c.haOrari }}" hint-placeholder-val="{{ false }}"><div><dt>Orari</dt><dd><sc-for list="{{ c.orari }}" as="o" hint-placeholder-count="1"><span class="centro-riga">{{ o.t }}</span></sc-for></dd></div></sc-if>
+                            <sc-if value="{{ c.haEmail }}" hint-placeholder-val="{{ false }}"><div><dt>Email</dt><dd><a href="{{ c.hrefEmail }}">{{ c.email }}</a></dd></div></sc-if>
+                            <sc-if value="{{ c.haSito }}" hint-placeholder-val="{{ false }}"><div><dt>Sito</dt><dd><a href="{{ c.sito }}" target="_blank" rel="noopener noreferrer">Apri il sito del centro</a></dd></div></sc-if>
+                          </dl>
+                          <sc-if value="{{ c.haNote }}" hint-placeholder-val="{{ false }}"><p class="centro-note">{{ c.note }}</p></sc-if>
+                          <sc-if value="{{ c.haTel }}" hint-placeholder-val="{{ true }}"><a class="cta centro-tel" href="{{ c.hrefTel }}">Chiama {{ c.tel }}</a></sc-if>
+                        </article>
+                      </sc-for>
+                    </div>
+                  </section>
+                </sc-for>
+              </div>
+            </div>
+            </sc-if>
+
+            <sc-if value="{{ centriVuota }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-crema wrap sezione" data-screen-label="Stato vuoto Centri screening">
+              <div class="fx col gap16">
+                <div class="avviso fx col gap12">
+                  <h2>Stiamo raccogliendo i centri</h2>
+                  <p>L’elenco dei centri screening delle ASL è in preparazione. Intanto trovi le iniziative aperte regione per regione.</p>
+                  <a class="cta" href="#/trova">Vedi le iniziative per regione</a>
+                </div>
+              </div>
+            </div>
+            </sc-if>
+
+          </div>
+        </sc-if>
+
+
         <sc-if value="{{ vistaBp }}" hint-placeholder-val="{{ false }}">
           <div data-screen-label="Buone pratiche">
 
@@ -1713,6 +1798,7 @@
                           <option value="Diabete e celiachia pediatrici">Diabete</option>
                           <option value="Polmonare">Polmonare</option>
                           <option value="Epatite C (HCV)">HCV (Epatite C)</option>
+                          <option value="Cardiovascolare">Cardiovascolare</option>
                           <option value="Altro">Altro</option>
                         </select>
                         <svg class="sel-frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
@@ -2093,6 +2179,7 @@
                 <a href="#/articolo/faq-1">Se l’invito non arriva</a>
                 <a href="#/articolo/faq-5">Il kit del colon-retto</a>
                 <a href="#/screening/prostata">Screening prostatico (PSA)</a>
+                <sc-if value="{{ haCentri }}" hint-placeholder-val="{{ false }}"><a href="#/centri">Centri screening delle ASL</a></sc-if>
                 <sc-if value="{{ haTesti }}" hint-placeholder-val="{{ false }}"><a href="#/testimonianze">Testimonianze</a></sc-if>
                 <sc-if value="{{ haBp }}" hint-placeholder-val="{{ false }}"><a href="#/buone-pratiche">Buone pratiche</a></sc-if>
                 <sc-if value="{{ haDiff }}" hint-placeholder-val="{{ false }}"><a href="#/difficolta">Difficoltà e disservizi</a></sc-if>

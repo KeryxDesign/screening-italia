@@ -9,8 +9,8 @@
   const HREF_HPV = null;     // S5, rimando «/hpv/» (cervicale)
   const HREF_INVITO = null;  // S6, «/invito/»
 
-  const SLUG = ["mammografico", "cervicale", "colon-retto", "prostata", "neonatale", "diabete-celiachia"];
-  const TIPO = { "mammografico": "Mammografico", "cervicale": "Cervice uterina", "colon-retto": "Colon-retto", "prostata": "Prostata" };
+  const SLUG = ["mammografico", "cervicale", "colon-retto", "prostata", "neonatale", "diabete-celiachia", "cardiovascolare"];
+  const TIPO = { "mammografico": "Mammografico", "cervicale": "Cervice uterina", "colon-retto": "Colon-retto", "prostata": "Prostata", "cardiovascolare": "Cardiovascolare" };
 
   // Icone (brief §3.5): SVG inline, tratto 2px, sempre accanto a un'etichetta scritta.
   const PERSONA = "M12 12.6a4.05 4.05 0 100-8.1 4.05 4.05 0 000 8.1M4.5 20.2c0-3.3 3.4-5.2 7.5-5.2s7.5 1.9 7.5 5.2";
@@ -90,9 +90,11 @@
     const m = M();
     const out = {
       vistaScr: dentro,
-      scrAdulti: dentro && ["mammografico", "cervicale", "colon-retto", "prostata"].indexOf(slug) !== -1,
+      scrAdulti: dentro && ["mammografico", "cervicale", "colon-retto", "prostata", "cardiovascolare"].indexOf(slug) !== -1,
       scrOnco: dentro && ["mammografico", "cervicale", "colon-retto"].indexOf(slug) !== -1,
       scrProstata: slug === "prostata",
+      // Senza invito nazionale: prostata e cardiovascolare (17/10/2026) usano le stesse bande.
+      scrSenzaInvito: slug === "prostata" || slug === "cardiovascolare",
       scrGenitori: slug === "neonatale" || slug === "diabete-celiachia",
       scrNeo: slug === "neonatale",
       scrDia: slug === "diabete-celiachia",

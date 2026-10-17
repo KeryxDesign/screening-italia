@@ -179,6 +179,11 @@ class Component extends DCLogic {
         this.espVer = window.__siEspVer || 0;
         this.forceUpdate();
       }
+      // Centri screening delle ASL (centri-wp.js, 17/10/2026): stesso giro.
+      if ((window.__siCentriVer || 0) !== (this.centriVer || 0)) {
+        this.centriVer = window.__siCentriVer || 0;
+        this.forceUpdate();
+      }
       if ((window.__siIniziativeVer || 0) !== (this.iniVer || 0)) {
         this.iniVer = window.__siIniziativeVer || 0;
         // La mappa si ridisegna solo se cambia regione: si azzera il segno per i nuovi conteggi.
@@ -505,7 +510,7 @@ class Component extends DCLogic {
     // #/racconta?tipo=difficolta: la domanda preseleziona il tipo, non fa parte della vista.
     const q0 = (p[0] || "").split("?");
     let vista = q0[0];
-    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening", "buone-pratiche", "difficolta", "racconta", "privacy"];
+    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening", "buone-pratiche", "difficolta", "racconta", "privacy", "centri"];
     if (note.indexOf(vista) === -1) { vista = ""; }
     let arg = p[1] ? decodeURIComponent(p[1]) : "";
     if (vista === "racconta") { arg = this.tipoDaDomanda(q0[1]); }
@@ -532,7 +537,7 @@ class Component extends DCLogic {
     const q0 = (p[0] || "").split("?");
     let vista = q0[0];
     let arg = p[1] ? decodeURIComponent(p[1]) : "";
-    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening", "buone-pratiche", "difficolta", "racconta", "privacy"];
+    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening", "buone-pratiche", "difficolta", "racconta", "privacy", "centri"];
     if (note.indexOf(vista) === -1) { vista = ""; }
     if (vista === "racconta") { arg = this.tipoDaDomanda(q0[1]); }
     // Alias permanente: #/prostata diventa #/screening/prostata senza voce doppia nella cronologia.
@@ -608,6 +613,7 @@ class Component extends DCLogic {
       "Mammografico": "M12 3a9 9 0 100 18 9 9 0 000-18M12 10.6a1.4 1.4 0 100 2.8 1.4 1.4 0 000-2.8",
       "Colon-retto": "M6 4c0 4.5 5.5 3.5 5.5 8S5 15.5 5 19h14",
       "Cervice uterina": "M12 3.5l7 3v5.2c0 4.2-3 6.9-7 8.3-4-1.4-7-4.1-7-8.3V6.5z",
+      "Cardiovascolare": "M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z", // Lucide heart (ISC)
       "Prostata": "M12 3.5c3.2 4.2 5.2 6.4 5.2 9A5.2 5.2 0 0112 17.7 5.2 5.2 0 016.8 12.5c0-2.6 2-4.8 5.2-9z",
       "Melanoma": "M12 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9M12 2.5v2M12 19.5v2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M2.5 12h2M19.5 12h2M5.2 18.8l1.4-1.4M17.4 6.6l1.4-1.4",
       "Polmone": "M12 3.5v9M9 8.5c-2.2 1.2-3.2 3.4-3.2 6.4v5H9v-7M15 8.5c2.2 1.2 3.2 3.4 3.2 6.4v5H15v-7",
@@ -801,6 +807,28 @@ class Component extends DCLogic {
     try { window.history.replaceState(null, "", "#/"); } catch (e) {}
     this.setState({ rotta: { vista: "", arg: "", sez: "" } });
   }
+  /* Centri screening delle ASL (note di Angelo, 17/10/2026), da centri-wp.js.
+     Raggruppati per regione; ogni riga della scheda esce solo se il dato c'e. */
+  centriGruppi() {
+    const c = window.__siCentri || {};
+    const lista = c.stato === "fatto" && Array.isArray(c.lista) ? c.lista : [];
+    const gruppi = [];
+    lista.forEach((x) => {
+      let g = gruppi.find((k) => k.reg === x.reg);
+      if (!g) { g = { reg: x.reg, centri: [] }; gruppi.push(g); }
+      g.centri.push({
+        nome: x.nome, asl: x.asl, haAsl: !!x.asl,
+        screening: x.screening.join(" · "), haScreening: x.screening.length > 0,
+        indirizzo: x.indirizzo, haIndirizzo: !!x.indirizzo,
+        orari: (x.orari ? x.orari.split("\n") : []).map((t) => ({ t: t })), haOrari: !!x.orari,
+        tel: x.tel, haTel: !!x.tel, hrefTel: "tel:" + x.tel.split(" ").join(""),
+        email: x.email, haEmail: !!x.email, hrefEmail: "mailto:" + x.email,
+        sito: x.sito, haSito: !!x.sito,
+        note: x.note, haNote: !!x.note
+      });
+    });
+    return gruppi;
+  }
   /* Esperienze (13/10/2026): Buone pratiche e Difficolta da esperienze-wp.js.
      Riga sotto il titolo: «Regione · Screening · mese anno». */
   esperienze(chi) {
@@ -825,7 +853,7 @@ class Component extends DCLogic {
   }
   rcTipoNome(t) { return t === "bp" ? "Una cosa che ha funzionato" : (t === "diff" ? "Un disservizio" : ""); }
   rcScreening() {
-    return ["Mammografico", "Cervice uterina", "Colon-retto", "Prostata", "Neonatale", "Diabete e celiachia pediatrici", "Polmonare", "Epatite C (HCV)", "Altro"];
+    return ["Mammografico", "Cervice uterina", "Colon-retto", "Prostata", "Neonatale", "Diabete e celiachia pediatrici", "Polmonare", "Epatite C (HCV)", "Cardiovascolare", "Altro"];
   }
   rcInvia() {
     const s = this.state;

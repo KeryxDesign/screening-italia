@@ -1441,3 +1441,43 @@ html:not(.contrasto) .banda.b-blu :is(.cta,.cta-2,a):focus-visible{outline:3px s
   .banda.wrap:not(.hero):not(.ini-larga):not(.banda-larga):not(:has(.art-griglia)):not(:has(.testi-griglia)):not(:has(.carrellata)) > *{margin-left:auto;margin-right:auto;width:100%}
   /* Le fasce larghe (griglie di card) restano allineate al bordo della griglia. */
 }
+
+/* Tabella degli screening accanto alla mappa (note di Angelo, 17/10/2026).
+   Sotto i 900px va sotto la mappa. Testata blu, gruppi su sabbia, freccia terracotta. */
+.trova-due{display:grid;grid-template-columns:1fr;gap:24px;align-items:start}
+@media (min-width:900px){.trova-due{grid-template-columns:minmax(0,1fr) 340px}}
+.tab-scr{background:#fff;border:1.5px solid var(--verde);border-radius:12px;overflow:hidden}
+.tab-scr-tit{margin:0;padding:14px 18px;background:var(--verde);color:#fff;font-size:19px;line-height:1.2}
+.tab-scr-lista{list-style:none;margin:0;padding:0}
+.tab-scr-lista li{margin:0}
+.tab-scr-gruppo{padding:8px 18px;background:var(--sabbia);color:var(--verde-scuro);font-size:14px;font-weight:700;
+  letter-spacing:0.06em;text-transform:uppercase;border-top:1px solid rgba(20,32,43,0.12)}
+.tab-scr-r{display:flex;align-items:center;gap:12px;min-height:48px;padding:8px 18px;border-top:1px solid rgba(20,32,43,0.12);
+  color:var(--inchiostro);text-decoration:none;font-size:17px;font-weight:600}
+.tab-scr-sub{padding-left:30px}
+a.tab-scr-r:hover,a.tab-scr-r:focus-visible{background:var(--verde-tenue)}
+a.tab-scr-r:hover .tab-scr-n,a.tab-scr-r:focus-visible .tab-scr-n{text-decoration:underline;text-underline-offset:3px}
+a.tab-scr-r:focus-visible{outline:3px solid var(--terracotta);outline-offset:-3px}
+.tab-scr-n{display:flex;flex-direction:column}
+.tab-scr-sotto{font-size:14px;font-weight:400;color:var(--soft)}
+.tab-scr-f{width:19px;height:19px;margin-left:auto;flex-shrink:0;color:var(--terracotta)}
+.tab-scr-off{color:var(--soft);font-weight:500}
+.tab-scr-presto{margin-left:auto;font-size:14px;font-weight:400;color:var(--soft);white-space:nowrap}
+html.contrasto .tab-scr{border:2.5px solid #000}
+
+/* Centri screening delle ASL (note di Angelo, 17/10/2026). */
+.centri-griglia{display:grid;grid-template-columns:1fr;gap:16px}
+@media (min-width:760px){.centri-griglia{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.centro{display:flex;flex-direction:column;gap:10px;background:#fff;border-radius:12px;padding:20px;
+  box-shadow:0 1px 3px rgba(20,32,43,0.12)}
+.centro h3{margin:0;font-size:20px;line-height:1.25}
+.centro-asl{margin:0;font-weight:600;color:var(--verde)}
+.centro-scr{margin:0;font-size:15px;color:var(--soft)}
+.centro-dati{margin:0;display:flex;flex-direction:column;gap:8px}
+.centro-dati div{display:grid;grid-template-columns:72px 1fr;gap:8px}
+.centro-dati dt{font-weight:600;color:var(--soft)}
+.centro-dati dd{margin:0;overflow-wrap:anywhere}
+.centro-riga{display:block}
+.centro-note{margin:0;font-size:15px;color:var(--soft);white-space:pre-line}
+.centro-tel{align-self:flex-start;margin-top:4px}
+html.contrasto .centro{border:2.5px solid #000}

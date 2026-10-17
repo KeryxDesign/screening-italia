@@ -44,9 +44,9 @@
   };
 
   /* Liste chiuse. Fuori da qui l'iniziativa si scarta.
-     tipo: regola del brand, sei voci, non una di piu. */
+     tipo: le voci con una pagina sul sito. Cardiovascolare aggiunta il 17/10/2026 (Angelo). */
   var TIPI = ["Mammografico", "Cervice uterina", "Colon-retto", "Prostata",
-              "Neonatale", "Diabete e celiachia pediatrici"];
+              "Neonatale", "Diabete e celiachia pediatrici", "Cardiovascolare"];
   var REGIONI = ["Abruzzo", "Basilicata", "Calabria", "Campania", "Emilia-Romagna",
                  "Friuli-Venezia Giulia", "Lazio", "Liguria", "Lombardia", "Marche",
                  "Molise", "Piemonte", "Puglia", "Sardegna", "Sicilia", "Toscana",
