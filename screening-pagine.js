@@ -362,8 +362,8 @@ window.SCREENING_PAGINE = {
     "Microtesti·Etichetta del bottone del direttorio · variante 3": "Vedi il centro della tua zona",
     "Microtesti·Etichetta del recapito telefonico": "Chiama il centro"
   },
-  /* Cardiovascolare (note di Angelo, 17/10/2026). Bozza da far rivedere a MUSE e ad Angelo:
-     i [DATO MANCANTE] restano visibili in .finto finche qualcuno non li verifica. Niente pareri
+  /* Cardiovascolare (note di Angelo, 17/10/2026). Bozza da far rivedere a MUSE e ad Angelo
+     (eta dei programmi e esami compresi: frasi neutre finche Angelo non da i dati). Niente pareri
      medici, niente soglie, niente «gratuito» senza una data. */
   "cardiovascolare": {
     "S1·Occhiello": "SCREENING CARDIOVASCOLARE",
@@ -375,7 +375,7 @@ window.SCREENING_PAGINE = {
     "S2·Titolo h2": "Un controllo che si decide con il medico",
     "S2·Paragrafo": "Senza un programma nazionale, chi può partecipare e ogni quanto lo stabilisce chi organizza l'iniziativa. Fuori dalle iniziative, ne parli con il tuo medico di famiglia.",
     "S2·Cella 1 · h3": "L'età cambia da un'iniziativa all'altra",
-    "S2·Cella 1 · prosa": "[DATO MANCANTE: fascia di età dei programmi regionali, da Angelo]",
+    "S2·Cella 1 · prosa": "Chi può partecipare lo decide chi organizza. Lo trovi nella scheda di ogni iniziativa.",
     "S2·Cella 1 · etichetta icona": "Fascia di età",
     "S2·Cella 2 · h3": "Nessuna cadenza fissa",
     "S2·Cella 2 · prosa": "Non c'è un ritmo stabilito per tutti. Lo decide il medico che ti segue.",
@@ -398,7 +398,7 @@ window.SCREENING_PAGINE = {
     "S3·Passo 4 · h3": "Se nella tua regione non c'è niente",
     "S3·Passo 4 · prosa": "Resta la strada normale: ne parli con il medico, che valuta con te cosa serve.",
     "S4·Titolo h2": "Il controllo in pratica",
-    "S4·Paragrafo": "[DATO MANCANTE: quali esami comprende di solito un controllo del rischio cardiovascolare, da Angelo]",
+    "S4·Paragrafo": "Cosa comprende il controllo cambia da un'iniziativa all'altra. Prima di andare, chiedi quali esami sono previsti.",
     "S4·Voce 1": "Chiedi prima cosa è compreso.",
     "S4·Voce 2": "Porta con te gli esami che hai già fatto.",
     "S4·Voce 3": "I risultati li legge il medico.",
