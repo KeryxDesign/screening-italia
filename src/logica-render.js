@@ -72,6 +72,11 @@ window.__siLogicaRender = class {
       navTesti: vista === "testimonianze" ? "page" : "false",
       navEnti: vista === "enti" ? "page" : "false",
       navChi: vista === "chi" ? "page" : "false",
+      navCarta: vista === "carta" ? "page" : "false",
+      navRazionale: vista === "razionale" ? "page" : "false",
+      navChiSiamo: (vista === "carta" || vista === "razionale") ? "page" : "false",
+      chiAperto: this.chiAperto() ? "true" : "false",
+      chiApriChiudi: () => this.apriChiudi("chi"),
       navContatti: vista === "contatti" ? "page" : "false",
       // «Gli screening» e una tendina (brief 26/09/2026): corrente su tutte le rotte #/screening*.
       navFaq: (vista === "faq" || this.state.rotta.vista === "screening") ? "page" : "false",
@@ -115,6 +120,11 @@ window.__siLogicaRender = class {
       })(),
       vistaFaq: vista === "faq" || vista === "domande" || vista === "articoli",
       vistaChi: vista === "chi",
+      vistaCarta: vista === "carta",
+      vistaRazionale: vista === "razionale",
+      razGiuridico: () => this.vaiARazionale("giuridico"),
+      razScientifico: () => this.vaiARazionale("scientifico"),
+      razEtico: () => this.vaiARazionale("etico"),
       vistaContatti: vista === "contatti",
       // Il floater mail non si rende su #/contatti: la pagina ha gia il suo bottone (collaudo LORI giro 1).
       floaterMail: vista !== "contatti",

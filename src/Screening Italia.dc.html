@@ -85,7 +85,7 @@
 
         <div class="hdr">
           <div class="wrap hdr-riga">
-            <a class="marchio" href="#/" title="Torna alla home" aria-label="Screening Italia, torna alla home"><img class="marchio-img" src="./marchio/screening-italia-chiaro.png" alt="Screening Italia" width="1169" height="440" /><span class="motto">Screening Italia, un SI alla prevenzione</span></a>
+            <a class="marchio" href="#/" title="Torna alla home" aria-label="Screening Italia, torna alla home"><img class="marchio-img" src="./marchio/screening-italia-chiaro.png?v=carta1018" alt="Screening Italia" width="1169" height="440" /><span class="motto">Screening Italia, un SI alla prevenzione</span></a>
             <input class="menu-chk" type="checkbox" id="menu-chk" aria-label="Apri il menu">
             <label class="hamb" for="menu-chk">
               <svg class="i-apri" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
@@ -123,6 +123,14 @@
               </div>
               </sc-if>
               <a href="#/domande" aria-current="{{ navDomande }}">Domande frequenti</a>
+              <!-- Tendina «Chi siamo» (Davide, 18/10/2026): Carta dei servizi e Razionale, il «chi siamo» di Screening Italia. -->
+              <div class="nav-voce">
+                <button type="button" class="nav-tendina" aria-expanded="{{ chiAperto }}" aria-controls="menu-chi" aria-current="{{ navChiSiamo }}" onClick="{{ chiApriChiudi }}">Chi siamo<svg class="nav-freccia" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+                <div class="nav-menu" id="menu-chi">
+                  <a href="#/carta" aria-current="{{ navCarta }}">Carta dei servizi</a>
+                  <a href="#/razionale" aria-current="{{ navRazionale }}">Razionale</a>
+                </div>
+              </div>
               <a href="#/contatti" aria-current="{{ navContatti }}">Contatti</a>
             </nav>
           </div>
@@ -133,7 +141,7 @@
 
             <div class="banda hero wrap sezione" data-screen-label="Above the fold">
               <div class="hero-sfondo" aria-hidden="true">
-                <image-slot id="hero-1" src="../img/foto/foto-si-piazza.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
+                <image-slot id="hero-1" src="./img/foto/foto-si-piazza.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
                 <span class="hero-velo"></span>
               </div>
               <div class="hero-due">
@@ -515,7 +523,7 @@
 
             <div class="banda hero wrap sezione" data-screen-label="Non c e niente">
               <div class="hero-sfondo" aria-hidden="true">
-                <image-slot id="hero-3" src="../img/foto/foto-74855-23397.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
+                <image-slot id="hero-3" src="./img/foto/foto-74855-23397.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
                 <span class="hero-velo"></span>
               </div>
               <div class="fx col gap16">
@@ -580,7 +588,7 @@
 
             <div class="banda hero wrap sezione" data-screen-label="Apertura enti">
               <div class="hero-sfondo" aria-hidden="true">
-                <image-slot id="hero-8" src="../img/foto/foto-si-balcone.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
+                <image-slot id="hero-8" src="./img/foto/foto-si-balcone.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
                 <span class="hero-velo"></span>
               </div>
               <div class="fx col gap16">
@@ -701,7 +709,7 @@
 
             <div class="banda hero wrap sezione" data-screen-label="Apertura domande">
               <div class="hero-sfondo" aria-hidden="true">
-                <image-slot id="hero-4" src="../img/foto/foto-si-telefono.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
+                <image-slot id="hero-4" src="./img/foto/foto-si-telefono.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
                 <span class="hero-velo"></span>
               </div>
               <div class="fx col gap16">
@@ -1324,25 +1332,170 @@
           </div>
         </sc-if>
 
-        <sc-if value="{{ vistaChi }}" hint-placeholder-val="{{ false }}">
-          <div data-screen-label="Chi siamo">
+        <!-- Carta dei servizi (documento di Davide, 18/10/2026): sostituisce «Chi siamo» (#/chi e alias).
+             Le tre figure del documento sono rifatte in HTML/CSS (cs-ponte, cs-anello). Fatta nel repo, non in
+             Claude Design: va riportata nel file Claude Design. Testi da far rivedere a MUSE. -->
+        <sc-if value="{{ vistaCarta }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Carta dei servizi">
 
-            <div class="banda hero wrap sezione" data-screen-label="Chi siamo apertura">
+            <div class="banda hero wrap sezione" data-screen-label="Carta apertura">
               <div class="hero-sfondo" aria-hidden="true">
-                <image-slot id="hero-6" src="../img/foto/foto-si-panchina.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
+                <image-slot id="hero-6" src="./img/foto/foto-si-panchina.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
                 <span class="hero-velo"></span>
               </div>
               <div class="fx col gap16">
-                <div class="occhiello">Chi siamo</div>
-                <h1>Un elenco curato e verificato, non un algoritmo</h1>
-                <p>Consultiamo i siti delle aziende sanitarie, degli ospedali e delle associazioni e riportiamo qui le iniziative attive, complete di periodo e recapito.</p>
+                <div class="occhiello">Carta dei servizi</div>
+                <h1>Chi siamo e cosa facciamo</h1>
+                <p>Screening Italia lavora con le Istituzioni, i cittadini e tutti i portatori di interesse per migliorare la gestione degli screening sanitari: dalla pianificazione all’esecuzione, fino al follow up.</p>
               </div>
             </div>
 
-            <div class="banda b-crema wrap sezione" data-screen-label="Come lavoriamo">
+            <div class="banda b-bianco wrap sezione" data-screen-label="Carta missione">
+              <div class="fx col gap28">
+                <div class="fx col gap12 cs-centro">
+                  <div class="occhiello">La missione</div>
+                  <h2>Partner strategico delle Istituzioni, dei cittadini e dei portatori di interesse</h2>
+                </div>
+                <p class="cs-lead">L’obiettivo è migliorare la gestione globale degli screening sanitari, dalla pianificazione all’esecuzione, fino al follow up.</p>
+                <div class="cs-tipi" role="list" aria-label="Le tipologie di screening di cui ci occupiamo">
+                  <span role="listitem">Oncologici</span>
+                  <span role="listitem">Nutrizionali</span>
+                  <span role="listitem">Neonatali</span>
+                  <span role="listitem">Diabete</span>
+                  <span role="listitem">Cardiovascolari</span>
+                </div>
+                <p class="cs-lead">Ci occupiamo di tutte le tipologie di screening, per mettere in luce il valore strategico della prevenzione secondaria strutturata: in una parola, dello screening.</p>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap banda-larga sezione" data-screen-label="Carta come lavora">
+              <div class="fx col gap28">
+                <div class="fx col gap12 cs-centro">
+                  <div class="occhiello">Come lavora</div>
+                  <h2>Un ponte tra Istituzioni e cittadini</h2>
+                </div>
+                <div class="cs-tre">
+                  <div class="card fx col gap8">
+                    <h3>In sintonia con le Istituzioni</h3>
+                    <p>Opera in stretta sinergia con le Istituzioni, il mondo del lavoro e le associazioni sindacali.</p>
+                  </div>
+                  <div class="card fx col gap8">
+                    <h3>Dal basso, dall’alto e in trasversale</h3>
+                    <p>Agisce bottom-up, top-down e trasversalmente, coinvolgendo attivamente tutti i portatori di interesse.</p>
+                  </div>
+                  <div class="card fx col gap8">
+                    <h3>Un’informazione chiara</h3>
+                    <p>Sensibilizza, divulga, promuove e comunica, con un ponte informativo chiaro ed efficace tra Istituzioni e cittadini.</p>
+                  </div>
+                </div>
+
+                <figure class="cs-fig" aria-labelledby="cs-ponte-tit">
+                  <figcaption id="cs-ponte-tit" class="cs-fig-tit">Il messaggio va e torna</figcaption>
+                  <div class="cs-ponte">
+                    <div class="cs-nodo">
+                      <span class="cs-nodo-tit">Istituzioni</span>
+                      <span class="cs-nodo-sub">il centro</span>
+                    </div>
+                    <div class="cs-ponte-mezzo">
+                      <div class="cs-freccia cs-freccia-va">
+                        <span>Capillarizza in periferia il messaggio delle Istituzioni</span>
+                        <svg viewBox="0 0 120 16" preserveAspectRatio="none" aria-hidden="true"><path d="M2 8h110M104 2l10 6-10 6"></path></svg>
+                      </div>
+                      <div class="cs-ponte-logo"><img src="./marchio/screening-italia-chiaro.png?v=carta1018" alt="Screening Italia" width="1169" height="440" /></div>
+                      <div class="cs-freccia cs-freccia-torna">
+                        <svg viewBox="0 0 120 16" preserveAspectRatio="none" aria-hidden="true"><path d="M118 8H8M16 2L6 8l10 6"></path></svg>
+                        <span>Convoglia al centro il messaggio della periferia</span>
+                      </div>
+                    </div>
+                    <div class="cs-nodo cs-nodo-chiaro">
+                      <span class="cs-nodo-tit">Territorio</span>
+                      <span class="cs-nodo-sub">la periferia: cittadini, associazioni, enti</span>
+                    </div>
+                  </div>
+                </figure>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap banda-larga sezione" data-screen-label="Carta servizi">
+              <div class="fx col gap28">
+                <div class="fx col gap12 cs-centro">
+                  <div class="occhiello">I servizi</div>
+                  <h2>Cosa fa Screening Italia</h2>
+                </div>
+                <ol class="cs-servizi">
+                  <li><strong>Pubblica online le iniziative</strong> dei portatori di interesse.</li>
+                  <li><strong>Affianca e assiste le Istituzioni</strong>, diffondendo le loro iniziative, le buone pratiche e le criticità.</li>
+                  <li><strong>Affianca e assiste i cittadini e le associazioni</strong> ed è portavoce delle loro difficoltà, delle critiche e delle esperienze positive.</li>
+                  <li><strong>Aiuta le associazioni</strong> a diffondere le proprie iniziative, a farle conoscere e a trovare sostegno.</li>
+                  <li><strong>Evidenzia le difficoltà esecutive</strong> e le congestioni operative, condividendo i problemi che emergono.</li>
+                  <li><strong>È tavolo di confronto</strong> e forum dei portatori di interesse.</li>
+                  <li><strong>Parla anche ai più giovani</strong>, perché lo screening diventi una scelta naturale e consapevole: «Quando sarò grande farò gli screening».</li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap banda-larga sezione" data-screen-label="Carta risultati">
+              <div class="fx col gap28">
+                <div class="fx col gap12 cs-centro">
+                  <div class="occhiello">Dalle iniziative ai risultati</div>
+                  <h2>Cosa genera nella popolazione</h2>
+                </div>
+                <p class="cs-lead">Con iniziative online e sul territorio, Screening Italia genera consapevolezza, impegno, capacità di scelta e adesione, e contribuisce così ad aumentare la partecipazione dei cittadini agli screening.</p>
+
+                <div class="cs-flusso">
+                  <figure class="cs-fig" aria-labelledby="cs-anello1-tit">
+                    <figcaption id="cs-anello1-tit" class="cs-fig-tit">Iniziative online e sul territorio</figcaption>
+                    <div class="cs-anello cs-anello-6">
+                      <div class="cs-anello-centro"><img src="./marchio/screening-italia-chiaro.png?v=carta1018" alt="Screening Italia" width="1169" height="440" /></div>
+                      <ul>
+                        <li style="--i:0">Comunicazione</li>
+                        <li style="--i:1">Formazione</li>
+                        <li style="--i:2">Informazione</li>
+                        <li style="--i:3">Promozione</li>
+                        <li style="--i:4">Sensibilizzazione</li>
+                        <li style="--i:5">Diffusione</li>
+                      </ul>
+                    </div>
+                  </figure>
+
+                  <div class="cs-giu" aria-hidden="true"><svg viewBox="0 0 40 64"><path d="M20 2v54M8 44l12 14 12-14"></path></svg></div>
+
+                  <figure class="cs-fig" aria-labelledby="cs-anello2-tit">
+                    <figcaption id="cs-anello2-tit" class="cs-fig-tit">I risultati, per tutti</figcaption>
+                    <div class="cs-anello cs-anello-7">
+                      <div class="cs-anello-centro cs-anello-centro-testo">Istituzioni, cittadini, privato</div>
+                      <ul>
+                        <li style="--i:0">Commitment<small>impegno</small></li>
+                        <li style="--i:1">Empowerment<small>capacità di scegliere</small></li>
+                        <li style="--i:2">Partecipazione</li>
+                        <li style="--i:3">Awareness<small>consapevolezza</small></li>
+                        <li style="--i:4">Coinvolgimento</li>
+                        <li style="--i:5">Equity<small>equità di accesso</small></li>
+                        <li style="--i:6">Compliance<small>adesione</small></li>
+                      </ul>
+                    </div>
+                  </figure>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Carta domini">
               <div class="fx col gap20">
-                <h2>Il procedimento di verifica</h2>
-                <div class="fx col gap14">
+                <div class="fx col gap12 cs-centro">
+                  <div class="occhiello">I nomi a dominio</div>
+                  <h2>Indirizzi dedicati allo screening</h2>
+                </div>
+                <p class="cs-lead">Screening Italia è titolare dei diritti su nomi a dominio fondamentali, con le relative estensioni, dedicati esclusivamente allo screening. Le usa per portare il «messaggio screening» in modo capillare, amplificato e mirato.</p>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap banda-larga sezione" data-screen-label="Carta come verifichiamo">
+              <div class="fx col gap28">
+                <div class="fx col gap12 cs-centro">
+                  <div class="occhiello">Come verifichiamo</div>
+                  <h2>Un elenco curato e verificato, non un algoritmo</h2>
+                </div>
+                <div class="cs-tre">
                   <div class="card fx col gap8">
                     <h3>1. Ricezione della segnalazione</h3>
                     <p>Dall’ente organizzatore o da chi ne è venuto a conoscenza.</p>
@@ -1356,14 +1509,151 @@
                     <p>Le informazioni non verificate non vengono pubblicate. Alla chiusura dell’iniziativa la scheda viene rimossa.</p>
                   </div>
                 </div>
+                <p class="cs-lead">Non gestiamo prenotazioni, non vendiamo prestazioni, non raccogliamo dati sanitari e non diamo pareri clinici: per quelli la competenza è del tuo medico di medicina generale.</p>
               </div>
             </div>
 
-            <div class="banda b-verde wrap sezione" data-screen-label="Cosa non facciamo">
+            <div class="banda b-blu wrap sezione" data-screen-label="Carta adesione">
               <div class="fx col gap16">
-                <h2>Ambito del servizio</h2>
-                <p>Non gestiamo prenotazioni, non vendiamo prestazioni, non raccogliamo dati sanitari e non diamo pareri clinici: per quelli la competenza è del tuo medico di medicina generale.</p>
-                <a class="cta-2" href="#/contatti">Contatti</a>
+                <div class="occhiello">Enti sostenitori</div>
+                <h2>Aderisci alla Carta dei servizi</h2>
+                <p>Istituzioni, aziende sanitarie, associazioni e imprese possono aderire alla Carta come Enti sostenitori. Scrivici per sapere come.</p>
+                <a class="cta" href="#/contatti">Scrivici per aderire</a>
+                <a class="cta-2" href="#/razionale">Leggi il razionale</a>
+              </div>
+            </div>
+
+          </div>
+        </sc-if>
+
+        <!-- Razionale (documento di Davide, 18/10/2026): basi giuridiche, scientifiche ed etiche, con le fonti.
+             Voci doppie del documento unite; refusi corretti. Fatta nel repo, non in Claude Design: va riportata
+             nel file Claude Design. Testi da far rivedere a MUSE. -->
+        <sc-if value="{{ vistaRazionale }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Razionale">
+
+            <div class="banda hero wrap sezione" data-screen-label="Razionale apertura">
+              <div class="hero-sfondo" aria-hidden="true">
+                <image-slot id="hero-raz" src="./img/foto/foto-si-panchina-2.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
+                <span class="hero-velo"></span>
+              </div>
+              <div class="fx col gap16">
+                <div class="occhiello">Razionale</div>
+                <h1>Perché gli screening, e perché Screening Italia</h1>
+                <p>Le basi giuridiche, scientifiche ed etiche su cui poggia il nostro lavoro. Ogni punto rimanda alla sua fonte.</p>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap banda-larga sezione" data-screen-label="Razionale indice">
+              <nav class="raz-indice" aria-label="Le tre parti del razionale">
+                <button type="button" onClick="{{ razGiuridico }}"><span class="raz-num">1</span><span class="raz-ind-tit">Razionale giuridico</span><span class="raz-ind-sub">OMS, Unione europea, leggi italiane</span></button>
+                <button type="button" onClick="{{ razScientifico }}"><span class="raz-num">2</span><span class="raz-ind-tit">Razionale scientifico</span><span class="raz-ind-sub">Cosa dicono i dati</span></button>
+                <button type="button" onClick="{{ razEtico }}"><span class="raz-num">3</span><span class="raz-ind-tit">Razionale etico ed equity</span><span class="raz-ind-sub">Accesso uguale per tutti</span></button>
+              </nav>
+            </div>
+
+            <div class="banda b-crema wrap sezione raz-parte" id="raz-giuridico" data-screen-label="Razionale giuridico">
+              <div class="fx col gap28">
+                <div class="fx col gap12 cs-centro">
+                  <div class="occhiello">1. Razionale giuridico</div>
+                  <h2>Gli screening sono un diritto, scritto nelle norme</h2>
+                </div>
+
+                <section class="raz-gruppo">
+                  <h3 class="raz-gruppo-tit">Organizzazione mondiale della sanità</h3>
+                  <ul class="raz-voci">
+                    <li><a href="https://www.who.int/europe/publications/i/item/9789289057561" target="_blank" rel="noopener noreferrer">«A short guide to cancer screening»</a>, dell’Ufficio regionale europeo dell’OMS, aiuta i decisori ad aumentare i benefici dei programmi di screening esistenti e a promuoverne di nuovi. Ricorda che lo screening non è un semplice test, ma un percorso.</li>
+                    <li>Le <a href="https://www.who.int/publications/i/item/9789240030824" target="_blank" rel="noopener noreferrer">linee guida OMS per lo screening e il trattamento delle lesioni precancerose</a> del collo dell’utero, nella prevenzione del cancro della cervice.</li>
+                    <li>Le <a href="https://www.who.int/publications/i/item/9789240102248" target="_blank" rel="noopener noreferrer">nuove linee guida per il monitoraggio globale della prevenzione e del controllo del diabete</a>. Il <a href="https://www.who.int/initiatives/the-who-global-diabetes-compact" target="_blank" rel="noopener noreferrer">Global Diabetes Compact</a>, introdotto nel 2021, resta al centro delle iniziative globali per la prevenzione, la diagnosi precoce e la gestione del diabete.</li>
+                    <li>Il <a href="https://www.who.int/teams/noncommunicable-diseases/on-the-road-to-2025" target="_blank" rel="noopener noreferrer">quarto incontro di alto livello dell’Assemblea generale delle Nazioni Unite</a> sulla prevenzione e il controllo delle malattie non trasmissibili.</li>
+                    <li>La 77ª Assemblea mondiale della sanità ha approvato una risoluzione che chiede ai Governi di rafforzare e ampliare i programmi di screening neonatale.</li>
+                  </ul>
+                </section>
+
+                <section class="raz-gruppo">
+                  <h3 class="raz-gruppo-tit">Unione europea</h3>
+                  <ul class="raz-voci">
+                    <li>Con il Piano europeo di lotta contro il cancro, nel 2022 l’UE ha adottato un <a href="https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX%3A52022DC0474" target="_blank" rel="noopener noreferrer">nuovo approccio allo screening dei tumori</a>, per aumentarne l’accesso e la qualità e coprire più gruppi e più tumori. Per il tumore al seno, la Commissione aiuterà i Paesi a garantire che il 90% delle persone in fascia abbia accesso a screening di qualità.</li>
+                    <li>La <a href="https://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX%3A32022H1213%2801%29" target="_blank" rel="noopener noreferrer">Raccomandazione del Consiglio del 9 dicembre 2022</a> sul rafforzamento della prevenzione attraverso l’individuazione precoce.</li>
+                    <li>Le <a href="https://cancer-screening-and-care.jrc.ec.europa.eu/en/ecicc" target="_blank" rel="noopener noreferrer">raccomandazioni europee sullo screening cervicale e colorettale</a>.</li>
+                    <li><a href="https://www.epicentro.iss.it/screening/jaeucanscreen" target="_blank" rel="noopener noreferrer">EUCanScreen</a>, l’Azione congiunta europea lanciata nel giugno 2024 con il programma EU4Health, per quattro anni: screening di qualità per seno, collo dell’utero e colon retto, e avvio dei programmi raccomandati di recente per polmone, prostata e stomaco.</li>
+                  </ul>
+                </section>
+
+                <section class="raz-gruppo">
+                  <h3 class="raz-gruppo-tit">Legislazione nazionale</h3>
+                  <ul class="raz-voci">
+                    <li>Gli screening rientrano nei <strong>Livelli essenziali di assistenza (LEA)</strong>, che il Servizio sanitario nazionale deve garantire a tutti, a suo carico. I LEA sono lo strumento con cui si realizza il diritto alla salute dell’<a href="https://www.senato.it/istituzione/la-costituzione/parte-i/titolo-ii/articolo-32" target="_blank" rel="noopener noreferrer">articolo 32 della Costituzione</a>, con un livello di prestazioni uguale in tutto il Paese.</li>
+                    <li>L’Italia è impegnata nei programmi di screening oncologico dall’inizio degli anni ’90 e contribuisce attivamente alle raccomandazioni europee.</li>
+                    <li>Il Piano oncologico nazionale, il Piano nazionale della prevenzione e il Piano sanitario nazionale contano gli screening fra le strategie per «ridurre il carico prevenibile di morbosità, mortalità e disabilità delle malattie non trasmissibili». Obiettivi per le Regioni: estendere davvero i programmi a tutta la popolazione in fascia per i tre tumori oggetto di screening, aumentare le persone a rischio che vi partecipano, introdurre il test HPV-DNA per la cervice. Sono previste modalità specifiche per superare le criticità nelle Regioni meridionali e insulari. Già il Piano sanitario nazionale 1998-2000 estendeva a tutto il Paese gli screening di provata efficacia.</li>
+                    <li>La partecipazione dei cittadini è prevista dalla <strong>legge 833/1978</strong>, istitutiva del Servizio sanitario nazionale, e dal <strong>D.Lgs. 502/1992, art. 14</strong>, che chiede alle Regioni di consultare cittadini e volontariato su programmazione, controllo e valutazione dei servizi (da qui i Comitati consultivi misti).</li>
+                    <li>Il <a href="https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legge:2025-10-31;159" target="_blank" rel="noopener noreferrer">decreto legge 31 ottobre 2025, n. 159</a> prevede permessi retribuiti, definiti dalla contrattazione collettiva, per fare in orario di lavoro gli screening oncologici del seno, della cervice uterina e del colon retto, e chiede al medico competente di informare i lavoratori sui programmi di screening previsti dai LEA.</li>
+                    <li>Nel 2025 la Conferenza Stato-Regioni ha approvato un aggiornamento dei LEA che modifica il DPCM del 12 gennaio 2017: amplia lo screening neonatale esteso a nuove patologie, con lo screening per la SMA, e introduce un programma di sorveglianza per i tumori legati ai geni BRCA.</li>
+                    <li>La <strong>legge 15 settembre 2023, n. 130</strong> istituisce un programma di screening per il diabete di tipo 1 e la celiachia nella popolazione pediatrica: la prima legge al mondo di questo tipo. I primi risultati del progetto coordinato dal Ministero della Salute e dall’Istituto superiore di sanità mostrano che riesce a intercettare precocemente i possibili casi.</li>
+                  </ul>
+                </section>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap banda-larga sezione raz-parte" id="raz-scientifico" data-screen-label="Razionale scientifico">
+              <div class="fx col gap28">
+                <div class="fx col gap12 cs-centro">
+                  <div class="occhiello">2. Razionale scientifico</div>
+                  <h2>Gli screening funzionano</h2>
+                </div>
+                <div class="raz-dati">
+                  <div class="raz-dato">
+                    <span class="raz-cifra">oltre 30%</span>
+                    <p>la riduzione della mortalità per tumore al seno nelle donne fra 50 e 69 anni che fanno la mammografia ogni due anni. <a href="https://www.airc.it/cancro/informazioni-tumori/corretta-informazione/screening-mammografia" target="_blank" rel="noopener noreferrer">Fonte: AIRC</a></p>
+                  </div>
+                  <div class="raz-dato">
+                    <span class="raz-cifra">49</span>
+                    <p>le malattie ricercate oggi con lo screening neonatale esteso. <a href="https://www.osservatorioscreening.it/screening-neonatale-malattie-metaboliche/" target="_blank" rel="noopener noreferrer">Fonte: Osservatorio screening</a></p>
+                  </div>
+                  <div class="raz-dato">
+                    <span class="raz-cifra">−49%</span>
+                    <p>i casi di chetoacidosi grave nel progetto pilota dello screening pediatrico per diabete di tipo 1 e celiachia (legge 130/2023).</p>
+                  </div>
+                </div>
+                <ul class="raz-voci">
+                  <li>Gli screening oncologici sono uno strumento fondamentale di sanità pubblica per la prevenzione secondaria: permettono la diagnosi precoce dei tumori e migliorano in modo significativo le possibilità di trattamento e di sopravvivenza.</li>
+                  <li>Le <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022H1213(01)" target="_blank" rel="noopener noreferrer">raccomandazioni europee del 2022</a> chiedono di potenziare e ampliare i programmi, con nuove fasce d’età e nuovi esami: il loro impatto è riconosciuto a livello internazionale fra le strategie più efficaci contro il cancro.</li>
+                  <li>Lo screening neonatale identifica precocemente numerose malattie, anche gravissime, nei primi giorni di vita. È obbligatorio ed è un diritto di ogni nuovo nato: si esegue nel centro nascita prima delle dimissioni, per legge fra le 48 e le 72 ore di vita.</li>
+                  <li>La legge 130/2023 ha istituito un programma nazionale, volontario, di screening per diabete di tipo 1 e celiachia fra 1 e 17 anni, per una diagnosi precoce che prevenga complicanze gravi come la chetoacidosi diabetica.</li>
+                  <li><a href="https://www.rainews.it/articoli/2026/02/tumori-aumentano-nei-giovani-in-crescita-neoplasie-colon-pancreas-e-polmone-7c669b72-4c80-40c8-87a8-4039e45e9494.html" target="_blank" rel="noopener noreferrer">Giornata mondiale contro il cancro 2026</a>: i tumori aumentano nei giovani, in particolare colon, pancreas e polmone. Per il colon il Policlinico Gemelli stima un +80% di casi sotto i 50 anni entro il 2040. In Europa si raccomanda già di anticipare alcuni programmi: per la mammella la Raccomandazione del Consiglio dell’Unione europea del 2022 indica l’inizio a 45 anni.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap banda-larga sezione raz-parte" id="raz-etico" data-screen-label="Razionale etico">
+              <div class="fx col gap28">
+                <div class="fx col gap12 cs-centro">
+                  <div class="occhiello">3. Razionale etico ed equity</div>
+                  <h2>Lo stesso accesso per tutti</h2>
+                </div>
+                <div class="cs-tre">
+                  <div class="card fx col gap8">
+                    <h3>Le criticità restano</h3>
+                    <p>Copertura, adesione della popolazione, sostenibilità economica ed efficacia complessiva degli screening richiedono approfondimento e confronto fra gli operatori del settore.</p>
+                  </div>
+                  <div class="card fx col gap8">
+                    <h3>Le tecnologie cambiano</h3>
+                    <p>Intelligenza artificiale e biomarcatori stanno trasformando la diagnosi precoce: chi lavora nei programmi di screening ha bisogno di un aggiornamento costante.</p>
+                  </div>
+                  <div class="card fx col gap8">
+                    <h3>Le disuguaglianze vanno ridotte</h3>
+                    <p>I servizi devono essere disponibili per tutta la popolazione, indipendentemente da fattori socio-economici o geografici.</p>
+                  </div>
+                </div>
+                <p class="nota cs-centro-testo">Fonte: <a href="https://www.sanita.puglia.it/documents/47906/606722/Locandina%2Bevento%2Bscreening%2B13%2Bdicembre%2B2024.pdf/1391bc08-4388-6de6-cb4a-edc58a524584?t=1751122513267" target="_blank" rel="noopener noreferrer">congresso sugli screening del 13 dicembre 2024, Brindisi</a>.</p>
+              </div>
+            </div>
+
+            <div class="banda b-blu wrap sezione" data-screen-label="Razionale chiusura">
+              <div class="fx col gap16">
+                <h2>Da qui nasce la Carta dei servizi</h2>
+                <p>Cosa fa Screening Italia, come lavora e come aderire come Ente sostenitore.</p>
+                <a class="cta" href="#/carta">Leggi la Carta dei servizi</a>
               </div>
             </div>
 
@@ -1375,7 +1665,7 @@
 
             <div class="banda hero wrap sezione" data-screen-label="Contatti apertura">
               <div class="hero-sfondo" aria-hidden="true">
-                <image-slot id="hero-7" src="../img/foto/foto-si-lettera.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
+                <image-slot id="hero-7" src="./img/foto/foto-si-lettera.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
                 <span class="hero-velo"></span>
               </div>
               <div class="fx col gap16">
@@ -2026,7 +2316,7 @@
 
             <div class="banda hero wrap sezione" data-screen-label="Apertura cookie">
               <div class="hero-sfondo" aria-hidden="true">
-                <img src="../img/foto/foto-si-caffe.webp" alt="" />
+                <img src="./img/foto/foto-si-caffe.webp" alt="" />
                 <span class="hero-velo"></span>
               </div>
               <div class="fx col gap16">
@@ -2153,7 +2443,7 @@
 
             <div class="ftr-alto">
               <div class="ftr-marchio fx col gap12">
-                <img class="ftr-marchio-img" src="./marchio/screening-italia-chiaro.png" alt="Screening Italia" width="1169" height="440">
+                <img class="ftr-marchio-img" src="./marchio/screening-italia-chiaro.png?v=carta1018" alt="Screening Italia" width="1169" height="440">
                 <p class="ftr-claim">Un elenco curato a mano delle iniziative di screening aperte in Italia. Ogni segnalazione è verificata sulla fonte ufficiale prima di essere pubblicata.</p>
                 <a class="ftr-wa" href="mailto:info@screeningitalia.it?subject=Messaggio%20dal%20sito%20Screening%20Italia">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg>
@@ -2185,13 +2475,14 @@
 
               <nav class="ftr-col" aria-label="Il portale">
                 <h3 class="ftr-tit">Il portale</h3>
-                <a href="#/chi">Chi siamo</a>
+                <a href="#/carta">Carta dei servizi</a>
+                <a href="#/razionale">Razionale</a>
                 <a href="#/contatti">Contatti</a>
                 <a href="#/enti">Per ASL ed enti</a>
                 <a href="#/contatti">Segnala un’iniziativa</a>
                 <a href="#/contatti">Segnala un dato sbagliato</a>
                 <a href="#/racconta">Racconta la tua esperienza</a>
-                <a href="#/chi">Come verifichiamo</a>
+                <a href="#/carta">Come verifichiamo</a>
               </nav>
             </div>
 
@@ -2209,9 +2500,9 @@
                 <span aria-hidden="true">·</span>
                 <button type="button" class="ftr-btn-link" onClick="{{ apriScelte }}">Preferenze cookie</button>
                 <span aria-hidden="true">·</span>
-                <a href="#/chi">Fonti e metodo</a>
+                <a href="#/razionale">Fonti e metodo</a>
                 <span aria-hidden="true">·</span>
-                <a href="#/chi">Accessibilità</a>
+                <a href="#/carta">Accessibilità</a>
               </p>
             </div>
 

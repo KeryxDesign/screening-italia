@@ -9,7 +9,7 @@ class Component extends DCLogic {
       // Pagine screening (25/09/2026): regione scelta nella pagina, resta per la sessione.
       regScr: null,
       // Tendine del menu («Gli screening», «Esperienze»): una sola aperta alla volta.
-      // menuAperto: "scr" | "esp" | "" (tutte chiuse) | null = stato di partenza
+      // menuAperto: "scr" | "esp" | "chi" | "" (tutte chiuse) | null = stato di partenza
       // (chiuse da desktop; nel pannello hamburger aperta quella della rotta).
       menuAperto: null,
       // Modulo #/racconta (SENTINEL 13/10/2026): niente salvato, niente fetch.
@@ -53,6 +53,11 @@ class Component extends DCLogic {
      pagina dello screening sulla sezione #scr-<sezione> (regione, dir, domanda), come fa
      scendi() in logica-screening.js: scroll al blocco, poi fuoco sul suo h2 (tabindex -1).
      Si insiste qualche giro: le foto cambiano l'altezza della pagina mentre arrivano. */
+  // Razionale (18/10/2026): l'indice scende alla parte scelta, senza toccare la rotta.
+  vaiARazionale(parte) {
+    const el = document.getElementById("raz-" + parte);
+    if (el) { window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 88, behavior: "smooth" }); }
+  }
   portaASezione() {
     const r = this.state.rotta;
     if (r.vista !== "screening" || !r.arg || !r.sez) { return; }
@@ -461,11 +466,13 @@ class Component extends DCLogic {
     const v = this.state.rotta.vista;
     if (v === "screening") { return "scr"; }
     if (this.eRottaEsperienze(v)) { return "esp"; }
+    if (v === "carta" || v === "razionale") { return "chi"; }
     return "";
   }
   eRottaEsperienze(v) { return ["testimonianze", "buone-pratiche", "difficolta", "racconta"].indexOf(v) !== -1; }
   scrAperto() { return this.menu() === "scr"; }
   espAperto() { return this.menu() === "esp"; }
+  chiAperto() { return this.menu() === "chi"; }
   apriChiudi(k) { this.setState({ menuAperto: this.menu() === k ? "" : k }); }
   // Cambio rotta (collaudo LORI giro 1): il pannello hamburger si chiude, la pagina nuova resta visibile.
   chiudiHamburger() {
@@ -510,12 +517,14 @@ class Component extends DCLogic {
     // #/racconta?tipo=difficolta: la domanda preseleziona il tipo, non fa parte della vista.
     const q0 = (p[0] || "").split("?");
     let vista = q0[0];
-    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening", "buone-pratiche", "difficolta", "racconta", "privacy", "centri"];
+    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening", "buone-pratiche", "difficolta", "racconta", "privacy", "centri", "carta", "razionale"];
     if (note.indexOf(vista) === -1) { vista = ""; }
     let arg = p[1] ? decodeURIComponent(p[1]) : "";
     if (vista === "racconta") { arg = this.tipoDaDomanda(q0[1]); }
     // Alias permanente (brief LORI 25/09/2026): #/prostata e ora #/screening/prostata.
     if (vista === "prostata") { vista = "screening"; arg = "prostata"; rotta = "#/screening/prostata"; }
+    // Carta dei servizi (18/10/2026): sostituisce «Chi siamo», #/chi resta come alias.
+    if (vista === "chi") { vista = "carta"; arg = ""; rotta = "#/carta"; }
     // Vecchie FAQ interne e #/articolo senza argomento: portano a #/domande (brief LORI 26/09/2026).
     if (this.eVecchiaFaq(vista, arg)) { vista = "domande"; arg = ""; rotta = "#/domande"; }
     if (vista === "screening" && !this.scrValido(arg)) { arg = ""; }
@@ -537,13 +546,17 @@ class Component extends DCLogic {
     const q0 = (p[0] || "").split("?");
     let vista = q0[0];
     let arg = p[1] ? decodeURIComponent(p[1]) : "";
-    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening", "buone-pratiche", "difficolta", "racconta", "privacy", "centri"];
+    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening", "buone-pratiche", "difficolta", "racconta", "privacy", "centri", "carta", "razionale"];
     if (note.indexOf(vista) === -1) { vista = ""; }
     if (vista === "racconta") { arg = this.tipoDaDomanda(q0[1]); }
     // Alias permanente: #/prostata diventa #/screening/prostata senza voce doppia nella cronologia.
     if (vista === "prostata") {
       vista = "screening"; arg = "prostata";
       try { window.history.replaceState(null, "", "#/screening/prostata"); } catch (e) {}
+    }
+    if (vista === "chi") {
+      vista = "carta"; arg = "";
+      try { window.history.replaceState(null, "", "#/carta"); } catch (e) {}
     }
     // Vecchie FAQ interne e #/articolo senza argomento: #/domande, senza voce doppia nella cronologia.
     if (this.eVecchiaFaq(vista, arg)) {
