@@ -158,7 +158,9 @@
         vuoto: !!reg && carte.length === 0 && !inAttesa,
         s8bh2: c["S8-b·Titolo h2"], s8bp: c["S8-b·Prosa"], s8bPiena: c["S8-b·Etichetta piena"], s8bContorno: c["S8-b·Etichetta a contorno"],
         tornaMappa: () => { comp.setState({ regScr: null }); setTimeout(() => scendi("scr-regione"), 0); },
-        s9: c["S9·Testo 17"], s11: c["S11·Testo 17"]
+        s9: c["S9·Testo 17"], s11: c["S11·Testo 17"],
+        // Programmi regionali verificati per questo screening (programmi-regionali.js, 18/10/2026).
+        prog: window.__siProgrammi ? window.__siProgrammi.perScreening(slug) : { ok: false, schede: [], fonti: [] }
       });
       return Object.assign(out, { scr: v });
     }

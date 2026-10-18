@@ -11,6 +11,7 @@
 <script src="./logica-render.js"></script>
 <script src="./logica-classe.js"></script>
 <script src="./screening-pagine.js"></script>
+<script src="./programmi-regionali.js"></script>
 <script src="./logica-screening.js"></script>
 </head>
 <body>
@@ -434,6 +435,52 @@
               </div>
             </div>
 
+            <!-- Programmi pubblici verificati sulle pagine ufficiali (18/10/2026, programmi-regionali.js). Fuori da Claude Design: da riportare lì. -->
+            <sc-if value="{{ prog.ok }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-bianco wrap sezione" data-screen-label="Programmi della Regione">
+              <div class="fx col gap20">
+                <div class="fx col gap8">
+                  <h2>{{ prog.h2 }}</h2>
+                  <p>{{ prog.p }}</p>
+                </div>
+                <div class="centri-griglia">
+                  <sc-for list="{{ prog.schede }}" as="g" hint-placeholder-count="2">
+                    <article class="centro prog">
+                      <h3>{{ g.titolo }}</h3>
+                      <dl class="prog-dati">
+                        <div><dt>{{ g.etChi }}</dt><dd>{{ g.chi }}</dd></div>
+                        <div><dt>{{ g.etEsame }}</dt><dd>{{ g.esame }}</dd></div>
+                        <div><dt>{{ g.etAccesso }}</dt><dd>{{ g.accesso }}</dd></div>
+                        <sc-if value="{{ g.haGratuito }}" hint-placeholder-val="{{ true }}"><div><dt>{{ g.etCosto }}</dt><dd>{{ g.gratuito }}</dd></div></sc-if>
+                        <sc-if value="{{ g.haNonEntra }}" hint-placeholder-val="{{ false }}"><div><dt>{{ g.etNonEntra }}</dt><dd>{{ g.nonEntra }}</dd></div></sc-if>
+                      </dl>
+                      <sc-if value="{{ g.haLink }}" hint-placeholder-val="{{ true }}">
+                        <ul class="prog-link">
+                          <sc-for list="{{ g.link }}" as="l" hint-placeholder-count="1">
+                            <li><a href="{{ l.url }}" target="_blank" rel="noopener noreferrer">{{ l.t }}</a></li>
+                          </sc-for>
+                        </ul>
+                      </sc-if>
+                          <sc-if value="{{ g.haPagina }}" hint-placeholder-val="{{ true }}"><a class="link-cta prog-vai" href="{{ g.hrefPagina }}">{{ g.vediPagina }}</a></sc-if>
+                    </article>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ prog.haContatti }}" hint-placeholder-val="{{ true }}">
+                  <div class="avviso fx col gap12">
+                    <h3>{{ prog.contattiH3 }}</h3>
+                    <p>{{ prog.contattiP }}</p>
+                    <ul class="prog-contatti">
+                      <sc-for list="{{ prog.contatti }}" as="k" hint-placeholder-count="4">
+                        <li><a href="{{ k.url }}" target="_blank" rel="noopener noreferrer">{{ k.t }}</a></li>
+                      </sc-for>
+                    </ul>
+                  </div>
+                </sc-if>
+                <p class="nota prog-fonte">{{ prog.fontePre }}<sc-for list="{{ prog.fonti }}" as="f" hint-placeholder-count="1">{{ f.sep }}<a href="{{ f.url }}" target="_blank" rel="noopener noreferrer">{{ f.t }}</a></sc-for>{{ prog.fontePost }}</p>
+              </div>
+            </div>
+            </sc-if>
+
             <div class="banda b-blu wrap sezione" data-screen-label="Le due porte">
               <div class="fx col gap16">
                 <h2>Nessuna iniziativa nelle tue vicinanze?</h2>
@@ -542,6 +589,52 @@
                 <a class="cta-2" href="#/faq">Il portale screening della Regione {{ reg }}</a>
               </div>
             </div>
+
+            <!-- Programmi pubblici verificati sulle pagine ufficiali (18/10/2026, programmi-regionali.js). Fuori da Claude Design: da riportare lì. -->
+            <sc-if value="{{ prog.ok }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-bianco wrap sezione" data-screen-label="Programmi della Regione">
+              <div class="fx col gap20">
+                <div class="fx col gap8">
+                  <h2>{{ prog.h2 }}</h2>
+                  <p>{{ prog.p }}</p>
+                </div>
+                <div class="centri-griglia">
+                  <sc-for list="{{ prog.schede }}" as="g" hint-placeholder-count="2">
+                    <article class="centro prog">
+                      <h3>{{ g.titolo }}</h3>
+                      <dl class="prog-dati">
+                        <div><dt>{{ g.etChi }}</dt><dd>{{ g.chi }}</dd></div>
+                        <div><dt>{{ g.etEsame }}</dt><dd>{{ g.esame }}</dd></div>
+                        <div><dt>{{ g.etAccesso }}</dt><dd>{{ g.accesso }}</dd></div>
+                        <sc-if value="{{ g.haGratuito }}" hint-placeholder-val="{{ true }}"><div><dt>{{ g.etCosto }}</dt><dd>{{ g.gratuito }}</dd></div></sc-if>
+                        <sc-if value="{{ g.haNonEntra }}" hint-placeholder-val="{{ false }}"><div><dt>{{ g.etNonEntra }}</dt><dd>{{ g.nonEntra }}</dd></div></sc-if>
+                      </dl>
+                      <sc-if value="{{ g.haLink }}" hint-placeholder-val="{{ true }}">
+                        <ul class="prog-link">
+                          <sc-for list="{{ g.link }}" as="l" hint-placeholder-count="1">
+                            <li><a href="{{ l.url }}" target="_blank" rel="noopener noreferrer">{{ l.t }}</a></li>
+                          </sc-for>
+                        </ul>
+                      </sc-if>
+                          <sc-if value="{{ g.haPagina }}" hint-placeholder-val="{{ true }}"><a class="link-cta prog-vai" href="{{ g.hrefPagina }}">{{ g.vediPagina }}</a></sc-if>
+                    </article>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ prog.haContatti }}" hint-placeholder-val="{{ true }}">
+                  <div class="avviso fx col gap12">
+                    <h3>{{ prog.contattiH3 }}</h3>
+                    <p>{{ prog.contattiP }}</p>
+                    <ul class="prog-contatti">
+                      <sc-for list="{{ prog.contatti }}" as="k" hint-placeholder-count="4">
+                        <li><a href="{{ k.url }}" target="_blank" rel="noopener noreferrer">{{ k.t }}</a></li>
+                      </sc-for>
+                    </ul>
+                  </div>
+                </sc-if>
+                <p class="nota prog-fonte">{{ prog.fontePre }}<sc-for list="{{ prog.fonti }}" as="f" hint-placeholder-count="1">{{ f.sep }}<a href="{{ f.url }}" target="_blank" rel="noopener noreferrer">{{ f.t }}</a></sc-for>{{ prog.fontePost }}</p>
+              </div>
+            </div>
+            </sc-if>
 
             <div class="banda b-verde wrap sezione" data-screen-label="Avvisami">
               <div class="fx col gap16">
@@ -887,6 +980,41 @@
               </div>
             </div>
 
+            <!-- Programmi pubblici verificati sulle pagine ufficiali (18/10/2026, programmi-regionali.js). Fuori da Claude Design: da riportare lì. -->
+            <sc-if value="{{ scr.prog.ok }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-bianco wrap sezione" data-screen-label="Programmi regionali">
+              <div class="fx col gap20">
+                <div class="fx col gap8">
+                  <h2>{{ scr.prog.h2 }}</h2>
+                  <p>{{ scr.prog.p }}</p>
+                </div>
+                <div class="centri-griglia">
+                  <sc-for list="{{ scr.prog.schede }}" as="g" hint-placeholder-count="2">
+                    <article class="centro prog">
+                      <h3>{{ g.titolo }}</h3>
+                      <dl class="prog-dati">
+                        <div><dt>{{ g.etChi }}</dt><dd>{{ g.chi }}</dd></div>
+                        <div><dt>{{ g.etEsame }}</dt><dd>{{ g.esame }}</dd></div>
+                        <div><dt>{{ g.etAccesso }}</dt><dd>{{ g.accesso }}</dd></div>
+                        <sc-if value="{{ g.haGratuito }}" hint-placeholder-val="{{ true }}"><div><dt>{{ g.etCosto }}</dt><dd>{{ g.gratuito }}</dd></div></sc-if>
+                        <sc-if value="{{ g.haNonEntra }}" hint-placeholder-val="{{ false }}"><div><dt>{{ g.etNonEntra }}</dt><dd>{{ g.nonEntra }}</dd></div></sc-if>
+                      </dl>
+                      <sc-if value="{{ g.haLink }}" hint-placeholder-val="{{ true }}">
+                        <ul class="prog-link">
+                          <sc-for list="{{ g.link }}" as="l" hint-placeholder-count="1">
+                            <li><a href="{{ l.url }}" target="_blank" rel="noopener noreferrer">{{ l.t }}</a></li>
+                          </sc-for>
+                        </ul>
+                      </sc-if>
+                          <a class="link-cta prog-vai" href="{{ g.hrefRegione }}">{{ g.vediRegione }}</a>
+                    </article>
+                  </sc-for>
+                </div>
+                <p class="nota prog-fonte">{{ scr.prog.fontePre }}<sc-for list="{{ scr.prog.fonti }}" as="f" hint-placeholder-count="1">{{ f.sep }}<a href="{{ f.url }}" target="_blank" rel="noopener noreferrer">{{ f.t }}</a></sc-for>{{ scr.prog.fontePost }}</p>
+              </div>
+            </div>
+            </sc-if>
+
             <div class="banda b-bianco wrap sezione" data-screen-label="Dentro l ambulatorio">
               <div class="fx col gap20">
                 <h2>{{ scr.s4h2 }}</h2>
@@ -911,6 +1039,41 @@
                 </ul>
               </div>
             </div>
+
+            <!-- Programmi pubblici verificati sulle pagine ufficiali (18/10/2026, programmi-regionali.js). Fuori da Claude Design: da riportare lì. -->
+            <sc-if value="{{ scr.prog.ok }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-bianco wrap sezione" data-screen-label="Programmi regionali">
+              <div class="fx col gap20">
+                <div class="fx col gap8">
+                  <h2>{{ scr.prog.h2 }}</h2>
+                  <p>{{ scr.prog.p }}</p>
+                </div>
+                <div class="centri-griglia">
+                  <sc-for list="{{ scr.prog.schede }}" as="g" hint-placeholder-count="2">
+                    <article class="centro prog">
+                      <h3>{{ g.titolo }}</h3>
+                      <dl class="prog-dati">
+                        <div><dt>{{ g.etChi }}</dt><dd>{{ g.chi }}</dd></div>
+                        <div><dt>{{ g.etEsame }}</dt><dd>{{ g.esame }}</dd></div>
+                        <div><dt>{{ g.etAccesso }}</dt><dd>{{ g.accesso }}</dd></div>
+                        <sc-if value="{{ g.haGratuito }}" hint-placeholder-val="{{ true }}"><div><dt>{{ g.etCosto }}</dt><dd>{{ g.gratuito }}</dd></div></sc-if>
+                        <sc-if value="{{ g.haNonEntra }}" hint-placeholder-val="{{ false }}"><div><dt>{{ g.etNonEntra }}</dt><dd>{{ g.nonEntra }}</dd></div></sc-if>
+                      </dl>
+                      <sc-if value="{{ g.haLink }}" hint-placeholder-val="{{ true }}">
+                        <ul class="prog-link">
+                          <sc-for list="{{ g.link }}" as="l" hint-placeholder-count="1">
+                            <li><a href="{{ l.url }}" target="_blank" rel="noopener noreferrer">{{ l.t }}</a></li>
+                          </sc-for>
+                        </ul>
+                      </sc-if>
+                          <a class="link-cta prog-vai" href="{{ g.hrefRegione }}">{{ g.vediRegione }}</a>
+                    </article>
+                  </sc-for>
+                </div>
+                <p class="nota prog-fonte">{{ scr.prog.fontePre }}<sc-for list="{{ scr.prog.fonti }}" as="f" hint-placeholder-count="1">{{ f.sep }}<a href="{{ f.url }}" target="_blank" rel="noopener noreferrer">{{ f.t }}</a></sc-for>{{ scr.prog.fontePost }}</p>
+              </div>
+            </div>
+            </sc-if>
 
             <div class="banda b-bianco wrap sezione" data-screen-label="Passi">
               <div class="fx col gap20">

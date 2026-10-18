@@ -137,6 +137,8 @@ window.__siLogicaRender = class {
 
       // regione
       reg: reg,
+      // Programmi della Regione (18/10/2026): fatti dalle pagine ufficiali, in programmi-regionali.js.
+      prog: window.__siProgrammi ? window.__siProgrammi.perRegione(reg) : { ok: false, schede: [], contatti: [], fonti: [] },
       hrefVuota: "#/vuota/" + encodeURIComponent(reg),
       apertura: tutte.length
         ? "Scegli gli screening che ti interessano: sotto trovi le iniziative aperte adesso, con chi le organizza e il numero da chiamare."
