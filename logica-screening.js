@@ -130,9 +130,10 @@
       const tipo = TIPO[slug];
       const dati = window.INIZIATIVE || [];
       const conta = {};
-      dati.forEach((x) => { if (x.tipo === tipo) { conta[x.reg] = (conta[x.reg] || 0) + 1; } });
+      const haTipo = (x) => (Array.isArray(x.tipi) ? x.tipi : [x.tipo]).indexOf(tipo) !== -1;
+      dati.forEach((x) => { if (haTipo(x)) { conta[x.reg] = (conta[x.reg] || 0) + 1; } });
       const reg = stato.regScr || null;
-      const carte = reg ? dati.filter((x) => x.tipo === tipo && x.reg === reg)
+      const carte = reg ? dati.filter((x) => haTipo(x) && x.reg === reg)
         .slice().sort((a, b) => String(a.chiude || "9").localeCompare(String(b.chiude || "9"))) : [];
       const inAttesa = window.__siIniziativeStato === "attesa";
       Object.assign(v, {

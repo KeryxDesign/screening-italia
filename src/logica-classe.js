@@ -19,6 +19,7 @@ class Component extends DCLogic {
     this.mappaRef = (el) => { this.mapEl = el; this.disegnaMappa(); };
     // Corpo dell'articolo WordPress: lo scrive mettiTesto(), non il modello.
     this.artTestoRef = (el) => { this.artTestoEl = el; this.mettiTesto(); };
+    this.iniTestoRef = (el) => { this.iniTestoEl = el; this.mettiTestoIni(); };
   }
   /* ---- Consenso ai cookie ----
      Il tag di misurazione parte SOLO dopo il consenso: Consent Mode con
@@ -224,7 +225,22 @@ class Component extends DCLogic {
     if (r.vista !== "articolo" || !r.arg) { return "fuori"; }
     return this.state.voceSlug === r.arg && this.state.voceStato !== "attesa" ? this.state.voceStato : "attesa";
   }
-  /* L'unico innerHTML della pagina: testoHtml e gia passato da ripulisciHtml().
+  /* Testo libero dell'iniziativa (maschera libera, 18/10/2026): stesso percorso degli
+     articoli. testoHtml e gia passato da ripulisciHtml() in iniziative-wp.js. */
+  mettiTestoIni() {
+    const el = this.iniTestoEl;
+    if (!el) { return; }
+    const r = this.state.rotta;
+    const d = r.vista === "iniziativa" ? (window.INIZIATIVE || []).filter((x) => x.id === r.arg)[0] : null;
+    const html = d && d.testoHtml ? d.testoHtml : "";
+    const chiave = d ? d.id + "|" + html.length : "";
+    if (el.dataset.ini === chiave) { return; }
+    el.dataset.ini = chiave;
+    el.innerHTML = html;
+    el.querySelectorAll("p").forEach((n) => n.classList.add("art-p"));
+    el.querySelectorAll("h2").forEach((n) => n.classList.add("art-sub"));
+  }
+  /* Uno dei due innerHTML della pagina (l'altro e mettiTestoIni): testoHtml e gia passato da ripulisciHtml().
      Nessun'altra stringa entra qui. Ai paragrafi e ai sottotitoli si danno le
      classi che il corpo delle FAQ usa gia: stesso aspetto, nessuna classe nuova.
      Poi i nodi gia inseriti si spostano (nessun HTML nuovo) in una section
@@ -428,6 +444,7 @@ class Component extends DCLogic {
     this.curaDettaglio();
     this.caricaVoce();
     this.mettiTesto();
+    this.mettiTestoIni();
   }
   componentWillUnmount() {
     window.removeEventListener("hashchange", this.onHash);
@@ -628,14 +645,32 @@ class Component extends DCLogic {
     const N = { "Prostata": "Prostatico (PSA)", "Diabete e celiachia pediatrici": "Diabete", "Epatite C (HCV)": "HCV (Epatite C)" };
     return N[tipo] || tipo;
   }
+  // Screening dell'iniziativa: piu d'uno dalla maschera libera (18/10/2026), uno negli esempi.
+  tipiDi(x) {
+    return Array.isArray(x.tipi) && x.tipi.length ? x.tipi : (x.tipo ? [x.tipo] : []);
+  }
   scheda(x) {
     let cls = "tag tag-gratis";
     if (x.stato === "a pagamento") { cls = "tag tag-paga"; }
     if (x.stato === "su invito") { cls = "tag tag-invito"; }
+    // Maschera libera (18/10/2026): ogni campo tranne titolo, regione e screening puo mancare.
+    // La pagina mostra solo quello che c'e: ogni dato porta il suo «ha...».
+    const tel = x.tel || "";
+    const recapiti = (Array.isArray(x.recapiti) ? x.recapiti : []).map((r) => ({
+      et: r.et || "Recapito", testo: r.testo, href: r.href || "", haLink: !!r.href, soloTesto: !r.href
+    }));
+    const descr = String(x.descrizione || "").split("\n").filter(Boolean).map((t) => ({ t: t }));
+    const dove = x.nazionale ? "In tutta Italia" : x.dove;
     return {
-      tipo: this.nomeTipo(x.tipo), icona: this.icona(x.tipo), titolo: x.titolo, ente: x.ente, dove: x.dove,
-      quando: x.quando, chi: x.chi, tel: x.tel, href: "tel:" + x.tel.split(" ").join(""),
-      tagTesto: x.stato, tagCls: cls,
+      tipo: this.tipiDi(x).map((t) => this.nomeTipo(t)).join(" · "), icona: this.icona(x.tipo), titolo: x.titolo,
+      ente: x.ente || "", haEnte: !!x.ente, dove: dove || "", haDove: !!dove,
+      quando: x.quando || "", haQuando: !!x.quando, chi: x.chi || "", haChi: !!x.chi,
+      tel: tel, haTel: !!tel, href: "tel:" + tel.split(" ").join(""),
+      haDati: !!(x.ente || dove || x.quando || x.chi),
+      recapiti: recapiti, haRecapiti: recapiti.length > 0,
+      descrizione: descr, haDescrizione: descr.length > 0 && !x.testoHtml,
+      haTestoLibero: !!x.testoHtml,
+      haStato: !!x.stato, tagTesto: x.stato || "", tagCls: cls,
       scadenza: this.scadenza(x).testo, scadenzaCls: this.scadenza(x).cls,
       haScadenza: !!this.scadenza(x).testo,
       posti: x.posti || "", haPosti: !!x.posti,
@@ -643,7 +678,7 @@ class Component extends DCLogic {
       // «Quando» una riga per data solo se il dato e gia diviso da «;».
       periodo: this.periodo(x), haPeriodo: !!this.periodo(x),
       ultimi: this.ultimiGiorni(x), haUltimi: !!this.ultimiGiorni(x),
-      occhiello: [this.nomeTipo(x.tipo), x.reg].filter(Boolean).join(" · "),
+      occhiello: [this.tipiDi(x).map((t) => this.nomeTipo(t)).join(", "), x.nazionale ? "Tutta Italia" : (x.regioni || [x.reg]).join(", ")].filter(Boolean).join(" · "),
       riassunto: this.riassunto(x),
       quandoRighe: this.righeQuando(x.quando).map((t) => ({ t: t })),
       quandoUnaRiga: this.righeQuando(x.quando).length < 2,

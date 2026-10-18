@@ -405,8 +405,8 @@
                   <a class="card card-reg card-vai" href="{{ i.hrefDettaglio }}">
                     <span class="ini-tipo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ i.icona }}"></path></svg>{{ i.tipo }}</span>
                     <h3 class="ini-nome">{{ i.titolo }}</h3>
-                    <span class="ini-ente">{{ i.ente }}</span>
-                    <span class="ini-luogo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.4 7-11a7 7 0 10-14 0c0 5.6 7 11 7 11zM12 12.4a2.6 2.6 0 100-5.2 2.6 2.6 0 000 5.2"></path></svg>{{ i.dove }}</span>
+                    <sc-if value="{{ i.haEnte }}" hint-placeholder-val="{{ true }}"><span class="ini-ente">{{ i.ente }}</span></sc-if>
+                    <sc-if value="{{ i.haDove }}" hint-placeholder-val="{{ true }}"><span class="ini-luogo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.4 7-11a7 7 0 10-14 0c0 5.6 7 11 7 11zM12 12.4a2.6 2.6 0 100-5.2 2.6 2.6 0 000 5.2"></path></svg>{{ i.dove }}</span></sc-if>
                     <sc-if value="{{ i.haPeriodo }}" hint-placeholder-val="{{ true }}">
                       <span class="ini-periodo">{{ i.periodo }}</span>
                     </sc-if>
@@ -414,7 +414,7 @@
                       <sc-if value="{{ i.haUltimi }}" hint-placeholder-val="{{ false }}">
                         <span class="pill-ultimi">{{ i.ultimi }}</span>
                       </sc-if>
-                      <span class="{{ i.tagCls }}">{{ i.tagTesto }}</span>
+                      <sc-if value="{{ i.haStato }}" hint-placeholder-val="{{ true }}"><span class="{{ i.tagCls }}">{{ i.tagTesto }}</span></sc-if>
                       <sc-if value="{{ i.haPosti }}" hint-placeholder-val="{{ false }}">
                         <span class="ini-posti">{{ i.posti }}</span>
                       </sc-if>
@@ -475,6 +475,7 @@
                 <p class="ini-occhiello">{{ ini.occhiello }}</p>
                 <h1 class="ini-fuoco" tabindex="-1">{{ ini.titolo }}</h1>
                 <p class="ini-riassunto">{{ ini.riassunto }}<sc-if value="{{ ini.haUltimi }}" hint-placeholder-val="{{ false }}"> <span class="pill-ultimi">{{ ini.ultimi }}</span></sc-if></p>
+                <sc-if value="{{ ini.haTel }}" hint-placeholder-val="{{ true }}">
                 <div class="ini-chiama">
                     <a class="tel tel-grande" href="{{ ini.href }}">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.2 3.5H4.9a1.4 1.4 0 00-1.4 1.5c.5 8.2 7.3 15 15.5 15.5a1.4 1.4 0 001.5-1.4v-2.3a1.4 1.4 0 00-1.2-1.4l-2.8-.4a1.4 1.4 0 00-1.4.7l-.8 1.4a11.6 11.6 0 01-5.6-5.6l1.4-.8a1.4 1.4 0 00.7-1.4l-.4-2.8a1.4 1.4 0 00-1.4-1.2z"></path></svg>
@@ -482,19 +483,51 @@
                     </a>
                     <p class="nota">La prenotazione avviene telefonicamente al numero indicato. Il portale non gestisce appuntamenti.</p>
                 </div>
+                </sc-if>
               </div>
             </div>
 
+            <sc-if value="{{ ini.haDati }}" hint-placeholder-val="{{ true }}">
             <div class="banda b-crema wrap sezione" data-screen-label="Dati iniziativa">
               <div class="card fx col gap14">
                 <div class="fx col gap8">
-                      <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12.6a4.05 4.05 0 100-8.1 4.05 4.05 0 000 8.1M4.5 20.2c0-3.3 3.4-5.2 7.5-5.2s7.5 1.9 7.5 5.2"></path></svg>Chi</span><span class="vl">{{ ini.ente }}</span></div>
-                      <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.4 7-11a7 7 0 10-14 0c0 5.6 7 11 7 11zM12 12.4a2.6 2.6 0 100-5.2 2.6 2.6 0 000 5.2"></path></svg>Dove</span><span class="vl">{{ ini.dove }}</span></div>
-                      <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v3M17 3v3M3.5 9.5h17M4.5 6h15a1 1 0 011 1v12a1 1 0 01-1 1h-15a1 1 0 01-1-1V7a1 1 0 011-1z"></path></svg>Quando</span><span class="vl"><sc-if value="{{ ini.quandoUnaRiga }}" hint-placeholder-val="{{ true }}">{{ ini.quando }}</sc-if><sc-if value="{{ ini.quandoPiuRighe }}" hint-placeholder-val="{{ false }}"><span class="vl-righe"><sc-for list="{{ ini.quandoRighe }}" as="q" hint-placeholder-count="2"><span class="vl-riga">{{ q.t }}</span></sc-for></span></sc-if></span></div>
-                      <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21a9 9 0 100-18 9 9 0 000 18M8.5 12.2l2.4 2.4 4.6-5.2"></path></svg>Chi può</span><span class="vl">{{ ini.chi }}</span></div>
+                      <sc-if value="{{ ini.haEnte }}" hint-placeholder-val="{{ true }}"><div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12.6a4.05 4.05 0 100-8.1 4.05 4.05 0 000 8.1M4.5 20.2c0-3.3 3.4-5.2 7.5-5.2s7.5 1.9 7.5 5.2"></path></svg>Chi</span><span class="vl">{{ ini.ente }}</span></div></sc-if>
+                      <sc-if value="{{ ini.haDove }}" hint-placeholder-val="{{ true }}"><div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.4 7-11a7 7 0 10-14 0c0 5.6 7 11 7 11zM12 12.4a2.6 2.6 0 100-5.2 2.6 2.6 0 000 5.2"></path></svg>Dove</span><span class="vl">{{ ini.dove }}</span></div></sc-if>
+                      <sc-if value="{{ ini.haQuando }}" hint-placeholder-val="{{ true }}"><div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v3M17 3v3M3.5 9.5h17M4.5 6h15a1 1 0 011 1v12a1 1 0 01-1 1h-15a1 1 0 01-1-1V7a1 1 0 011-1z"></path></svg>Quando</span><span class="vl"><sc-if value="{{ ini.quandoUnaRiga }}" hint-placeholder-val="{{ true }}">{{ ini.quando }}</sc-if><sc-if value="{{ ini.quandoPiuRighe }}" hint-placeholder-val="{{ false }}"><span class="vl-righe"><sc-for list="{{ ini.quandoRighe }}" as="q" hint-placeholder-count="2"><span class="vl-riga">{{ q.t }}</span></sc-for></span></sc-if></span></div></sc-if>
+                      <sc-if value="{{ ini.haChi }}" hint-placeholder-val="{{ true }}"><div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21a9 9 0 100-18 9 9 0 000 18M8.5 12.2l2.4 2.4 4.6-5.2"></path></svg>Chi può</span><span class="vl">{{ ini.chi }}</span></div></sc-if>
                 </div>
               </div>
             </div>
+            </sc-if>
+
+            <!-- Maschera libera (18/10/2026): recapiti uno per riga e testo libero dall'editor di WordPress. -->
+            <sc-if value="{{ ini.haRecapiti }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-bianco wrap sezione" data-screen-label="Recapiti iniziativa">
+              <div class="fx col gap14">
+                <h2>Recapiti</h2>
+                <div class="card fx col gap8">
+                  <sc-for list="{{ ini.recapiti }}" as="r" hint-placeholder-count="2">
+                    <div class="dato"><span class="et">{{ r.et }}</span><span class="vl"><sc-if value="{{ r.haLink }}" hint-placeholder-val="{{ true }}"><a href="{{ r.href }}">{{ r.testo }}</a></sc-if><sc-if value="{{ r.soloTesto }}" hint-placeholder-val="{{ false }}">{{ r.testo }}</sc-if></span></div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+            </sc-if>
+
+            <sc-if value="{{ ini.haDescrizione }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-bianco wrap sezione" data-screen-label="Descrizione iniziativa">
+              <div class="fx col gap14">
+                <sc-for list="{{ ini.descrizione }}" as="p" hint-placeholder-count="2"><p class="art-p">{{ p.t }}</p></sc-for>
+              </div>
+            </div>
+            </sc-if>
+
+            <sc-if value="{{ ini.haTestoLibero }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-bianco wrap sezione" data-screen-label="Testo libero iniziativa">
+              <!-- testoHtml gia passato da ripulisciHtml() (articoli.js): lo inserisce iniTestoRef. -->
+              <div class="art-wp fx col gap20" ref="{{ iniTestoRef }}"></div>
+            </div>
+            </sc-if>
             </sc-if>
 
             <sc-if value="{{ iniMancante }}" hint-placeholder-val="{{ false }}">
@@ -1003,7 +1036,7 @@
                   <sc-for list="{{ scr.carte }}" as="i" hint-placeholder-count="3">
                     <div class="card card-ini fx col gap14 scr-ris">
                       <div class="fx gap8" style="flex-wrap:wrap">
-                        <span class="{{ i.tagCls }}">{{ i.tagTesto }}</span>
+                        <sc-if value="{{ i.haStato }}" hint-placeholder-val="{{ true }}"><span class="{{ i.tagCls }}">{{ i.tagTesto }}</span></sc-if>
                         <span class="tag tag-tipo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ i.icona }}"></path></svg>{{ i.tipo }}</span>
                         <sc-if value="{{ i.haScadenza }}" hint-placeholder-val="{{ true }}">
                           <span class="{{ i.scadenzaCls }}">
@@ -1020,10 +1053,12 @@
                         <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v3M17 3v3M3.5 9.5h17M4.5 6h15a1 1 0 011 1v12a1 1 0 01-1 1h-15a1 1 0 01-1-1V7a1 1 0 011-1z"></path></svg>Quando</span><span class="vl">{{ i.quando }}</span></div>
                         <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21a9 9 0 100-18 9 9 0 000 18M8.5 12.2l2.4 2.4 4.6-5.2"></path></svg>Chi può</span><span class="vl">{{ i.chi }}</span></div>
                       </div>
+                      <sc-if value="{{ i.haTel }}" hint-placeholder-val="{{ true }}">
                       <a class="tel" href="{{ i.href }}">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.2 3.5H4.9a1.4 1.4 0 00-1.4 1.5c.5 8.2 7.3 15 15.5 15.5a1.4 1.4 0 001.5-1.4v-2.3a1.4 1.4 0 00-1.2-1.4l-2.8-.4a1.4 1.4 0 00-1.4.7l-.8 1.4a11.6 11.6 0 01-5.6-5.6l1.4-.8a1.4 1.4 0 00.7-1.4l-.4-2.8a1.4 1.4 0 00-1.4-1.2z"></path></svg>
                         {{ i.tel }}
                       </a>
+                      </sc-if>
                       <span class="link-cta ini-vai" aria-hidden="true">Mostra i dettagli
                         <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
                       </span>

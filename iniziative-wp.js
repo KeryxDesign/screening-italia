@@ -52,6 +52,8 @@
                  "Molise", "Piemonte", "Puglia", "Sardegna", "Sicilia", "Toscana",
                  "Trentino-Alto Adige", "Umbria", "Valle d'Aosta", "Veneto"];
   var STATI = ["gratuito", "a pagamento", "su invito"];
+  /* Voce della maschera per le campagne nazionali (18/10/2026): vale tutte le regioni. */
+  var TUTTA_ITALIA = "Tutta Italia";
 
   /* La pagina guarda questo valore per non dichiarare «non trovata»
      un'iniziativa vera mentre la risposta e ancora in viaggio. */
@@ -139,17 +141,82 @@
      2. Da post di WordPress a iniziativa
      --------------------------------------------------------------- */
 
-  /* Torna l'oggetto nella forma di iniziative.js, oppure null se
-     l'iniziativa non passa i controlli. Motivo dello scarto in console,
-     cosi chi lavora sul pannello puo capire perche non la vede. */
+  /* Valore di una scelta multipla ACF: arriva come elenco o come testo singolo. */
+  function elenco(v) {
+    if (Array.isArray(v)) { return v; }
+    return v == null || v === "" ? [] : [v];
+  }
+
+  /* Nome libero per «Altro» (maschera libera, 18/10/2026): "Osteoporosi, Tiroide".
+     Corto e senza marcatura: diventa un'etichetta e un filtro della regione. */
+  function nomiLiberi(v) {
+    return testo(v).split(/[,;]/).map(function (t) { return t.trim(); })
+      .filter(function (t) { return t && t.length <= 60; });
+  }
+
+  /* Recapiti, uno per riga, con un'etichetta facoltativa prima dei due punti:
+     "Prenotazioni: 02 1234 5678". Diventano link solo telefoni, email e indirizzi
+     https; il resto si mostra come testo. L'href lo costruiamo noi, mai preso com'e. */
+  function recapiti(v) {
+    if (typeof v !== "string" || !v) { return []; }
+    return v.split(/\r?\n/).map(soloTesto).filter(Boolean).slice(0, 12).map(function (riga) {
+      var et = "", val = riga;
+      var m = /^([^:]{1,40}):\s+(.+)$/.exec(riga);
+      if (m && !/^https?$/i.test(m[1].trim())) { et = m[1].trim(); val = m[2].trim(); }
+      var r = { et: et, testo: val, href: "" };
+      if (/^https:\/\/[^\s<>"']+$/i.test(val)) {
+        r.href = val;
+      } else if (/^[^\s@<>"']+@[^\s@<>"']+\.[a-z]{2,}$/i.test(val)) {
+        r.href = "mailto:" + val;
+      } else if (/^\+?[0-9][0-9 .\/-]{5,}$/.test(val)) {
+        r.testo = telefono(val);
+        r.href = "tel:" + r.testo.split(" ").join("");
+        r.tel = true;
+      }
+      return r;
+    });
+  }
+
+  /* Testo libero dall'editor di WordPress. Passa dallo stesso filtro degli articoli
+     (articoli.js, ripulisciHtml): senza quel filtro il testo non si mostra. */
+  function corpo(post) {
+    var html = post.content && typeof post.content.rendered === "string" ? post.content.rendered : "";
+    if (!html.trim()) { return ""; }
+    var A = window.Articoli;
+    if (!A || typeof A.ripulisciHtml !== "function") { return ""; }
+    var pulito = A.ripulisciHtml(html);
+    return soloTesto(pulito) ? pulito : "";
+  }
+
+  /* Torna l'elenco delle schede di un post, una per regione (stesso id), oppure null
+     se l'iniziativa non passa i controlli. Motivo dello scarto in console,
+     cosi chi lavora sul pannello puo capire perche non la vede.
+
+     Maschera libera (Angelo, 18/10/2026): obbligatori solo titolo, regione e almeno
+     uno screening. Tutto il resto e facoltativo e la pagina mostra solo quello che c'e. */
   function componi(post) {
     if (!post || typeof post !== "object") { return null; }
     var f = (post.acf && typeof post.acf === "object") ? post.acf : {};
 
+    /* Screening: quelli con una pagina, poi i nomi liberi scritti sotto «Altro». */
+    var tipi = [];
+    elenco(f.tipi != null ? f.tipi : f.tipo).forEach(function (t) {
+      if (inLista(t, TIPI) && tipi.indexOf(t) === -1) { tipi.push(t); }
+    });
+    nomiLiberi(f.tipo_altro).forEach(function (t) { if (tipi.indexOf(t) === -1) { tipi.push(t); } });
+
+    /* Regioni: una o piu. «Tutta Italia» la mette in tutte. */
+    var grezze = elenco(f.regioni != null ? f.regioni : f.reg);
+    var nazionale = grezze.indexOf(TUTTA_ITALIA) !== -1;
+    var regioni = nazionale ? REGIONI.slice() : [];
+    if (!nazionale) {
+      grezze.forEach(function (r) { if (inLista(r, REGIONI) && regioni.indexOf(r) === -1) { regioni.push(r); } });
+    }
+
     var x = {
       id: identificativo(post.slug),
-      reg: inLista(f.reg, REGIONI),
-      tipo: inLista(f.tipo, TIPI),
+      tipo: tipi[0] || "",
+      tipi: tipi,
       titolo: soloTesto(post.title && post.title.rendered),
       ente: testo(f.ente),
       dove: testo(f.dove),
@@ -160,25 +227,41 @@
       chiude: data(f.chiude)
     };
 
-    /* Data di chiusura facoltativa (Angelo, 17/10/2026): le iniziative delle ASL
-       non hanno una fine. Senza data l'iniziativa resta aperta e non mostra scadenze.
-       Una data scritta ma non valida invece scarta l'iniziativa, come prima. */
     var manca = [];
+    if (!x.id) { manca.push("id"); }
+    if (!x.titolo) { manca.push("titolo"); }
+    if (!tipi.length) { manca.push("tipo"); }
+    if (!regioni.length) { manca.push("reg"); }
+    /* Data di chiusura facoltativa (Angelo, 17/10/2026). Una data scritta ma non valida
+       invece scarta l'iniziativa, come prima: meglio niente che una scadenza sbagliata. */
     if (f.chiude != null && String(f.chiude).trim() !== "" && !x.chiude) { manca.push("chiude"); }
-    if (!x.chiude) { delete x.chiude; }
-    ["id", "reg", "tipo", "titolo", "ente", "dove", "quando", "chi", "tel", "stato"]
-      .forEach(function (k) { if (!x[k]) { manca.push(k); } });
     if (manca.length) {
       console.warn("Iniziativa scartata (" + (post.slug || post.id) + "): campi non validi -> " + manca.join(", "));
       return null;
     }
 
     /* Facoltativi: presenti solo quando servono, come negli esempi. */
+    ["ente", "dove", "quando", "chi", "tel", "stato", "chiude"].forEach(function (k) { if (!x[k]) { delete x[k]; } });
     if (f.posti === true) { x.posti = "ultimi posti"; }
     var descr = testoLungo(f.descrizione);
     if (descr) { x.descrizione = descr; }
+    var rec = recapiti(f.recapiti);
+    if (rec.length) { x.recapiti = rec; }
+    /* Senza il campo Telefono, il primo numero dei recapiti fa da telefono principale. */
+    if (!x.tel) {
+      for (var i = 0; i < rec.length; i++) { if (rec[i].tel) { x.tel = rec[i].testo; break; } }
+    }
+    var html = corpo(post);
+    if (html) { x.testoHtml = html; }
+    if (nazionale) { x.nazionale = true; }
+    if (regioni.length > 1) { x.regioni = regioni; }
 
-    return x;
+    return regioni.map(function (r) {
+      var copia = {};
+      for (var k in x) { if (Object.prototype.hasOwnProperty.call(x, k)) { copia[k] = x[k]; } }
+      copia.reg = r;
+      return copia;
+    });
   }
 
   /* ---------------------------------------------------------------
@@ -195,7 +278,7 @@
       "orderby=date",
       "order=desc",
       /* Solo i campi che servono: meno byte, meno dati esposti. */
-      "_fields=id,slug,title,acf",
+      "_fields=id,slug,title,content,acf",
       /* WordPress e la CDN di Hostinger rispondono con 7 giorni di cache:
          senza questo marcatore un'iniziativa appena pubblicata arriverebbe
          giorni dopo. Cambia ogni 5 minuti, come in articoli.js. */
@@ -303,10 +386,10 @@
     var visti = {};
     var buone = [];
     for (var i = 0; i < posts.length; i++) {
-      var x = componi(posts[i]);
-      if (!x || visti[x.id]) { continue; }   /* niente doppioni sulla stessa rotta */
-      visti[x.id] = true;
-      buone.push(x);
+      var schede = componi(posts[i]);
+      if (!schede || visti[schede[0].id]) { continue; }   /* niente doppioni sulla stessa rotta */
+      visti[schede[0].id] = true;
+      buone = buone.concat(schede);
     }
     if (!buone.length) { consegna(null, "esempi: nessuna iniziativa valida sul pannello"); return; }
     consegna(buone, "wordpress");
@@ -315,5 +398,5 @@
   });
 
   /* Esposto solo per le prove in console. */
-  window.IniziativeWP = { CFG: CFG, componi: componi, data: data, telefono: telefono };
+  window.IniziativeWP = { CFG: CFG, componi: componi, data: data, telefono: telefono, recapiti: recapiti };
 })();
