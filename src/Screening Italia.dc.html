@@ -140,15 +140,15 @@
               <div class="hero-due">
                 <div class="fx col gap16">
                   <div class="occhiello">Screening in Italia</div>
-                  <h1>Trova lo screening giusto nella tua regione</h1>
-                  <p>Facilitiamo i processi di screening: informazioni chiare, subito. Quale screening ti riguarda, dove andare, chi chiamare.</p>
+                  <h1>Trova gli screening della tua regione</h1>
+                  <p>Le informazioni sugli screening, chiare e facili da trovare: quale ti riguarda, dove si fa, chi chiamare.</p>
                   <!-- Angelo 19/10/2026: due ingressi di pari peso (stesso colore d'azione, stessa misura).
                        Le iniziative scendono a terzo livello: link di testo, non pulsante. -->
                   <div class="hero-ingressi">
                     <a class="cta" href="#/screening">Trova il tuo screening</a>
-                    <a class="cta" href="#/centri">Dove vado: centri screening</a>
+                    <a class="cta" href="#/centri">Centri screening: dove andare</a>
                   </div>
-                  <p class="hero-terzo"><a href="#/trova">Cerchi un&rsquo;iniziativa? Vedi quelle aperte nella tua regione</a></p>
+                  <p class="hero-terzo"><a href="#/trova">Le iniziative di associazioni e altri enti nella tua regione</a></p>
                   <div class="numeri-hero">
                     <div class="numero-h"><span class="numero-hn">{{ nRegioni }}</span><span class="numero-het">regioni coperte</span></div>
                     <div class="numero-h"><span class="numero-hn">{{ nTipi }}</span><span class="numero-het">tipi di screening</span></div>
@@ -382,11 +382,11 @@
             <div class="banda b-bianco wrap sezione asl-testa" data-screen-label="Riquadro regione">
               <div class="fx col gap20">
                 <p class="nota reg-torna"><a href="#/trova">← Tutte le regioni</a></p>
-                <h1 class="scelta-h2 reg-h1">Screening in {{ reg }}: dove vai, chi lo coordina, come li contatti</h1>
+                <h1 class="scelta-h2 reg-h1">Screening in {{ reg }}: dove andare e chi chiamare</h1>
                 <dl class="dcc">
-                  <div class="dcc-r"><dt>Dove</dt><dd>{{ reg }}</dd></div>
-                  <div class="dcc-r"><dt>Cosa</dt><dd>{{ asl.cosa }}</dd></div>
-                  <div class="dcc-r"><dt>Chi e dove</dt><dd>Le aziende sanitarie e i loro centri screening: numero, orari, e-mail e sito, nella tabella qui sotto.</dd></div>
+                  <div class="dcc-r"><dt>Regione</dt><dd>{{ reg }}</dd></div>
+                  <div class="dcc-r"><dt>Screening</dt><dd>{{ asl.cosa }}</dd></div>
+                  <div class="dcc-r"><dt>A chi rivolgersi</dt><dd>Numero, orari, e-mail e sito dei centri screening sono nella tabella qui sotto.</dd></div>
                 </dl>
               </div>
             </div>
@@ -394,27 +394,29 @@
             <div class="banda b-crema wrap banda-larga sezione asl-larga" data-screen-label="Offerta ASL">
               <div class="fx col gap20">
                 <div class="fx col gap8">
-                  <p class="occhiello">Offerta ASL</p>
-                  <h2>I centri screening delle ASL in {{ reg }}</h2>
-                  <p class="nota">È l&rsquo;offerta fissa del servizio sanitario: non cambia di mese in mese. La ricontrolliamo ogni quattro mesi.</p>
+                  <p class="occhiello">Servizio sanitario</p>
+                  <h2>I centri screening delle aziende sanitarie in {{ reg }}</h2>
+                  <p class="nota">Sono i programmi stabili del servizio sanitario. Numeri e orari li ricontrolliamo ogni quattro mesi.</p>
                   <p class="asl-controllo">{{ asl.controlloTesto }}</p>
                 </div>
                 <div class="asl-tab" role="table" aria-label="Centri screening delle ASL in {{ reg }}">
                   <div class="asl-riga asl-capo" role="row" aria-hidden="true">
-                    <span role="columnheader">ASL</span><span role="columnheader">Numero verde</span><span role="columnheader">Giorni e orari</span><span role="columnheader">E-mail</span><span role="columnheader">Sito</span>
+                    <span role="columnheader">Azienda sanitaria</span><span role="columnheader">Telefono</span><span role="columnheader">Giorni e orari</span><span role="columnheader">E-mail</span><span role="columnheader">Sito</span>
                   </div>
                   <sc-for list="{{ asl.righe }}" as="r" hint-placeholder-count="3">
                     <div class="asl-riga" role="row">
                       <h3 class="asl-ente" role="rowheader">{{ r.ente }}</h3>
-                      <div class="asl-cella" role="cell"><span class="asl-et">Numero verde</span>
+                      <div class="asl-cella" role="cell"><span class="asl-et">Telefono</span>
                         <sc-for list="{{ r.tel }}" as="t" hint-placeholder-count="2">
-                          <a class="asl-tel" href="{{ t.href }}"><span class="asl-sub">{{ t.et }}</span><span class="asl-num">{{ t.n }}</span></a>
+                          <span class="asl-tel"><span class="asl-sub">{{ t.et }}</span>
+                            <sc-for list="{{ t.nums }}" as="n" hint-placeholder-count="1"><a class="asl-num" href="{{ n.href }}">{{ n.n }}</a></sc-for>
+                          </span>
                         </sc-for>
                       </div>
                       <div class="asl-cella" role="cell"><span class="asl-et">Giorni e orari</span><span>{{ r.orari }}</span></div>
                       <div class="asl-cella" role="cell"><span class="asl-et">E-mail</span>
                         <sc-for list="{{ r.mail }}" as="m" hint-placeholder-count="2">
-                          <a class="asl-mail" href="{{ m.href }}">{{ m.testo }}</a>
+                          <a class="asl-mail" href="{{ m.href }}"><span>{{ m.utente }}</span><span>@{{ m.dominio }}</span></a>
                         </sc-for>
                       </div>
                       <div class="asl-cella" role="cell"><span class="asl-et">Sito</span><span class="asl-sito">{{ r.sito }}</span></div>
@@ -422,10 +424,12 @@
                   </sc-for>
                 </div>
                 <!-- Sotto la tabella: documenti (PDF, volantini) e mappa dei centri. Arrivano dal pannello. -->
+                <sc-if value="{{ asl.haExtra }}" hint-placeholder-val="{{ false }}">
                 <div class="asl-extra">
-                  <div class="asl-box"><h3>Documenti e volantini</h3><p class="nota">Moduli, volantini e guide in PDF di ogni ASL, appena disponibili.</p></div>
-                  <div class="asl-box"><h3>Mappa dei centri</h3><p class="nota">Dove si trovano i centri e le sedi dove si fa materialmente l&rsquo;esame.</p></div>
+                  <sc-if value="{{ asl.haDocumenti }}" hint-placeholder-val="{{ false }}"><div class="asl-box"><h3>Documenti e volantini</h3><p class="nota">Moduli, volantini e guide delle aziende sanitarie, in PDF.</p></div></sc-if>
+                  <sc-if value="{{ asl.haMappa }}" hint-placeholder-val="{{ false }}"><div class="asl-box"><h3>Mappa dei centri</h3><p class="nota">Gli indirizzi dei centri dove si fa l&rsquo;esame.</p></div></sc-if>
                 </div>
+                </sc-if>
               </div>
             </div>
             </sc-if>
@@ -437,9 +441,9 @@
                 </sc-if>
                 <div class="fx col gap8">
                   <sc-if value="{{ haAsl }}" hint-placeholder-val="{{ true }}">
-                    <p class="occhiello">Offerta altri enti</p>
+                    <p class="occhiello">Altre iniziative</p>
                     <h2 class="scelta-h2">Quali screening ti interessano in {{ reg }}?</h2>
-                    <p class="nota">Associazioni, enti e luoghi di lavoro. Cambiano nel tempo: controlla sempre le date. Puoi sceglierne più di uno.</p>
+                    <p class="nota">Le organizzano associazioni, enti e aziende. Ognuna ha le sue date: controllale prima di andare. Puoi scegliere più di uno screening.</p>
                   </sc-if>
                   <sc-if value="{{ nonHaAsl }}" hint-placeholder-val="{{ false }}">
                     <h1 class="scelta-h2 reg-h1">Quali screening ti interessano in {{ reg }}?</h1>
@@ -833,7 +837,12 @@
                 <!-- Angelo 19/10/2026: tante domande, come quelle del Ministero. Ricerca + filtro per tema. -->
                 <div class="fx col gap8">
                   <label class="nota" for="cerca-domande">Cerca nelle domande</label>
-                  <input class="campo" id="cerca-domande" type="search" placeholder="Per esempio: lettera, kit, costo" value="{{ artCerca }}" onInput="{{ artCercaScrivi }}">
+                  <div class="cerca">
+                    <svg class="cerca-i" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+                    <input class="campo campo-cerca" id="cerca-domande" type="search" placeholder="Per esempio: lettera, kit, costo" value="{{ artCerca }}" onInput="{{ artCercaScrivi }}">
+                    <sc-if value="{{ artHaCerca }}" hint-placeholder-val="{{ false }}"><button type="button" class="cerca-x" aria-label="Cancella la ricerca" onClick="{{ artCercaVia }}"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></sc-if>
+                  </div>
+                  <p class="nota" aria-live="polite">{{ artRisultati }}</p>
                 </div>
 
                 <sc-if value="{{ artMostraFiltro }}" hint-placeholder-val="{{ true }}">
@@ -863,7 +872,7 @@
                               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
                             </a>
                             <sc-if value="{{ a.haApprofondisci }}" hint-placeholder-val="{{ false }}">
-                              <a class="art-appr" href="{{ a.approfondisciHref }}" target="_blank" rel="noopener noreferrer">Approfondisci <span class="art-appr-fonte">(sito esterno, si apre in una scheda nuova)</span></a>
+                              <a class="art-appr" href="{{ a.approfondisciHref }}" target="_blank" rel="noopener noreferrer">Approfondisci <span class="art-appr-fonte">(sito esterno, si apre in una scheda nuova)</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5"></path></svg></a>
                             </sc-if>
                           </div>
                         </div>
@@ -886,9 +895,17 @@
                   </div>
                 </sc-if>
 
+                <sc-if value="{{ artVuotoCerca }}" hint-placeholder-val="{{ false }}">
+                  <div class="avviso fx col gap12" data-screen-label="Stato vuoto - ricerca senza risultati">
+                    <p>Non abbiamo trovato domande con queste parole. Prova con un&rsquo;altra parola.</p>
+                    <button type="button" class="cta-2" onClick="{{ artAzzera }}">Vedi tutte le domande</button>
+                    <a class="link-cta" href="#/contatti">Non trovi la tua domanda? Scrivici</a>
+                  </div>
+                </sc-if>
+
                 <sc-if value="{{ artVuotoFiltro }}" hint-placeholder-val="{{ false }}">
                   <div class="avviso fx col gap12" data-screen-label="Stato vuoto - filtro senza risultati">
-                    <p>Nessuna domanda corrisponde. Prova con un&rsquo;altra parola o un altro argomento.</p>
+                    <p>Su questo argomento non abbiamo ancora risposte. Prova con un altro.</p>
                     <button type="button" class="cta-2" onClick="{{ artAzzera }}">Vedi tutte le domande</button>
                   </div>
                 </sc-if>

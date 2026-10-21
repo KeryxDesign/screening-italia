@@ -1005,7 +1005,9 @@ class Component extends DCLogic {
     return {
       ok: ok,
       vuotoTutto: vuoto && !conFiltro,
-      vuotoFiltro: vuoto && (conFiltro || conCerca),
+      vuotoFiltro: vuoto && conFiltro && !conCerca,
+      vuotoCerca: vuoto && conCerca,
+      risultati: conCerca ? (filtrati.length === 1 ? "1 domanda trovata." : filtrati.length + " domande trovate.") : "",
       errore: stato === "offline" || stato === "errore",
       mostraFiltro: stato === "ok" && cats.length >= 2,
       argomenti: argomenti,
@@ -1020,15 +1022,19 @@ class Component extends DCLogic {
   offertaAsl() {
     const d = (window.SI_OFFERTA_ASL || {})[this.reg()];
     if (!d || !Array.isArray(d.righe) || !d.righe.length) { return null; }
+    const documenti = Array.isArray(d.documenti) && d.documenti.length > 0;
+    const mappa = !!d.mappa;
     const dataIt = (iso) => { const p = String(iso || "").split("-"); return p.length === 3 ? p[2] + "/" + p[1] + "/" + p[0] : ""; };
     return {
       cosa: d.cosa || "",
       // «Gratuito» e «controllato» solo con una data vera (regola del progetto).
-      controlloTesto: d.controllo ? "Gratuita. Ultimo controllo: " + dataIt(d.controllo) : "Ultimo controllo: [gg/mm/aaaa, da inserire dopo la verifica sulle fonti]",
+      controlloTesto: d.controllo ? "Gli esami su invito sono gratuiti. Dati controllati il " + dataIt(d.controllo) + "." : "Numeri in verifica: telefona prima di andare.",
+      haDocumenti: documenti, haMappa: mappa, haExtra: documenti || mappa,
       righe: d.righe.map((r) => ({
         ente: r.ente, orari: r.orari, sito: r.sito,
-        tel: (r.tel || []).map((t) => ({ et: t.et, n: t.n, href: "tel:" + String(t.n).split(/[·/]/)[0].replace(/[^0-9+]/g, "") })),
-        mail: (r.mail || []).map((m) => ({ testo: m, href: "mailto:" + m }))
+        // Un link per numero: un tocco = una chiamata (LORI 21/10).
+        tel: (r.tel || []).map((t) => ({ et: t.et, nums: String(t.n).split(/\s*·\s*/).map((n) => ({ n: n, href: "tel:" + n.split("/")[0].replace(/[^0-9+]/g, "") })) })),
+        mail: (r.mail || []).map((m) => ({ utente: m.split("@")[0], dominio: m.split("@")[1] || "", href: "mailto:" + m }))
       }))
     };
   }
