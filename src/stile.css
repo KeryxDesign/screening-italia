@@ -1538,3 +1538,79 @@ html:not(.contrasto) .hero .hero-ingressi .cta{border:2px solid #fff}
 .appr-nota{font-size:17px;font-weight:500;color:var(--soft)}
 .art-appr{font-size:17px;font-weight:400;min-height:44px;display:inline-flex;flex-wrap:wrap;align-items:center;gap:0 6px;align-self:flex-start}
 .art-appr-fonte{font-weight:400;font-size:17px;color:var(--soft)}
+
+/* ======================================================================
+   QA telefono 390 di LORI sulla build 726a8a4 (21/10/2026). Blocco finale.
+   ====================================================================== */
+
+/* 1. Home: «Centri screening: dove andare» e pulsante secondario, stessa misura del primario.
+      Fondo #FFF, bordo 2px #064A8B, testo #0B3C5D (sistema_visivo.md §2). */
+.hero .hero-ingressi .cta-2{
+  background:#FFFFFF !important;color:#0B3C5D !important;border:2px solid #064A8B !important;box-shadow:none !important;
+  min-height:62px;max-width:none;width:100%;margin-top:0;align-self:stretch;border-radius:10px;
+  font-size:19px;font-weight:700;line-height:1.2;padding:16px 20px;text-shadow:none;transform:none;position:relative}
+.hero .hero-ingressi .cta-2:hover{background:#E3EEF8 !important;color:#04325D !important;border-color:#04325D !important}
+.hero .hero-ingressi .cta-2:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+.hero .hero-ingressi .cta{padding:16px 20px;line-height:1.2}
+html.contrasto .hero .hero-ingressi .cta-2{background:#fff !important;color:#000 !important;border:2.5px solid #000 !important}
+
+/* 2. Pavimento 17px (profilo B): nessun testo sotto i 17px. */
+.motto{font-size:17px;white-space:normal;line-height:1.25}
+.tab-scr-gruppo,.tab-scr-sotto,.tab-scr-presto{font-size:17px}
+.tab-scr-gruppo{letter-spacing:0.04em}
+.tab-scr-presto{white-space:normal;text-align:right}
+.ftr-tit{font-size:17px}
+.ftr-avviso p{font-size:17px !important}
+.occhiello,p.occhiello,.occhiello-neutro{font-size:17px}
+.centro-scr,.centro-note{font-size:17px}
+.card .nota{font-size:17px}
+/* Bersaglio: le voci corte del piede («Lazio») restano larghe almeno 44px. */
+.ftr-col a{min-width:44px}
+
+/* 3. Cambia regione: griglia di pulsanti regione al posto della tendina. */
+a.btn-reg{text-decoration:none;color:var(--inchiostro)}
+a.btn-reg:hover{color:var(--inchiostro);text-decoration:none}
+a.btn-reg.on,a.btn-reg.on:hover{color:#fff;background:#064A8B;border-color:#064A8B}
+a.btn-reg:focus-visible{outline:3px solid #A63D17;outline-offset:2px}
+.btn-reg span:first-child{overflow-wrap:normal;hyphens:none}
+html.contrasto a.btn-reg.on{background:#003C75;color:#fff}
+
+/* 3. Contatti: radio grandi al posto della tendina. Lo stato scelto si vede anche dal pallino pieno. */
+.scelte-radio{gap:12px}
+.scelta-radio{min-height:56px;padding:12px 16px}
+.pallino{flex-shrink:0;width:24px;height:24px;border-radius:999px;border:2px solid #064A8B;background:#fff;box-sizing:border-box}
+.scelta-radio:has(:checked) .pallino{border-color:#fff;background:#fff;box-shadow:inset 0 0 0 5px #064A8B}
+html.contrasto .pallino{border-color:#000}
+html.contrasto .scelta-radio:has(:checked) .pallino{box-shadow:inset 0 0 0 5px #003C75}
+
+/* 5. Elenco delle regioni sempre aperto: sopra la mappa sul telefono, sotto la mappa da 701px. */
+.elenco-reg-lista{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:4px 16px}
+.elenco-reg-lista li{margin:0}
+.elenco-reg-lista a{display:flex;align-items:center;min-height:48px;font-size:19px;font-weight:600;line-height:1.25;
+  color:#064A8B;text-decoration:underline;text-underline-offset:3px}
+.elenco-reg-lista a:hover{color:#04325D;text-decoration-thickness:2.5px}
+.elenco-reg-lista a:focus-visible{outline:3px solid #A63D17;outline-offset:2px}
+@media (max-width:359px){.elenco-reg-lista{grid-template-columns:1fr}}
+@media (min-width:701px){
+  .elenco-reg{order:1}
+  .elenco-reg-lista{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (min-width:1000px){.elenco-reg-lista{grid-template-columns:repeat(4,minmax(0,1fr))}}
+html.contrasto .elenco-reg-lista a{color:#000}
+
+/* 8. Chiusura delle pagine screening: avvertenza in prosa su fondo chiaro, non piu su fondo blu.
+      Entra nell'alternanza bianco/sabbia (pattern 7: mai due fondi uguali adiacenti). */
+.banda.b-avvertenza :is(p,.nota){color:#1E1E1E}
+/* 6. Colonne uguali: il nome lungo non allarga la sua colonna; il trattino a video e U+2011. */
+.cambia-reg{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:359px){.cambia-reg{grid-template-columns:minmax(0,1fr)}}
+@media (min-width:700px){.cambia-reg{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:1000px){.cambia-reg{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Sul telefono i pulsanti regione hanno colonne uguali; il nome passa a 18px (sopra il pavimento 17px)
+   e meno margine interno, cosi «Emilia‑Romagna» sta su una riga a 390px. */
+@media (max-width:699px){
+  .griglia-reg{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .btn-reg{padding:12px 10px}
+  .btn-reg > span:first-child{font-size:18px;overflow-wrap:anywhere}
+}
+@media (max-width:359px){.griglia-reg{grid-template-columns:minmax(0,1fr)}}

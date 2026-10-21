@@ -572,6 +572,11 @@ class Component extends DCLogic {
   nomiRegioni() {
     return ["Abruzzo","Basilicata","Calabria","Campania","Emilia-Romagna","Friuli-Venezia Giulia","Lazio","Liguria","Lombardia","Marche","Molise","Piemonte","Puglia","Sardegna","Sicilia","Toscana","Trentino-Alto Adige","Umbria","Valle d'Aosta","Veneto"];
   }
+  // Nome a video con trattino non separabile (U+2011): «Emilia-Romagna» non va a capo sul trattino.
+  // Solo per la visualizzazione: rotte e chiavi usano sempre il nome con il trattino normale.
+  nomeVis(n) {
+    return String(n).replace(/-/g, "\u2011");
+  }
   conteggi() {
     const c = {};
     (window.INIZIATIVE || []).forEach((x) => { c[x.reg] = (c[x.reg] || 0) + 1; });

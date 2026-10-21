@@ -134,7 +134,8 @@ window.__siLogicaRender = class {
       },
       mappaRef: this.mappaRef,
       erroreMappa: !!this.state.erroreMappa,
-      regioni: this.nomiRegioni().map((n) => ({ nome: n, href: this.rottaRegione(n) })),
+      // vis: trattino non separabile (U+2011) solo a video, il nome resta la chiave della rotta (QA 390, 21/10).
+      regioni: this.nomiRegioni().map((n) => ({ nome: n, vis: this.nomeVis(n), href: this.rottaRegione(n) })),
       // Ultimi aggiornamenti: primi 4 articoli WordPress per data; senza, la banda non c'e.
       homeArticoli: homeArt,
       homeOk: homeArt.length > 0,
@@ -147,10 +148,19 @@ window.__siLogicaRender = class {
         : "Per questa regione non risultano iniziative segnalate.",
       elencoRegioni: this.nomiRegioni().map((n) => {
         const q = conteggi[n] || 0;
-        return { nome: n, etichetta: n + " — " + (q ? this.parola(q, "iniziativa", "iniziative") : "nessuna iniziativa") };
+        const conta = q ? this.parola(q, "iniziativa", "iniziative") : "nessuna iniziativa";
+        // Griglia di pulsanti al posto della tendina (QA 390 LORI, 21/10/2026).
+        return {
+          nome: n, vis: this.nomeVis(n), etichetta: n + " — " + conta, conta: conta,
+          href: this.rottaRegione(n), cur: n === reg ? "page" : "false", cls: n === reg ? "btn-reg on" : "btn-reg"
+        };
       }),
       vaiA: (e) => { this.vaiA(this.rottaRegione(e.target.value)); },
       scelte: scelte,
+      // Zero iniziative (QA 390, 21/10): niente scelta degli screening, un solo titolo.
+      regPiena: tutte.length > 0,
+      regVuotaAsl: tutte.length === 0 && !!this.offertaAsl(),
+      regVuotaNoAsl: tutte.length === 0 && !this.offertaAsl(),
       azzera: () => this.setState({ tipi: [] }),
       quante: quante,
       titoloElenco: tutte.length === 0
@@ -297,6 +307,11 @@ window.__siLogicaRender = class {
       mNome: this.state.mNome || "",
       mMail: this.state.mMail || "",
       mTipo: this.state.mTipo || "Segnalo un’iniziativa",
+      // Radio al posto della tendina (QA 390, 21/10): stesso stato mTipo, stesso valore nella mail.
+      mTipo1: (this.state.mTipo || "Segnalo un’iniziativa") === "Segnalo un’iniziativa",
+      mTipo2: this.state.mTipo === "Segnalo un dato sbagliato",
+      mTipo3: this.state.mTipo === "Ho una domanda",
+      mTipo4: this.state.mTipo === "Altro",
       mTesto: this.state.mTesto || "",
       msgInviato: !!this.state.msgInviato,
       msgDaCompilare: !this.state.msgInviato,
