@@ -992,7 +992,12 @@ class Component extends DCLogic {
       cls: scelto === n.chiave ? "filtro on" : "filtro",
       scegli: () => this.setState({ artArg: n.chiave, artQuanti: 6 })
     }));
-    const filtrati = conFiltro ? tutti.filter((a) => (a.categorie || []).some((c) => c.slug === scelto)) : tutti;
+    const perArg = conFiltro ? tutti.filter((a) => (a.categorie || []).some((c) => c.slug === scelto)) : tutti;
+    // Ricerca libera (Angelo 19/10/2026): parole nel titolo o nell'estratto, senza accenti e maiuscole.
+    const norma = (x) => String(x || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const parole = norma(this.state.artCerca).split(/\s+/).filter((x) => x);
+    const filtrati = parole.length ? perArg.filter((a) => { const t = norma(a.titolo + " " + a.estratto); return parole.every((w) => t.indexOf(w) !== -1); }) : perArg;
+    const conCerca = parole.length > 0;
     const quanti = this.state.artQuanti;
     const visibili = filtrati.slice(0, quanti).map((a) => this.cardArticolo(a, "art-elenco-"));
     const ok = stato === "ok" && filtrati.length > 0;
@@ -1000,13 +1005,37 @@ class Component extends DCLogic {
     return {
       ok: ok,
       vuotoTutto: vuoto && !conFiltro,
-      vuotoFiltro: vuoto && conFiltro,
+      vuotoFiltro: vuoto && conFiltro && !conCerca,
+      vuotoCerca: vuoto && conCerca,
+      risultati: conCerca ? (filtrati.length === 1 ? "1 domanda trovata." : filtrati.length + " domande trovate.") : "",
       errore: stato === "offline" || stato === "errore",
       mostraFiltro: stato === "ok" && cats.length >= 2,
       argomenti: argomenti,
       visibili: visibili,
       altri: ok && filtrati.length > quanti,
       finiti: ok && filtrati.length <= quanti
+    };
+  }
+  /* Offerta ASL della regione (Angelo 19/10/2026). Dati: window.SI_OFFERTA_ASL (dati-angelo-1019.js,
+     in produzione dal pannello). Torna null se la regione non ha dati: la pagina resta com'era.
+     Testo e numeri sono sempre testo, mai HTML. */
+  offertaAsl() {
+    const d = (window.SI_OFFERTA_ASL || {})[this.reg()];
+    if (!d || !Array.isArray(d.righe) || !d.righe.length) { return null; }
+    const documenti = Array.isArray(d.documenti) && d.documenti.length > 0;
+    const mappa = !!d.mappa;
+    const dataIt = (iso) => { const p = String(iso || "").split("-"); return p.length === 3 ? p[2] + "/" + p[1] + "/" + p[0] : ""; };
+    return {
+      cosa: d.cosa || "",
+      // «Gratuito» e «controllato» solo con una data vera (regola del progetto).
+      controlloTesto: d.controllo ? "Gli esami su invito sono gratuiti. Dati controllati il " + dataIt(d.controllo) + "." : "Numeri in verifica: telefona prima di andare.",
+      haDocumenti: documenti, haMappa: mappa, haExtra: documenti || mappa,
+      righe: d.righe.map((r) => ({
+        ente: r.ente, orari: r.orari, sito: r.sito,
+        // Un link per numero: un tocco = una chiamata (LORI 21/10).
+        tel: (r.tel || []).map((t) => ({ et: t.et, nums: String(t.n).split(/\s*·\s*/).map((n) => ({ n: n, href: "tel:" + n.split("/")[0].replace(/[^0-9+]/g, "") })) })),
+        mail: (r.mail || []).map((m) => ({ utente: m.split("@")[0], dominio: m.split("@")[1] || "", href: "mailto:" + m }))
+      }))
     };
   }
   // Card di un articolo WordPress: la stessa in elenco e in home.
@@ -1023,7 +1052,10 @@ class Component extends DCLogic {
       haFoto: !!(a.immagine && a.immagine.url),
       foto: a.immagine && a.immagine.url ? a.immagine.url : "",
       // Illustrazione di repertorio della categoria (articoli.js), non foto WordPress.
-      segnaposto: !!(a.immagine && a.immagine.segnaposto)
+      segnaposto: !!(a.immagine && a.immagine.segnaposto),
+      // «Approfondisci» (Angelo 19/10/2026): link esterno scelto da lui, campo ACF «approfondisci» sull'articolo.
+      haApprofondisci: !!(a.approfondisci && /^https:\/\//.test(a.approfondisci)),
+      approfondisciHref: a.approfondisci || ""
     };
   }
   /* Home «Ultimi aggiornamenti» (brief LORI 26/09/2026): i primi 4 per data.

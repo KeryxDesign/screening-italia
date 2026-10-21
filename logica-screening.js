@@ -140,6 +140,10 @@
         orient: c["S1·Riga di orientamento"], cta: c["S1·Etichetta CTA primaria"],
         s2h2: c["S2·Titolo h2"], s2p: c["S2·Paragrafo"], celle: celle,
         celleCls: celle.length === 4 ? "scr-celle scr-celle-4" : "scr-celle",
+        // «Approfondisci» (Angelo 19/10/2026): link per sezione da window.SI_APPROFONDISCI, solo https.
+        haAppr2: !!(((window.SI_APPROFONDISCI || {})[slug] || {}).s2),
+        appr2Href: ((((window.SI_APPROFONDISCI || {})[slug] || {}).s2) || {}).url || "",
+        appr2Et: ((((window.SI_APPROFONDISCI || {})[slug] || {}).s2) || {}).et || "",
         bish2: c["S2-bis·Titolo h2"], bisp: c["S2-bis·Paragrafo"], bisVoci: voci(c, "S2-bis·Voce"),
         s3h2: c["S3·Titolo h2"], passi: passi(c, "S3", "h3", "prosa"),
         s4h2: c["S4·Titolo h2"], s4p: c["S4·Paragrafo"], s4Voci: voci(c, "S4·Voce"),

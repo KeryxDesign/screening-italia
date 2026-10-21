@@ -1481,3 +1481,60 @@ html.contrasto .tab-scr{border:2.5px solid #000}
 .centro-note{margin:0;font-size:15px;color:var(--soft);white-space:pre-line}
 .centro-tel{align-self:flex-start;margin-top:4px}
 html.contrasto .centro{border:2.5px solid #000}
+
+/* --- Indicazioni di Angelo, 19/10/2026 (ripasso LORI 21/10: testi da 17px, un tocco = un numero) --- */
+
+/* Home: due ingressi di pari peso, le iniziative a terzo livello. */
+.hero-ingressi{display:grid;grid-template-columns:1fr;gap:12px;width:100%}
+.hero-ingressi .cta{max-width:none;margin-top:0;align-self:stretch}
+html:not(.contrasto) .hero .hero-ingressi .cta{border:2px solid #fff}
+.hero-terzo{margin:0;font-size:17px}
+.hero-terzo a{color:#fff;font-weight:500}
+.hero-terzo a:hover{color:#fff;text-decoration-thickness:2.5px}
+@media (min-width:640px){.hero-ingressi{grid-template-columns:1fr 1fr;max-width:640px}}
+
+/* Pagina regione: riquadro Regione / Screening / A chi rivolgersi. */
+.dcc{margin:0;display:grid;grid-template-columns:1fr;gap:0;border:1.5px solid var(--bordo);border-radius:8px;overflow:hidden;background:#DCEAF7}
+.dcc-r{display:grid;grid-template-columns:1fr;gap:2px;padding:16px;border-top:1.5px solid var(--bordo)}
+.dcc-r:first-child{border-top:0}
+.dcc dt{font-size:17px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--verde)}
+.dcc dd{margin:0;font-size:19px;font-weight:600;color:var(--inchiostro)}
+@media (min-width:760px){
+  .dcc-r{grid-template-columns:200px 1fr;gap:16px;align-items:baseline;padding:16px 24px}
+}
+
+/* Servizio sanitario: tabella sinottica, a schede sotto i 1000px. */
+.asl-controllo{margin:0;font-size:17px;font-weight:700;color:var(--verde-scuro)}
+.asl-tab{display:flex;flex-direction:column;gap:16px}
+.asl-riga{display:grid;grid-template-columns:1fr;gap:16px;padding:16px;background:#fff;border:1.5px solid var(--bordo);border-radius:8px}
+.asl-riga.asl-capo{display:none}
+.asl-ente{font-size:20px;color:var(--verde-scuro)}
+.asl-cella{display:flex;flex-direction:column;gap:8px;font-size:18px;line-height:1.45;min-width:0}
+.asl-et{font-size:17px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--soft)}
+.asl-tel{display:flex;flex-direction:column;gap:2px}
+.asl-sub{font-size:17px;color:var(--soft)}
+.asl-num{display:flex;align-items:center;min-height:48px;font-weight:700;color:var(--verde);text-decoration:underline;text-underline-offset:3px}
+.asl-mail{font-size:17px;min-height:44px;display:inline-flex;align-items:center;flex-wrap:wrap}
+.asl-mail span{display:inline-block}
+.asl-sito{font-weight:500}
+.asl-extra{display:grid;grid-template-columns:1fr;gap:16px}
+.asl-box{padding:16px;border:1.5px solid var(--bordo);border-radius:8px;background:#fff;display:flex;flex-direction:column;gap:8px}
+@media (min-width:1000px){
+  .asl-tab{gap:0;border:1.5px solid var(--bordo);border-radius:8px;overflow:hidden;background:#fff}
+  .asl-riga.asl-capo{display:grid;background:var(--verde);color:#fff;font-weight:700;font-size:17px;letter-spacing:0.05em;text-transform:uppercase}
+  .asl-capo span{padding:16px}
+  .asl-capo,.asl-riga{grid-template-columns:1fr 1.6fr 1fr 2fr .9fr}
+  .asl-riga{gap:0;padding:0;border:0;border-top:1.5px solid var(--bordo);border-radius:0}
+  .asl-riga.asl-capo{border-top:0}
+  .asl-ente{padding:16px;background:#DCEAF7;display:flex;align-items:center;font-size:18px}
+  .asl-cella{padding:16px;border-left:1.5px solid var(--bordo);font-size:17px}
+  /* Le etichette restano per il lettore di schermo, nascoste alla vista. */
+  .asl-et{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .asl-extra{grid-template-columns:1fr 1fr}
+}
+
+/* «Approfondisci»: pulsante secondario, link esterno. */
+.appr{flex-direction:column;gap:2px;max-width:420px;margin-top:8px}
+.appr-nota{font-size:17px;font-weight:500;color:var(--soft)}
+.art-appr{font-size:17px;font-weight:400;min-height:44px;display:inline-flex;flex-wrap:wrap;align-items:center;gap:0 6px;align-self:flex-start}
+.art-appr-fonte{font-weight:400;font-size:17px;color:var(--soft)}

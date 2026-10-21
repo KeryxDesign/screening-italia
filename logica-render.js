@@ -103,6 +103,10 @@ window.__siLogicaRender = class {
       hrefCampania: this.rottaRegione("Campania"),
       vistaHome: vista === "",
       vistaRegione: vista === "regione",
+      // Offerta ASL (Angelo 19/10/2026): senza dati per la regione la pagina resta com'era.
+      haAsl: !!this.offertaAsl(),
+      nonHaAsl: !this.offertaAsl(),
+      asl: this.offertaAsl() || { cosa: "", controlloTesto: "", righe: [] },
       vistaVuota: vista === "vuota",
       // pagina dell'iniziativa (card cliccabili, 24/09/2026)
       vistaIniziativa: vista === "iniziativa",
@@ -167,6 +171,8 @@ window.__siLogicaRender = class {
       inviaMail: () => { if (this.state.mail) { this.setState({ inviato: true }); } },
 
       // domande frequenti (articoli WordPress, brief LORI 26/09/2026)
+      artCerca: this.state.artCerca || "",
+      artCercaScrivi: (e) => this.setState({ artCerca: e.target.value, artQuanti: 6 }),
       artMostraFiltro: art.mostraFiltro,
       artArgomenti: art.argomenti,
       artOk: art.ok,
@@ -175,9 +181,13 @@ window.__siLogicaRender = class {
       artFiniti: art.finiti,
       artVuotoTutto: art.vuotoTutto,
       artVuotoFiltro: art.vuotoFiltro,
+      artVuotoCerca: art.vuotoCerca,
+      artHaCerca: !!(this.state.artCerca || ""),
+      artCercaVia: () => this.setState({ artCerca: "", artQuanti: 6 }),
+      artRisultati: art.risultati,
       artErrore: art.errore,
       artMostraAltri: () => this.setState({ artQuanti: this.state.artQuanti + 6 }),
-      artAzzera: () => this.setState({ artArg: null, artQuanti: 6 }),
+      artAzzera: () => this.setState({ artArg: null, artCerca: "", artQuanti: 6 }),
 
       // articolo
       vistaArticolo: vista === "articolo",
