@@ -1678,3 +1678,25 @@ html.contrasto .banda:not(.hero) :is(.card,.art,.testi,.mappa-nome,.avviso,.fatt
 .art-tit a:hover,.art-tit a:focus-visible{color:var(--accento)}
 html.contrasto .scr-home .scr-gruppo,html.contrasto .scr-home .scr-carta svg.scr-cf,html.contrasto .art-meta,html.contrasto .art-vai{color:#000}
 html.contrasto .scr-home .scr-carta .scr-ci{box-shadow:none}
+
+/* Fascia blu mai accanto a un altro blu scuro (Davide 21/10): se e l'ultima (poi viene il piede),
+   se segue il blu di apertura o precede un'altra fascia blu, torna chiara. */
+.banda.b-blu:is(:last-child,:has(+ .b-blu)),
+:is(.hero,.b-blu) + .banda.b-blu{--fondo:var(--sabbia)}
+html:not(.contrasto) :is(.banda.b-blu:is(:last-child,:has(+ .b-blu)),:is(.hero,.b-blu) + .banda.b-blu){color:#14202B}
+html:not(.contrasto) :is(.banda.b-blu:is(:last-child,:has(+ .b-blu)),:is(.hero,.b-blu) + .banda.b-blu) h2{color:#064A8B}
+html:not(.contrasto) :is(.banda.b-blu:is(:last-child,:has(+ .b-blu)),:is(.hero,.b-blu) + .banda.b-blu) :is(p,h3,li){color:#14202B}
+html:not(.contrasto) :is(.banda.b-blu:is(:last-child,:has(+ .b-blu)),:is(.hero,.b-blu) + .banda.b-blu) .nota{color:#33414F}
+html:not(.contrasto) :is(.banda.b-blu:is(:last-child,:has(+ .b-blu)),:is(.hero,.b-blu) + .banda.b-blu) .occhiello{color:#8A3212}
+html:not(.contrasto) :is(.banda.b-blu:is(:last-child,:has(+ .b-blu)),:is(.hero,.b-blu) + .banda.b-blu) a:not(.cta):not(.cta-2){color:#064A8B}
+html:not(.contrasto) :is(.banda.b-blu:is(:last-child,:has(+ .b-blu)),:is(.hero,.b-blu) + .banda.b-blu) .cta{border:0 !important}
+html:not(.contrasto) :is(.banda.b-blu:is(:last-child,:has(+ .b-blu)),:is(.hero,.b-blu) + .banda.b-blu) .cta-2{background:#fff !important;color:#064A8B !important;border:2px solid #064A8B !important}
+html:not(.contrasto) :is(.banda.b-blu:is(:last-child,:has(+ .b-blu)),:is(.hero,.b-blu) + .banda.b-blu) .cta-2:hover{background:#E3EEF8 !important;color:#04325D !important;border-color:#04325D !important}
+html:not(.contrasto) :is(.banda.b-blu:is(:last-child,:has(+ .b-blu)),:is(.hero,.b-blu) + .banda.b-blu) :is(.cta,.cta-2,a):focus-visible{outline-color:#A63D17}
+
+/* Bottoni sulle fasce blu: sempre un buon contrasto (Davide 21/10). Principale giallo con testo scuro
+   (circa 6:1 sul blu), secondario bianco pieno con testo blu. */
+html:not(.contrasto) .banda.b-blu:not(:is(:last-child,:has(+ .b-blu))) .cta{background:var(--oro) !important;color:#14100A !important;border:2px solid #fff !important}
+html:not(.contrasto) .banda.b-blu:not(:is(:last-child,:has(+ .b-blu))) .cta:hover{background:var(--oro-chiaro) !important;color:#14100A !important}
+html:not(.contrasto) .banda.b-blu:not(:is(:last-child,:has(+ .b-blu))) .cta-2{background:#fff !important;color:#064A8B !important;border:2px solid #fff !important}
+html:not(.contrasto) .banda.b-blu:not(:is(:last-child,:has(+ .b-blu))) .cta-2:hover{background:#E3EEF8 !important;color:#04325D !important}
