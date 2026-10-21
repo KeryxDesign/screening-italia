@@ -1879,54 +1879,31 @@
                         <p class="errore" id="rc-err-tipo" role="alert">Scegli se racconti una cosa che ha funzionato o un disservizio.</p>
                       </sc-if>
                     </fieldset>
-                    <div class="fx col gap6">
-                      <label class="etichetta" for="rc-reg">Regione (facoltativa)</label>
-                      <div class="sel-box">
-                        <select class="campo campo-sel" id="rc-reg" value="{{ rcReg }}" onChange="{{ rcScriviReg }}">
-                          <option value="">Preferisco non dirlo</option>
-                          <option value="Abruzzo">Abruzzo</option>
-                          <option value="Basilicata">Basilicata</option>
-                          <option value="Calabria">Calabria</option>
-                          <option value="Campania">Campania</option>
-                          <option value="Emilia-Romagna">Emilia-Romagna</option>
-                          <option value="Friuli-Venezia Giulia">Friuli-Venezia Giulia</option>
-                          <option value="Lazio">Lazio</option>
-                          <option value="Liguria">Liguria</option>
-                          <option value="Lombardia">Lombardia</option>
-                          <option value="Marche">Marche</option>
-                          <option value="Molise">Molise</option>
-                          <option value="Piemonte">Piemonte</option>
-                          <option value="Puglia">Puglia</option>
-                          <option value="Sardegna">Sardegna</option>
-                          <option value="Sicilia">Sicilia</option>
-                          <option value="Toscana">Toscana</option>
-                          <option value="Trentino-Alto Adige">Trentino-Alto Adige</option>
-                          <option value="Umbria">Umbria</option>
-                          <option value="Valle d&#39;Aosta">Valle d'Aosta</option>
-                          <option value="Veneto">Veneto</option>
-                        </select>
-                        <svg class="sel-frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                    <!-- QA 390 LORI 21/10: niente tendine (sistema_visivo §7 divieto 10). Regione con la griglia .btn-reg,
+                         screening con radio grandi. Stesso stato rcReg/rcScr, stessi valori nella mail. -->
+                    <fieldset class="campo-gruppo fx col gap6">
+                      <legend class="etichetta">Regione (facoltativa)</legend>
+                      <div class="griglia-reg rc-reg-griglia" id="rc-reg-griglia">
+                        <sc-for list="{{ rcRegioni }}" as="r" hint-placeholder-count="21">
+                          <button type="button" class="{{ r.cls }}" value="{{ r.nome }}" data-val="{{ r.nome }}" onClick="{{ rcScriviReg }}" aria-pressed="{{ r.on }}">
+                            <span>{{ r.vis }}</span>
+                            <svg class="spunta" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+                          </button>
+                        </sc-for>
                       </div>
-                    </div>
-                    <div class="fx col gap6">
-                      <label class="etichetta" for="rc-scr">Screening (facoltativo)</label>
-                      <div class="sel-box">
-                        <select class="campo campo-sel" id="rc-scr" value="{{ rcScr }}" onChange="{{ rcScriviScr }}">
-                          <option value="">Preferisco non dirlo</option>
-                          <option value="Mammografico">Mammografico</option>
-                          <option value="Cervice uterina">Cervice uterina</option>
-                          <option value="Colon-retto">Colon-retto</option>
-                          <option value="Prostata">Prostatico (PSA)</option>
-                          <option value="Neonatale">Neonatale</option>
-                          <option value="Diabete e celiachia pediatrici">Diabete</option>
-                          <option value="Polmonare">Polmonare</option>
-                          <option value="Epatite C (HCV)">HCV (Epatite C)</option>
-                          <option value="Cardiovascolare">Cardiovascolare</option>
-                          <option value="Altro">Altro</option>
-                        </select>
-                        <svg class="sel-frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                    </fieldset>
+                    <fieldset class="campo-gruppo fx col gap6">
+                      <legend class="etichetta">Screening (facoltativo)</legend>
+                      <div class="scelte scelte-radio rc-scr-scelte">
+                        <sc-for list="{{ rcScreeningOpz }}" as="o" hint-placeholder-count="11">
+                          <label class="scelta scelta-radio">
+                            <input class="sr" type="radio" name="rc-scr" id="{{ o.id }}" value="{{ o.nome }}" checked="{{ o.on }}" onChange="{{ rcScriviScr }}">
+                            <span class="pallino" aria-hidden="true"></span>
+                            <span class="scelta-nome">{{ o.et }}</span>
+                          </label>
+                        </sc-for>
                       </div>
-                    </div>
+                    </fieldset>
                     <div class="avviso fx col gap8" id="rc-regole">
                       <h3>Prima di scrivere</h3>
                       <ul>
