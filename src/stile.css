@@ -1652,7 +1652,7 @@ html.contrasto .mappa .tocco{stroke:#000}
 .trova-due{grid-template-columns:1fr}
 @media (min-width:900px){.trova-due{grid-template-columns:minmax(0,520px);justify-content:center}}
 /* Home: carte screening raggruppate, con icone. */
-.scr-home .scr-gruppo{margin:14px 0 0;font-size:15px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#064A8B}
+.scr-home .scr-gruppo{margin:14px 0 0;font-size:17px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#064A8B}
 .scr-home .scr-gruppo:first-of-type{margin-top:4px}
 .scr-home .scr-carta .scr-ci{box-sizing:content-box;width:30px;height:30px;padding:9px;border-radius:50%;background:var(--azzurro-tenue);color:#064A8B}
 .scr-home .scr-arrivo{margin:10px 0 0;font-size:17px;line-height:1.5;color:var(--soft)}
