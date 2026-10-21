@@ -77,7 +77,7 @@
     return comp.nomiRegioni().map((n) => {
       const q = conta ? (conta[n] || 0) : 0;
       return {
-        nome: n, on: scelta === n ? "true" : "false", cls: scelta === n ? "btn-reg on" : "btn-reg",
+        nome: n, vis: comp.nomeVis(n), on: scelta === n ? "true" : "false", cls: scelta === n ? "btn-reg on" : "btn-reg",
         haN: q > 0, n: q === 1 ? "1 iniziativa aperta" : q + " iniziative aperte",
         pick: () => comp.setState({ regScr: n }, () => scendiRisultati(id))
       };
