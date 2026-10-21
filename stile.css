@@ -1614,3 +1614,25 @@ html.contrasto .elenco-reg-lista a{color:#000}
   .btn-reg > span:first-child{font-size:18px;overflow-wrap:anywhere}
 }
 @media (max-width:359px){.griglia-reg{grid-template-columns:minmax(0,1fr)}}
+
+/* ======================================================================
+   QA 390 LORI 21/10/2026 — #/racconta senza tendine (divieto 10).
+   ====================================================================== */
+/* Regione: griglia .btn-reg a 2 colonne; «Preferisco non dirlo» occupa la riga intera.
+   Lo stato scelto si vede anche dalla spunta, non solo dal fondo pieno. */
+.rc-reg-griglia{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:359px){.rc-reg-griglia{grid-template-columns:minmax(0,1fr)}}
+@media (min-width:700px){.rc-reg-griglia{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.rc-reg-griglia .rc-nessuna{grid-column:1/-1}
+.rc-reg-griglia{row-gap:14px}
+.rc-reg-griglia .btn-reg{position:relative;min-height:56px}
+.rc-reg-griglia .btn-reg > *{pointer-events:none}
+/* Spunta a bollino sull'angolo: non toglie spazio al nome («Emilia‑Romagna» resta su una riga a 390px). */
+.rc-reg-griglia .spunta{display:none;position:absolute;right:-8px;top:-8px;width:26px;height:26px;padding:3px;box-sizing:border-box;
+  background:#fff;color:#064A8B;border:2px solid #064A8B;border-radius:999px}
+.rc-reg-griglia .btn-reg.on .spunta{display:block}
+html.contrasto .rc-reg-griglia .spunta{color:#000;border-color:#000}
+.rc-reg-griglia .btn-reg:focus-visible{outline:3px solid #A63D17;outline-offset:2px}
+html.contrasto .rc-reg-griglia .btn-reg.on{background:#003C75;color:#fff}
+/* Screening: radio grandi come in Contatti (una colonna sul telefono, due da 520px: il modulo e largo ~540px). */
+.rc-scr-scelte .scelta-nome{overflow-wrap:normal;hyphens:none;min-width:0}

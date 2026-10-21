@@ -257,11 +257,22 @@ window.__siLogicaRender = class {
       rcSceltaDiff: rcTipo === "diff" ? "scelta on" : "scelta",
       rcScegliBp: () => this.setState({ rcTipo: "bp", rcErr: rcErr.tipo ? { ...rcErr, tipo: false } : this.state.rcErr }),
       rcScegliDiff: () => this.setState({ rcTipo: "diff", rcErr: rcErr.tipo ? { ...rcErr, tipo: false } : this.state.rcErr }),
-      rcRegioni: this.nomiRegioni().map((n) => ({ nome: n })),
-      rcScreeningOpz: this.rcScreening().map((n) => ({ nome: n })),
+      // Niente tendine (QA 390 LORI, 21/10): pulsanti regione e radio screening. "" = «Preferisco non dirlo».
+      // vis: trattino non separabile (U+2011) solo a video; il valore nella mail resta il nome normale.
+      rcRegioni: [""].concat(this.nomiRegioni()).map((n) => {
+        const on = (this.state.rcReg || "") === n;
+        return { nome: n, vis: n ? this.nomeVis(n) : "Preferisco non dirlo", on: on ? "true" : "false",
+          cls: "btn-reg" + (n ? "" : " rc-nessuna") + (on ? " on" : "") };
+      }),
+      rcScreeningOpz: [""].concat(this.rcScreening()).map((n, i) => ({
+        nome: n, id: "rc-scr-" + i, on: (this.state.rcScr || "") === n,
+        et: this.nomeVis(({ "": "Preferisco non dirlo", "Prostata": "Prostatico (PSA)", "Diabete e celiachia pediatrici": "Diabete",
+          "Epatite C (HCV)": "HCV (Epatite C)" })[n] || n)
+      })),
       rcReg: this.state.rcReg || "",
       rcScr: this.state.rcScr || "",
-      rcScriviReg: (e) => this.setState({ rcReg: e.target.value }),
+      // currentTarget: il clic puo cadere sullo <span> dentro il pulsante; il valore sta sul <button>.
+      rcScriviReg: (e) => this.setState({ rcReg: (e.currentTarget && e.currentTarget.value != null ? e.currentTarget : e.target).value }),
       rcScriviScr: (e) => this.setState({ rcScr: e.target.value }),
       rcTesto: rcTesto,
       rcScriviTesto: (e) => this.setState({ rcTesto: String(e.target.value || "").slice(0, 1200), rcErr: rcErr.testo ? { ...rcErr, testo: false } : this.state.rcErr }),
