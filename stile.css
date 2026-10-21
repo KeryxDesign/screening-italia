@@ -576,16 +576,12 @@ html.contrasto .esp-bp,html.contrasto .esp-diff,html.contrasto .consenso{box-sha
 html.contrasto .wa-float{background:#FFFFFF;color:#002445;border:2.5px solid #000;box-shadow:none}
 @media print{.wa-float{display:none}}
 
-/* Sotto i 1200px (stessa soglia dell'hamburger): accessibilita in testata,
-   il floater mail visibile solo dopo i numeri dell'hero. Posizione del floater nel blocco <=699. */
+/* Sotto i 1200px il floater mail compare solo dopo i numeri dell'hero. Posizione del floater nel blocco <=699.
+   Il pulsante accessibilita resta flottante in basso a sinistra (Davide 21/10: non in testata). */
 @media (max-width:1199px){
-  .a11y{top:22px;bottom:auto;left:auto;right:74px;z-index:31;flex-direction:column-reverse;align-items:flex-end;gap:28px}
-  .a11y-apri{width:44px;height:44px;border-radius:8px;border:1.5px solid rgba(255,255,255,0.35);box-shadow:none}
-  .a11y-apri svg{width:26px;height:26px}
   .wa-float{visibility:hidden;opacity:0;transition:opacity .2s ease,visibility 0s linear .2s,transform .14s ease,box-shadow .14s ease}
   .wa-float.in-vista{visibility:visible;opacity:1;transition:opacity .2s ease,transform .14s ease,box-shadow .14s ease}
 }
-@media (min-width:860px) and (max-width:1199px){.a11y{right:86px}}
 @media (prefers-reduced-motion:reduce){.wa-float,.wa-float.in-vista{transition:none}}
 
 /* --- Numeri del portale --- */
@@ -1096,7 +1092,7 @@ html.contrasto .card-ini:has(.ini-tit a:focus-visible),html.contrasto .card-ini 
  .hero h1{font-size:48px;line-height:1.10}.hero p{font-size:20px;line-height:1.65}.numero-hn{font-size:34px}}
 
 /* Menu aperto sopra il banner cookie (z 70), accessibilita sopra la testata (collaudo LORI giro 2, 26/09/2026). */
-@media (max-width:1199px){.hdr:has(.menu-chk:checked){z-index:71} body:has(.menu-chk:checked) .a11y{z-index:72}}
+@media (max-width:1199px){.hdr:has(.menu-chk:checked){z-index:71} body:has(.menu-chk:checked) .a11y{z-index:29}}
 
 /* ============ Blocco 2: schede strette dell'elenco regione (brief LORI 26/09/2026) ============ */
 /* Solo .card-reg (vista regione). Le card-ini delle pagine screening non cambiano.
@@ -1175,7 +1171,7 @@ html.contrasto .invito .invito-tit{color:#002445}
   --oro:#F0B429;            /* solo riempimento con testo scuro, o su blu scuro */
   --oro-chiaro:#FFD34F;
   --oro-bordo:#8A5A00;      /* contorno del giallo: 4.8:1 su sabbia */
-  --sabbia:#F3E6D2;         /* 1.23:1 sul bianco, 1.15:1 sulla carta */
+  --sabbia:#E7EEF5;         /* fondo delle bande alternate: grigio-azzurro chiaro (era sabbia, Davide 21/10) */
   --azzurro-tenue:#DCEAF7;
 }
 .b-crema{background:var(--sabbia);box-shadow:0 0 0 100vmax var(--sabbia)}
@@ -1375,7 +1371,7 @@ html.contrasto body .pag-scr .cta{background-color:#8A2600 !important}
    Le classi b-bianco / b-crema / b-verde / b-carta restano solo come segnaposto.
    Alto contrasto (html.contrasto) invariato: tutto bianco e nero.
    ====================================================================== */
-:root{--sabbia:#F5EBD8;--carta:#FFFFFF;--filo-card:#727980}
+:root{--sabbia:#E7EEF5;--carta:#FFFFFF;--filo-card:#727980}
 body{background:#fff}
 
 /* --- Fondi: un solo strato a tutta larghezza (border-image), niente cuciture sui bordi --- */
@@ -1636,3 +1632,28 @@ html.contrasto .rc-reg-griglia .spunta{color:#000;border-color:#000}
 html.contrasto .rc-reg-griglia .btn-reg.on{background:#003C75;color:#fff}
 /* Screening: radio grandi come in Contatti (una colonna sul telefono, due da 520px: il modulo e largo ~540px). */
 .rc-scr-scelte .scelta-nome{overflow-wrap:normal;hyphens:none;min-width:0}
+
+
+/* ============ Correzioni mobile home (Davide, 21/10/2026) ============ */
+/* Testata: marchio con aria sopra e sotto (niente motto, che ora e il titolo della home). */
+.hdr-riga{padding-top:max(14px,env(safe-area-inset-top));padding-bottom:14px;min-height:92px}
+.marchio-img,.marchio:has(.motto) .marchio-img{height:64px}
+/* Menu a comparsa: bersaglio piu grande (56px) e icona piu grossa. */
+@media (max-width:1199px){
+  .menu-chk{width:56px;height:56px}
+  .hamb{width:56px;height:56px;border-radius:10px;border:2px solid rgba(255,255,255,0.7);background:rgba(255,255,255,0.08)}
+  .hamb svg{width:34px;height:34px}
+}
+/* Mappa: bersaglio largo per le regioni piccole. */
+.mappa .tocco{fill:transparent;stroke:#064A8B;stroke-width:1.6;stroke-dasharray:4 3;vector-effect:non-scaling-stroke;cursor:pointer;pointer-events:all}
+.mappa-bianca .tocco{stroke:#fff}
+.mappa .tocco:hover{fill:rgba(6,74,139,0.12)}
+html.contrasto .mappa .tocco{stroke:#000}
+.trova-due{grid-template-columns:1fr}
+@media (min-width:900px){.trova-due{grid-template-columns:minmax(0,520px);justify-content:center}}
+/* Home: carte screening raggruppate, con icone. */
+.scr-home .scr-gruppo{margin:14px 0 0;font-size:15px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#064A8B}
+.scr-home .scr-gruppo:first-of-type{margin-top:4px}
+.scr-home .scr-carta .scr-ci{box-sizing:content-box;width:30px;height:30px;padding:9px;border-radius:50%;background:var(--azzurro-tenue);color:#064A8B}
+.scr-home .scr-arrivo{margin:10px 0 0;font-size:17px;line-height:1.5;color:var(--soft)}
+html.contrasto .scr-home .scr-carta .scr-ci{background:#fff;border:2px solid #000;color:#000}

@@ -21,6 +21,25 @@
   const DOMANDA = "M7.9 20A9 9 0 1 0 4 16.1L2 22ZM9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"; // Lucide message-circle-question (ISC), diabete (LORI giro 1)
   const ICONA_CELLA = { "Fascia di età": PERSONA, "25-29 anni": PERSONA, "30-64 anni": PERSONA, "Cadenza": CALENDARIO, "Costo": EURO, "Casi particolari": INFO };
 
+  // Icone delle carte in home: tratto 2px come le altre, forme semplici e non cliniche.
+  const ICONA_HOME = {
+    "mammografico": "M12 4.2c-2.2 0-3.8 1.6-3.8 3.6 0 2.6 2.1 4.4 3.8 6 1.7-1.6 3.8-3.4 3.8-6 0-2-1.6-3.6-3.8-3.6zM10.4 13.6L7.6 20.5l3.1-1.6 1.3 2.1M13.6 13.6l2.8 6.9-3.1-1.6",
+    "cervicale": "M12 3.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9zM12 12.5v8M8.5 17h7",
+    "colon-retto": "M4 6h13a3.5 3.5 0 010 7H7a3.5 3.5 0 000 7h13",
+    "prostata": "M10.5 9.5a5 5 0 100 10 5 5 0 000-10zM14 12l6-6M15 5.5h5v5",
+    "neonatale": BABY,
+    "diabete-celiachia": "M12 3.5s6 6.2 6 10.5a6 6 0 01-12 0c0-4.3 6-10.5 6-10.5z",
+    "cardiovascolare": "M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0112 7.2 4.3 4.3 0 0119.5 10c0 5.4-7.5 10-7.5 10z"
+  };
+  function cartaHome(m, s, i) {
+    return {
+      href: "#/screening/" + s,
+      titolo: m["H·Card " + (i + 1) + " · " + s + " · Titolo"],
+      riga: m["H·Card " + (i + 1) + " · " + s + " · Riga"],
+      icona: ICONA_HOME[s]
+    };
+  }
+
   const P = () => window.SCREENING_PAGINE || {};
   const M = () => window.SCREENING_MICRO || {};
   // I buchi di dato del copy si mostrano in .finto (brief §2.3), mai nascosti in anteprima.
@@ -100,12 +119,9 @@
       scrDia: slug === "diabete-celiachia",
       scrHome: {
         h2: m["H·Titolo h2"],
-        card: SLUG.map((s, i) => ({
-          href: "#/screening/" + s,
-          titolo: m["H·Card " + (i + 1) + " · " + s + " · Titolo"],
-          riga: m["H·Card " + (i + 1) + " · " + s + " · Riga"],
-          icona: TIPO[s] ? comp.icona(TIPO[s]) : (s === "neonatale" ? BABY : DOMANDA)
-        }))
+        // Due gruppi (Angelo 17/10): oncologici e altri; icone proprie per ogni screening (Davide 21/10).
+        onco: SLUG.slice(0, 4).map((s, i) => cartaHome(m, s, i)),
+        altri: SLUG.slice(4).map((s, i) => cartaHome(m, s, i + 4))
       },
       scr: {}
     };

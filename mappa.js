@@ -53,6 +53,25 @@ window.MappaItalia = {
     });
 
     el.appendChild(svg);
+
+    /* Regioni troppo piccole da toccare col dito (Valle d'Aosta, Molise): attorno alla regione
+       un cerchio tratteggiato largo almeno 48px sullo schermo, che apre la stessa pagina. */
+    var larg = svg.getBoundingClientRect().width || 340;
+    var scala = larg / (parseFloat(dati.viewBox.split(" ")[2]) || 620);
+    ["Valle d\u2019Aosta", "Valle d'Aosta", "Molise"].forEach(function (nome) {
+      var base = svg.querySelector('path[aria-label^="' + nome + ',"]');
+      if (!base) { return; }
+      var bb = base.getBBox();
+      var r = Math.max(24 / scala, Math.max(bb.width, bb.height) / 2 + 3 / scala);
+      var c = document.createElementNS(NS, "circle");
+      c.setAttribute("cx", bb.x + bb.width / 2);
+      c.setAttribute("cy", bb.y + bb.height / 2);
+      c.setAttribute("r", r);
+      c.setAttribute("class", "tocco");
+      c.setAttribute("aria-hidden", "true");
+      c.addEventListener("click", function () { base.dispatchEvent(new MouseEvent("click")); });
+      svg.appendChild(c);
+    });
     return true;
   }
 };
