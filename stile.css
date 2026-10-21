@@ -1657,3 +1657,8 @@ html.contrasto .mappa .tocco{stroke:#000}
 .scr-home .scr-carta .scr-ci{box-sizing:content-box;width:30px;height:30px;padding:9px;border-radius:50%;background:var(--azzurro-tenue);color:#064A8B}
 .scr-home .scr-arrivo{margin:10px 0 0;font-size:17px;line-height:1.5;color:var(--soft)}
 html.contrasto .scr-home .scr-carta .scr-ci{background:#fff;border:2px solid #000;color:#000}
+
+/* Card senza linea scura attorno (Davide 21/10): stacco dato dall'ombra morbida, non dal filo. */
+.banda:not(.hero) :is(.card,.art,.testi,.mappa-nome,.avviso,.fatto,.scr-carta,.scr-cella,.scr-frase){
+  border-color:transparent;box-shadow:0 1px 2px rgba(4,40,64,0.06),0 6px 18px rgba(4,40,64,0.10)}
+html.contrasto .banda:not(.hero) :is(.card,.art,.testi,.mappa-nome,.avviso,.fatto,.scr-carta,.scr-cella,.scr-frase){border-color:#000;box-shadow:none}
