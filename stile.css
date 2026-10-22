@@ -1678,3 +1678,6 @@ html.contrasto .banda:not(.hero) :is(.card,.art,.testi,.mappa-nome,.avviso,.fatt
 .art-tit a:hover,.art-tit a:focus-visible{color:var(--accento)}
 html.contrasto .scr-home .scr-gruppo,html.contrasto .scr-home .scr-carta svg.scr-cf,html.contrasto .art-meta,html.contrasto .art-vai{color:#000}
 html.contrasto .scr-home .scr-carta .scr-ci{box-shadow:none}
+
+/* Descrizione libera dell iniziativa (22/10/2026): per i tipi «Altro» è tutto il contenuto. */
+.ini-descr{margin:0;line-height:1.6;max-width:68ch;white-space:pre-line}
