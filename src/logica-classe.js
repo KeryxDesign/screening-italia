@@ -630,8 +630,16 @@ class Component extends DCLogic {
   /* Nome a schermo del tipo, scritto da Angelo (note del 17/10/2026). Il valore salvato
      nel pannello non cambia: cambia solo come lo legge il cittadino. */
   nomeTipo(tipo) {
-    const N = { "Prostata": "Prostatico (PSA)", "Diabete e celiachia pediatrici": "Diabete", "Epatite C (HCV)": "HCV (Epatite C)" };
+    const N = { "Altro (spiegare nella descrizione)": "Altro", "Prostata": "Prostatico (PSA)", "Diabete e celiachia pediatrici": "Diabete", "Epatite C (HCV)": "HCV (Epatite C)" };
     return N[tipo] || tipo;
+  }
+  // «Ultimo aggiornamento» in home: la modifica piu recente nel pannello (x.agg, AAAA-MM-GG).
+  ultimoAggiornamento(dati) {
+    const mesi = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"];
+    const max = (dati || []).map((x) => x.agg || "").filter(Boolean).sort().pop();
+    if (!max) { return "3 settembre"; }
+    const p = max.split("-");
+    return Number(p[2]) + " " + mesi[Number(p[1]) - 1];
   }
   scheda(x) {
     let cls = "tag tag-gratis";
@@ -639,7 +647,9 @@ class Component extends DCLogic {
     if (x.stato === "su invito") { cls = "tag tag-invito"; }
     return {
       tipo: this.nomeTipo(x.tipo), icona: this.icona(x.tipo), titolo: x.titolo, ente: x.ente, dove: x.dove,
-      quando: x.quando, chi: x.chi, tel: x.tel, href: "tel:" + x.tel.split(" ").join(""),
+      quando: x.quando, chi: x.chi, tel: x.tel || "", href: "tel:" + String(x.tel || "").split(" ").join(""),
+      haEnte: !!x.ente, haDove: !!x.dove, haQuando: !!x.quando, haChi: !!x.chi, haTel: !!x.tel,
+      descrizione: x.descrizione || "", haDescrizione: !!x.descrizione,
       tagTesto: x.stato, tagCls: cls,
       scadenza: this.scadenza(x).testo, scadenzaCls: this.scadenza(x).cls,
       haScadenza: !!this.scadenza(x).testo,
