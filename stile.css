@@ -1745,3 +1745,29 @@ html.contrasto .asl-card{box-shadow:none;outline:2px solid #14202B}
 html.contrasto .asl-ico{background:#003C75}
 html.contrasto .asl-card .asl-num{background:#F0B429;color:#000;border-color:#000}
 .cambia-sel{max-width:520px}
+
+/* Pagina dell'iniziativa (Florbo 22/10/2026): «In breve» a tasselli con icone, testo libero formattato, contatti cliccabili. */
+.ini-info{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+@media (min-width:760px){.ini-info{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ini-tassello{display:flex;gap:14px;align-items:flex-start;background:#fff;border-radius:12px;padding:16px 18px;box-shadow:0 2px 10px rgba(10,37,64,.16);min-width:0}
+.ini-t-largo{grid-column:1/-1}
+.ini-t-corpo{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
+.ini-t-et{font-size:15px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#04325D}
+.ini-t-val{font-size:19px;line-height:1.5;color:#14202B;font-weight:600;overflow-wrap:anywhere}
+.ini-t-val .vl-righe{display:flex;flex-direction:column;gap:4px}
+.ini-testo{max-width:760px}
+.ini-blocco{display:flex;flex-direction:column;gap:12px}
+.ini-sottotit{margin:12px 0 0;font-size:22px;line-height:1.3;font-weight:700;color:#04325D}
+.ini-blocco .ini-sottotit:has(+ *){margin-top:12px}
+.ini-par{margin:0;font-size:19px;line-height:1.65;color:#14202B;overflow-wrap:anywhere}
+.ini-elenco{list-style:disc;margin:0;padding:0 0 0 24px;display:flex;flex-direction:column;gap:10px;font-size:19px;line-height:1.55;color:#14202B}
+.ini-elenco li::marker{color:#A63D17}
+.ini-contatti{background:#fff;border-radius:12px;box-shadow:0 2px 10px rgba(10,37,64,.16);overflow:hidden}
+.ini-contatti .asl-voce:first-child{border-top:0}
+.ini-c-val{display:block;font-size:18px;line-height:1.5;color:#14202B;overflow-wrap:anywhere}
+.ini-link{font-weight:700;color:#064A8B;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+.ini-link[href^="tel:"]{display:inline-block;padding:4px 12px;margin:2px 0;border-radius:8px;background:#F0B429;color:#14100A;border:2px solid #8A5A00;text-decoration:none}
+.ini-vai{align-self:flex-start;width:auto;max-width:420px}
+@media (max-width:699px){.ini-vai{align-self:stretch;max-width:none}}
+html.contrasto .ini-tassello,html.contrasto .ini-contatti{box-shadow:none;outline:2px solid #14202B}
+html.contrasto .ini-link[href^="tel:"]{background:#F0B429;color:#000;border-color:#000}

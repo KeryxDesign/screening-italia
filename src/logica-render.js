@@ -160,6 +160,10 @@ window.__siLogicaRender = class {
       // Zero iniziative (QA 390, 21/10): niente scelta degli screening, un solo titolo.
       regPiena: tutte.length > 0,
       regVuota: tutte.length === 0,
+      vaiAiContattiIni: () => {
+        const el = document.querySelector(".ini-contatti") || document.querySelector("#ini-dettagli");
+        if (el) { window.scrollTo(0, el.getBoundingClientRect().top + window.pageYOffset - 90); }
+      },
       vaiAiContatti: () => {
         const el = document.querySelector("#asl-contatti");
         if (el) { window.scrollTo(0, el.getBoundingClientRect().top + window.pageYOffset - 70); }

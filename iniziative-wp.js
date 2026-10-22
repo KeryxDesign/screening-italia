@@ -93,8 +93,10 @@
   function testoLungo(v) {
     if (typeof v !== "string" || !v) { return ""; }
     var s = v.replace(/<br\s*\/?>/gi, "\n");
-    var righe = s.split(/\r?\n/).map(soloTesto).filter(function (r) { return r !== ""; });
-    return righe.join("\n");
+    /* Le righe vuote restano (una sola di seguito): separano i blocchi del testo, che la pagina
+       impagina in titoli, elenchi e contatti (Florbo 22/10/2026). */
+    var righe = s.split(/\r?\n/).map(soloTesto).filter(function (r, i, a) { return r !== "" || (i > 0 && a[i - 1] !== ""); });
+    return righe.join("\n").replace(/^\n+|\n+$/g, "");
   }
 
   /* Solo valori della lista, confronto esatto. */
