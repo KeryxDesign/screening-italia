@@ -406,7 +406,7 @@ html.contrasto .mappa path.attiva{fill:#8A2600;stroke:#000;stroke-width:2.5}
 .art-tit a:hover,.art-tit a:focus-visible{color:var(--verde);text-decoration:underline;text-underline-offset:3px}
 .art-img{display:block;width:100%;aspect-ratio:16 / 9}
 .art-corpo{display:flex;flex-direction:column;gap:8px;padding:18px 20px 18px}
-.art-meta{font-size:16px;color:var(--soft);line-height:1.3}
+.art-meta{font-size:17px;color:var(--soft);line-height:1.3}
 .art-tit{font-size:21px;font-weight:600;line-height:1.3;max-width:none}
 .art-som{font-size:17px;color:var(--soft);line-height:1.5;max-width:none}
 .art-vai{margin-top:2px;min-height:44px;font-size:17px;font-weight:700;color:var(--verde);
@@ -1745,3 +1745,9 @@ html.contrasto .asl-card{box-shadow:none;outline:2px solid #14202B}
 html.contrasto .asl-ico{background:#003C75}
 html.contrasto .asl-card .asl-num{background:#F0B429;color:#000;border-color:#000}
 .cambia-sel{max-width:520px}
+
+/* Testata e apertura sono due blu scuri a contatto (LORI 22/10): filo tricolore sotto la testata,
+   lo stesso del motto. Non cambia la gerarchia, separa soltanto. */
+.hdr::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:4px;pointer-events:none;
+  background:linear-gradient(90deg,#009246 0 33.3%,#fff 33.3% 66.6%,#CE2B37 66.6%)}
+html.contrasto .hdr::after{background:#fff;height:3px;bottom:-3px}
