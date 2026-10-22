@@ -359,85 +359,14 @@
         <sc-if value="{{ vistaRegione }}" hint-placeholder-val="{{ false }}">
           <div data-screen-label="Iniziative della regione">
 
-            <!-- Florbo 16/10/2026: niente apertura con foto e cambio regione in cima.
-                 Ordine: filtro, iniziative, «nessuna iniziativa», cambia regione. -->
-            <!-- Angelo 19/10/2026: pagina regione in due blocchi. Prima l'offerta ASL (fissa, controllata
-                 ogni 4 mesi), poi l'offerta di altri enti (le iniziative di oggi). Regioni senza dati ASL:
-                 la pagina resta com'era. Esempio: Lombardia. -->
-            <sc-if value="{{ haAsl }}" hint-placeholder-val="{{ true }}">
-            <div class="banda b-bianco wrap sezione asl-testa" data-screen-label="Riquadro regione">
-              <div class="fx col gap20">
-                <p class="nota reg-torna"><a href="#/trova">← Tutte le regioni</a></p>
-                <h1 class="scelta-h2 reg-h1">Screening in {{ reg }}: dove andare e chi chiamare</h1>
-                <dl class="dcc">
-                  <div class="dcc-r"><dt>Regione</dt><dd>{{ reg }}</dd></div>
-                  <div class="dcc-r"><dt>Screening</dt><dd>{{ asl.cosa }}</dd></div>
-                  <div class="dcc-r"><dt>A chi rivolgersi</dt><dd>Numero, orari, e-mail e sito dei centri screening sono nella tabella qui sotto.</dd></div>
-                </dl>
-              </div>
-            </div>
-
-            <div class="banda b-crema wrap banda-larga sezione asl-larga" data-screen-label="Offerta ASL">
-              <div class="fx col gap20">
-                <div class="fx col gap8">
-                  <p class="occhiello">Servizio sanitario</p>
-                  <h2>I centri screening delle aziende sanitarie in {{ reg }}</h2>
-                  <p class="nota">Sono i programmi stabili del servizio sanitario. Numeri e orari li ricontrolliamo ogni quattro mesi.</p>
-                  <p class="asl-controllo">{{ asl.controlloTesto }}</p>
-                </div>
-                <div class="asl-tab" role="table" aria-label="Centri screening delle ASL in {{ reg }}">
-                  <div class="asl-riga asl-capo" role="row" aria-hidden="true">
-                    <span role="columnheader">Azienda sanitaria</span><span role="columnheader">Telefono</span><span role="columnheader">Giorni e orari</span><span role="columnheader">E-mail</span><span role="columnheader">Sito</span>
-                  </div>
-                  <sc-for list="{{ asl.righe }}" as="r" hint-placeholder-count="3">
-                    <div class="asl-riga" role="row">
-                      <h3 class="asl-ente" role="rowheader">{{ r.ente }}</h3>
-                      <div class="asl-cella" role="cell"><span class="asl-et">Telefono</span>
-                        <sc-for list="{{ r.tel }}" as="t" hint-placeholder-count="2">
-                          <span class="asl-tel"><span class="asl-sub">{{ t.et }}</span>
-                            <sc-for list="{{ t.nums }}" as="n" hint-placeholder-count="1"><a class="asl-num" href="{{ n.href }}">{{ n.n }}</a></sc-for>
-                          </span>
-                        </sc-for>
-                      </div>
-                      <div class="asl-cella" role="cell"><span class="asl-et">Giorni e orari</span><span>{{ r.orari }}</span></div>
-                      <div class="asl-cella" role="cell"><span class="asl-et">E-mail</span>
-                        <sc-for list="{{ r.mail }}" as="m" hint-placeholder-count="2">
-                          <a class="asl-mail" href="{{ m.href }}"><span>{{ m.utente }}</span><span>@{{ m.dominio }}</span></a>
-                        </sc-for>
-                      </div>
-                      <div class="asl-cella" role="cell"><span class="asl-et">Sito</span><span class="asl-sito">{{ r.sito }}</span></div>
-                    </div>
-                  </sc-for>
-                </div>
-                <!-- Sotto la tabella: documenti (PDF, volantini) e mappa dei centri. Arrivano dal pannello. -->
-                <sc-if value="{{ asl.haExtra }}" hint-placeholder-val="{{ false }}">
-                <div class="asl-extra">
-                  <sc-if value="{{ asl.haDocumenti }}" hint-placeholder-val="{{ false }}"><div class="asl-box"><h3>Documenti e volantini</h3><p class="nota">Moduli, volantini e guide delle aziende sanitarie, in PDF.</p></div></sc-if>
-                  <sc-if value="{{ asl.haMappa }}" hint-placeholder-val="{{ false }}"><div class="asl-box"><h3>Mappa dei centri</h3><p class="nota">Gli indirizzi dei centri dove si fa l&rsquo;esame.</p></div></sc-if>
-                </div>
-                </sc-if>
-              </div>
-            </div>
-            </sc-if>
-
-            <!-- QA 390 LORI 21/10: con zero iniziative niente scelta degli screening, un solo titolo. -->
-            <sc-if value="{{ regPiena }}" hint-placeholder-val="{{ true }}">
+            <!-- Florbo 22/10/2026: aprendo una regione, per prima cosa le iniziative filtrabili per tipo di screening.
+                 Poi i contatti delle ASL (schede con icone), poi cambio regione: mappa e tendina sotto la mappa. -->
             <div class="banda b-bianco wrap sezione" data-screen-label="Scelta dello screening">
               <div class="fx col gap20">
-                <sc-if value="{{ nonHaAsl }}" hint-placeholder-val="{{ false }}">
-                  <p class="nota reg-torna"><a href="#/trova">← Tutte le regioni</a></p>
-                </sc-if>
-                <div class="fx col gap8">
-                  <sc-if value="{{ haAsl }}" hint-placeholder-val="{{ true }}">
-                    <p class="occhiello">Altre iniziative</p>
-                    <h2 class="scelta-h2">Quali screening ti interessano in {{ reg }}?</h2>
-                    <p class="nota">Le organizzano associazioni, enti e aziende. Ognuna ha le sue date: controllale prima di andare. Puoi scegliere più di uno screening.</p>
-                  </sc-if>
-                  <sc-if value="{{ nonHaAsl }}" hint-placeholder-val="{{ false }}">
-                    <h1 class="scelta-h2 reg-h1">Quali screening ti interessano in {{ reg }}?</h1>
-                    <p class="nota">Puoi sceglierne più di uno: sotto restano solo le iniziative che corrispondono.</p>
-                  </sc-if>
-                </div>
+                <p class="nota reg-torna"><a href="#/trova">← Tutte le regioni</a></p>
+                <h1 class="scelta-h2 reg-h1">Screening in {{ reg }}</h1>
+                <sc-if value="{{ regPiena }}" hint-placeholder-val="{{ true }}">
+                <p class="nota">Le iniziative aperte adesso. Scegli il tipo di screening che ti interessa, anche più di uno: restano solo quelle che corrispondono.</p>
                 <div class="scelte">
                   <sc-for list="{{ scelte }}" as="s" hint-placeholder-count="5">
                     <button type="button" class="{{ s.cls }}" onClick="{{ s.pick }}" aria-pressed="{{ s.on }}">
@@ -450,9 +379,14 @@
                   </sc-for>
                 </div>
                 <p class="nota" aria-live="polite">{{ quante }}</p>
+                </sc-if>
+                <sc-if value="{{ haAsl }}" hint-placeholder-val="{{ true }}">
+                  <button type="button" class="cta-2 asl-vai" onClick="{{ vaiAiContatti }}">Telefono e e-mail dei centri screening
+                    <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"></path></svg>
+                  </button>
+                </sc-if>
               </div>
             </div>
-            </sc-if>
 
             <div class="banda b-crema wrap sezione ini-larga" data-screen-label="Le iniziative">
               <div class="fx col gap20">
@@ -462,15 +396,11 @@
                   <p class="nota">Apri una scheda per vedere ente, luogo, requisiti e telefono: il portale non gestisce appuntamenti.</p>
                 </div>
                 </sc-if>
-                <sc-if value="{{ regVuotaAsl }}" hint-placeholder-val="{{ false }}">
+                <sc-if value="{{ regVuota }}" hint-placeholder-val="{{ false }}">
                   <h2>{{ titoloElenco }}</h2>
                 </sc-if>
-                <sc-if value="{{ regVuotaNoAsl }}" hint-placeholder-val="{{ false }}">
-                  <p class="nota reg-torna"><a href="#/trova">← Tutte le regioni</a></p>
-                  <h1 class="reg-h1">{{ titoloElenco }}</h1>
-                </sc-if>
 
-                <!-- Blocco 2: schede strette, SOLO in questo elenco. Dal 13/10/2026 (Florbo) la scheda intera porta alla pagina dell'iniziativa, niente fisarmonica.
+                <!-- Schede strette, SOLO in questo elenco. La scheda intera porta alla pagina dell'iniziativa.
                      Le schede delle pagine screening (#scr-regione) restano card-ini. -->
                 <div class="ini-griglia">
                 <sc-for list="{{ iniziative }}" as="i" hint-placeholder-count="3">
@@ -510,6 +440,66 @@
               </div>
             </div>
 
+            <!-- Contatti delle ASL/ATS (Angelo 19/10/2026; icone e contrasto Florbo 22/10/2026). Senza dati la banda non c'e. -->
+            <sc-if value="{{ haAsl }}" hint-placeholder-val="{{ true }}">
+            <div class="banda b-bianco wrap banda-larga sezione asl-larga" id="asl-contatti" data-screen-label="Offerta ASL">
+              <div class="fx col gap20">
+                <div class="fx col gap8">
+                  <p class="occhiello">Servizio sanitario</p>
+                  <h2>I centri screening delle aziende sanitarie in {{ reg }}</h2>
+                  <p class="nota">{{ asl.cosa }}. Sono i programmi stabili del servizio sanitario. Numeri e orari li ricontrolliamo ogni quattro mesi.</p>
+                  <p class="asl-controllo">{{ asl.controlloTesto }}</p>
+                </div>
+                <ul class="asl-lista" aria-label="Centri screening delle ASL in {{ reg }}">
+                  <sc-for list="{{ asl.righe }}" as="r" hint-placeholder-count="3">
+                    <li class="asl-card">
+                      <h3 class="asl-ente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1M14 9h1M9 13h1M14 13h1M10 21v-4h4v4"></path></svg>{{ r.ente }}</h3>
+                      <div class="asl-voce">
+                        <span class="asl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"></path></svg></span>
+                        <div class="asl-corpo"><span class="asl-et">Telefono</span>
+                          <sc-for list="{{ r.tel }}" as="t" hint-placeholder-count="2">
+                            <span class="asl-tel"><span class="asl-sub">{{ t.et }}</span>
+                              <sc-for list="{{ t.nums }}" as="n" hint-placeholder-count="1"><a class="asl-num" href="{{ n.href }}">{{ n.n }}</a></sc-for>
+                            </span>
+                          </sc-for>
+                        </div>
+                      </div>
+                      <sc-if value="{{ r.haOrari }}" hint-placeholder-val="{{ true }}">
+                      <div class="asl-voce">
+                        <span class="asl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 100-20 10 10 0 000 20zM12 6v6l4 2"></path></svg></span>
+                        <div class="asl-corpo"><span class="asl-et">Giorni e orari</span><span class="asl-testo">{{ r.orari }}</span></div>
+                      </div>
+                      </sc-if>
+                      <sc-if value="{{ r.haMail }}" hint-placeholder-val="{{ true }}">
+                      <div class="asl-voce">
+                        <span class="asl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2zM22 6l-10 7L2 6"></path></svg></span>
+                        <div class="asl-corpo"><span class="asl-et">E-mail</span>
+                          <sc-for list="{{ r.mail }}" as="m" hint-placeholder-count="2">
+                            <a class="asl-mail" href="{{ m.href }}"><span>{{ m.utente }}</span><span>@{{ m.dominio }}</span></a>
+                          </sc-for>
+                        </div>
+                      </div>
+                      </sc-if>
+                      <sc-if value="{{ r.haSito }}" hint-placeholder-val="{{ true }}">
+                      <div class="asl-voce">
+                        <span class="asl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 100-20 10 10 0 000 20zM2 12h20M12 2a15.3 15.3 0 010 20 15.3 15.3 0 010-20z"></path></svg></span>
+                        <div class="asl-corpo"><span class="asl-et">Sito</span><span class="asl-testo asl-sito">{{ r.sito }}</span></div>
+                      </div>
+                      </sc-if>
+                    </li>
+                  </sc-for>
+                </ul>
+                <!-- Sotto le schede: documenti (PDF, volantini) e mappa dei centri. Arrivano dal pannello. -->
+                <sc-if value="{{ asl.haExtra }}" hint-placeholder-val="{{ false }}">
+                <div class="asl-extra">
+                  <sc-if value="{{ asl.haDocumenti }}" hint-placeholder-val="{{ false }}"><div class="asl-box"><h3>Documenti e volantini</h3><p class="nota">Moduli, volantini e guide delle aziende sanitarie, in PDF.</p></div></sc-if>
+                  <sc-if value="{{ asl.haMappa }}" hint-placeholder-val="{{ false }}"><div class="asl-box"><h3>Mappa dei centri</h3><p class="nota">Gli indirizzi dei centri dove si fa l&rsquo;esame.</p></div></sc-if>
+                </div>
+                </sc-if>
+              </div>
+            </div>
+            </sc-if>
+
             <div class="banda b-blu wrap sezione" data-screen-label="Le due porte">
               <div class="fx col gap16">
                 <h2>Nessuna iniziativa nelle tue vicinanze?</h2>
@@ -525,17 +515,19 @@
             <div class="banda b-bianco wrap sezione" data-screen-label="Cambia regione">
               <div class="fx col gap20">
                 <h2>Cambia regione</h2>
-                <p class="nota">Tocca un’altra regione sulla mappa, oppure scegli dall’elenco.</p>
-                <!-- QA 390 LORI 21/10: niente tendina, griglia di pulsanti regione (come nelle pagine screening). -->
-                <div class="griglia-reg cambia-reg">
-                  <sc-for list="{{ elencoRegioni }}" as="o" hint-placeholder-count="20">
-                    <a class="{{ o.cls }}" href="{{ o.href }}" aria-current="{{ o.cur }}">
-                      <span>{{ o.vis }}</span>
-                      <span class="n">{{ o.conta }}</span>
-                    </a>
-                  </sc-for>
-                </div>
+                <p class="nota">Tocca un’altra regione sulla mappa.</p>
                 <div class="mappa" ref="{{ mappaRef }}"></div>
+                <div class="fx col gap8 cambia-sel">
+                  <label class="etichetta-sel" for="scegli-reg">Oppure scegli dall’elenco</label>
+                  <div class="sel-box">
+                    <select class="campo campo-sel" id="scegli-reg" value="{{ reg }}" onChange="{{ vaiA }}">
+                      <sc-for list="{{ elencoRegioni }}" as="o" hint-placeholder-count="20">
+                        <option value="{{ o.nome }}">{{ o.etichetta }}</option>
+                      </sc-for>
+                    </select>
+                    <svg class="sel-frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                  </div>
+                </div>
               </div>
             </div>
 

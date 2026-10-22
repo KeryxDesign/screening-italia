@@ -159,6 +159,11 @@ window.__siLogicaRender = class {
       scelte: scelte,
       // Zero iniziative (QA 390, 21/10): niente scelta degli screening, un solo titolo.
       regPiena: tutte.length > 0,
+      regVuota: tutte.length === 0,
+      vaiAiContatti: () => {
+        const el = document.querySelector("#asl-contatti");
+        if (el) { window.scrollTo(0, el.getBoundingClientRect().top + window.pageYOffset - 70); }
+      },
       regVuotaAsl: tutte.length === 0 && !!this.offertaAsl(),
       regVuotaNoAsl: tutte.length === 0 && !this.offertaAsl(),
       azzera: () => this.setState({ tipi: [] }),
