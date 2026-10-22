@@ -61,7 +61,9 @@ window.MappaItalia = {
     ["Valle d\u2019Aosta", "Valle d'Aosta", "Molise"].forEach(function (nome) {
       var base = svg.querySelector('path[aria-label^="' + nome + ',"]');
       if (!base) { return; }
-      var bb = base.getBBox();
+      var bb;
+      try { bb = base.getBBox(); } catch (e) { return; }
+      if (!bb || !bb.width || !bb.height) { return; }
       var r = Math.max(24 / scala, Math.max(bb.width, bb.height) / 2 + 3 / scala);
       var c = document.createElementNS(NS, "circle");
       c.setAttribute("cx", bb.x + bb.width / 2);
