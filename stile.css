@@ -1735,12 +1735,13 @@ html.contrasto .banda[data-fondo]:not(.hero){--fondo:#fff !important}
 .asl-card .asl-et{font-size:15px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#04325D}
 .asl-card .asl-sub{font-size:17px;color:#14202B}
 .asl-card .asl-tel{display:flex;flex-direction:column;gap:4px}
-.asl-card .asl-num{display:inline-flex;align-items:center;align-self:flex-start;min-height:48px;padding:0 18px;border-radius:8px;background:#064A8B;color:#fff;font-size:21px;font-weight:700;text-decoration:none}
-.asl-card .asl-num:hover{background:#04325D;color:#fff}
+.asl-card .asl-num{display:inline-flex;align-items:center;align-self:flex-start;min-height:48px;padding:0 18px;border-radius:8px;background:#F0B429;color:#14100A;border:2px solid #8A5A00;font-size:21px;font-weight:700;text-decoration:none}
+.asl-card .asl-num:hover{background:#E0A21A;color:#14100A}
 .asl-card .asl-mail{display:block;min-height:44px;padding:8px 0;font-size:17px;font-weight:600;color:#064A8B;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere;word-break:break-word}
 .asl-card .asl-mail span{display:inline}
 .asl-card .asl-testo{font-weight:600}
 .asl-card a:focus-visible,.asl-vai:focus-visible{outline:3px solid #A63D17;outline-offset:2px}
 html.contrasto .asl-card{box-shadow:none;outline:2px solid #14202B}
-html.contrasto .asl-ico,html.contrasto .asl-card .asl-num{background:#003C75}
+html.contrasto .asl-ico{background:#003C75}
+html.contrasto .asl-card .asl-num{background:#F0B429;color:#000;border-color:#000}
 .cambia-sel{max-width:520px}
