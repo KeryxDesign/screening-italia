@@ -1714,3 +1714,9 @@ html:not(.contrasto) .banda:not(.hero):not(.b-blu) .cta-2:hover,
 html:not(.contrasto) .avviso .cta-2:hover,html:not(.contrasto) .card .cta-2:hover{background:#04325D !important;color:#fff !important;border-color:#04325D !important}
 html:not(.contrasto) .banda:not(.hero):not(.b-blu) .cta-2:focus-visible{outline:3px solid #A63D17}
 .banda:not(.hero) .cta-2.cta-centro{align-self:center}
+
+/* Sfondi calcolati da accessibilita.js (data-fondo): vincono sull'alternanza per posizione. */
+.banda[data-fondo="bianco"]:not(.hero){--fondo:#fff !important}
+.banda[data-fondo="sabbia"]:not(.hero){--fondo:var(--sabbia) !important}
+.banda[data-fondo="blu"]:not(.hero){--fondo:#064A8B !important}
+html.contrasto .banda[data-fondo]:not(.hero){--fondo:#fff !important}
