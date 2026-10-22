@@ -46,7 +46,8 @@
   /* Liste chiuse. Fuori da qui l'iniziativa si scarta.
      tipo: le voci con una pagina sul sito. Cardiovascolare aggiunta il 17/10/2026 (Angelo). */
   var TIPI = ["Mammografico", "Cervice uterina", "Colon-retto", "Prostata",
-              "Neonatale", "Diabete e celiachia pediatrici", "Cardiovascolare"];
+              "Neonatale", "Diabete e celiachia pediatrici", "Cardiovascolare",
+              "Altro (spiegare nella descrizione)"];
   var REGIONI = ["Abruzzo", "Basilicata", "Calabria", "Campania", "Emilia-Romagna",
                  "Friuli-Venezia Giulia", "Lazio", "Liguria", "Lombardia", "Marche",
                  "Molise", "Piemonte", "Puglia", "Sardegna", "Sicilia", "Toscana",
@@ -166,7 +167,9 @@
     var manca = [];
     if (f.chiude != null && String(f.chiude).trim() !== "" && !x.chiude) { manca.push("chiude"); }
     if (!x.chiude) { delete x.chiude; }
-    ["id", "reg", "tipo", "titolo", "ente", "dove", "quando", "chi", "tel", "stato"]
+    /* Facoltativi (richiesta di Angelo, 22/10/2026): ente, dove, quando, chi e telefono.
+       Senza, la card non mostra la riga. Restano obbligatori regione, tipo, titolo, stato. */
+    ["id", "reg", "tipo", "titolo", "stato"]
       .forEach(function (k) { if (!x[k]) { manca.push(k); } });
     if (manca.length) {
       console.warn("Iniziativa scartata (" + (post.slug || post.id) + "): campi non validi -> " + manca.join(", "));
@@ -177,6 +180,8 @@
     if (f.posti === true) { x.posti = "ultimi posti"; }
     var descr = testoLungo(f.descrizione);
     if (descr) { x.descrizione = descr; }
+    /* Data dell'ultima modifica nel pannello: alimenta «ultimo aggiornamento» in home. */
+    if (typeof post.modified === "string" && /^\d{4}-\d{2}-\d{2}/.test(post.modified)) { x.agg = post.modified.slice(0, 10); }
 
     return x;
   }
@@ -195,7 +200,7 @@
       "orderby=date",
       "order=desc",
       /* Solo i campi che servono: meno byte, meno dati esposti. */
-      "_fields=id,slug,title,acf",
+      "_fields=id,slug,title,acf,modified",
       /* WordPress e la CDN di Hostinger rispondono con 7 giorni di cache:
          senza questo marcatore un'iniziativa appena pubblicata arriverebbe
          giorni dopo. Cambia ogni 5 minuti, come in articoli.js. */

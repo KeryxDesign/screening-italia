@@ -127,7 +127,7 @@ window.__siLogicaRender = class {
       nIniziative: dati.length ? String(dati.length) : "–",
       nRegioni: String(Object.keys(conteggi).length),
       nTipi: String(new Set(dati.map((x) => x.tipo)).size),
-      aggiornato: "3 settembre",
+      aggiornato: this.ultimoAggiornamento(dati),
       vaiAllaMappa: () => {
         const el = document.querySelector("#trova");
         if (el) { window.scrollTo(0, el.getBoundingClientRect().top + window.pageYOffset - 70); }
