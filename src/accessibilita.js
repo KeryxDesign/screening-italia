@@ -146,10 +146,58 @@
     chiediVistaWa();
   }
 
+  /* Sfondi delle fasce (Davide 22/10): si calcolano sulla sequenza reale delle fasce di ogni pagina.
+     Bianco e azzurro chiaro si alternano sempre; la fascia blu scuro resta blu solo se non e l'ultima
+     (dopo c'e il piede, blu scuro), non segue l'apertura con la foto e non ha un'altra fascia blu accanto. */
+  var fondiInCoda = false;
+  function calcolaFondi() {
+    fondiInCoda = false;
+    var gruppi = [];
+    var tutte = document.querySelectorAll(".banda");
+    for (var i = 0; i < tutte.length; i++) {
+      var p = tutte[i].parentNode;
+      if (gruppi.indexOf(p) === -1) { gruppi.push(p); }
+    }
+    gruppi.forEach(function (p) {
+      var fasce = [];
+      for (var k = 0; k < p.children.length; k++) {
+        if (p.children[k].classList.contains("banda")) { fasce.push(p.children[k]); }
+      }
+      var precedenteScura = false;
+      var ultimaChiara = null;
+      fasce.forEach(function (b, i) {
+        if (b.getAttribute("data-blu") === null && b.classList.contains("b-blu")) { b.setAttribute("data-blu", "1"); }
+        var vuoleBlu = b.getAttribute("data-blu") === "1";
+        var succ = fasce[i + 1];
+        var succBlu = !!succ && succ.getAttribute("data-blu") === "1";
+        var fondo;
+        if (b.classList.contains("hero")) { precedenteScura = true; return; }
+        var blu = vuoleBlu && !precedenteScura && !!succ && !succBlu;
+        if (blu) { fondo = "blu"; precedenteScura = true; }
+        else { fondo = ultimaChiara === "bianco" ? "sabbia" : "bianco"; ultimaChiara = fondo; precedenteScura = false; }
+        if (b.getAttribute("data-fondo") !== fondo) { b.setAttribute("data-fondo", fondo); }
+        if (vuoleBlu && b.classList.contains("b-blu") !== blu) { b.classList.toggle("b-blu", blu); }
+      });
+    });
+  }
+  function chiediFondi() {
+    if (fondiInCoda) { return; }
+    fondiInCoda = true;
+    requestAnimationFrame(calcolaFondi);
+  }
+  function avviaFondi() {
+    window.addEventListener("hashchange", chiediFondi);
+    if (window.MutationObserver) {
+      new MutationObserver(chiediFondi).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["class"] });
+    }
+    chiediFondi();
+  }
+
   function avvia() {
     applica();
     costruisci();
     avviaVistaWa();
+    avviaFondi();
     // La pagina si ricostruisce dopo il montaggio: si ricontrolla per un po'.
     var n = 0;
     var t = setInterval(function () {
