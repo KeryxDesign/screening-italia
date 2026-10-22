@@ -37,7 +37,13 @@ class Component extends DCLogic {
     // Al primo caricamento il browser ripristina la posizione da solo e le foto
     // cambiano l'altezza della pagina: si insiste finche la posizione tiene.
     try { window.history.scrollRestoration = "manual"; } catch (e) {}
+    // Su cache vuota foto, articoli e iniziative arrivano anche dopo molti secondi e spostano la
+    // sezione: si insiste fino a 12 secondi, e si smette appena la persona tocca o scorre da sola.
+    let mani = false;
+    const fermati = () => { mani = true; };
+    ["touchstart", "wheel", "keydown", "mousedown"].forEach((t) => window.addEventListener(t, fermati, { once: true, passive: true }));
     const tenta = (giri) => {
+      if (mani) { return; }
       if (this.state.rotta.vista !== vista) { return; }
       if (vista === "screening" && this.state.rotta.arg) { return; }
       const el = document.querySelector(bersaglio);
@@ -47,7 +53,7 @@ class Component extends DCLogic {
       }
       if (giri > 0) { setTimeout(() => tenta(giri - 1), 260); }
     };
-    setTimeout(() => tenta(10), 260);
+    setTimeout(() => tenta(46), 260);
   }
   /* Invito a fine articolo (blocco 3, 29/09/2026): #/screening/<slug>/<sezione> apre la
      pagina dello screening sulla sezione #scr-<sezione> (regione, dir, domanda), come fa
