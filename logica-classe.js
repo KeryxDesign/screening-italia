@@ -1053,6 +1053,7 @@ class Component extends DCLogic {
       haDocumenti: documenti, haMappa: mappa, haExtra: documenti || mappa,
       righe: d.righe.map((r) => ({
         ente: r.ente, orari: r.orari, sito: r.sito,
+        haOrari: !!r.orari, haSito: !!r.sito, haMail: (r.mail || []).length > 0,
         // Un link per numero: un tocco = una chiamata (LORI 21/10).
         tel: (r.tel || []).map((t) => ({ et: t.et, nums: String(t.n).split(/\s*·\s*/).map((n) => ({ n: n, href: "tel:" + n.split("/")[0].replace(/[^0-9+]/g, "") })) })),
         mail: (r.mail || []).map((m) => ({ utente: m.split("@")[0], dominio: m.split("@")[1] || "", href: "mailto:" + m }))
