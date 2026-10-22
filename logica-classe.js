@@ -657,6 +657,16 @@ class Component extends DCLogic {
       haEnte: !!x.ente, haDove: !!x.dove, haQuando: !!x.quando, haChi: !!x.chi, haTel: !!x.tel,
       descrizione: x.descrizione || "", haDescrizione: !!x.descrizione,
       tagTesto: x.stato, tagCls: cls,
+      costo: x.stato ? x.stato.charAt(0).toUpperCase() + x.stato.slice(1) : "",
+      enteLungo: String(x.ente || "").length > 90,
+      haQuandoOPeriodo: !!(x.quando || this.periodo(x)),
+      periodoTile: this.periodo(x),
+      blocchi: this.blocchiDescrizione(x.descrizione),
+      haContattiTesto: this.blocchiDescrizione(x.descrizione).some((b) => b.isContatti),
+      soloPeriodo: !x.quando && !!this.periodo(x),
+      enteCls: String(x.ente || "").length > 90 ? "ini-tassello ini-t-largo" : "ini-tassello",
+      senzaTelConContatti: !x.tel && this.blocchiDescrizione(x.descrizione).some((b) => b.isContatti),
+      senzaContatti: !x.tel && !this.blocchiDescrizione(x.descrizione).some((b) => b.isContatti),
       scadenza: this.scadenza(x).testo, scadenzaCls: this.scadenza(x).cls,
       haScadenza: !!this.scadenza(x).testo,
       posti: x.posti || "", haPosti: !!x.posti,
@@ -802,6 +812,73 @@ class Component extends DCLogic {
     if (g === 0) { return "Ultimo giorno, oggi"; }
     if (g === 1) { return "Chiude domani"; }
     return "Ultimi " + g + " giorni";
+  }
+
+  /* Testo libero di Angelo -> blocchi (titolo, paragrafo, elenco, contatti) con telefoni, e-mail e link cliccabili.
+     Solo testo: nessun HTML dal pannello. I link nascono da espressioni regolari, mai dal testo grezzo.
+     Florbo 22/10/2026: la descrizione arrivava come un muro di testo. */
+  segmentiLink(testo) {
+    const RE = /(https?:\/\/[^\s<>"]+)|([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})|((?:\+39\s?)?\b(?:0\d{1,3}\s?\d{5,8}|(?:800|803|199)\s?\d{3}\s?\d{3}|3\d{2}\s?\d{6,7})\b)/g;
+    const segs = [];
+    let ultimo = 0;
+    let m;
+    while ((m = RE.exec(testo)) !== null) {
+      if (m.index > ultimo) { segs.push({ t: testo.slice(ultimo, m.index), link: false, testo: true, href: "" }); }
+      let href = "";
+      let t = m[0];
+      if (m[1]) {
+        const coda = /[.,;)]+$/.exec(t);
+        if (coda) { t = t.slice(0, -coda[0].length); RE.lastIndex = m.index + t.length; }
+        href = t;
+      } else if (m[2]) { href = "mailto:" + t; }
+      else { href = "tel:" + t.replace(/[^0-9+]/g, ""); }
+      segs.push({ t: t, link: true, testo: false, href: href, esterno: !!m[1] });
+      ultimo = m.index + t.length;
+    }
+    if (ultimo < testo.length) { segs.push({ t: testo.slice(ultimo), link: false, testo: true, href: "" }); }
+    return segs.length ? segs : [{ t: testo, link: false, testo: true, href: "" }];
+  }
+  blocchiDescrizione(testo) {
+    const gruppi = String(testo || "").split(/\n\s*\n/).map((g) => g.split("\n").map((r) => r.trim()).filter(Boolean)).filter((g) => g.length);
+    if (!gruppi.length) { return []; }
+    const CONTATTO = /^(telefono|tel\.?|cell\.?|e-?mail|mail|pec|sito(?: web)?|whatsapp)\b\s*[:\-]?\s*(.*)$/i;
+    const titoloLike = (r) => r.length <= 70 && !/[.,;]$/.test(r) && !/^\d/.test(r) && !CONTATTO.test(r) && /[A-Za-zÀ-ÿ]/.test(r) && !/:\s*\S/.test(r) && this.segmentiLink(r).length === 1;
+    const unico = gruppi.length === 1 && gruppi[0].length === 1;
+    const blocchi = [];
+    const base = { isTitolo: false, isP: false, isElenco: false, isContatti: false, t: "", segs: [], voci: [], righe: [] };
+    const nuovo = (o) => Object.assign({}, base, o);
+    gruppi.forEach((g) => {
+      let righe = g.slice();
+      if (!unico && titoloLike(righe[0]) && (righe.length > 1 || gruppi.length > 1)) {
+        blocchi.push(nuovo({ isTitolo: true, t: righe.shift().replace(/:$/, "") }));
+      }
+      if (!righe.length) { return; }
+      const voce = (r) => /^([-•*–]\s|\d{1,2}\b)/.test(r);
+      if (righe.length > 1 && righe.every(voce)) {
+        blocchi.push(nuovo({ isElenco: true, voci: righe.map((r) => ({ segs: this.segmentiLink(r.replace(/^[-•*–]\s+/, "")) })) }));
+        return;
+      }
+      let corsa = [];
+      const chiudiCorsa = () => { if (corsa.length) { blocchi.push(nuovo({ isContatti: true, righe: corsa })); corsa = []; } };
+      let dopoContatto = false;
+      righe.forEach((r) => {
+        const c = CONTATTO.exec(r);
+        if (c && c[2]) {
+          const k = c[1].toLowerCase();
+          const tipo = /mail|pec/.test(k) ? "mail" : (/sito/.test(k) ? "sito" : "tel");
+          dopoContatto = true;
+          corsa.push({ et: tipo === "mail" ? "E-mail" : (tipo === "sito" ? "Sito" : "Telefono"), isTel: tipo === "tel", isMail: tipo === "mail", isSito: tipo === "sito", segs: this.segmentiLink(c[2]) });
+          return;
+        }
+        chiudiCorsa();
+        if (dopoContatto && titoloLike(r)) { blocchi.push(nuovo({ isTitolo: true, t: r.replace(/:$/, ""), sotto: /:$/.test(r) })); dopoContatto = false; return; }
+        dopoContatto = false;
+        if (/:$/.test(r) && r.length <= 70) { blocchi.push(nuovo({ isTitolo: true, t: r.replace(/:$/, ""), sotto: true })); return; }
+        blocchi.push(nuovo({ isP: true, segs: this.segmentiLink(r) }));
+      });
+      chiudiCorsa();
+    });
+    return blocchi;
   }
   righeQuando(q) {
     const t = String(q || "");
