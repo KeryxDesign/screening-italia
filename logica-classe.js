@@ -867,7 +867,7 @@ class Component extends DCLogic {
           const k = c[1].toLowerCase();
           const tipo = /mail|pec/.test(k) ? "mail" : (/sito/.test(k) ? "sito" : "tel");
           dopoContatto = true;
-          corsa.push({ et: tipo === "mail" ? "E-mail" : (tipo === "sito" ? "Sito" : "Telefono"), isTel: tipo === "tel", isMail: tipo === "mail", isSito: tipo === "sito", segs: this.segmentiLink(c[2]) });
+          corsa.push({ icoCls: "asl-ico " + (tipo === "mail" ? "ico-mail" : (tipo === "sito" ? "ico-sito" : "ico-tel")), et: tipo === "mail" ? "E-mail" : (tipo === "sito" ? "Sito" : "Telefono"), isTel: tipo === "tel", isMail: tipo === "mail", isSito: tipo === "sito", segs: this.segmentiLink(c[2]) });
           return;
         }
         chiudiCorsa();
