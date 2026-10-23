@@ -211,6 +211,7 @@
             <div class="banda b-crema wrap sezione scr-home" id="screening" data-screen-label="Tipologie di screening">
               <div class="fx col gap20">
                 <h2>{{ scrHome.h2 }}</h2>
+                <div class="scr-tab scr-tab-onco">
                 <h3 class="scr-gruppo">Screening oncologici</h3>
                 <div class="scr-carte">
                 <sc-for list="{{ scrHome.onco }}" as="k" hint-placeholder-count="4">
@@ -224,6 +225,8 @@
                     </a>
                   </sc-for>
                 </div>
+                </div>
+                <div class="scr-tab scr-tab-altri">
                 <h3 class="scr-gruppo">Altri screening</h3>
                 <div class="scr-carte">
                 <sc-for list="{{ scrHome.altri }}" as="k" hint-placeholder-count="4">
@@ -236,6 +239,7 @@
                       <svg class="scr-cf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
                     </a>
                   </sc-for>
+                </div>
                 </div>
                 <p class="scr-arrivo">Pagine in arrivo: <strong>Polmonare</strong>, <strong>Nutrizionale</strong>, <strong>HCV (epatite C)</strong>.</p>
               </div>

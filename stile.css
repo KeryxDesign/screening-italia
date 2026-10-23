@@ -1822,3 +1822,21 @@ html:not(.contrasto) .avviso.avviso-blu h3{font-size:22px}
 html.contrasto .passi-card .passo,html.contrasto .prog-scheda{box-shadow:none;border:2.5px solid #000;border-top-width:2.5px}
 html.contrasto .passo-ic,html.contrasto .prog-ic{background:#fff;color:#000;box-shadow:inset 0 0 0 2px #000}
 html.contrasto .passo-passo,html.contrasto .passi-card .passo-tit,html.contrasto .prog-scheda h4{color:#000}
+
+/* Due tabelle distinte per gli screening in home (Davide 23/10): oncologici in terracotta caldo,
+   altri in blu. Testata a tinta piena con testo bianco (contrasto oltre 6:1); non sono fasce, quindi
+   nessun blu scuro accanto a un altro blu scuro. Card bianche dentro. */
+.scr-home .scr-tab{border-radius:18px;overflow:hidden;box-shadow:0 1px 2px rgba(4,40,64,0.06),0 8px 22px rgba(4,40,64,0.10)}
+.scr-home .scr-tab .scr-gruppo,.scr-home .scr-tab .scr-gruppo:first-of-type{margin:0;padding:14px 20px;font-size:17px;color:#fff}
+.scr-home .scr-tab .scr-carte{padding:16px}
+.scr-home .scr-tab .scr-carta{background:#fff}
+.scr-home .scr-tab-onco{background:#FBE9DF}
+.scr-home .scr-tab-onco .scr-gruppo{background:var(--accento)}
+.scr-home .scr-tab-altri{background:#DCEAF7}
+.scr-home .scr-tab-altri .scr-gruppo{background:#064A8B}
+.scr-home .scr-tab-altri .scr-carta svg.scr-ci{background:#fff;color:#064A8B;box-shadow:inset 0 0 0 2px #064A8B}
+.scr-home .scr-tab-altri .scr-carta svg.scr-cf{color:#064A8B}
+.scr-home .scr-tab-altri .scr-carta:hover,.scr-home .scr-tab-altri .scr-carta:focus-visible{box-shadow:inset 0 0 0 2px #064A8B}
+html.contrasto .scr-home .scr-tab{background:#fff;border:2.5px solid #000;box-shadow:none}
+html.contrasto .scr-home .scr-tab .scr-gruppo{background:#000;color:#fff}
+html.contrasto .scr-home .scr-tab-altri .scr-carta svg.scr-ci{box-shadow:none}
