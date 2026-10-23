@@ -156,6 +156,8 @@ window.__siLogicaRender = class {
         };
       }),
       vaiA: (e) => { this.vaiA(this.rottaRegione(e.target.value)); },
+      // Tendina sotto la mappa in home (Florbo 23/10/2026): la voce vuota non fa nulla.
+      vaiARegioneHome: (e) => { if (e.target.value) { this.vaiA(this.rottaRegione(e.target.value)); } },
       scelte: scelte,
       // Zero iniziative (QA 390, 21/10): niente scelta degli screening, un solo titolo.
       regPiena: tutte.length > 0,
