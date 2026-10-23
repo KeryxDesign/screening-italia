@@ -1777,23 +1777,24 @@ html.contrasto .ini-link[href^="tel:"]{background:#F0B429;color:#000;border-colo
   background:linear-gradient(90deg,#009246 0 33.3%,#fff 33.3% 66.6%,#CE2B37 66.6%)}
 html.contrasto .hdr::after{background:#fff;height:3px;bottom:-3px}
 
-/* Palette piu calda (Florbo 22/10/2026: «troppo blu»): icone terracotta e gialle, testate calde, tasselli con accento.
-   Contrasti: bianco su #A63D17 6,5:1; #14100A su #F0B429 ~10:1; #8A3212 su bianco ~8:1; #5A2208 su #FCEFD2 ~11:1. */
-.asl-ico.ico-tel,.asl-ico.ico-mail{background:#A63D17;color:#fff}
-.asl-ico.ico-orari,.asl-ico.ico-sito{background:#F0B429;color:#14100A}
-.asl-card .asl-ente{background:#FCEFD2;color:#5A2208;box-shadow:inset 0 -3px 0 #F0B429}
+/* Palette equilibrata (Florbo 22/10/2026): blu come base, terracotta e giallo come accenti.
+   Contrasti: bianco su #064A8B ~9:1; bianco su #A63D17 6,5:1; #14100A su #F0B429 ~10:1; #04325D su #DCEAF7 ~10:1. */
+.asl-ico{background:#064A8B;color:#fff}
+.asl-ico.ico-orari{background:#F0B429;color:#14100A}
+.asl-ico.ico-sito{background:#A63D17;color:#fff}
+.asl-card .asl-ente{background:#DCEAF7;color:#04325D;box-shadow:inset 0 -3px 0 #F0B429}
 .asl-card .asl-ente svg{color:#A63D17}
-.asl-card .asl-et,.ini-t-et{color:#8A3212}
-.asl-voce{border-top-color:#EAD9B5}
-.asl-card .asl-mail,.ini-link{color:#8A3212}
-.ini-tassello{box-shadow:inset 5px 0 0 #A63D17,0 2px 10px rgba(10,37,64,.16)}
-.ini-tassello:nth-child(even){box-shadow:inset 5px 0 0 #F0B429,0 2px 10px rgba(10,37,64,.16)}
-.ini-tassello .asl-ico{background:#A63D17;color:#fff}
-.ini-tassello:nth-child(even) .asl-ico{background:#F0B429;color:#14100A}
-.ini-sottotit{color:#8A3212}
+.asl-card .asl-et,.ini-t-et{color:#04325D}
+.asl-voce{border-top-color:#C9D8E6}
+.asl-card .asl-mail,.ini-link{color:#064A8B}
+.ini-tassello{box-shadow:inset 5px 0 0 #F0B429,0 2px 10px rgba(10,37,64,.16)}
+.ini-tassello .asl-ico{background:#064A8B;color:#fff}
+.ini-tassello:nth-child(3n) .asl-ico{background:#A63D17;color:#fff}
+.ini-tassello:nth-child(3n+2) .asl-ico{background:#F0B429;color:#14100A}
+.ini-sottotit{color:#04325D;box-shadow:inset 4px 0 0 #A63D17;padding-left:12px}
 .ini-contatti{box-shadow:inset 5px 0 0 #F0B429,0 2px 10px rgba(10,37,64,.16)}
-html.contrasto .asl-ico.ico-tel,html.contrasto .asl-ico.ico-mail,html.contrasto .ini-tassello .asl-ico{background:#6B1F00}
-html.contrasto .asl-ico.ico-orari,html.contrasto .asl-ico.ico-sito{background:#F0B429;color:#000}
+html.contrasto .asl-ico,html.contrasto .ini-tassello .asl-ico,html.contrasto .ini-tassello:nth-child(3n) .asl-ico{background:#003C75;color:#fff}
+html.contrasto .asl-ico.ico-orari,html.contrasto .ini-tassello:nth-child(3n+2) .asl-ico{background:#F0B429;color:#000}
 html.contrasto .asl-card .asl-ente{background:#fff;color:#000;box-shadow:none}
 
 /* «Come funziona il programma pubblico»: piu struttura e gerarchia (Davide 22/10).
