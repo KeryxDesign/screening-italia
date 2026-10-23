@@ -9,11 +9,11 @@
 <link rel="icon" type="image/png" sizes="32x32" href="./marchio/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="./marchio/icona-192.png">
 <link rel="apple-touch-icon" href="./marchio/apple-touch-icon.png">
-<script src="./support.js?v=mix1023a"></script>
-<script src="./logica-render.js?v=mix1023a"></script>
-<script src="./logica-classe.js?v=mix1023a"></script>
-<script src="./screening-pagine.js?v=mix1023a"></script>
-<script src="./logica-screening.js?v=mix1023a"></script>
+<script src="./support.js?v=tendina1023b"></script>
+<script src="./logica-render.js?v=tendina1023b"></script>
+<script src="./logica-classe.js?v=tendina1023b"></script>
+<script src="./screening-pagine.js?v=tendina1023b"></script>
+<script src="./logica-screening.js?v=tendina1023b"></script>
 </head>
 <body>
 <x-dc>
@@ -41,19 +41,19 @@
         <meta name="ext-resource-dependency" content="./img/foto/foto-74855-23397.webp">
         <meta name="ext-resource-dependency" content="./img/foto/foto-197531-19160.webp">
         <meta name="ext-resource-dependency" content="./img/foto/foto-197531-19155.webp">
-        <link rel="stylesheet" href="./stile.css?v=mix1023a">
-        <link rel="stylesheet" href="./screening.css?v=mix1023a">
-        <script src="./accessibilita.js?v=mix1023a"></script>
-        <script src="./iniziative.js?v=mix1023a"></script>
-        <script src="./iniziative-wp.js?v=mix1023a"></script>
-        <script src="./articoli.js?v=mix1023a"></script>
-        <script src="./testimonianze-wp.js?v=mix1023a"></script>
-        <script src="./esperienze-wp.js?v=mix1023a"></script>
-        <script src="./centri-wp.js?v=mix1023a"></script>
-        <script src="./dati-angelo-1019.js?v=mix1023a"></script>
-        <script src="./regioni-italia.js?v=mix1023a"></script>
-        <script src="./mappa.js?v=mix1023a"></script>
-        <script src="./image-slot.js?v=mix1023a"></script>
+        <link rel="stylesheet" href="./stile.css?v=tendina1023b">
+        <link rel="stylesheet" href="./screening.css?v=tendina1023b">
+        <script src="./accessibilita.js?v=tendina1023b"></script>
+        <script src="./iniziative.js?v=tendina1023b"></script>
+        <script src="./iniziative-wp.js?v=tendina1023b"></script>
+        <script src="./articoli.js?v=tendina1023b"></script>
+        <script src="./testimonianze-wp.js?v=tendina1023b"></script>
+        <script src="./esperienze-wp.js?v=tendina1023b"></script>
+        <script src="./centri-wp.js?v=tendina1023b"></script>
+        <script src="./dati-angelo-1019.js?v=tendina1023b"></script>
+        <script src="./regioni-italia.js?v=tendina1023b"></script>
+        <script src="./mappa.js?v=tendina1023b"></script>
+        <script src="./image-slot.js?v=tendina1023b"></script>
         <style>
           /* Marcatore di bozza (sezione articoli sotto le Domande frequenti, 23/09/2026):
              esce insieme al testo di prova, prima del build. */
@@ -88,7 +88,7 @@
 
         <div class="hdr">
           <div class="wrap hdr-riga">
-            <a class="marchio" href="#/" title="Torna alla home" aria-label="Screening Italia, torna alla home"><img class="marchio-img" src="./marchio/screening-italia-chiaro.png?v=mix1023a" alt="Screening Italia" width="1169" height="440" /></a>
+            <a class="marchio" href="#/" title="Torna alla home" aria-label="Screening Italia, torna alla home"><img class="marchio-img" src="./marchio/screening-italia-chiaro.png?v=tendina1023b" alt="Screening Italia" width="1169" height="440" /></a>
             <input class="menu-chk" type="checkbox" id="menu-chk" aria-label="Apri il menu">
             <label class="hamb" for="menu-chk">
               <svg class="i-apri" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
@@ -200,6 +200,18 @@
                 <p class="nota">Tocca la regione sulla mappa: si aprirà l’elenco delle iniziative attive sul territorio.</p>
                 <div class="trova-due">
                 <div class="mappa" ref="{{ mappaRef }}"></div>
+                </div>
+                <div class="fx col gap8 cambia-sel">
+                  <label class="etichetta-sel" for="scegli-reg-home">Oppure scegli dal menu</label>
+                  <div class="sel-box">
+                    <select class="campo campo-sel" id="scegli-reg-home" onChange="{{ vaiARegioneHome }}">
+                      <option value="">Scegli la regione</option>
+                      <sc-for list="{{ regioni }}" as="o" hint-placeholder-count="20">
+                        <option value="{{ o.nome }}">{{ o.nome }}</option>
+                      </sc-for>
+                    </select>
+                    <svg class="sel-frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                  </div>
                 </div>
                 <sc-if value="{{ erroreMappa }}" hint-placeholder-val="{{ false }}">
                   <div class="avviso fx col gap8">
@@ -2310,7 +2322,7 @@
 
             <div class="ftr-alto">
               <div class="ftr-marchio fx col gap12">
-                <img class="ftr-marchio-img" src="./marchio/screening-italia-chiaro.png?v=mix1023a" alt="Screening Italia" width="1169" height="440">
+                <img class="ftr-marchio-img" src="./marchio/screening-italia-chiaro.png?v=tendina1023b" alt="Screening Italia" width="1169" height="440">
                 <p class="ftr-claim">Un elenco curato a mano delle iniziative di screening aperte in Italia. Ogni segnalazione è verificata sulla fonte ufficiale prima di essere pubblicata.</p>
                 <a class="ftr-wa" href="mailto:info@screeningitalia.it?subject=Messaggio%20dal%20sito%20Screening%20Italia">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg>
