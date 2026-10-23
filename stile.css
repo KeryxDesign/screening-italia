@@ -1795,3 +1795,30 @@ html.contrasto .hdr::after{background:#fff;height:3px;bottom:-3px}
 html.contrasto .asl-ico.ico-tel,html.contrasto .asl-ico.ico-mail,html.contrasto .ini-tassello .asl-ico{background:#6B1F00}
 html.contrasto .asl-ico.ico-orari,html.contrasto .asl-ico.ico-sito{background:#F0B429;color:#000}
 html.contrasto .asl-card .asl-ente{background:#fff;color:#000;box-shadow:none}
+
+/* «Come funziona il programma pubblico»: piu struttura e gerarchia (Davide 22/10).
+   Passi come tre card con icona, programmi come tre schede, riquadro finale a blu pieno. */
+.passi-card{display:grid;grid-template-columns:1fr;gap:16px}
+@media (min-width:860px){.passi-card{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}}
+.passi-card .passo{flex-direction:column;gap:14px;padding:22px 22px 24px;background:#fff;border-radius:14px;
+  border-top:4px solid var(--oro);box-shadow:0 1px 2px rgba(4,40,64,0.06),0 6px 18px rgba(4,40,64,0.10)}
+.passo-ic,.prog-ic{box-sizing:content-box;display:flex;align-items:center;justify-content:center;width:30px;height:30px;padding:9px;
+  border-radius:50%;background:#FFEFC2;color:var(--accento);box-shadow:inset 0 0 0 2px var(--oro)}
+.passo-ic svg,.prog-ic svg{width:30px;height:30px}
+.passi-card .passo-txt{padding-top:0;gap:6px}
+.passo-passo{font-size:17px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--accento)}
+.passi-card .passo-tit{font-size:22px;color:#064A8B}
+.passi-card .passo-desc{max-width:none;color:#14202B}
+.prog-schede{display:grid;grid-template-columns:1fr;gap:16px}
+@media (min-width:860px){.prog-schede{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}}
+.prog-scheda{display:flex;flex-direction:column;gap:10px;padding:20px 22px;background:#fff;border-radius:14px;
+  box-shadow:0 1px 2px rgba(4,40,64,0.06),0 6px 18px rgba(4,40,64,0.10)}
+.prog-scheda h4{margin:0;font-size:22px;line-height:1.25;color:#064A8B}
+.prog-scheda p{margin:0;font-size:18px;line-height:1.5;color:#14202B}
+html:not(.contrasto) .banda:not(.hero) .avviso.avviso-blu{background:#064A8B;border-color:transparent;padding:26px 26px 28px;
+  box-shadow:0 6px 18px rgba(4,40,64,0.22)}
+html:not(.contrasto) .avviso.avviso-blu :is(h3,p){color:#fff}
+html:not(.contrasto) .avviso.avviso-blu h3{font-size:22px}
+html.contrasto .passi-card .passo,html.contrasto .prog-scheda{box-shadow:none;border:2.5px solid #000;border-top-width:2.5px}
+html.contrasto .passo-ic,html.contrasto .prog-ic{background:#fff;color:#000;box-shadow:inset 0 0 0 2px #000}
+html.contrasto .passo-passo,html.contrasto .passi-card .passo-tit,html.contrasto .prog-scheda h4{color:#000}
