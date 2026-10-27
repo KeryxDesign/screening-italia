@@ -261,6 +261,32 @@
     return giro(1);
   }
 
+  /* Un solo tentativo non basta: una connessione mobile che cade un attimo non deve
+     far sparire le iniziative. Si riprova una volta dopo 1,5 secondi. */
+  function chiediConRiprova() {
+    return chiediTutte().then(function (posts) {
+      if (posts) { return posts; }
+      return new Promise(function (ok) { setTimeout(ok, 1500); }).then(chiediTutte);
+    });
+  }
+
+  /* Ultima copia buona (segnalata da Angelo il 27/10/2026: «zero iniziative»).
+     Se il pannello non risponde, in produzione meglio le ultime iniziative vere
+     ancora aperte che una pagina vuota. Mai oltre 14 giorni, mai scadute. */
+  var CHIAVE = "si-iniziative-ultima-copia";
+  function salvaCopia(buone) {
+    try { localStorage.setItem(CHIAVE, JSON.stringify({ t: Date.now(), d: buone })); } catch (e) {}
+  }
+  function leggiCopia() {
+    try {
+      var c = JSON.parse(localStorage.getItem(CHIAVE) || "null");
+      if (!c || !Array.isArray(c.d) || Date.now() - c.t > 14 * 86400000) { return null; }
+      var oggi = new Date(); oggi = oggi.getFullYear() + "-" + ("0" + (oggi.getMonth() + 1)).slice(-2) + "-" + ("0" + oggi.getDate()).slice(-2);
+      var aperte = c.d.filter(function (x) { return x && x.id && (!x.chiude || x.chiude >= oggi); });
+      return aperte.length ? aperte : null;
+    } catch (e) { return null; }
+  }
+
   /* ---------------------------------------------------------------
      4. Consegna alla pagina
      --------------------------------------------------------------- */
@@ -305,8 +331,13 @@
     });
   }
 
-  chiediTutte().then(function (posts) {
-    if (!posts) { consegna(null, "esempi: pannello non raggiungibile"); return; }
+  chiediConRiprova().then(function (posts) {
+    if (!posts) {
+      var copia = !CFG.riservaEsempi ? leggiCopia() : null;
+      if (copia) { consegna(copia, "copia locale: pannello non raggiungibile"); return; }
+      consegna(null, "esempi: pannello non raggiungibile");
+      return;
+    }
     var visti = {};
     var buone = [];
     for (var i = 0; i < posts.length; i++) {
@@ -316,6 +347,7 @@
       buone.push(x);
     }
     if (!buone.length) { consegna(null, "esempi: nessuna iniziativa valida sul pannello"); return; }
+    salvaCopia(buone);
     consegna(buone, "wordpress");
   }, function () {
     consegna(null, "esempi: errore imprevisto");

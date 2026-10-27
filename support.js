@@ -1149,7 +1149,11 @@
   function cdnScriptFor(url, sri) {
     const res = window.__resources;
     const v = res ? res[url] : void 0;
-    return typeof v === "string" && v ? { src: v } : { src: url, integrity: sri };
+    if (typeof v === "string" && v) return { src: v };
+    /* Copie locali in ./vendor (27/10/2026): il sito non dipende piu da unpkg.com, che sui telefoni
+       con rete lenta o blocchi lasciava la pagina bianca. Stesse versioni, nessun SRI (stessa origine). */
+    const locale = { [REACT_URL]: "./vendor/react.production.min.js", [REACT_DOM_URL]: "./vendor/react-dom.production.min.js", [BABEL_URL]: "./vendor/babel.min.js" }[url];
+    return locale ? { src: locale + "?v=1027" } : { src: url, integrity: sri };
   }
 
   // src/external.ts
