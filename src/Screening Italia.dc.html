@@ -93,7 +93,6 @@
               <svg class="i-chiudi" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"></path></svg>
             </label>
             <nav class="nav-riga" aria-label="Sezioni del sito">
-              <a href="{{ hrefIniziative }}" aria-current="{{ navReg }}">Iniziative per regione</a>
               <div class="nav-voce">
                 <button type="button" class="nav-tendina" aria-expanded="{{ scrAperto }}" aria-controls="menu-screening" aria-current="{{ navFaq }}" onClick="{{ scrApriChiudi }}">Gli screening<svg class="nav-freccia" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
                 <div class="nav-menu" id="menu-screening">
@@ -108,6 +107,7 @@
                   <a href="#/screening/cardiovascolare" aria-current="{{ navScrCardio }}">Cardiovascolare</a>
                 </div>
               </div>
+              <a href="{{ hrefIniziative }}" aria-current="{{ navReg }}">Iniziative per regione</a>
               <sc-if value="{{ haCentri }}" hint-placeholder-val="{{ false }}"><a href="#/centri" aria-current="{{ navCentri }}">Centri screening</a></sc-if>
               <a href="#/enti" aria-current="{{ navEnti }}">Pubblica le tue iniziative</a>
               <!-- Tendina «Esperienze» (brief 13/10/2026): esce se almeno una categoria ha post;
