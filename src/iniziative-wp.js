@@ -47,7 +47,7 @@
      tipo: le voci con una pagina sul sito. Cardiovascolare aggiunta il 17/10/2026 (Angelo). */
   var TIPI = ["Mammografico", "Cervice uterina", "Colon-retto", "Prostata",
               "Neonatale", "Diabete e celiachia pediatrici", "Cardiovascolare",
-              "Altro (spiegare nella descrizione)"];
+              "Polmonare", "Epatite C (HCV)", "Altro (spiegare nella descrizione)"];
   var REGIONI = ["Abruzzo", "Basilicata", "Calabria", "Campania", "Emilia-Romagna",
                  "Friuli-Venezia Giulia", "Lazio", "Liguria", "Lombardia", "Marche",
                  "Molise", "Piemonte", "Puglia", "Sardegna", "Sicilia", "Toscana",
@@ -152,26 +152,44 @@
     var x = {
       id: identificativo(post.slug),
       reg: inLista(f.reg, REGIONI),
-      tipo: inLista(f.tipo, TIPI),
+      tipo: "",
       titolo: soloTesto(post.title && post.title.rendered),
       ente: testo(f.ente),
       dove: testo(f.dove),
       quando: testo(f.quando),
       chi: testo(f.chi),
       tel: telefono(f.tel),
-      stato: inLista(f.stato, STATI),
+      stato: "",
       chiude: data(f.chiude)
     };
 
     /* Data di chiusura facoltativa (Angelo, 17/10/2026): le iniziative delle ASL
        non hanno una fine. Senza data l'iniziativa resta aperta e non mostra scadenze.
        Una data scritta ma non valida invece scarta l'iniziativa, come prima. */
+    /* Piu screening per iniziativa (mu-plugin del pannello): acf.tipi e l'elenco completo,
+       acf.tipo il primo. Qui si tengono tutti i valori noti, senza doppioni, il primo davanti. */
+    var tipi = [];
+    [f.tipo].concat(Array.isArray(f.tipi) ? f.tipi : []).forEach(function (t) {
+      var v = inLista(t, TIPI);
+      if (v && tipi.indexOf(v) === -1) { tipi.push(v); }
+    });
+    /* Condizioni anche insieme (Angelo, 25/10/2026): acf.stati e l'elenco, acf.stato il primo.
+       Il testo mostrato le unisce; il colore del tag segue la prima. Facoltative: senza, il tag non compare. */
+    var stati = [];
+    [].concat(Array.isArray(f.stati) ? f.stati : [], Array.isArray(f.stato) ? f.stato : [f.stato]).forEach(function (t) {
+      var v = inLista(t, STATI);
+      if (v && stati.indexOf(v) === -1) { stati.push(v); }
+    });
+    x.stato = stati.join(" · ");
+    x.stati = stati;
+    x.tipo = tipi[0] || "";
+    x.tipi = tipi;
     var manca = [];
     if (f.chiude != null && String(f.chiude).trim() !== "" && !x.chiude) { manca.push("chiude"); }
     if (!x.chiude) { delete x.chiude; }
     /* Facoltativi (richiesta di Angelo, 22/10/2026): ente, dove, quando, chi e telefono.
-       Senza, la card non mostra la riga. Restano obbligatori regione, tipo, titolo, stato. */
-    ["id", "reg", "tipo", "titolo", "stato"]
+       Senza, la card non mostra la riga. Restano obbligatori regione, tipo, titolo. */
+    ["id", "reg", "tipo", "titolo"]
       .forEach(function (k) { if (!x[k]) { manca.push(k); } });
     if (manca.length) {
       console.warn("Iniziativa scartata (" + (post.slug || post.id) + "): campi non validi -> " + manca.join(", "));

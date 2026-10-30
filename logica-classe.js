@@ -652,6 +652,9 @@ class Component extends DCLogic {
     });
   }
 
+  /* Un'iniziativa puo riguardare piu screening (x.tipi); gli esempi hanno solo x.tipo. */
+  haTipo(x, t) { return (x.tipi && x.tipi.length ? x.tipi : [x.tipo]).indexOf(t) !== -1; }
+  nomiTipi(x) { return (x.tipi && x.tipi.length ? x.tipi : [x.tipo]).map((t) => this.nomeTipo(t)).join(", "); }
   icona(tipo) {
     const I = {
       "Mammografico": "M12 3a9 9 0 100 18 9 9 0 000-18M12 10.6a1.4 1.4 0 100 2.8 1.4 1.4 0 000-2.8",
@@ -682,10 +685,11 @@ class Component extends DCLogic {
   }
   scheda(x) {
     let cls = "tag tag-gratis";
-    if (x.stato === "a pagamento") { cls = "tag tag-paga"; }
-    if (x.stato === "su invito") { cls = "tag tag-invito"; }
+    const primo = (x.stati && x.stati[0]) || x.stato;
+    if (primo === "a pagamento") { cls = "tag tag-paga"; }
+    if (primo === "su invito") { cls = "tag tag-invito"; }
     return {
-      tipo: this.nomeTipo(x.tipo), icona: this.icona(x.tipo), titolo: x.titolo, ente: x.ente, dove: x.dove,
+      tipo: this.nomiTipi(x), icona: this.icona(x.tipo), titolo: x.titolo, ente: x.ente, dove: x.dove,
       quando: x.quando, chi: x.chi, tel: x.tel || "", href: "tel:" + String(x.tel || "").split(" ").join(""),
       haEnte: !!x.ente, haDove: !!x.dove, haQuando: !!x.quando, haChi: !!x.chi, haTel: !!x.tel,
       descrizione: x.descrizione || "", haDescrizione: !!x.descrizione,
@@ -707,7 +711,7 @@ class Component extends DCLogic {
       // «Quando» una riga per data solo se il dato e gia diviso da «;».
       periodo: this.periodo(x), haPeriodo: !!this.periodo(x),
       ultimi: this.ultimiGiorni(x), haUltimi: !!this.ultimiGiorni(x),
-      occhiello: [this.nomeTipo(x.tipo), x.reg].filter(Boolean).join(" · "),
+      occhiello: [this.nomiTipi(x), x.reg].filter(Boolean).join(" · "),
       riassunto: this.riassunto(x),
       quandoRighe: this.righeQuando(x.quando).map((t) => ({ t: t })),
       quandoUnaRiga: this.righeQuando(x.quando).length < 2,

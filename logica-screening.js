@@ -6,6 +6,8 @@
    iniziative aperte» (stessa stringa di #/trova, brief §4.1). */
 (function () {
   // Pagine che non esistono ancora (brief §2.1): finche sono null il blocco non entra nel DOM.
+  // Un'iniziativa puo riguardare piu screening (x.tipi); gli esempi hanno solo x.tipo.
+  const haTipo = (x, t) => (x.tipi && x.tipi.length ? x.tipi : [x.tipo]).indexOf(t) !== -1;
   const HREF_HPV = null;     // S5, rimando «/hpv/» (cervicale)
   const HREF_INVITO = null;  // S6, «/invito/»
 
@@ -146,9 +148,9 @@
       const tipo = TIPO[slug];
       const dati = window.INIZIATIVE || [];
       const conta = {};
-      dati.forEach((x) => { if (x.tipo === tipo) { conta[x.reg] = (conta[x.reg] || 0) + 1; } });
+      dati.forEach((x) => { if (haTipo(x, tipo)) { conta[x.reg] = (conta[x.reg] || 0) + 1; } });
       const reg = stato.regScr || null;
-      const carte = reg ? dati.filter((x) => x.tipo === tipo && x.reg === reg)
+      const carte = reg ? dati.filter((x) => haTipo(x, tipo) && x.reg === reg)
         .slice().sort((a, b) => String(a.chiude || "9").localeCompare(String(b.chiude || "9"))) : [];
       const inAttesa = window.__siIniziativeStato === "attesa";
       Object.assign(v, {
