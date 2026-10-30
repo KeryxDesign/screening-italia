@@ -152,11 +152,6 @@
                     <a class="cta-2" href="#/centri">Centri screening: dove andare</a>
                   </div>
                   <p class="hero-terzo"><a href="#/trova">Le iniziative di associazioni e altri enti nella tua regione</a></p>
-                  <div class="numeri-hero">
-                    <div class="numero-h"><span class="numero-hn">{{ nRegioni }}</span><span class="numero-het">regioni coperte</span></div>
-                    <div class="numero-h"><span class="numero-hn">{{ nTipi }}</span><span class="numero-het">tipi di screening</span></div>
-                    <div class="numero-h"><span class="numero-hn">{{ aggiornato }}</span><span class="numero-het">ultimo aggiornamento</span></div>
-                  </div>
                 </div>
                 <div class="hero-mappa">
                   <div class="mappa mappa-bianca" ref="{{ mappaRef }}"></div>
@@ -2368,7 +2363,7 @@
             </div>
 
             <div class="ftr-basso">
-              <p class="ftr-legale">© 2026 Screening Italia</p>
+              <p class="ftr-legale">© 2026 Screening Italia · Ultimo aggiornamento: {{ aggiornato }}</p>
               <p class="ftr-legale ftr-legale-link">
                 <a href="#/privacy">Privacy</a>
                 <span aria-hidden="true">·</span>
