@@ -47,7 +47,7 @@
      tipo: le voci con una pagina sul sito. Cardiovascolare aggiunta il 17/10/2026 (Angelo). */
   var TIPI = ["Mammografico", "Cervice uterina", "Colon-retto", "Prostata",
               "Neonatale", "Diabete e celiachia pediatrici", "Cardiovascolare",
-              "Altro (spiegare nella descrizione)"];
+              "Polmonare", "Epatite C (HCV)", "Altro (spiegare nella descrizione)"];
   var REGIONI = ["Abruzzo", "Basilicata", "Calabria", "Campania", "Emilia-Romagna",
                  "Friuli-Venezia Giulia", "Lazio", "Liguria", "Lombardia", "Marche",
                  "Molise", "Piemonte", "Puglia", "Sardegna", "Sicilia", "Toscana",
@@ -152,7 +152,7 @@
     var x = {
       id: identificativo(post.slug),
       reg: inLista(f.reg, REGIONI),
-      tipo: inLista(f.tipo, TIPI),
+      tipo: "",
       titolo: soloTesto(post.title && post.title.rendered),
       ente: testo(f.ente),
       dove: testo(f.dove),
@@ -166,6 +166,15 @@
     /* Data di chiusura facoltativa (Angelo, 17/10/2026): le iniziative delle ASL
        non hanno una fine. Senza data l'iniziativa resta aperta e non mostra scadenze.
        Una data scritta ma non valida invece scarta l'iniziativa, come prima. */
+    /* Piu screening per iniziativa (mu-plugin del pannello): acf.tipi e l'elenco completo,
+       acf.tipo il primo. Qui si tengono tutti i valori noti, senza doppioni, il primo davanti. */
+    var tipi = [];
+    [f.tipo].concat(Array.isArray(f.tipi) ? f.tipi : []).forEach(function (t) {
+      var v = inLista(t, TIPI);
+      if (v && tipi.indexOf(v) === -1) { tipi.push(v); }
+    });
+    x.tipo = tipi[0] || "";
+    x.tipi = tipi;
     var manca = [];
     if (f.chiude != null && String(f.chiude).trim() !== "" && !x.chiude) { manca.push("chiude"); }
     if (!x.chiude) { delete x.chiude; }

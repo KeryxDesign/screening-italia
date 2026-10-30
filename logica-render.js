@@ -10,17 +10,17 @@ window.__siLogicaRender = class {
     const tutte = dati.filter((x) => x.reg === reg);
     const sel = this.state.tipi;
     const nomiTipi = [];
-    tutte.forEach((x) => { if (nomiTipi.indexOf(x.tipo) === -1) { nomiTipi.push(x.tipo); } });
+    tutte.forEach((x) => { (x.tipi && x.tipi.length ? x.tipi : [x.tipo]).forEach((t) => { if (nomiTipi.indexOf(t) === -1) { nomiTipi.push(t); } }); });
     // Massimo sei filtri: oltre quel numero la fila diventa illeggibile.
     // Restano i sei tipi con piu iniziative nella regione.
     nomiTipi.sort((a, b) => {
-      const d = tutte.filter((x) => x.tipo === b).length - tutte.filter((x) => x.tipo === a).length;
+      const d = tutte.filter((x) => this.haTipo(x, b)).length - tutte.filter((x) => this.haTipo(x, a)).length;
       return d !== 0 ? d : a.localeCompare(b);
     });
     nomiTipi.splice(6);
     nomiTipi.sort();
     const scelte = nomiTipi.map((t) => {
-      const n = tutte.filter((x) => x.tipo === t).length;
+      const n = tutte.filter((x) => this.haTipo(x, t)).length;
       const on = sel.indexOf(t) !== -1;
       return {
         nome: t, etichetta: this.nomeTipo(t), on: on ? "true" : "false", icona: this.icona(t),
@@ -32,7 +32,7 @@ window.__siLogicaRender = class {
       };
     });
     // Chi chiude prima sta in cima: e l'informazione che fa agire.
-    const viste = (sel.length ? tutte.filter((x) => sel.indexOf(x.tipo) !== -1) : tutte)
+    const viste = (sel.length ? tutte.filter((x) => sel.some((t) => this.haTipo(x, t))) : tutte)
       .slice().sort((a, b) => String(a.chiude || "9").localeCompare(String(b.chiude || "9")));
     const inScadenza = viste.filter((x) => {
       const g = this.giorniAllaChiusura(x);
@@ -126,7 +126,7 @@ window.__siLogicaRender = class {
       // home
       nIniziative: dati.length ? String(dati.length) : "–",
       nRegioni: String(Object.keys(conteggi).length),
-      nTipi: String(new Set(dati.map((x) => x.tipo)).size),
+      nTipi: String(new Set([].concat(...dati.map((x) => (x.tipi && x.tipi.length ? x.tipi : [x.tipo])))).size),
       aggiornato: this.ultimoAggiornamento(dati),
       vaiAllaMappa: () => {
         const el = document.querySelector("#trova");
