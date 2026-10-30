@@ -353,6 +353,12 @@ window.__siLogicaRender = class {
       // Contatti (13/10/2026): apre la posta con la mail gia scritta, come #/racconta.
       inviaModulo: () => this.ctInvia(),
       vistaPrivacy: vista === "privacy",
+      // Carta dei servizi SI (30/10/2026): Presentazione e Razionale.
+      vistaCarta: vista === "carta",
+      vistaRazionale: vista === "razionale",
+      vaiRazG: () => this.vaiARazionale("g"),
+      vaiRazS: () => this.vaiARazionale("s"),
+      vaiRazE: () => this.vaiARazionale("e"),
 
       // pagine screening (25/09/2026): vistaScr, scrOnco, scrProstata, scrGenitori, scr, scrHome
       ...(window.__siScreening ? window.__siScreening.vals(this.state, this.state.rotta, this)

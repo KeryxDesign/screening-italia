@@ -59,6 +59,11 @@ class Component extends DCLogic {
      pagina dello screening sulla sezione #scr-<sezione> (regione, dir, domanda), come fa
      scendi() in logica-screening.js: scroll al blocco, poi fuoco sul suo h2 (tabindex -1).
      Si insiste qualche giro: le foto cambiano l'altezza della pagina mentre arrivano. */
+  // Razionale: l'indice scende alla parte scelta (g, s, e), senza toccare la rotta.
+  vaiARazionale(parte) {
+    const el = document.getElementById("raz-" + parte);
+    if (el) { window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 88, behavior: "smooth" }); try { el.focus({ preventScroll: true }); } catch (e) {} }
+  }
   portaASezione() {
     const r = this.state.rotta;
     if (r.vista !== "screening" || !r.arg || !r.sez) { return; }
@@ -549,7 +554,7 @@ class Component extends DCLogic {
     // #/racconta?tipo=difficolta: la domanda preseleziona il tipo, non fa parte della vista.
     const q0 = (p[0] || "").split("?");
     let vista = q0[0];
-    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening", "buone-pratiche", "difficolta", "racconta", "privacy", "centri"];
+    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening", "buone-pratiche", "difficolta", "racconta", "privacy", "centri", "carta", "razionale"];
     if (note.indexOf(vista) === -1) { vista = ""; }
     let arg = p[1] ? decodeURIComponent(p[1]) : "";
     if (vista === "racconta") { arg = this.tipoDaDomanda(q0[1]); }
@@ -576,7 +581,7 @@ class Component extends DCLogic {
     const q0 = (p[0] || "").split("?");
     let vista = q0[0];
     let arg = p[1] ? decodeURIComponent(p[1]) : "";
-    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening", "buone-pratiche", "difficolta", "racconta", "privacy", "centri"];
+    const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening", "buone-pratiche", "difficolta", "racconta", "privacy", "centri", "carta", "razionale"];
     if (note.indexOf(vista) === -1) { vista = ""; }
     if (vista === "racconta") { arg = this.tipoDaDomanda(q0[1]); }
     // Alias permanente: #/prostata diventa #/screening/prostata senza voce doppia nella cronologia.

@@ -1847,3 +1847,31 @@ html.contrasto .scr-home .scr-tab-altri .scr-carta svg.scr-ci{box-shadow:none}
 .art-testa .art-figura{margin:0 0 4px}
 .art-testa .art-figura-img{aspect-ratio:21 / 9;max-height:180px;border-radius:10px}
 .art-standfirst{display:none}
+
+/* --- Carta dei servizi SI e Razionale (30/10/2026) --- */
+.cs-tabs{display:flex;flex-wrap:wrap;gap:10px}
+.cs-tab{display:inline-flex;align-items:center;min-height:48px;padding:10px 18px;border-radius:999px;background:#fff;color:#064A8B;
+  border:1.5px solid #064A8B;font-size:17px;font-weight:600;text-decoration:none}
+.cs-tab:hover{background:#E7EEF5}
+.cs-tab[aria-current="page"]{background:#064A8B;color:#fff}
+.cs-tab:focus-visible{outline:3px solid #A63D17;outline-offset:2px}
+.cs-mission{border-left:6px solid #A63D17;padding:4px 0 4px 18px;display:flex;flex-direction:column;gap:8px}
+.cs-lead{font-size:22px;line-height:1.5;color:#14202B;max-width:none}
+.cs-elenco{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.cs-elenco li{position:relative;background:#fff;border-radius:12px;padding:16px 18px 16px 44px;font-size:18px;line-height:1.55;color:#14202B;
+  box-shadow:0 1px 2px rgba(4,40,64,0.06),0 4px 14px rgba(4,40,64,0.08)}
+.cs-elenco li::before{content:"";position:absolute;left:18px;top:25px;width:10px;height:10px;border-radius:50%;background:#A63D17}
+.cs-elenco li a{overflow-wrap:anywhere}
+.cs-sub h3,.cs-evid h3{margin:0 0 4px}
+.cs-sub h4{font-size:19px;line-height:1.35;margin:18px 0 0;color:#064A8B;text-align:left}
+.cs-sub{display:flex;flex-direction:column;gap:14px}
+.cs-sub .cs-elenco li{background:#F1F6FB;box-shadow:none}
+.cs-intro{font-weight:600}
+.cs-evid{border-left:6px solid #F0B429 !important;display:flex;flex-direction:column;gap:10px}
+.cs-evid p{font-size:18px;line-height:1.55}
+.cs-indice{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.cs-indice .occhiello{width:100%}
+.cs-fine{display:flex;justify-content:center}
+[id^="raz-"]:focus{outline:none}
+@media (min-width:768px){.cs-lead{font-size:26px}.cs-elenco li{font-size:19px}}
+@media (max-width:600px){.cs-sub{padding:16px 12px}.cs-elenco li{padding:14px 12px 14px 32px;font-size:17px}.cs-elenco li::before{left:12px;top:22px;width:8px;height:8px}}
