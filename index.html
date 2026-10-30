@@ -10,8 +10,8 @@
 <link rel="icon" type="image/png" sizes="192x192" href="./marchio/icona-192.png">
 <link rel="apple-touch-icon" href="./marchio/apple-touch-icon.png">
 <script src="./support.js?v=locale1027"></script>
-<script src="./logica-render.js?v=tipi1030"></script>
-<script src="./logica-classe.js?v=stati1030"></script>
+<script src="./logica-render.js?v=carta1030"></script>
+<script src="./logica-classe.js?v=carta1030"></script>
 <script src="./screening-pagine.js?v=tendina1023b"></script>
 <script src="./logica-screening.js?v=tipi1030"></script>
 </head>
@@ -41,7 +41,7 @@
         <meta name="ext-resource-dependency" content="./img/foto/foto-74855-23397.webp">
         <meta name="ext-resource-dependency" content="./img/foto/foto-197531-19160.webp">
         <meta name="ext-resource-dependency" content="./img/foto/foto-197531-19155.webp">
-        <link rel="stylesheet" href="./stile.css?v=stati1030">
+        <link rel="stylesheet" href="./stile.css?v=carta1030">
         <link rel="stylesheet" href="./screening.css?v=tendina1023b">
         <script src="./accessibilita.js?v=tendina1023b"></script>
         <script src="./iniziative.js?v=tendina1023b"></script>
@@ -1467,6 +1467,112 @@
           </div>
         </sc-if>
 
+        <sc-if value="{{ vistaCarta }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Carta dei servizi">
+
+            <div class="banda hero wrap sezione" data-screen-label="Carta apertura">
+              <div class="hero-sfondo" aria-hidden="true">
+                <image-slot id="hero-6" src="./img/foto/foto-si-panchina.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
+                <span class="hero-velo"></span>
+              </div>
+              <div class="fx col gap16">
+                <div class="occhiello">Carta dei servizi SI</div>
+                <h1>Carta dei servizi di Screening Italia</h1>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Mission">
+              <div class="fx col gap20">
+                <nav class="cs-tabs" aria-label="Carta dei servizi"><a class="cs-tab" href="#/carta" aria-current="page">Presentazione (Carta dei servizi)</a><a class="cs-tab" href="#/razionale">Razionale</a></nav>
+                <div class="cs-mission">
+                  <div class="occhiello">Mission</div>
+                  <p class="cs-lead">Partner strategico delle Istituzioni, dei cittadini, e degli stakeholders, con l'obiettivo di migliorare la gestione globale degli screening sanitari, dalla pianificazione, all’esecuzione, al follow up.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" data-screen-label="Cosa fa Screening Italia">
+              <div class="fx col gap20">
+                <h2>Screening Italia</h2>
+                <ul class="cs-elenco"><li>Si occupa di tutte le tipologie di screening (oncologici, nutrizionali, neonatali, diabete, cardiovascolari), per evidenziare l’importanza strategica del concetto globale di prevenzione secondaria strutturata, ovvero il concetto di Screening.</li><li>Opera in stretta sinergia e sintonia con le Istituzioni, il mondo del lavoro e le associazioni sindacali.</li><li>Agisce attraverso un modus operandi bottom-up, top down e trasversale, tramite il coinvolgimento attivo di tutti i portatori di interesse.</li><li>Sensibilizza, divulga, promuove, comunica, creando un ponte informativo chiaro ed efficace tra Istituzioni e Cittadini</li><li>Ha un ruolo sociale perché sensibilizza anche le fasce più giovani affinché lo screening diventi una scelta naturale e consapevole nel futuro, “®Quando sarò grande farò gli screening”.</li><li>Pubblica online le iniziative dei portatori di interesse</li><li>Affianca e assiste le Istituzioni, diffondendo le loro iniziative, le best practices e le loro criticità</li><li>Affianca e assiste i cittadini e le associazioni ed è portavoce delle loro difficoltà, delle loro critiche e delle loro esperienze positive</li><li>Aiuta le associazioni a diffondere le proprie iniziative, a farle conoscere, a monetizzarle</li><li>Evidenzia le difficoltà esecutive e le congestioni operative, condividendo le problematiche emergenti</li><li>È tavolo di confronto e stakeholders forum</li><li>Genera nella popolazione Awareness, Commitment, Empowerment e Compliance, contribuendo così a favorire l’aumento della partecipazione dei cittadini agli Screening.</li></ul>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Domini">
+              <div class="fx col gap20">
+                <div class="card cs-evid">
+                  <p>Controlla il mercato italiano relativo ai domini di primo livello (TLD) screening related, essendo titolare dei diritti esclusivi di proprietà industriale di fondamentali nomi a dominio e relative estensioni, esclusivi e focalizzati sullo Screening: ciò permette di raggiungere uno dei suoi obiettivi: capillarizzare, amplificare e mirare l’azione e l’efficacia di divulgazione del “messaggio screening”.</p>
+                </div>
+                <div class="cs-fine">
+                  <a class="cta-2" href="#/razionale">Leggi il Razionale</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ vistaRazionale }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Razionale">
+
+            <div class="banda hero wrap sezione" data-screen-label="Razionale apertura">
+              <div class="hero-sfondo" aria-hidden="true">
+                <image-slot id="hero-6" src="./img/foto/foto-si-panchina.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
+                <span class="hero-velo"></span>
+              </div>
+              <div class="fx col gap16">
+                <div class="occhiello">Carta dei servizi SI</div>
+                <h1>Razionale</h1>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Indice razionale">
+              <div class="fx col gap20">
+                <nav class="cs-tabs" aria-label="Carta dei servizi"><a class="cs-tab" href="#/carta">Presentazione (Carta dei servizi)</a><a class="cs-tab" href="#/razionale" aria-current="page">Razionale</a></nav>
+                <nav class="cs-indice" aria-label="In questa pagina">
+                  <span class="occhiello">In questa pagina</span>
+                  <button type="button" class="filtro" onClick="{{ vaiRazG }}">Razionale giuridico</button>
+                  <button type="button" class="filtro" onClick="{{ vaiRazS }}">Razionale scientifico</button>
+                  <button type="button" class="filtro" onClick="{{ vaiRazE }}">Razionale etico ed equity</button>
+                </nav>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" id="raz-g" tabindex="-1" data-screen-label="Razionale giuridico">
+              <div class="fx col gap20">
+                <h2>Razionale giuridico</h2>
+                <div class="card cs-sub"><h3>OMS</h3><ul class="cs-elenco cs-link"><li><a href="https://www.who.int/europe/publications/i/item/9789289057561" target="_blank" rel="noopener noreferrer">Linee guida screening</a></li><li><a href="https://www.who.int/publications/i/item/9789240030824" target="_blank" rel="noopener noreferrer">Screening cancro cervice</a></li></ul><p class="cs-intro">Molte Raccomandazioni e Linee Guida dell'OMS riguardano gli screening, ad esempio:</p><ul class="cs-elenco"><li><a href="https://www.who.int/publications/i/item/9789240102248" target="_blank" rel="noopener noreferrer">le nuove linee guida per il monitoraggio globale della prevenzione e del controllo del diabete.</a> Inoltre il <a href="https://www.who.int/initiatives/the-who-global-diabetes-compact" target="_blank" rel="noopener noreferrer">Global Diabetes Compact,</a> introdotto nel 2021, rimane al centro delle iniziative globali per migliorare la prevenzione, la diagnosi precoce e la gestione del diabete</li><li><a href="https://www.who.int/teams/noncommunicable-diseases/on-the-road-to-2025" target="_blank" rel="noopener noreferrer">Il quarto incontro di alto livello dell'Assemblea generale delle Nazioni Unite sulla prevenzione e il controllo delle malattie non trasmissibili (NCD)</a></li><li>Le Linee guida OMS per lo screening e il trattamento delle lesioni pre-cancerose del collo dell'utero nella prevenzione del cancro della cervice.</li><li>L'ufficio regionale europeo dell'OMS ha pubblicato una guida dal titolo "A short guide to cancer screening" finalizzata ad aiutare i policy maker ad aumentare i benefici dei programmi di screening del cancro esistenti e continuare a promuovere nuovi programmi. Viene evidenziato inoltre che, lo screening del cancro non è semplicemente un test ma, parte di un percorso di screening.</li><li>La 77ª Assemblea Mondiale della Sanità ha approvato una risoluzione che sollecita i Governi a rafforzare e ampliare i programmi di screening neonatale, riconoscendone il ruolo cruciale nella prevenzione e nella salute pubblica.</li></ul></div>
+                <div class="card cs-sub"><h3>Commissione Europea</h3><ul class="cs-elenco"><li>Piano europeo di lotta contro il cancro (2022)</li><li>Raccomandazioni su screening cervicale e colorettale</li></ul><h4><a href="https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX%3A52022DC0474" target="_blank" rel="noopener noreferrer">Nuovo approccio dell'UE allo screening dei tumori (Raccomandazione 2022)</a></h4><ul class="cs-elenco"><li>Molte Raccomandazioni e Linee Guida della Commissione Europea riguardano gli screening</li><li>Nell'ambito del piano europeo di lotta contro il cancro, nel 2022 I'UE ha accelerato il passo per aumentare l'accesso agli screening e migliorarne la qualità, coprendo un maggior numero di gruppi bersaglio e di tumori. Per quanto riguarda il cancro al seno, la Commissione aiuterà i paesi dell'UE a garantire che il 90% dei gruppi destinatari ammissibili abbia accesso a screening basati su dati concreti e di qualità garantita.</li><li>Screening cervicale e colorettale: <a href="https://cancer-screening-and-care.jrc.ec.europa.eu/en/ecicc" target="_blank" rel="noopener noreferrer">le raccomandazioni europee.</a></li><li><a href="https://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX%3A32022H1213%2801%29" target="_blank" rel="noopener noreferrer">Raccomandazione</a> del Consiglio del 9 dicembre 2022 relativa al rafforzamento della prevenzione attraverso l'individuazione precoce: un nuovo approccio dell'UE allo screening dei tumori.</li></ul><h4><a href="https://www.epicentro.iss.it/screening/jaeucanscreen" target="_blank" rel="noopener noreferrer">EUCanScreen: la JA europea sugli screening oncologici</a></h4><p>Lanciata nell’ambito del Programma EU4Health a giugno 2024, con una durata di quattro anni, l’Azione congiunta europea EUCanScreen (Joint Action on the new EU cancer screening scheme implementation) si prefigge l’obiettivo di garantire un'implementazione sostenibile di screening di alta qualità per il cancro al seno, al collo dell'utero e al colon retto e l'attuazione dei programmi di screening recentemente raccomandati per i tumori del polmone, della prostata e dello stomaco.</p></div>
+                <div class="card cs-sub"><h3>Legislazione Nazionale</h3><ul class="cs-elenco"><li>Gli screening rientrano nei Livelli Essenziali di Assistenza (LEA) come programmi di prevenzione e diagnosi precoce di malattie, che il Servizio Sanitario Nazionale (SSN) è tenuto a fornire a tutti i cittadini: un LEA è lo strumento attraverso cui si concretizzano i diritti costituzionali, in particolare il diritto alla salute sancito dal<a href="https://www.senato.it/istituzione/la-costituzione/parte-i/titolo-ii/articolo-32" target="_blank" rel="noopener noreferrer">l'articolo 32 della Costituzione.</a> Essi garantiscono un livello minimo uniforme di prestazioni e servizi sanitari su tutto il territorio nazionale, realizzando così il principio di uguaglianza e tutela della salute a carico del Servizio Sanitario Nazionale e quindi gratuiti</li><li>L'Italia è impegnata attivamente nei programmi di screening oncologico dall'inizio degli anni '90, negli screening oncologici.</li><li>L'Italia è considerato un leader in Europa per quanto riguarda lo screening dei tumori e contribuisce attivamente alle raccomandazioni europee.</li><li>Gli screening rientrano fra le strategie per "ridurre il carico prevenibile di morbosità, mortalità e disabilità delle malattie non trasmissibili". Gli obiettivi centrali per le Regioni: aumentare l'estensione reale dei programmi di screening alla popolazione target (per ognuno dei 3 tumori oggetto di screening), aumentare i soggetti a rischio sottoposti a screening oncologico, riorientare/avviare i programmi di screening per il cancro della cervice uterina introducendo il test Hpv-Dna.</li><li>Vengono definite modalità e criteri di realizzazione dei programmi per il superamento delle criticità nelle Regioni meridionali e insulari.</li></ul><p class="cs-intro">La partecipazione dei cittadini e della nostra iniziativa in Sanità è legittimata e auspicata dai più importanti presupposti di legge:</p><ul class="cs-elenco"><li>Legge 833/1978 (Istitutiva del SSN): Sancisce che l'attuazione del servizio sanitario compete allo Stato garantendo la partecipazione dei cittadini.</li><li>D.Lgs. 502/1992 (Art. 14 - Partecipazione e tutela dei diritti): Prevede esplicitamente che le Regioni promuovano consultazioni con i cittadini e le organizzazioni di volontariato per la programmazione, il controllo e la valutazione dei servizi. Questo ha portato all'istituzione dei CCM (Comitati Consultivi Misti).</li></ul><ul class="cs-elenco"><li><a href="https://www.normattiva.it/uri-res/N2Ls?urn%3Anir%3Astato%3Adecreto.legge%3A2025-10-31%3B159" target="_blank" rel="noopener noreferrer">Il 31 ottobre 2025 è entrato in vigore il decreto legge 159/2025,</a> che introduce permessi specifici e retribuiti per chi si sottopone a screening oncologici in orario di lavoro. Uno degli obiettivi del dl è potenziare la partecipazione dei cittadini agli screening oncologici, peraltro gratuiti e garantiti dal Servizio Sanitario Nazionale. Vengono introdotti permessi retribuiti per coloro che hanno intenzione di sottoporsi agli screening per i tumori del seno, i tumori della cervice uterina, i tumori del colon retto, che sono i tre principali programmi di prevenzione oncologica organizzata del SSN. Il medico aziendale (chiamato medico competente), fornirà informazioni ai lavoratori sull'importanza della prevenzione oncologica, promuovendo l'adesione ai programmi di screening oncologici previsti dai livelli essenziali di Assistenza (LEA), informando le lavoratrici e i lavoratori sulla loro finalità ed utilità anche con il supporto di campagne informative a tale scopo promosse dal Ministero della Salute.</li><li>Il 23 ottobre 2025 la Conferenza Stato-Regioni ha approvato un nuovo aggiornamento dei Livelli essenziali di assistenza (LEA) che include importanti novità per gli screening, come l'ampliamento dello screening neonatale esteso a 8 nuove patologie, l'introduzione di un programma di sorveglianza per i tumori BRCA- correlati e la standardizzazione nazionale dello screening per la SM-SMA. Questo aggiornamento modifica il DPCM del 12 gennaio 2017.</li><li>La legge 15 settembre 2023, n. 130, definisce un programma diagnostico per l'individuazione del diabete di tipo 1 e della celiachia nella popolazione pediatrica. E' la prima legge al mondo di questo tipo. Dopo un anno di sperimentazione, si è visto che lo screening sui bambini per il diabete di tipo 1 e la celiachia funziona e riesce a intercettare precocemente i possibili casi. Lo affermano i primi risultati del progetto coordinato dal Ministero della Salute e dall'Istituto Superiore di Sanità.</li><li>Numerosissime disposizioni di legge, comprendenti il Piano oncologico nazionale, il Piano nazionale della prevenzione, il Piano Sanitario Nazionale, riguardano gli screening, definendo obiettivi ambiziosi ma perseguibili e misurabili in tema di promozione della salute e prevenzione, e rafforzano la necessità di investire sulla messa a sistema in tutte le Regioni dei programmi di prevenzione collettiva di provata efficacia come gli screening oncologici, che rientrano fra le strategie per ridurre la mortalità e morbilità dovuta alle tre patologie oncologiche attualmente oggetto di screening (carcinoma della cervice uterina, mammario e del colon retto).</li><li>Il Piano Sanitario Nazionale 1998-2000 estende inoltre a tutto il territorio nazionale gli screening che si sono dimostrati efficaci nel modificare la storia naturale di una malattia.</li></ul></div>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" id="raz-s" tabindex="-1" data-screen-label="Razionale scientifico">
+              <div class="fx col gap20">
+                <h2>Razionale scientifico</h2>
+                <ul class="cs-elenco"><li>Gli screening sono efficaci e riducono mortalità e morbilità.</li><li>È dimostrato che lo screening mammografico può ridurre di più del 30% la mortalità per cancro al seno nelle donne che lo effettuano ogni due anni fra i 50 e i 69 anni. (AIRC)</li><li>Secondo le nuove <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022H1213(01)" target="_blank" rel="noopener noreferrer">raccomandazioni della Commissione Europea,</a> pubblicate nel 2022, i programmi di screening dovrebbero essere potenziati e ampliati per includere nuove fasce di età e nuovi esami diagnostici. Questo dimostra quanto il loro impatto sia riconosciuto a livello internazionale come una delle strategie più efficaci per combattere il cancro.</li><li>Gli screening oncologici rappresentano uno strumento fondamentale di Sanità pubblica per la prevenzione secondaria, permettendo la diagnosi precoce dei tumori e, di conseguenza, migliorando significativamente le possibilità di trattamento e sopravvivenza dei pazienti.</li><li>Lo screening neonatale permette di identificare precocemente numerose malattie, anche gravissime, entro i primi giorni di vita dei neonati.</li><li>Questo test, oltre ad essere obbligatorio, è un diritto per tutti i nuovi nati e viene eseguito presso il centro nascita prima che il bambino lasci l’ospedale: in Italia, per legge, fra le 48 e le 72 ore di vita. Con lo screening neonatale esteso in Italia oggi si ricerca la possibile presenza di <a href="https://www.osservatorioscreening.it/screening-neonatale-malattie-metaboliche/" target="_blank" rel="noopener noreferrer">49 diverse malattie.</a></li><li>La Legge 130/2023 ha istituito un programma nazionale di screening gratuito e volontario per il diabete di tipo 1 e la celiachia nella popolazione pediatrica (1-17 anni), un primato mondiale, per permettere una diagnosi precoce e prevenire complicanze gravi come la chetoacidosi diabetica. I dati del progetto pilota mostrano una riduzione del 49% dei casi di chetoacidosi grave</li></ul>
+                <div class="card cs-evid">
+                  <div class="occhiello"><a href="https://www.rainews.it/articoli/2026/02/tumori-aumentano-nei-giovani-in-crescita-neoplasie-colon-pancreas-e-polmone-7c669b72-4c80-40c8-87a8-4039e45e9494.html" target="_blank" rel="noopener noreferrer">2026. Giornata mondiale contro il cancro</a></div>
+                  <h3>Tumori, aumentano nei giovani: in crescita neoplasie colon, pancreas e polmone</h3>
+                  <p>L'allarme del Policlinico Gemelli: "Per il colon +80% di casi under 50 entro il 2040"</p>
+                  <p>Alla luce dell'aumento dei casi di cancro prima dei 50 anni il Consiglio d'Europa ha già raccomandato l'anticipazione dei programmi di screening oncologico, in particolare per i tumori del colon e della mammella</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" id="raz-e" tabindex="-1" data-screen-label="Razionale etico ed equity">
+              <div class="fx col gap20">
+                <h2>Razionale etico ed equity</h2>
+                <ul class="cs-elenco"><li>Nonostante l'importanza riconosciuta, persistono criticità legate alla copertura, all'adesione della popolazione, alla sostenibilità economica e all'efficacia complessiva degli screening, che richiedono un approfondimento e un confronto tra gli operatori del settore.</li><li>L’introduzione di nuove tecnologie e metodologie, come l’Intelligenza artificiale e l'uso di biomarcatori, sta trasformando il panorama della diagnosi precoce, rendendo necessario un aggiornamento costante per i professionisti coinvolti nei programmi di screening. <a href="https://www.sanita.puglia.it/documents/47906/606722/Locandina%2Bevento%2Bscreening%2B13%2Bdicembre%2B2024.pdf/1391bc08-4388-6de6-cb4a-edc58a524584?t=1751122513267" target="_blank" rel="noopener noreferrer">(Congresso 13 dicembre 2024, Brindisi)</a></li><li>È necessario affrontare le disuguaglianze nell’accesso agli screening, garantendo che i servizi siano equamente disponibili per tutta la popolazione, indipendentemente da fattori socio-economici o geografici. <a href="https://www.sanita.puglia.it/documents/47906/606722/Locandina%2Bevento%2Bscreening%2B13%2Bdicembre%2B2024.pdf/1391bc08-4388-6de6-cb4a-edc58a524584?t=1751122513267" target="_blank" rel="noopener noreferrer">(Congresso 13 dicembre 2024, Brindisi)</a></li></ul>
+                <div class="cs-fine">
+                  <a class="cta-2" href="#/carta">Torna alla Presentazione</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </sc-if>
+
         <sc-if value="{{ vistaContatti }}" hint-placeholder-val="{{ false }}">
           <div data-screen-label="Contatti">
 
@@ -2272,6 +2378,7 @@
               <nav class="ftr-col" aria-label="Il portale">
                 <h3 class="ftr-tit">Il portale</h3>
                 <a href="#/chi">Chi siamo</a>
+                <a href="#/carta">Carta dei servizi SI</a>
                 <a href="#/contatti">Contatti</a>
                 <a href="#/enti">Pubblica le tue iniziative</a>
                 <a href="#/contatti">Segnala un’iniziativa</a>
