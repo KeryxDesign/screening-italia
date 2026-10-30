@@ -652,8 +652,9 @@ class Component extends DCLogic {
   }
   scheda(x) {
     let cls = "tag tag-gratis";
-    if (x.stato === "a pagamento") { cls = "tag tag-paga"; }
-    if (x.stato === "su invito") { cls = "tag tag-invito"; }
+    const primo = (x.stati && x.stati[0]) || x.stato;
+    if (primo === "a pagamento") { cls = "tag tag-paga"; }
+    if (primo === "su invito") { cls = "tag tag-invito"; }
     return {
       tipo: this.nomiTipi(x), icona: this.icona(x.tipo), titolo: x.titolo, ente: x.ente, dove: x.dove,
       quando: x.quando, chi: x.chi, tel: x.tel || "", href: "tel:" + String(x.tel || "").split(" ").join(""),

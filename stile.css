@@ -180,6 +180,7 @@ a:hover{color:var(--verde-scuro);text-decoration-thickness:2.5px}
 .tel:active{transform:none}
 .tel svg{width:21px;height:21px;flex-shrink:0}
 
+.tag:empty{display:none}
 .tag{display:inline-block;font-size:17px;font-weight:700;padding:6px 14px;border-radius:999px;border:1.5px solid}
 .tag-gratis,.tag.tag-bp{background:#E3EEF8;color:#04386A;border-color:rgba(4,56,106,0.62)}
 .tag-paga,.tag.tag-diff{background:#FAF1DC;color:#5C3D00;border-color:rgba(92,61,0,0.62)}
