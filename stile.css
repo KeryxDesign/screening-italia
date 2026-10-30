@@ -837,7 +837,7 @@ html.contrasto .sel-discreto .campo-sel{background:#002445;border-color:#fff;bac
 @media (min-width:700px){.ftr-alto{grid-template-columns:1.4fr 1fr 1fr;gap:36px 28px}}
 @media (min-width:1000px){.ftr-alto{grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px 32px}}
 .ftr .nome{font-size:23px;font-weight:700;letter-spacing:-0.012em}
-.ftr-claim{font-size:17px !important;line-height:1.55;color:#D1DAE3 !important;max-width:34ch}
+.ftr-claim{font-size:20px !important;line-height:1.4;font-weight:700;color:var(--oro-chiaro) !important;max-width:30ch}
 .ftr-wa{display:inline-flex;align-items:center;gap:10px;min-height:48px;align-self:flex-start;
   font-size:17px;font-weight:700;color:#AFC8E0 !important;text-decoration:none}
 .ftr-wa svg{width:24px;height:24px;flex-shrink:0}
