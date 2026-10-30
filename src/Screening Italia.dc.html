@@ -97,18 +97,21 @@
                 <button type="button" class="nav-tendina" aria-expanded="{{ scrAperto }}" aria-controls="menu-screening" aria-current="{{ navFaq }}" onClick="{{ scrApriChiudi }}">Gli screening<svg class="nav-freccia" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
                 <div class="nav-menu" id="menu-screening">
                   <a href="#/screening" aria-current="{{ navScrTutti }}">Tutti gli screening</a>
-                  <!-- Nomi e ordine scritti da Angelo (note del 17/10/2026). -->
+                  <!-- Dieci screening (Davide 30/10/2026): 5 oncologici di fila, poi gli altri 5. Senza pagina: voce non cliccabile. -->
                   <a href="#/screening/mammografico" aria-current="{{ navScrMammografico }}">Mammografico</a>
                   <a href="#/screening/colon-retto" aria-current="{{ navScrColon }}">Colon-retto</a>
-                  <a href="#/screening/cervicale" aria-current="{{ navScrCervicale }}">Cervice uterina</a>
-                  <a href="#/screening/prostata" aria-current="{{ navScrProstata }}">Prostatico (PSA)</a>
-                  <a href="#/screening/neonatale" aria-current="{{ navScrNeonatale }}">Neonatale</a>
+                  <a href="#/screening/cervicale" aria-current="{{ navScrCervicale }}">Cervice uterina (HPV, PAP Test)</a>
+                  <a href="#/screening/prostata" aria-current="{{ navScrProstata }}">Prostatico (PSA, TAC multiparametrica)</a>
+                  <span class="nav-presto">Polmonare <small>in arrivo</small></span>
                   <a href="#/screening/diabete-celiachia" aria-current="{{ navScrDiabete }}">Diabete</a>
-                  <a href="#/screening/cardiovascolare" aria-current="{{ navScrCardio }}">Cardiovascolare</a>
+                  <span class="nav-presto">Nutrizionale <small>in arrivo</small></span>
+                  <a href="#/screening/neonatale" aria-current="{{ navScrNeonatale }}">Neonatale</a>
+                  <span class="nav-presto">HCV (epatite C) <small>in arrivo</small></span>
+                  <a href="#/screening/cardiovascolare" aria-current="{{ navScrCardio }}">Cardiovascolare (INPS)</a>
                 </div>
               </div>
               <a href="{{ hrefIniziative }}" aria-current="{{ navReg }}">Iniziative per regione</a>
-              <sc-if value="{{ haCentri }}" hint-placeholder-val="{{ false }}"><a href="#/centri" aria-current="{{ navCentri }}">Centri screening</a></sc-if>
+              <sc-if value="{{ haCentri }}" hint-placeholder-val="{{ false }}"><a href="#/centri" aria-current="{{ navCentri }}">Centri Screening ASL</a></sc-if>
               <a href="#/enti" aria-current="{{ navEnti }}">Pubblica le tue iniziative</a>
               <!-- Tendina «Esperienze» (brief 13/10/2026): esce se almeno una categoria ha post;
                    ogni voce solo se la sua categoria ha post, «Racconta la tua» sempre. -->
@@ -147,7 +150,7 @@
                        Le iniziative scendono a terzo livello: link di testo, non pulsante. -->
                   <div class="hero-ingressi">
                     <a class="cta" href="#/trova">Trova il tuo screening</a>
-                    <a class="cta-2" href="#/centri">Centri screening: dove andare</a>
+                    <a class="cta-2" href="#/centri">Centri Screening ASL</a>
                   </div>
                   <p class="hero-terzo"><a href="#/trova">Le iniziative di associazioni e altri enti nella tua regione</a></p>
                 </div>
@@ -1753,7 +1756,7 @@
                 <span class="hero-velo"></span>
               </div>
               <div class="fx col gap16">
-                <div class="occhiello">Centri screening</div>
+                <div class="occhiello">Centri Screening ASL</div>
                 <h1>I centri screening delle ASL</h1>
                 <p>Gli indirizzi e i recapiti dei centri screening, regione per regione. Per prenotare o chiedere informazioni si contatta direttamente il centro.</p>
               </div>
@@ -2364,7 +2367,7 @@
                 <a href="#/articolo/faq-1">Se l’invito non arriva</a>
                 <a href="#/articolo/faq-5">Il kit del colon-retto</a>
                 <a href="#/screening/prostata">Screening prostatico (PSA)</a>
-                <sc-if value="{{ haCentri }}" hint-placeholder-val="{{ false }}"><a href="#/centri">Centri screening delle ASL</a></sc-if>
+                <sc-if value="{{ haCentri }}" hint-placeholder-val="{{ false }}"><a href="#/centri">Centri Screening ASL</a></sc-if>
                 <sc-if value="{{ haTesti }}" hint-placeholder-val="{{ false }}"><a href="#/testimonianze">Testimonianze</a></sc-if>
                 <sc-if value="{{ haBp }}" hint-placeholder-val="{{ false }}"><a href="#/buone-pratiche">Buone pratiche</a></sc-if>
                 <sc-if value="{{ haDiff }}" hint-placeholder-val="{{ false }}"><a href="#/difficolta">Difficoltà e disservizi</a></sc-if>
