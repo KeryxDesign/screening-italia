@@ -159,7 +159,7 @@
       quando: testo(f.quando),
       chi: testo(f.chi),
       tel: telefono(f.tel),
-      stato: inLista(f.stato, STATI),
+      stato: "",
       chiude: data(f.chiude)
     };
 
@@ -173,14 +173,23 @@
       var v = inLista(t, TIPI);
       if (v && tipi.indexOf(v) === -1) { tipi.push(v); }
     });
+    /* Condizioni anche insieme (Angelo, 25/10/2026): acf.stati e l'elenco, acf.stato il primo.
+       Il testo mostrato le unisce; il colore del tag segue la prima. Facoltative: senza, il tag non compare. */
+    var stati = [];
+    [].concat(Array.isArray(f.stati) ? f.stati : [], Array.isArray(f.stato) ? f.stato : [f.stato]).forEach(function (t) {
+      var v = inLista(t, STATI);
+      if (v && stati.indexOf(v) === -1) { stati.push(v); }
+    });
+    x.stato = stati.join(" · ");
+    x.stati = stati;
     x.tipo = tipi[0] || "";
     x.tipi = tipi;
     var manca = [];
     if (f.chiude != null && String(f.chiude).trim() !== "" && !x.chiude) { manca.push("chiude"); }
     if (!x.chiude) { delete x.chiude; }
     /* Facoltativi (richiesta di Angelo, 22/10/2026): ente, dove, quando, chi e telefono.
-       Senza, la card non mostra la riga. Restano obbligatori regione, tipo, titolo, stato. */
-    ["id", "reg", "tipo", "titolo", "stato"]
+       Senza, la card non mostra la riga. Restano obbligatori regione, tipo, titolo. */
+    ["id", "reg", "tipo", "titolo"]
       .forEach(function (k) { if (!x[k]) { manca.push(k); } });
     if (manca.length) {
       console.warn("Iniziativa scartata (" + (post.slug || post.id) + "): campi non validi -> " + manca.join(", "));
