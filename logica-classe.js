@@ -243,11 +243,44 @@ class Component extends DCLogic {
     if (el.dataset.slug === chiave) { return; }
     el.dataset.slug = chiave;
     el.innerHTML = v ? v.testoHtml : "";
+    this.sistemaTitoli(el);
     el.querySelectorAll("p").forEach((n) => n.classList.add("art-p"));
     el.querySelectorAll("h2").forEach((n) => n.classList.add("art-sub"));
     this.fraseChiave(el);
     this.noteCorsive(el);
     this.dividiSezioni(el);
+  }
+  /* Gerarchia dei titoli (Florbo 30/10): in WordPress i titoli di sezione sono spesso solo un
+     paragrafo tutto in grassetto, magari con un'emoji davanti. Quel paragrafo diventa un h2
+     (l'h1 e il titolo dell'articolo), le emoji in testa ai titoli si tolgono, le righe «Che cos'è X?»
+     e i separatori <hr> si eliminano. Il testo dei nodi si sposta, non si inserisce HTML nuovo. */
+  sistemaTitoli(el) {
+    const EMOJI = /^[\s\p{Extended_Pictographic}\uFE0F\u200D]+/u;
+    const pulisci = (n) => {
+      const t = n.firstChild;
+      if (t && t.nodeType === 3) { t.textContent = t.textContent.replace(EMOJI, ""); }
+      else if (t && t.nodeType === 1 && t.firstChild && t.firstChild.nodeType === 3) {
+        t.firstChild.textContent = t.firstChild.textContent.replace(EMOJI, "");
+      }
+    };
+    el.querySelectorAll("hr").forEach((n) => n.remove());
+    Array.prototype.slice.call(el.children).forEach((n) => {
+      if (n.tagName !== "P") { return; }
+      const testo = n.textContent.replace(EMOJI, "").trim();
+      const figli = Array.prototype.filter.call(n.childNodes, (c) => !(c.nodeType === 3 && !c.textContent.trim()) && !(c.nodeType === 1 && c.tagName === "BR"));
+      const soloGrassetto = figli.length === 1 && figli[0].nodeType === 1 && (figli[0].tagName === "STRONG" || figli[0].tagName === "B");
+      if (testo.length < 90 && /^(che\s+cos['’]è|cos['’]è)/i.test(testo)) { n.remove(); return; }
+      const conEmoji = EMOJI.test(n.textContent) && /^[\s]*[^\s\w]/u.test(n.textContent) && n.textContent.trim() !== testo;
+      if ((soloGrassetto || conEmoji) && testo.length > 0 && testo.length < 120) {
+        const h = document.createElement("h2");
+        h.textContent = testo.replace(/[:\s]+$/, "");
+        n.replaceWith(h);
+      }
+    });
+    el.querySelectorAll("h2,h3,h4").forEach((n) => {
+      pulisci(n);
+      if (/^(che\s+cos['’]è|cos['’]è)/i.test(n.textContent.trim())) { n.remove(); }
+    });
   }
   /* <blockquote> = frase chiave (brief LORI 26/09/2026): ogni p del blockquote, o il
      blockquote stesso se non ha p, prende «art-p art-chiave» e i suoi figli si spostano
@@ -1172,13 +1205,14 @@ class Component extends DCLogic {
     const c = (v.categorie || [])[0];
     return {
       slot: "art-wp-" + v.id, foto: v.immagine && v.immagine.url ? v.immagine.url : "",
-      haFoto: !!(v.immagine && v.immagine.url),
+      // Foto sopra il titolo solo se e quella vera dell'articolo: la foto generica di repertorio non serve.
+      haFoto: !!(v.immagine && v.immagine.url && !v.immagine.repertorio && !v.immagine.segnaposto),
       segnaposto: !!(v.immagine && v.immagine.segnaposto),
       // Il segnaposto e un'illustrazione: «Foto di repertorio» sarebbe falso.
       didascalia: v.immagine && v.immagine.segnaposto
         ? "Illustrazione di repertorio."
         : "Foto di repertorio: non ritrae pazienti né casi reali.",
-      cat: c ? c.nome : "", titolo: v.titolo, sommario: v.estratto,
+      cat: c ? c.nome : "", titolo: v.titolo.replace(/^[\s\p{Extended_Pictographic}\uFE0F\u200D]+/u, ""), sommario: "",
       data: this.dataArticolo(v.dataIso), corpo: [],
       tornaHref: "#/domande", tornaTesto: "← Torna alle domande frequenti"
     };

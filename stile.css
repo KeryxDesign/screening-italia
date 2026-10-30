@@ -1841,3 +1841,8 @@ html.contrasto .passo-passo,html.contrasto .passi-card .passo-tit,html.contrasto
 html.contrasto .scr-home .scr-tab{background:#fff;border:2.5px solid #000;box-shadow:none}
 html.contrasto .scr-home .scr-tab .scr-gruppo{background:#000;color:#fff}
 html.contrasto .scr-home .scr-tab-altri .scr-carta svg.scr-ci{box-shadow:none}
+
+/* Articolo (Florbo 30/10): foto piccola sopra il titolo, niente occhiello sotto il titolo. */
+.art-testa .art-figura{margin:0 0 4px}
+.art-testa .art-figura-img{aspect-ratio:21 / 9;max-height:180px;border-radius:10px}
+.art-standfirst{display:none}
