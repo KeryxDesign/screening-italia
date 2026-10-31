@@ -8,6 +8,12 @@
    ✅ Ratificate da LEX con vincoli il 25/09/2026.
    Formule riscritte da MUSE sui vincoli LEX del 25/09/2026, approvate da Davide il 25/09:
    microcopy_sei_pagine.md §5. */
+/* Avvertenze finali, uguali su tutte le pagine dei singoli screening (testo di Davide, 31/10/2026). */
+window.SCREENING_AVVISI = [
+  "Screening Italia dà solo informazioni. Non prenotiamo esami, non diamo pareri medici, non sostituiamo la tua ASL.",
+  "Le informazioni di questa pagina hanno scopo divulgativo. Non sostituiscono il parere del medico e non servono a interpretare un esame o un referto. Per quello c'è il tuo medico.",
+  "Screening Italia è un sito privato e indipendente. Non è affiliato né convenzionato con Servizio Sanitario Nazionale, Regioni, ASL, Ministero della Salute o Istituto Superiore di Sanità. Non parla a loro nome."
+];
 window.SI_NON_AFFILIAZIONE = {
   adulti: "Screening Italia è un sito privato e indipendente. Non è affiliato né convenzionato con Servizio Sanitario Nazionale, Regioni, ASL, Ministero della Salute o Istituto Superiore di Sanità. Non parla a loro nome.",   // mammografico, cervicale, colon-retto, prostata
   genitori: "Screening Italia è un'iniziativa privata e indipendente. Non è affiliata né convenzionata con Servizio Sanitario Nazionale, Regioni, ASL, Ministero della Salute o Istituto Superiore di Sanità. Non parla a loro nome."  // neonatale, diabete-celiachia

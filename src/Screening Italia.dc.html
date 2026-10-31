@@ -1143,15 +1143,11 @@
               </div>
             </div>
 
-            <div class="banda b-crema wrap sezione" data-screen-label="Cosa non facciamo">
-              <p class="scr-cosa">{{ scr.s9 }}</p>
-            </div>
-            <!-- S10 Articoli: nascosto (mostraArticoli:false), gli articoli non esistono. -->
-
-            <div class="banda b-crema b-avvertenza wrap sezione" data-screen-label="Chiusura">
+            <div class="banda b-crema b-avvertenza wrap sezione" data-screen-label="Avvertenze">
               <div class="fx col gap12">
-                <p class="nota">{{ scr.s11 }}</p>
-                <p class="nota">{{ scr.nonAff }}</p>
+                <sc-for list="{{ scr.avvisi }}" as="t" hint-placeholder-count="3">
+                  <p class="nota">{{ t.t }}</p>
+                </sc-for>
               </div>
             </div>
 

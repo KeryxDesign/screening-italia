@@ -198,7 +198,7 @@
     const na = window.SI_NON_AFFILIAZIONE || {};
     const v = {
       ritorno: m["R·Link"],
-      nonAff: (slug === "neonatale" || slug === "diabete-celiachia") ? na.genitori : na.adulti,
+      avvisi: (window.SCREENING_AVVISI || []).map((t) => ({ t: t })),
       scendiRegione: () => scendi("scr-regione"),
       scendiDir: () => scendi("scr-dir"),
       scendiDomanda: () => scendi("scr-domanda")
