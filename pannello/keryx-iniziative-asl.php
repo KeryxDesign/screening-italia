@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Keryx — campo ASL nelle iniziative
- * Description: Richiesta di Florbo (31/10/2026). Aggiunge il campo di testo facoltativo «ASL» (acf.asl) alle iniziative: l'ASL (o ASP, ASST, Azienda sanitaria) in cui si svolge l'iniziativa. Il sito lo mostra nella card insieme al «Dove» (città). Per tornare indietro basta svuotare o togliere questo file: i dati scritti restano nel database e il sito, senza campo, non mostra la riga.
+ * Description: Richiesta di Florbo (31/10/2026). Aggiunge i campi facoltativi «ASL» (acf.asl, testo) e «Sito dell'ASL» (acf.asl_url, link) alle iniziative: l'ASL (o ASP, ASST, Azienda sanitaria) in cui si svolge l'iniziativa. Il sito lo mostra nella card insieme al «Dove» (città). Per tornare indietro basta svuotare o togliere questo file: i dati scritti restano nel database e il sito, senza campo, non mostra la riga.
  *
  * REST: compare in acf.asl, come gli altri campi. Il sito non lo deduce da «ente»: si scrive solo quello che e verificato.
  */
@@ -24,6 +24,12 @@ add_action('acf/include_fields', function () {
             'type'         => 'text',
             'maxlength'    => 80,
             'instructions' => 'Per esempio «ASL Roma 1», «ASP Palermo», «ASST Sette Laghi». Facoltativo: lascia vuoto se non lo sai, il sito non scrive niente.',
+        ), array(
+            'key'          => 'field_kx_ini_asl_url',
+            'name'         => 'asl_url',
+            'label'        => "Sito dell'ASL (link)",
+            'type'         => 'url',
+            'instructions' => "Facoltativo, accanto al telefono. Indirizzo completo, con https://. Il sito mostra il pulsante «Vai al sito dell'ASL» solo se compilato.",
         )),
     ));
 });

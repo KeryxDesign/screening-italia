@@ -586,6 +586,9 @@
                   <sc-if value="{{ ini.senzaContatti }}" hint-placeholder-val="{{ false }}">
                     <p class="nota">Per questa iniziativa non è indicato un numero di telefono. Il portale non gestisce appuntamenti: informati presso l&rsquo;ente che la organizza.</p>
                   </sc-if>
+                  <sc-if value="{{ ini.haAslUrl }}" hint-placeholder-val="{{ false }}">
+                    <a class="cta-2 ini-vai" href="{{ ini.aslUrl }}" target="_blank" rel="noopener noreferrer" aria-label="Vai al sito dell&rsquo;ASL (si apre in una nuova scheda)">Vai al sito dell&rsquo;ASL</a>
+                  </sc-if>
                 </div>
               </div>
             </div>
