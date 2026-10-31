@@ -1898,3 +1898,12 @@ html.contrasto .filtro-azzera{color:#000}
 html.contrasto .card-vai .ini-origine{background:#fff;box-shadow:inset 0 0 0 2px #000;color:#000}
 .filtri .sel-box,.filtri .campo-sel{width:100%;max-width:none}
 
+
+/* Mappa nelle pagine screening: spente = grigio chiaro, accese = blu. */
+.mappa-scr path.vuota{fill:#D5DCE4;stroke:#6B7A8C}
+.mappa-scr path.vuota:hover,.mappa-scr path.vuota:focus{fill:#C2CCD8;stroke:var(--inchiostro)}
+.mappa-leg{display:block;line-height:1.9}
+.leg-sw{display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid #4A5A6E;vertical-align:-2px;margin-right:6px}
+.leg-piena{background:var(--verde-mappa)}
+.leg-vuota{background:#D5DCE4;margin-left:6px}
+html.contrasto .mappa-scr path.vuota{fill:#fff;stroke:#000}
