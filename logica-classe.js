@@ -765,6 +765,7 @@ class Component extends DCLogic {
     return {
       tipo: this.nomiTipi(x), icona: this.icona(x.tipo), titolo: x.titolo, ente: x.ente, dove: x.dove,
       quando: x.quando, chi: x.chi, tel: x.tel || "", href: "tel:" + String(x.tel || "").split(" ").join(""),
+      tels: (x.tels && x.tels.length ? x.tels : (x.tel ? [x.tel] : [])).map((n) => ({ tel: n, href: "tel:" + String(n).split(" ").join("") })),
       haEnte: !!x.ente, haDove: !!x.dove, haQuando: !!x.quando, haChi: !!x.chi, haTel: !!x.tel,
       descrizione: x.descrizione || "", haDescrizione: !!x.descrizione,
       origine: this.origine(x), origineEtichetta: this.origineEtichetta(x), origineBreve: this.origine(x) === "programma" ? "Programma pubblico ASL" : "Iniziativa",
