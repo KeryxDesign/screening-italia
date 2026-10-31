@@ -176,6 +176,13 @@ window.__siLogicaRender = class {
       optTipo: optTipo, optOrigine: optOrigine, optCond: optCond, optScad: optScad,
       haCond: statiPresenti.length > 0, haScad: haScad,
       vTipo: sel[0] || "", vOrigine: fo, vCond: fc[0] || "", vScad: fs,
+      optRegione: this.nomiRegioni().map((n) => ({ v: n, t: n + " (" + (conteggi[n] || 0) + ")" })), vRegione: reg,
+      sceltaRegione: (e) => {
+        const n = e.target.value;
+        if (!n || n === reg) { return; }
+        this.filtriPorta = { tipi: sel.slice(), fq: this.state.fq || "", fo: fo, fc: fc.slice(), fs: fs };
+        this.vaiA(this.rottaRegione(n));
+      },
       sceltaTipo: (e) => this.setState({ tipi: e.target.value ? [e.target.value] : [] }),
       sceltaOrigine: (e) => this.setState({ fo: e.target.value }),
       sceltaCond: (e) => this.setState({ fc: e.target.value ? [e.target.value] : [] }),

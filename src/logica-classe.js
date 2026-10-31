@@ -571,7 +571,14 @@ class Component extends DCLogic {
     if (vista === "screening" && !this.scrValido(arg)) { arg = ""; }
     const sez = this.sezValida(vista, arg, p[2]);
     const nuova = { vista: vista, arg: arg, sez: sez };
-    this.setState({ rotta: nuova, tipi: [], fq: "", fo: "", fc: [], fs: "", fm: false, inviato: false, mail: "", menuAperto: "", msgInviato: false, mErr: null, ...this.rcDaRotta(nuova) },
+    // Cambio regione dalla tendina dei filtri: gli altri filtri restano (il tipo solo se la nuova regione lo ha).
+    const portati = this.filtriPorta || {};
+    this.filtriPorta = null;
+    if (portati.tipi && portati.tipi.length) {
+      const dest = (window.INIZIATIVE || []).filter((x) => x.reg === arg);
+      portati.tipi = portati.tipi.filter((t) => dest.some((x) => this.haTipo(x, t)));
+    }
+    this.setState({ rotta: nuova, tipi: [], fq: "", fo: "", fc: [], fs: "", fm: false, inviato: false, mail: "", menuAperto: "", msgInviato: false, mErr: null, ...this.rcDaRotta(nuova), ...portati },
       () => this.portaASezione());
     this.chiudiHamburger();
     window.scrollTo(0, 0);
