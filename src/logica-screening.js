@@ -59,12 +59,12 @@
       const o = {
         "S1·Occhiello": c["N1·Occhiello"], "S1·Titolo h1": "Cos'è lo screening neonatale",
         "S1·Sommario": c["N1·Sommario"], "S1·Riga di orientamento": "Cos'è, per chi è e dove farlo.", "S1·Etichetta CTA primaria": "Apri la tua regione",
-        "S2·Titolo h2": "Tocca a tutti i nuovi nati", "S2·Paragrafo": c["N2·Paragrafo"],
+        "S2·Titolo h2": "Se è nato un bambino, ti riguarda", "S2·Paragrafo": "Il test si fa a tutti i nuovi nati: non lo decidi tu e non serve chiederlo.",
         "S2·Cella 1 · h3": "Per tutti i neonati", "S2·Cella 1 · prosa": "Non lo decidi tu: fa parte delle cure alla nascita.", "S2·Cella 1 · etichetta icona": "Fascia di età",
         "S2·Cella 2 · h3": "Entro 48-72 ore dalla nascita", "S2·Cella 2 · prosa": "Si fa una sola volta, in ospedale, con una goccia di sangue dal tallone.", "S2·Cella 2 · etichetta icona": "Cadenza",
         "S2·Cella 3 · h3": "Offerto dal Servizio sanitario", "S2·Cella 3 · prosa": "Non si chiede e non si prenota.", "S2·Cella 3 · etichetta icona": "Costo",
         "S3·Titolo h2": c["N5·Titolo h2"],
-        "S4·Titolo h2": c["N2·Titolo h2"], "S4·Paragrafo": c["N1·Riquadro · prosa"],
+        "S4·Titolo h2": c["N2·Titolo h2"], "S4·Paragrafo": c["N2·Paragrafo"] + " " + c["N1·Riquadro · prosa"],
         "S5·Titolo h2": c["N3·Titolo h2"], "S5·Paragrafo": c["N3·Paragrafo"], "S5·Riquadro · h3": c["N3·Riquadro · titolo h3"], "S5·Riquadro · prosa": c["N3·Riquadro · prosa"],
         "S7·Titolo h2": c["N6·Titolo h2"],
         "S8·Titolo h2": "Dove farlo: scegli la tua regione", "S8·Paragrafo": c["N4·Paragrafo"],
@@ -82,7 +82,7 @@
       const o = {
         "S1·Occhiello": c["D1·Occhiello"], "S1·Titolo h1": "Cos'è lo screening di diabete tipo 1 e celiachia",
         "S1·Sommario": c["D1·Sommario"], "S1·Riga di orientamento": "Cos'è, per chi è e dove farlo.", "S1·Etichetta CTA primaria": "Apri la tua regione",
-        "S2·Titolo h2": c["D2·Titolo h2"], "S2·Paragrafo": c["D2·Paragrafo"] + " " + c["D2·Riga di cautela"],
+        "S2·Titolo h2": "Se hai un figlio, ti riguarda: lo chiedi al pediatra", "S2·Paragrafo": c["D2·Paragrafo"] + " " + c["D2·Riga di cautela"],
         "S2·Cella 1 · h3": "Per i bambini", "S2·Cella 1 · prosa": "Le fasce d'età le stabilisce il programma nazionale. Il pediatra dice se tuo figlio rientra.", "S2·Cella 1 · etichetta icona": "Fascia di età",
         "S2·Cella 2 · h3": "Nessuna lettera", "S2·Cella 2 · prosa": "Il percorso parte da chi segue tuo figlio: si chiede al pediatra.", "S2·Cella 2 · etichetta icona": "Come parte",
         "S2·Cella 3 · h3": "Programma pubblico", "S2·Cella 3 · prosa": c["D7·Risposta 4"], "S2·Cella 3 · etichetta icona": "Costo",
