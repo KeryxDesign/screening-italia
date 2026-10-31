@@ -778,7 +778,7 @@ class Component extends DCLogic {
     if (primo === "a pagamento") { cls = "tag tag-paga"; }
     if (primo === "su invito") { cls = "tag tag-invito"; }
     return {
-      tipo: this.nomiTipi(x), icona: this.icona(x.tipo), titolo: x.titolo, ente: x.ente, dove: x.dove,
+      tipo: this.nomiTipi(x), icona: this.icona(x.tipo), titolo: x.titolo, ente: x.ente, dove: x.dove, asl: x.asl || "", haAsl: !!x.asl, haAslCard: !!x.asl && String(x.asl).trim().toLowerCase() !== String(x.ente || "").trim().toLowerCase(),
       quando: x.quando, chi: x.chi, tel: x.tel || "", href: "tel:" + String(x.tel || "").split(" ").join(""),
       tels: (x.tels && x.tels.length ? x.tels : (x.tel ? [x.tel] : [])).map((n) => ({ tel: n, href: "tel:" + String(n).split(" ").join("") })),
       haEnte: !!x.ente, haDove: !!x.dove, haQuando: !!x.quando, haChi: !!x.chi, haTel: !!x.tel,

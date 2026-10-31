@@ -14,7 +14,7 @@ window.__siLogicaRender = class {
     const fo = this.state.fo || "";
     const fc = this.state.fc || [];
     const fs = this.state.fs || "";
-    const cerca = (x) => !fq || [x.titolo, x.ente, x.dove, x.quando, x.chi, this.nomiTipi(x)].join(" ").toLowerCase().indexOf(fq) !== -1;
+    const cerca = (x) => !fq || [x.titolo, x.ente, x.dove, x.asl, x.quando, x.chi, this.nomiTipi(x)].join(" ").toLowerCase().indexOf(fq) !== -1;
     // «salta»: la dimensione che si sta contando, cosi ogni chip mostra quante schede darebbe.
     const passa = (x, salta) => {
       if (!cerca(x)) { return false; }

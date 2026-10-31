@@ -181,6 +181,8 @@
       titolo: soloTesto(post.title && post.title.rendered),
       ente: testo(f.ente),
       dove: testo(f.dove),
+      /* ASL in cui si svolge (Florbo, 31/10/2026): campo «asl» del pannello, facoltativo. */
+      asl: testo(f.asl),
       quando: testo(f.quando),
       chi: testo(f.chi),
       tel: "",
@@ -225,6 +227,7 @@
     var manca = [];
     if (f.chiude != null && String(f.chiude).trim() !== "" && !x.chiude) { manca.push("chiude"); }
     if (!x.chiude) { delete x.chiude; }
+    if (!x.asl) { delete x.asl; }
     /* Facoltativi (richiesta di Angelo, 22/10/2026): ente, dove, quando, chi e telefono.
        Senza, la card non mostra la riga. Restano obbligatori regione, tipo, titolo. */
     ["id", "reg", "tipo", "titolo"]
