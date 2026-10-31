@@ -99,6 +99,16 @@
     return righe.join("\n").replace(/^\n+|\n+$/g, "");
   }
 
+  /* «Data (calendario)» del pannello (AAAAMMGG) -> «17 ottobre 2026». Solo se il testo libero del «Quando» è vuoto. */
+  function dataLeggibile(v) {
+    var m = /^(\d{4})-?(\d{2})-?(\d{2})$/.exec(typeof v === "string" ? v.trim() : "");
+    if (!m) { return ""; }
+    var mesi = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"];
+    var mese = parseInt(m[2], 10), giorno = parseInt(m[3], 10);
+    if (mese < 1 || mese > 12 || giorno < 1 || giorno > 31) { return ""; }
+    return giorno + " " + mesi[mese - 1] + " " + m[1];
+  }
+
   /* Solo valori della lista, confronto esatto. */
   function inLista(v, lista) {
     return typeof v === "string" && lista.indexOf(v) !== -1 ? v : "";
@@ -183,7 +193,7 @@
       dove: testo(f.dove),
       /* ASL in cui si svolge (Florbo, 31/10/2026): campo «asl» del pannello, facoltativo. */
       asl: testo(f.asl),
-      quando: testo(f.quando),
+      quando: testo(f.quando) || dataLeggibile(f.quando_data),
       chi: testo(f.chi),
       tel: "",
       stato: "",

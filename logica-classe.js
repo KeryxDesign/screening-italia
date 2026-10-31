@@ -810,6 +810,8 @@ class Component extends DCLogic {
       quandoPiuRighe: this.righeQuando(x.quando).length > 1,
       // Card cliccabile (24/09/2026): la card apre la pagina dell'iniziativa.
       id: x.id || "", hrefDettaglio: "/iniziativa/" + encodeURIComponent(x.id || ""),
+      // Immagine in evidenza dal pannello (solo https, gia filtrata in iniziative-wp.js).
+      immagine: x.immagine || "", haImmagine: !!x.immagine,
       reg: x.reg, hrefRegione: "/regione/" + encodeURIComponent(x.reg)
     };
   }
