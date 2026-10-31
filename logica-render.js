@@ -34,7 +34,7 @@ window.__siLogicaRender = class {
     nomiTipi.sort();
     const optTipo = [opz("", "Tutti gli screening", null)].concat(nomiTipi.map((t) =>
       opz(t, this.nomeTipo(t), tutte.filter((x) => passa(x, "tipo") && this.haTipo(x, t)).length)));
-    const optOrigine = [opz("", "Programmi e iniziative", null),
+    const optOrigine = [opz("", "Tutti", null),
       opz("programma", "Programmi pubblici", tutte.filter((x) => passa(x, "origine") && this.origine(x) === "programma").length),
       opz("iniziativa", "Iniziative di associazioni e privati", tutte.filter((x) => passa(x, "origine") && this.origine(x) === "iniziativa").length)];
     const statiPresenti = ["gratuito", "su invito", "a pagamento"].filter((c) => tutte.some((x) => this.statiDi(x).indexOf(c) !== -1));
