@@ -16,8 +16,8 @@
 <script src="./support.js?v=locale1027"></script>
 <script src="./logica-render.js?v=filtri1031j"></script>
 <script src="./logica-classe.js?v=filtri1031j"></script>
-<script src="./screening-pagine.js?v=gratis1031"></script>
-<script src="./logica-screening.js?v=ordine1031b"></script>
+<script src="./screening-pagine.js?v=struttura1031"></script>
+<script src="./logica-screening.js?v=struttura1031b"></script>
 </head>
 <body>
 <x-dc>
@@ -974,6 +974,17 @@
                     </div>
                   </sc-for>
                 </div>
+                <sc-if value="{{ scrSenzaInvito }}" hint-placeholder-val="{{ false }}">
+                  <div class="fx col gap12">
+                    <h3>{{ scr.bish2 }}</h3>
+                    <p>{{ scr.bisp }}</p>
+                    <ul class="scr-lista">
+                      <sc-for list="{{ scr.bisVoci }}" as="v" hint-placeholder-count="3">
+                        <li class="{{ v.cls }}">{{ v.t }}</li>
+                      </sc-for>
+                    </ul>
+                  </div>
+                </sc-if>
                 <!-- Angelo 19/10/2026: «Approfondisci» a fine sezione descrittiva, link scelto da lui. -->
                 <sc-if value="{{ scr.haAppr2 }}" hint-placeholder-val="{{ false }}">
                   <a class="cta-2 appr" href="{{ scr.appr2Href }}" target="_blank" rel="noopener noreferrer">{{ scr.appr2Et }}<span class="appr-nota">Si apre in una scheda nuova</span></a>
@@ -1086,49 +1097,6 @@
               </div>
             </div>
             </sc-if>
-            <sc-if value="{{ scrSenzaInvito }}" hint-placeholder-val="{{ false }}">
-            <div class="banda b-bianco wrap sezione" data-screen-label="Cosa esiste">
-              <div class="fx col gap20">
-                <h2>{{ scr.bish2 }}</h2>
-                <p>{{ scr.bisp }}</p>
-                <ul class="scr-lista">
-                  <sc-for list="{{ scr.bisVoci }}" as="v" hint-placeholder-count="3">
-                    <li class="{{ v.cls }}">{{ v.t }}</li>
-                  </sc-for>
-                </ul>
-              </div>
-            </div>
-
-            <div class="banda b-crema wrap sezione" data-screen-label="Passi">
-              <div class="fx col gap20">
-                <h2>{{ scr.s3h2 }}</h2>
-                <ol class="passi">
-                  <sc-for list="{{ scr.passi }}" as="s" hint-placeholder-count="4">
-                    <li class="passo">
-                      <span class="num">{{ s.n }}</span>
-                      <div class="passo-txt">
-                        <h3 class="passo-tit">{{ s.h3 }}</h3>
-                        <span class="passo-desc">{{ s.p }}</span>
-                      </div>
-                    </li>
-                  </sc-for>
-                </ol>
-              </div>
-            </div>
-
-            <div class="banda b-bianco wrap sezione" data-screen-label="Dentro l ambulatorio">
-              <div class="fx col gap20">
-                <h2>{{ scr.s4h2 }}</h2>
-                <p>{{ scr.s4p }}</p>
-                <ul class="scr-lista">
-                  <sc-for list="{{ scr.s4Voci }}" as="v" hint-placeholder-count="3">
-                    <li class="{{ v.cls }}">{{ v.t }}</li>
-                  </sc-for>
-                </ul>
-              </div>
-            </div>
-            </sc-if>
-
             <div class="banda b-verde wrap sezione" data-screen-label="La risposta">
               <div class="fx col gap20">
                 <h2>{{ scr.s5h2 }}</h2>
@@ -1137,6 +1105,13 @@
                   <h3>{{ scr.s5h3 }}</h3>
                   <p>{{ scr.s5prosa }}</p>
                 </div>
+                <sc-if value="{{ scr.haS5Voci }}" hint-placeholder-val="{{ false }}">
+                  <ul class="scr-lista">
+                    <sc-for list="{{ scr.s5Voci }}" as="v" hint-placeholder-count="3">
+                      <li class="{{ v.cls }}">{{ v.t }}</li>
+                    </sc-for>
+                  </ul>
+                </sc-if>
                 <sc-if value="{{ scr.haHpv }}" hint-placeholder-val="{{ false }}">
                   <p class="nota"><a href="{{ scr.hrefHpv }}">{{ scr.hpv }}</a></p>
                 </sc-if>
@@ -1182,273 +1157,6 @@
               </div>
             </div>
 
-          </div>
-        </sc-if>
-
-        <sc-if value="{{ scrGenitori }}" hint-placeholder-val="{{ false }}">
-          <div class="pag-scr" data-screen-label="Screening GENITORI">
-
-            <sc-if value="{{ scrNeo }}" hint-placeholder-val="{{ false }}">
-            <div data-screen-label="Neonatale">
-            <div class="banda b-carta wrap sezione" data-screen-label="Apertura screening">
-              <div class="fx col gap16">
-                <p class="nota"><a href="/screening">{{ scr.ritorno }}</a></p>
-                <div class="occhiello">{{ scr.occhiello }}</div>
-                <h1>{{ scr.h1 }}</h1>
-                <p>{{ scr.sommario }}</p>
-                <button type="button" class="cta" onClick="{{ scr.scendiDir }}">{{ scr.cta }}</button>
-                <div class="avviso fx col gap8">
-                  <h3>{{ scr.riqH3 }}</h3>
-                  <p>{{ scr.riqP }}</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="banda b-bianco wrap sezione" data-screen-label="N2">
-              <div class="fx col gap20">
-                <h2>{{ scr.n2h2 }}</h2>
-                <p>{{ scr.n2p }}</p>
-                <ul class="scr-lista">
-                  <sc-for list="{{ scr.n2Voci }}" as="v" hint-placeholder-count="3">
-                    <li class="{{ v.cls }}">{{ v.t }}</li>
-                  </sc-for>
-                </ul>
-              </div>
-            </div>
-
-            <div class="banda b-crema wrap sezione" data-screen-label="N3">
-              <div class="fx col gap20">
-                <h2>{{ scr.n3h2 }}</h2>
-                <p>{{ scr.n3p }}</p>
-                <div class="avviso fx col gap8">
-                  <h3>{{ scr.n3h3 }}</h3>
-                  <p>{{ scr.n3prosa }}</p>
-                </div>
-                <ul class="scr-lista">
-                  <sc-for list="{{ scr.n3Voci }}" as="v" hint-placeholder-count="3">
-                    <li class="{{ v.cls }}">{{ v.t }}</li>
-                  </sc-for>
-                </ul>
-              </div>
-            </div>
-
-            <div class="banda b-bianco wrap sezione scr-bersaglio scr-dir" id="scr-dir" data-screen-label="Direttorio neonatale">
-              <div class="fx col gap20">
-                <h2 tabindex="-1">{{ scr.n4h2 }}</h2>
-                <p>{{ scr.n4p }}</p>
-                <sc-if value="{{ scr.dirGriglia }}" hint-placeholder-val="{{ false }}">
-                <div class="griglia-reg">
-                  <sc-for list="{{ scr.regioni }}" as="r" hint-placeholder-count="20">
-                    <button type="button" class="{{ r.cls }}" onClick="{{ r.pick }}" aria-pressed="{{ r.on }}">
-                      <span>{{ r.vis }}</span>
-                      <sc-if value="{{ r.haN }}" hint-placeholder-val="{{ false }}"><span class="n">{{ r.n }}</span></sc-if>
-                    </button>
-                  </sc-for>
-                </div>
-                </sc-if>
-                <sc-for list="{{ scr.dirSchede }}" as="d" hint-placeholder-count="1">
-                  <div class="card fx col gap14 scr-ris">
-                    <h3>{{ d.ente }}</h3>
-                    <p>{{ scr.n4cosa }}</p>
-                    <sc-if value="{{ d.haLab }}" hint-placeholder-val="{{ false }}">
-                      <div class="dato"><span class="et">{{ scr.n4lab }}</span><span class="vl">{{ d.lab }}</span></div>
-                    </sc-if>
-                    <sc-if value="{{ d.haTel }}" hint-placeholder-val="{{ false }}">
-                      <a class="tel" href="{{ d.href }}">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.2 3.5H4.9a1.4 1.4 0 00-1.4 1.5c.5 8.2 7.3 15 15.5 15.5a1.4 1.4 0 001.5-1.4v-2.3a1.4 1.4 0 00-1.2-1.4l-2.8-.4a1.4 1.4 0 00-1.4.7l-.8 1.4a11.6 11.6 0 01-5.6-5.6l1.4-.8a1.4 1.4 0 00.7-1.4l-.4-2.8a1.4 1.4 0 00-1.4-1.2z"></path></svg>
-                        {{ scr.telEt }}
-                      </a>
-                    </sc-if>
-                    <p class="nota">{{ scr.n4nota }}</p>
-                  </div>
-                </sc-for>
-                <sc-if value="{{ scr.dirVuoto }}" hint-placeholder-val="{{ false }}">
-                  <div class="avviso fx col gap8 scr-ris">
-                    <h3>{{ scr.dirVuotoH3 }}</h3>
-                    <p>{{ scr.dirVuotoP }}</p>
-                  </div>
-                </sc-if>
-              </div>
-            </div>
-
-            <div class="banda b-verde wrap sezione" data-screen-label="Passi">
-              <div class="fx col gap20">
-                <h2>{{ scr.n5h2 }}</h2>
-                <ol class="passi">
-                  <sc-for list="{{ scr.passi }}" as="s" hint-placeholder-count="4">
-                    <li class="passo">
-                      <span class="num">{{ s.n }}</span>
-                      <div class="passo-txt">
-                        <h3 class="passo-tit">{{ s.h3 }}</h3>
-                        <span class="passo-desc">{{ s.p }}</span>
-                      </div>
-                    </li>
-                  </sc-for>
-                </ol>
-              </div>
-            </div>
-
-            <div class="banda b-bianco wrap sezione" data-screen-label="Domande">
-              <div class="fx col gap20">
-                <h2>{{ scr.n6h2 }}</h2>
-                <div class="scr-domande fx col gap14">
-                  <sc-for list="{{ scr.domande }}" as="q" hint-placeholder-count="4">
-                    <details class="elenco">
-                      <summary>
-                        <h3>{{ q.d }}</h3>
-                        <svg class="frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
-                      </summary>
-                      <p>{{ q.r }}</p>
-                    </details>
-                  </sc-for>
-                </div>
-              </div>
-            </div>
-
-            <div class="banda b-crema wrap sezione" data-screen-label="N7">
-              <div class="fx col gap20">
-                <h2>{{ scr.n7h2 }}</h2>
-                <p>{{ scr.n7p }}</p>
-                <ul class="scr-lista">
-                  <sc-for list="{{ scr.n7Voci }}" as="v" hint-placeholder-count="3">
-                    <li class="{{ v.cls }}">{{ v.t }}</li>
-                  </sc-for>
-                </ul>
-              </div>
-            </div>
-
-            <div class="banda b-bianco wrap sezione" data-screen-label="Cosa non facciamo">
-              <p class="scr-cosa">{{ scr.n9 }}</p>
-            </div>
-
-            <div class="banda b-crema b-avvertenza wrap sezione" data-screen-label="Chiusura">
-              <div class="fx col gap12">
-                <p class="nota">{{ scr.n8 }}</p>
-                <p class="nota">{{ scr.nonAff }}</p>
-              </div>
-            </div>
-            </div>
-            </sc-if>
-
-            <sc-if value="{{ scrDia }}" hint-placeholder-val="{{ false }}">
-            <div data-screen-label="Diabete e celiachia">
-            <div class="banda b-carta wrap sezione" data-screen-label="Apertura screening">
-              <div class="fx col gap16">
-                <p class="nota"><a href="/screening">{{ scr.ritorno }}</a></p>
-                <div class="occhiello">{{ scr.occhiello }}</div>
-                <h1>{{ scr.h1 }}</h1>
-                <p>{{ scr.sommario }}</p>
-                <button type="button" class="cta" onClick="{{ scr.scendiDomanda }}">{{ scr.cta }}</button>
-                <div class="avviso">
-                  <p>{{ scr.riqP }}</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="banda b-bianco wrap sezione" data-screen-label="D2">
-              <div class="fx col gap20">
-                <h2>{{ scr.d2h2 }}</h2>
-                <p>{{ scr.d2p }}</p>
-                <ul class="scr-lista">
-                  <sc-for list="{{ scr.d2Voci }}" as="v" hint-placeholder-count="3">
-                    <li class="{{ v.cls }}">{{ v.t }}</li>
-                  </sc-for>
-                </ul>
-                <p class="nota">{{ scr.d2cautela }}</p>
-              </div>
-            </div>
-
-            <div class="banda b-crema wrap sezione" data-screen-label="D3 Stato">
-              <div class="card fx col gap12 scr-stato">
-                <h3>{{ scr.d3h3 }}</h3>
-                <p class="scr-data">{{ scr.d3data }}</p>
-                <p class="{{ scr.d3pCls }}">{{ scr.d3p }}</p>
-                <p class="{{ scr.d3notaCls }}">{{ scr.d3nota }}</p>
-              </div>
-            </div>
-
-            <div class="banda b-verde wrap sezione scr-bersaglio" id="scr-domanda" data-screen-label="D4 La domanda">
-              <div class="fx col gap20">
-                <h2 tabindex="-1">{{ scr.d4h2 }}</h2>
-                <p>{{ scr.d4p }}</p>
-                <p class="scr-frase">{{ scr.d4frase }}</p>
-                <p class="nota">{{ scr.d4nota }}</p>
-              </div>
-            </div>
-
-            <div class="banda b-bianco wrap sezione scr-bersaglio scr-dir" id="scr-dir" data-screen-label="Direttorio diabete">
-              <div class="fx col gap20">
-                <h2 tabindex="-1">{{ scr.d5h2 }}</h2>
-                <p>{{ scr.d5p }}</p>
-                <sc-if value="{{ scr.dirGriglia }}" hint-placeholder-val="{{ false }}">
-                <div class="griglia-reg">
-                  <sc-for list="{{ scr.regioni }}" as="r" hint-placeholder-count="20">
-                    <button type="button" class="{{ r.cls }}" onClick="{{ r.pick }}" aria-pressed="{{ r.on }}">
-                      <span>{{ r.vis }}</span>
-                      <sc-if value="{{ r.haN }}" hint-placeholder-val="{{ false }}"><span class="n">{{ r.n }}</span></sc-if>
-                    </button>
-                  </sc-for>
-                </div>
-                </sc-if>
-                <sc-for list="{{ scr.dirSchede }}" as="d" hint-placeholder-count="1">
-                  <div class="card fx col gap14 scr-ris">
-                    <div><span class="{{ d.tagCls }}">{{ d.stato }}</span></div>
-                    <h3>{{ d.ente }}</h3>
-                  </div>
-                </sc-for>
-                <sc-if value="{{ scr.haSchede }}" hint-placeholder-val="{{ false }}">
-                  <p class="nota scr-d5nota">{{ scr.d5nota }}</p>
-                </sc-if>
-                <sc-if value="{{ scr.dirVuoto }}" hint-placeholder-val="{{ false }}">
-                  <div class="avviso fx col gap8 scr-ris">
-                    <h3>{{ scr.dirVuotoH3 }}</h3>
-                    <p>{{ scr.dirVuotoP }}</p>
-                  </div>
-                </sc-if>
-              </div>
-            </div>
-
-            <div class="banda b-crema wrap sezione" data-screen-label="D6 Esito positivo">
-              <div class="fx col gap20">
-                <h2>{{ scr.d6h2 }}</h2>
-                <p>{{ scr.d6p }}</p>
-                <div class="avviso fx col gap8">
-                  <h3>{{ scr.d6h3 }}</h3>
-                  <p>{{ scr.d6prosa }}</p>
-                </div>
-                <!-- Numero D6 e sua spiegazione: nascosti finche non c'e una fonte pubblica (brief §2.3). -->
-              </div>
-            </div>
-
-            <div class="banda b-bianco wrap sezione" data-screen-label="Domande">
-              <div class="fx col gap20">
-                <h2>{{ scr.d7h2 }}</h2>
-                <div class="scr-domande fx col gap14">
-                  <sc-for list="{{ scr.domande }}" as="q" hint-placeholder-count="4">
-                    <details class="elenco">
-                      <summary>
-                        <h3>{{ q.d }}</h3>
-                        <svg class="frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
-                      </summary>
-                      <p>{{ q.r }}</p>
-                    </details>
-                  </sc-for>
-                </div>
-              </div>
-            </div>
-
-            <div class="banda b-crema wrap sezione" data-screen-label="Cosa non facciamo">
-              <p class="scr-cosa">{{ scr.n9 }}</p>
-            </div>
-
-            <div class="banda b-crema b-avvertenza wrap sezione" data-screen-label="Chiusura">
-              <div class="fx col gap12">
-                <p class="nota">{{ scr.n8 }}</p>
-                <p class="nota">{{ scr.nonAff }}</p>
-              </div>
-            </div>
-            </div>
-            </sc-if>
           </div>
         </sc-if>
 

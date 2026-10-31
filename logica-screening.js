@@ -12,7 +12,7 @@
   const HREF_INVITO = null;  // S6, «/invito/»
 
   const SLUG = ["mammografico", "cervicale", "colon-retto", "prostata", "neonatale", "diabete-celiachia", "cardiovascolare"];
-  const TIPO = { "mammografico": "Mammografico", "cervicale": "Cervice uterina", "colon-retto": "Colon-retto", "prostata": "Prostata", "cardiovascolare": "Cardiovascolare" };
+  const TIPO = { "mammografico": "Mammografico", "cervicale": "Cervice uterina", "colon-retto": "Colon-retto", "prostata": "Prostata", "cardiovascolare": "Cardiovascolare", "neonatale": "Neonatale", "diabete-celiachia": "Diabete e celiachia pediatrici" };
 
   // Icone (brief §3.5): SVG inline, tratto 2px, sempre accanto a un'etichetta scritta.
   const PERSONA = "M12 12.6a4.05 4.05 0 100-8.1 4.05 4.05 0 000 8.1M4.5 20.2c0-3.3 3.4-5.2 7.5-5.2s7.5 1.9 7.5 5.2";
@@ -47,6 +47,62 @@
   // I buchi di dato del copy si mostrano in .finto (brief §2.3), mai nascosti in anteprima.
   const buco = (t) => /\[(DATO MANCANTE|DA DECIDERE)/.test(t || "");
   const cls = (base, t) => (base ? base + (buco(t) ? " finto" : "") : (buco(t) ? "finto" : ""));
+
+
+  // Neonatale e diabete-celiachia: i testi esistenti (N1..N9, D1..D9) rimessi nei blocchi del modello
+  // comune (S1..S11), senza aggiungere dati clinici. Dove un blocco non ha contenuto resta una frase
+  // neutra o il blocco non c'e. I segnaposto [DATO MANCANTE] non si mostrano ai cittadini.
+  function comeAdulto(slug, c, m) {
+    if (slug === "neonatale") {
+      const q = serie(c, "N6·Domanda", "", " ").map((t, i) => ({ d: t, r: c["N6·Risposta " + (i + 1)] }));
+      q.push({ d: "Se il bambino deve ancora nascere?", r: c["N7·Paragrafo"] + " " + serie(c, "N7·Voce puntata").join(". ") + "." });
+      const o = {
+        "S1·Occhiello": c["N1·Occhiello"], "S1·Titolo h1": "Cos'è lo screening neonatale",
+        "S1·Sommario": c["N1·Sommario"], "S1·Riga di orientamento": "Cos'è, per chi è e dove farlo.", "S1·Etichetta CTA primaria": "Apri la tua regione",
+        "S2·Titolo h2": "Tocca a tutti i nuovi nati", "S2·Paragrafo": c["N2·Paragrafo"],
+        "S2·Cella 1 · h3": "Per tutti i neonati", "S2·Cella 1 · prosa": "Non lo decidi tu: fa parte delle cure alla nascita.", "S2·Cella 1 · etichetta icona": "Fascia di età",
+        "S2·Cella 2 · h3": "Entro 48-72 ore dalla nascita", "S2·Cella 2 · prosa": "Si fa una sola volta, in ospedale, con una goccia di sangue dal tallone.", "S2·Cella 2 · etichetta icona": "Cadenza",
+        "S2·Cella 3 · h3": "Offerto dal Servizio sanitario", "S2·Cella 3 · prosa": "Non si chiede e non si prenota.", "S2·Cella 3 · etichetta icona": "Costo",
+        "S3·Titolo h2": c["N5·Titolo h2"],
+        "S4·Titolo h2": c["N2·Titolo h2"], "S4·Paragrafo": c["N1·Riquadro · prosa"],
+        "S5·Titolo h2": c["N3·Titolo h2"], "S5·Paragrafo": c["N3·Paragrafo"], "S5·Riquadro · h3": c["N3·Riquadro · titolo h3"], "S5·Riquadro · prosa": c["N3·Riquadro · prosa"],
+        "S7·Titolo h2": c["N6·Titolo h2"],
+        "S8·Titolo h2": "Dove farlo: scegli la tua regione", "S8·Paragrafo": c["N4·Paragrafo"],
+        "S8-b·Titolo h2": m["N4-b·Titolo h3"], "S8-b·Prosa": m["N4-b·Prosa"], "S8-b·Etichetta piena": "Segnala un'iniziativa", "S8-b·Etichetta a contorno": "Torna alla mappa",
+        "S9·Testo 17": c["N9"], "S11·Testo 17": c["N8"],
+        "Microtesti·Titolo per Google": c["Microtesti·Titolo per Google"], "Microtesti·Descrizione per Google": c["Microtesti·Descrizione per Google"]
+      };
+      for (let i = 1; i <= 4; i++) { o["S3·Passo " + i + " · h3"] = c["N5·Passo " + i + " · titolo h3"]; o["S3·Passo " + i + " · prosa"] = c["N5·Passo " + i + " · prosa"]; }
+      serie(c, "N2·Voce puntata").forEach((t, i) => { o["S4·Voce " + (i + 1)] = t; });
+      serie(c, "N3·Voce puntata").forEach((t, i) => { o["S5·Voce " + (i + 1)] = t; });
+      q.forEach((x, i) => { o["S7·D" + (i + 1)] = x.d; o["S7·R" + (i + 1)] = x.r; });
+      return o;
+    }
+    if (slug === "diabete-celiachia") {
+      const o = {
+        "S1·Occhiello": c["D1·Occhiello"], "S1·Titolo h1": "Cos'è lo screening di diabete tipo 1 e celiachia",
+        "S1·Sommario": c["D1·Sommario"], "S1·Riga di orientamento": "Cos'è, per chi è e dove farlo.", "S1·Etichetta CTA primaria": "Apri la tua regione",
+        "S2·Titolo h2": c["D2·Titolo h2"], "S2·Paragrafo": c["D2·Paragrafo"] + " " + c["D2·Riga di cautela"],
+        "S2·Cella 1 · h3": "Per i bambini", "S2·Cella 1 · prosa": "Le fasce d'età le stabilisce il programma nazionale. Il pediatra dice se tuo figlio rientra.", "S2·Cella 1 · etichetta icona": "Fascia di età",
+        "S2·Cella 2 · h3": "Nessuna lettera", "S2·Cella 2 · prosa": "Il percorso parte da chi segue tuo figlio: si chiede al pediatra.", "S2·Cella 2 · etichetta icona": "Come parte",
+        "S2·Cella 3 · h3": "Programma pubblico", "S2·Cella 3 · prosa": c["D7·Risposta 4"], "S2·Cella 3 · etichetta icona": "Costo",
+        "S3·Titolo h2": c["D4·Titolo h2"],
+        "S3·Passo 1 · h3": "Fai la domanda al pediatra", "S3·Passo 1 · prosa": c["D4·Paragrafo"] + " " + c["D4·La frase da ripetere in ambulatorio"],
+        "S3·Passo 2 · h3": "Se la risposta non è chiara", "S3·Passo 2 · prosa": c["D4·Nota sotto la frase"],
+        "S3·Passo 3 · h3": "Il pediatra avvia il percorso", "S3·Passo 3 · prosa": c["D7·Risposta 1"],
+        "S4·Titolo h2": "Cosa prevede la legge", "S4·Paragrafo": c["D1·Riquadro · prosa (L. 130/2023)"],
+        "S5·Titolo h2": c["D6·Titolo h2"], "S5·Paragrafo": c["D6·Paragrafo"], "S5·Riquadro · h3": c["D6·Riquadro · titolo h3"], "S5·Riquadro · prosa": c["D6·Riquadro · prosa"],
+        "S7·Titolo h2": c["D7·Titolo h2"],
+        "S8·Titolo h2": "Dove farlo: scegli la tua regione", "S8·Paragrafo": c["D5·Paragrafo"],
+        "S8-b·Titolo h2": m["D5-b·Titolo h3"], "S8-b·Prosa": m["D5-b·Prosa"], "S8-b·Etichetta piena": "Segnala un'iniziativa", "S8-b·Etichetta a contorno": "Torna alla mappa",
+        "S9·Testo 17": c["D9"], "S11·Testo 17": c["D8"],
+        "Microtesti·Titolo per Google": c["Microtesti·Titolo per Google"], "Microtesti·Descrizione per Google": c["Microtesti·Descrizione per Google"]
+      };
+      serie(c, "D7·Domanda", "", " ").forEach((t, i) => { o["S7·D" + (i + 1)] = t; o["S7·R" + (i + 1)] = c["D7·Risposta " + (i + 1)]; });
+      return o;
+    }
+    return c;
+  }
 
   function slugValido(arg) { return SLUG.indexOf(arg) !== -1; }
 
@@ -120,15 +176,15 @@
     const m = M();
     const out = {
       vistaScr: dentro,
-      scrAdulti: dentro && ["mammografico", "cervicale", "colon-retto", "prostata", "cardiovascolare"].indexOf(slug) !== -1,
-      scrOnco: dentro && ["mammografico", "cervicale", "colon-retto"].indexOf(slug) !== -1,
+      // Tutte le pagine screening hanno la stessa struttura (Davide 31/10/2026): neonatale e diabete
+      // passano dallo stesso modello, con i loro testi rimappati da comeAdulto().
+      scrAdulti: dentro,
+      scrOnco: dentro,
       scrProstata: slug === "prostata",
       // Senza invito nazionale: prostata e cardiovascolare (17/10/2026) usano le stesse bande.
       scrSenzaInvito: slug === "prostata" || slug === "cardiovascolare",
-      scrGenitori: slug === "neonatale" || slug === "diabete-celiachia",
-      scrNeo: slug === "neonatale",
-      scrDia: slug === "diabete-celiachia",
-      scrHome: {
+      scrGenitori: false,
+                  scrHome: {
         h2: m["H·Titolo h2"],
         // Due gruppi (Angelo 17/10): oncologici e altri; icone proprie per ogni screening (Davide 21/10).
         onco: SLUG.slice(0, 4).map((s, i) => cartaHome(m, s, i)),
@@ -138,18 +194,18 @@
     };
     if (!dentro) { return out; }
 
-    const c = P()[slug] || {};
+    const c = comeAdulto(slug, P()[slug] || {}, M());
     const na = window.SI_NON_AFFILIAZIONE || {};
     const v = {
       ritorno: m["R·Link"],
-      nonAff: out.scrGenitori ? na.genitori : na.adulti,
+      nonAff: (slug === "neonatale" || slug === "diabete-celiachia") ? na.genitori : na.adulti,
       scendiRegione: () => scendi("scr-regione"),
       scendiDir: () => scendi("scr-dir"),
       scendiDomanda: () => scendi("scr-domanda")
     };
 
-    if (!out.scrGenitori) {
-      // --- ONCO e PROSTATA ---
+    {
+      // --- stessa struttura per tutte le pagine ---
       const celle = serie(c, "S2·Cella", " · h3").map((t, i) => {
         const et = c["S2·Cella " + (i + 1) + " · etichetta icona"];
         return { h3: t, p: c["S2·Cella " + (i + 1) + " · prosa"], et: et, icona: ICONA_CELLA[et] || INFO };
@@ -175,6 +231,7 @@
         s3h2: c["S3·Titolo h2"], passi: passi(c, "S3", "h3", "prosa"),
         s4h2: c["S4·Titolo h2"], s4p: c["S4·Paragrafo"], s4Voci: voci(c, "S4·Voce"),
         s5h2: c["S5·Titolo h2"], s5p: c["S5·Paragrafo"], s5h3: c["S5·Riquadro · h3"], s5prosa: c["S5·Riquadro · prosa"],
+        s5Voci: voci(c, "S5·Voce"), haS5Voci: !!c["S5·Voce 1"],
         haHpv: !!HREF_HPV && !!c["S5·Etichetta di rimando a /hpv/"], hrefHpv: HREF_HPV || "", hpv: c["S5·Etichetta di rimando a /hpv/"] || "",
         haInvito: !!HREF_INVITO, hrefInvito: HREF_INVITO || "",
         s6h2: c["S6·Titolo h2"], s6p: c["S6·Prosa"], s6btn: c["S6·Etichetta bottone a contorno"],
@@ -194,62 +251,6 @@
       });
       return Object.assign(out, { scr: v });
     }
-
-    // --- GENITORI ---
-    const neo = slug === "neonatale";
-    const X = neo ? "N" : "D";
-    const dir = (window.SI_DIRETTORIO || {})[neo ? "neonatale" : "diabete"] || {};
-    const reg = stato.regScr || null;
-    const voce = reg ? dir[reg] : null;
-    const haDati = Object.keys(dir).some((k) => Array.isArray(dir[k]) ? dir[k].length > 0 : !!dir[k]);
-    const tagCls = { "attivo": "tag tag-gratis", "in avvio": "tag tag-paga", "non attivo": "tag" };
-    const parole = String(c["D5·Scheda · etichetta di stato"] || "").split(" · ");
-    Object.assign(v, {
-      occhiello: c[X + "1·Occhiello"], h1: c[X + "1·Titolo h1"], sommario: c[X + "1·Sommario"],
-      cta: neo ? c["Microtesti·Etichetta del bottone del direttorio · variante 1"] : c["Microtesti·Etichetta del bottone · variante 1"],
-      regioni: griglia(comp, null, "scr-dir"),
-      // Risposta 6 LORI giro 1: se nessuna regione ha dati la griglia non si mostra e l'avviso
-      // compare subito; se almeno una ne ha, griglia e avviso al clic.
-      dirGriglia: haDati,
-      dirVuoto: !haDati || (!!reg && !voce),
-      dirVuotoH3: neo ? m["N4-b·Titolo h3"] : m["D5-b·Titolo h3"],
-      dirVuotoP: neo ? m["N4-b·Prosa"] : m["D5-b·Prosa"],
-      n9: c[X + "9"], n8: c[X + "8"]
-    });
-    if (neo) {
-      Object.assign(v, {
-        riqH3: c["N1·Riquadro · titolo h3"], riqP: c["N1·Riquadro · prosa"],
-        n2h2: c["N2·Titolo h2"], n2p: c["N2·Paragrafo"], n2Voci: voci(c, "N2·Voce puntata"),
-        n3h2: c["N3·Titolo h2"], n3p: c["N3·Paragrafo"], n3h3: c["N3·Riquadro · titolo h3"], n3prosa: c["N3·Riquadro · prosa"], n3Voci: voci(c, "N3·Voce puntata"),
-        n4h2: c["N4·Titolo h2"], n4p: c["N4·Paragrafo"], n4cosa: c["N4·Scheda · che cos'è, in una riga"], n4lab: c["N4·Scheda · etichetta laboratorio"], n4nota: c["N4·Scheda · nota"],
-        telEt: c["Microtesti·Etichetta del recapito telefonico"],
-        // Direttorio neonatale: una voce per regione { ente, laboratorio, tel }.
-        dirSchede: voce ? [{ ente: voce.ente || "", lab: voce.laboratorio || "", haLab: !!voce.laboratorio,
-          haTel: !!voce.tel, href: "tel:" + String(voce.tel || "").split(" ").join("") }] : [],
-        n5h2: c["N5·Titolo h2"], passi: passi(c, "N5", "titolo h3", "prosa"),
-        n6h2: c["N6·Titolo h2"], domande: domande(c, "N6·Domanda", "N6·Risposta"),
-        n7h2: c["N7·Titolo h2"], n7p: c["N7·Paragrafo"], n7Voci: voci(c, "N7·Voce puntata")
-      });
-    } else {
-      const d3p = c["D3·Prosa: a che punto è l'attuazione"], d3n = c["D3·Nota"];
-      Object.assign(v, {
-        riqP: c["D1·Riquadro · prosa (L. 130/2023)"],
-        d2h2: c["D2·Titolo h2"], d2p: c["D2·Paragrafo"], d2Voci: voci(c, "D2·Voce puntata"), d2cautela: c["D2·Riga di cautela"],
-        d3h3: c["D3·Titolo h3"], d3data: c["D3·Data di aggiornamento"], d3p: d3p, d3pCls: cls("", d3p), d3nota: d3n, d3notaCls: cls("nota", d3n),
-        d4h2: c["D4·Titolo h2"], d4p: c["D4·Paragrafo"], d4frase: c["D4·La frase da ripetere in ambulatorio"], d4nota: c["D4·Nota sotto la frase"],
-        d5h2: c["D5·Titolo h2"], d5p: c["D5·Paragrafo"], d5nota: c["D5·Scheda · nota"],
-        // Direttorio diabete: per regione un elenco [{ ente, stato: "attivo" | "in avvio" | "non attivo" }].
-        // La parola di stato viene dal copy (D5·Scheda · etichetta di stato), mai solo colore.
-        dirSchede: (Array.isArray(voce) ? voce : (voce ? [voce] : [])).map((x) => ({
-          ente: x.ente || "", stato: parole.indexOf(x.stato) !== -1 ? x.stato : "", tagCls: tagCls[x.stato] || "tag"
-        })),
-        d6h2: c["D6·Titolo h2"], d6p: c["D6·Paragrafo"], d6h3: c["D6·Riquadro · titolo h3"], d6prosa: c["D6·Riquadro · prosa"],
-        d7h2: c["D7·Titolo h2"], domande: domande(c, "D7·Domanda", "D7·Risposta")
-      });
-      if (Array.isArray(voce) && voce.length === 0) { v.dirVuoto = true; }
-      v.haSchede = v.dirSchede.length > 0;
-    }
-    return Object.assign(out, { scr: v });
   }
 
   // Titolo della scheda e meta description (brief §1.1): «Titolo per Google», tetto 60,
@@ -263,7 +264,7 @@
       }
       return false;
     }
-    const c = P()[r.arg] || {};
+    const c = comeAdulto(r.arg, P()[r.arg] || {}, M());
     let t = c["Microtesti·Titolo per Google"] || "";
     if (Array.from(t).length > 60) { t = Array.from(t).slice(0, 59).join("") + "…"; }
     if (t && document.title !== t) { document.title = t; }
