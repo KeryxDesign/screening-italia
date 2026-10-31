@@ -182,6 +182,10 @@
     });
     x.stato = stati.join(" · ");
     x.stati = stati;
+    /* Programma pubblico o iniziativa di associazione/privato (Florbo, 31/10/2026): campo «origine» del pannello.
+       Se manca o non e riconosciuto non si scrive niente: il sito lo deduce dall'ente. */
+    var origine = String(f.origine == null ? "" : f.origine).trim().toLowerCase();
+    if (origine === "programma" || origine === "iniziativa") { x.origine = origine; }
     x.tipo = tipi[0] || "";
     x.tipi = tipi;
     var manca = [];

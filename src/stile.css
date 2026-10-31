@@ -1880,3 +1880,31 @@ html.contrasto .scr-home .scr-tab-altri .scr-carta svg.scr-ci{box-shadow:none}
   color:#A9BBCD;cursor:default;box-shadow:inset 0 -1.5px 0 rgba(255,255,255,0.14)}
 .nav-riga .nav-menu .nav-presto small{font-size:14px;margin-left:8px;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,0.12)}
 .menu-chk:checked ~ .nav-riga .nav-menu .nav-presto{padding:0 20px 0 40px}
+
+/* --- Barra filtri della pagina regione (Florbo 31/10/2026, modello: siti di eventi) --- */
+.filtri{display:flex;flex-direction:column;gap:16px;background:#E7EEF5;border-radius:14px;padding:20px}
+.filtri-cerca{display:flex;flex-direction:column;gap:8px}
+.filtri-toggle{min-height:52px}
+.filtri-corpo{display:none;flex-direction:column;gap:18px}
+.filtri-corpo.aperta{display:flex}
+@media (min-width:720px){.filtri-toggle{display:none}.filtri-corpo{display:flex}.filtri{padding:24px 28px}}
+.filtri-gruppo{border:0;margin:0;padding:0;min-width:0;display:flex;flex-direction:column;gap:8px}
+.filtri-gruppo legend{padding:0;font-size:16px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--verde-scuro);margin-bottom:8px}
+.filtri-chips{display:flex;flex-wrap:wrap;gap:10px}
+.filtri .filtro{display:inline-flex;align-items:center;gap:8px;white-space:normal;text-align:left}
+.filtri .filtro:hover{border-color:var(--verde);background:var(--verde-tenue)}
+.filtri .filtro.on:hover{background:var(--verde-scuro)}
+.filtri .filtro:focus-visible,.filtri .campo:focus-visible{outline:3px solid var(--terracotta);outline-offset:2px}
+.filtro-ico{width:20px;height:20px;flex-shrink:0}
+.filtro-n{font-weight:400;font-size:16px;opacity:.85}
+.filtri-esito{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.filtri-esito .nota{margin:0}
+.filtro-azzera{color:var(--terracotta);border-color:var(--terracotta)}
+.gruppo-ini{display:flex;flex-direction:column;gap:18px}
+.gruppo-ini + .gruppo-ini{margin-top:20px}
+.gruppo-h{text-align:left;margin-left:0}
+.gruppo-n{display:inline-block;min-width:34px;padding:2px 12px;border-radius:999px;background:#fff;color:var(--verde-scuro);font-size:19px;font-weight:700;vertical-align:middle}
+html.contrasto .filtri{background:#fff;box-shadow:inset 0 0 0 2.5px #000}
+html.contrasto .filtri .filtro{border-color:#000;color:#000}
+html.contrasto .filtri .filtro.on{background:#003C75;color:#fff}
+html.contrasto .filtro-azzera{color:#000}

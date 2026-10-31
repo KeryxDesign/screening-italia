@@ -7,43 +7,84 @@ window.__siLogicaRender = class {
     const conteggi = this.conteggi();
 
     // --- regione ---
+    // Barra filtri (Florbo 31/10/2026): ricerca, chi organizza, screening, condizioni, scadenza.
     const tutte = dati.filter((x) => x.reg === reg);
     const sel = this.state.tipi;
+    const fq = String(this.state.fq || "").trim().toLowerCase();
+    const fo = this.state.fo || "";
+    const fc = this.state.fc || [];
+    const fs = this.state.fs || "";
+    const cerca = (x) => !fq || [x.titolo, x.ente, x.dove, x.quando, x.chi, this.nomiTipi(x)].join(" ").toLowerCase().indexOf(fq) !== -1;
+    // «salta»: la dimensione che si sta contando, cosi ogni chip mostra quante schede darebbe.
+    const passa = (x, salta) => {
+      if (!cerca(x)) { return false; }
+      if (salta !== "tipo" && sel.length && !sel.some((t) => this.haTipo(x, t))) { return false; }
+      if (salta !== "origine" && fo && this.origine(x) !== fo) { return false; }
+      if (salta !== "cond" && fc.length && !fc.some((c) => this.statiDi(x).indexOf(c) !== -1)) { return false; }
+      if (salta !== "scad" && fs) {
+        const g = this.giorniAllaChiusura(x);
+        if (fs === "presto" && !(g !== null && g <= 30)) { return false; }
+        if (fs === "senza" && g !== null) { return false; }
+      }
+      return true;
+    };
+    const chip = (etichetta, on, n, pick, extra) => Object.assign({
+      etichetta: etichetta, on: on ? "true" : "false", n: String(n), cls: on ? "filtro on" : "filtro", pick: pick
+    }, extra || {});
     const nomiTipi = [];
     tutte.forEach((x) => { (x.tipi && x.tipi.length ? x.tipi : [x.tipo]).forEach((t) => { if (nomiTipi.indexOf(t) === -1) { nomiTipi.push(t); } }); });
-    // Massimo sei filtri: oltre quel numero la fila diventa illeggibile.
-    // Restano i sei tipi con piu iniziative nella regione.
+    // Massimo otto filtri: restano i tipi con piu schede nella regione.
     nomiTipi.sort((a, b) => {
       const d = tutte.filter((x) => this.haTipo(x, b)).length - tutte.filter((x) => this.haTipo(x, a)).length;
       return d !== 0 ? d : a.localeCompare(b);
     });
-    nomiTipi.splice(6);
+    nomiTipi.splice(8);
     nomiTipi.sort();
-    const scelte = nomiTipi.map((t) => {
-      const n = tutte.filter((x) => this.haTipo(x, t)).length;
-      const on = sel.indexOf(t) !== -1;
-      return {
-        nome: t, etichetta: this.nomeTipo(t), on: on ? "true" : "false", icona: this.icona(t),
-        conta: this.parola(n, "iniziativa", "iniziative"),
-        cls: on ? "scelta on" : "scelta",
-        pick: () => this.setState((s) => ({
-          tipi: s.tipi.indexOf(t) === -1 ? s.tipi.concat([t]) : s.tipi.filter((x) => x !== t)
-        }))
-      };
-    });
-    // Chi chiude prima sta in cima: e l'informazione che fa agire.
-    const viste = (sel.length ? tutte.filter((x) => sel.some((t) => this.haTipo(x, t))) : tutte)
-      .slice().sort((a, b) => String(a.chiude || "9").localeCompare(String(b.chiude || "9")));
+    const scelte = nomiTipi.map((t) => chip(this.nomeTipo(t), sel.indexOf(t) !== -1,
+      tutte.filter((x) => passa(x, "tipo") && this.haTipo(x, t)).length,
+      () => this.setState((s) => ({ tipi: s.tipi.indexOf(t) === -1 ? s.tipi.concat([t]) : s.tipi.filter((y) => y !== t) })),
+      { icona: this.icona(t) }));
+    const nProg = tutte.filter((x) => this.origine(x) === "programma").length;
+    const haDueOrigini = nProg > 0 && nProg < tutte.length;
+    const chipOrigine = [["", "Tutti", null], ["programma", "Programmi pubblici", "programma"], ["iniziativa", "Iniziative", "iniziativa"]]
+      .map((o) => chip(o[1], fo === o[0], tutte.filter((x) => passa(x, "origine") && (!o[0] || this.origine(x) === o[0])).length,
+        () => this.setState({ fo: o[0] })));
+    const statiPresenti = ["gratuito", "su invito", "a pagamento"].filter((c) => tutte.some((x) => this.statiDi(x).indexOf(c) !== -1));
+    const chipCond = statiPresenti.map((c) => chip(c.charAt(0).toUpperCase() + c.slice(1), fc.indexOf(c) !== -1,
+      tutte.filter((x) => passa(x, "cond") && this.statiDi(x).indexOf(c) !== -1).length,
+      () => this.setState((s) => ({ fc: s.fc.indexOf(c) === -1 ? s.fc.concat([c]) : s.fc.filter((y) => y !== c) }))));
+    const haScad = tutte.some((x) => !!x.chiude) && tutte.some((x) => !x.chiude);
+    const chipScad = [["", "Qualsiasi data"], ["presto", "Chiudono entro 30 giorni"], ["senza", "Senza scadenza"]]
+      .map((o) => chip(o[1], fs === o[0], tutte.filter((x) => passa(x, "scad") && (o[0] !== "presto" || (this.giorniAllaChiusura(x) !== null && this.giorniAllaChiusura(x) <= 30)) && (o[0] !== "senza" || this.giorniAllaChiusura(x) === null)).length,
+        () => this.setState({ fs: o[0] })));
+    const filtriAttivi = !!(fq || fo || fs || sel.length || fc.length);
+    // Chi chiude prima sta in cima: e l'informazione che fa agire. Senza scadenza in fondo, in ordine di titolo.
+    const viste = tutte.filter((x) => passa(x))
+      .slice().sort((a, b) => String(a.chiude || "9").localeCompare(String(b.chiude || "9")) || String(a.titolo).localeCompare(String(b.titolo)));
     const inScadenza = viste.filter((x) => {
       const g = this.giorniAllaChiusura(x);
       return g !== null && g >= 0 && g <= 7;
     }).length;
-    let quante = "Nessuna iniziativa aperta in " + reg + ".";
-    if (tutte.length) {
-      quante = sel.length
-        ? this.parola(viste.length, "iniziativa aperta", "iniziative aperte") + " per la tua scelta."
-        : this.parola(tutte.length, "iniziativa aperta", "iniziative aperte") + " in " + reg + ". Seleziona uno screening per restringere l’elenco.";
+    const gruppi = [];
+    const programmi = viste.filter((x) => this.origine(x) === "programma");
+    const altre = viste.filter((x) => this.origine(x) !== "programma");
+    if (programmi.length) {
+      gruppi.push({ id: "gr-programmi", titolo: "Programmi pubblici", n: String(programmi.length),
+        nota: "Programmi di ASL, aziende sanitarie e Regione: spesso arriva una lettera d’invito. Apri la scheda per condizioni e contatti.",
+        cards: programmi.map((x) => this.schedaReg(x)) });
     }
+    if (altre.length) {
+      gruppi.push({ id: "gr-iniziative", titolo: "Iniziative di associazioni e privati", n: String(altre.length),
+        nota: "Giornate e aperture organizzate da associazioni, fondazioni e strutture private. Controlla sempre condizioni e date.",
+        cards: altre.map((x) => this.schedaReg(x)) });
+    }
+    let quante = "Nessuna scheda in " + reg + ".";
+    if (tutte.length) {
+      quante = filtriAttivi
+        ? this.parola(viste.length, "risultato", "risultati") + " su " + tutte.length + "."
+        : this.parola(tutte.length, "scheda", "schede") + " in " + reg + (haDueOrigini ? ": " + this.parola(nProg, "programma pubblico", "programmi pubblici") + " e " + this.parola(tutte.length - nProg, "iniziativa", "iniziative") + "." : ".");
+    }
+    const fMostra = !!this.state.fm;
 
     // --- domande frequenti = articoli WordPress (brief LORI 26/09/2026) ---
     const art = this.articoli();
@@ -159,6 +200,18 @@ window.__siLogicaRender = class {
       // Tendina sotto la mappa in home (Florbo 23/10/2026): la voce vuota non fa nulla.
       vaiARegioneHome: (e) => { if (e.target.value) { this.vaiA(this.rottaRegione(e.target.value)); } },
       scelte: scelte,
+      haDueOrigini: haDueOrigini, chipOrigine: chipOrigine,
+      haCond: chipCond.length > 0, chipCond: chipCond,
+      haScad: haScad, chipScad: chipScad,
+      gruppi: gruppi,
+      fq: this.state.fq || "", haFq: !!fq,
+      fqScrivi: (e) => this.setState({ fq: e.target.value }),
+      fqVia: () => this.setState({ fq: "" }),
+      filtriAttivi: filtriAttivi,
+      fMostra: fMostra ? "true" : "false",
+      fToggle: () => this.setState((s) => ({ fm: !s.fm })),
+      fToggleTesto: (fMostra ? "Nascondi i filtri" : "Mostra i filtri") + (filtriAttivi ? " (attivi)" : ""),
+      filtriCls: fMostra ? "filtri-corpo aperta" : "filtri-corpo",
       // Zero iniziative (QA 390, 21/10): niente scelta degli screening, un solo titolo.
       regPiena: tutte.length > 0,
       regVuota: tutte.length === 0,
@@ -172,11 +225,11 @@ window.__siLogicaRender = class {
       },
       regVuotaAsl: tutte.length === 0 && !!this.offertaAsl(),
       regVuotaNoAsl: tutte.length === 0 && !this.offertaAsl(),
-      azzera: () => this.setState({ tipi: [] }),
+      azzera: () => this.setState({ tipi: [], fq: "", fo: "", fc: [], fs: "" }),
       quante: quante,
       titoloElenco: tutte.length === 0
         ? "Nessuna iniziativa in " + reg
-        : (sel.length ? "Le iniziative corrispondenti alla tua scelta" : "Tutte le iniziative attive in " + reg),
+        : (filtriAttivi ? "Le schede che corrispondono ai filtri" : "Programmi e iniziative in " + reg),
       iniziative: viste.map((x) => this.schedaReg(x)),
       avvisoScadenza: inScadenza > 0
         ? (inScadenza === 1 ? "Una di queste chiude entro una settimana." : inScadenza + " di queste chiudono entro una settimana.")

@@ -4,7 +4,7 @@ window.__siLogica = function (DCLogic) {
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { rotta: this.leggiRotta(), tipi: [], mail: "", inviato: false,
+    this.state = { rotta: this.leggiRotta(), tipi: [], fq: "", fo: "", fc: [], fs: "", fm: false, mail: "", inviato: false,
       artArg: null, artQuanti: 6, artStato: null, artDati: null,
       // Pagine screening (25/09/2026): regione scelta nella pagina, resta per la sessione.
       regScr: null,
@@ -156,7 +156,7 @@ class Component extends DCLogic {
 
     this.onHash = () => {
       const r = this.leggiRotta();
-      this.setState({ rotta: r, tipi: [], inviato: false, mail: "", menuAperto: "", msgInviato: false, mErr: null, ...this.rcDaRotta(r) });
+      this.setState({ rotta: r, tipi: [], fq: "", fo: "", fc: [], fs: "", fm: false, inviato: false, mail: "", menuAperto: "", msgInviato: false, mErr: null, ...this.rcDaRotta(r) });
       this.chiudiHamburger();
       window.scrollTo(0, 0);
     };
@@ -565,7 +565,7 @@ class Component extends DCLogic {
     if (vista === "screening" && !this.scrValido(arg)) { arg = ""; }
     const sez = this.sezValida(vista, arg, p[2]);
     const nuova = { vista: vista, arg: arg, sez: sez };
-    this.setState({ rotta: nuova, tipi: [], inviato: false, mail: "", menuAperto: "", msgInviato: false, mErr: null, ...this.rcDaRotta(nuova) },
+    this.setState({ rotta: nuova, tipi: [], fq: "", fo: "", fc: [], fs: "", fm: false, inviato: false, mail: "", menuAperto: "", msgInviato: false, mErr: null, ...this.rcDaRotta(nuova) },
       () => this.portaASezione());
     this.chiudiHamburger();
     window.scrollTo(0, 0);
@@ -659,6 +659,15 @@ class Component extends DCLogic {
 
   /* Un'iniziativa puo riguardare piu screening (x.tipi); gli esempi hanno solo x.tipo. */
   haTipo(x, t) { return (x.tipi && x.tipi.length ? x.tipi : [x.tipo]).indexOf(t) !== -1; }
+  /* Programma pubblico (ASL, aziende sanitarie, Regione, Ministero) o iniziativa di associazioni e privati.
+     Vale il campo «origine» del pannello; se manca, si legge dall'ente (solo gli enti del servizio sanitario). */
+  origine(x) {
+    if (x.origine === "programma" || x.origine === "iniziativa") { return x.origine; }
+    const ENTI_PUBBLICI = /\b(ASL|AUSL|ASP|AST|ASUR|ASREM|ASST|ATS|ULSS|USL|Azienda (Sanitaria|USL|Provinciale per i Servizi Sanitari)|Regione|Ministero|Servizio Sanitario|SSN)\b/i;
+    return ENTI_PUBBLICI.test(String(x.ente || "")) ? "programma" : "iniziativa";
+  }
+  origineEtichetta(x) { return this.origine(x) === "programma" ? "Programma pubblico" : "Iniziativa di associazione o privato"; }
+  statiDi(x) { return (x.stati && x.stati.length ? x.stati : String(x.stato || "").split(" · ")).filter(Boolean); }
   nomiTipi(x) { return (x.tipi && x.tipi.length ? x.tipi : [x.tipo]).map((t) => this.nomeTipo(t)).join(", "); }
   icona(tipo) {
     const I = {
@@ -698,6 +707,7 @@ class Component extends DCLogic {
       quando: x.quando, chi: x.chi, tel: x.tel || "", href: "tel:" + String(x.tel || "").split(" ").join(""),
       haEnte: !!x.ente, haDove: !!x.dove, haQuando: !!x.quando, haChi: !!x.chi, haTel: !!x.tel,
       descrizione: x.descrizione || "", haDescrizione: !!x.descrizione,
+      origine: this.origine(x), origineEtichetta: this.origineEtichetta(x),
       tagTesto: x.stato, tagCls: cls,
       costo: x.stato ? x.stato.charAt(0).toUpperCase() + x.stato.slice(1) : "",
       enteLungo: String(x.ente || "").length > 90,
@@ -716,7 +726,7 @@ class Component extends DCLogic {
       // «Quando» una riga per data solo se il dato e gia diviso da «;».
       periodo: this.periodo(x), haPeriodo: !!this.periodo(x),
       ultimi: this.ultimiGiorni(x), haUltimi: !!this.ultimiGiorni(x),
-      occhiello: [this.nomiTipi(x), x.reg].filter(Boolean).join(" · "),
+      occhiello: [this.origineEtichetta(x), this.nomiTipi(x), x.reg].filter(Boolean).join(" · "),
       riassunto: this.riassunto(x),
       quandoRighe: this.righeQuando(x.quando).map((t) => ({ t: t })),
       quandoUnaRiga: this.righeQuando(x.quando).length < 2,
