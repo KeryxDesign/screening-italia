@@ -35,7 +35,7 @@
   };
   function cartaHome(m, s, i) {
     return {
-      href: "#/screening/" + s,
+      href: "/screening/" + s,
       titolo: m["H·Card " + (i + 1) + " · " + s + " · Titolo"],
       riga: m["H·Card " + (i + 1) + " · " + s + " · Riga"],
       icona: ICONA_HOME[s]
@@ -105,6 +105,15 @@
     });
   }
 
+  // Mappa d'Italia delle pagine screening: stessa mappa della home, ma colora le regioni
+  // con iniziative di QUESTO screening e al clic sceglie la regione qui, senza cambiare pagina.
+  function conteggi(slug) {
+    const tipo = TIPO[slug], q = {};
+    (window.INIZIATIVE || []).forEach((x) => { if (haTipo(x, tipo)) { q[x.reg] = (q[x.reg] || 0) + 1; } });
+    return q;
+  }
+  function scegli(comp, n) { comp.setState({ regScr: n }, () => scendiRisultati("scr-regione")); }
+
   function vals(stato, rotta, comp) {
     const dentro = rotta.vista === "screening" && slugValido(rotta.arg);
     const slug = dentro ? rotta.arg : "";
@@ -172,6 +181,7 @@
         s7h2: c["S7·Titolo h2"], domande: domande(c, "S7·D", "S7·R", ""),
         s8h2: c["S8·Titolo h2"], s8p: c["S8·Paragrafo"],
         regioni: griglia(comp, conta, "scr-regione"),
+        sceltaRegione: (e) => { if (e.target.value) { scegli(comp, e.target.value); } },
         carte: carte.map((x) => comp.scheda(x)),
         haCarte: carte.length > 0,
         // Esempi attivi (fuori da screeningitalia.it): resta il marcatore .finto gia esistente.
@@ -264,5 +274,5 @@
     return true;
   }
 
-  window.__siScreening = { vals: vals, titolo: titolo, slugValido: slugValido };
+  window.__siScreening = { vals: vals, titolo: titolo, slugValido: slugValido, conteggi: conteggi, scegli: scegli };
 })();
