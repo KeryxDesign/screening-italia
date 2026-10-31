@@ -736,7 +736,7 @@ class Component extends DCLogic {
       quando: x.quando, chi: x.chi, tel: x.tel || "", href: "tel:" + String(x.tel || "").split(" ").join(""),
       haEnte: !!x.ente, haDove: !!x.dove, haQuando: !!x.quando, haChi: !!x.chi, haTel: !!x.tel,
       descrizione: x.descrizione || "", haDescrizione: !!x.descrizione,
-      origine: this.origine(x), origineEtichetta: this.origineEtichetta(x),
+      origine: this.origine(x), origineEtichetta: this.origineEtichetta(x), origineBreve: this.origine(x) === "programma" ? "Programma pubblico" : "Iniziativa",
       tagTesto: x.stato, tagCls: cls,
       costo: x.stato ? x.stato.charAt(0).toUpperCase() + x.stato.slice(1) : "",
       enteLungo: String(x.ente || "").length > 90,

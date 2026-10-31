@@ -14,8 +14,8 @@
 <link rel="icon" type="image/png" sizes="192x192" href="./marchio/icona-192.png">
 <link rel="apple-touch-icon" href="./marchio/apple-touch-icon.png">
 <script src="./support.js?v=locale1027"></script>
-<script src="./logica-render.js?v=urlpuliti1031"></script>
-<script src="./logica-classe.js?v=ordine1031b"></script>
+<script src="./logica-render.js?v=filtri1031f"></script>
+<script src="./logica-classe.js?v=filtri1031f"></script>
 <script src="./screening-pagine.js?v=ordine1031"></script>
 <script src="./logica-screening.js?v=ordine1031b"></script>
 </head>
@@ -45,11 +45,11 @@
         <meta name="ext-resource-dependency" content="./img/foto/foto-74855-23397.webp">
         <meta name="ext-resource-dependency" content="./img/foto/foto-197531-19160.webp">
         <meta name="ext-resource-dependency" content="./img/foto/foto-197531-19155.webp">
-        <link rel="stylesheet" href="./stile.css?v=filtri1031b">
+        <link rel="stylesheet" href="./stile.css?v=filtri1031e">
         <link rel="stylesheet" href="./screening.css?v=tendina1023b">
         <script src="./accessibilita.js?v=tendina1023b"></script>
         <script src="./iniziative.js?v=tendina1023b"></script>
-        <script src="./iniziative-wp.js?v=filtri1031b"></script>
+        <script src="./iniziative-wp.js?v=filtri1031e"></script>
         <script src="./articoli.js?v=tendina1023b"></script>
         <script src="./testimonianze-wp.js?v=tendina1023b"></script>
         <script src="./esperienze-wp.js?v=tendina1023b"></script>
@@ -386,7 +386,7 @@
                 <p class="nota reg-torna"><a href="/trova">← Tutte le regioni</a></p>
                 <h1 class="scelta-h2 reg-h1">Screening in {{ reg }}</h1>
                 <sc-if value="{{ regPiena }}" hint-placeholder-val="{{ true }}">
-                <p class="nota">Programmi pubblici e iniziative aperte adesso. Cerca, oppure restringi con i filtri: restano solo le schede che corrispondono.</p>
+                <p class="nota">Programmi pubblici e iniziative aperte adesso. Cerca per nome o scegli dai menu: restano solo le schede che corrispondono.</p>
                 <div class="filtri" role="search" aria-label="Filtra le schede di {{ reg }}">
                   <div class="filtri-cerca">
                     <label class="etichetta-sel" for="cerca-ini">Cerca per nome, ente o luogo</label>
@@ -396,47 +396,56 @@
                       <sc-if value="{{ haFq }}" hint-placeholder-val="{{ false }}"><button type="button" class="cerca-x" aria-label="Cancella la ricerca" onClick="{{ fqVia }}"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></sc-if>
                     </div>
                   </div>
-                  <button type="button" class="cta-2 filtri-toggle" aria-expanded="{{ fMostra }}" onClick="{{ fToggle }}">{{ fToggleTesto }}</button>
-                  <div class="{{ filtriCls }}">
+                  <div class="filtri-corpo aperta">
+                    <div class="filtri-sel">
+                      <label class="etichetta-sel" for="f-tipo">Screening</label>
+                      <div class="sel-box">
+                        <select class="campo campo-sel" id="f-tipo" value="{{ vTipo }}" onChange="{{ sceltaTipo }}">
+                          <sc-for list="{{ optTipo }}" as="o" hint-placeholder-count="3">
+                            <option value="{{ o.v }}">{{ o.t }}</option>
+                          </sc-for>
+                        </select>
+                        <svg class="sel-frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                      </div>
+                    </div>
                     <sc-if value="{{ haDueOrigini }}" hint-placeholder-val="{{ true }}">
-                    <fieldset class="filtri-gruppo">
-                      <legend>Chi lo organizza</legend>
-                      <div class="filtri-chips">
-                        <sc-for list="{{ chipOrigine }}" as="c" hint-placeholder-count="3">
-                          <button type="button" class="{{ c.cls }}" aria-pressed="{{ c.on }}" onClick="{{ c.pick }}">{{ c.etichetta }}<span class="filtro-n">{{ c.n }}</span></button>
-                        </sc-for>
+                    <div class="filtri-sel">
+                      <label class="etichetta-sel" for="f-org">Chi lo organizza</label>
+                      <div class="sel-box">
+                        <select class="campo campo-sel" id="f-org" value="{{ vOrigine }}" onChange="{{ sceltaOrigine }}">
+                          <sc-for list="{{ optOrigine }}" as="o" hint-placeholder-count="3">
+                            <option value="{{ o.v }}">{{ o.t }}</option>
+                          </sc-for>
+                        </select>
+                        <svg class="sel-frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
                       </div>
-                    </fieldset>
+                    </div>
                     </sc-if>
-                    <fieldset class="filtri-gruppo">
-                      <legend>Screening</legend>
-                      <div class="filtri-chips">
-                        <sc-for list="{{ scelte }}" as="s" hint-placeholder-count="5">
-                          <button type="button" class="{{ s.cls }}" aria-pressed="{{ s.on }}" onClick="{{ s.pick }}">
-                            <svg class="filtro-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ s.icona }}"></path></svg>{{ s.etichetta }}<span class="filtro-n">{{ s.n }}</span>
-                          </button>
-                        </sc-for>
-                      </div>
-                    </fieldset>
                     <sc-if value="{{ haCond }}" hint-placeholder-val="{{ true }}">
-                    <fieldset class="filtri-gruppo">
-                      <legend>Condizioni</legend>
-                      <div class="filtri-chips">
-                        <sc-for list="{{ chipCond }}" as="c" hint-placeholder-count="3">
-                          <button type="button" class="{{ c.cls }}" aria-pressed="{{ c.on }}" onClick="{{ c.pick }}">{{ c.etichetta }}<span class="filtro-n">{{ c.n }}</span></button>
-                        </sc-for>
+                    <div class="filtri-sel">
+                      <label class="etichetta-sel" for="f-cond">Condizioni</label>
+                      <div class="sel-box">
+                        <select class="campo campo-sel" id="f-cond" value="{{ vCond }}" onChange="{{ sceltaCond }}">
+                          <sc-for list="{{ optCond }}" as="o" hint-placeholder-count="3">
+                            <option value="{{ o.v }}">{{ o.t }}</option>
+                          </sc-for>
+                        </select>
+                        <svg class="sel-frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
                       </div>
-                    </fieldset>
+                    </div>
                     </sc-if>
                     <sc-if value="{{ haScad }}" hint-placeholder-val="{{ true }}">
-                    <fieldset class="filtri-gruppo">
-                      <legend>Scadenza</legend>
-                      <div class="filtri-chips">
-                        <sc-for list="{{ chipScad }}" as="c" hint-placeholder-count="3">
-                          <button type="button" class="{{ c.cls }}" aria-pressed="{{ c.on }}" onClick="{{ c.pick }}">{{ c.etichetta }}<span class="filtro-n">{{ c.n }}</span></button>
-                        </sc-for>
+                    <div class="filtri-sel">
+                      <label class="etichetta-sel" for="f-scad">Scadenza</label>
+                      <div class="sel-box">
+                        <select class="campo campo-sel" id="f-scad" value="{{ vScad }}" onChange="{{ sceltaScad }}">
+                          <sc-for list="{{ optScad }}" as="o" hint-placeholder-count="3">
+                            <option value="{{ o.v }}">{{ o.t }}</option>
+                          </sc-for>
+                        </select>
+                        <svg class="sel-frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
                       </div>
-                    </fieldset>
+                    </div>
                     </sc-if>
                   </div>
                   <div class="filtri-esito">
@@ -456,7 +465,10 @@
             <div class="banda b-crema wrap sezione ini-larga" data-screen-label="Le iniziative">
               <div class="fx col gap20">
                 <sc-if value="{{ regPiena }}" hint-placeholder-val="{{ true }}">
-                <p class="nota">Apri una scheda per vedere ente, luogo, requisiti e telefono: il portale non gestisce appuntamenti.</p>
+                <div class="fx col gap8">
+                  <h2>{{ titoloElenco }}</h2>
+                  <p class="nota">Apri una scheda per vedere ente, luogo, requisiti e telefono: il portale non gestisce appuntamenti.</p>
+                </div>
                 </sc-if>
                 <sc-if value="{{ regVuota }}" hint-placeholder-val="{{ false }}">
                   <h2>{{ titoloElenco }}</h2>
@@ -464,15 +476,10 @@
 
                 <!-- Schede strette, SOLO in questo elenco. La scheda intera porta alla pagina dell'iniziativa.
                      Le schede delle pagine screening (#scr-regione) restano card-ini. -->
-                <sc-for list="{{ gruppi }}" as="g" hint-placeholder-count="2">
-                <section class="gruppo-ini" aria-labelledby="{{ g.id }}">
-                  <div class="fx col gap8">
-                    <h2 class="gruppo-h" id="{{ g.id }}">{{ g.titolo }} <span class="gruppo-n">{{ g.n }}</span></h2>
-                    <p class="nota">{{ g.nota }}</p>
-                  </div>
-                  <div class="ini-griglia">
-                  <sc-for list="{{ g.cards }}" as="i" hint-placeholder-count="3">
-                    <a class="card card-reg card-vai" href="{{ i.hrefDettaglio }}">
+                <div class="ini-griglia">
+                <sc-for list="{{ schede }}" as="i" hint-placeholder-count="3">
+                  <a class="card card-reg card-vai" href="{{ i.hrefDettaglio }}">
+                    <span class="ini-origine">{{ i.origineBreve }}</span>
                     <span class="ini-tipo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ i.icona }}"></path></svg>{{ i.tipo }}</span>
                     <h3 class="ini-nome">{{ i.titolo }}</h3>
                     <sc-if value="{{ i.haEnte }}" hint-placeholder-val="{{ true }}">
@@ -495,10 +502,8 @@
                     </span>
                     <span class="ini-piede" aria-hidden="true">Approfondisci →</span>
                   </a>
-                  </sc-for>
-                  </div>
-                </section>
                 </sc-for>
+                </div>
 
                 <sc-if value="{{ vuotoPerScelta }}" hint-placeholder-val="{{ false }}">
                   <div class="avviso fx col gap12">

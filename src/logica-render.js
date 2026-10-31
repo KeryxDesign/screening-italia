@@ -28,35 +28,21 @@ window.__siLogicaRender = class {
       }
       return true;
     };
-    const chip = (etichetta, on, n, pick, extra) => Object.assign({
-      etichetta: etichetta, on: on ? "true" : "false", n: String(n), cls: on ? "filtro on" : "filtro", pick: pick
-    }, extra || {});
+    const opz = (v, t, n) => ({ v: v, t: n === null ? t : t + " (" + n + ")" });
     const nomiTipi = [];
     tutte.forEach((x) => { (x.tipi && x.tipi.length ? x.tipi : [x.tipo]).forEach((t) => { if (nomiTipi.indexOf(t) === -1) { nomiTipi.push(t); } }); });
-    // Massimo otto filtri: restano i tipi con piu schede nella regione.
-    nomiTipi.sort((a, b) => {
-      const d = tutte.filter((x) => this.haTipo(x, b)).length - tutte.filter((x) => this.haTipo(x, a)).length;
-      return d !== 0 ? d : a.localeCompare(b);
-    });
-    nomiTipi.splice(8);
     nomiTipi.sort();
-    const scelte = nomiTipi.map((t) => chip(this.nomeTipo(t), sel.indexOf(t) !== -1,
-      tutte.filter((x) => passa(x, "tipo") && this.haTipo(x, t)).length,
-      () => this.setState((s) => ({ tipi: s.tipi.indexOf(t) === -1 ? s.tipi.concat([t]) : s.tipi.filter((y) => y !== t) })),
-      { icona: this.icona(t) }));
-    const nProg = tutte.filter((x) => this.origine(x) === "programma").length;
-    const haDueOrigini = nProg > 0 && nProg < tutte.length;
-    const chipOrigine = [["", "Tutti", null], ["programma", "Programmi pubblici", "programma"], ["iniziativa", "Iniziative", "iniziativa"]]
-      .map((o) => chip(o[1], fo === o[0], tutte.filter((x) => passa(x, "origine") && (!o[0] || this.origine(x) === o[0])).length,
-        () => this.setState({ fo: o[0] })));
+    const optTipo = [opz("", "Tutti gli screening", null)].concat(nomiTipi.map((t) =>
+      opz(t, this.nomeTipo(t), tutte.filter((x) => passa(x, "tipo") && this.haTipo(x, t)).length)));
+    const optOrigine = [opz("", "Programmi e iniziative", null),
+      opz("programma", "Programmi pubblici", tutte.filter((x) => passa(x, "origine") && this.origine(x) === "programma").length),
+      opz("iniziativa", "Iniziative di associazioni e privati", tutte.filter((x) => passa(x, "origine") && this.origine(x) === "iniziativa").length)];
     const statiPresenti = ["gratuito", "su invito", "a pagamento"].filter((c) => tutte.some((x) => this.statiDi(x).indexOf(c) !== -1));
-    const chipCond = statiPresenti.map((c) => chip(c.charAt(0).toUpperCase() + c.slice(1), fc.indexOf(c) !== -1,
-      tutte.filter((x) => passa(x, "cond") && this.statiDi(x).indexOf(c) !== -1).length,
-      () => this.setState((s) => ({ fc: s.fc.indexOf(c) === -1 ? s.fc.concat([c]) : s.fc.filter((y) => y !== c) }))));
+    const optCond = [opz("", "Tutte le condizioni", null)].concat(statiPresenti.map((c) =>
+      opz(c, c.charAt(0).toUpperCase() + c.slice(1), tutte.filter((x) => passa(x, "cond") && this.statiDi(x).indexOf(c) !== -1).length)));
     const haScad = tutte.some((x) => !!x.chiude) && tutte.some((x) => !x.chiude);
-    const chipScad = [["", "Qualsiasi data"], ["presto", "Chiudono entro 30 giorni"], ["senza", "Senza scadenza"]]
-      .map((o) => chip(o[1], fs === o[0], tutte.filter((x) => passa(x, "scad") && (o[0] !== "presto" || (this.giorniAllaChiusura(x) !== null && this.giorniAllaChiusura(x) <= 30)) && (o[0] !== "senza" || this.giorniAllaChiusura(x) === null)).length,
-        () => this.setState({ fs: o[0] })));
+    const optScad = [opz("", "Qualsiasi scadenza", null), opz("presto", "Chiudono entro 30 giorni", null), opz("senza", "Senza scadenza", null)];
+    const haDueOrigini = tutte.some((x) => this.origine(x) === "programma") && tutte.some((x) => this.origine(x) !== "programma");
     const filtriAttivi = !!(fq || fo || fs || sel.length || fc.length);
     // Chi chiude prima sta in cima: e l'informazione che fa agire. Senza scadenza in fondo, in ordine di titolo.
     const viste = tutte.filter((x) => passa(x))
@@ -65,26 +51,13 @@ window.__siLogicaRender = class {
       const g = this.giorniAllaChiusura(x);
       return g !== null && g >= 0 && g <= 7;
     }).length;
-    const gruppi = [];
-    const programmi = viste.filter((x) => this.origine(x) === "programma");
-    const altre = viste.filter((x) => this.origine(x) !== "programma");
-    if (programmi.length) {
-      gruppi.push({ id: "gr-programmi", titolo: "Programmi pubblici", n: String(programmi.length),
-        nota: "Programmi di ASL, aziende sanitarie e Regione: spesso arriva una lettera d’invito. Apri la scheda per condizioni e contatti.",
-        cards: programmi.map((x) => this.schedaReg(x)) });
-    }
-    if (altre.length) {
-      gruppi.push({ id: "gr-iniziative", titolo: "Iniziative di associazioni e privati", n: String(altre.length),
-        nota: "Giornate e aperture organizzate da associazioni, fondazioni e strutture private. Controlla sempre condizioni e date.",
-        cards: altre.map((x) => this.schedaReg(x)) });
-    }
+    const schede = viste.map((x) => this.schedaReg(x));
     let quante = "Nessuna scheda in " + reg + ".";
     if (tutte.length) {
       quante = filtriAttivi
         ? this.parola(viste.length, "risultato", "risultati") + " su " + tutte.length + "."
-        : this.parola(tutte.length, "scheda", "schede") + " in " + reg + (haDueOrigini ? ": " + this.parola(nProg, "programma pubblico", "programmi pubblici") + " e " + this.parola(tutte.length - nProg, "iniziativa", "iniziative") + "." : ".");
+        : this.parola(tutte.length, "scheda", "schede") + " in " + reg + ".";
     }
-    const fMostra = !!this.state.fm;
 
     // --- domande frequenti = articoli WordPress (brief LORI 26/09/2026) ---
     const art = this.articoli();
@@ -199,19 +172,19 @@ window.__siLogicaRender = class {
       vaiA: (e) => { this.vaiA(this.rottaRegione(e.target.value)); },
       // Tendina sotto la mappa in home (Florbo 23/10/2026): la voce vuota non fa nulla.
       vaiARegioneHome: (e) => { if (e.target.value) { this.vaiA(this.rottaRegione(e.target.value)); } },
-      scelte: scelte,
-      haDueOrigini: haDueOrigini, chipOrigine: chipOrigine,
-      haCond: chipCond.length > 0, chipCond: chipCond,
-      haScad: haScad, chipScad: chipScad,
-      gruppi: gruppi,
+      haDueOrigini: haDueOrigini,
+      optTipo: optTipo, optOrigine: optOrigine, optCond: optCond, optScad: optScad,
+      haCond: statiPresenti.length > 0, haScad: haScad,
+      vTipo: sel[0] || "", vOrigine: fo, vCond: fc[0] || "", vScad: fs,
+      sceltaTipo: (e) => this.setState({ tipi: e.target.value ? [e.target.value] : [] }),
+      sceltaOrigine: (e) => this.setState({ fo: e.target.value }),
+      sceltaCond: (e) => this.setState({ fc: e.target.value ? [e.target.value] : [] }),
+      sceltaScad: (e) => this.setState({ fs: e.target.value }),
+      schede: schede,
       fq: this.state.fq || "", haFq: !!fq,
       fqScrivi: (e) => this.setState({ fq: e.target.value }),
       fqVia: () => this.setState({ fq: "" }),
       filtriAttivi: filtriAttivi,
-      fMostra: fMostra ? "true" : "false",
-      fToggle: () => this.setState((s) => ({ fm: !s.fm })),
-      fToggleTesto: (fMostra ? "Nascondi i filtri" : "Mostra i filtri") + (filtriAttivi ? " (attivi)" : ""),
-      filtriCls: fMostra ? "filtri-corpo aperta" : "filtri-corpo",
       // Zero iniziative (QA 390, 21/10): niente scelta degli screening, un solo titolo.
       regPiena: tutte.length > 0,
       regVuota: tutte.length === 0,
