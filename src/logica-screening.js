@@ -35,7 +35,7 @@
   };
   function cartaHome(m, s, i) {
     return {
-      href: "#/screening/" + s,
+      href: "/screening/" + s,
       titolo: m["H·Card " + (i + 1) + " · " + s + " · Titolo"],
       riga: m["H·Card " + (i + 1) + " · " + s + " · Riga"],
       icona: ICONA_HOME[s]
