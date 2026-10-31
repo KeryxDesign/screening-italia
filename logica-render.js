@@ -104,6 +104,7 @@ window.__siLogicaRender = class {
       navEnti: vista === "enti" ? "page" : "false",
       navChi: vista === "chi" ? "page" : "false",
       navContatti: vista === "contatti" ? "page" : "false",
+      navCarta: (vista === "carta" || vista === "razionale") ? "page" : "false",
       // «Gli screening» e una tendina (brief 26/09/2026): corrente su tutte le rotte #/screening*.
       navFaq: (vista === "faq" || this.state.rotta.vista === "screening") ? "page" : "false",
       scrAperto: this.scrAperto() ? "true" : "false",
