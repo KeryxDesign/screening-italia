@@ -19,6 +19,7 @@ class Component extends DCLogic {
     this.mappaRef = (el) => { this.mapEl = el; this.disegnaMappa(); };
     // Corpo dell'articolo WordPress: lo scrive mettiTesto(), non il modello.
     this.artTestoRef = (el) => { this.artTestoEl = el; this.mettiTesto(); };
+    // Descrizione formattata di un'iniziativa: la scrive mettiIniHtml(), gia ripulita da Articoli.ripulisciHtml.
   }
   /* ---- Consenso ai cookie ----
      Il tag di misurazione parte SOLO dopo il consenso: Consent Mode con
@@ -247,6 +248,19 @@ class Component extends DCLogic {
      classi che il corpo delle FAQ usa gia: stesso aspetto, nessuna classe nuova.
      Poi i nodi gia inseriti si spostano (nessun HTML nuovo) in una section
      .art-sez per ogni h2, come le FAQ; cio che sta prima del primo h2 fa sezione a se. */
+  mettiIniHtml() {
+    const el = document.querySelector(".ini-html[data-html]");
+    if (!el) { return; }
+    const h = el.getAttribute("data-html") || "";
+    if (el.dataset.fatto === h) { return; }
+    el.dataset.fatto = h;
+    const A = window.Articoli;
+    el.innerHTML = h && A && A.ripulisciHtml ? A.ripulisciHtml(h) : "";
+    el.querySelectorAll("p").forEach((n) => n.classList.add("ini-par"));
+    el.querySelectorAll("h1,h2,h3,h4,h5,h6").forEach((n) => n.classList.add("ini-sottotit"));
+    el.querySelectorAll("ul,ol").forEach((n) => n.classList.add("ini-elenco"));
+    el.querySelectorAll("a").forEach((n) => n.classList.add("ini-link"));
+  }
   mettiTesto() {
     const el = this.artTestoEl;
     if (!el) { return; }
@@ -502,6 +516,7 @@ class Component extends DCLogic {
     this.curaDettaglio();
     this.caricaVoce();
     this.mettiTesto();
+    this.mettiIniHtml();
   }
   componentWillUnmount() {
     window.removeEventListener("popstate", this.onHash);
@@ -774,8 +789,9 @@ class Component extends DCLogic {
       enteLungo: String(x.ente || "").length > 90,
       haQuandoOPeriodo: !!(x.quando || this.periodo(x)),
       periodoTile: this.periodo(x),
-      blocchi: this.blocchiDescrizione(x.descrizione),
-      haContattiTesto: this.blocchiDescrizione(x.descrizione).some((b) => b.isContatti),
+      blocchi: x.descrizioneHtml ? [] : this.blocchiDescrizione(x.descrizione),
+      descrizioneHtml: x.descrizioneHtml || "", haHtml: !!x.descrizioneHtml,
+      haContattiTesto: !x.descrizioneHtml && this.blocchiDescrizione(x.descrizione).some((b) => b.isContatti),
       soloPeriodo: !x.quando && !!this.periodo(x),
       enteCls: String(x.ente || "").length > 90 ? "ini-tassello ini-t-largo" : "ini-tassello",
       senzaTelConContatti: !x.tel && this.blocchiDescrizione(x.descrizione).some((b) => b.isContatti),

@@ -238,6 +238,14 @@
     if (f.posti === true) { x.posti = "ultimi posti"; }
     var descr = testoLungo(f.descrizione);
     if (descr) { x.descrizione = descr; }
+    /* Descrizione scritta con l'editor completo di WordPress: HTML, ripulito da articoli.js
+       (stessa lista di tag ammessi degli articoli). Le descrizioni vecchie, in testo semplice,
+       non hanno tag e restano sul percorso di prima. */
+    if (descr && typeof f.descrizione === "string" && /<(p|h[1-6]|ul|ol|li|strong|b|em|i|a|blockquote|table)\b/i.test(f.descrizione) &&
+        window.Articoli && typeof window.Articoli.ripulisciHtml === "function") {
+      var pulito = window.Articoli.ripulisciHtml(f.descrizione);
+      if (pulito) { x.descrizioneHtml = pulito; }
+    }
     /* Data dell'ultima modifica nel pannello: alimenta «ultimo aggiornamento» in home. */
     if (typeof post.modified === "string" && /^\d{4}-\d{2}-\d{2}/.test(post.modified)) { x.agg = post.modified.slice(0, 10); }
 
@@ -410,5 +418,5 @@
   });
 
   /* Esposto solo per le prove in console. */
-  window.IniziativeWP = { CFG: CFG, componi: componi, data: data, telefono: telefono };
+  window.IniziativeWP = { CFG: CFG, componi: componi, data: data, telefoni: telefoni };
 })();
