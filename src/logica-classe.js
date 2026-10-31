@@ -258,6 +258,7 @@ class Component extends DCLogic {
     this.sistemaTitoli(el);
     el.querySelectorAll("p").forEach((n) => n.classList.add("art-p"));
     el.querySelectorAll("h2").forEach((n) => n.classList.add("art-sub"));
+    el.querySelectorAll("h3").forEach((n) => n.classList.add("art-sub3"));
     this.fraseChiave(el);
     this.noteCorsive(el);
     this.dividiSezioni(el);
@@ -287,6 +288,26 @@ class Component extends DCLogic {
         const h = document.createElement("h2");
         h.textContent = testo.replace(/[:\s]+$/, "");
         n.replaceWith(h);
+      }
+    });
+    // <ul> con un solo <li> tutto in grassetto = titolo di sezione (come nei contatti delle ASL).
+    Array.prototype.slice.call(el.querySelectorAll("ul")).forEach((ul) => {
+      const li = ul.children.length === 1 ? ul.children[0] : null;
+      if (!li || li.children.length !== 1 || li.children[0].tagName !== "STRONG") { return; }
+      const t = li.textContent.replace(EMOJI, "").trim();
+      if (t.length < 120 && t === li.textContent.trim().replace(EMOJI, "")) {
+        const h = document.createElement("h2");
+        h.textContent = t.replace(/[:\s]+$/, "");
+        ul.replaceWith(h);
+      }
+    });
+    // Riga breve che finisce con «:» = sottotitolo h3 (es. «screening colon retto:»).
+    Array.prototype.slice.call(el.querySelectorAll("p")).forEach((p) => {
+      const t = p.textContent.trim();
+      if (t.length > 0 && t.length < 60 && /:$/.test(t) && !/^(email|e-mail|telefono|tel)\b/i.test(t)) {
+        const h = document.createElement("h3");
+        h.textContent = t.replace(/:$/, "");
+        p.replaceWith(h);
       }
     });
     el.querySelectorAll("h2,h3,h4").forEach((n) => {
@@ -1263,8 +1284,8 @@ class Component extends DCLogic {
     const c = (v.categorie || [])[0];
     return {
       slot: "art-wp-" + v.id, foto: v.immagine && v.immagine.url ? v.immagine.url : "",
-      // Foto sopra il titolo solo se e quella vera dell'articolo: la foto generica di repertorio non serve.
-      haFoto: !!(v.immagine && v.immagine.url && !v.immagine.repertorio && !v.immagine.segnaposto),
+      // La foto c'e sempre (propria dell'articolo o di repertorio), piccola e sopra il titolo.
+      haFoto: !!(v.immagine && v.immagine.url),
       segnaposto: !!(v.immagine && v.immagine.segnaposto),
       // Il segnaposto e un'illustrazione: «Foto di repertorio» sarebbe falso.
       didascalia: v.immagine && v.immagine.segnaposto
