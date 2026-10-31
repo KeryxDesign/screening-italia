@@ -22,3 +22,13 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !\.[A-Za-z0-9]+$
 RewriteRule ^ /index.html [L]
 </IfModule>
+
+# La pagina (html) si ricontrolla sempre (31/10/2026): e lei che indica quali file con ?v=... caricare,
+# quindi se resta vecchia in cache il browser non vede mai i file nuovi (Chrome su Android, Safari, anche Angelo).
+# no-cache NON vieta la copia: il browser chiede «e cambiato?» e, se no, usa la sua (risposta 304, pochi byte).
+# Solo gli html: js, css e immagini restano in cache, versionati con ?v=.
+<IfModule mod_headers.c>
+<FilesMatch "\.html$">
+Header set Cache-Control "no-cache"
+</FilesMatch>
+</IfModule>
