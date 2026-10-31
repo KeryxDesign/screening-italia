@@ -604,6 +604,7 @@
             <div class="banda b-bianco wrap sezione" id="ini-dettagli" data-screen-label="Dettagli iniziativa">
               <div class="fx col gap20 ini-testo">
                 <h2>Tutti i dettagli</h2>
+                <sc-if value="{{ ini.haHtml }}" hint-placeholder-val="{{ false }}"><div class="ini-html fx col gap12" data-html="{{ ini.descrizioneHtml }}"></div></sc-if>
                 <sc-for list="{{ ini.blocchi }}" as="b" hint-placeholder-count="4">
                   <div class="ini-blocco">
                     <sc-if value="{{ b.isTitolo }}" hint-placeholder-val="{{ false }}"><h3 class="ini-sottotit">{{ b.t }}</h3></sc-if>
