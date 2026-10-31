@@ -1757,6 +1757,9 @@ html.contrasto .asl-card .asl-num{background:#F0B429;color:#000;border-color:#00
 .ini-t-val{font-size:19px;line-height:1.5;color:#14202B;font-weight:400;overflow-wrap:anywhere}
 .ini-t-val .vl-righe{display:flex;flex-direction:column;gap:4px}
 .ini-testo{max-width:760px}
+.card.card-reg.card-vai{overflow:hidden}
+.card-vai > .ini-img-card{display:block;align-self:stretch;width:auto;max-width:none;margin:-24px -24px 6px;aspect-ratio:16/9;object-fit:cover;background:#E7EEF5}
+.ini-img-pagina{display:block;max-width:100%;height:auto;border-radius:14px;align-self:flex-start}
 .ini-html{display:flex;flex-direction:column;gap:12px}
 .ini-html strong{font-weight:700}
 .ini-html h1,.ini-html h2,.ini-html h3,.ini-html h4{margin:12px 0 0}

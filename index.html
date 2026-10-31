@@ -429,6 +429,7 @@
                 <div class="ini-griglia">
                 <sc-for list="{{ schede }}" as="i" hint-placeholder-count="3">
                   <a class="card card-reg card-vai" href="{{ i.hrefDettaglio }}">
+                    <sc-if value="{{ i.haImmagine }}" hint-placeholder-val="{{ false }}"><img class="ini-img-card" src="{{ i.immagine }}" alt="" loading="lazy" decoding="async"></sc-if>
                     <span class="ini-origine">{{ i.origineBreve }}</span>
                     <span class="ini-tipo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ i.icona }}"></path></svg>{{ i.tipo }}</span>
                     <h3 class="ini-nome">{{ i.titolo }}</h3>
@@ -570,6 +571,7 @@
                 <p class="ini-occhiello">{{ ini.occhiello }}</p>
                 <h1 class="ini-fuoco" tabindex="-1">{{ ini.titolo }}</h1>
                 <p class="ini-riassunto">{{ ini.riassunto }}<sc-if value="{{ ini.haUltimi }}" hint-placeholder-val="{{ false }}"> <span class="pill-ultimi">{{ ini.ultimi }}</span></sc-if></p>
+                <sc-if value="{{ ini.haImmagine }}" hint-placeholder-val="{{ false }}"><img class="ini-img-pagina" src="{{ ini.immagine }}" alt="" decoding="async"></sc-if>
                 <div class="ini-chiama">
                   <sc-if value="{{ ini.haTel }}" hint-placeholder-val="{{ true }}">
                     <sc-for list="{{ ini.tels }}" as="tt" hint-placeholder-count="1"><a class="tel tel-grande" href="{{ tt.href }}">
