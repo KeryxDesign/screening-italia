@@ -5,15 +5,19 @@
 <meta name="googlebot" content="noindex, nofollow">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Indirizzi puliti (31/10/2026): la base fissa alla radice i percorsi relativi (./support.js, ./img/...) su /regione/Lazio ecc.
+     Lo script porta i vecchi link con # (screeningitalia.it/#/faq) al nuovo indirizzo (/faq), senza ricaricare. -->
+<base href="/">
+<script>(function(){try{var h=location.hash;if(h.indexOf("#/")===0){history.replaceState(null,"",h.slice(1));}}catch(e){}})();</script>
 <link rel="icon" href="./favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="./marchio/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="./marchio/icona-192.png">
 <link rel="apple-touch-icon" href="./marchio/apple-touch-icon.png">
 <script src="./support.js?v=locale1027"></script>
-<script src="./logica-render.js?v=filtri1031b"></script>
-<script src="./logica-classe.js?v=filtri1031b"></script>
+<script src="./logica-render.js?v=urlpuliti1031"></script>
+<script src="./logica-classe.js?v=urlpuliti1031"></script>
 <script src="./screening-pagine.js?v=tendina1023b"></script>
-<script src="./logica-screening.js?v=tipi1030"></script>
+<script src="./logica-screening.js?v=urlpuliti1031"></script>
 </head>
 <body>
 <x-dc>
@@ -88,7 +92,7 @@
 
         <div class="hdr">
           <div class="wrap hdr-riga">
-            <a class="marchio" href="#/" title="Torna alla home" aria-label="Screening Italia, torna alla home"><img class="marchio-img" src="./marchio/screening-italia-chiaro.png?v=tendina1023b" alt="Screening Italia" width="1169" height="440" /></a>
+            <a class="marchio" href="/" title="Torna alla home" aria-label="Screening Italia, torna alla home"><img class="marchio-img" src="./marchio/screening-italia-chiaro.png?v=tendina1023b" alt="Screening Italia" width="1169" height="440" /></a>
             <input class="menu-chk" type="checkbox" id="menu-chk" aria-label="Apri il menu">
             <label class="hamb" for="menu-chk">
               <svg class="i-apri" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
@@ -98,38 +102,38 @@
               <div class="nav-voce">
                 <button type="button" class="nav-tendina" aria-expanded="{{ scrAperto }}" aria-controls="menu-screening" aria-current="{{ navFaq }}" onClick="{{ scrApriChiudi }}">Gli screening<svg class="nav-freccia" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
                 <div class="nav-menu" id="menu-screening">
-                  <a href="#/screening" aria-current="{{ navScrTutti }}">Tutti gli screening</a>
+                  <a href="/screening" aria-current="{{ navScrTutti }}">Tutti gli screening</a>
                   <!-- Dieci screening (Davide 30/10/2026): 5 oncologici di fila, poi gli altri 5. Senza pagina: voce non cliccabile. -->
-                  <a href="#/screening/mammografico" aria-current="{{ navScrMammografico }}">Mammografico</a>
-                  <a href="#/screening/colon-retto" aria-current="{{ navScrColon }}">Colon-retto</a>
-                  <a href="#/screening/cervicale" aria-current="{{ navScrCervicale }}">Cervice uterina (HPV, PAP Test)</a>
-                  <a href="#/screening/prostata" aria-current="{{ navScrProstata }}">Prostatico (PSA, TAC multiparametrica)</a>
+                  <a href="/screening/mammografico" aria-current="{{ navScrMammografico }}">Mammografico</a>
+                  <a href="/screening/colon-retto" aria-current="{{ navScrColon }}">Colon-retto</a>
+                  <a href="/screening/cervicale" aria-current="{{ navScrCervicale }}">Cervice uterina (HPV, PAP Test)</a>
+                  <a href="/screening/prostata" aria-current="{{ navScrProstata }}">Prostatico (PSA, TAC multiparametrica)</a>
                   <span class="nav-presto">Polmonare <small>in arrivo</small></span>
-                  <a href="#/screening/diabete-celiachia" aria-current="{{ navScrDiabete }}">Diabete</a>
+                  <a href="/screening/diabete-celiachia" aria-current="{{ navScrDiabete }}">Diabete</a>
                   <span class="nav-presto">Nutrizionale <small>in arrivo</small></span>
-                  <a href="#/screening/neonatale" aria-current="{{ navScrNeonatale }}">Neonatale</a>
+                  <a href="/screening/neonatale" aria-current="{{ navScrNeonatale }}">Neonatale</a>
                   <span class="nav-presto">HCV (epatite C) <small>in arrivo</small></span>
-                  <a href="#/screening/cardiovascolare" aria-current="{{ navScrCardio }}">Cardiovascolare (INPS)</a>
+                  <a href="/screening/cardiovascolare" aria-current="{{ navScrCardio }}">Cardiovascolare (INPS)</a>
                 </div>
               </div>
               <a href="{{ hrefIniziative }}" aria-current="{{ navReg }}">Iniziative per regione</a>
-              <sc-if value="{{ haCentri }}" hint-placeholder-val="{{ false }}"><a href="#/centri" aria-current="{{ navCentri }}">Centri Screening ASL</a></sc-if>
-              <a href="#/enti" aria-current="{{ navEnti }}">Pubblica le tue iniziative</a>
+              <sc-if value="{{ haCentri }}" hint-placeholder-val="{{ false }}"><a href="/centri" aria-current="{{ navCentri }}">Centri Screening ASL</a></sc-if>
+              <a href="/enti" aria-current="{{ navEnti }}">Pubblica le tue iniziative</a>
               <!-- Tendina «Esperienze» (brief 13/10/2026): esce se almeno una categoria ha post;
                    ogni voce solo se la sua categoria ha post, «Racconta la tua» sempre. -->
               <sc-if value="{{ haEsperienze }}" hint-placeholder-val="{{ false }}">
               <div class="nav-voce">
                 <button type="button" class="nav-tendina" aria-expanded="{{ espAperto }}" aria-controls="menu-esperienze" aria-current="{{ navEsp }}" onClick="{{ espApriChiudi }}">Esperienze<svg class="nav-freccia" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
                 <div class="nav-menu" id="menu-esperienze">
-                  <sc-if value="{{ haTesti }}" hint-placeholder-val="{{ false }}"><a href="#/testimonianze" aria-current="{{ navTesti }}">Testimonianze</a></sc-if>
-                  <sc-if value="{{ haBp }}" hint-placeholder-val="{{ false }}"><a href="#/buone-pratiche" aria-current="{{ navBp }}">Buone pratiche</a></sc-if>
-                  <sc-if value="{{ haDiff }}" hint-placeholder-val="{{ false }}"><a href="#/difficolta" aria-current="{{ navDiff }}">Difficoltà e disservizi</a></sc-if>
-                  <a href="#/racconta" aria-current="{{ navRacconta }}">Racconta la tua</a>
+                  <sc-if value="{{ haTesti }}" hint-placeholder-val="{{ false }}"><a href="/testimonianze" aria-current="{{ navTesti }}">Testimonianze</a></sc-if>
+                  <sc-if value="{{ haBp }}" hint-placeholder-val="{{ false }}"><a href="/buone-pratiche" aria-current="{{ navBp }}">Buone pratiche</a></sc-if>
+                  <sc-if value="{{ haDiff }}" hint-placeholder-val="{{ false }}"><a href="/difficolta" aria-current="{{ navDiff }}">Difficoltà e disservizi</a></sc-if>
+                  <a href="/racconta" aria-current="{{ navRacconta }}">Racconta la tua</a>
                 </div>
               </div>
               </sc-if>
-              <a href="#/domande" aria-current="{{ navDomande }}">Domande frequenti</a>
-              <a href="#/contatti" aria-current="{{ navContatti }}">Contatti</a>
+              <a href="/domande" aria-current="{{ navDomande }}">Domande frequenti</a>
+              <a href="/contatti" aria-current="{{ navContatti }}">Contatti</a>
             </nav>
           </div>
         </div>
@@ -151,10 +155,10 @@
                        pulsante secondario (.cta-2), una sola CTA primaria per schermata.
                        Le iniziative scendono a terzo livello: link di testo, non pulsante. -->
                   <div class="hero-ingressi">
-                    <a class="cta" href="#/trova">Trova il tuo screening</a>
-                    <a class="cta-2" href="#/centri">Centri Screening ASL</a>
+                    <a class="cta" href="/trova">Trova il tuo screening</a>
+                    <a class="cta-2" href="/centri">Centri Screening ASL</a>
                   </div>
-                  <p class="hero-terzo"><a href="#/trova">Le iniziative di associazioni e altri enti nella tua regione</a></p>
+                  <p class="hero-terzo"><a href="/trova">Le iniziative di associazioni e altri enti nella tua regione</a></p>
                 </div>
                 <div class="hero-mappa">
                   <div class="mappa mappa-bianca" ref="{{ mappaRef }}"></div>
@@ -283,7 +287,7 @@
                   </sc-for>
                 </div>
                 <sc-if value="{{ testiAltri }}" hint-placeholder-val="{{ false }}">
-                <a class="cta-2 testi-tutte" href="#/testimonianze">Leggi tutte le testimonianze</a>
+                <a class="cta-2 testi-tutte" href="/testimonianze">Leggi tutte le testimonianze</a>
                 </sc-if>
               </div>
             </div>
@@ -322,12 +326,12 @@
                   </sc-for>
                 </div>
                 <sc-if value="{{ haBp }}" hint-placeholder-val="{{ false }}">
-                <a class="cta-2 testi-tutte" href="#/buone-pratiche">Leggi le buone pratiche</a>
+                <a class="cta-2 testi-tutte" href="/buone-pratiche">Leggi le buone pratiche</a>
                 </sc-if>
                 <sc-if value="{{ haDiff }}" hint-placeholder-val="{{ false }}">
-                <a class="cta-2 testi-tutte" href="#/difficolta">Leggi le difficoltà segnalate</a>
+                <a class="cta-2 testi-tutte" href="/difficolta">Leggi le difficoltà segnalate</a>
                 </sc-if>
-                <p class="nota"><a href="#/racconta">Racconta la tua esperienza</a></p>
+                <p class="nota"><a href="/racconta">Racconta la tua esperienza</a></p>
               </div>
             </div>
             </sc-if>
@@ -355,7 +359,7 @@
                     </div>
                   </sc-for>
                 </div>
-                <a class="cta-2 cta-centro" href="#/domande">Consulta tutte le domande</a>
+                <a class="cta-2 cta-centro" href="/domande">Consulta tutte le domande</a>
               </div>
             </div>
             </sc-if>
@@ -365,7 +369,7 @@
                 <div class="occhiello occhiello-neutro">Per chi organizza</div>
                 <h2>Sei un’ASL, un ospedale, un’associazione?</h2>
                 <p>Segnalaci la tua iniziativa: controlliamo i dati sulla fonte ufficiale e la pubblichiamo qui, gratuitamente.</p>
-                <a class="cta-2" href="#/contatti">Segnala un’iniziativa</a>
+                <a class="cta-2" href="/contatti">Segnala un’iniziativa</a>
               </div>
             </div>
 
@@ -379,7 +383,7 @@
                  Poi i contatti delle ASL (schede con icone), poi cambio regione: mappa e tendina sotto la mappa. -->
             <div class="banda b-bianco wrap sezione banda-larga" data-screen-label="Scelta dello screening">
               <div class="fx col gap20">
-                <p class="nota reg-torna"><a href="#/trova">← Tutte le regioni</a></p>
+                <p class="nota reg-torna"><a href="/trova">← Tutte le regioni</a></p>
                 <h1 class="scelta-h2 reg-h1">Screening in {{ reg }}</h1>
                 <sc-if value="{{ regPiena }}" hint-placeholder-val="{{ true }}">
                 <p class="nota">Programmi pubblici e iniziative aperte adesso. Cerca, oppure restringi con i filtri: restano solo le schede che corrispondono.</p>
@@ -571,10 +575,10 @@
                 <h2>Nessuna iniziativa nelle tue vicinanze?</h2>
                 <p>Le iniziative vengono attivate e chiuse con frequenza. Puoi richiedere un avviso alla pubblicazione di una nuova iniziativa in {{ reg }}.</p>
                 <a class="cta" href="{{ hrefVuota }}">Richiedi un avviso</a>
-                <a class="link-cta" href="#/faq">Come funziona lo screening pubblico
+                <a class="link-cta" href="/faq">Come funziona lo screening pubblico
                   <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
                 </a>
-                <p class="nota">Organizzi un’iniziativa? <a href="#/contatti">Segnalacela</a>: dopo la verifica dei dati sarà pubblicata.</p>
+                <p class="nota">Organizzi un’iniziativa? <a href="/contatti">Segnalacela</a>: dopo la verifica dei dati sarà pubblicata.</p>
               </div>
             </div>
 
@@ -679,7 +683,7 @@
               <div class="avviso fx col gap12">
                 <h2 class="ini-fuoco" tabindex="-1">Questa iniziativa non è più in elenco</h2>
                 <p>Le iniziative vengono attivate e chiuse con frequenza. Quelle attive sono tutte negli elenchi per regione.</p>
-                <a class="cta-2" href="#/trova">Scegli la regione</a>
+                <a class="cta-2" href="/trova">Scegli la regione</a>
               </div>
             </div>
             </sc-if>
@@ -696,7 +700,7 @@
                 <span class="hero-velo"></span>
               </div>
               <div class="fx col gap16">
-                <p class="nota"><a href="#/trova">← Torna a tutte le regioni</a></p>
+                <p class="nota"><a href="/trova">← Torna a tutte le regioni</a></p>
                 <h1>In {{ reg }} non risultano iniziative segnalate.</h1>
                 <p>Significa che nessuna iniziativa ci è stata segnalata, non che in {{ reg }} manchi l’attività di prevenzione: i programmi di screening dell’azienda sanitaria proseguono comunque. Di seguito le modalità di accesso.</p>
               </div>
@@ -714,9 +718,9 @@
                 <div class="avviso fx col gap12">
                   <h3>La lettera di invito non è pervenuta?</h3>
                   <p>Accade di frequente: cambio di domicilio, residenza non aggiornata, mancato recapito postale. La tua posizione è recuperabile e non perdi il turno.</p>
-                  <a class="cta-2" href="#/articolo/faq-1">Come procedere in caso di mancato recapito</a>
+                  <a class="cta-2" href="/articolo/faq-1">Come procedere in caso di mancato recapito</a>
                 </div>
-                <a class="cta-2" href="#/faq">Il portale screening della Regione {{ reg }}</a>
+                <a class="cta-2" href="/faq">Il portale screening della Regione {{ reg }}</a>
               </div>
             </div>
 
@@ -744,7 +748,7 @@
               <div class="fx col gap16">
                 <h2>Enti e associazioni</h2>
                 <p>Aziende sanitarie, ospedali, ambulatori e associazioni possono segnalare le proprie iniziative: dopo la verifica dei dati vengono pubblicate su questo portale.</p>
-                <a class="cta-2" href="#/contatti">Segnala un’iniziativa</a>
+                <a class="cta-2" href="/contatti">Segnala un’iniziativa</a>
                 <p class="nota">Il servizio è gratuito ed è riservato agli enti organizzatori.</p>
               </div>
             </div>
@@ -764,7 +768,7 @@
                 <div class="occhiello">Per ASL, ospedali e associazioni</div>
                 <h1>Pubblica le tue iniziative in autonomia</h1>
                 <p>Se organizzi screening, puoi caricare le tue iniziative direttamente sul portale: ti diamo un accesso riservato e le pubblichi quando vuoi, senza passare da noi ogni volta.</p>
-                <a class="cta" href="#/contatti">Richiedi un accesso</a>
+                <a class="cta" href="/contatti">Richiedi un accesso</a>
               </div>
             </div>
 
@@ -794,7 +798,7 @@
                     </span>
                   </li>
                 </ol>
-                <a class="cta" href="#/contatti">Contatta gli amministratori</a>
+                <a class="cta" href="/contatti">Contatta gli amministratori</a>
               </div>
             </div>
 
@@ -938,7 +942,7 @@
                   <div class="avviso fx col gap12" data-screen-label="Stato vuoto - nessuna domanda">
                     <h3>Stiamo scrivendo le prime risposte</h3>
                     <p>Intanto puoi già vedere quali screening sono attivi nella tua regione.</p>
-                    <a class="cta" href="#/trova">Vai alla tua regione</a>
+                    <a class="cta" href="/trova">Vai alla tua regione</a>
                   </div>
                 </sc-if>
 
@@ -946,7 +950,7 @@
                   <div class="avviso fx col gap12" data-screen-label="Stato vuoto - ricerca senza risultati">
                     <p>Non abbiamo trovato domande con queste parole. Prova con un&rsquo;altra parola.</p>
                     <button type="button" class="cta-2" onClick="{{ artAzzera }}">Vedi tutte le domande</button>
-                    <a class="link-cta" href="#/contatti">Non trovi la tua domanda? Scrivici</a>
+                    <a class="link-cta" href="/contatti">Non trovi la tua domanda? Scrivici</a>
                   </div>
                 </sc-if>
 
@@ -974,7 +978,7 @@
 
             <div class="banda b-carta wrap sezione" data-screen-label="Apertura screening">
               <div class="fx col gap16">
-                <p class="nota"><a href="#/screening">{{ scr.ritorno }}</a></p>
+                <p class="nota"><a href="/screening">{{ scr.ritorno }}</a></p>
                 <div class="occhiello">{{ scr.occhiello }}</div>
                 <h1>{{ scr.h1 }}</h1>
                 <p>{{ scr.sommario }}</p>
@@ -1182,7 +1186,7 @@
                   <div class="avviso fx col gap12 scr-ris">
                     <h2>{{ scr.s8bh2 }}</h2>
                     <p>{{ scr.s8bp }}</p>
-                    <a class="cta" href="#/contatti">{{ scr.s8bPiena }}</a>
+                    <a class="cta" href="/contatti">{{ scr.s8bPiena }}</a>
                     <button type="button" class="cta-2" onClick="{{ scr.tornaMappa }}">{{ scr.s8bContorno }}</button>
                   </div>
                 </sc-if>
@@ -1211,7 +1215,7 @@
             <div data-screen-label="Neonatale">
             <div class="banda b-carta wrap sezione" data-screen-label="Apertura screening">
               <div class="fx col gap16">
-                <p class="nota"><a href="#/screening">{{ scr.ritorno }}</a></p>
+                <p class="nota"><a href="/screening">{{ scr.ritorno }}</a></p>
                 <div class="occhiello">{{ scr.occhiello }}</div>
                 <h1>{{ scr.h1 }}</h1>
                 <p>{{ scr.sommario }}</p>
@@ -1353,7 +1357,7 @@
             <div data-screen-label="Diabete e celiachia">
             <div class="banda b-carta wrap sezione" data-screen-label="Apertura screening">
               <div class="fx col gap16">
-                <p class="nota"><a href="#/screening">{{ scr.ritorno }}</a></p>
+                <p class="nota"><a href="/screening">{{ scr.ritorno }}</a></p>
                 <div class="occhiello">{{ scr.occhiello }}</div>
                 <h1>{{ scr.h1 }}</h1>
                 <p>{{ scr.sommario }}</p>
@@ -1510,7 +1514,7 @@
               <div class="fx col gap16">
                 <h2>Ambito del servizio</h2>
                 <p>Non gestiamo prenotazioni, non vendiamo prestazioni, non raccogliamo dati sanitari e non diamo pareri clinici: per quelli la competenza è del tuo medico di medicina generale.</p>
-                <a class="cta-2" href="#/contatti">Contatti</a>
+                <a class="cta-2" href="/contatti">Contatti</a>
               </div>
             </div>
 
@@ -1533,7 +1537,7 @@
 
             <div class="banda b-bianco wrap sezione" data-screen-label="Mission">
               <div class="fx col gap20">
-                <nav class="cs-tabs" aria-label="Carta dei servizi"><a class="cs-tab" href="#/carta" aria-current="page">Presentazione (Carta dei servizi)</a><a class="cs-tab" href="#/razionale">Razionale</a></nav>
+                <nav class="cs-tabs" aria-label="Carta dei servizi"><a class="cs-tab" href="/carta" aria-current="page">Presentazione (Carta dei servizi)</a><a class="cs-tab" href="/razionale">Razionale</a></nav>
                 <div class="cs-mission">
                   <div class="occhiello">Mission</div>
                   <p class="cs-lead">Partner strategico delle Istituzioni, dei cittadini, e degli stakeholders, con l'obiettivo di migliorare la gestione globale degli screening sanitari, dalla pianificazione, all’esecuzione, al follow up.</p>
@@ -1554,7 +1558,7 @@
                   <p>Controlla il mercato italiano relativo ai domini di primo livello (TLD) screening related, essendo titolare dei diritti esclusivi di proprietà industriale di fondamentali nomi a dominio e relative estensioni, esclusivi e focalizzati sullo Screening: ciò permette di raggiungere uno dei suoi obiettivi: capillarizzare, amplificare e mirare l’azione e l’efficacia di divulgazione del “messaggio screening”.</p>
                 </div>
                 <div class="cs-fine">
-                  <a class="cta-2" href="#/razionale">Leggi il Razionale</a>
+                  <a class="cta-2" href="/razionale">Leggi il Razionale</a>
                 </div>
               </div>
             </div>
@@ -1578,7 +1582,7 @@
 
             <div class="banda b-bianco wrap sezione" data-screen-label="Indice razionale">
               <div class="fx col gap20">
-                <nav class="cs-tabs" aria-label="Carta dei servizi"><a class="cs-tab" href="#/carta">Presentazione (Carta dei servizi)</a><a class="cs-tab" href="#/razionale" aria-current="page">Razionale</a></nav>
+                <nav class="cs-tabs" aria-label="Carta dei servizi"><a class="cs-tab" href="/carta">Presentazione (Carta dei servizi)</a><a class="cs-tab" href="/razionale" aria-current="page">Razionale</a></nav>
                 <nav class="cs-indice" aria-label="In questa pagina">
                   <span class="occhiello">In questa pagina</span>
                   <button type="button" class="filtro" onClick="{{ vaiRazG }}">Razionale giuridico</button>
@@ -1615,7 +1619,7 @@
                 <h2>Razionale etico ed equity</h2>
                 <ul class="cs-elenco"><li>Nonostante l'importanza riconosciuta, persistono criticità legate alla copertura, all'adesione della popolazione, alla sostenibilità economica e all'efficacia complessiva degli screening, che richiedono un approfondimento e un confronto tra gli operatori del settore.</li><li>L’introduzione di nuove tecnologie e metodologie, come l’Intelligenza artificiale e l'uso di biomarcatori, sta trasformando il panorama della diagnosi precoce, rendendo necessario un aggiornamento costante per i professionisti coinvolti nei programmi di screening. <a href="https://www.sanita.puglia.it/documents/47906/606722/Locandina%2Bevento%2Bscreening%2B13%2Bdicembre%2B2024.pdf/1391bc08-4388-6de6-cb4a-edc58a524584?t=1751122513267" target="_blank" rel="noopener noreferrer">(Congresso 13 dicembre 2024, Brindisi)</a></li><li>È necessario affrontare le disuguaglianze nell’accesso agli screening, garantendo che i servizi siano equamente disponibili per tutta la popolazione, indipendentemente da fattori socio-economici o geografici. <a href="https://www.sanita.puglia.it/documents/47906/606722/Locandina%2Bevento%2Bscreening%2B13%2Bdicembre%2B2024.pdf/1391bc08-4388-6de6-cb4a-edc58a524584?t=1751122513267" target="_blank" rel="noopener noreferrer">(Congresso 13 dicembre 2024, Brindisi)</a></li></ul>
                 <div class="cs-fine">
-                  <a class="cta-2" href="#/carta">Torna alla Presentazione</a>
+                  <a class="cta-2" href="/carta">Torna alla Presentazione</a>
                 </div>
               </div>
             </div>
@@ -1723,7 +1727,7 @@
               <div class="fx col gap16">
                 <h2>Hai un'esperienza con uno screening?</h2>
                 <p>Raccontaci cosa ha funzionato o cosa no: invito, kit, prenotazione, referto. La pubblichiamo senza nomi, per aiutare chi viene dopo.</p>
-                <a class="cta-2" href="#/racconta">Racconta la tua esperienza</a>
+                <a class="cta-2" href="/racconta">Racconta la tua esperienza</a>
               </div>
             </div>
 
@@ -1790,7 +1794,7 @@
               <div class="fx col gap16">
                 <h2>Hai fatto uno screening?</h2>
                 <p>Racconta com'è andata: la tua storia può aiutare chi non sa da dove iniziare. Esce solo anonima, e solo dopo che hai approvato il testo finale.</p>
-                <a class="cta" href="#/contatti">Racconta la tua storia</a>
+                <a class="cta" href="/contatti">Racconta la tua storia</a>
               </div>
             </div>
 
@@ -1849,7 +1853,7 @@
                 <div class="avviso fx col gap12">
                   <h2>Stiamo raccogliendo i centri</h2>
                   <p>L’elenco dei centri screening delle ASL è in preparazione. Intanto trovi le iniziative aperte regione per regione.</p>
-                  <a class="cta" href="#/trova">Vedi le iniziative per regione</a>
+                  <a class="cta" href="/trova">Vedi le iniziative per regione</a>
                 </div>
               </div>
             </div>
@@ -1897,7 +1901,7 @@
             <div class="banda b-bianco wrap sezione" data-screen-label="Racconta la tua">
               <div class="fx col gap16">
                 <h2>Se qualcosa ha funzionato bene anche per te, puoi raccontarlo.</h2>
-                <a class="cta" href="#/racconta?tipo=buona">Racconta la tua esperienza</a>
+                <a class="cta" href="/racconta?tipo=buona">Racconta la tua esperienza</a>
               </div>
             </div>
             </sc-if>
@@ -1909,8 +1913,8 @@
                 <p class="testi-intro">Qui trovi le cose che nel servizio di screening hanno funzionato bene: una lettera chiara, un kit arrivato in tempo, una prenotazione semplice. Le raccontano i lettori, noi le riscriviamo senza nomi.</p>
                 <div class="avviso fx col gap12">
                   <p>Non abbiamo ancora pubblicato buone pratiche. La prima può essere la tua.</p>
-                  <a class="cta" href="#/racconta?tipo=buona">Racconta la tua esperienza</a>
-                  <a class="cta-2" href="#/">Torna alla home</a>
+                  <a class="cta" href="/racconta?tipo=buona">Racconta la tua esperienza</a>
+                  <a class="cta-2" href="/">Torna alla home</a>
                 </div>
               </div>
             </div>
@@ -1957,7 +1961,7 @@
             <div class="banda b-bianco wrap sezione" data-screen-label="Racconta la tua">
               <div class="fx col gap16">
                 <h2>Se qualcosa non ha funzionato, puoi raccontarlo.</h2>
-                <a class="cta" href="#/racconta?tipo=difficolta">Racconta la tua esperienza</a>
+                <a class="cta" href="/racconta?tipo=difficolta">Racconta la tua esperienza</a>
               </div>
             </div>
             </sc-if>
@@ -1969,8 +1973,8 @@
                 <p class="testi-intro">Qui trovi le cose che nel servizio di screening si sono inceppate: un invito mai arrivato, una lettera difficile da capire, un numero che non risponde. Le pubblichiamo per far vedere dove il servizio si può migliorare, non per accusare qualcuno. Per questo non trovi nomi di persone né di strutture.</p>
                 <div class="avviso fx col gap12">
                   <p>Non abbiamo ancora pubblicato segnalazioni.</p>
-                  <a class="cta" href="#/racconta?tipo=difficolta">Racconta la tua esperienza</a>
-                  <a class="cta-2" href="#/">Torna alla home</a>
+                  <a class="cta" href="/racconta?tipo=difficolta">Racconta la tua esperienza</a>
+                  <a class="cta-2" href="/">Torna alla home</a>
                 </div>
               </div>
             </div>
@@ -2182,7 +2186,7 @@
                 <p><strong>Preferenze salvate sul tuo dispositivo.</strong> Il sito ricorda la regione che hai aperto, le preferenze di lettura (testo più grande, contrasto) e la tua scelta sui cookie. Restano nel tuo browser: non ci arrivano.</p>
                 <p><strong>Statistiche, solo se le accetti.</strong> Se dici sì ai cookie di statistica, usiamo Google Analytics per contare le visite, le pagine lette e la regione di provenienza. Non lo usiamo per pubblicità né per profilarti. Se dici no, Google Analytics non parte.</p>
                 <p><strong>Mail di contatto.</strong> Se ci scrivi, riceviamo il tuo indirizzo email, il nome se lo indichi e il contenuto del messaggio. Ti chiediamo di non scrivere informazioni sulla tua salute: non ci servono per rispondere.</p>
-                <p><strong>Racconti di esperienze.</strong> Se usi la pagina <a href="#/racconta">Racconta la tua esperienza</a>, riceviamo il tuo indirizzo email e il tuo racconto, con regione e tipo di screening. Il racconto può contenere dati sulla salute: per questo ti chiediamo un consenso esplicito.</p>
+                <p><strong>Racconti di esperienze.</strong> Se usi la pagina <a href="/racconta">Racconta la tua esperienza</a>, riceviamo il tuo indirizzo email e il tuo racconto, con regione e tipo di screening. Il racconto può contenere dati sulla salute: per questo ti chiediamo un consenso esplicito.</p>
                 <p><strong>Richieste di avviso.</strong> [DA DECIDERE: tenere questo paragrafo solo se il servizio «Avvisami» viene attivato davvero] Se chiedi di essere avvisato quando esce una nuova iniziativa nella tua regione, riceviamo il tuo indirizzo email e la regione scelta. Non ti chiediamo dati sulla salute.</p>
                 <p>Non raccogliamo liste di indirizzi della popolazione e non riceviamo dati dalle ASL.</p>
 
@@ -2252,7 +2256,7 @@
                 <p>Il sito non è pensato per chi ha meno di 14 anni, e non raccogliamo consapevolmente i loro dati. Se scrivi un racconto che riguarda un minore, per esempio uno screening neonatale, non indicare nessun dato del bambino. Se ci accorgiamo di aver ricevuto dati di un minore, li cancelliamo.</p>
 
                 <h2>Cookie</h2>
-                <p>Quali cookie usiamo, a cosa servono e come si spengono lo trovi nella pagina <a href="#/cookie">Cookie e dati</a>.</p>
+                <p>Quali cookie usiamo, a cosa servono e come si spengono lo trovi nella pagina <a href="/cookie">Cookie e dati</a>.</p>
 
                 <h2>Modifiche a questa informativa</h2>
                 <p>Se cambiamo il modo in cui trattiamo i dati, aggiorniamo questa pagina e la data qui sotto.</p>
@@ -2311,7 +2315,7 @@
               <div class="fx col gap16">
                 <h2>Cosa non facciamo mai</h2>
                 <div class="fx col gap12">
-                  <div class="dato"><span class="et">Salute</span><span class="vl">Mentre navighi non registriamo quale screening guardi, n&eacute; nulla che riguardi la tua salute. Se ci mandi un racconto per mail, valgono le regole scritte nella pagina <a href="#/racconta">Racconta la tua esperienza</a>.</span></div>
+                  <div class="dato"><span class="et">Salute</span><span class="vl">Mentre navighi non registriamo quale screening guardi, n&eacute; nulla che riguardi la tua salute. Se ci mandi un racconto per mail, valgono le regole scritte nella pagina <a href="/racconta">Racconta la tua esperienza</a>.</span></div>
                   <div class="dato"><span class="et">Pubblicit&agrave;</span><span class="vl">Nessun cookie pubblicitario, nessun pubblico da rivendere.</span></div>
                   <div class="dato"><span class="et">Liste</span><span class="vl">Nessuna lista di indirizzi della popolazione: non &egrave; percorribile e non ci serve.</span></div>
                 </div>
@@ -2323,7 +2327,7 @@
               <div class="fx col gap16">
                 <h2>I tuoi diritti</h2>
                 <p>Puoi chiedere quali dati abbiamo, farli correggere o farli cancellare. Si scrive a <a href="mailto:info@screeningitalia.it">info@screeningitalia.it</a> e rispondiamo entro 30 giorni.</p>
-                <a class="link-cta" href="#/contatti">Scrivici
+                <a class="link-cta" href="/contatti">Scrivici
                   <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
                 </a>
               </div>
@@ -2337,7 +2341,7 @@
             <div class="ck-corpo">
               <div class="ck-testo">
                 <h2 class="ck-tit" id="ck-tit">Prima di continuare</h2>
-                <p class="ck-txt" id="ck-txt">Usiamo cookie tecnici, che servono a far funzionare il sito, e cookie di statistica, che ci dicono quante persone leggono queste pagine. I cookie di statistica partono solo se li accetti. <a href="#/cookie">Come li usiamo</a></p>
+                <p class="ck-txt" id="ck-txt">Usiamo cookie tecnici, che servono a far funzionare il sito, e cookie di statistica, che ci dicono quante persone leggono queste pagine. I cookie di statistica partono solo se li accetti. <a href="/cookie">Come li usiamo</a></p>
               </div>
               <div class="ck-azioni">
                 <button type="button" class="ck-btn ck-btn-si" onClick="{{ accettaTutti }}">Accetta tutti</button>
@@ -2410,31 +2414,31 @@
                 <a href="{{ hrefLazio }}">Lazio</a>
                 <a href="{{ hrefVeneto }}">Veneto</a>
                 <a href="{{ hrefCampania }}">Campania</a>
-                <a href="#/trova">Tutte le regioni</a>
+                <a href="/trova">Tutte le regioni</a>
               </nav>
 
               <nav class="ftr-col" aria-label="Come funziona">
                 <h3 class="ftr-tit">Come funziona</h3>
-                <a href="#/screening">Gli screening</a>
-                <a href="#/articolo/faq-1">Se l’invito non arriva</a>
-                <a href="#/articolo/faq-5">Il kit del colon-retto</a>
-                <a href="#/screening/prostata">Screening prostatico (PSA)</a>
-                <sc-if value="{{ haCentri }}" hint-placeholder-val="{{ false }}"><a href="#/centri">Centri Screening ASL</a></sc-if>
-                <sc-if value="{{ haTesti }}" hint-placeholder-val="{{ false }}"><a href="#/testimonianze">Testimonianze</a></sc-if>
-                <sc-if value="{{ haBp }}" hint-placeholder-val="{{ false }}"><a href="#/buone-pratiche">Buone pratiche</a></sc-if>
-                <sc-if value="{{ haDiff }}" hint-placeholder-val="{{ false }}"><a href="#/difficolta">Difficoltà e disservizi</a></sc-if>
+                <a href="/screening">Gli screening</a>
+                <a href="/articolo/faq-1">Se l’invito non arriva</a>
+                <a href="/articolo/faq-5">Il kit del colon-retto</a>
+                <a href="/screening/prostata">Screening prostatico (PSA)</a>
+                <sc-if value="{{ haCentri }}" hint-placeholder-val="{{ false }}"><a href="/centri">Centri Screening ASL</a></sc-if>
+                <sc-if value="{{ haTesti }}" hint-placeholder-val="{{ false }}"><a href="/testimonianze">Testimonianze</a></sc-if>
+                <sc-if value="{{ haBp }}" hint-placeholder-val="{{ false }}"><a href="/buone-pratiche">Buone pratiche</a></sc-if>
+                <sc-if value="{{ haDiff }}" hint-placeholder-val="{{ false }}"><a href="/difficolta">Difficoltà e disservizi</a></sc-if>
               </nav>
 
               <nav class="ftr-col" aria-label="Il portale">
                 <h3 class="ftr-tit">Il portale</h3>
-                <a href="#/chi">Chi siamo</a>
-                <a href="#/carta">Carta dei servizi SI</a>
-                <a href="#/contatti">Contatti</a>
-                <a href="#/enti">Pubblica le tue iniziative</a>
-                <a href="#/contatti">Segnala un’iniziativa</a>
-                <a href="#/contatti">Segnala un dato sbagliato</a>
-                <a href="#/racconta">Racconta la tua esperienza</a>
-                <a href="#/chi">Come verifichiamo</a>
+                <a href="/chi">Chi siamo</a>
+                <a href="/carta">Carta dei servizi SI</a>
+                <a href="/contatti">Contatti</a>
+                <a href="/enti">Pubblica le tue iniziative</a>
+                <a href="/contatti">Segnala un’iniziativa</a>
+                <a href="/contatti">Segnala un dato sbagliato</a>
+                <a href="/racconta">Racconta la tua esperienza</a>
+                <a href="/chi">Come verifichiamo</a>
               </nav>
             </div>
 
@@ -2446,15 +2450,15 @@
             <div class="ftr-basso">
               <p class="ftr-legale">© 2026 Screening Italia · Ultimo aggiornamento: {{ aggiornato }}</p>
               <p class="ftr-legale ftr-legale-link">
-                <a href="#/privacy">Privacy</a>
+                <a href="/privacy">Privacy</a>
                 <span aria-hidden="true">·</span>
-                <a href="#/cookie">Cookie</a>
+                <a href="/cookie">Cookie</a>
                 <span aria-hidden="true">·</span>
                 <button type="button" class="ftr-btn-link" onClick="{{ apriScelte }}">Preferenze cookie</button>
                 <span aria-hidden="true">·</span>
-                <a href="#/chi">Fonti e metodo</a>
+                <a href="/chi">Fonti e metodo</a>
                 <span aria-hidden="true">·</span>
-                <a href="#/chi">Accessibilità</a>
+                <a href="/chi">Accessibilità</a>
               </p>
             </div>
 

@@ -9,3 +9,16 @@ RewriteEngine On
 RewriteCond %{HTTP_HOST} ^www\.screeningitalia\.it$ [NC]
 RewriteRule ^ https://screeningitalia.it%{REQUEST_URI} [R=301,L]
 </IfModule>
+
+# Indirizzi puliti (31/10/2026, decisione Davide): il sito e una sola pagina (index.html) che
+# legge il percorso (/regione/Lazio, /articolo/<slug>, /faq ...). Ogni percorso senza file o
+# cartella reale e senza estensione torna a index.html (stato 200: e la stessa pagina, non un 404).
+# File veri (js, css, img, robots.txt ...) e le cartelle esistenti passano intatti; un file
+# mancante con estensione resta un 404 vero. I vecchi link con # li porta al nuovo indirizzo
+# lo script in index.html (l'hash non arriva mai al server).
+<IfModule mod_rewrite.c>
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !\.[A-Za-z0-9]+$
+RewriteRule ^ /index.html [L]
+</IfModule>
