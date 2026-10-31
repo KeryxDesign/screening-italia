@@ -31,18 +31,18 @@ Il file `.nojekyll` serve a impedire a GitHub di reinterpretare i file: lascialo
 
 ## Struttura del portale
 
-Una sola pagina con navigazione interna via indirizzo:
+Una sola pagina con indirizzi puliti (senza #): il server riporta ogni percorso a `index.html` (regola in `.htaccess`) e il sito legge il percorso. I vecchi link con `#/...` si portano da soli al nuovo indirizzo.
 
 | Indirizzo | Schermata |
 |---|---|
-| `#/` | Home: apertura, sostenitori, come si consulta, mappa, testimonianze, domande |
-| `#/regione/<Nome>` | Iniziative aperte nella regione, filtrabili per tipo di screening |
-| `#/vuota/<Nome>` | Regione senza iniziative segnalate, con servizio di avviso |
-| `#/faq` | Domande frequenti, con ricerca e filtri per argomento |
-| `#/articolo/<id>` | Singola risposta impaginata come articolo |
-| `#/prostata` | Approfondimento sullo screening della prostata |
-| `#/testimonianze` | Tutte le testimonianze |
-| `#/chi`, `#/contatti` | Chi siamo, contatti con modulo e WhatsApp |
+| `/` | Home: apertura, sostenitori, come si consulta, mappa, testimonianze, domande |
+| `/regione/<Nome>` | Iniziative aperte nella regione, filtrabili per tipo di screening |
+| `/vuota/<Nome>` | Regione senza iniziative segnalate, con servizio di avviso |
+| `/faq` | Domande frequenti, con ricerca e filtri per argomento |
+| `/articolo/<id>` | Singola risposta impaginata come articolo |
+| `/prostata` | Approfondimento sullo screening della prostata |
+| `/testimonianze` | Tutte le testimonianze |
+| `/chi`, `/contatti` | Chi siamo, contatti con modulo e WhatsApp |
 
 ## Note
 

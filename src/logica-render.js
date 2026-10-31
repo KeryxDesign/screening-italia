@@ -137,7 +137,7 @@ window.__siLogicaRender = class {
       navScrCardio: this.navScr("cardiovascolare"),
       navDomande: (vista === "domande" || vista === "articoli" || vista === "articolo") ? "page" : "false",
       // Florbo 16/10/2026: dall'header si sceglie la regione sulla mappa, niente Lombardia di default.
-      hrefIniziative: "#/trova",
+      hrefIniziative: "/trova",
       hrefLombardia: this.rottaRegione("Lombardia"),
       hrefLazio: this.rottaRegione("Lazio"),
       hrefVeneto: this.rottaRegione("Veneto"),
@@ -183,7 +183,7 @@ window.__siLogicaRender = class {
 
       // regione
       reg: reg,
-      hrefVuota: "#/vuota/" + encodeURIComponent(reg),
+      hrefVuota: "/vuota/" + encodeURIComponent(reg),
       apertura: tutte.length
         ? "Scegli gli screening che ti interessano: sotto trovi le iniziative aperte adesso, con chi le organizza e il numero da chiamare."
         : "Per questa regione non risultano iniziative segnalate.",

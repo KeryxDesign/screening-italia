@@ -160,14 +160,18 @@ class Component extends DCLogic {
       this.chiudiHamburger();
       window.scrollTo(0, 0);
     };
-    window.addEventListener("hashchange", this.onHash);
-    // In certe anteprime in iframe il cambio di indirizzo e bloccato:
-    // i clic sui link interni vengono gestiti qui, senza dipendere dall hash.
+    window.addEventListener("popstate", this.onHash);
+    // Indirizzi puliti (31/10/2026): i clic sui link interni (href che comincia con "/",
+    // senza estensione di file) cambiano vista con la History API, senza ricaricare la pagina.
+    // Clic con tasto speciale, tasto non primario o target esterno restano al browser.
     this.onClickInterno = (e) => {
-      const a = e.target && e.target.closest ? e.target.closest('a[href^="#/"]') : null;
-      if (!a) { return; }
+      const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+      if (!a || e.defaultPrevented || e.button > 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) { return; }
+      if (a.hasAttribute("download") || (a.target && a.target !== "_self")) { return; }
+      const h = a.getAttribute("href") || "";
+      if (!/^\/(?!\/)/.test(h) || /\.[a-z0-9]+$/i.test(h.split("?")[0])) { return; }
       e.preventDefault();
-      this.vaiA(a.getAttribute("href"));
+      this.vaiA(h);
     };
     document.addEventListener("click", this.onClickInterno);
     this.tick = setInterval(() => {
@@ -474,7 +478,7 @@ class Component extends DCLogic {
     this.mettiTesto();
   }
   componentWillUnmount() {
-    window.removeEventListener("hashchange", this.onHash);
+    window.removeEventListener("popstate", this.onHash);
     document.removeEventListener("click", this.onClickInterno);
     document.removeEventListener("click", this.onClickFuori);
     document.removeEventListener("keydown", this.onEscTendina);
@@ -549,7 +553,7 @@ class Component extends DCLogic {
   }
 
   vaiA(rotta) {
-    const pulita = String(rotta).replace(/^#\/?/, "");
+    const pulita = String(rotta).replace(/^#?\/?/, "");
     const p = pulita.split("/");
     // #/racconta?tipo=difficolta: la domanda preseleziona il tipo, non fa parte della vista.
     const q0 = (p[0] || "").split("?");
@@ -559,9 +563,9 @@ class Component extends DCLogic {
     let arg = p[1] ? decodeURIComponent(p[1]) : "";
     if (vista === "racconta") { arg = this.tipoDaDomanda(q0[1]); }
     // Alias permanente (brief LORI 25/09/2026): #/prostata e ora #/screening/prostata.
-    if (vista === "prostata") { vista = "screening"; arg = "prostata"; rotta = "#/screening/prostata"; }
+    if (vista === "prostata") { vista = "screening"; arg = "prostata"; rotta = "/screening/prostata"; }
     // Vecchie FAQ interne e #/articolo senza argomento: portano a #/domande (brief LORI 26/09/2026).
-    if (this.eVecchiaFaq(vista, arg)) { vista = "domande"; arg = ""; rotta = "#/domande"; }
+    if (this.eVecchiaFaq(vista, arg)) { vista = "domande"; arg = ""; rotta = "/domande"; }
     if (vista === "screening" && !this.scrValido(arg)) { arg = ""; }
     const sez = this.sezValida(vista, arg, p[2]);
     const nuova = { vista: vista, arg: arg, sez: sez };
@@ -572,27 +576,35 @@ class Component extends DCLogic {
     this.portaAllElenco(vista);
     // pushState: ogni vista entra nella cronologia, cosi il tasto indietro del browser
     // torna alla vista prima invece di uscire dal sito. Niente voci doppie.
-    try { if (window.location.hash !== new URL(rotta, window.location.href).hash) { window.history.pushState(null, "", rotta); } } catch (e) {}
+    try {
+      const url = "/" + String(rotta).replace(/^#?\/?/, "");
+      if (window.location.pathname + window.location.search !== url) { window.history.pushState(null, "", url); }
+    } catch (e) {}
   }
   leggiRotta() {
     let h = "";
-    try { h = String(window.location.hash || "").replace(/^#\/?/, ""); } catch (e) {}
+    // Indirizzi puliti (31/10/2026): la rotta e il percorso, non piu l'hash.
+    try { h = String(window.location.pathname || "").replace(/^\/+|\/+$/g, "") + String(window.location.search || ""); } catch (e) {}
     const p = h.split("/");
     const q0 = (p[0] || "").split("?");
     let vista = q0[0];
     let arg = p[1] ? decodeURIComponent(p[1]) : "";
     const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening", "buone-pratiche", "difficolta", "racconta", "privacy", "centri", "carta", "razionale"];
-    if (note.indexOf(vista) === -1) { vista = ""; }
+    if (note.indexOf(vista) === -1) {
+      // Percorso sconosciuto (anche /index.html): vale come Home, con indirizzo "/".
+      if (vista) { try { window.history.replaceState(null, "", "/"); } catch (e) {} }
+      vista = "";
+    }
     if (vista === "racconta") { arg = this.tipoDaDomanda(q0[1]); }
     // Alias permanente: #/prostata diventa #/screening/prostata senza voce doppia nella cronologia.
     if (vista === "prostata") {
       vista = "screening"; arg = "prostata";
-      try { window.history.replaceState(null, "", "#/screening/prostata"); } catch (e) {}
+      try { window.history.replaceState(null, "", "/screening/prostata"); } catch (e) {}
     }
     // Vecchie FAQ interne e #/articolo senza argomento: #/domande, senza voce doppia nella cronologia.
     if (this.eVecchiaFaq(vista, arg)) {
       vista = "domande"; arg = "";
-      try { window.history.replaceState(null, "", "#/domande"); } catch (e) {}
+      try { window.history.replaceState(null, "", "/domande"); } catch (e) {}
     }
     // Pagina screening sconosciuta: vale come #/screening (Home, sezione delle tipologie).
     if (vista === "screening" && !this.scrValido(arg)) { arg = ""; }
@@ -628,7 +640,7 @@ class Component extends DCLogic {
   }
   rottaRegione(n) {
     const q = this.conteggi()[n] || 0;
-    return "#/" + (q > 0 ? "regione" : "vuota") + "/" + encodeURIComponent(n);
+    return "/" + (q > 0 ? "regione" : "vuota") + "/" + encodeURIComponent(n);
   }
   etichettaConta(n) {
     const q = this.conteggi()[n] || 0;
@@ -732,8 +744,8 @@ class Component extends DCLogic {
       quandoUnaRiga: this.righeQuando(x.quando).length < 2,
       quandoPiuRighe: this.righeQuando(x.quando).length > 1,
       // Card cliccabile (24/09/2026): la card apre la pagina dell'iniziativa.
-      id: x.id || "", hrefDettaglio: "#/iniziativa/" + encodeURIComponent(x.id || ""),
-      reg: x.reg, hrefRegione: "#/regione/" + encodeURIComponent(x.reg)
+      id: x.id || "", hrefDettaglio: "/iniziativa/" + encodeURIComponent(x.id || ""),
+      reg: x.reg, hrefRegione: "/regione/" + encodeURIComponent(x.reg)
     };
   }
   /* Scheda stretta dell'elenco regione (blocco 2, brief LORI 26/09/2026).
@@ -954,7 +966,7 @@ class Component extends DCLogic {
   curaTesti() {
     const t = window.__siTesti || {};
     if (this.state.rotta.vista !== "testimonianze" || t.stato !== "fatto" || this.storie().length) { return; }
-    try { window.history.replaceState(null, "", "#/"); } catch (e) {}
+    try { window.history.replaceState(null, "", "/"); } catch (e) {}
     this.setState({ rotta: { vista: "", arg: "", sez: "" } });
   }
   /* Centri screening delle ASL (note di Angelo, 17/10/2026), da centri-wp.js.
@@ -1083,7 +1095,7 @@ class Component extends DCLogic {
         titolo: "Lo screening " + NOME[scr] + " nella tua regione",
         frase: "Che la lettera sia arrivata o no, il diritto resta. Qui vedi come funziona lo screening " + NOME[scr] + " nella tua regione. Decidi tu.",
         bottone: "Trova la tua regione",
-        href: "#/screening/" + scr + "/regione"
+        href: "/screening/" + scr + "/regione"
       };
     }
     if (scr === "prostata") {
@@ -1092,7 +1104,7 @@ class Component extends DCLogic {
         titolo: "Prostata: cosa c'è oggi nella tua regione",
         frase: "Per la prostata non arriva nessuna lettera: qui vedi cosa esiste oggi, regione per regione. Poi decidi tu.",
         bottone: "Trova la tua regione",
-        href: "#/screening/prostata/regione"
+        href: "/screening/prostata/regione"
       };
     }
     if (scr === "neonatale") {
@@ -1101,7 +1113,7 @@ class Component extends DCLogic {
         titolo: "Ogni neonato ha diritto a questo screening",
         frase: "Lo prevede la legge, ogni regione lo organizza a modo suo. Qui vedi come funziona lo screening neonatale nella tua regione. Così sai cosa chiedere.",
         bottone: "Trova la tua regione",
-        href: "#/screening/neonatale/dir"
+        href: "/screening/neonatale/dir"
       };
     }
     if (scr === "diabete-celiachia") {
@@ -1110,7 +1122,7 @@ class Component extends DCLogic {
         titolo: "Diabete tipo 1 e celiachia nei bambini",
         frase: "Lo prevede una legge nazionale. Qui trovi cosa dice, così sai cosa chiedere al pediatra.",
         bottone: "Cosa chiedere al pediatra",
-        href: "#/screening/diabete-celiachia/domanda"
+        href: "/screening/diabete-celiachia/domanda"
       };
     }
     return {
@@ -1118,7 +1130,7 @@ class Component extends DCLogic {
       titolo: "Guarda cosa c'è nella tua regione",
       frase: "Scegli la tua regione e vedi quali iniziative di screening ci sono. Niente registrazione, niente dati da lasciare. Poi decidi tu.",
       bottone: "Apri la mappa delle regioni",
-      href: "#/trova"
+      href: "/trova"
     };
   }
   /* Articoli veri da window.Articoli.lista(). Gli argomenti del filtro sono le
@@ -1198,7 +1210,7 @@ class Component extends DCLogic {
       titolo: a.titolo,
       estratto: a.estratto,
       meta: [c ? c.nome : "", data].filter((x) => x).join(" · "),
-      href: "#/articolo/" + encodeURIComponent(a.slug),
+      href: "/articolo/" + encodeURIComponent(a.slug),
       aria: "Leggi la risposta: " + a.titolo,
       haFoto: !!(a.immagine && a.immagine.url),
       foto: a.immagine && a.immagine.url ? a.immagine.url : "",
@@ -1220,7 +1232,7 @@ class Component extends DCLogic {
   // Vista articolo riempita con un articolo WordPress.
   voceArticolo() {
     const v = this.statoVoce() === "ok" ? this.state.voce : null;
-    if (!v) { return { slot: "art-wp", foto: "", haFoto: false, segnaposto: false, didascalia: "", cat: "", titolo: "", sommario: "", data: "", corpo: [], tornaHref: "#/domande", tornaTesto: "← Torna alle domande frequenti" }; }
+    if (!v) { return { slot: "art-wp", foto: "", haFoto: false, segnaposto: false, didascalia: "", cat: "", titolo: "", sommario: "", data: "", corpo: [], tornaHref: "/domande", tornaTesto: "← Torna alle domande frequenti" }; }
     const c = (v.categorie || [])[0];
     return {
       slot: "art-wp-" + v.id, foto: v.immagine && v.immagine.url ? v.immagine.url : "",
@@ -1233,7 +1245,7 @@ class Component extends DCLogic {
         : "Foto di repertorio: non ritrae pazienti né casi reali.",
       cat: c ? c.nome : "", titolo: v.titolo.replace(/^[\s\p{Extended_Pictographic}\uFE0F\u200D]+/u, ""), sommario: "",
       data: this.dataArticolo(v.dataIso), corpo: [],
-      tornaHref: "#/domande", tornaTesto: "← Torna alle domande frequenti"
+      tornaHref: "/domande", tornaTesto: "← Torna alle domande frequenti"
     };
   }
 
