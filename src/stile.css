@@ -1485,7 +1485,7 @@ html.contrasto .centro{border:2.5px solid #000}
 .hero-ingressi .cta{max-width:none;margin-top:0;align-self:stretch}
 html:not(.contrasto) .hero .hero-ingressi .cta{border:2px solid #fff}
 .hero-terzo{margin:0;font-size:17px}
-.hero-terzo a{color:#fff;font-weight:500}
+.hero-terzo a{color:#fff;font-weight:500;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px;display:inline-block;padding:10px 0}
 .hero-terzo a:hover{color:#fff;text-decoration-thickness:2.5px}
 @media (min-width:640px){.hero-ingressi{grid-template-columns:1fr 1fr;max-width:640px}}
 
