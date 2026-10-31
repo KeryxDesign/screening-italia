@@ -726,7 +726,7 @@ class Component extends DCLogic {
     const ENTI_PUBBLICI = /\b(ASL|AUSL|ASP|AST|ASUR|ASREM|ASST|ATS|ULSS|USL|Azienda (Sanitaria|USL|Provinciale per i Servizi Sanitari)|Regione|Ministero|Servizio Sanitario|SSN)\b/i;
     return ENTI_PUBBLICI.test(String(x.ente || "")) ? "programma" : "iniziativa";
   }
-  origineEtichetta(x) { return this.origine(x) === "programma" ? "Programma pubblico" : "Iniziativa di associazione o privato"; }
+  origineEtichetta(x) { return this.origine(x) === "programma" ? "Programma pubblico ASL" : "Iniziativa di associazione o privato"; }
   statiDi(x) { return (x.stati && x.stati.length ? x.stati : String(x.stato || "").split(" · ")).filter(Boolean); }
   nomiTipi(x) { return (x.tipi && x.tipi.length ? x.tipi : [x.tipo]).map((t) => this.nomeTipo(t)).join(", "); }
   icona(tipo) {
@@ -767,7 +767,7 @@ class Component extends DCLogic {
       quando: x.quando, chi: x.chi, tel: x.tel || "", href: "tel:" + String(x.tel || "").split(" ").join(""),
       haEnte: !!x.ente, haDove: !!x.dove, haQuando: !!x.quando, haChi: !!x.chi, haTel: !!x.tel,
       descrizione: x.descrizione || "", haDescrizione: !!x.descrizione,
-      origine: this.origine(x), origineEtichetta: this.origineEtichetta(x), origineBreve: this.origine(x) === "programma" ? "Programma pubblico" : "Iniziativa",
+      origine: this.origine(x), origineEtichetta: this.origineEtichetta(x), origineBreve: this.origine(x) === "programma" ? "Programma pubblico ASL" : "Iniziativa",
       tagTesto: x.stato, tagCls: cls,
       costo: x.stato ? x.stato.charAt(0).toUpperCase() + x.stato.slice(1) : "",
       enteLungo: String(x.ente || "").length > 90,
