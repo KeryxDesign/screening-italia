@@ -1881,44 +1881,20 @@ html.contrasto .scr-home .scr-tab-altri .scr-carta svg.scr-ci{box-shadow:none}
 .nav-riga .nav-menu .nav-presto small{font-size:14px;margin-left:8px;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,0.12)}
 .menu-chk:checked ~ .nav-riga .nav-menu .nav-presto{padding:0 20px 0 40px}
 
-/* --- Barra filtri della pagina regione (Florbo 31/10/2026, modello: siti di eventi) --- */
+/* --- Filtri della pagina regione (Florbo 31/10/2026): ricerca e menu a tendina --- */
 .filtri{display:flex;flex-direction:column;gap:16px;background:#E7EEF5;border-radius:14px;padding:20px}
 .filtri-cerca{display:flex;flex-direction:column;gap:8px}
-.filtri-toggle{min-height:52px}
-.filtri-corpo{display:none;flex-direction:column;gap:18px}
-.filtri-corpo.aperta{display:flex}
-@media (min-width:720px){.filtri-toggle{display:none}.filtri-corpo{display:flex}.filtri{padding:24px 28px}}
-.filtri-gruppo{border:0;margin:0;padding:0;min-width:0;display:flex;flex-direction:column;gap:8px}
-.filtri-gruppo legend{padding:0;font-size:16px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--verde-scuro);margin-bottom:8px}
-.filtri-chips{display:flex;flex-wrap:wrap;gap:10px}
-.filtri .filtro{display:inline-flex;align-items:center;gap:8px;white-space:normal;text-align:left}
-.filtri .filtro:hover{border-color:var(--verde);background:var(--verde-tenue)}
-.filtri .filtro.on:hover{background:var(--verde-scuro)}
-.filtri .filtro:focus-visible,.filtri .campo:focus-visible{outline:3px solid var(--terracotta);outline-offset:2px}
-.filtro-ico{width:20px;height:20px;flex-shrink:0}
-.filtro-n{font-weight:400;font-size:16px;opacity:.85}
+.filtri-corpo{display:grid;grid-template-columns:1fr;gap:14px}
+@media (min-width:720px){.filtri{padding:24px 28px}.filtri-corpo{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}}
+.filtri-sel{display:flex;flex-direction:column;gap:8px;min-width:0}
+.filtri .campo:focus-visible,.filtri .filtro:focus-visible{outline:3px solid var(--terracotta);outline-offset:2px}
 .filtri-esito{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
 .filtri-esito .nota{margin:0}
 .filtro-azzera{color:var(--terracotta);border-color:var(--terracotta)}
-.gruppo-ini{display:flex;flex-direction:column;gap:18px}
-.gruppo-ini + .gruppo-ini{margin-top:20px}
-.gruppo-h{text-align:left;margin-left:0}
-.gruppo-n{display:inline-block;min-width:34px;padding:2px 12px;border-radius:999px;background:#fff;color:var(--verde-scuro);font-size:19px;font-weight:700;vertical-align:middle}
-html.contrasto .filtri{background:#fff;box-shadow:inset 0 0 0 2.5px #000}
-html.contrasto .filtri .filtro{border-color:#000;color:#000}
-html.contrasto .filtri .filtro.on{background:#003C75;color:#fff}
-html.contrasto .filtro-azzera{color:#000}
-
-/* Barra a tutta larghezza come nei siti di eventi: ricerca in alto, poi una riga per gruppo (etichetta a sinistra, chip a destra). */
-@media (min-width:860px){
-  .filtri{padding:22px 28px;gap:14px}
-  .filtri-corpo{gap:12px}
-  .filtri-gruppo{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:12px}
-  .filtri-gruppo legend{float:left;width:150px;margin:0;padding:0}
-  .filtri-gruppo .filtri-chips{grid-column:2}
-  .filtri-gruppo{position:relative;padding-left:162px}
-  .filtri-gruppo legend{position:absolute;left:0;top:50%;transform:translateY(-50%);float:none}
-  .filtri-gruppo{display:block}
-  .filtri .filtro{min-height:46px;padding:8px 16px;font-size:17px}
-}
 .campo-cerca::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
+.card-vai .ini-origine{align-self:flex-start;display:inline-flex;align-items:center;min-height:30px;padding:3px 12px;border-radius:999px;
+  background:#E7EEF5;color:#04325D;font-size:16px;font-weight:700;line-height:1.3}
+html.contrasto .filtri{background:#fff;box-shadow:inset 0 0 0 2.5px #000}
+html.contrasto .filtro-azzera{color:#000}
+html.contrasto .card-vai .ini-origine{background:#fff;box-shadow:inset 0 0 0 2px #000;color:#000}
+.filtri .sel-box,.filtri .campo-sel{width:100%;max-width:none}
