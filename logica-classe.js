@@ -467,6 +467,8 @@ class Component extends DCLogic {
   componentDidUpdate() {
     if (this.riapplica) { this.riapplica(); this.rete(); }
     this.disegnaMappa();
+    const ss = document.querySelector("#scegli-reg-scr");
+    if (ss && ss.value !== (this.state.regScr || "")) { ss.value = this.state.regScr || ""; }
     const s = document.querySelector("#scegli-reg");
     if (s && s.options.length > 1 && s.value !== this.reg()) { s.value = this.reg(); }
     this.curaDettaglio();
@@ -630,8 +632,8 @@ class Component extends DCLogic {
     const q = this.conteggi()[n] || 0;
     return "#/" + (q > 0 ? "regione" : "vuota") + "/" + encodeURIComponent(n);
   }
-  etichettaConta(n) {
-    const q = this.conteggi()[n] || 0;
+  etichettaConta(n, qq) {
+    const q = qq !== undefined ? qq : (this.conteggi()[n] || 0);
     if (q === 0) { return "nessuna iniziativa segnalata"; }
     if (q === 1) { return "1 iniziativa aperta"; }
     return q + " iniziative aperte";
@@ -644,7 +646,22 @@ class Component extends DCLogic {
     if (this.mapEl && this.mapEl.isConnected && tutte.indexOf(this.mapEl) === -1) { tutte.push(this.mapEl); }
     if (!tutte.length || !window.MappaItalia || !window.MappaItalia.pronta()) { return; }
     const marca = this.vista() === "regione" ? this.reg() : "";
+    const S = window.__siScreening;
     tutte.forEach((el) => {
+      // Pagine screening: mappa dello screening, il clic sceglie la regione sulla stessa pagina.
+      if (el.classList.contains("mappa-scr") && S) {
+        const slug = this.state.rotta && this.state.rotta.arg;
+        const q = S.conteggi(slug), sc = this.state.regScr || null;
+        const m = "scr|" + slug + "|" + (sc || "") + "|" + JSON.stringify(q);
+        if (el.querySelector("svg") && el.dataset.reg === m) { return; }
+        el.dataset.reg = m;
+        window.MappaItalia.disegna(el, {
+          conteggi: q, attiva: sc,
+          vai: (n) => S.scegli(this, n),
+          etichetta: (n) => this.etichettaConta(n, q[n] || 0)
+        });
+        return;
+      }
       if (el.querySelector("svg") && el.dataset.reg === marca) { return; }
       el.dataset.reg = marca;
       window.MappaItalia.disegna(el, {
