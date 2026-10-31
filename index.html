@@ -14,17 +14,15 @@
 <link rel="icon" type="image/png" sizes="192x192" href="./marchio/icona-192.png">
 <link rel="apple-touch-icon" href="./marchio/apple-touch-icon.png">
 <script src="./support.js?v=locale1027"></script>
-<script src="./logica-render.js?v=filtri1031k"></script>
-<script src="./logica-classe.js?v=filtri1031k"></script>
-<script src="./screening-pagine.js?v=struttura1031"></script>
-<script src="./logica-screening.js?v=struttura1031b"></script>
+<script src="./logica-render.js?v=filtri1031l"></script>
+<script src="./logica-classe.js?v=filtri1031l"></script>
+<script src="./screening-pagine.js?v=avvisi1031"></script>
+<script src="./logica-screening.js?v=avvisi1031"></script>
 </head>
 <body>
 <x-dc>
       <helmet data-dc-atomics="">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&amp;family=Atkinson+Hyperlegible:wght@400;700&amp;display=swap">
+        <link rel="stylesheet" href="./fonts/fonts.css">
         <meta name="referrer" content="no-referrer">
         <meta name="ext-resource-dependency" content="./img/foto/foto-si-piazza.webp">
         <meta name="ext-resource-dependency" content="./img/foto/foto-si-piazza-2.webp">
@@ -45,11 +43,11 @@
         <meta name="ext-resource-dependency" content="./img/foto/foto-74855-23397.webp">
         <meta name="ext-resource-dependency" content="./img/foto/foto-197531-19160.webp">
         <meta name="ext-resource-dependency" content="./img/foto/foto-197531-19155.webp">
-        <link rel="stylesheet" href="./stile.css?v=mappa1031">
+        <link rel="stylesheet" href="./stile.css?v=filtri1031l">
         <link rel="stylesheet" href="./screening.css?v=tendina1023b">
         <script src="./accessibilita.js?v=tendina1023b"></script>
         <script src="./iniziative.js?v=tendina1023b"></script>
-        <script src="./iniziative-wp.js?v=filtri1031e"></script>
+        <script src="./iniziative-wp.js?v=nomi1031"></script>
         <script src="./articoli.js?v=tendina1023b"></script>
         <script src="./testimonianze-wp.js?v=tendina1023b"></script>
         <script src="./esperienze-wp.js?v=tendina1023b"></script>
@@ -390,11 +388,6 @@
               <div class="fx col gap20">
                 <p class="nota reg-torna"><a href="/trova">← Tutte le regioni</a></p>
                 <h1 class="scelta-h2 reg-h1">Screening in {{ reg }}</h1>
-                                <sc-if value="{{ haAsl }}" hint-placeholder-val="{{ true }}">
-                  <button type="button" class="cta-2 asl-vai" onClick="{{ vaiAiContatti }}">Telefono e e-mail dei centri screening
-                    <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"></path></svg>
-                  </button>
-                </sc-if>
               </div>
             </div>
 
@@ -402,14 +395,6 @@
               <div class="fx col gap20">
                 <sc-if value="{{ regPiena }}" hint-placeholder-val="{{ true }}">
                 <div class="filtri" role="search" aria-label="Filtra le schede di {{ reg }}">
-                  <div class="filtri-cerca">
-                    <label class="etichetta-sel" for="cerca-ini">Cerca per nome, ente o luogo</label>
-                    <div class="cerca">
-                      <svg class="cerca-i" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
-                      <input class="campo campo-cerca" id="cerca-ini" type="search" placeholder="Es.: mammografia, ASL, Brescia" value="{{ fq }}" onInput="{{ fqScrivi }}">
-                      <sc-if value="{{ haFq }}" hint-placeholder-val="{{ false }}"><button type="button" class="cerca-x" aria-label="Cancella la ricerca" onClick="{{ fqVia }}"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></sc-if>
-                    </div>
-                  </div>
                   <div class="filtri-corpo aperta">
                   <sc-for list="{{ menuFiltri }}" as="m" hint-placeholder-count="4">
                     <div class="filtri-sel fmenu" onKeyDown="{{ m.tasto }}">
@@ -542,8 +527,7 @@
             <div class="banda b-blu wrap sezione" data-screen-label="Le due porte">
               <div class="fx col gap16">
                 <h2>Nessuna iniziativa nelle tue vicinanze?</h2>
-                <p>Le iniziative vengono attivate e chiuse con frequenza. Puoi richiedere un avviso alla pubblicazione di una nuova iniziativa in {{ reg }}.</p>
-                <a class="cta" href="{{ hrefVuota }}">Richiedi un avviso</a>
+                <p>Le iniziative vengono attivate e chiuse con frequenza: torna a controllare più avanti.</p>
                 <a class="link-cta" href="/faq">Come funziona lo screening pubblico
                   <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
                 </a>
@@ -690,26 +674,6 @@
                   <a class="cta-2" href="/articolo/faq-1">Come procedere in caso di mancato recapito</a>
                 </div>
                 <a class="cta-2" href="/faq">Il portale screening della Regione {{ reg }}</a>
-              </div>
-            </div>
-
-            <div class="banda b-verde wrap sezione" data-screen-label="Avvisami">
-              <div class="fx col gap16">
-                <h2>Servizio di avviso</h2>
-                <p>Indicando un indirizzo email riceverai una comunicazione alla pubblicazione di una nuova iniziativa in {{ reg }}. Nessun altro invio.</p>
-                <sc-if value="{{ inviato }}" hint-placeholder-val="{{ false }}">
-                  <div class="fatto">Richiesta registrata. Ti scriviamo alla prima iniziativa pubblicata in {{ reg }}.</div>
-                </sc-if>
-                <sc-if value="{{ daCompilare }}" hint-placeholder-val="{{ true }}">
-                  <div class="fx col gap16">
-                    <div>
-                      <label class="etichetta" for="mail">La tua email</label>
-                      <input class="campo" id="mail" type="email" placeholder="nome@esempio.it" value="{{ mail }}" onInput="{{ scriviMail }}">
-                    </div>
-                    <button type="button" class="cta" onClick="{{ inviaMail }}">Attiva l’avviso</button>
-                    <p class="nota">Non ti chiediamo né registriamo alcun dato sanitario. Le comunicazioni riguardano solo questa regione.</p>
-                  </div>
-                </sc-if>
               </div>
             </div>
 
@@ -1145,15 +1109,11 @@
               </div>
             </div>
 
-            <div class="banda b-crema wrap sezione" data-screen-label="Cosa non facciamo">
-              <p class="scr-cosa">{{ scr.s9 }}</p>
-            </div>
-            <!-- S10 Articoli: nascosto (mostraArticoli:false), gli articoli non esistono. -->
-
-            <div class="banda b-crema b-avvertenza wrap sezione" data-screen-label="Chiusura">
+            <div class="banda b-crema b-avvertenza wrap sezione" data-screen-label="Avvertenze">
               <div class="fx col gap12">
-                <p class="nota">{{ scr.s11 }}</p>
-                <p class="nota">{{ scr.nonAff }}</p>
+                <sc-for list="{{ scr.avvisi }}" as="t" hint-placeholder-count="3">
+                  <p class="nota">{{ t.t }}</p>
+                </sc-for>
               </div>
             </div>
 
@@ -1859,9 +1819,9 @@
                 <h2>Chi è il titolare del trattamento</h2>
                 <p>Il titolare è <strong>Angelo Zaglio</strong>, medico.</p>
                 <ul>
-                <li>Partita IVA: [DA COMPLETARE: P.IVA]</li>
-                <li>Indirizzo: [DA COMPLETARE: indirizzo o recapito postale]</li>
-                <li>Iscritto all'Ordine dei Medici di [DA COMPLETARE: provincia], n. [DA COMPLETARE: numero di iscrizione]</li>
+                <li>Partita IVA: 03898940980</li>
+                <li>Indirizzo: Via Trento 41, Bari</li>
+                <li>Iscritto all'Ordine dei Medici Chirurghi e degli Odontoiatri della Provincia di Brescia, n. 5305</li>
                 <li>Email: <a href="mailto:info@screeningitalia.it">info@screeningitalia.it</a></li>
                 </ul>
                 <p>Non abbiamo nominato un responsabile della protezione dei dati (DPO): per qualsiasi domanda scrivi all'indirizzo qui sopra. [DA VERIFICARE: conferma che il DPO non sia obbligatorio]</p>
@@ -1872,7 +1832,6 @@
                 <p><strong>Statistiche, solo se le accetti.</strong> Se dici sì ai cookie di statistica, usiamo Google Analytics per contare le visite, le pagine lette e la regione di provenienza. Non lo usiamo per pubblicità né per profilarti. Se dici no, Google Analytics non parte.</p>
                 <p><strong>Mail di contatto.</strong> Se ci scrivi, riceviamo il tuo indirizzo email, il nome se lo indichi e il contenuto del messaggio. Ti chiediamo di non scrivere informazioni sulla tua salute: non ci servono per rispondere.</p>
                 <p><strong>Racconti di esperienze.</strong> Se usi la pagina <a href="/racconta">Racconta la tua esperienza</a>, riceviamo il tuo indirizzo email e il tuo racconto, con regione e tipo di screening. Il racconto può contenere dati sulla salute: per questo ti chiediamo un consenso esplicito.</p>
-                <p><strong>Richieste di avviso.</strong> [DA DECIDERE: tenere questo paragrafo solo se il servizio «Avvisami» viene attivato davvero] Se chiedi di essere avvisato quando esce una nuova iniziativa nella tua regione, riceviamo il tuo indirizzo email e la regione scelta. Non ti chiediamo dati sulla salute.</p>
                 <p>Non raccogliamo liste di indirizzi della popolazione e non riceviamo dati dalle ASL.</p>
 
                 <h2>Perché li trattiamo e su quale base</h2>
@@ -1881,7 +1840,6 @@
                 <li><strong>Statistiche di visita</strong>: il tuo consenso, art. 6.1.a GDPR. Lo dai o lo neghi nel banner, e lo cambi quando vuoi dal collegamento «Preferenze cookie» in fondo a ogni pagina.</li>
                 <li><strong>Rispondere alle tue mail</strong>: la tua richiesta, art. 6.1.b GDPR. Quando scrivi per segnalare un'iniziativa o un dato sbagliato, anche il nostro legittimo interesse a tenere corrette le informazioni del sito, art. 6.1.f GDPR.</li>
                 <li><strong>Valutare e pubblicare i racconti</strong>: il tuo consenso esplicito, artt. 6.1.a e 9.2.a GDPR. Usiamo email e racconto solo per valutare il racconto e, se lo scegliamo, pubblicarlo senza alcun dato che ti identifichi.</li>
-                <li><strong>Mandarti l'avviso di una nuova iniziativa</strong> [DA DECIDERE: solo se il servizio è attivo]: il tuo consenso, art. 6.1.a GDPR. Ti scriviamo solo per la regione scelta, nessun altro invio.</li>
                 </ul>
                 <p>Non usiamo i tuoi dati per pubblicità, non li vendiamo e non li usiamo per altri scopi.</p>
 
@@ -1896,17 +1854,15 @@
                 <p>Non cediamo i tuoi dati a nessuno. Li vedono solo il titolare e i fornitori tecnici che ci servono per far funzionare il sito e la posta. Questi fornitori agiscono come responsabili del trattamento, con un contratto che li obbliga a usare i dati solo per noi.</p>
                 <ul>
                 <li><strong>Hosting del sito e del pannello di gestione dei contenuti</strong>: Hostinger International Ltd. [DA VERIFICARE: sede legale e posizione dei server]</li>
-                <li><strong>Posta elettronica</strong> (casella info@screeningitalia.it): [DA COMPLETARE: fornitore della posta]</li>
+                <li><strong>Posta elettronica</strong> (casella info@screeningitalia.it): Hostinger International Ltd.</li>
                 <li><strong>Statistiche</strong>, solo col tuo consenso: Google Ireland Limited (Google Analytics).</li>
-                <li><strong>Caratteri tipografici</strong>: Google Fonts, servizio di Google. Quando apri una pagina, il tuo browser scarica i caratteri dai server di Google, che vedono il tuo indirizzo IP. [DA DECIDERE: se i caratteri vengono ospitati sul nostro server, togliere questa voce]</li>
-                <li><strong>Immagini e componenti tecnici del sito</strong>: alcune immagini e librerie vengono caricate da server esterni (unpkg.com), che vedono il tuo indirizzo IP. [DA VERIFICARE: elenco definitivo al momento della pubblicazione]</li>
                 <li><strong>Consulente tecnico</strong>: Keryx Design, che ha realizzato il sito e lo mantiene, può accedere ai dati tecnici per assistenza. [DA VERIFICARE: nomina a responsabile del trattamento]</li>
                 </ul>
                 <p>Possiamo comunicare dati alle autorità solo se la legge lo impone.</p>
 
                 <h2>Dati fuori dall'Unione Europea</h2>
                 <p>Alcuni fornitori, in particolare Google, possono trattare dati negli Stati Uniti. In quel caso il trasferimento si basa sulla decisione di adeguatezza della Commissione Europea per le aziende aderenti all'EU-US Data Privacy Framework, o sulle clausole contrattuali standard approvate dalla Commissione.</p>
-                <p>[DA VERIFICARE: per ogni fornitore (Hostinger, posta, Google, CDN delle immagini e delle librerie) dove stanno i server e quale garanzia si applica]</p>
+                <p>[DA VERIFICARE: per ogni fornitore (Hostinger, posta, Google) dove stanno i server e quale garanzia si applica]</p>
 
                 <h2>Per quanto tempo li conserviamo</h2>
                 <ul>
@@ -1915,7 +1871,6 @@
                 <li><strong>Preferenze sul tuo dispositivo</strong>: fino a 12 mesi, oppure finché non le cancelli dal browser.</li>
                 <li><strong>Mail di contatto</strong>: il tempo necessario a rispondere e a chiudere la richiesta, e al massimo [DA DECIDERE: 12 mesi].</li>
                 <li><strong>Racconti</strong>: conserviamo la mail al massimo 12 mesi. Il testo pubblicato, che non contiene dati che ti identificano, resta online finché non chiedi di toglierlo.</li>
-                <li><strong>Richieste di avviso</strong> [DA DECIDERE: solo se il servizio è attivo]: finché non ti cancelli, e al massimo [DA DECIDERE: 24 mesi]. In ogni mail di avviso trovi come cancellarti.</li>
                 </ul>
 
                 <h2>I tuoi diritti</h2>
@@ -2133,7 +2088,7 @@
             </div>
 
             <div class="ftr-basso">
-              <p class="ftr-legale">© 2026 Screening Italia · Ultimo aggiornamento: {{ aggiornato }}</p>
+              <p class="ftr-legale">© 2026 Screening Italia · Angelo Zaglio, medico · Via Trento 41, Bari · P.IVA 03898940980 · Iscrizione Ordine dei Medici di Brescia n. 5305 · Ultimo aggiornamento: {{ aggiornato }}</p>
               <p class="ftr-legale ftr-legale-link">
                 <a href="/privacy">Privacy</a>
                 <span aria-hidden="true">·</span>

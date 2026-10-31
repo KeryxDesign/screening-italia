@@ -8,6 +8,12 @@
    ✅ Ratificate da LEX con vincoli il 25/09/2026.
    Formule riscritte da MUSE sui vincoli LEX del 25/09/2026, approvate da Davide il 25/09:
    microcopy_sei_pagine.md §5. */
+/* Avvertenze finali, uguali su tutte le pagine dei singoli screening (testo di Davide, 31/10/2026). */
+window.SCREENING_AVVISI = [
+  "Screening Italia dà solo informazioni. Non prenotiamo esami, non diamo pareri medici, non sostituiamo la tua ASL.",
+  "Le informazioni di questa pagina hanno scopo divulgativo. Non sostituiscono il parere del medico e non servono a interpretare un esame o un referto. Per quello c'è il tuo medico.",
+  "Screening Italia è un sito privato e indipendente. Non è affiliato né convenzionato con Servizio Sanitario Nazionale, Regioni, ASL, Ministero della Salute o Istituto Superiore di Sanità. Non parla a loro nome."
+];
 window.SI_NON_AFFILIAZIONE = {
   adulti: "Screening Italia è un sito privato e indipendente. Non è affiliato né convenzionato con Servizio Sanitario Nazionale, Regioni, ASL, Ministero della Salute o Istituto Superiore di Sanità. Non parla a loro nome.",   // mammografico, cervicale, colon-retto, prostata
   genitori: "Screening Italia è un'iniziativa privata e indipendente. Non è affiliata né convenzionata con Servizio Sanitario Nazionale, Regioni, ASL, Ministero della Salute o Istituto Superiore di Sanità. Non parla a loro nome."  // neonatale, diabete-celiachia
@@ -93,8 +99,8 @@ window.SCREENING_PAGINE = {
     "S1·Riga di orientamento": "Cos'è, per chi è e dove farlo.",
     "S1·Etichetta CTA primaria": "Apri la tua regione",
     "S1·alt fotografia": "Una donna sulla quarantina apre la busta dell'invito allo screening, in cucina.",
-    "S2·Titolo h2": "Due esami diversi, secondo l'età",
-    "S2·Paragrafo": "Il programma nazionale copre dai 25 ai 64 anni. Cambia l'esame, cambia la cadenza: dipende da quanti anni hai.",
+    "S2·Titolo h2": "Se hai tra 25 e 64 anni, ti riguarda",
+    "S2·Paragrafo": "Il programma nazionale copre dai 25 ai 64 anni. Cambia l'esame e la cadenza, secondo la tua età: Pap test o HPV test.",
     "S2·Cella 1 · h3": "Dai 25 ai 29 anni: Pap test",
     "S2·Cella 1 · prosa": "Un prelievo di cellule dal collo dell'utero, ripetuto ogni tre anni. Lo fa un'ostetrica in ambulatorio.",
     "S2·Cella 1 · etichetta icona": "25-29 anni",
@@ -227,12 +233,12 @@ window.SCREENING_PAGINE = {
   },
   "prostata": {
     "S1·Occhiello": "PROSTATA E PSA",
-    "S1·Titolo h1": "Per la prostata non esiste un invito",
-    "S1·Sommario": "In Italia non c'è un programma nazionale che invita gli uomini a fare il PSA. Alcune regioni hanno avviato progetti propri. Qui trovi cosa esiste e cosa no.",
+    "S1·Titolo h1": "Cos'è lo screening della prostata (PSA)",
+    "S1·Sommario": "Il PSA è un esame del sangue che riguarda la prostata. In Italia non c'è un programma nazionale che invita gli uomini a farlo e nessuna lettera in arrivo: alcune regioni hanno progetti propri. Qui trovi cosa esiste e dove.",
     "S1·Riga di orientamento": "Cos'è, per chi è e dove trovarlo.",
     "S1·Etichetta CTA primaria": "Apri la tua regione",
     "S1·alt fotografia": "Un uomo sui sessant'anni cerca informazioni sullo schermo del telefono, seduto in cucina.",
-    "S2·Titolo h2": "Dai 50 anni, il PSA si decide con il medico",
+    "S2·Titolo h2": "Se hai più di 50 anni, ti riguarda: si decide con il medico",
     "S2·Paragrafo": "Il PSA è un esame del sangue, e si può fare in qualsiasi momento. Quando farlo e se farlo lo decidi con il tuo medico.",
     "S2·Cella 1 · h3": "Dai 50 anni in su",
     "S2·Cella 1 · prosa": "È l'età da cui partono i progetti regionali, dove esistono. Sotto i 50 non sono previsti.",
@@ -367,12 +373,12 @@ window.SCREENING_PAGINE = {
      medici, niente soglie, niente «gratuito» senza una data. */
   "cardiovascolare": {
     "S1·Occhiello": "SCREENING CARDIOVASCOLARE",
-    "S1·Titolo h1": "Per cuore e vasi non esiste un invito nazionale",
-    "S1·Sommario": "In Italia non c'è un programma nazionale che invita le persone a un controllo del rischio cardiovascolare. Alcune regioni e associazioni organizzano iniziative proprie. Qui trovi quelle che conosciamo.",
+    "S1·Titolo h1": "Cos'è lo screening cardiovascolare",
+    "S1·Sommario": "È un controllo del rischio cardiovascolare, cioè di cuore e vasi. In Italia non c'è un programma nazionale che invita le persone e nessuna lettera in arrivo: alcune regioni e associazioni organizzano iniziative proprie. Qui trovi quelle che conosciamo.",
     "S1·Riga di orientamento": "Cos'è, per chi è e dove trovarlo.",
     "S1·Etichetta CTA primaria": "Apri la tua regione",
     "S1·alt fotografia": "",
-    "S2·Titolo h2": "Un controllo che si decide con il medico",
+    "S2·Titolo h2": "Per chi è: lo decide chi organizza, con il tuo medico",
     "S2·Paragrafo": "Senza un programma nazionale, chi può partecipare e ogni quanto lo stabilisce chi organizza l'iniziativa. Fuori dalle iniziative, ne parli con il tuo medico di famiglia.",
     "S2·Cella 1 · h3": "L'età cambia da un'iniziativa all'altra",
     "S2·Cella 1 · prosa": "Chi può partecipare lo decide chi organizza. Lo trovi nella scheda di ogni iniziativa.",

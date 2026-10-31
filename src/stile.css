@@ -1845,8 +1845,13 @@ html.contrasto .scr-home .scr-tab-altri .scr-carta svg.scr-ci{box-shadow:none}
 
 /* Articolo (Florbo 30/10): foto piccola sopra il titolo, niente occhiello sotto il titolo. */
 .art-testa .art-figura{margin:0 0 4px}
-.art-testa .art-figura-img{aspect-ratio:21 / 9;max-height:180px;border-radius:10px}
+.art-testa .art-figura-img{aspect-ratio:21 / 9;max-height:200px;border-radius:10px}
 .art-standfirst{display:none}
+.art-testa{padding-bottom:0}
+.sezione-corpo{padding-top:12px}
+.art-wp{gap:18px !important}
+.art-sez{gap:10px !important}
+.art-sub3{text-align:left;margin:6px 0 0;max-width:none;font-size:20px;line-height:1.3;font-weight:700;color:#064A8B}
 
 /* --- Carta dei servizi SI e Razionale (30/10/2026) --- */
 .cs-tabs{display:flex;flex-wrap:wrap;gap:10px}
