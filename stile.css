@@ -1740,7 +1740,7 @@ html.contrasto .banda[data-fondo]:not(.hero){--fondo:#fff !important}
 .asl-card .asl-num:hover{background:#E0A21A;color:#14100A}
 .asl-card .asl-mail{display:block;min-height:44px;padding:8px 0;font-size:17px;font-weight:600;color:#064A8B;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere;word-break:break-word}
 .asl-card .asl-mail span{display:inline}
-.asl-card .asl-testo{font-weight:600}
+.asl-card .asl-testo{font-weight:400}
 .asl-card a:focus-visible,.asl-vai:focus-visible{outline:3px solid #A63D17;outline-offset:2px}
 html.contrasto .asl-card{box-shadow:none;outline:2px solid #14202B}
 html.contrasto .asl-ico{background:#003C75}
@@ -1754,7 +1754,7 @@ html.contrasto .asl-card .asl-num{background:#F0B429;color:#000;border-color:#00
 .ini-t-largo{grid-column:1/-1}
 .ini-t-corpo{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
 .ini-t-et{font-size:15px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#04325D}
-.ini-t-val{font-size:19px;line-height:1.5;color:#14202B;font-weight:600;overflow-wrap:anywhere}
+.ini-t-val{font-size:19px;line-height:1.5;color:#14202B;font-weight:400;overflow-wrap:anywhere}
 .ini-t-val .vl-righe{display:flex;flex-direction:column;gap:4px}
 .ini-testo{max-width:760px}
 .ini-blocco{display:flex;flex-direction:column;gap:12px}
