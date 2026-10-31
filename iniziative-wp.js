@@ -104,16 +104,23 @@
     return typeof v === "string" && lista.indexOf(v) !== -1 ? v : "";
   }
 
-  /* Telefono: restano cifre, spazi e un "+" solo in testa.
-     Il sito fa x.tel.split(" ") per costruire il link tel:, quindi
-     gli spazi multipli si riducono a uno. */
-  function telefono(v) {
-    if (typeof v !== "string" && typeof v !== "number") { return ""; }
-    var s = String(v).trim();
-    var piu = s.charAt(0) === "+";
-    s = s.replace(/[^0-9 ]/g, " ").replace(/\s+/g, " ").trim();
-    if (!/[0-9]/.test(s)) { return ""; }
-    return (piu ? "+" : "") + s;
+  /* Telefoni. Il campo del pannello e testo libero: puo contenere piu numeri
+     ("0922 407161 • 0922 407170"), orari o frasi. Qui si estraggono i soli numeri
+     (6-12 cifre, un "+" solo in testa), uno per voce, senza doppioni, al massimo 5.
+     Niente numeri: lista vuota (nessun pulsante). Ogni numero ha il suo link tel:. */
+  function telefoni(v) {
+    if (typeof v !== "string" && typeof v !== "number") { return []; }
+    var s = String(v).replace(/[•·,;|\n\r]/g, "|").replace(/\s[\/\u2013\u2014-]\s/g, "|").replace(/(\d)[\/\u2013\u2014-](?=\d)/g, "$1 ").replace(/[^0-9+ |]/g, "|");
+    var fuori = [];
+    s.split("|").forEach(function (seg) {
+      var m = seg.match(/\+?\d[\d ]*\d/g) || [];
+      m.forEach(function (n) {
+        n = n.replace(/\s+/g, " ").trim();
+        var cifre = n.replace(/\D/g, "").length;
+        if (cifre >= 6 && cifre <= 12 && fuori.indexOf(n) === -1) { fuori.push(n); }
+      });
+    });
+    return fuori.slice(0, 5);
   }
 
   /* Data di chiusura. ACF in REST la manda come AAAAMMGG ("20260930"),
@@ -176,7 +183,7 @@
       dove: testo(f.dove),
       quando: testo(f.quando),
       chi: testo(f.chi),
-      tel: telefono(f.tel),
+      tel: "",
       stato: "",
       chiude: data(f.chiude)
     };
@@ -204,6 +211,9 @@
        Se manca o non e riconosciuto non si scrive niente: il sito lo deduce dall'ente. */
     var origine = String(f.origine == null ? "" : f.origine).trim().toLowerCase();
     if (origine === "programma" || origine === "iniziativa") { x.origine = origine; }
+    var tels = telefoni(f.tel);
+    x.tel = tels[0] || "";
+    if (tels.length > 1) { x.tels = tels; }
     x.tipo = tipi[0] || "";
     x.tipi = tipi;
     /* Nome breve (Florbo, 31/10/2026): «Screening X – luogo». Il titolo lungo resta nel pannello
