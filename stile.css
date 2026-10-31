@@ -1907,3 +1907,21 @@ html.contrasto .card-vai .ini-origine{background:#fff;box-shadow:inset 0 0 0 2px
 .leg-piena{background:var(--verde-mappa)}
 .leg-vuota{background:#D5DCE4;margin-left:6px}
 html.contrasto .mappa-scr path.vuota{fill:#fff;stroke:#000}
+
+/* Tendine custom: pannello sotto il campo, a tutta larghezza (Florbo 31/10/2026) */
+.fmenu-box{position:relative;display:flex;align-items:center;width:100%}
+.fmenu-btn{width:100%;text-align:left;font-family:inherit;font-size:19px;min-height:58px;background:#fff;color:var(--inchiostro);
+  border:1.5px solid var(--bordo);border-radius:10px;padding:14px 52px 14px 16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fmenu-btn[aria-expanded="true"]{border-color:var(--verde);box-shadow:0 0 0 2px var(--verde)}
+.fmenu-panel{position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:60;margin:0;padding:6px;list-style:none;max-height:min(60vh,420px);overflow-y:auto;
+  background:#fff;border:1.5px solid var(--verde);border-radius:10px;box-shadow:0 12px 28px rgba(4,40,64,0.22)}
+.fmenu-op{display:block;width:100%;min-height:48px;padding:10px 14px;text-align:left;font-family:inherit;font-size:18px;line-height:1.3;
+  color:var(--inchiostro);background:#fff;border:0;border-radius:8px;cursor:pointer}
+.fmenu-op:hover,.fmenu-op:focus-visible{background:var(--verde-tenue);outline:none}
+.fmenu-op.on{font-weight:700;background:var(--verde-tenue);color:var(--verde-scuro)}
+.fmenu-btn:focus-visible,.fmenu-op:focus-visible{outline:3px solid var(--terracotta);outline-offset:2px}
+.fmenu{position:relative}
+html.contrasto .fmenu-btn,html.contrasto .fmenu-panel{border-color:#000;color:#000}
+html.contrasto .fmenu-op.on{background:#003C75;color:#fff}
+.fmenu:has(.fmenu-panel){z-index:70}
+.banda:has(.fmenu-panel){position:relative;z-index:70}

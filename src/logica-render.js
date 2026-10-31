@@ -80,6 +80,23 @@ window.__siLogicaRender = class {
     const mErr = this.state.mErr || {};
     const rcTipo = this.state.rcTipo;
 
+    // Tendine custom (Florbo 31/10/2026): il select nativo da telefono apriva un pannello minuscolo e fuori posto.
+    // Pannello a tutta larghezza sotto il campo, voci da 48px, testo 18px. Una sola aperta alla volta.
+    const aperta = this.state.fMenu || "";
+    const costruisci = (id, et, opzioni, valore, scegli) => {
+      const cur = opzioni.filter((o) => o.v === valore)[0] || opzioni[0] || { t: "" };
+      const chiudi = () => this.setState({ fMenu: "" });
+      return {
+        id: id, et: et, lblId: "fl-" + id, btnId: "fb-" + id, testo: cur.t,
+        aperto: aperta === id, esp: aperta === id ? "true" : "false",
+        toggle: () => this.setState((st) => ({ fMenu: st.fMenu === id ? "" : id })),
+        tasto: (e) => { if (e.key === "Escape" && aperta === id) { e.preventDefault(); chiudi(); const b = document.getElementById("fb-" + id); if (b) { b.focus(); } } },
+        opz: opzioni.map((o) => ({
+          t: o.t, sel: o.v === valore ? "true" : "false", cls: o.v === valore ? "fmenu-op on" : "fmenu-op",
+          pick: () => { chiudi(); scegli(o.v); const b = document.getElementById("fb-" + id); if (b) { b.focus(); } }
+        }))
+      };
+    };
     return {
       // navigazione
       navReg: (vista === "regione" || vista === "vuota" || vista === "iniziativa") ? "page" : "false",
@@ -176,6 +193,22 @@ window.__siLogicaRender = class {
       optTipo: optTipo, optOrigine: optOrigine, optCond: optCond, optScad: optScad,
       haCond: statiPresenti.length > 0, haScad: haScad,
       vTipo: sel[0] || "", vOrigine: fo, vCond: fc[0] || "", vScad: fs,
+      optRegione: this.nomiRegioni().map((n) => ({ v: n, t: n + " (" + (conteggi[n] || 0) + ")" })), vRegione: reg,
+      sceltaRegione: (e) => {
+        const n = e.target.value;
+        if (!n || n === reg) { return; }
+        this.filtriPorta = { tipi: sel.slice(), fq: this.state.fq || "", fo: fo, fc: fc.slice(), fs: fs };
+        this.vaiA(this.rottaRegione(n));
+      },
+      menuFiltri: [
+        costruisci("reg", "Regione", this.nomiRegioni().map((n) => ({ v: n, t: n + " (" + (conteggi[n] || 0) + ")" })), reg,
+          (v) => { if (v && v !== reg) { this.filtriPorta = { tipi: sel.slice(), fq: this.state.fq || "", fo: fo, fc: fc.slice(), fs: fs }; this.vaiA(this.rottaRegione(v)); } }),
+        costruisci("org", "Programmi o iniziative", optOrigine, fo, (v) => this.setState({ fo: v })),
+        costruisci("tipo", "Screening", optTipo, sel[0] || "", (v) => this.setState({ tipi: v ? [v] : [] }))
+      ].concat(statiPresenti.length ? [costruisci("cond", "Condizioni", optCond, fc[0] || "", (v) => this.setState({ fc: v ? [v] : [] }))] : [])
+        .concat(haScad ? [costruisci("scad", "Scadenza", optScad, fs, (v) => this.setState({ fs: v }))] : []),
+      menuHome: [costruisci("home", "Oppure scegli dal menu", [{ v: "", t: "Scegli la regione" }].concat(this.nomiRegioni().map((n) => ({ v: n, t: n }))), "",
+        (v) => { if (v) { this.vaiA(this.rottaRegione(v)); } })],
       sceltaTipo: (e) => this.setState({ tipi: e.target.value ? [e.target.value] : [] }),
       sceltaOrigine: (e) => this.setState({ fo: e.target.value }),
       sceltaCond: (e) => this.setState({ fc: e.target.value ? [e.target.value] : [] }),
