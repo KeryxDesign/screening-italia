@@ -1930,3 +1930,7 @@ html.contrasto .fmenu-btn,html.contrasto .fmenu-panel{border-color:#000;color:#0
 html.contrasto .fmenu-op.on{background:#003C75;color:#fff}
 .fmenu:has(.fmenu-panel){z-index:70}
 .banda:has(.fmenu-panel){position:relative;z-index:70}
+/* In home la tendina sta in fondo alla fascia, che taglia ciò che esce (clip-path): il pannello si apre in linea e spinge giù il resto. */
+.cambia-sel .fmenu-box{flex-direction:column;align-items:stretch}
+.cambia-sel .fmenu-box .sel-frecciona{position:absolute;right:16px;top:19px}
+.cambia-sel .fmenu-panel{position:static;margin-top:8px;max-height:min(50vh,360px);box-shadow:none}

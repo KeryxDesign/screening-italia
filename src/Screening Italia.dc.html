@@ -389,11 +389,6 @@
               <div class="fx col gap20">
                 <p class="nota reg-torna"><a href="/trova">← Tutte le regioni</a></p>
                 <h1 class="scelta-h2 reg-h1">Screening in {{ reg }}</h1>
-                                <sc-if value="{{ haAsl }}" hint-placeholder-val="{{ true }}">
-                  <button type="button" class="cta-2 asl-vai" onClick="{{ vaiAiContatti }}">Telefono e e-mail dei centri screening
-                    <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"></path></svg>
-                  </button>
-                </sc-if>
               </div>
             </div>
 
@@ -401,14 +396,6 @@
               <div class="fx col gap20">
                 <sc-if value="{{ regPiena }}" hint-placeholder-val="{{ true }}">
                 <div class="filtri" role="search" aria-label="Filtra le schede di {{ reg }}">
-                  <div class="filtri-cerca">
-                    <label class="etichetta-sel" for="cerca-ini">Cerca per nome, ente o luogo</label>
-                    <div class="cerca">
-                      <svg class="cerca-i" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
-                      <input class="campo campo-cerca" id="cerca-ini" type="search" placeholder="Es.: mammografia, ASL, Brescia" value="{{ fq }}" onInput="{{ fqScrivi }}">
-                      <sc-if value="{{ haFq }}" hint-placeholder-val="{{ false }}"><button type="button" class="cerca-x" aria-label="Cancella la ricerca" onClick="{{ fqVia }}"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></sc-if>
-                    </div>
-                  </div>
                   <div class="filtri-corpo aperta">
                   <sc-for list="{{ menuFiltri }}" as="m" hint-placeholder-count="4">
                     <div class="filtri-sel fmenu" onKeyDown="{{ m.tasto }}">

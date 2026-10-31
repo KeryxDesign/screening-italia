@@ -145,6 +145,24 @@
   /* Torna l'oggetto nella forma di iniziative.js, oppure null se
      l'iniziativa non passa i controlli. Motivo dello scarto in console,
      cosi chi lavora sul pannello puo capire perche non la vede. */
+  /* Nome breve «Screening X – luogo». Luogo: campo acf «citta» se c'e, altrimenti «dove» se e breve e sembra
+     un luogo; altrimenti la regione. Piu screening: il primo + «e altri». */
+  var NOME_BREVE = {
+    "Mammografico": "Screening mammografico", "Cervice uterina": "Screening cervice uterina",
+    "Colon-retto": "Screening colon-retto", "Prostata": "Screening prostata (PSA)",
+    "Neonatale": "Screening neonatale", "Diabete e celiachia pediatrici": "Screening diabete e celiachia",
+    "Cardiovascolare": "Screening cardiovascolare", "Polmonare": "Screening polmonare",
+    "Epatite C (HCV)": "Screening epatite C"
+  };
+  function nomeBreve(tipi, luogo, reg) {
+    var primo = tipi[0] || "";
+    var nome = NOME_BREVE[primo] || "Screening";
+    if (tipi.length > 1) { nome += " e altri"; }
+    var l = testo(luogo).replace(/^(Regione|Provincia di|Provincia|Comune di|Citta di|Città di)\s+/i, "");
+    if (!l || l.length > 30 || /[,;:]/.test(l) || /^(poliambulatori|ospedal|consultori|farmaci|ambulatori|centr|sede|asl|asp)/i.test(l)) { l = reg; }
+    return nome + " – " + l;
+  }
+
   function componi(post) {
     if (!post || typeof post !== "object") { return null; }
     var f = (post.acf && typeof post.acf === "object") ? post.acf : {};
@@ -188,6 +206,10 @@
     if (origine === "programma" || origine === "iniziativa") { x.origine = origine; }
     x.tipo = tipi[0] || "";
     x.tipi = tipi;
+    /* Nome breve (Florbo, 31/10/2026): «Screening X – luogo». Il titolo lungo resta nel pannello
+       (x.titoloPannello), il sito mostra sempre il nome breve: card, pagina dell'iniziativa, mappa. */
+    x.titoloPannello = x.titolo;
+    x.titolo = nomeBreve(tipi, f.citta || x.dove, x.reg);
     var manca = [];
     if (f.chiude != null && String(f.chiude).trim() !== "" && !x.chiude) { manca.push("chiude"); }
     if (!x.chiude) { delete x.chiude; }

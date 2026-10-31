@@ -35,7 +35,7 @@ window.__siLogicaRender = class {
     const optTipo = [opz("", "Tutti gli screening", null)].concat(nomiTipi.map((t) =>
       opz(t, this.nomeTipo(t), tutte.filter((x) => passa(x, "tipo") && this.haTipo(x, t)).length)));
     const optOrigine = [opz("", "Tutti", null),
-      opz("programma", "Programmi pubblici", tutte.filter((x) => passa(x, "origine") && this.origine(x) === "programma").length),
+      opz("programma", "Programmi pubblici ASL", tutte.filter((x) => passa(x, "origine") && this.origine(x) === "programma").length),
       opz("iniziativa", "Iniziative di associazioni e privati", tutte.filter((x) => passa(x, "origine") && this.origine(x) === "iniziativa").length)];
     const statiPresenti = ["gratuito", "su invito", "a pagamento"].filter((c) => tutte.some((x) => this.statiDi(x).indexOf(c) !== -1));
     const optCond = [opz("", "Tutte le condizioni", null)].concat(statiPresenti.map((c) =>
@@ -104,6 +104,7 @@ window.__siLogicaRender = class {
       navEnti: vista === "enti" ? "page" : "false",
       navChi: vista === "chi" ? "page" : "false",
       navContatti: vista === "contatti" ? "page" : "false",
+      navCarta: (vista === "carta" || vista === "razionale") ? "page" : "false",
       // «Gli screening» e una tendina (brief 26/09/2026): corrente su tutte le rotte #/screening*.
       navFaq: (vista === "faq" || this.state.rotta.vista === "screening") ? "page" : "false",
       scrAperto: this.scrAperto() ? "true" : "false",
@@ -205,8 +206,7 @@ window.__siLogicaRender = class {
           (v) => { if (v && v !== reg) { this.filtriPorta = { tipi: sel.slice(), fq: this.state.fq || "", fo: fo, fc: fc.slice(), fs: fs }; this.vaiA(this.rottaRegione(v)); } }),
         costruisci("org", "Programmi o iniziative", optOrigine, fo, (v) => this.setState({ fo: v })),
         costruisci("tipo", "Screening", optTipo, sel[0] || "", (v) => this.setState({ tipi: v ? [v] : [] }))
-      ].concat(statiPresenti.length ? [costruisci("cond", "Condizioni", optCond, fc[0] || "", (v) => this.setState({ fc: v ? [v] : [] }))] : [])
-        .concat(haScad ? [costruisci("scad", "Scadenza", optScad, fs, (v) => this.setState({ fs: v }))] : []),
+      ].concat(haScad ? [costruisci("scad", "Scadenza", optScad, fs, (v) => this.setState({ fs: v }))] : []),
       menuHome: [costruisci("home", "Oppure scegli dal menu", [{ v: "", t: "Scegli la regione" }].concat(this.nomiRegioni().map((n) => ({ v: n, t: n }))), "",
         (v) => { if (v) { this.vaiA(this.rottaRegione(v)); } })],
       sceltaTipo: (e) => this.setState({ tipi: e.target.value ? [e.target.value] : [] }),
