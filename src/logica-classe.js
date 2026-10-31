@@ -4,7 +4,7 @@ window.__siLogica = function (DCLogic) {
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { rotta: this.leggiRotta(), tipi: [], fq: "", fo: "", fc: [], fs: "", fm: false, mail: "", inviato: false,
+    this.state = { rotta: this.leggiRotta(), tipi: [], fq: "", fo: "", fc: [], fs: "", fm: false, fMenu: "", mail: "", inviato: false,
       artArg: null, artQuanti: 6, artStato: null, artDati: null,
       // Pagine screening (25/09/2026): regione scelta nella pagina, resta per la sessione.
       regScr: null,
@@ -156,11 +156,14 @@ class Component extends DCLogic {
 
     this.onHash = () => {
       const r = this.leggiRotta();
-      this.setState({ rotta: r, tipi: [], fq: "", fo: "", fc: [], fs: "", fm: false, inviato: false, mail: "", menuAperto: "", msgInviato: false, mErr: null, ...this.rcDaRotta(r) });
+      this.setState({ rotta: r, tipi: [], fq: "", fo: "", fc: [], fs: "", fm: false, fMenu: "", inviato: false, mail: "", menuAperto: "", msgInviato: false, mErr: null, ...this.rcDaRotta(r) });
       this.chiudiHamburger();
       window.scrollTo(0, 0);
     };
     window.addEventListener("popstate", this.onHash);
+    // Tendine dei filtri: un clic fuori dal menu lo chiude.
+    this.fuoriMenu = (e) => { if (this.state.fMenu && !(e.target.closest && e.target.closest(".fmenu"))) { this.setState({ fMenu: "" }); } };
+    document.addEventListener("click", this.fuoriMenu);
     // Indirizzi puliti (31/10/2026): i clic sui link interni (href che comincia con "/",
     // senza estensione di file) cambiano vista con la History API, senza ricaricare la pagina.
     // Clic con tasto speciale, tasto non primario o target esterno restano al browser.
@@ -578,7 +581,7 @@ class Component extends DCLogic {
       const dest = (window.INIZIATIVE || []).filter((x) => x.reg === arg);
       portati.tipi = portati.tipi.filter((t) => dest.some((x) => this.haTipo(x, t)));
     }
-    this.setState({ rotta: nuova, tipi: [], fq: "", fo: "", fc: [], fs: "", fm: false, inviato: false, mail: "", menuAperto: "", msgInviato: false, mErr: null, ...this.rcDaRotta(nuova), ...portati },
+    this.setState({ rotta: nuova, tipi: [], fq: "", fo: "", fc: [], fs: "", fm: false, fMenu: "", inviato: false, mail: "", menuAperto: "", msgInviato: false, mErr: null, ...this.rcDaRotta(nuova), ...portati },
       () => this.portaASezione());
     this.chiudiHamburger();
     window.scrollTo(0, 0);
