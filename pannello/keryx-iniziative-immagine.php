@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Keryx — iniziativa: calendario sulla data e immagine caricabile
- * Description: 1) Il campo «chiude» torna a mostrare il calendario (date picker; salva sempre AAAAMMGG come prima). 2) Nuovo campo «Immagine (carica)» con la libreria media. REST: acf.immagine_url = immagine caricata se c'è, altrimenti l'URL scritto a mano (acf.immagine_link / url_immagine / immagine_url_manuale, se esiste). Per tornare indietro basta svuotare questo file: i dati restano nel database.
+ * Description: 1) Il campo «chiude» torna a mostrare il calendario (date picker; il formato salvato non cambia). 2) Nuovo campo «Immagine (carica)» con la libreria media. REST: acf.immagine_url = immagine caricata se c'è, altrimenti l'URL scritto a mano (acf.immagine_link / url_immagine / immagine_url_manuale, se esiste). Per tornare indietro basta svuotare questo file: i dati restano nel database.
  */
 
 if (!defined('ABSPATH')) { exit; }
@@ -10,7 +10,6 @@ add_filter('acf/load_field/name=chiude', function ($field) {
     if (!is_array($field) || empty($field['name']) || $field['name'] !== 'chiude') { return $field; }
     $field['type'] = 'date_picker';
     $field['display_format'] = 'd/m/Y';
-    $field['return_format'] = 'Ymd';
     $field['first_day'] = 1;
     return $field;
 }, 30);

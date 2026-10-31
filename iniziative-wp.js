@@ -160,7 +160,9 @@
       chi: testo(f.chi),
       tel: telefono(f.tel),
       stato: "",
-      chiude: data(f.chiude)
+      chiude: data(f.chiude),
+      /* Immagine: quella caricata nel pannello (acf.immagine_url) se c'è, altrimenti niente. Solo https. */
+      immagine: (typeof f.immagine_url === "string" && /^https:\/\//.test(f.immagine_url)) ? f.immagine_url : ""
     };
 
     /* Data di chiusura facoltativa (Angelo, 17/10/2026): le iniziative delle ASL
