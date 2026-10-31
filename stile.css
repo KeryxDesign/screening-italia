@@ -835,8 +835,8 @@ html.contrasto .sel-discreto .campo-sel{background:#002445;border-color:#fff;bac
 
 /* ============ Piede completo ============ */
 .ftr-alto{display:grid;grid-template-columns:1fr;gap:32px}
-@media (min-width:700px){.ftr-alto{grid-template-columns:1.4fr 1fr 1fr;gap:36px 28px}}
-@media (min-width:1000px){.ftr-alto{grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px 32px}}
+@media (min-width:700px){.ftr-alto{grid-template-columns:1.4fr 1fr;gap:36px 28px}}
+@media (min-width:1000px){.ftr-alto{grid-template-columns:1.6fr 1fr;gap:40px 32px}}
 .ftr .nome{font-size:23px;font-weight:700;letter-spacing:-0.012em}
 .ftr-claim{font-size:20px !important;line-height:1.4;font-weight:700;color:var(--oro-chiaro) !important;max-width:30ch}
 .ftr-wa{display:inline-flex;align-items:center;gap:10px;min-height:48px;align-self:flex-start;
@@ -1335,7 +1335,7 @@ h2,.banda:not(.hero) h2{text-align:left;margin-left:0;margin-right:0;max-width:6
 
 /* --- 5. Piede piu largo: marchio 320px, link in 3 colonne da 200px --- */
 @media (min-width:1000px){
-  .ftr-alto{grid-template-columns:minmax(0,320px) repeat(3,minmax(0,200px));justify-content:space-between;gap:40px 24px}
+  .ftr-alto{grid-template-columns:minmax(0,320px) minmax(0,200px);justify-content:space-between;gap:40px 24px}
 }
 .ftr-col a{min-height:44px;line-height:1.35}
 .ftr-legale,.ftr-legale span{font-size:17px !important;color:#D1DAE3 !important}

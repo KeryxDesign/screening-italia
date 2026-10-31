@@ -130,6 +130,7 @@
                 </div>
               </div>
               </sc-if>
+              <a href="/carta" aria-current="{{ navCarta }}">Carta dei servizi</a>
               <a href="/domande" aria-current="{{ navDomande }}">Domande frequenti</a>
               <a href="/contatti" aria-current="{{ navContatti }}">Contatti</a>
             </nav>
@@ -2046,28 +2047,6 @@
                   Scrivici una mail
                 </a>
               </div>
-
-              <nav class="ftr-col" aria-label="Trova un’iniziativa">
-                <h3 class="ftr-tit">Trova un’iniziativa</h3>
-                <a href="{{ hrefIniziative }}">Iniziative per regione</a>
-                <a href="{{ hrefLombardia }}">Lombardia</a>
-                <a href="{{ hrefLazio }}">Lazio</a>
-                <a href="{{ hrefVeneto }}">Veneto</a>
-                <a href="{{ hrefCampania }}">Campania</a>
-                <a href="/trova">Tutte le regioni</a>
-              </nav>
-
-              <nav class="ftr-col" aria-label="Come funziona">
-                <h3 class="ftr-tit">Come funziona</h3>
-                <a href="/screening">Gli screening</a>
-                <a href="/articolo/faq-1">Se l’invito non arriva</a>
-                <a href="/articolo/faq-5">Il kit del colon-retto</a>
-                <a href="/screening/prostata">Screening prostatico (PSA)</a>
-                <sc-if value="{{ haCentri }}" hint-placeholder-val="{{ false }}"><a href="/centri">Centri Screening ASL</a></sc-if>
-                <sc-if value="{{ haTesti }}" hint-placeholder-val="{{ false }}"><a href="/testimonianze">Testimonianze</a></sc-if>
-                <sc-if value="{{ haBp }}" hint-placeholder-val="{{ false }}"><a href="/buone-pratiche">Buone pratiche</a></sc-if>
-                <sc-if value="{{ haDiff }}" hint-placeholder-val="{{ false }}"><a href="/difficolta">Difficoltà e disservizi</a></sc-if>
-              </nav>
 
               <nav class="ftr-col" aria-label="Il portale">
                 <h3 class="ftr-tit">Il portale</h3>
