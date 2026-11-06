@@ -43,7 +43,7 @@
         <meta name="ext-resource-dependency" content="./img/foto/foto-74855-23397.webp">
         <meta name="ext-resource-dependency" content="./img/foto/foto-197531-19160.webp">
         <meta name="ext-resource-dependency" content="./img/foto/foto-197531-19155.webp">
-        <link rel="stylesheet" href="./stile.css?v=tendina1031">
+        <link rel="stylesheet" href="./stile.css?v=teal1106">
         <link rel="stylesheet" href="./screening.css?v=tendina1023b">
         <script src="./accessibilita.js?v=tendina1023b"></script>
         <script src="./iniziative.js?v=tendina1023b"></script>
@@ -55,8 +55,7 @@
         <script src="./dati-angelo-1019.js?v=tendina1023b"></script>
         <script src="./regioni-italia.js?v=tendina1023b"></script>
         <script src="./mappa.js?v=tendina1023b"></script>
-        <script src="./image-slot.js?v=tendina1023b"></script>
-        <style>
+                <style>
           /* Marcatore di bozza (sezione articoli sotto le Domande frequenti, 23/09/2026):
              esce insieme al testo di prova, prima del build. */
           .prova{align-self:flex-start;font-size:15px;line-height:1.35;font-weight:700;
@@ -83,7 +82,7 @@
       </helmet>
 
       <template id="__bundler_thumbnail">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#064A8B"></rect><g fill="none" stroke="#FAF8F3" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M132 60l18 10 12 22-8 26 14 22"></path><path d="M188 140l-10 -18"></path><circle cx="160" cy="100" r="46"></circle></g></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#0B6E73"></rect><g fill="none" stroke="#FAF8F3" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M132 60l18 10 12 22-8 26 14 22"></path><path d="M188 140l-10 -18"></path><circle cx="160" cy="100" r="46"></circle></g></svg>
       </template>
 
       <div data-screen-label="Portale">
@@ -142,7 +141,7 @@
 
             <div class="banda hero wrap sezione" data-screen-label="Above the fold">
               <div class="hero-sfondo" aria-hidden="true">
-                <image-slot id="hero-1" src="./img/foto/foto-si-piazza.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
+                <img src="./img/foto/foto-si-piazza.webp" alt="" loading="lazy" decoding="async">
                 <span class="hero-velo"></span>
               </div>
               <div class="hero-due">
@@ -350,7 +349,7 @@
                   <sc-for list="{{ homeArticoli }}" as="a" hint-placeholder-count="4">
                     <div class="art">
                       <sc-if value="{{ a.haFoto }}" hint-placeholder-val="{{ false }}">
-                        <div class="art-img"><image-slot id="{{ a.slot }}" src="{{ a.foto }}" shape="rect" placeholder="Foto dell articolo"></image-slot></div>
+                        <div class="art-img"><img src="{{ a.foto }}" alt="" loading="lazy" decoding="async"></div>
                       </sc-if>
                       <div class="art-corpo">
                         <p class="art-meta">{{ a.meta }}</p>
@@ -656,7 +655,7 @@
 
             <div class="banda hero wrap sezione" data-screen-label="Non c e niente">
               <div class="hero-sfondo" aria-hidden="true">
-                <image-slot id="hero-3" src="./img/foto/foto-74855-23397.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
+                <img src="./img/foto/foto-74855-23397.webp" alt="" loading="lazy" decoding="async">
                 <span class="hero-velo"></span>
               </div>
               <div class="fx col gap16">
@@ -701,7 +700,7 @@
 
             <div class="banda hero wrap sezione" data-screen-label="Apertura enti">
               <div class="hero-sfondo" aria-hidden="true">
-                <image-slot id="hero-8" src="./img/foto/foto-si-balcone.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
+                <img src="./img/foto/foto-si-balcone.webp" alt="" loading="lazy" decoding="async">
                 <span class="hero-velo"></span>
               </div>
               <div class="fx col gap16">
@@ -853,7 +852,7 @@
                       <sc-for list="{{ articoli }}" as="a" hint-placeholder-count="6">
                         <div class="art">
                           <sc-if value="{{ a.haFoto }}" hint-placeholder-val="{{ false }}">
-                            <div class="art-img"><image-slot id="{{ a.slot }}" src="{{ a.foto }}" shape="rect" placeholder="Foto dell articolo"></image-slot></div>
+                            <div class="art-img"><img src="{{ a.foto }}" alt="" loading="lazy" decoding="async"></div>
                           </sc-if>
                           <div class="art-corpo">
                             <p class="art-meta">{{ a.meta }}</p>
@@ -1131,7 +1130,7 @@
 
             <div class="banda hero wrap sezione" data-screen-label="Chi siamo apertura">
               <div class="hero-sfondo" aria-hidden="true">
-                <image-slot id="hero-6" src="./img/foto/foto-si-panchina.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
+                <img src="./img/foto/foto-si-panchina.webp" alt="" loading="lazy" decoding="async">
                 <span class="hero-velo"></span>
               </div>
               <div class="fx col gap16">
@@ -1182,6 +1181,15 @@
               </div>
             </div>
 
+            <div class="banda b-crema wrap sezione" data-screen-label="Sito privato e indipendente">
+              <div class="fx col gap12">
+                <div class="avviso fx col gap8">
+                  <h3>Sito privato e indipendente</h3>
+                  <p>Screening Italia è un sito privato e indipendente. NON è affiliato né convenzionato con Servizio Sanitario Nazionale, Regioni, ASL, Ministero della Salute o Istituto Superiore di Sanità. NON parla a loro nome.</p>
+                </div>
+              </div>
+            </div>
+
           </div>
         </sc-if>
 
@@ -1190,7 +1198,7 @@
 
             <div class="banda hero wrap sezione" data-screen-label="Carta apertura">
               <div class="hero-sfondo" aria-hidden="true">
-                <image-slot id="hero-6" src="./img/foto/foto-si-panchina.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
+                <img src="./img/foto/foto-si-panchina.webp" alt="" loading="lazy" decoding="async">
                 <span class="hero-velo"></span>
               </div>
               <div class="fx col gap16">
@@ -1237,6 +1245,15 @@
               </div>
             </div>
 
+            <div class="banda b-crema wrap sezione" data-screen-label="Sito privato e indipendente">
+              <div class="fx col gap12">
+                <div class="avviso fx col gap8">
+                  <h3>Sito privato e indipendente</h3>
+                  <p>Screening Italia è un sito privato e indipendente. NON è affiliato né convenzionato con Servizio Sanitario Nazionale, Regioni, ASL, Ministero della Salute o Istituto Superiore di Sanità. NON parla a loro nome.</p>
+                </div>
+              </div>
+            </div>
+
           </div>
         </sc-if>
 
@@ -1245,7 +1262,7 @@
 
             <div class="banda hero wrap sezione" data-screen-label="Razionale apertura">
               <div class="hero-sfondo" aria-hidden="true">
-                <image-slot id="hero-6" src="./img/foto/foto-si-panchina.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
+                <img src="./img/foto/foto-si-panchina.webp" alt="" loading="lazy" decoding="async">
                 <span class="hero-velo"></span>
               </div>
               <div class="fx col gap16">
@@ -1306,7 +1323,7 @@
 
             <div class="banda hero wrap sezione" data-screen-label="Contatti apertura">
               <div class="hero-sfondo" aria-hidden="true">
-                <image-slot id="hero-7" src="./img/foto/foto-si-lettera.webp" shape="rect" placeholder="Foto di sezione"></image-slot>
+                <img src="./img/foto/foto-si-lettera.webp" alt="" loading="lazy" decoding="async">
                 <span class="hero-velo"></span>
               </div>
               <div class="fx col gap16">
@@ -1401,14 +1418,14 @@
               <div class="fx col gap16">
                 <h2>Hai un'esperienza con uno screening?</h2>
                 <p>Raccontaci cosa ha funzionato o cosa no: invito, kit, prenotazione, referto. La pubblichiamo senza nomi, per aiutare chi viene dopo.</p>
-                <a class="cta-2" href="/racconta">Racconta la tua esperienza</a>
+                <a class="cta" href="/racconta">Racconta la tua esperienza</a>
               </div>
             </div>
 
             <div class="banda b-crema wrap sezione" data-screen-label="Segnala">
               <div class="fx col gap16">
                 <h2>Enti e associazioni</h2>
-                <p style="margin-left:auto;margin-right:auto;text-align:center">Inviaci la locandina o il collegamento alla pagina ufficiale, con ente, sede, date, requisiti di partecipazione e recapito telefonico. Dopo la verifica sarà pubblicata.</p>
+                <p>Inviaci la locandina o il collegamento alla pagina ufficiale, con ente, sede, date, requisiti di partecipazione e recapito telefonico. Dopo la verifica sarà pubblicata.</p>
                 <a class="cta" href="mailto:info@screeningitalia.it">Segnala un’iniziativa</a>
               </div>
             </div>
@@ -1418,6 +1435,15 @@
                 <div class="avviso fx col gap8">
                   <h3>Per prenotare occorre contattare l’ente organizzatore</h3>
                   <p>Il recapito è riportato nella scheda di ciascuna iniziativa: il portale non può prenotare per te. In presenza di sintomi o dubbi clinici rivolgiti al medico di medicina generale.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" data-screen-label="Sito privato e indipendente">
+              <div class="fx col gap12">
+                <div class="avviso fx col gap8">
+                  <h3>Sito privato e indipendente</h3>
+                  <p>Screening Italia è un sito privato e indipendente. NON è affiliato né convenzionato con Servizio Sanitario Nazionale, Regioni, ASL, Ministero della Salute o Istituto Superiore di Sanità. NON parla a loro nome.</p>
                 </div>
               </div>
             </div>
@@ -1781,7 +1807,7 @@
                 <!-- Foto solo se è quella vera dell'articolo (non di repertorio), piccola e sopra il titolo. -->
                 <sc-if value="{{ art.haFoto }}" hint-placeholder-val="{{ false }}">
                 <figure class="art-figura">
-                  <span class="art-figura-img"><image-slot id="{{ art.slot }}" src="{{ art.foto }}" shape="rect" placeholder="Foto dell articolo"></image-slot></span>
+                  <span class="art-figura-img"><img src="{{ art.foto }}" alt="" loading="lazy" decoding="async"></span>
                 </figure>
                 </sc-if>
                 <p class="nota art-torna"><a href="{{ art.tornaHref }}">{{ art.tornaTesto }}</a></p>
