@@ -100,13 +100,13 @@ a:hover{color:var(--verde-scuro);text-decoration-thickness:2.5px}
   .menu-chk:checked ~ .nav-riga a{min-height:56px;padding:0 20px;font-size:19px;font-weight:500;
     border-bottom:1.5px solid rgba(255,255,255,0.14)}
   .menu-chk:checked ~ .nav-riga a[aria-current="page"]{border-bottom-color:rgba(255,255,255,0.14);
-    box-shadow:inset 4px 0 0 var(--terracotta)}
+    box-shadow:inset 4px 0 0 #fff}
   /* Tendina «Gli screening» come fisarmonica nel pannello */
   .nav-voce{flex-direction:column}
   .menu-chk:checked ~ .nav-riga .nav-tendina{width:100%;min-height:56px;padding:0 20px;font-size:19px;font-weight:500;
     border-bottom:1.5px solid rgba(255,255,255,0.14)}
   .menu-chk:checked ~ .nav-riga .nav-tendina[aria-current="page"]{border-bottom-color:rgba(255,255,255,0.14);
-    box-shadow:inset 4px 0 0 var(--terracotta)}
+    box-shadow:inset 4px 0 0 #fff}
   .menu-chk:checked ~ .nav-riga .nav-menu a{padding:0 20px 0 40px}
 }
 
