@@ -1125,7 +1125,10 @@ class Component extends DCLogic {
   /* ---- Modulo #/contatti (SENTINEL 13/10/2026) ----
      Come #/racconta: niente salvato, niente fetch. Costruisce la mail e apre la posta;
      oggetto = tipo scelto, corpo = nome, email, messaggio e in fondo la frase del consenso. */
-  ctConsenso() { return "Ho letto l'informativa e acconsento al trattamento dei miei dati per ricevere una risposta."; }
+  ctConsenso(tipo) {
+    if (tipo === "Racconto la mia esperienza") { return "Ho letto l'informativa e acconsento esplicitamente al trattamento dei dati sulla salute contenuti nel mio racconto e alla sua pubblicazione in forma anonima."; }
+    return "Ho letto l'informativa e acconsento al trattamento dei miei dati per ricevere una risposta.";
+  }
   ctMailto(d) {
     d = d || {};
     const corpo = [
@@ -1135,7 +1138,7 @@ class Component extends DCLogic {
       String(d.testo || "").replace(/\r\n?/g, "\n").trim().replace(/\n/g, "\r\n"),
       "",
       "---",
-      this.ctConsenso()
+      this.ctConsenso(d.tipo)
     ].join("\r\n");
     return "mailto:info@screeningitalia.it?subject=" + encodeURIComponent(d.tipo || "Messaggio dal sito") +
       "&body=" + encodeURIComponent(corpo);
