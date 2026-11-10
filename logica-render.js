@@ -396,6 +396,7 @@ window.__siLogicaRender = class {
       mTipo3: this.state.mTipo === "Ho una domanda",
       mTipo4: this.state.mTipo === "Altro",
       mTipo5: this.state.mTipo === "Racconto la mia esperienza",
+      mNonTipo5: this.state.mTipo !== "Racconto la mia esperienza",
       mTipo6: this.state.mTipo === "Lascio un feedback",
       mTesto: this.state.mTesto || "",
       msgInviato: !!this.state.msgInviato,
