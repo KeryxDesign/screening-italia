@@ -1941,3 +1941,5 @@ html.contrasto .fmenu-op.on{background:#055459;color:#fff}
 
 /* Tendina Contatti (10/11/2026): ultima voce della barra, si apre verso sinistra per non uscire dallo schermo. */
 @media (min-width:1200px){ #menu-contatti{left:auto;right:0} }
+/* Contatti: i campi occupano tutta la colonna, allineati al titolo «Scrivici». */
+.modulo-colonna .modulo{max-width:none;align-self:stretch}
