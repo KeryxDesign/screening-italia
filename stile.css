@@ -1942,3 +1942,15 @@ html.contrasto .fmenu-op.on{background:#055459;color:#fff}
 
 /* Tendina Contatti (10/11/2026): ultima voce della barra, si apre verso sinistra per non uscire dallo schermo. */
 @media (min-width:1200px){ #menu-contatti{left:auto;right:0} }
+
+/* ============ Nuovo logo di Angelo (10/11/2026) ============ */
+/* Versione breve (marchio SI + nome) in testata, completa (con dicitura e motto) nel piede.
+   PNG trasparenti: stanno su una scheda bianca, perche il testo e blu notte e il fondo e verde acqua. */
+.marchio-img,.marchio:has(.motto) .marchio-img{height:60px;width:auto;background:#FFFFFF;padding:5px 9px;border-radius:8px;box-sizing:content-box}
+.hdr-riga{padding-top:max(10px,env(safe-area-inset-top));padding-bottom:10px;min-height:80px}
+@media (min-width:1200px){
+  .marchio-img,.marchio:has(.motto) .marchio-img{height:72px;padding:6px 12px}
+  .hdr-riga{min-height:100px}
+}
+.ftr-marchio-img{display:block;width:100%;max-width:340px;height:auto;padding:18px 20px;background:#FFFFFF;border-radius:10px;box-sizing:border-box;align-self:flex-start}
+@media (min-width:900px){.ftr-marchio-img{max-width:400px}}
