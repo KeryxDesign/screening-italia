@@ -1944,6 +1944,8 @@ html.contrasto .fmenu-op.on{background:#055459;color:#fff}
 
 /* Tendina Contatti (10/11/2026): ultima voce della barra, si apre verso sinistra per non uscire dallo schermo. */
 @media (min-width:1200px){ #menu-contatti{left:auto;right:0} }
+/* Contatti: i campi occupano tutta la colonna, allineati al titolo «Scrivici». */
+.modulo-colonna .modulo{max-width:none;align-self:stretch}
 
 /* Pulsante «portale della Regione» (10/11/2026): verde acqua pieno, per distinguerlo dal pulsante giallo accanto. */
 html:not(.contrasto) .banda .avviso a.cta-2.cta-portale.cta-portale{background:#0B6E73 !important;color:#fff !important;border:2px solid #07494D !important}
