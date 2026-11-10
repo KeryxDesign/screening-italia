@@ -1950,3 +1950,15 @@ html.contrasto .fmenu-op.on{background:#055459;color:#fff}
 /* Pulsante «portale della Regione» (10/11/2026): verde acqua pieno, per distinguerlo dal pulsante giallo accanto. */
 html:not(.contrasto) .banda .avviso a.cta-2.cta-portale.cta-portale{background:#0B6E73 !important;color:#fff !important;border:2px solid #07494D !important}
 html:not(.contrasto) .banda .avviso a.cta-2.cta-portale.cta-portale:hover{background:#07494D !important;color:#fff !important;border-color:#07494D !important}
+
+/* ============ Nuovo logo di Angelo (10/11/2026) ============ */
+/* Versione breve (marchio SI + nome) in testata, completa (con dicitura e motto) nel piede.
+   PNG trasparenti: stanno su una scheda bianca, perche il testo e blu notte e il fondo e verde acqua. */
+.marchio-img,.marchio:has(.motto) .marchio-img{height:60px;width:auto;background:#FFFFFF;padding:5px 9px;border-radius:8px;box-sizing:content-box}
+.hdr-riga{padding-top:max(10px,env(safe-area-inset-top));padding-bottom:10px;min-height:80px}
+@media (min-width:1200px){
+  .marchio-img,.marchio:has(.motto) .marchio-img{height:72px;padding:6px 12px}
+  .hdr-riga{min-height:100px}
+}
+.ftr-marchio-img{display:block;width:100%;max-width:340px;height:auto;padding:18px 20px;background:#FFFFFF;border-radius:10px;box-sizing:border-box;align-self:flex-start}
+@media (min-width:900px){.ftr-marchio-img{max-width:400px}}
