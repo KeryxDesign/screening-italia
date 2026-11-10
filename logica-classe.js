@@ -4,7 +4,7 @@ window.__siLogica = function (DCLogic) {
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { rotta: this.leggiRotta(), tipi: [], fq: "", fo: "", fc: [], fs: "", fm: false, fMenu: "", mail: "", inviato: false,
+    this.state = { rotta: this.leggiRotta(), mTipo: this.ctTipoDaRotta(this.leggiRotta()), tipi: [], fq: "", fo: "", fc: [], fs: "", fm: false, fMenu: "", mail: "", inviato: false,
       artArg: null, artQuanti: 6, artStato: null, artDati: null,
       // Pagine screening (25/09/2026): regione scelta nella pagina, resta per la sessione.
       regScr: null,
@@ -157,7 +157,7 @@ class Component extends DCLogic {
 
     this.onHash = () => {
       const r = this.leggiRotta();
-      this.setState({ rotta: r, tipi: [], fq: "", fo: "", fc: [], fs: "", fm: false, fMenu: "", inviato: false, mail: "", menuAperto: "", msgInviato: false, mErr: null, ...this.rcDaRotta(r) });
+      this.setState({ rotta: r, tipi: [], fq: "", fo: "", fc: [], fs: "", fm: false, fMenu: "", inviato: false, mail: "", menuAperto: "", msgInviato: false, mErr: null, ...this.rcDaRotta(r), ...this.ctDaRotta(r) });
       this.chiudiHamburger();
       window.scrollTo(0, 0);
     };
@@ -550,11 +550,13 @@ class Component extends DCLogic {
     const v = this.state.rotta.vista;
     if (v === "screening") { return "scr"; }
     if (this.eRottaEsperienze(v)) { return "esp"; }
+    if (v === "contatti") { return "con"; }
     return "";
   }
   eRottaEsperienze(v) { return ["testimonianze", "buone-pratiche", "difficolta", "racconta"].indexOf(v) !== -1; }
   scrAperto() { return this.menu() === "scr"; }
   espAperto() { return this.menu() === "esp"; }
+  conAperto() { return this.menu() === "con"; }
   apriChiudi(k) { this.setState({ menuAperto: this.menu() === k ? "" : k }); }
   // Cambio rotta (collaudo LORI giro 1): il pannello hamburger si chiude, la pagina nuova resta visibile.
   chiudiHamburger() {
@@ -603,6 +605,7 @@ class Component extends DCLogic {
     if (note.indexOf(vista) === -1) { vista = ""; }
     let arg = p[1] ? decodeURIComponent(p[1]) : "";
     if (vista === "racconta") { arg = this.tipoDaDomanda(q0[1]); }
+    if (vista === "contatti") { arg = this.ctTipoArg(q0[1]); }
     // Alias permanente (brief LORI 25/09/2026): #/prostata e ora #/screening/prostata.
     if (vista === "prostata") { vista = "screening"; arg = "prostata"; rotta = "/screening/prostata"; }
     // Vecchie FAQ interne e #/articolo senza argomento: portano a #/domande (brief LORI 26/09/2026).
@@ -617,7 +620,7 @@ class Component extends DCLogic {
       const dest = (window.INIZIATIVE || []).filter((x) => x.reg === arg);
       portati.tipi = portati.tipi.filter((t) => dest.some((x) => this.haTipo(x, t)));
     }
-    this.setState({ rotta: nuova, tipi: [], fq: "", fo: "", fc: [], fs: "", fm: false, fMenu: "", inviato: false, mail: "", menuAperto: "", msgInviato: false, mErr: null, ...this.rcDaRotta(nuova), ...portati },
+    this.setState({ rotta: nuova, tipi: [], fq: "", fo: "", fc: [], fs: "", fm: false, fMenu: "", inviato: false, mail: "", menuAperto: "", msgInviato: false, mErr: null, ...this.rcDaRotta(nuova), ...this.ctDaRotta(nuova), ...portati },
       () => this.portaASezione());
     this.chiudiHamburger();
     window.scrollTo(0, 0);
@@ -644,6 +647,7 @@ class Component extends DCLogic {
       vista = "";
     }
     if (vista === "racconta") { arg = this.tipoDaDomanda(q0[1]); }
+    if (vista === "contatti") { arg = this.ctTipoArg(q0[1]); }
     // Alias permanente: #/prostata diventa #/screening/prostata senza voce doppia nella cronologia.
     if (vista === "prostata") {
       vista = "screening"; arg = "prostata";
@@ -1074,6 +1078,18 @@ class Component extends DCLogic {
   tipoDaDomanda(q) {
     const m = /(?:^|&)tipo=([a-z-]+)/.exec(q || "");
     return m && (m[1] === "difficolta" || m[1] === "buona") ? m[1] : "";
+  }
+  /* Contatti: /contatti?tipo=esperienza|iniziativa|feedback preseleziona il tipo di messaggio. */
+  ctTipoArg(q) {
+    const m = /(?:^|&)tipo=([a-z-]+)/.exec(q || "");
+    return m && ["esperienza", "iniziativa", "feedback"].indexOf(m[1]) !== -1 ? m[1] : "";
+  }
+  ctTipoNome(a) {
+    return { esperienza: "Racconto la mia esperienza", iniziativa: "Segnalo un’iniziativa", feedback: "Lascio un feedback" }[a] || "";
+  }
+  ctTipoDaRotta(r) { return (r && r.vista === "contatti" && this.ctTipoNome(r.arg)) || "Segnalo un’iniziativa"; }
+  ctDaRotta(r) {
+    return r && r.vista === "contatti" && this.ctTipoNome(r.arg) ? { mTipo: this.ctTipoNome(r.arg) } : {};
   }
   rcDaRotta(r) {
     if (!r || r.vista !== "racconta") { return { rcErr: null, rcAperta: false }; }

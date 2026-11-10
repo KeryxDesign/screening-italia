@@ -1938,3 +1938,6 @@ html.contrasto .fmenu-op.on{background:#055459;color:#fff}
 .cambia-sel .fmenu-box{flex-direction:column;align-items:stretch}
 .cambia-sel .fmenu-box .sel-frecciona{position:absolute;right:16px;top:19px}
 .cambia-sel .fmenu-panel{position:static;margin-top:8px;max-height:min(50vh,360px);box-shadow:none}
+
+/* Tendina Contatti (10/11/2026): ultima voce della barra, si apre verso sinistra per non uscire dallo schermo. */
+@media (min-width:1200px){ #menu-contatti{left:auto;right:0} }
