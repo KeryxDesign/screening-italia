@@ -14,8 +14,8 @@
 <link rel="icon" type="image/png" sizes="192x192" href="./marchio/icona-192.png">
 <link rel="apple-touch-icon" href="./marchio/apple-touch-icon.png">
 <script src="./support.js?v=locale1027"></script>
-<script src="./logica-render.js?v=asl1031"></script>
-<script src="./logica-classe.js?v=asl1031"></script>
+<script src="./logica-render.js?v=contatti1110"></script>
+<script src="./logica-classe.js?v=contatti1110"></script>
 <script src="./screening-pagine.js?v=avvisi1031"></script>
 <script src="./logica-screening.js?v=avvisi1031"></script>
 </head>
@@ -43,7 +43,7 @@
         <meta name="ext-resource-dependency" content="./img/foto/foto-74855-23397.webp">
         <meta name="ext-resource-dependency" content="./img/foto/foto-197531-19160.webp">
         <meta name="ext-resource-dependency" content="./img/foto/foto-197531-19155.webp">
-        <link rel="stylesheet" href="./stile.css?v=barra1106">
+        <link rel="stylesheet" href="./stile.css?v=contatti1110">
         <link rel="stylesheet" href="./screening.css?v=tendina1023b">
         <script src="./accessibilita.js?v=tendina1023b"></script>
         <script src="./iniziative.js?v=tendina1023b"></script>
@@ -131,7 +131,14 @@
               </sc-if>
               <a href="/domande" aria-current="{{ navDomande }}">Domande frequenti</a>
               <a href="/carta" aria-current="{{ navCarta }}">Carta dei servizi</a>
-              <a href="/contatti" aria-current="{{ navContatti }}">Contatti</a>
+              <!-- Contatti (10/11/2026): tendina con due voci, entrambe aprono lo stesso modulo con il tipo già scelto. -->
+              <div class="nav-voce">
+                <button type="button" class="nav-tendina" aria-expanded="{{ conAperto }}" aria-controls="menu-contatti" aria-current="{{ navContatti }}" onClick="{{ conApriChiudi }}">Contatti<svg class="nav-freccia" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+                <div class="nav-menu" id="menu-contatti">
+                  <a href="/contatti?tipo=esperienza">Racconta la tua esperienza</a>
+                  <a href="/contatti?tipo=iniziativa">Segnala un’iniziativa</a>
+                </div>
+              </div>
             </nav>
           </div>
         </div>
@@ -1329,48 +1336,44 @@
               <div class="fx col gap16">
                 <div class="occhiello">Contatti</div>
                 <h1>Contatti</h1>
-                <p>Se hai visto un’iniziativa che manca o un dato sbagliato, segnalalo: ogni segnalazione viene verificata e, se serve, la pagina si aggiorna.</p>
-              </div>
-            </div>
-
-            <div class="banda b-bianco wrap sezione" data-screen-label="Recapiti">
-              <div class="fx col gap20">
-                <h2>Per segnalazioni e domande</h2>
-                <a class="wa" href="mailto:info@screeningitalia.it?subject=Messaggio%20dal%20sito%20Screening%20Italia">
-                  <svg class="wa-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg>
-                  <span class="wa-txt">
-                    <span class="wa-tit">Scrivici una mail</span>
-                    <span class="wa-sub">Si apre la tua posta, con l’indirizzo già scritto</span>
-                  </span>
-                </a>
-                <p class="nota">Il nostro indirizzo: info@screeningitalia.it</p>
+                <p>Segnala un’iniziativa o un dato sbagliato, racconta la tua esperienza o lasciaci un feedback: ogni messaggio viene letto e, se serve, la pagina si aggiorna.</p>
               </div>
             </div>
 
             <div class="banda b-verde wrap sezione" data-screen-label="Modulo">
               <div class="fx col gap20">
-                <h2>Oppure mandaci una mail</h2>
+                <h2>Scrivici</h2>
                 <sc-if value="{{ msgInviato }}" hint-placeholder-val="{{ false }}">
                   <div class="fatto" role="status">Si è aperta la tua posta? Controlla il messaggio e premi «Invia». Se non si è aperta, scrivici a info@screeningitalia.it e copia in fondo la frase del consenso.</div>
                 </sc-if>
                 <sc-if value="{{ msgDaCompilare }}" hint-placeholder-val="{{ true }}">
                   <div class="modulo fx col gap16">
                     <div class="fx col gap6">
-                      <label class="etichetta" for="m-nome">Nome e cognome</label>
-                      <input class="campo" id="m-nome" type="text" placeholder="Come ti chiami" value="{{ mNome }}" onInput="{{ scriviNome }}">
+                      <label class="sr" for="m-nome">Nome e cognome</label>
+                      <input class="campo" id="m-nome" type="text" placeholder="Nome e cognome" autocomplete="name" value="{{ mNome }}" onInput="{{ scriviNome }}">
                     </div>
                     <div class="fx col gap6">
-                      <label class="etichetta" for="m-mail">Email</label>
-                      <input class="campo" id="m-mail" type="email" placeholder="nome@esempio.it" value="{{ mMail }}" onInput="{{ scriviIndirizzo }}">
+                      <label class="sr" for="m-mail">Email</label>
+                      <input class="campo" id="m-mail" type="email" placeholder="Email" autocomplete="email" value="{{ mMail }}" onInput="{{ scriviIndirizzo }}">
                     </div>
                     <!-- QA 390 LORI 21/10: niente tendina, scelta con pulsanti radio grandi. Stessi valori nella mail. -->
                     <fieldset class="campo-gruppo fx col gap6">
                       <legend class="etichetta">Di cosa si tratta</legend>
                       <div class="scelte scelte-radio">
                         <label class="scelta scelta-radio">
+                          <input class="sr" type="radio" name="m-tipo" id="m-tipo-5" value="Racconto la mia esperienza" checked="{{ mTipo5 }}" onChange="{{ scriviTipo }}">
+                          <span class="pallino" aria-hidden="true"></span>
+                          <span class="scelta-nome">Racconto la mia esperienza</span>
+                        </label>
+                        <label class="scelta scelta-radio">
                           <input class="sr" type="radio" name="m-tipo" id="m-tipo-1" value="Segnalo un’iniziativa" checked="{{ mTipo1 }}" onChange="{{ scriviTipo }}">
                           <span class="pallino" aria-hidden="true"></span>
                           <span class="scelta-nome">Segnalo un’iniziativa</span>
+                        </label>
+                        <label class="scelta scelta-radio">
+                          <input class="sr" type="radio" name="m-tipo" id="m-tipo-6" value="Lascio un feedback" checked="{{ mTipo6 }}" onChange="{{ scriviTipo }}">
+                          <span class="pallino" aria-hidden="true"></span>
+                          <span class="scelta-nome">Lascio un feedback</span>
                         </label>
                         <label class="scelta scelta-radio">
                           <input class="sr" type="radio" name="m-tipo" id="m-tipo-2" value="Segnalo un dato sbagliato" checked="{{ mTipo2 }}" onChange="{{ scriviTipo }}">
@@ -1391,7 +1394,7 @@
                     </fieldset>
                     <div class="fx col gap6">
                       <label class="etichetta" for="m-testo">Il tuo messaggio</label>
-                      <textarea class="campo campo-area" id="m-testo" rows="5" maxLength="1200" required="required" placeholder="Scrivi qui. Se segnali un’iniziativa, indica ente, sede, date e recapito." value="{{ mTesto }}" onInput="{{ scriviTesto }}" aria-invalid="{{ mInvTesto }}" aria-describedby="{{ mDescTesto }}"></textarea>
+                      <textarea class="campo campo-area" id="m-testo" rows="5" maxLength="1200" required="required" placeholder="Scrivi qui il tuo messaggio. Se segnali un’iniziativa, indica ente, sede, date e recapito." value="{{ mTesto }}" onInput="{{ scriviTesto }}" aria-invalid="{{ mInvTesto }}" aria-describedby="{{ mDescTesto }}"></textarea>
                       <p class="nota" id="m-conta">{{ mConta }}</p>
                       <sc-if value="{{ mErrTesto }}" hint-placeholder-val="{{ false }}">
                         <p class="errore" id="m-err-testo" role="alert">Scrivi il tuo messaggio prima di andare avanti.</p>
@@ -1411,31 +1414,6 @@
                     <p class="nota">Il messaggio arriva a info@screeningitalia.it. Usiamo questi dati solo per risponderti: non chiediamo né registriamo informazioni sanitarie.</p>
                   </div>
                 </sc-if>
-              </div>
-            </div>
-
-            <div class="banda b-bianco wrap sezione" data-screen-label="Racconta la tua esperienza">
-              <div class="fx col gap16">
-                <h2>Hai un'esperienza con uno screening?</h2>
-                <p>Raccontaci cosa ha funzionato o cosa no: invito, kit, prenotazione, referto. La pubblichiamo senza nomi, per aiutare chi viene dopo.</p>
-                <a class="cta" href="/racconta">Racconta la tua esperienza</a>
-              </div>
-            </div>
-
-            <div class="banda b-crema wrap sezione" data-screen-label="Segnala">
-              <div class="fx col gap16">
-                <h2>Enti e associazioni</h2>
-                <p>Inviaci la locandina o il collegamento alla pagina ufficiale, con ente, sede, date, requisiti di partecipazione e recapito telefonico. Dopo la verifica sarà pubblicata.</p>
-                <a class="cta" href="mailto:info@screeningitalia.it">Segnala un’iniziativa</a>
-              </div>
-            </div>
-
-            <div class="banda b-bianco wrap sezione" data-screen-label="Avvertenza">
-              <div class="fx col gap12">
-                <div class="avviso fx col gap8">
-                  <h3>Per prenotare occorre contattare l’ente organizzatore</h3>
-                  <p>Il recapito è riportato nella scheda di ciascuna iniziativa: il portale non può prenotare per te. In presenza di sintomi o dubbi clinici rivolgiti al medico di medicina generale.</p>
-                </div>
               </div>
             </div>
 
