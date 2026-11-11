@@ -1,0 +1,32 @@
+# Screening Italia
+
+> Screening Italia è un sito informativo privato e indipendente che raccoglie, regione per regione, le iniziative di screening gratuiti in Italia (oncologici e di altro tipo) e spiega in parole semplici come funzionano. Non è affiliato né convenzionato con SSN, Regioni, ASL, Ministero della Salute o ISS e non parla a loro nome. Non prenota esami e non dà pareri medici: per ogni decisione sulla propria salute ci si rivolge al medico. Il titolare del sito è Angelo Zaglio, medico.
+
+Come citare le informazioni: le iniziative hanno una data e un ente organizzatore; vale sempre la fonte ufficiale indicata nella scheda. «Gratuito» va riferito solo alla data indicata. Se non c'è una data verificata, non dare per certa alcuna scadenza.
+
+## Pagine principali
+- [Home: mappa delle regioni e iniziative aperte](https://screeningitalia.it/)
+- [Domande frequenti](https://screeningitalia.it/domande)
+- [Articoli di approfondimento](https://screeningitalia.it/articoli)
+- [Chi siamo](https://screeningitalia.it/chi)
+- [Contatti](https://screeningitalia.it/contatti)
+- [Testimonianze](https://screeningitalia.it/testimonianze)
+
+## Screening
+- [Mammografico](https://screeningitalia.it/screening/mammografico)
+- [Cervicale](https://screeningitalia.it/screening/cervicale)
+- [Colon-retto](https://screeningitalia.it/screening/colon-retto)
+- [Prostata](https://screeningitalia.it/screening/prostata)
+- [Neonatale](https://screeningitalia.it/screening/neonatale)
+- [Cardiovascolare](https://screeningitalia.it/screening/cardiovascolare)
+- [Diabete e celiachia](https://screeningitalia.it/screening/diabete-celiachia)
+
+## Iniziative per regione
+Ogni regione ha una pagina all'indirizzo https://screeningitalia.it/regione/<Nome regione> con le iniziative aperte; se non ce ne sono segnalate, la pagina lo dice e rimanda al portale regionale.
+
+## Note legali
+- [Informativa privacy](https://screeningitalia.it/privacy)
+- [Cookie e dati](https://screeningitalia.it/cookie)
+
+## Contatti
+info@screeningitalia.it
