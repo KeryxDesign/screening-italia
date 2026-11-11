@@ -1,3 +1,4 @@
-# Sito in costruzione. Nessun motore di ricerca deve indicizzarlo.
 User-agent: *
-Disallow: /
+Allow: /
+
+Sitemap: https://screeningitalia.it/sitemap.xml
