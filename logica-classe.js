@@ -126,7 +126,7 @@ class Component extends DCLogic {
     // ⚠️ Segnaposto: in anteprima gli script girano davvero, e un ID di produzione
     // sparerebbe eventi veri da un dominio che non e quello del cliente.
     // L'ID reale (G-…) lo mette SENTINEL in fase di build.
-    const ID = "G-XXXXXXXXXX";
+    const ID = "G-SND16RY71E";
     if (ID.indexOf("X") !== -1) {
       this.setState({ misurazioneFinta: true });
       window.gtag("config", ID, { send_page_view: false });
