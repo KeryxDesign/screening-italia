@@ -32,3 +32,6 @@ RewriteRule ^ /index.html [L]
 Header set Cache-Control "no-cache"
 </FilesMatch>
 </IfModule>
+
+# Testi (llms.txt, robots.txt, sitemap) sempre in UTF-8: senza, gli accenti si leggono male.
+AddDefaultCharset UTF-8
