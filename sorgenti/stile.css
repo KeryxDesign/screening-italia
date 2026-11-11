@@ -1,0 +1,1964 @@
+:root{
+  --carta:#EFFAF9;
+  --carta2:#CEEFED;
+  --inchiostro:#14202B;
+  --soft:#33414F;
+  --verde:#0B6E73;
+  --verde-scuro:#07494D;
+  --verde-tenue:#D8F2F0;
+  --verde-mappa:#3FA3A1;
+  --tratto-mappa:#062927;
+  --terracotta:#A63D17;
+  --bordo:rgba(20,32,43,0.62);
+}
+
+*{box-sizing:border-box}
+html{overflow-x:clip;-webkit-text-size-adjust:100%}
+body{overflow-x:clip;
+  margin:0;
+  background:var(--carta);
+  color:var(--inchiostro);
+  font-family:'Atkinson Hyperlegible Next','Atkinson Hyperlegible',system-ui,-apple-system,sans-serif;
+  font-size:19px;
+  line-height:1.65;
+  font-weight:400;
+  text-wrap:pretty;
+}
+
+h1,h2{font-family:inherit;font-weight:600;margin:0}
+h1{font-size:32px;line-height:1.24;letter-spacing:-0.012em;max-width:19ch}
+h2{font-size:30px;line-height:1.24;letter-spacing:-0.012em;max-width:20ch;
+  color:var(--verde);text-align:center;margin-left:auto;margin-right:auto}
+h3{font-size:20px;line-height:1.4;font-weight:600;margin:0}
+p{max-width:62ch}
+p{margin:0;font-size:19px}
+.nota{font-size:17px;color:#424A51;line-height:1.55;max-width:60ch}
+.occhiello{font-size:16px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--verde)}
+
+a{color:var(--verde);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1.5px}
+a:hover{color:var(--verde-scuro);text-decoration-thickness:2.5px}
+
+.wrap{max-width:430px;margin:0 auto;padding:0 20px;width:100%}
+.sezione{padding-top:48px;padding-bottom:48px}
+.sep{border:0;border-top:1.5px solid var(--bordo);margin:0}
+
+.hdr{background:linear-gradient(180deg,#055E59 0%,#044A46 100%);color:#fff;position:sticky;top:0;z-index:30;
+  box-shadow:0 2px 12px rgba(2,30,28,0.18)}
+.hdr-riga{position:relative;display:flex;flex-wrap:nowrap;align-items:stretch;gap:10px;min-height:88px;max-width:none;padding:0 20px}
+.marchio{flex:0 0 auto;margin-right:auto;display:flex;align-items:center;white-space:nowrap;color:#fff;
+  text-decoration:none;cursor:pointer;font-size:19px;font-weight:600;letter-spacing:-0.015em;line-height:1.1}
+.marchio:hover span{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px}
+.marchio:focus-visible{outline:3px solid var(--terracotta);outline-offset:2px;border-radius:6px}
+.marchio:hover{color:#fff;text-decoration:none}
+
+.nav-riga{display:flex;gap:2px}
+.nav-riga a{display:flex;align-items:center;min-height:88px;padding:0 10px;white-space:nowrap;
+  color:#D7E9E8;font-size:17px;font-weight:500;text-decoration:none;border-bottom:4px solid transparent}
+.nav-riga a:hover{color:#fff;background:rgba(255,255,255,0.10);text-decoration:none}
+.nav-riga a[aria-current="page"]{color:#fff;font-weight:600;border-bottom-color:#fff}
+
+/* --- Tendina «Gli screening» (brief 26/09/2026) --- */
+.nav-voce{position:relative;display:flex}
+.nav-tendina{display:flex;align-items:center;min-height:88px;padding:0 10px;white-space:nowrap;
+  margin:0;background:none;border:0;border-bottom:4px solid transparent;border-radius:0;cursor:pointer;
+  font-family:inherit;color:#D7E9E8;font-size:17px;font-weight:500;text-align:left}
+.nav-tendina:hover{color:#fff;background:rgba(255,255,255,0.10)}
+.nav-tendina[aria-current="page"]{color:#fff;font-weight:600;border-bottom-color:#fff}
+.nav-tendina:focus-visible{outline:3px solid var(--terracotta);outline-offset:-3px}
+.nav-freccia{width:16px;height:16px;margin-left:6px;flex-shrink:0;transition:transform .15s ease}
+.nav-tendina[aria-expanded="true"] .nav-freccia{transform:rotate(180deg)}
+.nav-menu{display:none}
+.nav-tendina[aria-expanded="true"] + .nav-menu{display:flex;flex-direction:column}
+@media (min-width:1200px){
+  .nav-menu{position:absolute;top:100%;left:0;min-width:300px;z-index:31;
+    background:var(--verde-scuro);box-shadow:0 12px 24px rgba(1,19,18,0.28);border-radius:0 0 10px 10px;overflow:hidden}
+  .nav-riga .nav-menu a{min-height:56px;padding:0 20px;font-size:17px;font-weight:500;color:#D7E9E8;
+    border-bottom:0;box-shadow:inset 0 -1.5px 0 rgba(255,255,255,0.14)}
+  .nav-riga .nav-menu a:last-child{box-shadow:none}
+  .nav-riga .nav-menu a:hover{color:#fff;background:rgba(255,255,255,0.10)}
+  .nav-riga .nav-menu a[aria-current="page"]{color:#fff;font-weight:500;box-shadow:inset 4px 0 0 #fff,inset 0 -1.5px 0 rgba(255,255,255,0.14)}
+  .nav-riga .nav-menu a[aria-current="page"]:last-child{box-shadow:inset 4px 0 0 #fff}
+  .nav-riga .nav-menu a:focus-visible{outline:3px solid var(--terracotta);outline-offset:-3px}
+}
+@media (min-width:1200px) and (max-width:1279px){.nav-riga{gap:0}.nav-riga a,.nav-tendina{padding:0 8px}}
+
+.menu-chk,.hamb{display:none}
+
+/* Sotto i 860px il menu diventa un pannello a comparsa. */
+@media (max-width:1199px){
+  .menu-chk{display:block;position:absolute;right:16px;top:50%;transform:translateY(-50%);width:44px;height:44px;margin:0;opacity:0;cursor:pointer;z-index:2}
+  .hamb{display:flex;align-items:center;justify-content:center;width:44px;height:44px;
+    align-self:center;color:#fff;border-radius:8px;border:1.5px solid rgba(255,255,255,0.35)}
+  .i-chiudi{display:none}
+  .menu-chk:checked ~ .hamb .i-apri{display:none}
+  .menu-chk:checked ~ .hamb .i-chiudi{display:block}
+  .menu-chk:focus-visible ~ .hamb{outline:3px solid var(--terracotta);outline-offset:2px}
+  .nav-riga{display:none}
+  .menu-chk:checked ~ .nav-riga{display:flex;flex-direction:column;gap:0;
+    position:absolute;top:100%;left:0;right:0;background:var(--verde-scuro);
+    box-shadow:0 12px 24px rgba(1,19,18,0.28);max-height:calc(100dvh - 88px);overflow-y:auto}
+  .menu-chk:checked ~ .nav-riga a{min-height:56px;padding:0 20px;font-size:19px;font-weight:500;
+    border-bottom:1.5px solid rgba(255,255,255,0.14)}
+  .menu-chk:checked ~ .nav-riga a[aria-current="page"]{border-bottom-color:rgba(255,255,255,0.14);
+    box-shadow:inset 4px 0 0 #fff}
+  /* Tendina «Gli screening» come fisarmonica nel pannello */
+  .nav-voce{flex-direction:column}
+  .menu-chk:checked ~ .nav-riga .nav-tendina{width:100%;min-height:56px;padding:0 20px;font-size:19px;font-weight:500;
+    border-bottom:1.5px solid rgba(255,255,255,0.14)}
+  .menu-chk:checked ~ .nav-riga .nav-tendina[aria-current="page"]{border-bottom-color:rgba(255,255,255,0.14);
+    box-shadow:inset 4px 0 0 #fff}
+  .menu-chk:checked ~ .nav-riga .nav-menu a{padding:0 20px 0 40px}
+}
+
+.btn-reg{
+  min-height:62px;width:100%;
+  font-family:inherit;font-size:19px;font-weight:700;line-height:1.25;
+  background:#fff;color:var(--inchiostro);
+  border:1.5px solid var(--bordo);border-radius:10px;
+  padding:12px 14px;text-align:left;cursor:pointer;
+  display:flex;flex-direction:column;justify-content:center;gap:2px;
+}
+.btn-reg:hover{border-color:var(--verde);background:var(--verde-tenue)}
+.btn-reg .n{font-size:17px;font-weight:400;color:var(--soft)}
+.btn-reg.on{background:var(--verde);color:#fff;border-color:var(--verde)}
+.btn-reg.on .n{color:#D7E9E8}
+
+.cta{
+  min-height:62px;width:100%;
+  background:linear-gradient(180deg,#BE4A1E 0%,#A63D17 100%);color:#fff;
+  border:none;border-radius:10px;box-shadow:0 2px 6px rgba(120,44,16,0.28),inset 0 1px 0 rgba(255,255,255,0.18);
+  transition:transform .12s ease,box-shadow .12s ease,background .12s ease;
+  font-family:inherit;font-size:19px;font-weight:700;
+  padding:16px 20px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  text-decoration:none;
+}
+.cta:hover{background:linear-gradient(180deg,#A83F16 0%,#8A3212 100%);color:#fff;
+  transform:translateY(-1px);box-shadow:0 6px 14px rgba(120,44,16,0.3)}
+.cta:active{transform:none;box-shadow:0 1px 3px rgba(120,44,16,0.3)}
+
+.cta-2{
+  min-height:62px;width:100%;
+  background:linear-gradient(180deg,#FFFFFF 0%,#ECF9F8 100%);color:var(--verde);
+  border:1.5px solid var(--verde);border-radius:10px;box-shadow:0 1px 3px rgba(2,32,31,0.08);
+  transition:transform .12s ease,box-shadow .12s ease,background .12s ease;
+  font-family:inherit;font-size:19px;font-weight:700;
+  padding:16px 20px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;text-align:center;
+}
+.cta-2:hover{background:linear-gradient(180deg,#E9F4F3 0%,#DCEAE9 100%);color:var(--verde-scuro);
+  transform:translateY(-1px);box-shadow:0 5px 12px rgba(2,39,37,0.12)}
+.cta-2:active{transform:none}
+
+.filtro{
+  min-height:52px;
+  font-family:inherit;font-size:17px;font-weight:700;
+  background:#fff;color:var(--inchiostro);
+  border:1.5px solid var(--bordo);border-radius:999px;
+  padding:10px 18px;cursor:pointer;white-space:nowrap;
+}
+.filtro.on{background:linear-gradient(180deg,#05655F 0%,#044743 100%);color:#fff;border-color:var(--verde-scuro)}
+
+.card{background:#fff;border:0;border-radius:14px;padding:26px;
+  box-shadow:0 1px 2px rgba(3,43,41,0.06),0 6px 18px rgba(3,43,41,0.10)}
+.dato{display:grid;grid-template-columns:104px 1fr;gap:4px 14px;align-items:start;
+  padding-bottom:10px;border-bottom:1px solid #E4F1F0}
+.dato:last-of-type{border-bottom:0;padding-bottom:0}
+.dato .et{font-size:15px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
+  color:#4A5157;padding-top:3px}
+.dato .vl{font-size:19px;line-height:1.45;color:#181A1B;font-weight:500}
+
+.tel{
+  display:flex;align-items:center;justify-content:center;
+  gap:11px;min-height:58px;background:#08403D;color:#fff;
+  border-radius:10px;font-size:20px;font-weight:700;box-shadow:0 2px 6px rgba(2,39,37,0.24),inset 0 1px 0 rgba(255,255,255,0.14);
+  text-decoration:none;letter-spacing:0.02em;
+}
+.tel:hover{background:#052E2C;color:#fff;text-decoration:none;transform:translateY(-1px);
+  box-shadow:0 6px 14px rgba(5,46,44,0.28)}
+.tel:active{transform:none}
+.tel svg{width:21px;height:21px;flex-shrink:0}
+
+.tag:empty{display:none}
+.tag{display:inline-block;font-size:17px;font-weight:700;padding:6px 14px;border-radius:999px;border:1.5px solid}
+.tag-gratis,.tag.tag-bp{background:#D8F2F0;color:#033F3B;border-color:rgba(3,63,59,0.62)}
+.tag-paga,.tag.tag-diff{background:#FAF1DC;color:#5C3D00;border-color:rgba(92,61,0,0.62)}
+.tag-invito{background:#EAE6F4;color:#33265C;border-color:rgba(51,38,92,0.62)}
+
+.finto{
+  background:#FBEDE7;border:1.5px solid rgba(122,43,16,0.62);
+  color:#7A2B10;font-size:17px;font-weight:700;
+  padding:12px 14px;border-radius:8px;line-height:1.45;
+}
+
+.avviso,.fatto{
+  background:var(--carta2);border:1.5px solid var(--bordo);
+  border-radius:10px;padding:18px;
+}
+
+.blog-item{display:flex;flex-direction:column;gap:6px;padding:18px 0}
+.blog-item .data{font-size:17px;color:var(--soft)}
+
+.ftr{background:linear-gradient(180deg,#044340 0%,#022624 100%);color:#fff;padding:44px 0 28px}
+.ftr p{font-size:19px;line-height:1.55;color:#DCEAE9}
+.ftr a{color:#fff}
+
+.griglia-reg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:359px){.griglia-reg{grid-template-columns:1fr}}
+
+/* --- Correzioni dopo la misura sul DOM a 390px.
+   Pavimento: graf_pagina_web.md punto 4, profilo B (eta minima 50 >= 45), ratifica #82. --- */
+
+/* Erano alti 21px, sotto il bersaglio minimo di 44px. */
+.ftr p a{display:inline-flex;align-items:center;min-height:48px;padding:0 6px}
+.nota a{display:inline-flex;align-items:center;min-height:44px}
+
+/* --- Mappa cliccabile delle regioni --- */
+.mappa{width:100%;position:relative}
+.mappa svg{display:block;width:100%;height:100%;filter:drop-shadow(0 3px 6px rgba(3,43,41,0.18))}
+.mappa path{cursor:pointer;transition:fill .12s ease;outline:none}
+.mappa path.vuota{fill:#fff;stroke:var(--tratto-mappa);stroke-width:1.1;stroke-linejoin:round}
+.mappa path.piena{fill:var(--verde-mappa);stroke:var(--tratto-mappa);stroke-width:1.1;stroke-linejoin:round}
+.mappa path.vuota:hover,.mappa path.vuota:focus{fill:var(--verde-tenue);stroke:var(--inchiostro);stroke-width:2.2}
+.mappa path.piena:hover,.mappa path.piena:focus{fill:var(--verde);stroke:var(--inchiostro);stroke-width:2.2}
+.mappa path:focus{stroke:var(--terracotta);stroke-width:2.5}
+
+.mappa-nome{min-height:52px;display:flex;flex-direction:column;justify-content:center;
+  border:1.5px dashed var(--bordo);border-radius:10px;padding:8px 14px;background:#fff}
+.mappa-nome .r{font-size:19px;font-weight:700;line-height:1.25}
+.mappa-nome .q{font-size:17px;color:var(--soft);line-height:1.3}
+
+.legenda{display:flex;gap:18px;flex-wrap:wrap;font-size:17px;color:var(--soft);align-items:center}
+.legenda span{display:flex;align-items:center;gap:8px}
+.legenda i{width:18px;height:18px;border-radius:4px;border:1.5px solid var(--bordo);display:inline-block}
+.legenda i.piena{background:var(--verde-mappa);border-color:var(--tratto-mappa)}
+.legenda i.vuota{background:#fff}
+
+.elenco{border:1.5px solid var(--bordo);border-radius:10px;background:#fff}
+.elenco>summary{min-height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:0 16px;font-size:19px;font-weight:700;cursor:pointer;color:var(--verde);list-style:none}
+.elenco>summary::-webkit-details-marker{display:none}
+.frecciona{flex-shrink:0;transition:transform .15s ease}
+.elenco[open]>summary .frecciona{transform:rotate(180deg)}
+.elenco-lista{display:grid;grid-template-columns:1fr 1fr;gap:2px 12px;padding:4px 16px 14px}
+.elenco-lista a{display:flex;align-items:center;min-height:48px;font-size:17px;line-height:1.25}
+@media (max-width:359px){.elenco-lista{grid-template-columns:1fr}}
+
+/* --- Bande di sezione: fondi adiacenti mai uguali. Full-bleed senza wrapper. --- */
+.banda{position:relative;clip-path:inset(0 -100vmax)}
+.b-bianco{background:#fff;box-shadow:0 0 0 100vmax #fff}
+.b-crema{background:var(--carta2);box-shadow:0 0 0 100vmax var(--carta2)}
+.b-crema .campo,.b-crema .filtro:not(.on),.b-crema .scelta:not(.on){background:#fff}
+.b-verde{background:var(--verde-tenue);box-shadow:0 0 0 100vmax var(--verde-tenue)}
+.b-carta{background:var(--carta);box-shadow:0 0 0 100vmax var(--carta)}
+.banda .card,.banda .mappa-nome,.banda .elenco{background:#fff}
+.b-bianco .card,.b-bianco .testi,.b-bianco .mappa-nome,.b-bianco .elenco{background:var(--carta)}
+
+/* --- Anteprima articolo con thumbnail --- */
+.post{display:flex;gap:14px;align-items:center;padding:14px 0;text-decoration:none;color:var(--inchiostro)}
+.post:hover{color:var(--verde);text-decoration:none}
+.post:hover .tit{text-decoration:underline;text-underline-offset:3px}
+.post-img{flex-shrink:0;display:block;width:104px;height:78px}
+.post-txt{display:flex;flex-direction:column;gap:4px;min-width:0}
+.post .data{font-size:17px;color:var(--soft);line-height:1.3}
+.post .tit{font-size:19px;font-weight:700;line-height:1.3}
+
+/* --- Da tablet in su la colonna respira, i bottoni non diventano barre --- */
+@media (min-width:860px){
+  .wrap{max-width:680px;padding:0 24px}
+  .hdr-riga{max-width:none;padding:0 32px;min-height:88px}
+  .nav-riga a{min-height:88px}
+  .sezione{padding-top:76px;padding-bottom:76px}
+  h1{font-size:42px}
+  h2{font-size:38px}
+  .cta,.cta-2,.tel{max-width:420px}
+  .elenco-lista{grid-template-columns:1fr 1fr 1fr}
+  .mappa{max-width:520px;margin:0 auto}
+}
+
+/* --- Ricerca --- */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.cerca{position:relative;display:flex;align-items:center}
+.cerca-i{position:absolute;left:14px;color:var(--soft);pointer-events:none}
+.campo{min-height:58px;width:100%;font-family:inherit;font-size:19px;padding:14px 16px;
+  border:1.5px solid var(--bordo);border-radius:10px;background:#fff;color:var(--inchiostro)}
+.campo::placeholder{color:#5F6871}
+.campo:focus{outline:3px solid var(--verde);outline-offset:1px}
+.campo-cerca{padding:14px 56px 14px 46px}
+.cerca-x{position:absolute;right:6px;width:46px;height:46px;display:flex;align-items:center;
+  justify-content:center;background:none;border:0;border-radius:8px;color:var(--soft);cursor:pointer}
+.cerca-x:hover{background:var(--carta2);color:var(--inchiostro)}
+
+/* --- Mappa: altezza esplicita, Safari non calcola height:auto sul viewBox --- */
+.mappa{aspect-ratio:620 / 740}
+.mappa svg{width:100%;height:100%}
+
+/* --- Scelta multipla dello screening --- */
+.scelte{display:grid;grid-template-columns:1fr;gap:14px}
+@media (min-width:520px){.scelte{grid-template-columns:1fr 1fr;gap:16px}}
+.scelta{display:flex;align-items:center;gap:14px;min-height:72px;width:100%;
+  font-family:inherit;text-align:left;cursor:pointer;
+  background:#fff;color:var(--inchiostro);border:1.5px solid var(--bordo);border-radius:10px;padding:12px 16px}
+.scelta-icona{flex-shrink:0;width:34px;height:34px;color:var(--verde)}
+.scelta.on .scelta-icona,.scelta:has(:checked) .scelta-icona{color:#fff}
+.tag-tipo{display:inline-flex;align-items:center;gap:7px}
+.tag-tipo svg{width:17px;height:17px;flex-shrink:0}
+.scelta:hover{border-color:var(--verde);background:linear-gradient(180deg,#F0F7F6 0%,#D8F2F0 100%)}
+.scelta.on,.scelta:has(:checked){background:linear-gradient(180deg,#05655F 0%,#044743 100%);border-color:var(--verde-scuro);color:#fff;
+  box-shadow:0 3px 8px rgba(2,39,37,0.22),inset 0 1px 0 rgba(255,255,255,0.14)}
+.scelta.on:hover,.scelta:has(:checked):hover{background:var(--verde-scuro)}
+.scelta.on .scelta-n,.scelta:has(:checked) .scelta-n{color:#D7E9E8}
+.scelta-txt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.scelta-nome{font-size:19px;font-weight:700;line-height:1.25}
+.scelta-n{font-size:17px;color:var(--soft);line-height:1.3}
+.tag-tipo{background:#fff;color:var(--soft);border-color:var(--bordo)}
+html.contrasto .scelta-icona{color:#000}
+
+/* --- Come funziona: tre passi --- */
+.passi{display:flex;flex-direction:column;gap:22px;margin:0;padding:0;list-style:none}
+.passo{display:flex;gap:16px;align-items:flex-start}
+.passo .num{flex-shrink:0;width:40px;height:40px;border-radius:999px;
+  background:linear-gradient(180deg,#05655F 0%,#044743 100%);color:#fff;
+  box-shadow:0 2px 6px rgba(2,39,37,0.22),inset 0 1px 0 rgba(255,255,255,0.14);
+  font-size:19px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.passo-txt{display:flex;flex-direction:column;gap:4px;padding-top:4px;min-width:0}
+.passo-tit{font-size:21px;font-weight:600;line-height:1.3;letter-spacing:-0.008em}
+.passo-desc{font-size:18px;color:var(--soft);line-height:1.5;max-width:52ch}
+.passo p{padding-top:7px}
+
+/* --- Accessibilita: ingrandimento del testo e contrasto --- */
+html.txt-g body{overflow-x:clip;zoom:1.15}
+html.txt-xg body{overflow-x:clip;zoom:1.32}
+
+html.contrasto{
+  --carta:#FFFFFF; --carta2:#FFFFFF; --inchiostro:#000000; --soft:#141414;
+  --verde:#055459; --verde-scuro:#033B3E; --verde-tenue:#FFFFFF;
+  --terracotta:#8A2600; --bordo:#000000;
+}
+html.contrasto .banda{background:#fff !important;box-shadow:0 0 0 100vmax #fff !important}
+html.contrasto .card,html.contrasto .avviso,html.contrasto .fatto,html.contrasto .elenco,
+html.contrasto .campo,html.contrasto .scelta,html.contrasto .filtro,
+html.contrasto .tag,html.contrasto .mappa-nome{border-width:2.5px;border-color:#000;background:#fff}
+html.contrasto .finto{background:#fff;border-color:#000;color:#000}
+html.contrasto .mappa path.vuota{fill:#fff;stroke:#000;stroke-width:1.5}
+html.contrasto .mappa path.piena{fill:#2E7974;stroke:#000;stroke-width:1.8}
+html.contrasto a{text-decoration-thickness:2.5px}
+html.contrasto .sep{border-top-color:#000}
+html.contrasto .scelta.on,html.contrasto .scelta:has(:checked),html.contrasto .filtro.on{background:#055459;color:#fff}
+html.contrasto .scelta.on .scelta-icona,html.contrasto .scelta:has(:checked) .scelta-icona{color:#fff}
+html.contrasto .scelta.on .scelta-n,html.contrasto .scelta:has(:checked) .scelta-n{color:#fff}
+
+.a11y{position:fixed;left:16px;bottom:16px;z-index:60;display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.a11y-apri{width:56px;height:56px;border-radius:999px;border:2px solid #fff;
+  background:var(--verde);color:#fff;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;box-shadow:0 6px 18px rgba(1,19,18,0.28)}
+.a11y-apri:hover{background:var(--verde-scuro)}
+.a11y-apri:focus-visible{outline:3px solid var(--terracotta);outline-offset:3px}
+.a11y-pannello[hidden]{display:none}
+.a11y-pannello{width:266px;background:#fff;border:1.5px solid var(--bordo);border-radius:12px;
+  padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 12px 28px rgba(1,19,18,0.24)}
+.a11y-tit{font-size:17px;font-weight:700;color:var(--soft)}
+.a11y-riga{display:flex;gap:8px}
+.a11y-scelta{min-height:52px;min-width:52px;flex:1;font-family:inherit;font-size:19px;font-weight:700;
+  background:#fff;color:var(--inchiostro);border:1.5px solid var(--bordo);border-radius:8px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center}
+.a11y-scelta:hover{border-color:var(--verde);background:var(--verde-tenue)}
+.a11y-scelta.on{background:var(--verde);color:#fff;border-color:var(--verde)}
+.a11y-scelta.larga{width:100%;font-size:17px;padding:0 12px}
+.a11y-chiudi{min-height:48px;font-family:inherit;font-size:17px;font-weight:700;background:none;
+  border:0;color:var(--verde);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
+/* Respiro tra un testo e il bottone che lo segue. */
+.cta:not(:first-child),.cta-2:not(:first-child),.tel:not(:first-child){margin-top:8px}
+.scelte{margin-top:4px}
+.card{padding:22px}
+
+/* Le utility di spaziatura mancanti: senza queste le card restano compresse. */
+.gap4{gap:4px}.gap6{gap:6px}.gap14{gap:14px}.gap18{gap:18px}.gap20{gap:20px}.gap28{gap:28px}.gap32{gap:32px}
+.card > h3{margin-top:2px}
+
+.card > h3{color:var(--azzurro);font-size:26px;line-height:1.24;letter-spacing:-0.012em;font-weight:700;margin-top:8px}
+@media (min-width:860px){.card > h3{font-size:30px}}
+
+/* Cambio regione dalla pagina delle iniziative */
+.etichetta-sel,.etichetta{font-size:17px;font-weight:700;color:var(--soft)}
+.sel-box{position:relative;display:flex;align-items:center}
+.campo-sel{appearance:none;-webkit-appearance:none;padding:14px 52px 14px 16px;font-weight:700;cursor:pointer}
+.sel-frecciona{position:absolute;right:16px;color:var(--verde);pointer-events:none}
+
+/* Scelta della regione nella pagina delle iniziative */
+.scelta-reg{display:flex;flex-direction:column;gap:20px}
+.mappa-piccola{max-width:none;margin:0}
+@media (min-width:860px){.mappa-piccola{max-width:520px;margin:0 auto}}
+.mappa path.attiva{fill:var(--terracotta);stroke:var(--inchiostro);stroke-width:2}
+html.contrasto .mappa path.attiva{fill:#8A2600;stroke:#000;stroke-width:2.5}
+
+/* --- Card articolo (domande frequenti) --- */
+.art-griglia{display:grid;grid-template-columns:1fr;gap:18px}
+@media (min-width:860px){.art-griglia{grid-template-columns:1fr 1fr;gap:20px}}
+.art{display:flex;flex-direction:column;background:#fff;border:0;border-radius:14px;overflow:hidden;
+  color:var(--inchiostro);box-shadow:0 1px 2px rgba(3,43,41,0.06),0 6px 18px rgba(3,43,41,0.10);
+  transition:transform .18s ease,box-shadow .18s ease}
+.art:hover,.art:focus-within{transform:translateY(-2px);
+  box-shadow:0 2px 4px rgba(3,43,41,0.08),0 14px 30px rgba(3,43,41,0.16)}
+.art .art-img{border-radius:0}
+.art-tit a{color:var(--inchiostro);text-decoration:none}
+.art-tit a:hover,.art-tit a:focus-visible{color:var(--verde);text-decoration:underline;text-underline-offset:3px}
+.art-img{display:block;width:100%;aspect-ratio:16 / 9;overflow:hidden}
+.art-img img,.art-figura-img img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.art-corpo{display:flex;flex-direction:column;gap:8px;padding:18px 20px 18px}
+.art-meta{font-size:17px;color:var(--soft);line-height:1.3}
+.art-tit{font-size:21px;font-weight:600;line-height:1.3;max-width:none}
+.art-som{font-size:17px;color:var(--soft);line-height:1.5;max-width:none;
+  /* estratto sempre di 3 righe: tagliato con «…» se lungo, spazio riservato se corto */
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;line-clamp:3;overflow:hidden;min-height:4.5em}
+.art-vai{margin-top:2px;min-height:44px;font-size:17px;font-weight:700;color:var(--verde);
+  display:inline-flex;align-items:center;gap:7px;text-decoration:none;align-self:flex-start}
+.art-vai:hover{color:var(--verde-scuro);text-decoration:underline;text-underline-offset:3px}
+html.contrasto .art{border:2.5px solid #000;background:#fff;box-shadow:none}
+
+/* Immagine di apertura */
+.foto-apertura{width:100%;aspect-ratio:16 / 9;border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(3,43,41,0.16)}
+@media (min-width:860px){.foto-apertura{aspect-ratio:21 / 9}}
+
+
+html.contrasto .hdr{background:#033B3E}
+html.contrasto .ftr{background:#033B3E}
+html.contrasto .cta,html.contrasto .tel,html.contrasto .scelta.on,html.contrasto .scelta:has(:checked),html.contrasto .filtro.on{background:#055459;box-shadow:none}
+html.contrasto .cta{background:#8A2600}
+html.contrasto .card,html.contrasto .cta-2{background:#fff;box-shadow:none}
+html.contrasto .mappa svg{filter:none}
+
+/* I titoli dentro le card e gli avvisi restano allineati a sinistra */
+.card h2,.avviso h2,.art h2{text-align:left;margin-left:0;color:var(--inchiostro)}
+html.contrasto h2{color:#033B3E}
+
+/* --- Apertura con fotografia di sfondo a tutta fascia --- */
+.hero{position:relative;color:#fff;padding-top:84px;padding-bottom:84px;isolation:isolate}
+.hero::before{display:none}
+.hero-sfondo{position:absolute;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);
+  z-index:-1;overflow:hidden;background:#044743}
+.hero-sfondo img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
+.hero-sfondo image-slot{width:100%;height:100%;display:block}
+.hero-velo{position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(1,28,26,0.86) 0%,rgba(1,28,26,0.76) 50%,rgba(1,28,26,0.82) 100%)}
+.hero h1{color:#fff;max-width:18ch;text-shadow:0 2px 14px rgba(0,0,0,0.45)}
+.hero p{color:#EDF5F5;max-width:50ch;text-shadow:0 1px 8px rgba(0,0,0,0.4)}
+.hero .occhiello{color:#A8E1DE}
+@media (min-width:860px){.hero{padding-top:128px;padding-bottom:128px}}
+html.contrasto .hero-sfondo img{display:none}
+html.contrasto .hero-velo{background:#033B3E}
+html.contrasto .hero h1,html.contrasto .hero p{text-shadow:none}
+
+/* --- Comparsa in scorrimento: attiva solo con JS, disattivata su richiesta --- */
+html.js-anim .rivela{opacity:0;transform:translateY(18px)}
+html.js-anim .rivela.dentro{opacity:1;transform:none;
+  transition:opacity .5s ease,transform .5s cubic-bezier(.22,.68,.3,1)}
+html.js-anim .rivela.d1.dentro{transition-delay:.08s}
+html.js-anim .rivela.d2.dentro{transition-delay:.16s}
+html.js-anim .rivela.d3.dentro{transition-delay:.24s}
+@media (prefers-reduced-motion:reduce){
+  html.js-anim .rivela{opacity:1 !important;transform:none !important;transition:none !important}
+}
+.hero h1,.hero p,.hero .occhiello,.hero .cta{position:relative}
+html.js-anim .hero-sfondo img{animation:respiro 18s ease-in-out infinite alternate}
+@keyframes respiro{from{transform:scale(1)}to{transform:scale(1.06)}}
+@media (prefers-reduced-motion:reduce){html.js-anim .hero-sfondo img{animation:none}}
+
+/* --- Icone nei dati della scheda --- */
+.dato .et{display:inline-flex;align-items:center;gap:7px}
+.dato .et svg{width:16px;height:16px;flex-shrink:0;color:var(--azzurro)}
+.passo-tit{display:flex;align-items:center;gap:9px}
+.passo-tit svg{width:20px;height:20px;flex-shrink:0;color:var(--verde)}
+html.contrasto .dato .et svg,html.contrasto .passo-tit svg{color:#000}
+
+/* --- Mail: invito primario --- */
+.wa{display:flex;align-items:center;gap:16px;min-height:76px;padding:16px 22px;border-radius:14px;
+  align-self:center;
+  background:linear-gradient(180deg,#05655F 0%,#044743 100%);color:#fff;text-decoration:none;
+  box-shadow:0 4px 14px rgba(3,59,55,0.3),inset 0 1px 0 rgba(255,255,255,0.18);
+  transition:transform .14s ease,box-shadow .14s ease;align-self:center;width:100%;max-width:34rem}
+.wa:hover{color:#fff;background:var(--verde-scuro);transform:translateY(-2px);box-shadow:0 10px 24px rgba(3,59,55,0.36);text-decoration:none}
+.wa:active{transform:none}
+.wa-i{width:38px;height:38px;flex-shrink:0;color:#fff}
+.wa-txt{display:flex;flex-direction:column;gap:3px;min-width:0}
+.wa-tit{font-size:21px;font-weight:700;line-height:1.2;color:#fff}
+.wa-sub{font-size:17px;line-height:1.35;color:#EEF9F9}
+.sep-o{display:flex;align-items:center;gap:14px;color:var(--soft);font-size:16px;max-width:34rem}
+.sep-o::before,.sep-o::after{content:"";flex:1;height:1.5px;background:var(--bordo)}
+html.contrasto .wa{background:#033B3E;box-shadow:none;border:2.5px solid #000}
+html.contrasto .wa-tit,html.contrasto .wa-sub,html.contrasto .wa-i{color:#fff}
+
+/* --- Modulo di contatto --- */
+.modulo{max-width:34rem;align-self:center;width:100%}
+.campo-area{min-height:132px;padding:14px 16px;line-height:1.5;resize:vertical}
+/* Modulo #/racconta (brief LORI esperienze §4, 13/10/2026) */
+.campo-gruppo{border:0;margin:0;padding:0;min-width:0}
+.scelta:has(:focus-visible){outline:3px solid var(--terracotta);outline-offset:2px}
+.consenso{display:flex;gap:12px;align-items:flex-start;min-height:56px;padding:14px 16px;background:#fff;border:1.5px solid var(--bordo);border-radius:10px;cursor:pointer;font-size:19px;line-height:1.5}
+.consenso input{width:28px;height:28px;flex-shrink:0;margin:2px 0 0;accent-color:var(--verde)}
+.consenso:has(:focus-visible){outline:3px solid var(--terracotta);outline-offset:2px}
+.errore{font-size:17px;font-weight:700;color:var(--inchiostro);padding-left:12px;box-shadow:inset 4px 0 0 var(--terracotta)}
+[aria-invalid="true"]{border-color:var(--terracotta);border-width:2.5px}
+.scelta:has([aria-invalid="true"]){border-color:var(--terracotta);border-width:2.5px}
+
+/* Link dentro un hero scuro: chiari, non verdi */
+.hero a{color:#FFFFFF;text-decoration-color:rgba(255,255,255,0.6)}
+.hero a:hover{color:#A8E1DE;text-decoration-color:#A8E1DE}
+.hero .nota{color:#DCEAE9}
+html.contrasto .hero a{color:#fff}
+
+/* --- Pulsanti d'azione: aspetto unico e centrato --- */
+.cta-2{
+  background:linear-gradient(180deg,#BE4A1E 0%,#A63D17 100%);color:#fff;border:none;
+  box-shadow:0 2px 6px rgba(120,44,16,0.28),inset 0 1px 0 rgba(255,255,255,0.18);
+}
+.cta-2:hover{background:linear-gradient(180deg,#A83F16 0%,#8A3212 100%);color:#fff;
+  transform:translateY(-1px);box-shadow:0 6px 14px rgba(120,44,16,0.3)}
+.cta-2:active{transform:none;box-shadow:0 1px 3px rgba(120,44,16,0.3)}
+.banda:not(.hero) .cta,.banda:not(.hero) .cta-2{align-self:center}
+.avviso .cta,.avviso .cta-2,.avviso .tel,.card .cta,.card .cta-2,.card .tel{align-self:center}
+.hero .cta,.hero .cta-2{align-self:flex-start}
+html.contrasto .cta-2{background:#8A2600;color:#fff;border:2.5px solid #000;box-shadow:none}
+
+/* --- Testimonianze (blocco 3, brief LORI 26/09/2026 §1.2-1.4) ---
+   Griglia ferma, niente carosello. Card senza foto: virgolette, testo, nome, fascia e regione. */
+.carrellata{display:grid;grid-template-columns:1fr;gap:20px}
+@media (min-width:860px){.carrellata{grid-template-columns:1fr 1fr;gap:24px}}
+@media (min-width:1280px){.carrellata{grid-template-columns:repeat(3,1fr)}}
+/* La fascia delle testimonianze usa una colonna piu larga della colonna di lettura */
+.banda-larga{max-width:1040px}
+@media (min-width:1280px){.banda-larga{max-width:1200px}}
+.testi-griglia{display:grid;grid-template-columns:1fr;gap:20px;width:100%;max-width:38rem;margin:0 auto}
+@media (min-width:700px){.testi-griglia{gap:24px}}
+@media (min-width:1000px){
+  .testi-griglia{grid-template-columns:1fr 1fr;max-width:1040px}
+  .testi-griglia:has(> :only-child){grid-template-columns:1fr;max-width:38rem}
+}
+.testi{display:flex;flex-direction:column;gap:16px;margin:0;padding:20px;
+  background:#fff;border:0;border-radius:14px;box-shadow:none}
+@media (min-width:700px){.testi{padding:28px}}
+.testi-virg{width:32px;height:32px;flex-shrink:0;color:#8DB7B4}
+.testi-txt{display:flex;flex-direction:column;gap:12px;margin:0;padding:0;border:0;
+  font-size:19px;line-height:1.6;font-weight:400;color:var(--inchiostro);max-width:none}
+.testi-txt p{margin:0;font-size:19px;line-height:1.6;max-width:none}
+.testi-chi{display:flex;flex-direction:column;gap:2px;margin-top:auto}
+.testi-nome{font-size:17px;font-weight:700;color:var(--inchiostro)}
+.testi-ruolo{font-size:17px;font-weight:400;color:var(--soft)}
+/* Frase introduttiva: sotto il titolo, prima delle card. A sinistra sotto i 700px, centrata sopra. */
+.banda:not(.hero) .fx:not(.lettura) > p.testi-intro{font-size:19px;line-height:1.6;color:var(--inchiostro);
+  max-width:38rem;margin-left:auto;margin-right:auto;text-align:center}
+@media (max-width:699px){.banda:not(.hero) .fx:not(.lettura) > p.testi-intro{text-align:left}}
+/* Bottone «Leggi tutte»: pieno a 390, max 420 centrato da 700px. */
+@media (min-width:700px){.banda:not(.hero) .testi-tutte{max-width:420px;align-self:center}}
+
+html.contrasto .testi-virg{color:#000}
+html.contrasto .testi-ruolo{color:#000}
+
+/* --- Esperienze: Buone pratiche e Difficolta (brief LORI 13/10/2026 §2) ---
+   Scheda unica, riusata in home e nelle pagine: senza virgolette, la voce e il servizio.
+   La differenza la dice la parola dell'etichetta; colore e filetto la rinforzano. */
+.esp-bp{box-shadow:inset 4px 0 0 var(--verde)}
+.esp-diff{box-shadow:inset 4px 0 0 #5C3D00}
+.esp .tag{align-self:flex-start}
+.esp h3{color:var(--inchiostro)}
+html.contrasto .esp-bp,html.contrasto .esp-diff,html.contrasto .consenso{box-shadow:none;border:2.5px solid #000}
+
+/* --- Floater «Contattaci» (mail) --- */
+.wa-float{position:fixed;right:16px;bottom:18px;z-index:60;
+  display:flex;align-items:center;gap:10px;min-height:56px;padding:0 20px 0 16px;
+  border-radius:999px;background:#fff;border:2px solid var(--verde);
+  color:var(--verde);font-size:17px;font-weight:700;text-decoration:none;
+  box-shadow:0 6px 18px rgba(3,59,55,0.36),inset 0 1px 0 rgba(255,255,255,0.2);
+  transition:transform .14s ease,box-shadow .14s ease}
+.wa-float svg{width:28px;height:28px;flex-shrink:0}
+.wa-float:hover{color:var(--verde);background:var(--verde-tenue);text-decoration:none;transform:translateY(-2px);
+  box-shadow:0 12px 26px rgba(4,78,73,0.4)}
+.wa-float:active{transform:none}
+html.contrasto .wa-float{background:#FFFFFF;color:#033B3E;border:2.5px solid #000;box-shadow:none}
+@media print{.wa-float{display:none}}
+
+/* Sotto i 1200px il floater mail compare solo dopo i numeri dell'hero. Posizione del floater nel blocco <=699.
+   Il pulsante accessibilita resta flottante in basso a sinistra (Davide 21/10: non in testata). */
+@media (max-width:1199px){
+  .wa-float{visibility:hidden;opacity:0;transition:opacity .2s ease,visibility 0s linear .2s,transform .14s ease,box-shadow .14s ease}
+  .wa-float.in-vista{visibility:visible;opacity:1;transition:opacity .2s ease,transform .14s ease,box-shadow .14s ease}
+}
+@media (prefers-reduced-motion:reduce){.wa-float,.wa-float.in-vista{transition:none}}
+
+/* --- Numeri del portale --- */
+.numeri{display:grid;grid-template-columns:1fr 1fr;gap:22px 18px}
+@media (min-width:860px){.numeri{grid-template-columns:repeat(4,1fr);gap:24px}}
+.numero{display:flex;flex-direction:column;gap:4px;align-items:center;text-align:center}
+.numero-n{display:flex;align-items:center;min-height:40px;font-size:40px;font-weight:700;line-height:1;letter-spacing:-0.02em;
+  color:var(--verde-scuro);font-variant-numeric:tabular-nums}
+.numero-data{font-size:22px;letter-spacing:-0.005em;white-space:nowrap}
+@media (min-width:860px){.numero-data{font-size:26px}}
+.numero-et{font-size:16px;line-height:1.3;color:var(--soft);max-width:16ch}
+html.contrasto .numero-n{color:#000}
+html.contrasto .numero-et{color:#000}
+
+/* L'occhiello di sezione segue l'allineamento del titolo che introduce */
+.banda:not(.hero) .occhiello{text-align:center}
+
+/* Nelle fasce con titolo centrato, anche l'introduzione sta al centro.
+   Il contenuto (card, elenchi, note dei campi) resta allineato a sinistra. */
+.banda:not(.hero) .fx:not(.lettura):has(> h2) > p,
+.banda:not(.hero) .fx:not(.lettura):has(> h2) > .nota,
+.banda:not(.hero) .fx:not(.lettura):has(> h2) > .finto,
+.banda:not(.hero) .fx:not(.lettura):has(> .occhiello) > .finto{
+  text-align:center;margin-left:auto;margin-right:auto
+}
+.banda:not(.hero) .fx:has(> h2) > .finto{max-width:44rem}
+
+/* --- Numeri dentro l'hero --- */
+.numeri-hero{display:grid;grid-template-columns:1fr 1fr;gap:18px 22px;margin-top:8px;
+  padding-top:22px;border-top:1.5px solid rgba(255,255,255,0.28);width:100%;max-width:34rem}
+@media (min-width:860px){.numeri-hero{grid-template-columns:repeat(4,1fr);gap:24px;max-width:44rem}}
+.numero-h{display:flex;flex-direction:column;gap:3px}
+.numero-hn{font-size:30px;font-weight:700;line-height:1.05;letter-spacing:-0.015em;color:#fff;
+  font-variant-numeric:tabular-nums;text-shadow:0 1px 8px rgba(0,0,0,0.4);white-space:nowrap}
+.numero-het{font-size:15px;line-height:1.25;color:#E3F1F0;text-shadow:0 1px 6px rgba(0,0,0,0.4)}
+html.contrasto .numeri-hero{border-top-color:#fff}
+
+/* --- Colonna di lettura degli articoli --- */
+.lettura{max-width:38rem;margin:0 auto}
+.lettura-tit{font-size:24px;line-height:1.28;text-align:left;margin-left:0;max-width:28ch}
+@media (min-width:860px){.lettura-tit{font-size:27px}}
+.lettura-p{font-size:19px;line-height:1.66;max-width:none}
+@media (min-width:860px){.lettura-p{font-size:20px}}
+
+/* --- Articoli: impaginazione da testata --- */
+.art-testa{padding-bottom:8px}
+.sezione-corpo{padding-top:28px;padding-bottom:52px}
+@media (min-width:860px){.sezione-corpo{padding-top:36px;padding-bottom:76px}}
+.gap28{gap:28px}
+.art-testa .lettura,.sezione-corpo .lettura{max-width:38rem}
+.art-torna{text-align:left}
+.art-cat{font-size:15px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--terracotta);max-width:none}
+.art-headline{text-align:left;max-width:26ch;font-size:33px;line-height:1.15;letter-spacing:-0.018em}
+@media (min-width:860px){.art-headline{font-size:44px}}
+.art-standfirst{font-size:21px;line-height:1.5;color:#30383F;max-width:44ch}
+@media (min-width:860px){.art-standfirst{font-size:23px}}
+.art-firma{font-size:16px;color:var(--soft);max-width:none;
+  padding-top:14px;border-top:1.5px solid var(--bordo)}
+.art-figura{margin:8px 0 0;display:flex;flex-direction:column;gap:8px}
+.art-figura-img{display:block;width:100%;aspect-ratio:16 / 9;border-radius:10px;overflow:hidden;background:var(--carta2)}
+.art-figura-img image-slot{width:100%;height:100%;display:block}
+.art-didascalia{font-size:17px;color:var(--soft);line-height:1.45}
+.art-sez{scroll-margin-top:96px}
+.art-sub{text-align:left;margin-left:0;max-width:30ch;font-size:24px;line-height:1.26;
+  letter-spacing:-0.01em;color:var(--verde-scuro)}
+@media (min-width:860px){.art-sub{font-size:28px}}
+.art-p{text-align:left;font-size:19px;line-height:1.68;max-width:none;text-wrap:pretty}
+@media (min-width:860px){.art-p{font-size:20px}}
+.art-chiave{margin-top:2px}
+.art-chiave mark{background:#F7E7B8;color:#1A1A1A;padding:2px 5px;border-radius:3px;
+  box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.art-aside{font-size:18px;line-height:1.55;color:#30383F;max-width:none;
+  padding-left:16px;border-left:3px solid var(--verde-tenue)}
+.art-avvertenza{font-size:17px;line-height:1.5;color:var(--soft);max-width:none;
+  padding-top:18px;border-top:1.5px solid var(--bordo)}
+html.contrasto .art-cat{color:#8A2600}
+html.contrasto .art-sub{color:#000}
+html.contrasto .art-chiave mark{background:#FFE680;color:#000}
+html.contrasto .art-aside{border-left-color:#000;color:#000}
+
+/* Corpo degli articoli: sempre a sinistra, senza eccezioni */
+.lettura,.lettura *,.art-p,.art-aside,.art-chiave,.art-avvertenza,.art-didascalia{
+  text-align:left !important;margin-left:0 !important;margin-right:0 !important
+}
+.lettura{margin-left:auto !important;margin-right:auto !important}
+
+/* ============ Ottimizzazione per telefono ============ */
+@media (max-width:699px){
+  /* Respiro delle fasce: meno alto, il pollice arriva prima al contenuto */
+  .hero{padding-top:52px;padding-bottom:52px}
+  .sezione{padding-top:40px;padding-bottom:40px}
+
+  /* Titoli: scala ridotta ma sempre sopra il pavimento di leggibilita */
+  h1{font-size:28px;letter-spacing:-0.01em}
+  h2{font-size:25px}
+  .art-headline{font-size:29px;line-height:1.18}
+  .art-standfirst{font-size:19px}
+  .art-sub{font-size:22px}
+  .art-p{font-size:18px;line-height:1.62}
+
+  /* Numeri nell'hero: due colonne, cifre piu contenute */
+  .numeri-hero{gap:16px 18px;padding-top:18px}
+
+  /* Bersagli d'azione a tutta larghezza: piu facili da centrare col pollice */
+  .cta,.cta-2{width:100%;justify-content:center;text-align:center}
+  .banda:not(.hero) .cta,.banda:not(.hero) .cta-2{align-self:stretch}
+  .wa{padding:14px 18px;gap:12px}
+  .wa-tit{font-size:19px}
+  .wa-sub{font-size:17px}
+
+  /* Floater: icona e scritta anche da telefono (Davide, 26/09/2026) */
+  .wa-float{right:12px;bottom:12px;min-height:52px;padding:0 14px}
+  .wa-float svg{width:26px;height:26px}
+
+  /* Spazio in fondo alla pagina per i due pulsanti flottanti */
+  .ftr{padding-bottom:84px}
+
+  /* Articoli e schede: margini interni piu sobri */
+  .card{padding:20px}
+  .art-corpo{padding:16px 16px 16px}
+  .modulo{max-width:none}
+  .lettura{max-width:none}
+}
+@media (max-width:389px){
+  h1{font-size:26px}
+  .numeri-hero{grid-template-columns:1fr 1fr;gap:14px}
+}
+
+/* Secondo invito come collegamento, non come secondo pulsante */
+.link-cta{display:inline-flex;align-items:center;gap:8px;min-height:44px;
+  font-size:18px;font-weight:700;color:var(--verde-scuro);
+  text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px}
+.link-cta:hover{color:var(--verde);text-decoration-thickness:3px}
+.banda:not(.hero) .link-cta{align-self:center}
+html.contrasto .link-cta{color:#000}
+@media (max-width:699px){.link-cta{align-self:center;text-align:center}}
+
+/* --- Scadenze: quanto resta per aderire --- */
+/* Le pastiglie PIENE restano al costo (gratuito / a pagamento / su invito).
+   Le scadenze hanno un trattamento riservato: fondo trasparente e contorno,
+   cosi non si confondono con i tag di stato nella stessa card. */
+.scad{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;
+  font-size:15px;font-weight:700;line-height:1.25;background:transparent;
+  border:1.5px solid currentColor;white-space:nowrap}
+.scad svg{width:15px;height:15px;flex-shrink:0}
+/* L'unica scadenza con un fondo e quella imminente: e l'unica rossa della pagina. */
+.scad-rossa{background:#FBE7E2;color:#8A2411;border-width:2px}
+.scad-gialla{color:#074F4B}
+.scad-calma{color:#3F4850;border-color:transparent;font-weight:600;padding-left:2px;padding-right:2px}
+.scad-posti{color:#4A2E05;border-style:dashed}
+.scad-chiusa{color:#3A3A3A;border-color:rgba(58,58,58,0.45)}
+.urgenza{display:flex;align-items:center;gap:9px;justify-content:center;
+  font-size:18px;font-weight:700;color:#8A2411;max-width:none}
+.urgenza svg{flex-shrink:0}
+html.contrasto .scad{background:#fff;color:#000;border-color:#000;border-width:2.5px;border-style:solid}
+html.contrasto .scad-posti{border-style:dashed}
+html.contrasto .urgenza{color:#000}
+@media (max-width:699px){.scad{font-size:14px;padding:4px 9px}.urgenza{font-size:17px}}
+
+:root{--azzurro:#08403D}
+.card .nota{font-size:16px;color:#4A5157}
+.card .fx.col.gap8{gap:12px}
+html.contrasto .card{background:#fff;border:2.5px solid #000;box-shadow:none}
+html.contrasto .card > h3{color:#000}
+html.contrasto .dato{border-bottom-color:#000}
+html.contrasto .dato .et svg{color:#000}
+html.contrasto .tel{background:#022724}
+@media (max-width:699px){
+  .card{padding:20px}
+  .card > h3{font-size:24px}
+  .dato{grid-template-columns:1fr;gap:2px;padding-bottom:12px}
+  .dato .et{padding-top:0}
+}
+
+/* ============ Bottoni gialli sfumati ============ */
+.tel{
+  background:linear-gradient(180deg,#FFD34F 0%,#F0A800 100%) !important;
+  color:#14100A !important;
+  border:none !important;
+  box-shadow:0 2px 6px rgba(122,80,0,0.24),inset 0 1px 0 rgba(255,255,255,0.5) !important;
+}
+.tel:hover{
+  background:linear-gradient(180deg,#FFC93D 0%,#E09A00 100%) !important;
+  color:#14100A !important;
+  transform:translateY(-1px);
+  box-shadow:0 7px 16px rgba(122,80,0,0.28),inset 0 1px 0 rgba(255,255,255,0.5) !important;
+}
+/* L'invito principale del sito: terracotta su carta, giallo su fondo scuro. */
+.cta{
+  background:linear-gradient(180deg,#B0431A 0%,#93330F 100%) !important;
+  color:#fff !important;border:none !important;
+  box-shadow:0 2px 6px rgba(120,44,16,0.3),inset 0 1px 0 rgba(255,255,255,0.18) !important;
+}
+.cta:hover{
+  background:linear-gradient(180deg,#9A3512 0%,#7F2A0B 100%) !important;
+  color:#fff !important;transform:translateY(-1px);
+  box-shadow:0 7px 16px rgba(120,44,16,0.32) !important;
+}
+.cta:active,.tel:active{transform:none;box-shadow:0 1px 3px rgba(80,40,16,0.3) !important}
+.cta-2{
+  background:#FFFFFF !important;
+  color:var(--azzurro) !important;
+  border:none !important;
+  box-shadow:0 1px 3px rgba(3,43,41,0.12),inset 0 0 0 2px var(--verde) !important;
+}
+.cta-2:hover{
+  background:var(--verde-tenue) !important;
+  color:#052E2C !important;transform:translateY(-1px);
+  box-shadow:0 6px 14px rgba(3,43,41,0.14),inset 0 0 0 2px var(--verde-scuro) !important;
+}
+.tel{font-weight:700;letter-spacing:0.01em}
+html.contrasto .tel{background:#FFD100 !important;color:#000 !important;border:none !important;box-shadow:inset 0 0 0 2.5px #000 !important}
+html.contrasto .cta{background:#8A2600 !important;color:#fff !important;border:none !important;box-shadow:none !important}
+html.contrasto .cta-2{background:#fff !important;color:#000 !important;border:none !important;box-shadow:inset 0 0 0 2.5px #000 !important}
+.hero .cta{background:linear-gradient(180deg,#FFD34F 0%,#F0A800 100%)!important;color:#14100A!important;box-shadow:0 2px 6px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.5)!important}
+.hero .cta:hover{background:linear-gradient(180deg,#FFC93D 0%,#E09A00 100%)!important;color:#14100A!important}
+.hero .cta:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+html.contrasto .hero .cta{background:#FFD100!important;color:#000!important;box-shadow:inset 0 0 0 2.5px #000!important}
+
+/* ============ Scelta dello screening su una riga sola ============ */
+/* La headline sta su una riga sola; l'elenco degli screening resta a griglia leggibile. */
+.scelta-h2{max-width:none;white-space:nowrap}
+@media (max-width:699px){.scelta-h2{white-space:normal}}
+
+/* ============ Schede: piu respiro, informazioni in tondo ============ */
+.card{padding:28px}
+.card .fx.col.gap8{gap:0}
+.dato{padding-top:14px;padding-bottom:14px;gap:6px 14px}
+.dato:first-of-type{padding-top:4px}
+.dato .et{font-weight:400;letter-spacing:0.07em;color:#4A5157}
+.dato .vl{font-weight:400}
+.card > h3{margin-top:12px;margin-bottom:4px}
+.card .tel{margin-top:14px}
+.card .nota{margin-top:4px}
+@media (max-width:699px){
+  .card{padding:22px}
+  .dato{padding-top:12px;padding-bottom:12px}
+}
+
+/* Cambio regione dentro l'apertura: discreto, non compete con gli inviti. */
+.sel-discreto{max-width:24rem;align-self:flex-start;margin-top:2px}
+.sel-discreto .campo-sel{
+  background:rgba(2,32,30,0.62);color:#fff;border:1.5px solid rgba(255,255,255,0.4);
+  font-size:17px;font-weight:500;min-height:50px;backdrop-filter:blur(3px)}
+.sel-discreto .campo-sel:hover{border-color:rgba(255,255,255,0.7);background:rgba(2,32,30,0.74)}
+.sel-discreto .campo-sel option{background:#fff;color:var(--inchiostro)}
+.sel-discreto .sel-frecciona{color:rgba(255,255,255,0.85)}
+html.contrasto .sel-discreto .campo-sel{background:#033B3E;border-color:#fff;backdrop-filter:none}
+@media (max-width:699px){.sel-discreto{max-width:none;align-self:stretch}}
+
+/* ============ Piede completo ============ */
+.ftr-alto{display:grid;grid-template-columns:1fr;gap:32px}
+@media (min-width:700px){.ftr-alto{grid-template-columns:1.4fr 1fr;gap:36px 28px}}
+@media (min-width:1000px){.ftr-alto{grid-template-columns:1.6fr 1fr;gap:40px 32px}}
+.ftr .nome{font-size:23px;font-weight:700;letter-spacing:-0.012em}
+.ftr-claim{font-size:20px !important;line-height:1.4;font-weight:700;color:var(--oro-chiaro) !important;max-width:30ch}
+.ftr-wa{display:inline-flex;align-items:center;gap:10px;min-height:48px;align-self:flex-start;
+  font-size:17px;font-weight:700;color:#8AD2CD !important;text-decoration:none}
+.ftr-wa svg{width:24px;height:24px;flex-shrink:0}
+.ftr-wa:hover{color:#fff !important;text-decoration:underline;text-underline-offset:4px}
+.ftr-col{display:flex;flex-direction:column}
+.ftr-tit{font-size:15px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  color:#8AD2CD;margin:0 0 6px}
+.ftr-col a{display:inline-flex;align-items:center;min-height:44px;font-size:17px;
+  color:#DCEAE9 !important;text-decoration:none;align-self:flex-start}
+.ftr-col a:hover{color:#fff !important;text-decoration:underline;text-underline-offset:4px}
+.ftr-avviso{display:flex;gap:12px;align-items:flex-start;margin-top:36px;padding:18px 20px;
+  border-radius:12px;background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.18)}
+.ftr-avviso svg{flex-shrink:0;color:#F0C24E;margin-top:2px}
+.ftr-avviso p{font-size:16px !important;line-height:1.55;color:#D4E7E6 !important;max-width:88ch}
+.ftr-basso{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;
+  gap:8px 24px;margin-top:26px;padding-top:20px;border-top:1.5px solid rgba(255,255,255,0.16)}
+.ftr-legale{font-size:15px !important;line-height:1.5;color:#A8C3C1 !important;margin:0;max-width:none}
+.ftr-legale-link{display:flex;flex-wrap:wrap;align-items:center;gap:2px 4px}
+.ftr-legale a{color:#C8DDDC !important;min-height:44px;padding:0 4px;display:inline-flex;align-items:center}
+.ftr-legale a:hover{color:#fff !important}
+.ftr-legale span{color:rgba(255,255,255,0.35)}
+html.contrasto .ftr-tit,html.contrasto .ftr-wa{color:#fff !important}
+html.contrasto .ftr-claim,html.contrasto .ftr-legale,html.contrasto .ftr-avviso p{color:#fff !important}
+html.contrasto .ftr-avviso{background:transparent;border-color:#fff}
+html.contrasto .ftr-avviso svg{color:#fff}
+@media (max-width:699px){
+  .ftr{padding-top:36px}
+  .ftr-avviso{margin-top:28px;padding:16px}
+  .ftr-basso{flex-direction:column;align-items:flex-start;gap:4px}
+}
+
+/* La card della domanda e interamente cliccabile. */
+.art{position:relative}
+.art-tit a::after{content:"";position:absolute;inset:0;border-radius:14px}
+.art-vai{position:relative;z-index:1;pointer-events:none}
+.art-img{position:relative;z-index:0;pointer-events:none}
+
+/* ============ Apertura in home: due colonne solo da desktop ============ */
+.hero-due{display:flex;flex-direction:column;gap:28px}
+@media (min-width:1000px){
+  /* Solo l'apertura della home allarga la colonna: il resto del sito
+     resta sulla misura di lettura da 680px. */
+  /* L'apertura della home e larga il doppio della colonna di lettura:
+     serve alla mappa per essere grande. */
+  .hero:has(.hero-due){max-width:1400px}
+  .hero-due{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .hero-due > .fx{min-width:0}
+}
+
+/* La mappa bianca dell'apertura: sagoma chiara sul velo scuro. */
+.hero-mappa{display:flex;flex-direction:column;gap:10px;align-items:center;min-width:0}
+.hero-mappa-et{font-size:15px !important;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  color:#A8E1DE !important;text-align:center;max-width:none !important}
+.mappa-bianca{max-width:340px}
+@media (min-width:1000px){.mappa-bianca{max-width:none;width:80%;margin:0 auto}}
+.mappa-bianca svg{filter:drop-shadow(0 6px 18px rgba(0,0,0,0.45))}
+.mappa-bianca path.vuota{fill:#FFFFFF;stroke:#066A64;stroke-width:1.3}
+.mappa-bianca path.piena{fill:var(--verde-mappa);stroke:#FFFFFF;stroke-width:1.3}
+.mappa-bianca path.vuota:hover,.mappa-bianca path.vuota:focus{fill:var(--verde-tenue);stroke:#044743;stroke-width:2.4}
+.mappa-bianca path.piena:hover,.mappa-bianca path.piena:focus{fill:#FFD34F;stroke:#044743;stroke-width:2.4}
+.mappa-bianca path:focus{stroke:#FFD34F;stroke-width:2.6}
+html.contrasto .mappa-bianca path.vuota{fill:#fff;stroke:#000;stroke-width:1.5}
+html.contrasto .mappa-bianca path.piena{fill:#2E7974;stroke:#FFFFFF;stroke-width:1.8}
+.mappa-bianca path.attiva{fill:#FFD34F;stroke:#044743}
+@media (max-width:999px){.hero-mappa{display:none}}
+
+/* Domande frequenti: tre per riga, senza tratteggio intorno alle foto */
+@media (min-width:860px){.art-griglia{grid-template-columns:1fr 1fr;gap:20px}}
+@media (min-width:1000px){.art-griglia{grid-template-columns:repeat(3,1fr);gap:22px}}
+/* Il tratteggio vive su part="ring" dentro lo shadow DOM del segnaposto:
+   e l'unico modo di raggiungerlo. Le foto sono impostate, il tratteggio e solo rumore. */
+image-slot::part(ring){display:none !important}
+.art-img image-slot,.art-figura-img image-slot{border:0 !important;outline:0 !important;background:#E3F1F0}
+.art-img{background:#E3F1F0}
+
+/* Il numero da chiamare resta un pulsante anche da centrato. */
+.card .tel,.avviso .tel{padding:0 28px;min-width:220px}
+@media (max-width:699px){
+  .card .tel,.avviso .tel{align-self:stretch;width:100%;min-width:0;padding:0 18px}
+}
+
+/* Apertura: respiro ridotto ancora */
+.hero{padding-top:48px;padding-bottom:48px}
+@media (min-width:860px){.hero{padding-top:66px;padding-bottom:66px}}
+@media (max-width:699px){.hero{padding-top:32px;padding-bottom:32px}}
+
+/* Le card delle domande hanno bisogno di larghezza: la fascia che le contiene
+   allarga la colonna solo da desktop. */
+@media (min-width:1000px){
+  .banda:has(.art-griglia){max-width:1120px}
+  .art-griglia{gap:26px}
+  /* Dentro la fascia allargata, ricerca e filtri restano leggibili. */
+  .banda:has(.art-griglia) .cerca,
+  .banda:has(.art-griglia) > .fx > .fx.col.gap8{max-width:680px}
+}
+
+/* La risposta a soffietto senza wrapper: allineata alla domanda e staccata dal filetto. */
+.elenco > p{padding:12px 16px 18px;margin:0}
+/* Domande delle pagine screening a fisarmonica (brief LORI 29/09/2026) */
+.scr-domande .elenco>summary>h3{font:inherit;line-height:1.4;color:inherit;margin:0}
+.scr-domande .elenco>summary:focus-visible{outline:3px solid var(--terracotta);outline-offset:2px}
+.scr-domande .elenco>summary{padding:12px 16px}
+
+/* Interruttore di sicurezza: vince anche su una transizione gia avviata,
+   perche una transizione congelata non si sblocca togliendo una classe. */
+html.senza-anim .rivela,html.senza-anim .rivela.dentro{
+  opacity:1 !important;transform:none !important;transition:none !important;animation:none !important}
+html.senza-anim .hero-sfondo img,html.senza-anim .hero-sfondo image-slot{animation:none !important}
+
+/* Il marchio vero, estratto dalla presentazione di Angelo. */
+/* A 76px il marchio supera i 160px di larghezza della testata mobile
+   (sistema_visivo.md §6). */
+.marchio-img{display:block;height:76px;width:auto;flex-shrink:0}
+.marchio:hover .marchio-img{opacity:0.88}
+/* Motto di Angelo (note del 17/10/2026) sotto il marchio, con il tricolore.
+   Il marchio scende a 62px perche marchio e motto stiano nei 88px della testata. */
+.marchio:has(.motto){flex-direction:column;align-items:flex-start;justify-content:center;gap:4px}
+.marchio:has(.motto) .marchio-img{height:62px}
+.motto{font-size:13px;font-weight:600;letter-spacing:0;color:#fff;white-space:nowrap;padding-bottom:4px;
+  background:linear-gradient(90deg,#009246 0 33.3%,#fff 33.3% 66.6%,#CE2B37 66.6%) left bottom/100% 2px no-repeat}
+.marchio:hover .motto{text-decoration:none}
+/* Nel piede il margine resta 1/3 (sistema_visivo.md §6): la deroga 1/8 vale solo in testata. */
+.ftr-marchio-img{display:block;height:72px;width:auto;background:#FFFFFF;padding:12px;border-radius:8px;box-sizing:content-box}
+.ftr-marchio-img{align-self:flex-start}
+.marchio-vetrina{width:100%;max-width:26rem;align-self:center;padding:22px 26px;
+  border-radius:12px;background:#fff;box-shadow:0 3px 12px rgba(3,43,41,0.09)}
+.marchio-vetrina img{display:block;width:100%;height:auto}
+html.contrasto .marchio-vetrina{border:2.5px solid #000;box-shadow:none}
+
+/* ============ Consenso ai cookie ============ */
+.ck{position:fixed;left:0;right:0;bottom:0;z-index:70;
+  background:linear-gradient(180deg,#022523 0%,#011615 100%);
+  border-top:2px solid rgba(255,255,255,0.16);
+  box-shadow:0 -10px 34px rgba(1,18,17,0.38)}
+.ck-corpo{max-width:1040px;margin:0 auto;padding:20px 24px;
+  display:flex;flex-direction:column;gap:18px}
+@media (min-width:900px){
+  .ck-corpo{flex-direction:row;align-items:center;justify-content:space-between;gap:32px;padding:22px 24px}
+  .ck-testo{flex:1 1 auto;min-width:0}
+}
+.ck-tit{font-size:20px;font-weight:600;line-height:1.25;color:#fff;margin:0 0 6px;
+  text-align:left;max-width:none;letter-spacing:-0.008em}
+.ck-txt{font-size:17px;line-height:1.55;color:#EDF5F5;margin:0;max-width:72ch;text-align:left}
+.ck-txt a{color:#A8E1DE;text-decoration:underline;text-underline-offset:3px}
+.ck-txt a:hover{color:#fff}
+.ck-azioni{display:flex;flex-wrap:wrap;gap:12px;align-items:center;flex-shrink:0}
+.ck-btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 22px;
+  border-radius:10px;font-family:inherit;font-size:17px;font-weight:700;cursor:pointer;
+  transition:transform .12s ease,box-shadow .12s ease,background .12s ease}
+.ck-btn:hover{transform:translateY(-1px)}
+.ck-btn:active{transform:none}
+/* Pari dignita: accettare e rifiutare hanno lo stesso peso visivo. */
+.ck-btn-si{background:linear-gradient(180deg,#FFD34F 0%,#F0A800 100%);color:#14100A;
+  border:1.5px solid rgba(122,80,0,0.5);box-shadow:0 2px 6px rgba(0,0,0,0.26),inset 0 1px 0 rgba(255,255,255,0.5)}
+.ck-btn-no{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.72)}
+.ck-btn-no:hover{background:rgba(255,255,255,0.12);border-color:#fff}
+.ck-link{min-height:50px;padding:0 6px;background:none;border:0;cursor:pointer;
+  font-family:inherit;font-size:17px;font-weight:600;color:#A8E1DE;
+  text-decoration:underline;text-underline-offset:4px}
+.ck-link:hover{color:#fff}
+@media (max-width:899px){
+  .ck-azioni{flex-direction:column;align-items:stretch}
+  .ck-btn{width:100%}
+  .ck-link{text-align:center}
+}
+
+/* Pannello delle preferenze */
+.ck-velo{position:fixed;inset:0;z-index:80;background:rgba(1,20,19,0.6);backdrop-filter:blur(2px)}
+.ck-pannello{position:fixed;z-index:81;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:calc(100% - 32px);max-width:36rem;max-height:calc(100vh - 48px);overflow-y:auto;
+  background:#fff;border-radius:16px;padding:24px;
+  box-shadow:0 24px 60px rgba(1,24,22,0.42)}
+.ck-p-testa{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;
+  padding-bottom:16px;border-bottom:1.5px solid var(--bordo)}
+.ck-p-testa .ck-tit{color:var(--inchiostro);margin:0;font-size:23px}
+.ck-x{flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  background:none;border:1.5px solid var(--bordo);border-radius:10px;color:var(--inchiostro);cursor:pointer}
+.ck-x:hover{background:var(--carta2)}
+.ck-voce{display:flex;gap:18px;align-items:flex-start;justify-content:space-between;
+  padding:20px 0;border-bottom:1.5px solid var(--bordo)}
+.ck-voce-testo{min-width:0}
+.ck-voce-tit{font-size:19px;font-weight:600;line-height:1.3;margin:0 0 5px;max-width:none}
+.ck-voce-txt{font-size:16px;line-height:1.55;color:var(--soft);margin:0;max-width:60ch}
+.ck-sempre{flex-shrink:0;font-size:15px;font-weight:700;color:var(--verde);margin:2px 0 0;max-width:none}
+/* Bersaglio da 44px come tutti gli altri comandi del sito.
+   Lo stato NON passa da proprieta animate: la pallina si sposta con «left» e
+   la traccia cambia colore piatto, cosi resta giusto anche dove le transizioni
+   non avanzano e dove il gradiente non e interpolabile. */
+.ck-sw{flex-shrink:0;position:relative;width:78px;height:44px;border-radius:999px;cursor:pointer;
+  background-color:#C0D7D5;background-image:none;border:1.5px solid rgba(8,64,61,0.28)}
+.ck-sw-pallina{position:absolute;top:4px;left:4px;width:34px;height:34px;border-radius:999px;
+  background:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.28);transform:none}
+.ck-sw.on{background-color:#055B56;background-image:none;border-color:var(--verde-scuro)}
+.ck-sw.on .ck-sw-pallina{left:38px;transform:none}
+/* Un segno che non dipende dal colore: la traccia accesa porta la spunta. */
+.ck-sw::after{content:"";position:absolute;top:50%;left:13px;width:11px;height:6px;
+  margin-top:-5px;border-left:2.5px solid #fff;border-bottom:2.5px solid #fff;
+  transform:rotate(-45deg);opacity:0}
+.ck-sw.on::after{opacity:1}
+.ck-p-fondo{display:flex;flex-direction:column;gap:10px;padding-top:20px}
+.ck-p-fondo .ck-btn{align-self:stretch}
+.ck-nota{font-size:15px;line-height:1.5;color:var(--soft);margin:0;max-width:none;text-align:center}
+
+/* Il banner non copre i due pulsanti flottanti. */
+.ck ~ .wa-float{bottom:auto}
+.ftr-btn-link{background:none;border:0;padding:0 4px;min-height:44px;cursor:pointer;
+  font-family:inherit;font-size:15px;color:#C8DDDC;display:inline-flex;align-items:center;
+  text-decoration:underline;text-underline-offset:3px}
+.ftr-btn-link:hover{color:#fff}
+
+html.contrasto .ck{background:#033B3E;border-top:2px solid #fff}
+html.contrasto .ck-btn-si{background:#FFD100;color:#000;border:2.5px solid #fff;box-shadow:none}
+html.contrasto .ck-btn-no{border-color:#fff}
+html.contrasto .ck-txt,html.contrasto .ck-link{color:#fff}
+html.contrasto .ck-pannello{border:3px solid #000}
+html.contrasto .ck-sw.on{background:#055459}
+
+/* ============ Card delle iniziative cliccabili (brief LORI 24/09/2026) ============ */
+/* Stesso schema delle card articolo: link sul titolo, ::after steso sulla card.
+   Il telefono sta sopra lo strato e resta un bersaglio a se. Nessun valore nuovo. */
+.card-ini{position:relative;transition:transform .18s ease,box-shadow .18s ease}
+.card-ini:hover,.card-ini:focus-within{transform:translateY(-2px);
+  box-shadow:0 2px 4px rgba(3,43,41,0.08),0 14px 30px rgba(3,43,41,0.16)}
+.ini-tit a{color:inherit;text-decoration:none}
+.ini-tit a::after{content:"";position:absolute;inset:0;border-radius:14px}
+.ini-tit a:hover{text-decoration:underline;text-underline-offset:3px}
+.card-ini:has(.ini-tit a:focus-visible){outline:3px solid var(--terracotta);outline-offset:3px}
+@supports selector(:has(a)){.ini-tit a:focus-visible{outline:none}}
+.card-ini .tel{position:relative;z-index:1}
+.card-ini .tel:focus-visible{outline:3px solid var(--terracotta);outline-offset:3px}
+.ini-vai{pointer-events:none;align-self:center}
+html.contrasto .card-ini:has(.ini-tit a:focus-visible),html.contrasto .card-ini .tel:focus-visible{outline-color:#000}
+@media (prefers-reduced-motion:reduce){
+  .card-ini{transition:none}
+  .card-ini:hover,.card-ini:focus-within{transform:none}
+}
+/* Pagina dell'iniziativa: il titolo riceve il fuoco dal codice, non e un comando. */
+.ini-fuoco:focus{outline:none}
+/* Correzioni LORI, giro 1: occhiello del dettaglio e testo della pagina non trovata a sinistra. */
+.banda:not(.hero) .ini-reg{text-align:left}
+/* Prefisso .banda:not(.hero) .fx: serve a battere la regola di centratura
+   .banda:not(.hero) .fx:not(.lettura):has(> h2) > p (0,4,2). Colpisce sempre e solo questo avviso. */
+.banda:not(.hero) .fx.avviso:has(> h2.ini-fuoco) > p{text-align:left;margin-left:0}
+.hero .occhiello{font-size:17px;line-height:1.45}
+.hero h1{font-size:34px;line-height:1.15;font-weight:700;letter-spacing:-0.01em}
+.hero p{font-size:19px;line-height:1.6}
+.hero .nota{font-size:17px;line-height:1.45}
+.numero-hn{font-size:30px}
+.numero-het{font-size:17px;line-height:1.45}
+@media (min-width:860px){.hero .occhiello,.hero .nota,.numero-het{font-size:18px}
+ .hero h1{font-size:48px;line-height:1.10}.hero p{font-size:20px;line-height:1.65}.numero-hn{font-size:34px}}
+
+/* Menu aperto sopra il banner cookie (z 70), accessibilita sopra la testata (collaudo LORI giro 2, 26/09/2026). */
+@media (max-width:1199px){.hdr:has(.menu-chk:checked){z-index:71} body:has(.menu-chk:checked) .a11y{z-index:29}}
+
+/* ============ Blocco 2: schede strette dell'elenco regione (brief LORI 26/09/2026) ============ */
+/* Solo .card-reg (vista regione). Le card-ini delle pagine screening non cambiano.
+   Griglia: 390 -> 1 colonna da 350; 768 -> 2 da 356; 1280 -> 3 da 368.
+   Le colonne escono dalle larghezze gia in stile.css: .wrap (padding 20/24) e le
+   larghezze di .banda-larga (1040 / 1200). Gap 16 a 768 e 24 a 1280 sono il resto
+   aritmetico di quelle misure, non valori scelti. */
+@media (min-width:768px){.ini-larga{max-width:1040px}}
+@media (min-width:1280px){.ini-larga{max-width:1200px}}
+.ini-griglia{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;align-items:start}
+@media (min-width:768px){.ini-griglia{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}}
+@media (min-width:1280px){.ini-griglia{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}}
+
+/* La scheda e il bottone: tutta la parte chiusa e il bersaglio. */
+.card.card-reg{padding:0;display:flex;flex-direction:column}
+.card-reg > h3.ini-testa{margin:0;font-size:inherit;line-height:inherit;color:inherit;letter-spacing:0}
+.ini-apri{display:flex;flex-direction:column;align-items:flex-start;gap:10px;width:100%;
+  padding:28px;margin:0;border:0;background:transparent;border-radius:14px;
+  font:inherit;color:inherit;text-align:left;cursor:pointer}
+.ini-apri:focus-visible{outline:3px solid var(--terracotta);outline-offset:3px}
+html.contrasto .ini-apri:focus-visible{outline-color:#000}
+.ini-nome{display:block;font-size:21px;font-weight:700;line-height:1.24;color:var(--azzurro)}
+html.contrasto .ini-nome{color:#000}
+.ini-riga{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+/* Tipo e data su due righe: senza separatore scritto, sulla stessa riga si fondevano. */
+.ini-quando{display:flex;flex-direction:column}
+.ini-tipo,.ini-data{font-size:17px;line-height:1.45;color:#181A1B;font-weight:400}
+.ini-tipo{display:inline-flex;align-items:center;gap:7px}
+.ini-tipo svg{width:17px;height:17px;flex-shrink:0;color:var(--azzurro)}
+html.contrasto .ini-tipo svg{color:#000}
+/* Pavimento 17px anche per scadenza e posti (sul telefono .scad scendeva a 14). */
+.card-reg .scad{font-size:17px}
+/* Giro 2 LORI: pillole di stato e scadenza alla stessa altezza, a tutte le larghezze. */
+.card-reg .tag,.card-reg .scad{padding:4px 12px;line-height:1.3;min-height:34px}
+.banda:not(.hero) .card-reg .ini-indica{min-height:auto;align-self:flex-start;text-align:left}
+.ini-apri:hover .ini-indica{color:var(--verde);text-decoration-thickness:3px}
+.ini-freccia{transition:transform .18s ease}
+.ini-apri[aria-expanded="true"] .ini-freccia{transform:rotate(180deg)}
+
+/* Scheda aperta: stato -> ente -> dove -> chi puo -> telefono -> nota -> chiusura. */
+.ini-pannello{display:flex;flex-direction:column;gap:14px;padding:0 28px 28px}
+.ini-pannello[hidden]{display:none}
+.card-reg .dato .et{font-size:17px}
+.card-reg .nota{font-size:17px}
+.card-reg .tel{margin-top:0}
+.card-reg .ini-chiudi{align-self:stretch;max-width:none;margin-top:0}
+@media (max-width:699px){
+  .ini-apri{padding:20px}
+  .ini-pannello{padding:0 20px 20px}
+}
+/* Giro 1 LORI: da 700px dati su una colonna come sul telefono, telefono largo quanto la scheda. */
+@media (min-width:700px){
+  .card-reg .dato{grid-template-columns:1fr;gap:2px}
+  .card-reg .tel{align-self:stretch;max-width:none}
+}
+@media (prefers-reduced-motion:reduce){.ini-freccia{transition:none}}
+
+/* --- Invito a fine articolo (blocco 3, brief LORI 26/09/2026 §2) ---
+   Banda verde dopo l'avvertenza, sulla colonna del testo, tutto a sinistra. */
+.invito{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.invito .invito-tit{font-size:26px;line-height:1.24;font-weight:600;color:var(--verde-scuro);max-width:22ch}
+@media (min-width:860px){.invito .invito-tit{font-size:30px}}
+.invito .invito-p{font-size:19px;line-height:1.6;color:var(--inchiostro);max-width:38rem}
+.banda:not(.hero) .invito .cta{width:100%;align-self:stretch}
+@media (min-width:700px){
+  .banda:not(.hero) .invito .cta{width:auto;min-width:320px;align-self:flex-start;padding:16px 32px}
+}
+html.contrasto .invito-banda{border-top:2.5px solid #000}
+html.contrasto .invito .invito-tit{color:#033B3E}
+
+/* ============ Accenti e bande (LORI, 2026-10-13) ============ */
+/* Terracotta = azione e segnaletica; giallo caldo = evidenza, mai come testo su chiaro.
+   Bande: bianco / sabbia calda, una sola banda azzurra chiara (b-verde). */
+:root{
+  --accento:#A63D17;        /* testo 6.36:1 su bianco, 5.17:1 su sabbia */
+  --oro:#F0B429;            /* solo riempimento con testo scuro, o su blu scuro */
+  --oro-chiaro:#FFD34F;
+  --oro-bordo:#8A5A00;      /* contorno del giallo: 4.8:1 su sabbia */
+  --sabbia:#DEF1F0;         /* fondo delle bande alternate: grigio-azzurro chiaro (era sabbia, Davide 21/10) */
+  --azzurro-tenue:#CEEFED;
+}
+.b-crema{background:var(--sabbia);box-shadow:0 0 0 100vmax var(--sabbia)}
+.b-verde{background:var(--azzurro-tenue);box-shadow:0 0 0 100vmax var(--azzurro-tenue)}
+.occhiello{color:var(--accento)}
+.hero .occhiello{color:var(--oro-chiaro)}
+.passo .num{background:linear-gradient(180deg,#FFD34F 0%,#F0A800 100%);color:#14100A;font-weight:700;
+  box-shadow:0 2px 6px rgba(122,80,0,0.22),inset 0 0 0 2px var(--oro-bordo)}
+.ftr-tit{color:var(--oro-chiaro) !important}
+html.contrasto{--accento:#8A2600;--oro-bordo:#000000}
+html.contrasto .occhiello{color:#8A2600}
+html.contrasto .hero .occhiello{color:#FFD100}
+html.contrasto .passo .num{background:#FFD100;color:#000;box-shadow:inset 0 0 0 2.5px #000}
+
+/* Scheda regione cliccabile (Florbo 13/10/2026): tutta la card porta a #/iniziativa/<id>.
+   Nella card solo tipo, titolo, luogo, condizione e chiusura; il resto sta nella pagina. */
+.card.card-vai{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:24px 28px;
+  text-decoration:none;color:inherit;transition:box-shadow .15s ease,transform .15s ease}
+.card-vai:hover{box-shadow:0 6px 18px rgba(3,56,53,.14);transform:translateY(-1px)}
+.card-vai:hover .ini-nome{text-decoration:underline;text-underline-offset:3px}
+.card-vai:focus-visible{outline:3px solid var(--terracotta);outline-offset:3px}
+html.contrasto .card-vai:focus-visible{outline-color:#000}
+.card-vai .ini-nome{margin:0}
+.ini-luogo{display:flex;gap:7px;align-items:flex-start;font-size:17px;line-height:1.45;color:#181A1B;
+  overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.ini-luogo svg{width:17px;height:17px;flex-shrink:0;margin:3px 7px 0 0;color:var(--azzurro);vertical-align:-3px}
+html.contrasto .ini-luogo svg{color:#000}
+.card-vai .ini-indica{margin-top:auto;padding-top:4px}
+
+/* ======================================================================
+   Gerarchia visiva (LORI, 13/10/2026) — priorita 1, 2, 3 e 5.
+   Blocco finale: vince sulle regole precedenti. Foto e logo non si toccano.
+   ====================================================================== */
+
+/* --- 5. Un solo azzurro: #0B6E73. #07494D solo per hover e piede. --- */
+:root{--azzurro:#0B6E73}
+.hdr{background:#0B6E73;box-shadow:0 2px 12px rgba(2,30,28,0.18)}
+.ftr{background:#07494D}
+.filtro.on,.scelta.on,.scelta:has(:checked){background:#0B6E73;border-color:#0B6E73}
+.wa{background:#0B6E73;box-shadow:none}
+.link-cta{color:#0B6E73}
+.link-cta:hover{color:#07494D}
+.art-sub,.invito .invito-tit,.numero-n{color:#0B6E73}
+.ck-sw.on{background-color:#0B6E73}
+
+/* --- 3. Un solo sistema di pulsanti ---
+   Primario: terracotta piatto. Secondario: bianco con contorno azzurro. Giallo mai pulsante. */
+.cta,.hero .cta,.tel{
+  background:#A63D17 !important;color:#fff !important;border:none !important;box-shadow:none !important;
+  min-height:62px;border-radius:10px;font-size:19px;font-weight:700;transform:none;text-decoration:none}
+.cta:hover,.hero .cta:hover,.tel:hover{background:#8A3212 !important;color:#fff !important;
+  transform:none;box-shadow:none !important;text-decoration:none}
+.cta:active,.tel:active{background:#8A3212 !important;box-shadow:none !important}
+.cta-2{background:#fff !important;color:#0B6E73 !important;border:1.5px solid #0B6E73 !important;
+  box-shadow:none !important;transform:none}
+.cta-2:hover{background:#D8F2F0 !important;color:#07494D !important;border-color:#07494D !important;
+  box-shadow:none !important;transform:none}
+.cta:focus-visible,.cta-2:focus-visible,.tel:focus-visible{outline:3px solid #14202B;outline-offset:3px}
+.hero .cta:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+.ck-btn-si{background:#A63D17;color:#fff;border:1.5px solid #A63D17;box-shadow:none}
+.ck-btn-si:hover{background:#8A3212;border-color:#8A3212;transform:none}
+.ck-btn:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+html.contrasto .cta,html.contrasto .hero .cta,html.contrasto .tel{background:#8A2600 !important;color:#fff !important;box-shadow:none !important}
+html.contrasto .cta-2{background:#fff !important;color:#000 !important;border:2.5px solid #000 !important}
+html.contrasto .ck-btn-si{background:#8A2600;color:#fff;border:2.5px solid #fff}
+.occhiello-neutro,.banda:not(.hero) .occhiello-neutro{color:#33414F}
+html.contrasto .occhiello-neutro{color:#000}
+
+/* --- Evidenza gialla al posto del rosso (priorita 1) --- */
+.scad-ultimi,.scad-rossa{background:#F0B429;color:#14202B;border-color:#F0B429}
+.pill-ultimi{display:inline-flex;align-items:center;min-height:34px;padding:4px 12px;border-radius:999px;
+  background:#F0B429;color:#14202B;font-size:17px;font-weight:700;line-height:1.3;white-space:nowrap}
+html.contrasto .pill-ultimi{background:#FFD100;color:#000;box-shadow:inset 0 0 0 2.5px #000}
+
+/* --- 1. Card delle iniziative nella pagina regione --- */
+.card.card-vai{gap:8px;padding:24px 24px 0;border-radius:12px;align-items:stretch;text-align:left}
+.card-vai .ini-tipo{font-size:17px;font-weight:600;color:#0B6E73;line-height:1.4}
+.card-vai .ini-tipo svg{color:#0B6E73}
+.card-vai .ini-nome{font-size:21px;font-weight:700;line-height:1.25;color:#14202B;letter-spacing:-0.005em;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-width:none}
+@media (min-width:860px){.card-vai .ini-nome{font-size:24px}}
+.ini-ente{font-size:17px;font-weight:400;line-height:1.45;color:#33414F}
+.card-vai .ini-luogo{font-size:17px;color:#14202B}
+.card-vai .ini-luogo svg{color:#0B6E73}
+.ini-periodo{font-size:17px;font-weight:600;line-height:1.45;color:#14202B}
+.card-vai .ini-riga{gap:8px}
+.card-vai .tag{min-height:34px;padding:4px 12px;line-height:1.3;border-width:0}
+.card-vai .tag-gratis{background:#D8F2F0;color:#033F3B}
+.ini-posti{font-size:17px;line-height:1.45;color:#33414F}
+.ini-piede{display:flex;align-items:center;min-height:56px;margin:8px -24px 0;padding:12px 24px;
+  border-top:1.5px solid rgba(20,32,43,0.2);font-size:19px;font-weight:700;line-height:1.3;color:#0B6E73;text-align:left;margin-top:auto}
+.card-vai .ini-riga + .ini-piede,.card-vai > .ini-piede{margin-top:auto}
+.card-vai .ini-riga{margin-bottom:8px}
+.card-vai:hover{transform:none;box-shadow:0 6px 18px rgba(3,56,53,.14),inset 0 0 0 2px #0B6E73}
+.card-vai:hover .ini-nome{text-decoration:none}
+.card-vai:hover .ini-piede{text-decoration:underline;text-underline-offset:4px}
+.card-vai:focus-visible{outline:3px solid #A63D17;outline-offset:3px}
+html.contrasto .card-vai .ini-nome,html.contrasto .ini-ente,html.contrasto .ini-piede{color:#000}
+/* Griglia: 2 colonne; 3 solo da 3 iniziative in su e da 1280px. Tutto a sinistra. */
+.ini-griglia{align-items:stretch}
+@media (min-width:768px){.ini-griglia{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}}
+@media (min-width:1280px){
+  .ini-larga{max-width:1088px}
+  .ini-griglia{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+  .ini-griglia:has(> :nth-child(3)){grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+/* --- 2. Pagina dell'iniziativa: telefono subito sotto il titolo --- */
+.ini-occhiello{font-size:17px;font-weight:700;line-height:1.4;color:#0B6E73;max-width:none;text-transform:none;letter-spacing:0}
+.ini-riassunto{font-size:19px;line-height:1.55;color:#33414F;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+@media (min-width:860px){.ini-riassunto{font-size:20px}}
+.ini-chiama{display:flex;flex-direction:column;gap:12px;align-items:stretch;width:100%}
+.ini-chiama .nota{font-size:17px;max-width:none;text-align:left}
+.tel.tel-grande{width:100%;max-width:420px;min-height:62px;align-self:flex-start;justify-content:flex-start;
+  gap:12px;padding:0 24px;font-size:24px;letter-spacing:0.01em;margin-top:0}
+.tel.tel-grande svg{width:26px;height:26px}
+@media (max-width:699px){.tel.tel-grande{max-width:none;align-self:stretch}}
+.ini-apertura{padding-bottom:48px}
+@media (min-width:860px){.ini-apertura{padding-bottom:64px}}
+.dato .et{font-size:17px !important;font-weight:700 !important;letter-spacing:0 !important;text-transform:none !important;color:#33414F !important}
+.dato .et svg{color:#0B6E73}
+@media (min-width:700px){.dato{grid-template-columns:120px 1fr}}
+@media (max-width:699px){.dato{grid-template-columns:1fr;gap:4px}}
+.vl-righe{display:flex;flex-direction:column;gap:12px}
+.vl-riga{display:block}
+html.contrasto .ini-occhiello,html.contrasto .dato .et{color:#000 !important}
+/* Telefono in tutte le card: stesso primario terracotta */
+.card .tel,.avviso .tel{font-size:22px}
+
+/* --- 5. Allineamento a sinistra --- */
+h2,.banda:not(.hero) h2{text-align:left;margin-left:0;margin-right:0;max-width:632px}
+.banda:not(.hero) .occhiello{text-align:left}
+.banda:not(.hero) .fx:not(.lettura):has(> h2) > p,
+.banda:not(.hero) .fx:not(.lettura):has(> h2) > .nota,
+.banda:not(.hero) .fx:not(.lettura):has(> h2) > .finto,
+.banda:not(.hero) .fx:not(.lettura):has(> .occhiello) > .finto,
+.banda:not(.hero) .fx:not(.lettura) > p.testi-intro,
+.pag-scr .scr-cosa{text-align:left;margin-left:0;margin-right:0}
+.banda:not(.hero) .cta,.banda:not(.hero) .cta-2,.banda:not(.hero) .link-cta,
+.avviso .cta,.avviso .cta-2,.card .cta,.card .cta-2{align-self:flex-start}
+@media (max-width:699px){
+  .banda:not(.hero) .cta,.banda:not(.hero) .cta-2{align-self:stretch}
+  .link-cta{align-self:flex-start;text-align:left}
+  .banda:not(.hero) .link-cta{align-self:flex-start}
+}
+.urgenza{justify-content:flex-start}
+/* Griglia di 1040px: la colonna di prosa (632px) sta sul bordo sinistro, non al centro.
+   Le fasce con griglie di card usano tutta la larghezza. */
+@media (min-width:1000px){
+  .wrap{max-width:1088px}
+  .banda.wrap:not(.hero):not(.ini-larga):not(.banda-larga):not(:has(.art-griglia)):not(:has(.testi-griglia)):not(:has(.carrellata)) > *{max-width:632px}
+  .banda:has(.art-griglia),.banda-larga,.ini-larga{max-width:1088px}
+  .banda.wrap:not(.hero) > .fx > .fx.col.gap8,
+  .banda.wrap:not(.hero) > .fx > h2,
+  .banda.wrap:not(.hero) > .fx > p,
+  .banda.wrap:not(.hero) > .fx > .nota{max-width:632px}
+  .testi-griglia{margin-left:0;margin-right:0}
+  .testi-griglia:has(> :only-child){max-width:632px}
+  .hero:not(:has(.hero-due)) > :not(.hero-sfondo){max-width:632px}
+}
+
+/* --- 5. Piede piu largo: marchio 320px, link in 3 colonne da 200px --- */
+@media (min-width:1000px){
+  .ftr-alto{grid-template-columns:minmax(0,320px) minmax(0,200px);justify-content:space-between;gap:40px 24px}
+}
+.ftr-col a{min-height:44px;line-height:1.35}
+.ftr-legale,.ftr-legale span{font-size:17px !important;color:#C8DDDC !important}
+
+/* --- 5. Su telefono niente «Contattaci» fluttuante: Contatti sta nel menu e nel piede --- */
+@media (max-width:699px){
+  .wa-float,.wa-float.in-vista{display:none !important}
+  .ftr{padding-bottom:36px}
+}
+/* Apertura della home sulla stessa griglia di 1040px */
+@media (min-width:1000px){.hero:has(.hero-due){max-width:1088px}}
+.ftr-btn-link{font-size:17px;color:#C8DDDC}
+.ini-apertura h1{font-size:34px;line-height:1.15;font-weight:700;max-width:none}
+@media (min-width:860px){.ini-apertura h1{font-size:48px;line-height:1.1}}
+@media (min-width:1000px){.ini-apertura h1{max-width:832px}}
+/* Pagine screening: stesso terracotta #A63D17 piatto (vince su screening.css) */
+html body .pag-scr .cta{background-color:#A63D17 !important}
+html body .pag-scr .cta:hover{background-color:#8A3212 !important}
+html.contrasto body .pag-scr .cta{background-color:#8A2600 !important}
+/* Piu numeri nello stesso campo: il pulsante va a capo senza toccare i bordi */
+.tel.tel-grande{padding-top:12px;padding-bottom:12px;line-height:1.3}
+
+/* Pagina regione (Florbo 16/10/2026): il filtro e la prima cosa, con il titolo della pagina. */
+.reg-h1{white-space:normal;margin:0}
+.reg-torna{margin:0}
+
+/* ======================================================================
+   Contrasto tra le sezioni (LORI, 16/10/2026). Blocco finale: vince sui precedenti.
+   Tre fondi: bianco, sabbia #F5EBD8 (1,18:1 sul bianco; schiarita il 16/10 su richiesta di Davide, prima #ECD8B8), una sola banda blu #0B6E73.
+   Bianco e sabbia si alternano per posizione tra le bande visibili (sc-if toglie dal DOM
+   le sezioni nascoste); l'apertura con la foto (.hero), la banda blu e il corpo
+   dell'articolo (continua la sua apertura) non contano. La prima banda e bianca.
+   Le classi b-bianco / b-crema / b-verde / b-carta restano solo come segnaposto.
+   Alto contrasto (html.contrasto) invariato: tutto bianco e nero.
+   ====================================================================== */
+:root{--sabbia:#DEF1F0;--carta:#FFFFFF;--filo-card:#727980}
+body{background:#fff}
+
+/* --- Fondi: un solo strato a tutta larghezza (border-image), niente cuciture sui bordi --- */
+.banda:not(.hero){--fondo:#fff;background:none;box-shadow:none;
+  border-image:conic-gradient(var(--fondo) 0 0) fill 0 / 0 / 0 100vmax}
+.banda:nth-child(even of .banda:not(.hero):not(.b-blu):not(.sezione-corpo)){--fondo:var(--sabbia)}
+.banda.b-blu{--fondo:#0B6E73}
+html.contrasto .banda:not(.hero){--fondo:#fff}
+
+/* --- Banda bianca (e regola di base per tutte) --- */
+.banda:not(.hero) .nota{color:#33414F}
+.banda:not(.hero) h2{color:#0B6E73}
+.banda:not(.hero) .occhiello{color:#A63D17}
+.banda:not(.hero) :is(.card,.art,.testi,.mappa-nome,.avviso,.fatto,.scr-carta,.scr-cella,.scr-frase){
+  background:#fff;border:1.5px solid var(--filo-card)}
+.banda:not(.hero) .elenco{background:#fff;border-color:var(--filo-card)}
+.ini-piede{border-top:1.5px solid var(--filo-card)}
+
+/* --- Banda sabbia --- */
+.banda:nth-child(even of .banda:not(.hero):not(.b-blu):not(.sezione-corpo)) .occhiello{color:#8A3212}
+.banda:nth-child(even of .banda:not(.hero):not(.b-blu):not(.sezione-corpo))
+  :is(.card,.art,.testi,.mappa-nome,.avviso,.fatto,.scr-carta,.scr-cella,.scr-frase){border-color:transparent}
+.banda:nth-child(even of .banda:not(.hero):not(.b-blu):not(.sezione-corpo))
+  :is(.campo,.filtro:not(.on),.scelta:not(.on):not(:has(:checked))){background:#fff;border:1.5px solid #0B6E73}
+
+/* --- Banda blu: un solo blocco corto per pagina (titolo, testo, un pulsante) --- */
+html:not(.contrasto) .banda.b-blu,
+html:not(.contrasto) .banda.b-blu :is(p,h2,h3,li){color:#fff}
+html:not(.contrasto) .banda.b-blu .nota{color:#D8F2F0}
+html:not(.contrasto) .banda.b-blu .occhiello{color:#FFD34F}
+html:not(.contrasto) .banda.b-blu a:not(.cta):not(.cta-2),
+html:not(.contrasto) .banda.b-blu a:not(.cta):not(.cta-2):hover{color:#fff;text-decoration:underline}
+html:not(.contrasto) .banda.b-blu .cta{border:2px solid #fff !important}
+html:not(.contrasto) .banda.b-blu .cta-2{background:transparent !important;color:#fff !important;border:1.5px solid #fff !important}
+html:not(.contrasto) .banda.b-blu .cta-2:hover{background:#07494D !important;color:#fff !important;border-color:#fff !important}
+html:not(.contrasto) .banda.b-blu :is(.cta,.cta-2,a):focus-visible{outline:3px solid #fff;outline-offset:4px}
+
+/* --- Footer: filetto in alto, separa una banda blu in chiusura --- */
+.ftr{border-top:2px solid #89B3B0}
+
+/* --- Spaziature: bande 48 / 64 da 1000px, margini 20 / 32, griglia 1040 --- */
+.banda.sezione:not(.hero),.pag-scr .banda.sezione:not(.hero){padding-top:48px;padding-bottom:48px}
+.wrap{padding-left:20px;padding-right:20px}
+@media (min-width:1000px){
+  .banda.sezione:not(.hero),.pag-scr .banda.sezione:not(.hero){padding-top:64px;padding-bottom:64px}
+  .wrap{max-width:1104px;padding-left:32px;padding-right:32px}
+  .banda:has(.art-griglia),.banda-larga,.ini-larga,.hero:has(.hero-due){max-width:1104px}
+}
+/* Dentro la banda: occhiello > H2 8, H2 > testo 16, testo > contenuto 24, prima di un pulsante 24 */
+.banda:not(.hero) > .fx.col{gap:16px}
+.banda:not(.hero) > .fx.col > :is(.occhiello,.ini-occhiello) + :is(h1,h2){margin-top:-8px}
+.banda:not(.hero) > .fx.col > :is(h1,h2,p,.nota,.fx.col:has(> :is(h1,h2)))
+  + :not(h1,h2,h3,p,.nota,.occhiello,a:not(.cta):not(.cta-2)){margin-top:8px}
+.banda:not(.hero) > .fx.col > .fx.col.gap8:has(> :is(h1,h2)) > :is(h1,h2) + :is(p,.nota){margin-top:8px}
+
+/* ======================================================================
+   Colonna al centro su desktop (Davide, 16/10/2026). Blocco finale.
+   La colonna di prosa resta di 632px con il testo allineato a sinistra,
+   ma sta al centro della griglia invece che sul bordo sinistro:
+   prima a 1440px restavano 400px vuoti a destra.
+   ====================================================================== */
+@media (min-width:1000px){
+  .banda.wrap:not(.hero):not(.ini-larga):not(.banda-larga):not(:has(.art-griglia)):not(:has(.testi-griglia)):not(:has(.carrellata)) > *{margin-left:auto;margin-right:auto;width:100%}
+  /* Le fasce larghe (griglie di card) restano allineate al bordo della griglia. */
+}
+
+/* Tabella degli screening accanto alla mappa (note di Angelo, 17/10/2026).
+   Sotto i 900px va sotto la mappa. Testata blu, gruppi su sabbia, freccia terracotta. */
+.trova-due{display:grid;grid-template-columns:1fr;gap:24px;align-items:start}
+@media (min-width:900px){.trova-due{grid-template-columns:minmax(0,1fr) 340px}}
+.tab-scr{background:#fff;border:1.5px solid var(--verde);border-radius:12px;overflow:hidden}
+.tab-scr-tit{margin:0;padding:14px 18px;background:var(--verde);color:#fff;font-size:19px;line-height:1.2}
+.tab-scr-lista{list-style:none;margin:0;padding:0}
+.tab-scr-lista li{margin:0}
+.tab-scr-gruppo{padding:8px 18px;background:var(--sabbia);color:var(--verde-scuro);font-size:14px;font-weight:700;
+  letter-spacing:0.06em;text-transform:uppercase;border-top:1px solid rgba(20,32,43,0.12)}
+.tab-scr-r{display:flex;align-items:center;gap:12px;min-height:48px;padding:8px 18px;border-top:1px solid rgba(20,32,43,0.12);
+  color:var(--inchiostro);text-decoration:none;font-size:17px;font-weight:600}
+.tab-scr-sub{padding-left:30px}
+a.tab-scr-r:hover,a.tab-scr-r:focus-visible{background:var(--verde-tenue)}
+a.tab-scr-r:hover .tab-scr-n,a.tab-scr-r:focus-visible .tab-scr-n{text-decoration:underline;text-underline-offset:3px}
+a.tab-scr-r:focus-visible{outline:3px solid var(--terracotta);outline-offset:-3px}
+.tab-scr-n{display:flex;flex-direction:column}
+.tab-scr-sotto{font-size:14px;font-weight:400;color:var(--soft)}
+.tab-scr-f{width:19px;height:19px;margin-left:auto;flex-shrink:0;color:var(--terracotta)}
+.tab-scr-off{color:var(--soft);font-weight:500}
+.tab-scr-presto{margin-left:auto;font-size:14px;font-weight:400;color:var(--soft);white-space:nowrap}
+html.contrasto .tab-scr{border:2.5px solid #000}
+
+/* Centri screening delle ASL (note di Angelo, 17/10/2026). */
+.centri-griglia{display:grid;grid-template-columns:1fr;gap:16px}
+@media (min-width:760px){.centri-griglia{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.centro{display:flex;flex-direction:column;gap:10px;background:#fff;border-radius:12px;padding:20px;
+  box-shadow:0 1px 3px rgba(20,32,43,0.12)}
+.centro h3{margin:0;font-size:20px;line-height:1.25}
+.centro-asl{margin:0;font-weight:600;color:var(--verde)}
+.centro-scr{margin:0;font-size:15px;color:var(--soft)}
+.centro-dati{margin:0;display:flex;flex-direction:column;gap:8px}
+.centro-dati div{display:grid;grid-template-columns:72px 1fr;gap:8px}
+.centro-dati dt{font-weight:600;color:var(--soft)}
+.centro-dati dd{margin:0;overflow-wrap:anywhere}
+.centro-riga{display:block}
+.centro-note{margin:0;font-size:15px;color:var(--soft);white-space:pre-line}
+.centro-tel{align-self:flex-start;margin-top:4px}
+html.contrasto .centro{border:2.5px solid #000}
+
+/* --- Indicazioni di Angelo, 19/10/2026 (ripasso LORI 21/10: testi da 17px, un tocco = un numero) --- */
+
+/* Home: due ingressi di pari peso, le iniziative a terzo livello. */
+.hero-ingressi{display:grid;grid-template-columns:1fr;gap:12px;width:100%}
+.hero-ingressi .cta{max-width:none;margin-top:0;align-self:stretch}
+html:not(.contrasto) .hero .hero-ingressi .cta{border:2px solid #fff}
+.hero-terzo{margin:0;font-size:17px}
+.hero-terzo a{color:#fff;font-weight:500;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px;display:inline-block;padding:10px 0}
+.hero-terzo a:hover{color:#fff;text-decoration-thickness:2.5px}
+@media (min-width:640px){.hero-ingressi{grid-template-columns:1fr 1fr;max-width:640px}}
+
+/* Pagina regione: riquadro Regione / Screening / A chi rivolgersi. */
+.dcc{margin:0;display:grid;grid-template-columns:1fr;gap:0;border:1.5px solid var(--bordo);border-radius:8px;overflow:hidden;background:#CEEFED}
+.dcc-r{display:grid;grid-template-columns:1fr;gap:2px;padding:16px;border-top:1.5px solid var(--bordo)}
+.dcc-r:first-child{border-top:0}
+.dcc dt{font-size:17px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--verde)}
+.dcc dd{margin:0;font-size:19px;font-weight:600;color:var(--inchiostro)}
+@media (min-width:760px){
+  .dcc-r{grid-template-columns:200px 1fr;gap:16px;align-items:baseline;padding:16px 24px}
+}
+
+/* Servizio sanitario: tabella sinottica, a schede sotto i 1000px. */
+.asl-controllo{margin:0;font-size:17px;font-weight:700;color:var(--verde-scuro)}
+.asl-tab{display:flex;flex-direction:column;gap:16px}
+.asl-riga{display:grid;grid-template-columns:1fr;gap:16px;padding:16px;background:#fff;border:1.5px solid var(--bordo);border-radius:8px}
+.asl-riga.asl-capo{display:none}
+.asl-ente{font-size:20px;color:var(--verde-scuro)}
+.asl-cella{display:flex;flex-direction:column;gap:8px;font-size:18px;line-height:1.45;min-width:0}
+.asl-et{font-size:17px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--soft)}
+.asl-tel{display:flex;flex-direction:column;gap:2px}
+.asl-sub{font-size:17px;color:var(--soft)}
+.asl-num{display:flex;align-items:center;min-height:48px;font-weight:700;color:var(--verde);text-decoration:underline;text-underline-offset:3px}
+.asl-mail{font-size:17px;min-height:44px;display:inline-flex;align-items:center;flex-wrap:wrap}
+.asl-mail span{display:inline-block}
+.asl-sito{font-weight:500}
+.asl-extra{display:grid;grid-template-columns:1fr;gap:16px}
+.asl-box{padding:16px;border:1.5px solid var(--bordo);border-radius:8px;background:#fff;display:flex;flex-direction:column;gap:8px}
+@media (min-width:1000px){
+  .asl-tab{gap:0;border:1.5px solid var(--bordo);border-radius:8px;overflow:hidden;background:#fff}
+  .asl-riga.asl-capo{display:grid;background:var(--verde);color:#fff;font-weight:700;font-size:17px;letter-spacing:0.05em;text-transform:uppercase}
+  .asl-capo span{padding:16px}
+  .asl-capo,.asl-riga{grid-template-columns:1fr 1.6fr 1fr 2fr .9fr}
+  .asl-riga{gap:0;padding:0;border:0;border-top:1.5px solid var(--bordo);border-radius:0}
+  .asl-riga.asl-capo{border-top:0}
+  .asl-ente{padding:16px;background:#CEEFED;display:flex;align-items:center;font-size:18px}
+  .asl-cella{padding:16px;border-left:1.5px solid var(--bordo);font-size:17px}
+  /* Le etichette restano per il lettore di schermo, nascoste alla vista. */
+  .asl-et{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .asl-extra{grid-template-columns:1fr 1fr}
+}
+
+/* «Approfondisci»: pulsante secondario, link esterno. */
+.appr{flex-direction:column;gap:2px;max-width:420px;margin-top:8px}
+.appr-nota{font-size:17px;font-weight:500;color:var(--soft)}
+.art-appr{font-size:17px;font-weight:400;min-height:44px;display:inline-flex;flex-wrap:wrap;align-items:center;gap:0 6px;align-self:flex-start}
+.art-appr-fonte{font-weight:400;font-size:17px;color:var(--soft)}
+
+/* ======================================================================
+   QA telefono 390 di LORI sulla build 726a8a4 (21/10/2026). Blocco finale.
+   ====================================================================== */
+
+/* 1. Home: «Centri screening: dove andare» e pulsante secondario, stessa misura del primario.
+      Fondo #FFF, bordo 2px #0B6E73, testo #08403D (sistema_visivo.md §2). */
+.hero .hero-ingressi .cta-2{
+  background:#FFFFFF !important;color:#08403D !important;border:2px solid #0B6E73 !important;box-shadow:none !important;
+  min-height:62px;max-width:none;width:100%;margin-top:0;align-self:stretch;border-radius:10px;
+  font-size:19px;font-weight:700;line-height:1.2;padding:16px 20px;text-shadow:none;transform:none;position:relative}
+.hero .hero-ingressi .cta-2:hover{background:#D8F2F0 !important;color:#07494D !important;border-color:#07494D !important}
+.hero .hero-ingressi .cta-2:focus-visible{outline:3px solid #FFFFFF;outline-offset:3px}
+.hero .hero-ingressi .cta{padding:16px 20px;line-height:1.2}
+html.contrasto .hero .hero-ingressi .cta-2{background:#fff !important;color:#000 !important;border:2.5px solid #000 !important}
+
+/* 2. Pavimento 17px (profilo B): nessun testo sotto i 17px. */
+.motto{font-size:17px;white-space:normal;line-height:1.25}
+.tab-scr-gruppo,.tab-scr-sotto,.tab-scr-presto{font-size:17px}
+.tab-scr-gruppo{letter-spacing:0.04em}
+.tab-scr-presto{white-space:normal;text-align:right}
+.ftr-tit{font-size:17px}
+.ftr-avviso p{font-size:17px !important}
+.occhiello,p.occhiello,.occhiello-neutro{font-size:17px}
+.centro-scr,.centro-note{font-size:17px}
+.card .nota{font-size:17px}
+/* Bersaglio: le voci corte del piede («Lazio») restano larghe almeno 44px. */
+.ftr-col a{min-width:44px}
+
+/* 3. Cambia regione: griglia di pulsanti regione al posto della tendina. */
+a.btn-reg{text-decoration:none;color:var(--inchiostro)}
+a.btn-reg:hover{color:var(--inchiostro);text-decoration:none}
+a.btn-reg.on,a.btn-reg.on:hover{color:#fff;background:#0B6E73;border-color:#0B6E73}
+a.btn-reg:focus-visible{outline:3px solid #A63D17;outline-offset:2px}
+.btn-reg span:first-child{overflow-wrap:normal;hyphens:none}
+html.contrasto a.btn-reg.on{background:#055459;color:#fff}
+
+/* 3. Contatti: radio grandi al posto della tendina. Lo stato scelto si vede anche dal pallino pieno. */
+.scelte-radio{gap:12px}
+.scelta-radio{min-height:56px;padding:12px 16px}
+.pallino{flex-shrink:0;width:24px;height:24px;border-radius:999px;border:2px solid #0B6E73;background:#fff;box-sizing:border-box}
+.scelta-radio:has(:checked) .pallino{border-color:#fff;background:#fff;box-shadow:inset 0 0 0 5px #0B6E73}
+html.contrasto .pallino{border-color:#000}
+html.contrasto .scelta-radio:has(:checked) .pallino{box-shadow:inset 0 0 0 5px #055459}
+
+/* 5. Elenco delle regioni sempre aperto: sopra la mappa sul telefono, sotto la mappa da 701px. */
+.elenco-reg-lista{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:4px 16px}
+.elenco-reg-lista li{margin:0}
+.elenco-reg-lista a{display:flex;align-items:center;min-height:48px;font-size:19px;font-weight:600;line-height:1.25;
+  color:#0B6E73;text-decoration:underline;text-underline-offset:3px}
+.elenco-reg-lista a:hover{color:#07494D;text-decoration-thickness:2.5px}
+.elenco-reg-lista a:focus-visible{outline:3px solid #A63D17;outline-offset:2px}
+@media (max-width:359px){.elenco-reg-lista{grid-template-columns:1fr}}
+@media (min-width:701px){
+  .elenco-reg{order:1}
+  .elenco-reg-lista{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (min-width:1000px){.elenco-reg-lista{grid-template-columns:repeat(4,minmax(0,1fr))}}
+html.contrasto .elenco-reg-lista a{color:#000}
+
+/* 8. Chiusura delle pagine screening: avvertenza in prosa su fondo chiaro, non piu su fondo blu.
+      Entra nell'alternanza bianco/sabbia (pattern 7: mai due fondi uguali adiacenti). */
+.banda.b-avvertenza :is(p,.nota){color:#1E1E1E}
+/* 6. Colonne uguali: il nome lungo non allarga la sua colonna; il trattino a video e U+2011. */
+.cambia-reg{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:359px){.cambia-reg{grid-template-columns:minmax(0,1fr)}}
+@media (min-width:700px){.cambia-reg{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:1000px){.cambia-reg{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Sul telefono i pulsanti regione hanno colonne uguali; il nome passa a 18px (sopra il pavimento 17px)
+   e meno margine interno, cosi «Emilia‑Romagna» sta su una riga a 390px. */
+@media (max-width:699px){
+  .griglia-reg{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .btn-reg{padding:12px 10px}
+  .btn-reg > span:first-child{font-size:18px;overflow-wrap:anywhere}
+}
+@media (max-width:359px){.griglia-reg{grid-template-columns:minmax(0,1fr)}}
+
+/* ======================================================================
+   QA 390 LORI 21/10/2026 — #/racconta senza tendine (divieto 10).
+   ====================================================================== */
+/* Regione: griglia .btn-reg a 2 colonne; «Preferisco non dirlo» occupa la riga intera.
+   Lo stato scelto si vede anche dalla spunta, non solo dal fondo pieno. */
+.rc-reg-griglia{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:359px){.rc-reg-griglia{grid-template-columns:minmax(0,1fr)}}
+@media (min-width:700px){.rc-reg-griglia{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.rc-reg-griglia .rc-nessuna{grid-column:1/-1}
+.rc-reg-griglia{row-gap:14px}
+.rc-reg-griglia .btn-reg{position:relative;min-height:56px}
+.rc-reg-griglia .btn-reg > *{pointer-events:none}
+/* Spunta a bollino sull'angolo: non toglie spazio al nome («Emilia‑Romagna» resta su una riga a 390px). */
+.rc-reg-griglia .spunta{display:none;position:absolute;right:-8px;top:-8px;width:26px;height:26px;padding:3px;box-sizing:border-box;
+  background:#fff;color:#0B6E73;border:2px solid #0B6E73;border-radius:999px}
+.rc-reg-griglia .btn-reg.on .spunta{display:block}
+html.contrasto .rc-reg-griglia .spunta{color:#000;border-color:#000}
+.rc-reg-griglia .btn-reg:focus-visible{outline:3px solid #A63D17;outline-offset:2px}
+html.contrasto .rc-reg-griglia .btn-reg.on{background:#055459;color:#fff}
+/* Screening: radio grandi come in Contatti (una colonna sul telefono, due da 520px: il modulo e largo ~540px). */
+.rc-scr-scelte .scelta-nome{overflow-wrap:normal;hyphens:none;min-width:0}
+
+
+/* ============ Correzioni mobile home (Davide, 21/10/2026) ============ */
+/* Testata: marchio con aria sopra e sotto (niente motto, che ora e il titolo della home). */
+.hdr-riga{padding-top:max(14px,env(safe-area-inset-top));padding-bottom:14px;min-height:92px}
+.marchio-img,.marchio:has(.motto) .marchio-img{height:64px}
+/* Menu a comparsa: bersaglio piu grande (56px) e icona piu grossa. */
+@media (max-width:1199px){
+  .menu-chk{width:56px;height:56px}
+  .hamb{width:56px;height:56px;border-radius:10px;border:2px solid rgba(255,255,255,0.7);background:rgba(255,255,255,0.08)}
+  .hamb svg{width:34px;height:34px}
+}
+/* Mappa: bersaglio largo per le regioni piccole. */
+.mappa .tocco{fill:transparent;stroke:#0B6E73;stroke-width:1.6;stroke-dasharray:4 3;vector-effect:non-scaling-stroke;cursor:pointer;pointer-events:all}
+.mappa-bianca .tocco{stroke:#fff}
+.mappa .tocco:hover{fill:rgba(4,83,78,0.12)}
+html.contrasto .mappa .tocco{stroke:#000}
+.trova-due{grid-template-columns:1fr}
+@media (min-width:900px){.trova-due{grid-template-columns:minmax(0,520px);justify-content:center}}
+/* Home: carte screening raggruppate, con icone. */
+.scr-home .scr-gruppo{margin:14px 0 0;font-size:17px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#0B6E73}
+.scr-home .scr-gruppo:first-of-type{margin-top:4px}
+.scr-home .scr-carta .scr-ci{box-sizing:content-box;width:30px;height:30px;padding:9px;border-radius:50%;background:var(--azzurro-tenue);color:#0B6E73}
+.scr-home .scr-arrivo{margin:10px 0 0;font-size:17px;line-height:1.5;color:var(--soft)}
+html.contrasto .scr-home .scr-carta .scr-ci{background:#fff;border:2px solid #000;color:#000}
+
+/* Card senza linea scura attorno (Davide 21/10): stacco dato dall'ombra morbida, non dal filo. */
+.banda:not(.hero) :is(.card,.art,.testi,.mappa-nome,.avviso,.fatto,.scr-carta,.scr-cella,.scr-frase){
+  border-color:transparent;box-shadow:0 1px 2px rgba(3,43,41,0.06),0 6px 18px rgba(3,43,41,0.10)}
+html.contrasto .banda:not(.hero) :is(.card,.art,.testi,.mappa-nome,.avviso,.fatto,.scr-carta,.scr-cella,.scr-frase){border-color:#000;box-shadow:none}
+
+/* Mappa: il bersaglio largo per le regioni piccole non si vede (Davide 21/10: via la linea tratteggiata). */
+.mappa .tocco,.mappa-bianca .tocco,html.contrasto .mappa .tocco{stroke:none;stroke-dasharray:none}
+.mappa .tocco:hover{fill:rgba(240,180,41,0.18)}
+
+/* Piu accento fra le sezioni (Davide 21/10: «tutto bianco e blu»): terracotta e giallo caldo
+   su etichette, icone, frecce e link delle card. Il blu resta per titoli e azioni principali. */
+.scr-home .scr-gruppo{color:var(--accento)}
+.scr-home .scr-carta svg.scr-ci{background:#FFEFC2;color:var(--accento);box-shadow:inset 0 0 0 2px var(--oro)}
+.scr-home .scr-carta svg.scr-cf{color:var(--accento)}
+.scr-home .scr-carta:hover,.scr-home .scr-carta:focus-visible{box-shadow:inset 0 0 0 2px var(--accento)}
+.art-meta{color:var(--accento);font-weight:700}
+.art-vai,.art-vai:hover{color:var(--accento)}
+.art-tit a:hover,.art-tit a:focus-visible{color:var(--accento)}
+html.contrasto .scr-home .scr-gruppo,html.contrasto .scr-home .scr-carta svg.scr-cf,html.contrasto .art-meta,html.contrasto .art-vai{color:#000}
+html.contrasto .scr-home .scr-carta .scr-ci{box-shadow:none}
+
+/* Fascia blu mai accanto a un altro blu scuro (Davide 21/10): se e l'ultima (poi viene il piede),
+   se segue il blu di apertura o precede un'altra fascia blu, torna chiara. */
+.banda.b-blu:is(:last-child,:has(+ .b-blu)),
+:is(.hero,.b-blu) + .banda.b-blu{--fondo:var(--sabbia)}
+html:not(.contrasto) :is(.banda.b-blu:is(:last-child,:has(+ .b-blu)),:is(.hero,.b-blu) + .banda.b-blu){color:#14202B}
+html:not(.contrasto) :is(.banda.b-blu:is(:last-child,:has(+ .b-blu)),:is(.hero,.b-blu) + .banda.b-blu) h2{color:#0B6E73}
+html:not(.contrasto) :is(.banda.b-blu:is(:last-child,:has(+ .b-blu)),:is(.hero,.b-blu) + .banda.b-blu) :is(p,h3,li){color:#14202B}
+html:not(.contrasto) :is(.banda.b-blu:is(:last-child,:has(+ .b-blu)),:is(.hero,.b-blu) + .banda.b-blu) .nota{color:#33414F}
+html:not(.contrasto) :is(.banda.b-blu:is(:last-child,:has(+ .b-blu)),:is(.hero,.b-blu) + .banda.b-blu) .occhiello{color:#8A3212}
+html:not(.contrasto) :is(.banda.b-blu:is(:last-child,:has(+ .b-blu)),:is(.hero,.b-blu) + .banda.b-blu) a:not(.cta):not(.cta-2){color:#0B6E73}
+html:not(.contrasto) :is(.banda.b-blu:is(:last-child,:has(+ .b-blu)),:is(.hero,.b-blu) + .banda.b-blu) .cta{border:0 !important}
+html:not(.contrasto) :is(.banda.b-blu:is(:last-child,:has(+ .b-blu)),:is(.hero,.b-blu) + .banda.b-blu) .cta-2{background:#F0B429 !important;color:#14100A !important;border:2px solid #8A5A00 !important}
+html:not(.contrasto) :is(.banda.b-blu:is(:last-child,:has(+ .b-blu)),:is(.hero,.b-blu) + .banda.b-blu) .cta-2:hover{background:#FFD34F !important;color:#14100A !important;border-color:#8A5A00 !important}
+html:not(.contrasto) :is(.banda.b-blu:is(:last-child,:has(+ .b-blu)),:is(.hero,.b-blu) + .banda.b-blu) :is(.cta,.cta-2,a):focus-visible{outline-color:#A63D17}
+
+/* Bottoni sulle fasce blu: sempre un buon contrasto (Davide 21/10). Principale giallo con testo scuro
+   (circa 6:1 sul blu), secondario bianco pieno con testo blu. */
+html:not(.contrasto) .banda.b-blu:not(:is(:last-child,:has(+ .b-blu))) .cta{background:var(--oro) !important;color:#14100A !important;border:2px solid #fff !important}
+html:not(.contrasto) .banda.b-blu:not(:is(:last-child,:has(+ .b-blu))) .cta:hover{background:var(--oro-chiaro) !important;color:#14100A !important}
+html:not(.contrasto) .banda.b-blu:not(:is(:last-child,:has(+ .b-blu))) .cta-2{background:#fff !important;color:#0B6E73 !important;border:2px solid #fff !important}
+html:not(.contrasto) .banda.b-blu:not(:is(:last-child,:has(+ .b-blu))) .cta-2:hover{background:#D8F2F0 !important;color:#07494D !important}
+
+/* Descrizione libera dell iniziativa (22/10/2026): per i tipi «Altro» è tutto il contenuto. */
+.ini-descr{margin:0;line-height:1.6;max-width:68ch;white-space:pre-line}
+
+/* Pulsante «Consulta tutte le domande» centrato (Davide 22/10). */
+.cta-centro{align-self:center;margin-inline:auto;text-align:center}
+
+/* Pulsanti sempre ben visibili sul fondo (Davide 22/10): il secondario non e piu bianco con filo sottile
+   ma blu pieno con testo bianco, su ogni fondo chiaro. Sulle fasce blu e sulla foto restano le regole sopra. */
+html:not(.contrasto) .banda:not(.hero):not(.b-blu) .cta-2,
+html:not(.contrasto) .avviso .cta-2,html:not(.contrasto) .card .cta-2{background:#F0B429 !important;color:#14100A !important;border:2px solid #8A5A00 !important;box-shadow:0 2px 6px rgba(3,43,41,0.25)}
+html:not(.contrasto) .banda:not(.hero):not(.b-blu) .cta-2:hover,
+html:not(.contrasto) .avviso .cta-2:hover,html:not(.contrasto) .card .cta-2:hover{background:#FFD34F !important;color:#14100A !important;border-color:#8A5A00 !important}
+html:not(.contrasto) .banda:not(.hero):not(.b-blu) .cta-2:focus-visible{outline:3px solid #A63D17}
+.banda:not(.hero) .cta-2.cta-centro{align-self:center}
+
+/* Sfondi calcolati da accessibilita.js (data-fondo): vincono sull'alternanza per posizione. */
+.banda[data-fondo="bianco"]:not(.hero){--fondo:#fff !important}
+.banda[data-fondo="sabbia"]:not(.hero){--fondo:var(--sabbia) !important}
+.banda[data-fondo="blu"]:not(.hero){--fondo:#0B6E73 !important}
+html.contrasto .banda[data-fondo]:not(.hero){--fondo:#fff !important}
+
+/* Pagina regione (Florbo 22/10/2026): contatti ATS/ASL a schede con icone, piu contrasto; tendina sotto la mappa. */
+.asl-vai{align-self:flex-start;display:inline-flex;align-items:center;gap:10px}
+.asl-lista{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+@media (min-width:760px){.asl-lista{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.asl-card{display:flex;flex-direction:column;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(6,41,39,.18)}
+.asl-card .asl-ente{display:flex;align-items:center;gap:12px;margin:0;padding:16px 18px;background:#CEEFED;color:#07494D;font-size:21px;font-weight:700;line-height:1.25}
+.asl-card .asl-ente svg{flex:none;width:26px;height:26px}
+.asl-voce{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-top:1px solid #B7DEDB}
+.asl-ico{flex:none;width:40px;height:40px;border-radius:50%;background:#0B6E73;color:#fff;display:flex;align-items:center;justify-content:center}
+.asl-ico svg{width:21px;height:21px}
+.asl-corpo{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1;font-size:18px;line-height:1.4;color:#14202B}
+.asl-card .asl-et{font-size:15px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#07494D}
+.asl-card .asl-sub{font-size:17px;color:#14202B}
+.asl-card .asl-tel{display:flex;flex-direction:column;gap:4px}
+.asl-card .asl-num{display:inline-flex;align-items:center;align-self:flex-start;min-height:48px;padding:0 18px;border-radius:8px;background:#F0B429;color:#14100A;border:2px solid #8A5A00;font-size:21px;font-weight:700;text-decoration:none}
+.asl-card .asl-num:hover{background:#E0A21A;color:#14100A}
+.asl-card .asl-mail{display:block;min-height:44px;padding:8px 0;font-size:17px;font-weight:600;color:#0B6E73;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere;word-break:break-word}
+.asl-card .asl-mail span{display:inline}
+.asl-card .asl-testo{font-weight:400}
+.asl-card a:focus-visible,.asl-vai:focus-visible{outline:3px solid #A63D17;outline-offset:2px}
+html.contrasto .asl-card{box-shadow:none;outline:2px solid #14202B}
+html.contrasto .asl-ico{background:#055459}
+html.contrasto .asl-card .asl-num{background:#F0B429;color:#000;border-color:#000}
+.cambia-sel{max-width:520px}
+
+/* Pagina dell'iniziativa (Florbo 22/10/2026): «In breve» a tasselli con icone, testo libero formattato, contatti cliccabili. */
+.ini-info{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+@media (min-width:760px){.ini-info{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ini-tassello{display:flex;gap:14px;align-items:flex-start;background:#fff;border-radius:12px;padding:16px 18px;box-shadow:0 2px 10px rgba(6,41,39,.16);min-width:0}
+.ini-t-largo{grid-column:1/-1}
+.ini-t-corpo{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
+.ini-t-et{font-size:15px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#07494D}
+.ini-t-val{font-size:19px;line-height:1.5;color:#14202B;font-weight:400;overflow-wrap:anywhere}
+.ini-t-val .vl-righe{display:flex;flex-direction:column;gap:4px}
+.ini-testo{max-width:760px}
+.card.card-reg.card-vai{overflow:hidden}
+.card-vai > .ini-img-card{display:block;align-self:stretch;width:auto;max-width:none;margin:-24px -24px 6px;aspect-ratio:16/9;object-fit:cover;background:#DEF1F0}
+.ini-img-pagina{display:block;max-width:100%;height:auto;border-radius:14px;align-self:flex-start}
+.ini-html{display:flex;flex-direction:column;gap:12px}
+.ini-html strong{font-weight:700}
+.ini-html h1,.ini-html h2,.ini-html h3,.ini-html h4{margin:12px 0 0}
+.ini-html table{border-collapse:collapse;width:100%;font-size:17px}
+.ini-html td,.ini-html th{border:1px solid #87BAB7;padding:8px;text-align:left}
+.ini-blocco{display:flex;flex-direction:column;gap:12px}
+.ini-sottotit{margin:12px 0 0;font-size:22px;line-height:1.3;font-weight:700;color:#07494D}
+.ini-blocco .ini-sottotit:has(+ *){margin-top:12px}
+.ini-par{margin:0;font-size:19px;line-height:1.65;color:#14202B;overflow-wrap:anywhere}
+.ini-elenco{list-style:disc;margin:0;padding:0 0 0 24px;display:flex;flex-direction:column;gap:10px;font-size:19px;line-height:1.55;color:#14202B}
+.ini-elenco li::marker{color:#A63D17}
+.ini-contatti{background:#fff;border-radius:12px;box-shadow:0 2px 10px rgba(6,41,39,.16);overflow:hidden}
+.ini-contatti .asl-voce:first-child{border-top:0}
+.ini-c-val{display:block;font-size:18px;line-height:1.5;color:#14202B;overflow-wrap:anywhere}
+.ini-link{font-weight:700;color:#0B6E73;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+.ini-link[href^="tel:"]{display:inline-block;padding:4px 12px;margin:2px 0;border-radius:8px;background:#F0B429;color:#14100A;border:2px solid #8A5A00;text-decoration:none}
+.ini-vai{align-self:flex-start;width:auto;max-width:420px}
+@media (max-width:699px){.ini-vai{align-self:stretch;max-width:none}}
+html.contrasto .ini-tassello,html.contrasto .ini-contatti{box-shadow:none;outline:2px solid #14202B}
+html.contrasto .ini-link[href^="tel:"]{background:#F0B429;color:#000;border-color:#000}
+
+
+/* Palette equilibrata (Florbo 22/10/2026): blu come base, terracotta e giallo come accenti.
+   Contrasti: bianco su #0B6E73 ~9:1; bianco su #A63D17 6,5:1; #14100A su #F0B429 ~10:1; #07494D su #CEEFED ~10:1. */
+.asl-ico{background:#0B6E73;color:#fff}
+.asl-ico.ico-orari{background:#F0B429;color:#14100A}
+.asl-ico.ico-sito{background:#A63D17;color:#fff}
+.asl-card .asl-ente{background:#CEEFED;color:#07494D;box-shadow:inset 0 -3px 0 #F0B429}
+.asl-card .asl-ente svg{color:#A63D17}
+.asl-card .asl-et,.ini-t-et{color:#07494D}
+.asl-voce{border-top-color:#B7DEDB}
+.asl-card .asl-mail,.ini-link{color:#0B6E73}
+.ini-tassello{box-shadow:inset 5px 0 0 #F0B429,0 2px 10px rgba(6,41,39,.16)}
+.ini-tassello .asl-ico{background:#0B6E73;color:#fff}
+.ini-tassello:nth-child(3n) .asl-ico{background:#A63D17;color:#fff}
+.ini-tassello:nth-child(3n+2) .asl-ico{background:#F0B429;color:#14100A}
+.ini-sottotit{color:#07494D;box-shadow:inset 4px 0 0 #A63D17;padding-left:12px}
+.ini-contatti{box-shadow:inset 5px 0 0 #F0B429,0 2px 10px rgba(6,41,39,.16)}
+html.contrasto .asl-ico,html.contrasto .ini-tassello .asl-ico,html.contrasto .ini-tassello:nth-child(3n) .asl-ico{background:#055459;color:#fff}
+html.contrasto .asl-ico.ico-orari,html.contrasto .ini-tassello:nth-child(3n+2) .asl-ico{background:#F0B429;color:#000}
+html.contrasto .asl-card .asl-ente{background:#fff;color:#000;box-shadow:none}
+
+/* «Come funziona il programma pubblico»: piu struttura e gerarchia (Davide 22/10).
+   Passi come tre card con icona, programmi come tre schede, riquadro finale a blu pieno. */
+.passi-card{display:grid;grid-template-columns:1fr;gap:16px}
+@media (min-width:860px){.passi-card{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}}
+.passi-card .passo{flex-direction:column;gap:14px;padding:22px 22px 24px;background:#fff;border-radius:14px;
+  border-top:4px solid var(--oro);box-shadow:0 1px 2px rgba(3,43,41,0.06),0 6px 18px rgba(3,43,41,0.10)}
+.passo-ic,.prog-ic{box-sizing:content-box;display:flex;align-items:center;justify-content:center;width:30px;height:30px;padding:9px;
+  border-radius:50%;background:#FFEFC2;color:var(--accento);box-shadow:inset 0 0 0 2px var(--oro)}
+.passo-ic svg,.prog-ic svg{width:30px;height:30px}
+.passi-card .passo-txt{padding-top:0;gap:6px}
+.passo-passo{font-size:17px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--accento)}
+.passi-card .passo-tit{font-size:22px;color:#0B6E73}
+.passi-card .passo-desc{max-width:none;color:#14202B}
+.prog-schede{display:grid;grid-template-columns:1fr;gap:16px}
+@media (min-width:860px){.prog-schede{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}}
+.prog-scheda{display:flex;flex-direction:column;gap:10px;padding:20px 22px;background:#fff;border-radius:14px;
+  box-shadow:0 1px 2px rgba(3,43,41,0.06),0 6px 18px rgba(3,43,41,0.10)}
+.prog-scheda h4{margin:0;font-size:22px;line-height:1.25;color:#0B6E73}
+.prog-scheda p{margin:0;font-size:18px;line-height:1.5;color:#14202B}
+html:not(.contrasto) .banda:not(.hero) .avviso.avviso-blu{background:#0B6E73;border-color:transparent;padding:26px 26px 28px;
+  box-shadow:0 6px 18px rgba(3,43,41,0.22)}
+html:not(.contrasto) .avviso.avviso-blu :is(h3,p){color:#fff}
+html:not(.contrasto) .avviso.avviso-blu h3{font-size:22px}
+html.contrasto .passi-card .passo,html.contrasto .prog-scheda{box-shadow:none;border:2.5px solid #000;border-top-width:2.5px}
+html.contrasto .passo-ic,html.contrasto .prog-ic{background:#fff;color:#000;box-shadow:inset 0 0 0 2px #000}
+html.contrasto .passo-passo,html.contrasto .passi-card .passo-tit,html.contrasto .prog-scheda h4{color:#000}
+
+/* Due tabelle distinte per gli screening in home (Davide 23/10): oncologici in terracotta caldo,
+   altri in blu. Testata a tinta piena con testo bianco (contrasto oltre 6:1); non sono fasce, quindi
+   nessun blu scuro accanto a un altro blu scuro. Card bianche dentro. */
+.scr-home .scr-tab{border-radius:18px;overflow:hidden;box-shadow:0 1px 2px rgba(3,43,41,0.06),0 8px 22px rgba(3,43,41,0.10)}
+.scr-home .scr-tab .scr-gruppo,.scr-home .scr-tab .scr-gruppo:first-of-type{margin:0;padding:14px 20px;font-size:17px;color:#fff}
+.scr-home .scr-tab .scr-carte{padding:16px}
+.scr-home .scr-tab .scr-carta{background:#fff}
+.scr-home .scr-tab-onco{background:#FBE9DF}
+.scr-home .scr-tab-onco .scr-gruppo{background:var(--accento)}
+.scr-home .scr-tab-altri{background:#CEEFED}
+.scr-home .scr-tab-altri .scr-gruppo{background:#0B6E73}
+.scr-home .scr-tab-altri .scr-carta svg.scr-ci{background:#fff;color:#0B6E73;box-shadow:inset 0 0 0 2px #0B6E73}
+.scr-home .scr-tab-altri .scr-carta svg.scr-cf{color:#0B6E73}
+.scr-home .scr-tab-altri .scr-carta:hover,.scr-home .scr-tab-altri .scr-carta:focus-visible{box-shadow:inset 0 0 0 2px #0B6E73}
+html.contrasto .scr-home .scr-tab{background:#fff;border:2.5px solid #000;box-shadow:none}
+html.contrasto .scr-home .scr-tab .scr-gruppo{background:#000;color:#fff}
+html.contrasto .scr-home .scr-tab-altri .scr-carta svg.scr-ci{box-shadow:none}
+
+/* Articolo (Florbo 30/10): foto piccola sopra il titolo, niente occhiello sotto il titolo. */
+.art-testa .art-figura{margin:0 0 4px}
+.art-testa .art-figura-img{aspect-ratio:21 / 9;max-height:200px;border-radius:10px}
+.art-standfirst{display:none}
+.art-testa{padding-bottom:0}
+.sezione-corpo{padding-top:12px}
+.art-wp{gap:18px !important}
+.art-sez{gap:10px !important}
+.art-sub3{text-align:left;margin:6px 0 0;max-width:none;font-size:20px;line-height:1.3;font-weight:700;color:#0B6E73}
+
+/* --- Carta dei servizi SI e Razionale (30/10/2026) --- */
+.cs-tabs{display:flex;flex-wrap:wrap;gap:10px}
+.cs-tab{display:inline-flex;align-items:center;min-height:48px;padding:10px 18px;border-radius:999px;background:#fff;color:#0B6E73;
+  border:1.5px solid #0B6E73;font-size:17px;font-weight:600;text-decoration:none}
+.cs-tab:hover{background:#DEF1F0}
+.cs-tab[aria-current="page"]{background:#0B6E73;color:#fff}
+.cs-tab:focus-visible{outline:3px solid #A63D17;outline-offset:2px}
+.cs-mission{border-left:6px solid #A63D17;padding:4px 0 4px 18px;display:flex;flex-direction:column;gap:8px}
+.cs-lead{font-size:22px;line-height:1.5;color:#14202B;max-width:none}
+.cs-elenco{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.cs-elenco li{position:relative;background:#fff;border-radius:12px;padding:16px 18px 16px 44px;font-size:18px;line-height:1.55;color:#14202B;
+  box-shadow:0 1px 2px rgba(3,43,41,0.06),0 4px 14px rgba(3,43,41,0.08)}
+.cs-elenco li::before{content:"";position:absolute;left:18px;top:25px;width:10px;height:10px;border-radius:50%;background:#A63D17}
+.cs-elenco li a{overflow-wrap:anywhere}
+.cs-sub h3,.cs-evid h3{margin:0 0 4px}
+.cs-sub h4{font-size:19px;line-height:1.35;margin:18px 0 0;color:#0B6E73;text-align:left}
+.cs-sub{display:flex;flex-direction:column;gap:14px}
+.cs-sub .cs-elenco li{background:#EBF8F7;box-shadow:none}
+.cs-intro{font-weight:600}
+.cs-evid{border-left:6px solid #F0B429 !important;display:flex;flex-direction:column;gap:10px}
+.cs-evid p{font-size:18px;line-height:1.55}
+.cs-indice{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.cs-indice .occhiello{width:100%}
+.cs-fine{display:flex;justify-content:center}
+[id^="raz-"]:focus{outline:none}
+@media (min-width:768px){.cs-lead{font-size:26px}.cs-elenco li{font-size:19px}}
+@media (max-width:600px){.cs-sub{padding:16px 12px}.cs-elenco li{padding:14px 12px 14px 32px;font-size:17px}.cs-elenco li::before{left:12px;top:22px;width:8px;height:8px}}
+/* Voci di menu senza pagina (Polmonare, Nutrizionale, HCV): visibili ma non cliccabili. */
+.nav-riga .nav-menu .nav-presto{display:flex;align-items:center;min-height:56px;padding:0 20px;font-size:17px;font-weight:500;
+  color:#95C1BF;cursor:default;box-shadow:inset 0 -1.5px 0 rgba(255,255,255,0.14)}
+.nav-riga .nav-menu .nav-presto small{font-size:14px;margin-left:8px;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,0.12)}
+.menu-chk:checked ~ .nav-riga .nav-menu .nav-presto{padding:0 20px 0 40px}
+
+/* --- Filtri della pagina regione (Florbo 31/10/2026): ricerca e menu a tendina --- */
+.filtri{display:flex;flex-direction:column;gap:16px}
+.filtri-cerca{display:flex;flex-direction:column;gap:8px}
+.filtri-corpo{display:grid;grid-template-columns:1fr;gap:14px}
+@media (min-width:720px){.filtri-corpo{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}}
+.filtri-sel{display:flex;flex-direction:column;gap:8px;min-width:0}
+.filtri .campo:focus-visible,.filtri .filtro:focus-visible{outline:3px solid var(--terracotta);outline-offset:2px}
+.filtri-esito{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.filtri-esito .nota{margin:0}
+.filtro-azzera{color:var(--terracotta);border-color:var(--terracotta)}
+.campo-cerca::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
+.card-vai .ini-origine{align-self:flex-start;display:inline-flex;align-items:center;min-height:30px;padding:3px 12px;border-radius:999px;
+  background:#DEF1F0;color:#07494D;font-size:16px;font-weight:700;line-height:1.3}
+html.contrasto .filtro-azzera{color:#000}
+html.contrasto .card-vai .ini-origine{background:#fff;box-shadow:inset 0 0 0 2px #000;color:#000}
+.filtri .sel-box,.filtri .campo-sel{width:100%;max-width:none}
+
+
+/* Mappa nelle pagine screening: spente = grigio chiaro, accese = blu. */
+.mappa-scr path.vuota{fill:#CDDFDE;stroke:#6B7A8C}
+.mappa-scr path.vuota:hover,.mappa-scr path.vuota:focus{fill:#B6D0CF;stroke:var(--inchiostro)}
+.mappa-leg{display:block;line-height:1.9}
+.leg-sw{display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid #4A5A6E;vertical-align:-2px;margin-right:6px}
+.leg-piena{background:var(--verde-mappa)}
+.leg-vuota{background:#CDDFDE;margin-left:6px}
+html.contrasto .mappa-scr path.vuota{fill:#fff;stroke:#000}
+
+/* Tendine custom: pannello sotto il campo, a tutta larghezza (Florbo 31/10/2026) */
+.fmenu-box{position:relative;display:flex;align-items:center;width:100%}
+.fmenu-btn{width:100%;text-align:left;font-family:inherit;font-size:19px;min-height:58px;background:#fff;color:var(--inchiostro);
+  border:1.5px solid var(--bordo);border-radius:10px;padding:14px 52px 14px 16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fmenu-btn[aria-expanded="true"]{border-color:var(--verde);box-shadow:0 0 0 2px var(--verde)}
+.fmenu-panel{position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:60;margin:0;padding:6px;list-style:none;max-height:min(60vh,420px);overflow-y:auto;
+  background:#fff;border:1.5px solid var(--verde);border-radius:10px;box-shadow:0 12px 28px rgba(3,43,41,0.22)}
+.fmenu-op{display:block;width:100%;min-height:48px;padding:10px 14px;text-align:left;font-family:inherit;font-size:18px;line-height:1.3;
+  color:var(--inchiostro);background:#fff;border:0;border-radius:8px;cursor:pointer}
+.fmenu-op:hover,.fmenu-op:focus-visible{background:var(--verde-tenue);outline:none}
+.fmenu-op.on{font-weight:700;background:var(--verde-tenue);color:var(--verde-scuro)}
+.fmenu-btn:focus-visible,.fmenu-op:focus-visible{outline:3px solid var(--terracotta);outline-offset:2px}
+.fmenu{position:relative}
+html.contrasto .fmenu-btn,html.contrasto .fmenu-panel{border-color:#000;color:#000}
+html.contrasto .fmenu-op.on{background:#055459;color:#fff}
+.fmenu:has(.fmenu-panel){z-index:70}
+.banda:has(.fmenu-panel){position:relative;z-index:70}
+/* In home la tendina sta in fondo alla fascia, che taglia ciò che esce (clip-path): il pannello si apre in linea e spinge giù il resto. */
+.cambia-sel .fmenu-box{flex-direction:column;align-items:stretch}
+.cambia-sel .fmenu-box .sel-frecciona{position:absolute;right:16px;top:19px}
+.cambia-sel .fmenu-panel{position:static;margin-top:8px;max-height:min(50vh,360px);box-shadow:none}
+
+/* Tendina Contatti (10/11/2026): ultima voce della barra, si apre verso sinistra per non uscire dallo schermo. */
+@media (min-width:1200px){ #menu-contatti{left:auto;right:0} }
+/* Contatti: i campi occupano tutta la colonna, allineati al titolo «Scrivici». */
+.modulo-colonna .modulo{max-width:none;align-self:stretch}
+
+/* Pulsante «portale della Regione» (10/11/2026): verde acqua pieno, per distinguerlo dal pulsante giallo accanto. */
+html:not(.contrasto) .banda .avviso a.cta-2.cta-portale.cta-portale{background:#0B6E73 !important;color:#fff !important;border:2px solid #07494D !important}
+html:not(.contrasto) .banda .avviso a.cta-2.cta-portale.cta-portale:hover{background:#07494D !important;color:#fff !important;border-color:#07494D !important}
+
+/* ============ Nuovo logo di Angelo (10/11/2026) ============ */
+/* Versione breve (marchio SI + nome) in testata, completa (con dicitura e motto) nel piede.
+   PNG trasparenti: stanno su una scheda bianca, perche il testo e blu notte e il fondo e verde acqua. */
+.marchio-img,.marchio:has(.motto) .marchio-img{height:60px;width:auto;background:#FFFFFF;padding:5px 9px;border-radius:8px;box-sizing:content-box}
+.hdr-riga{padding-top:max(10px,env(safe-area-inset-top));padding-bottom:10px;min-height:80px}
+@media (min-width:1200px){
+  .marchio-img,.marchio:has(.motto) .marchio-img{height:72px;padding:6px 12px}
+  .hdr-riga{min-height:100px}
+}
+.ftr-marchio-img{display:block;width:100%;max-width:340px;height:auto;padding:18px 20px;background:#FFFFFF;border-radius:10px;box-sizing:border-box;align-self:flex-start}
+@media (min-width:900px){.ftr-marchio-img{max-width:400px}}

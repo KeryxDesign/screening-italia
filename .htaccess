@@ -35,3 +35,14 @@ Header set Cache-Control "no-cache"
 
 # Testi (llms.txt, robots.txt, sitemap) sempre in UTF-8: senza, gli accenti si leggono male.
 AddDefaultCharset UTF-8
+
+# Cache lunga (11/11/2026, velocita): js e css cambiano nome versione (?v=...) a ogni modifica, quindi si
+# tengono un anno. Immagini, font e marchio: 30 giorni. L'html resta no-cache (regola sopra).
+<IfModule mod_headers.c>
+<FilesMatch "\.(js|css)$">
+Header set Cache-Control "public, max-age=31536000, immutable"
+</FilesMatch>
+<FilesMatch "\.(webp|png|jpg|jpeg|svg|ico|woff2)$">
+Header set Cache-Control "public, max-age=2592000"
+</FilesMatch>
+</IfModule>
