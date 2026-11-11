@@ -50,3 +50,9 @@ Una sola pagina con indirizzi puliti (senza #): il server riporta ogni percorso 
   Per renderle locali, scaricale in `assets/` e sostituisci gli indirizzi in `src/`.
 - Il numero WhatsApp è un segnaposto (`+39 300 000 0000`).
 - Il portale non prenota esami e non sostituisce il parere del medico.
+
+## Velocità (11/11/2026)
+
+I file `.js` e `.css` in radice sono **minificati**; le copie leggibili stanno in `sorgenti/`.
+Per modificarli: cambia il file in `sorgenti/`, lancia `sh scripts/minifica.sh`, poi cambia il `?v=...` in `index.html` per i file toccati (js e css restano in cache un anno, vedi `.htaccess`).
+L'immagine principale della home ha tre misure (`foto-si-piazza-800/1280.webp` e l'originale) ed è precaricata.
