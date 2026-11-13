@@ -1962,3 +1962,11 @@ html:not(.contrasto) .banda .avviso a.cta-2.cta-portale.cta-portale:hover{backgr
 }
 .ftr-marchio-img{display:block;width:100%;max-width:340px;height:auto;padding:18px 20px;background:#FFFFFF;border-radius:10px;box-sizing:border-box;align-self:flex-start}
 @media (min-width:900px){.ftr-marchio-img{max-width:400px}}
+
+/* Tabelle negli articoli (es. screening opportunistico vs organizzato): su telefono
+   restavano più larghe dello schermo e le frasi a destra venivano tagliate. Ora la
+   tabella sta nella colonna, il testo va a capo, e se proprio non basta scorre di lato. */
+.art-wp figure,.art-wp .wp-block-table{margin:0;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.art-wp table{width:100%;max-width:100%;table-layout:fixed;border-collapse:collapse;font-size:17px}
+.art-wp td,.art-wp th{border:1px solid #87BAB7;padding:8px;text-align:left;vertical-align:top;overflow-wrap:anywhere;hyphens:auto}
+@media(max-width:600px){.art-wp table{font-size:15px;line-height:1.35}.art-wp td,.art-wp th{padding:6px}.art-wp td:first-child,.art-wp th:first-child{width:25%}}
