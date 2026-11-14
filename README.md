@@ -56,3 +56,14 @@ Una sola pagina con indirizzi puliti (senza #): il server riporta ogni percorso 
 I file `.js` e `.css` in radice sono **minificati**; le copie leggibili stanno in `sorgenti/`.
 Per modificarli: cambia il file in `sorgenti/`, lancia `sh scripts/minifica.sh`, poi cambia il `?v=...` in `index.html` per i file toccati (js e css restano in cache un anno, vedi `.htaccess`).
 L'immagine principale della home ha tre misure (`foto-si-piazza-800/1280.webp` e l'originale) ed è precaricata.
+
+## Pagine pre-renderizzate (`_pre/`)
+
+Chi non esegue JavaScript (crawler AI, lettori automatici, anteprime) riceve il testo vero: `.htaccess` serve `/_pre/<percorso>.html` al posto della shell vuota; con JS acceso la copia viene sostituita all'avvio e il sito funziona come prima. Se manca la copia di una rotta, resta la shell di sempre.
+
+Rigenerare dopo ogni modifica ai testi/template o alle iniziative (richiede `playwright-core` e Google Chrome; il sito va servito in locale):
+
+    NODE_PATH=<cartella con playwright-core>/node_modules node scripts/prerender.js http://localhost:8099
+    # una sola rotta: ... prerender.js http://localhost:8099 /domande
+
+I file generati si committano: l'host non ha uno step di build. Le iniziative nella copia statica sono una fotografia al momento della generazione; con JS la pagina le legge dal pannello in tempo reale.

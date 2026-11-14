@@ -10,6 +10,21 @@ RewriteCond %{HTTP_HOST} ^www\.screeningitalia\.it$ [NC]
 RewriteRule ^ https://screeningitalia.it%{REQUEST_URI} [R=301,L]
 </IfModule>
 
+# Pagine con il testo gia dentro (14/11/2026): per ogni indirizzo esiste una copia in _pre/ (scripts/prerender.js)
+# con titolo, testi e link veri nel file servito, cosi li leggono anche crawler AI, anteprime e lettori senza JS.
+# Con JS la pagina e la stessa di prima. Se la copia manca, vale la regola qui sotto (index.html).
+<IfModule mod_rewrite.c>
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{DOCUMENT_ROOT}/_pre/home.html -f
+RewriteRule ^ /_pre/home.html [L]
+RewriteCond %{REQUEST_URI} !^/_pre/
+RewriteCond %{REQUEST_URI} !\.[A-Za-z0-9]+$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/_pre/$0.html -f
+RewriteRule ^.+$ /_pre/$0.html [L]
+</IfModule>
+
 # Indirizzi puliti (31/10/2026, decisione Davide): il sito e una sola pagina (index.html) che
 # legge il percorso (/regione/Lazio, /articolo/<slug>, /faq ...). Ogni percorso senza file o
 # cartella reale e senza estensione torna a index.html (stato 200: e la stessa pagina, non un 404).
