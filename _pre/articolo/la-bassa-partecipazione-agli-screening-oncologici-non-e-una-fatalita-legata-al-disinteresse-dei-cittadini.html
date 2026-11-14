@@ -1,0 +1,2523 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Screening Italia: screening gratuiti in Italia, regione per regione</title>
+<meta name="description" content="Sito informativo privato e indipendente: trova gli screening gratuiti aperti nella tua regione e scopri come funzionano. Non prenota esami e non sostituisce il medico.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="Screening Italia">
+<meta property="og:title" content="Screening Italia: screening gratuiti in Italia, regione per regione">
+<meta property="og:description" content="Sito informativo privato e indipendente: trova gli screening gratuiti aperti nella tua regione e scopri come funzionano.">
+<meta property="og:url" content="https://screeningitalia.it/articolo/la-bassa-partecipazione-agli-screening-oncologici-non-e-una-fatalita-legata-al-disinteresse-dei-cittadini">
+<meta property="og:image" content="https://screeningitalia.it/marchio/icona-512.png">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://screeningitalia.it/#sito","url":"https://screeningitalia.it/","name":"Screening Italia","inLanguage":"it-IT","description":"Sito informativo privato e indipendente sugli screening gratuiti in Italia, regione per regione."},{"@type":"Organization","@id":"https://screeningitalia.it/#org","name":"Screening Italia","url":"https://screeningitalia.it/","logo":"https://screeningitalia.it/marchio/icona-512.png","email":"info@screeningitalia.it","founder":{"@type":"Person","name":"Angelo Zaglio","jobTitle":"Medico"}}]}</script>
+<!-- Indirizzi puliti (31/10/2026): la base fissa alla radice i percorsi relativi (./support.js, ./img/...) su /regione/Lazio ecc.
+     Lo script porta i vecchi link con # (screeningitalia.it/#/faq) al nuovo indirizzo (/faq), senza ricaricare. -->
+<link rel="canonical" href="https://screeningitalia.it/articolo/la-bassa-partecipazione-agli-screening-oncologici-non-e-una-fatalita-legata-al-disinteresse-dei-cittadini">
+<base href="/">
+<script>(function(){try{var h=location.hash;if(h.indexOf("#/")===0){history.replaceState(null,"",h.slice(1));}}catch(e){}})();</script>
+<link rel="preload" as="image" href="./img/foto/foto-si-piazza-800.webp" imagesrcset="./img/foto/foto-si-piazza-800.webp 800w, ./img/foto/foto-si-piazza-1280.webp 1280w, ./img/foto/foto-si-piazza.webp 1600w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="font" type="font/woff2" href="./fonts/cc63ecbb63.woff2" crossorigin>
+<link rel="icon" href="./favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="./marchio/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./marchio/icona-192.png">
+<link rel="apple-touch-icon" href="./marchio/apple-touch-icon.png">
+<script src="./support.js?v=tpl1114" defer></script>
+<script src="./logica-render.js?v=tpl1114" defer></script>
+<script src="./logica-classe.js?v=tpl1114" defer></script>
+<script src="./screening-pagine.js?v=tpl1114" defer></script>
+<script src="./logica-screening.js?v=tpl1114" defer></script>
+<link rel="stylesheet" href="./fonts/fonts.css">
+<link rel="stylesheet" href="./stile.css?v=tab1113">
+<link rel="stylesheet" href="./screening.css?v=tpl1114">
+<style>
+    .sc-placeholder{background:color-mix(in srgb,currentColor 8%,transparent);
+      border:1px solid color-mix(in srgb,currentColor 50%,transparent);
+      border-radius:2px;box-sizing:border-box;overflow:hidden}
+    @keyframes sc-shine{0%{background-position:100% 50%}100%{background-position:0% 50%}}
+    html.sc-dc-streaming .sc-placeholder,
+    html.sc-dc-streaming .sc-interp.sc-missing{position:relative;
+      background:color-mix(in srgb,currentColor 5%,transparent);
+      border-color:transparent}
+    html.sc-dc-streaming .sc-placeholder::before,
+    html.sc-dc-streaming .sc-interp.sc-missing::before{content:'';
+      position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(90deg,rgba(217,119,87,0) 25%,rgba(247,225,211,.95) 37%,rgba(217,119,87,0) 63%);
+      background-size:400% 100%;animation:sc-shine 1.4s ease infinite}
+    html.sc-dc-streaming .sc-placeholder:nth-child(n+9 of .sc-placeholder)::before,
+    html.sc-dc-streaming .sc-interp.sc-missing:nth-child(n+9 of .sc-interp.sc-missing)::before{animation:none;
+      background:color-mix(in srgb,currentColor 8%,transparent)}
+    .sc-placeholder-error{padding:4px 8px;font:11px/1.4 ui-monospace,monospace;
+      color:color-mix(in srgb,currentColor 70%,transparent);word-break:break-word}
+    .sc-interp.sc-missing{display:inline-block;width:2em;height:1em;overflow:hidden;
+      vertical-align:text-bottom;background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;color:transparent;
+      user-select:none}
+    .sc-interp.sc-unresolved{font-family:ui-monospace,monospace;font-size:.85em;
+      color:color-mix(in srgb,currentColor 50%,transparent);
+      background:color-mix(in srgb,currentColor 10%,transparent);border-radius:3px;
+      padding:0 3px}
+    .sc-host.sc-has-error{position:relative}
+    .sc-logic-error{position:absolute;top:8px;left:8px;z-index:2147483647;max-width:60ch;
+      padding:6px 10px;background:#b00020;color:#fff;font:12px/1.4 ui-monospace,monospace;
+      border-radius:4px;white-space:pre-wrap;pointer-events:none}
+    /* Mirrors PRINT_BASELINE_CSS in apps/web deck-stage-export.ts — keep both
+       in sync until dc-runtime regains a build step. */
+    @media print {
+      @page { margin: 0.5cm; }
+      figure, table { break-inside: avoid; }
+      #dc-root, #dc-root > .sc-host { height: auto; }
+      *, *::before, *::after {
+        print-color-adjust: exact; -webkit-print-color-adjust: exact;
+        backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+        animation-delay: -99s !important; animation-duration: .001s !important;
+        animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+        animation-play-state: running !important; transition-duration: 0s !important;
+      }
+    }
+  </style>
+<style>x-dc{display:none!important}</style>
+<style id="__dc-atomics">.fx{display:flex}.col{display:flex;flex-direction:column}.grid{display:grid}.ac{align-items:center}.jc{justify-content:center}.jb{justify-content:space-between}.f1{flex:1}.noshrink{flex-shrink:0}.wrap{flex-wrap:wrap}.fw5{font-weight:500}.fw6{font-weight:600}.fw7{font-weight:700}.fw8{font-weight:800}.fs11{font-size:11px}.fs12{font-size:12px}.fs13{font-size:13px}.fs14{font-size:14px}.fs15{font-size:15px}.fs16{font-size:16px}.fs20{font-size:20px}.fs22{font-size:22px}.upper{text-transform:uppercase}.tc{text-align:center}.nowrap{white-space:nowrap}.gap8{gap:8px}.gap10{gap:10px}.gap12{gap:12px}.gap16{gap:16px}.gap24{gap:24px}.m0{margin:0}.mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.mb8{margin-bottom:8px}.mb12{margin-bottom:12px}.mb16{margin-bottom:16px}.posrel{position:relative}.posabs{position:absolute}.round{border-radius:50%}.ohide{overflow:hidden}.bbox{box-sizing:border-box}.pointer{cursor:pointer}.w100{width:100%}.b0{border:none}</style>
+<style data-dc-tpl="34">
+          /* Marcatore di bozza (sezione articoli sotto le Domande frequenti, 23/09/2026):
+             esce insieme al testo di prova, prima del build. */
+          .prova{align-self:flex-start;font-size:15px;line-height:1.35;font-weight:700;
+            letter-spacing:.06em;text-transform:uppercase;color:var(--terracotta);
+            background:#fff;border:1.5px solid var(--terracotta);border-radius:8px;padding:4px 8px}
+          /* Testo da WordPress (.art-wp), LORI giro 1 del 24/09/2026: stesso aspetto del corpo FAQ.
+             Liste: corpo e interlinea di .art-p (stesse soglie), margine 0, rientro 20, 8 fra le voci. */
+          .art-wp ul,.art-wp ol{margin:0;padding-left:20px;font-size:19px;line-height:1.68}
+          @media (min-width:860px){.art-wp ul,.art-wp ol{font-size:20px}}
+          @media (max-width:699px){.art-wp ul,.art-wp ol{font-size:18px;line-height:1.62}}
+          .art-wp li + li{margin-top:8px}
+          /* Citazione = frase chiave (brief LORI 26/09/2026, sostituisce la regola del 24/09):
+             il blockquote e solo un contenitore, l'aspetto lo da .art-chiave messa da mettiTesto(). */
+          .art-wp blockquote{margin:0;padding:0;border:0;font-style:normal}
+          /* Immagini nel testo: piena larghezza, proporzioni del file, nessun aspect-ratio. */
+          .art-wp figure{margin:0}
+          .art-wp img{width:100%;height:auto;border-radius:10px}
+          .art-wp figcaption{font-size:15px;color:var(--soft);line-height:1.4}
+          /* Card delle domande (elenco e home): altezza propria, allineate in alto (LORI giro 1, 26/09/2026). */
+          #elenco-domande .art-griglia,#ultimi-aggiornamenti .art-griglia{align-items:start}
+          /* Home «Ultimi aggiornamenti»: quattro card, 2x2 anche da desktop (brief LORI 26/09/2026). */
+          @media (min-width:1000px){#ultimi-aggiornamenti .art-griglia{grid-template-columns:1fr 1fr}}
+        </style>
+<style>#si-pre~#dc-root{height:0;overflow:hidden}</style>
+</head>
+<body>
+<div id="si-pre"><div class="sc-host" data-sc-name="Root">
+      
+
+      
+
+      <div data-screen-label="Portale">
+
+        <div class="hdr">
+          <div class="wrap hdr-riga">
+            <a class="marchio" href="/" title="Torna alla home" aria-label="Screening Italia, torna alla home"><img class="marchio-img" src="./marchio/screening-italia-breve.png?v=tpl1114" alt="Screening Italia" width="620" height="326"></a>
+            <input class="menu-chk" type="checkbox" id="menu-chk" aria-label="Apri il menu">
+            <label class="hamb" for="menu-chk">
+              <svg class="i-apri" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
+              <svg class="i-chiudi" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"></path></svg>
+            </label>
+            <nav class="nav-riga" aria-label="Sezioni del sito">
+              <div class="nav-voce">
+                <button type="button" class="nav-tendina" aria-expanded="false" aria-controls="menu-screening" aria-current="false">Gli screening<svg class="nav-freccia" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+                <div class="nav-menu" id="menu-screening">
+                  <a href="/screening" aria-current="false">Tutti gli screening</a>
+                  
+                  <a href="/screening/mammografico" aria-current="false">Mammografico</a>
+                  <a href="/screening/colon-retto" aria-current="false">Colon-retto</a>
+                  <a href="/screening/cervicale" aria-current="false">Cervice uterina (HPV, PAP Test)</a>
+                  <a href="/screening/prostata" aria-current="false">Prostatico (PSA, TAC multiparametrica)</a>
+                  <span class="nav-presto">Polmonare <small>in arrivo</small></span>
+                  <a href="/screening/diabete-celiachia" aria-current="false">Diabete</a>
+                  <span class="nav-presto">Nutrizionale <small>in arrivo</small></span>
+                  <a href="/screening/neonatale" aria-current="false">Neonatale</a>
+                  <span class="nav-presto">HCV (epatite C) <small>in arrivo</small></span>
+                  <a href="/screening/cardiovascolare" aria-current="false">Cardiovascolare (INPS)</a>
+                </div>
+              </div>
+              <a href="/trova" aria-current="false">Iniziative per regione</a>
+              
+              <a href="/enti" aria-current="false">Pubblica le tue iniziative</a>
+              
+              
+              <a href="/domande" aria-current="page">Domande frequenti</a>
+              <a href="/carta" aria-current="false">Carta dei servizi</a>
+              
+              <div class="nav-voce">
+                <button type="button" class="nav-tendina" aria-expanded="false" aria-controls="menu-contatti" aria-current="false">Contatti<svg class="nav-freccia" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+                <div class="nav-menu" id="menu-contatti">
+                  <a href="/contatti?tipo=esperienza">Racconta la tua esperienza</a>
+                  <a href="/contatti?tipo=iniziativa">Segnala un’iniziativa</a>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+
+        
+
+
+        
+        
+
+
+        
+
+        
+
+        
+        
+
+        
+          <div data-screen-label="Articolo">
+
+            
+            
+            <div class="banda b-bianco wrap sezione art-testa" data-screen-label="Apertura articolo" data-fondo="bianco">
+              <div class="lettura fx col gap16">
+                
+                
+                <figure class="art-figura rivela dentro">
+                  <span class="art-figura-img"><img src="https://pannello.screeningitalia.it/wp-content/uploads/2026/11/bassa-partecipazione.jpeg" alt="" loading="lazy" decoding="async"></span>
+                </figure>
+                
+                <p class="nota art-torna rivela d1 dentro"><a href="/domande"><span class="sc-interp">← Torna alle domande frequenti</span></a></p>
+                <p class="art-cat rivela d2 dentro"><span class="sc-interp">Difficoltà e disservizi</span></p>
+                <h1 class="art-headline rivela dentro"><span class="sc-interp">La bassa partecipazione agli screening oncologici non è una fatalità legata al disinteresse dei cittadini</span></h1>
+                <p class="art-firma rivela d1 dentro">Redazione Screening Italia · <span class="sc-interp">11 novembre 2026</span></p>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione-corpo" data-screen-label="Corpo dell articolo" data-fondo="sabbia">
+              <div class="lettura fx col gap28">
+                
+                
+                  <div class="art-wp fx col gap28 rivela d2 dentro" data-slug="la-bassa-partecipazione-agli-screening-oncologici-non-e-una-fatalita-legata-al-disinteresse-dei-cittadini"><section class="art-sez fx col gap12"><p class="art-p">Angelo Zaglio</p>
+
+
+
+<p class="art-p">Screening mammografico e un paradosso dell’accessibilità: analisi critica della comunicazione e delle barriere selettive nei programmi di screening mammografico di massa e il caso dell’ASL Medio Campidano che il lettore legge <a href="https://www.unionesarda.it/news-sardegna/medio-campidano/asl-medio-campidano-al-via-le-nuove-date-per-lo-screening-mammografico-gratuito-al564fg3" rel="noopener noreferrer">QU</a>I</p>
+
+
+
+<p class="art-p">1. Introduzione: la prevenzione tra obiettivi di salute pubblica e percezione individuale</p>
+
+
+
+<p class="art-p">I programmi di screening oncologico di popolazione rappresentano uno dei pilastri fondamentali della sanità pubblica moderna. Basati sul principio della diagnosi precoce, essi mirano a intercettare la patologia in una fase pre-clinica, riducendo la mortalità e garantendo interventi terapeutici meno invasivi. Nel contesto del tumore alla mammella, l’efficacia di tali programmi è ampiamente documentata dalla letteratura scientifica internazionale. Tuttavia, il successo reale di uno screening non si misura unicamente sull’efficacia clinica del test diagnostico, ma sulla sua capacità di raggiungere e coinvolgere la massima quota possibile della popolazione target.</p>
+
+
+
+<p class="art-p">Quando un’azienda sanitaria, come l’ASL del Medio Campidano, definisce i criteri di accesso al proprio programma mammografico gratuito, si trova a dover bilanciare rigorosi protocolli epidemiologici e limitazioni strutturali con la necessità di mantenere il servizio inclusivo e accattivante. L’adozione di una comunicazione istituzionale rigida, focalizzata più sulle esclusioni che sulle soluzioni, rischia di trasformare uno strumento di tutela della salute in un percorso a ostacoli percepito come burocratico e respingente. Il presente saggio analizza l’impatto di tali restrizioni sulla partecipazione della popolazione, evidenziando il paradosso tra rigore clinico e disimpegno del paziente.</p>
+
+
+
+<p class="art-p">2. Anatomia dei criteri di esclusione: logica clinica vs. percezione dell’utente</p>
+
+
+
+<p class="art-p">L’analisi del bando o della nota informativa dell’ASL rivela una serie di sbarramenti precisi: un’età compresa tra i 50 e i 69 anni, la residenza o il domicilio nel territorio di competenza, l’assenza di un esame mammografico negli ultimi 24 mesi, l’assenza di patologie a carico della mammella e il non essere portatrice di protesi mammarie.</p>
+
+
+
+<ul>
+<li>Dal punto di vista della medicina basata sulle evidenze, ognuno di questi criteri risponde a una logica impeccabile: il criterio anagrafico e temporale (50-69 anni, ogni 2 anni): identifica la finestra temporale in cui il rapporto tra benefici (riduzione della mortalità) e rischi (sovradiagnosi o falsi positivi) è scientificamente più favorevole, ottimizzando al contempo l’allocazione delle risorse pubbliche.</li>
+
+
+
+<li>L’assenza di patologie pregresse o in atto: lo screening è, per definizione, rivolto a una popolazione <em>sana e asintomatica</em>. Un soggetto con una storia clinica senologica o sintomi evidenti non necessita di un test di screening standardizzato, bensì di un percorso diagnostico terapeutico assistenziale (PDTA) di senologia clinica, caratterizzato da tempi, modalità e approfondimenti mirati.</li>
+
+
+
+<li>L’esclusione delle portatrici di protesi: la presenza di impianti mammari richiede proiezioni radiologiche aggiuntive (como la manovra di Eklund) e una compressione calibrata per evitare il danneggiamento della protesi, oltre a una frequente integrazione ecografica per esplorare le zone d’ombra radiologica. Tali complessità mal si conciliano con i ritmi serrati e i protocolli standardizzati della radiologia di screening di primo livello.</li>
+</ul>
+
+
+
+<ul>
+<li>Il problema strutturale risiede nel fatto che questa rigorosa impalcatura clinica viene tradotta, agli occhi del cittadino comune, in una sequenza di sbarramenti discriminatori.</li>
+
+
+
+<li>L’utente non percepisce la differenziazione tecnica tra “screening di popolazione” e “diagnostica clinica”; percepisce semplicemente un rifiuto d’accesso da parte del sistema sanitario.</li>
+</ul>
+
+
+
+<p class="art-p">3. Il fallimento comunicativo come driver della bassa adesione</p>
+
+
+
+<p class="art-p">La psicologia della salute evidenzia come la percezione del rischio e la motivazione a sottoporsi a esami preventivi siano fortemente influenzate dal <em>framing</em> informativo, ovvero dalla cornice con cui le opzioni vengono presentate. Una comunicazione focalizzata prevalentemente sui requisiti negativi (“non può fare l’esame chi…”) genera un duplice effetto negativo.</p>
+
+
+
+<p class="art-p">In primo luogo, produce un senso di frustrazione e abbandono istituzionale. La donna che ha superato una patologia mammaria o che ha scelto di sottoporsi a una chirurgia additiva si sente esclusa da un diritto universale alla prevenzione, ignorando che per lei è previsto (o dovrebbe essere previsto) un percorso alternativo persino più tutelante. In secondo luogo, la complessità dei criteri burocratici alimenta l’ansia e l’incertezza: nel dubbio di non possedere i requisiti corretti, una fetta significativa di utenti sceglie l’inerzia, rinunciando del tutto al controllo.</p>
+
+
+
+<p class="art-p">Questo corto circuito informativo è una delle cause primarie della bassa partecipazione agli screening, un fenomeno particolarmente accentuato in territori complessi o frammentati. Se il messaggio percepito è “il servizio non è per te”, il paziente non si sentirà affatto invogliato a superare le barriere logistiche ed emotive legate all’esame mammografico, preferendo la via dell’evitamento o, nei casi in cui le risorse economiche lo consentano, il ricorso alla sanità privata a pagamento.</p>
+
+
+
+<p class="art-p">4. Dallo screening atomizzato alla continuità assistenziale:</p>
+
+
+
+<p class="art-p">Per invertire la rotta e incrementare l’adesione, è necessario un radicale cambio di paradigma che trasformi lo screening da evento isolato a porta d’accesso di un sistema di salute integrato. La sanità pubblica deve ridefinire la propria strategia comunicativa e organizzativa attraverso tre direttrici fondamentali:</p>
+
+
+
+<ul>
+<li>Il “No” orientato alla soluzione: l’atto comunicativo non deve mai esaurirsi in un divieto. Se una donna viene identificata come non idonea allo screening a causa di protesi o patologie pregresse, la lettera d’invito o il portale aziendale devono contestualmente reindirizzarla, in modo automatico e assistito, all’agenda di prenotazione della Senologia Clinica della stessa ASL. La comunicazione deve passare da “Tu non puoi aderire” a “Per le tue caratteristiche specifiche, abbiamo riservato per te un percorso di controllo differente e più approfondito”.</li>
+
+
+
+<li>Umanizzazione e semplificazione del linguaggio: i testi informativi istituzionali devono abbandonare il gergo eccessivamente medico-burocratico a favore di una narrazione accogliente e trasparente. Spiegare brevemente il <em>perché</em> di una limitazione (ad esempio, la necessità di tecniche radiologiche speciali per le protesi) disinnesca il sentimento di rifiuto e valorizza la specificità della cura.</li>
+
+
+
+<li>Integrazione con la medicina del territorio: I medici di medicina generale e i farmacisti del territorio devono essere parte attiva della rete di screening. Spesso il paziente, di fronte ai dubbi interpretativi suscitati dai criteri di esclusione dell’ASL, si rivolge al proprio medico curante. Se la rete territoriale è formata e allineata, può rassicurare l’utente e instradarla correttamente, neutralizzando l’effetto respingente delle circolari informative.</li>
+</ul>
+
+
+
+<p class="art-p">5. Conclusione: la prevenzione come diritto inclusivo</p>
+
+
+
+<p class="art-p">I criteri di selezione adottati dalle ASL per lo screening mammografico non sono capricci burocratici, ma necessità cliniche volte a garantire la massima appropriatezza terapeutica e la sicurezza dei pazienti. Tuttavia, la validità scientifica di un protocollo si azzera se la sua declinazione comunicativa produce l’allontanamento della popolazione dal servizio sanitario.</p>
+
+
+
+<p class="art-p">La bassa partecipazione agli screening oncologici non è una fatalità legata al disinteresse dei cittadini, ma spesso il risultato sussidiario di un’architettura informativa che spaventa e frammenta invece di accogliere. Soltanto colmando il divario tra la logica clinica dell’istituzione e la percezione emotiva del paziente sarà possibile trasformare la prevenzione da un obbligo selettivo a un’opportunità di salute universale, accessibile e realmente condivisa.</p>
+</section></div>
+                
+                <p class="art-avvertenza rivela"><em>Qui trovi informazioni generali. Non sostituiscono il medico né le indicazioni della tua ASL: per il tuo caso, chiedi a loro.</em></p>
+              </div>
+            </div>
+            
+
+            
+
+            
+            
+            <div class="banda b-verde wrap sezione invito-banda" data-screen-label="Invito a fine articolo" data-variante="a" data-fondo="bianco">
+              <div class="lettura invito">
+                <h2 class="invito-tit rivela d1"><span class="sc-interp">Guarda cosa c'è nella tua regione</span></h2>
+                <p class="invito-p rivela d2"><span class="sc-interp">Scegli la tua regione e vedi quali iniziative di screening ci sono. Niente registrazione, niente dati da lasciare. Poi decidi tu.</span></p>
+                <a class="cta rivela" href="/trova"><span class="sc-interp">Apri la mappa delle regioni</span></a>
+              </div>
+            </div>
+            
+
+          </div>
+        
+
+        
+
+        
+
+        
+          
+        
+
+        
+
+        
+        <a class="wa-float in-vista" href="mailto:info@screeningitalia.it?subject=Messaggio%20dal%20sito%20Screening%20Italia" aria-label="Contattaci via mail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3.5 6.5 12 13l8.5-6.5"></path></svg>
+          <span>Contattaci</span>
+        </a>
+        
+
+        <div class="ftr">
+          <div class="wrap">
+
+            <div class="ftr-alto">
+              <div class="ftr-marchio fx col gap12">
+                <img class="ftr-marchio-img" src="./marchio/screening-italia-completo.png?v=tpl1114" alt="Screening Italia: facilitatore dei processi di screening e partner strategico di cittadini e stakeholders. SI alla prevenzione" width="880" height="674">
+                <a class="ftr-wa" href="mailto:info@screeningitalia.it?subject=Messaggio%20dal%20sito%20Screening%20Italia">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3.5 6.5 12 13l8.5-6.5"></path></svg>
+                  Scrivici una mail
+                </a>
+              </div>
+
+              <nav class="ftr-col" aria-label="Il portale">
+                <h3 class="ftr-tit">Il portale</h3>
+                <a href="/chi">Chi siamo</a>
+                <a href="/carta">Carta dei servizi SI</a>
+                <a href="/contatti">Contatti</a>
+                <a href="/enti">Pubblica le tue iniziative</a>
+                <a href="/contatti">Segnala un’iniziativa</a>
+                <a href="/contatti">Segnala un dato sbagliato</a>
+                <a href="/racconta">Racconta la tua esperienza</a>
+                <a href="/chi">Come verifichiamo</a>
+              </nav>
+            </div>
+
+            <div class="ftr-avviso">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2a8.8 8.8 0 100 17.6 8.8 8.8 0 000-17.6M12 8v5.2M12 16.4h.01"></path></svg>
+              <p>Il portale non effettua prenotazioni, non vende prestazioni e non sostituisce il parere del medico. Per prenotare, chiama il numero indicato nella scheda dell’iniziativa. In caso di sintomi rivolgiti al medico di medicina generale o al 112.</p>
+            </div>
+
+            <div class="ftr-basso">
+              <p class="ftr-legale">© 2026 Screening Italia · Angelo Zaglio, medico chirurgo, specialista in medicina preventiva · P.IVA 03898940980 · Iscrizione Ordine dei Medici di Brescia n. 5305<br>Ultimo aggiornamento: <span class="sc-interp">14 novembre</span></p>
+              <p class="ftr-legale ftr-legale-link">
+                <a href="/privacy">Privacy</a>
+                <span aria-hidden="true">·</span>
+                <a href="/cookie">Cookie</a>
+                <span aria-hidden="true">·</span>
+                <button type="button" class="ftr-btn-link">Preferenze cookie</button>
+                <span aria-hidden="true">·</span>
+                <a href="/chi">Fonti e metodo</a>
+                <span aria-hidden="true">·</span>
+                <a href="/chi">Accessibilità</a>
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div></div></div>
+<script>(function(){var o=new MutationObserver(function(){if(document.querySelector("#dc-root .sc-host")){var p=document.getElementById("si-pre");if(p)p.remove();o.disconnect()}});o.observe(document.documentElement,{childList:true,subtree:true})})();</script>
+<x-dc>
+<template id="dc-src">
+      <helmet data-dc-atomics="">
+        <link rel="stylesheet" href="./fonts/fonts.css">
+        <meta name="referrer" content="no-referrer">
+        <meta name="ext-resource-dependency" content="./img/foto/foto-si-piazza.webp">
+        <meta name="ext-resource-dependency" content="./img/foto/foto-si-piazza-2.webp">
+        <meta name="ext-resource-dependency" content="./img/foto/foto-si-balcone.webp">
+        <meta name="ext-resource-dependency" content="./img/foto/foto-si-balcone-2.webp">
+        <meta name="ext-resource-dependency" content="./img/foto/foto-si-telefono.webp">
+        <meta name="ext-resource-dependency" content="./img/foto/foto-si-telefono-2.webp">
+        <meta name="ext-resource-dependency" content="./img/foto/foto-si-panchina.webp">
+        <meta name="ext-resource-dependency" content="./img/foto/foto-si-panchina-2.webp">
+        <meta name="ext-resource-dependency" content="./img/foto/foto-si-lettera.webp">
+        <meta name="ext-resource-dependency" content="./img/foto/foto-si-lettera-2.webp">
+        <meta name="ext-resource-dependency" content="./img/foto/foto-si-caffe.webp">
+        <meta name="ext-resource-dependency" content="./img/foto/foto-art-bici.webp">
+        <meta name="ext-resource-dependency" content="./img/foto/foto-art-cucina.webp">
+        <meta name="ext-resource-dependency" content="./img/foto/foto-art-mare.webp">
+        <meta name="ext-resource-dependency" content="./img/foto/foto-art-nonna.webp">
+        <meta name="ext-resource-dependency" content="./img/foto/foto-art-orto.webp">
+        <meta name="ext-resource-dependency" content="./img/foto/foto-74855-23397.webp">
+        <meta name="ext-resource-dependency" content="./img/foto/foto-197531-19160.webp">
+        <meta name="ext-resource-dependency" content="./img/foto/foto-197531-19155.webp">
+        <link rel="stylesheet" href="./stile.css?v=tab1113">
+        <link rel="stylesheet" href="./screening.css?v=tpl1114">
+        <script src="./accessibilita.js?v=tpl1114" defer></script>
+        <script src="./iniziative.js?v=tpl1114" defer></script>
+        <script src="./iniziative-wp.js?v=tpl1114" defer></script>
+        <script src="./articoli.js?v=tpl1114" defer></script>
+        <script src="./testimonianze-wp.js?v=tpl1114" defer></script>
+        <script src="./esperienze-wp.js?v=tpl1114" defer></script>
+        <script src="./centri-wp.js?v=tpl1114" defer></script>
+        <script src="./dati-angelo-1019.js?v=tpl1114" defer></script>
+        <script src="./regioni-italia.js?v=tpl1114" defer></script>
+        <script src="./mappa.js?v=tpl1114" defer></script>
+                <style>
+          /* Marcatore di bozza (sezione articoli sotto le Domande frequenti, 23/09/2026):
+             esce insieme al testo di prova, prima del build. */
+          .prova{align-self:flex-start;font-size:15px;line-height:1.35;font-weight:700;
+            letter-spacing:.06em;text-transform:uppercase;color:var(--terracotta);
+            background:#fff;border:1.5px solid var(--terracotta);border-radius:8px;padding:4px 8px}
+          /* Testo da WordPress (.art-wp), LORI giro 1 del 24/09/2026: stesso aspetto del corpo FAQ.
+             Liste: corpo e interlinea di .art-p (stesse soglie), margine 0, rientro 20, 8 fra le voci. */
+          .art-wp ul,.art-wp ol{margin:0;padding-left:20px;font-size:19px;line-height:1.68}
+          @media (min-width:860px){.art-wp ul,.art-wp ol{font-size:20px}}
+          @media (max-width:699px){.art-wp ul,.art-wp ol{font-size:18px;line-height:1.62}}
+          .art-wp li + li{margin-top:8px}
+          /* Citazione = frase chiave (brief LORI 26/09/2026, sostituisce la regola del 24/09):
+             il blockquote e solo un contenitore, l'aspetto lo da .art-chiave messa da mettiTesto(). */
+          .art-wp blockquote{margin:0;padding:0;border:0;font-style:normal}
+          /* Immagini nel testo: piena larghezza, proporzioni del file, nessun aspect-ratio. */
+          .art-wp figure{margin:0}
+          .art-wp img{width:100%;height:auto;border-radius:10px}
+          .art-wp figcaption{font-size:15px;color:var(--soft);line-height:1.4}
+          /* Card delle domande (elenco e home): altezza propria, allineate in alto (LORI giro 1, 26/09/2026). */
+          #elenco-domande .art-griglia,#ultimi-aggiornamenti .art-griglia{align-items:start}
+          /* Home «Ultimi aggiornamenti»: quattro card, 2x2 anche da desktop (brief LORI 26/09/2026). */
+          @media (min-width:1000px){#ultimi-aggiornamenti .art-griglia{grid-template-columns:1fr 1fr}}
+        </style>
+      </helmet>
+
+      <template id="__bundler_thumbnail">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#0B6E73"></rect><g fill="none" stroke="#FAF8F3" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M132 60l18 10 12 22-8 26 14 22"></path><path d="M188 140l-10 -18"></path><circle cx="160" cy="100" r="46"></circle></g></svg>
+      </template>
+
+      <div data-screen-label="Portale">
+
+        <div class="hdr">
+          <div class="wrap hdr-riga">
+            <a class="marchio" href="/" title="Torna alla home" aria-label="Screening Italia, torna alla home"><img class="marchio-img" src="./marchio/screening-italia-breve.png?v=tpl1114" alt="Screening Italia" width="620" height="326" /></a>
+            <input class="menu-chk" type="checkbox" id="menu-chk" aria-label="Apri il menu">
+            <label class="hamb" for="menu-chk">
+              <svg class="i-apri" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
+              <svg class="i-chiudi" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"></path></svg>
+            </label>
+            <nav class="nav-riga" aria-label="Sezioni del sito">
+              <div class="nav-voce">
+                <button type="button" class="nav-tendina" aria-expanded="{{ scrAperto }}" aria-controls="menu-screening" aria-current="{{ navFaq }}" onClick="{{ scrApriChiudi }}">Gli screening<svg class="nav-freccia" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+                <div class="nav-menu" id="menu-screening">
+                  <a href="/screening" aria-current="{{ navScrTutti }}">Tutti gli screening</a>
+                  <!-- Dieci screening (Davide 30/10/2026): 5 oncologici di fila, poi gli altri 5. Senza pagina: voce non cliccabile. -->
+                  <a href="/screening/mammografico" aria-current="{{ navScrMammografico }}">Mammografico</a>
+                  <a href="/screening/colon-retto" aria-current="{{ navScrColon }}">Colon-retto</a>
+                  <a href="/screening/cervicale" aria-current="{{ navScrCervicale }}">Cervice uterina (HPV, PAP Test)</a>
+                  <a href="/screening/prostata" aria-current="{{ navScrProstata }}">Prostatico (PSA, TAC multiparametrica)</a>
+                  <span class="nav-presto">Polmonare <small>in arrivo</small></span>
+                  <a href="/screening/diabete-celiachia" aria-current="{{ navScrDiabete }}">Diabete</a>
+                  <span class="nav-presto">Nutrizionale <small>in arrivo</small></span>
+                  <a href="/screening/neonatale" aria-current="{{ navScrNeonatale }}">Neonatale</a>
+                  <span class="nav-presto">HCV (epatite C) <small>in arrivo</small></span>
+                  <a href="/screening/cardiovascolare" aria-current="{{ navScrCardio }}">Cardiovascolare (INPS)</a>
+                </div>
+              </div>
+              <a href="{{ hrefIniziative }}" aria-current="{{ navReg }}">Iniziative per regione</a>
+              <sc-if value="{{ haCentri }}" hint-placeholder-val="{{ false }}"><a href="/centri" aria-current="{{ navCentri }}">Centri Screening ASL</a></sc-if>
+              <a href="/enti" aria-current="{{ navEnti }}">Pubblica le tue iniziative</a>
+              <!-- Tendina «Esperienze» (brief 13/10/2026): esce se almeno una categoria ha post;
+                   ogni voce solo se la sua categoria ha post, «Racconta la tua» sempre. -->
+              <sc-if value="{{ haEsperienze }}" hint-placeholder-val="{{ false }}">
+              <div class="nav-voce">
+                <button type="button" class="nav-tendina" aria-expanded="{{ espAperto }}" aria-controls="menu-esperienze" aria-current="{{ navEsp }}" onClick="{{ espApriChiudi }}">Esperienze<svg class="nav-freccia" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+                <div class="nav-menu" id="menu-esperienze">
+                  <sc-if value="{{ haTesti }}" hint-placeholder-val="{{ false }}"><a href="/testimonianze" aria-current="{{ navTesti }}">Testimonianze</a></sc-if>
+                  <sc-if value="{{ haBp }}" hint-placeholder-val="{{ false }}"><a href="/buone-pratiche" aria-current="{{ navBp }}">Buone pratiche</a></sc-if>
+                  <sc-if value="{{ haDiff }}" hint-placeholder-val="{{ false }}"><a href="/difficolta" aria-current="{{ navDiff }}">Difficoltà e disservizi</a></sc-if>
+                  <a href="/racconta" aria-current="{{ navRacconta }}">Racconta la tua</a>
+                </div>
+              </div>
+              </sc-if>
+              <a href="/domande" aria-current="{{ navDomande }}">Domande frequenti</a>
+              <a href="/carta" aria-current="{{ navCarta }}">Carta dei servizi</a>
+              <!-- Contatti (10/11/2026): tendina con due voci, entrambe aprono lo stesso modulo con il tipo già scelto. -->
+              <div class="nav-voce">
+                <button type="button" class="nav-tendina" aria-expanded="{{ conAperto }}" aria-controls="menu-contatti" aria-current="{{ navContatti }}" onClick="{{ conApriChiudi }}">Contatti<svg class="nav-freccia" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+                <div class="nav-menu" id="menu-contatti">
+                  <a href="/contatti?tipo=esperienza">Racconta la tua esperienza</a>
+                  <a href="/contatti?tipo=iniziativa">Segnala un’iniziativa</a>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+
+        <sc-if value="{{ vistaHome }}" hint-placeholder-val="{{ true }}">
+          <div data-screen-label="Home">
+
+            <div class="banda hero wrap sezione" data-screen-label="Above the fold">
+              <div class="hero-sfondo" aria-hidden="true">
+                <img src="./img/foto/foto-si-piazza-1280.webp" srcset="./img/foto/foto-si-piazza-800.webp 800w, ./img/foto/foto-si-piazza-1280.webp 1280w, ./img/foto/foto-si-piazza.webp 1600w" sizes="100vw" width="1600" height="900" alt="" fetchpriority="high" decoding="async">
+                <span class="hero-velo"></span>
+              </div>
+              <div class="hero-due">
+                <div class="fx col gap16">
+                  <div class="occhiello">Screening Italia, facilitatore dei processi di 10 tipologie di Screening</div>
+                  <h1>Screening Italia, SI alla prevenzione</h1>
+                  <p>Partner strategico di cittadini e stakeholders</p>
+                  <!-- Angelo 19/10/2026: due ingressi di pari peso (stessa misura). QA 390 LORI 21/10: il secondo e
+                       pulsante secondario (.cta-2), una sola CTA primaria per schermata.
+                       Le iniziative scendono a terzo livello: link di testo, non pulsante. -->
+                  <div class="hero-ingressi">
+                    <a class="cta" href="/trova">Trova il tuo screening</a>
+                    <a class="cta-2" href="/articolo/cosa-sono-gli-screening">Cosa sono gli screening</a>
+                  </div>
+                </div>
+                <div class="hero-mappa">
+                  <div class="mappa mappa-bianca" ref="{{ mappaRef }}"></div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="banda b-crema wrap sezione" data-screen-label="Come funziona">
+              <div class="fx col gap20">
+                <h2>Come si consulta</h2>
+                <ol class="passi">
+                  <li class="passo">
+                    <span class="num">1</span>
+                    <span class="passo-txt">
+                      <span class="passo-tit">Scegli la regione</span>
+                      <span class="passo-desc">Sulla mappa. Vedrai subito dove ci sono iniziative aperte e dove no.</span>
+                    </span>
+                  </li>
+                  <li class="passo">
+                    <span class="num">2</span>
+                    <span class="passo-txt">
+                      <span class="passo-tit">Indica gli screening che ti interessano</span>
+                      <span class="passo-desc">Dai neonati agli adulti. Puoi sceglierne più di uno alla volta.</span>
+                    </span>
+                  </li>
+                  <li class="passo">
+                    <span class="num">3</span>
+                    <span class="passo-txt">
+                      <span class="passo-tit">Verifica come aderire</span>
+                      <span class="passo-desc">Ogni scheda riporta ente, sede, periodo, requisiti di età e il numero da chiamare per prenotare.</span>
+                    </span>
+                  </li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" id="trova" data-screen-label="Scegli la regione">
+              <div class="fx col gap20">
+                <h2>Seleziona la tua regione</h2>
+                <p class="nota">Tocca la regione sulla mappa: si aprirà l’elenco delle iniziative attive sul territorio.</p>
+                <div class="trova-due">
+                <div class="mappa" ref="{{ mappaRef }}"></div>
+                </div>
+                <div class="fx col gap8 cambia-sel">
+                  <sc-for list="{{ menuHome }}" as="m" hint-placeholder-count="1">
+                    <div class="filtri-sel fmenu" onKeyDown="{{ m.tasto }}">
+                      <span class="etichetta-sel" id="{{ m.lblId }}">{{ m.et }}</span>
+                      <div class="fmenu-box">
+                        <button type="button" class="campo campo-sel fmenu-btn" id="{{ m.btnId }}" aria-haspopup="listbox" aria-expanded="{{ m.esp }}" aria-labelledby="{{ m.lblId }} {{ m.btnId }}" onClick="{{ m.toggle }}">{{ m.testo }}</button>
+                        <svg class="sel-frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                        <sc-if value="{{ m.aperto }}" hint-placeholder-val="{{ false }}">
+                          <ul class="fmenu-panel" role="listbox" aria-labelledby="{{ m.lblId }}">
+                            <sc-for list="{{ m.opz }}" as="o" hint-placeholder-count="4">
+                              <li role="presentation"><button type="button" role="option" class="{{ o.cls }}" aria-selected="{{ o.sel }}" onClick="{{ o.pick }}">{{ o.t }}</button></li>
+                            </sc-for>
+                          </ul>
+                        </sc-if>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ erroreMappa }}" hint-placeholder-val="{{ false }}">
+                  <div class="avviso fx col gap8">
+                    <h3>La mappa non risulta disponibile.</h3>
+                    <p>Prova a ricaricare la pagina, oppure apri «Iniziative per regione» dal menu.</p>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione scr-home" id="screening" data-screen-label="Tipologie di screening">
+              <div class="fx col gap20">
+                <h2>{{ scrHome.h2 }}</h2>
+                <div class="scr-tab scr-tab-onco">
+                <h3 class="scr-gruppo">Screening oncologici</h3>
+                <div class="scr-carte">
+                <sc-for list="{{ scrHome.onco }}" as="k" hint-placeholder-count="4">
+                    <a class="scr-carta" href="{{ k.href }}">
+                      <svg class="scr-ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ k.icona }}"></path></svg>
+                      <span class="scr-ctx">
+                        <span class="scr-ctit">{{ k.titolo }}</span>
+                        <span class="scr-criga">{{ k.riga }}</span>
+                      </span>
+                      <svg class="scr-cf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+                    </a>
+                  </sc-for>
+                </div>
+                </div>
+                <div class="scr-tab scr-tab-altri">
+                <h3 class="scr-gruppo">Altri screening</h3>
+                <div class="scr-carte">
+                <sc-for list="{{ scrHome.altri }}" as="k" hint-placeholder-count="4">
+                    <a class="scr-carta" href="{{ k.href }}">
+                      <svg class="scr-ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ k.icona }}"></path></svg>
+                      <span class="scr-ctx">
+                        <span class="scr-ctit">{{ k.titolo }}</span>
+                        <span class="scr-criga">{{ k.riga }}</span>
+                      </span>
+                      <svg class="scr-cf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+                    </a>
+                  </sc-for>
+                </div>
+                </div>
+                <p class="scr-arrivo">Pagine in arrivo: <strong>Polmonare</strong>, <strong>Nutrizionale</strong>, <strong>HCV (epatite C)</strong>.</p>
+              </div>
+            </div>
+
+
+            <!-- Testimonianze (blocco 3, brief LORI 26/09/2026): storie vere da WordPress, griglia ferma,
+                 al massimo 2 in home. Zero storie, o WordPress che non risponde: la banda non si rende. -->
+            <sc-if value="{{ haTesti }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-verde wrap banda-larga sezione" data-screen-label="Testimonianze">
+              <div class="fx col gap20">
+                <h2>Storie di chi ci è passato</h2>
+                <p class="testi-intro">Sono esperienze personali: nessuna ti promette lo stesso risultato e nessuna vale come consiglio medico, per decidere c'è il tuo medico. Le pubblichiamo anonime, con il permesso di chi scrive, che non riceve compensi.</p>
+                <sc-if value="{{ testiEsempi }}" hint-placeholder-val="{{ false }}">
+                <div class="finto">Testimonianze di esempio: nel prototipo non sono persone reali.</div>
+                </sc-if>
+                <div class="testi-griglia">
+                  <sc-for list="{{ testiHome }}" as="t" hint-placeholder-count="2">
+                    <figure class="testi">
+                      <svg class="testi-virg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9 7H5v6h4v-2c0 2-1 3-3 3v2c3 0 5-2 5-5V7zm10 0h-4v6h4v-2c0 2-1 3-3 3v2c3 0 5-2 5-5V7z"></path></svg>
+                      <blockquote class="testi-txt">
+                        <sc-for list="{{ t.paragrafi }}" as="q" hint-placeholder-count="1"><p>{{ q.t }}</p></sc-for>
+                      </blockquote>
+                      <figcaption class="testi-chi">
+                        <span class="testi-nome">{{ t.nome }}</span>
+                        <span class="testi-ruolo">{{ t.riga }}</span>
+                      </figcaption>
+                    </figure>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ testiAltri }}" hint-placeholder-val="{{ false }}">
+                <a class="cta-2 testi-tutte" href="/testimonianze">Leggi tutte le testimonianze</a>
+                </sc-if>
+              </div>
+            </div>
+            </sc-if>
+
+            <!-- Successi e difficoltà (brief esperienze 13/10/2026): l'ultima buona pratica e l'ultima
+                 difficoltà. Solo Difficoltà = la banda non esce (anti-paura); solo Buone pratiche = «Cosa funziona». -->
+            <sc-if value="{{ espHome }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-bianco wrap banda-larga sezione" data-screen-label="Successi e difficoltà">
+              <div class="fx col gap20">
+                <h2>{{ espHomeTitolo }}</h2>
+                <p class="testi-intro">Esperienze vere con il servizio di screening: inviti, kit, prenotazioni, referti. Senza nomi.</p>
+                <sc-if value="{{ espEsempi }}" hint-placeholder-val="{{ false }}">
+                <div class="finto">Esperienze di esempio: nel prototipo non sono casi reali.</div>
+                </sc-if>
+                <div class="testi-griglia">
+                  <sc-for list="{{ espHomeBp }}" as="b" hint-placeholder-count="1">
+                    <article class="testi esp esp-bp">
+                      <span class="tag tag-tipo tag-bp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Ha funzionato</span>
+                      <p class="testi-ruolo">{{ b.riga }}</p>
+                      <h3>{{ b.titolo }}</h3>
+                      <div class="testi-txt">
+                        <sc-for list="{{ b.paragrafi }}" as="q" hint-placeholder-count="1"><p>{{ q.t }}</p></sc-for>
+                      </div>
+                    </article>
+                  </sc-for>
+                  <sc-for list="{{ espHomeDiff }}" as="d" hint-placeholder-count="1">
+                    <article class="testi esp esp-diff">
+                      <span class="tag tag-tipo tag-diff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 11.5a7.5 7.5 0 0 1-10.9 6.7L4 19.5l1.4-4.4A7.5 7.5 0 1 1 20 11.5z"></path></svg>Da migliorare</span>
+                      <p class="testi-ruolo">{{ d.riga }}</p>
+                      <h3>{{ d.titolo }}</h3>
+                      <div class="testi-txt">
+                        <sc-for list="{{ d.paragrafi }}" as="q" hint-placeholder-count="1"><p>{{ q.t }}</p></sc-for>
+                      </div>
+                    </article>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ haBp }}" hint-placeholder-val="{{ false }}">
+                <a class="cta-2 testi-tutte" href="/buone-pratiche">Leggi le buone pratiche</a>
+                </sc-if>
+                <sc-if value="{{ haDiff }}" hint-placeholder-val="{{ false }}">
+                <a class="cta-2 testi-tutte" href="/difficolta">Leggi le difficoltà segnalate</a>
+                </sc-if>
+                <p class="nota"><a href="/racconta">Racconta la tua esperienza</a></p>
+              </div>
+            </div>
+            </sc-if>
+
+            <!-- Ultimi aggiornamenti (brief LORI 26/09/2026): i primi 4 articoli WordPress per data.
+                 Senza articoli, o se WordPress non risponde, la banda non si rende. -->
+            <sc-if value="{{ homeOk }}" hint-placeholder-val="{{ true }}">
+            <div class="{{ ultimiCls }}" id="ultimi-aggiornamenti" data-screen-label="Ultimi aggiornamenti">
+              <div class="fx col gap20">
+                <h2>Ultimi aggiornamenti</h2>
+                <div class="art-griglia">
+                  <sc-for list="{{ homeArticoli }}" as="a" hint-placeholder-count="4">
+                    <div class="art">
+                      <sc-if value="{{ a.haFoto }}" hint-placeholder-val="{{ false }}">
+                        <div class="art-img"><img src="{{ a.foto }}" alt="" loading="lazy" decoding="async"></div>
+                      </sc-if>
+                      <div class="art-corpo">
+                        <p class="art-meta">{{ a.meta }}</p>
+                        <h3 class="art-tit"><a href="{{ a.href }}" aria-label="{{ a.aria }}">{{ a.titolo }}</a></h3>
+                        <p class="art-som">{{ a.estratto }}</p>
+                        <a class="art-vai" href="{{ a.href }}">Leggi la risposta
+                          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+                        </a>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+                <a class="cta-2 cta-centro" href="/domande">Consulta tutte le domande</a>
+              </div>
+            </div>
+            </sc-if>
+
+            <div class="banda b-blu wrap sezione" data-screen-label="Sei un ente">
+              <div class="fx col gap16">
+                <div class="occhiello occhiello-neutro">Per chi organizza</div>
+                <h2>Sei un Ente pubblico, un ETS, una Fondazione, un Gruppo privato?</h2>
+                <p>Segnalaci la tua iniziativa: controlliamo i dati sulla fonte ufficiale e la pubblichiamo qui.</p>
+                <a class="cta-2" href="/contatti">Segnala un’iniziativa</a>
+              </div>
+            </div>
+
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ vistaRegione }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Iniziative della regione">
+
+            <!-- Florbo 22/10/2026: aprendo una regione, per prima cosa le iniziative filtrabili per tipo di screening.
+                 Poi i contatti delle ASL (schede con icone), poi cambio regione: mappa e tendina sotto la mappa. -->
+            <div class="banda b-bianco wrap sezione banda-larga" data-screen-label="Scelta dello screening">
+              <div class="fx col gap20">
+                <p class="nota reg-torna"><a href="/trova">← Tutte le regioni</a></p>
+                <h1 class="scelta-h2 reg-h1">Screening in {{ reg }}</h1>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione ini-larga" data-screen-label="Le iniziative">
+              <div class="fx col gap20">
+                <sc-if value="{{ regPiena }}" hint-placeholder-val="{{ true }}">
+                <div class="filtri" role="search" aria-label="Filtra le schede di {{ reg }}">
+                  <div class="filtri-corpo aperta">
+                  <sc-for list="{{ menuFiltri }}" as="m" hint-placeholder-count="4">
+                    <div class="filtri-sel fmenu" onKeyDown="{{ m.tasto }}">
+                      <span class="etichetta-sel" id="{{ m.lblId }}">{{ m.et }}</span>
+                      <div class="fmenu-box">
+                        <button type="button" class="campo campo-sel fmenu-btn" id="{{ m.btnId }}" aria-haspopup="listbox" aria-expanded="{{ m.esp }}" aria-labelledby="{{ m.lblId }} {{ m.btnId }}" onClick="{{ m.toggle }}">{{ m.testo }}</button>
+                        <svg class="sel-frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                        <sc-if value="{{ m.aperto }}" hint-placeholder-val="{{ false }}">
+                          <ul class="fmenu-panel" role="listbox" aria-labelledby="{{ m.lblId }}">
+                            <sc-for list="{{ m.opz }}" as="o" hint-placeholder-count="4">
+                              <li role="presentation"><button type="button" role="option" class="{{ o.cls }}" aria-selected="{{ o.sel }}" onClick="{{ o.pick }}">{{ o.t }}</button></li>
+                            </sc-for>
+                          </ul>
+                        </sc-if>
+                      </div>
+                    </div>
+                  </sc-for>
+                  </div>
+                  <div class="filtri-esito">
+                    <p class="nota" aria-live="polite">{{ quante }}</p>
+                    <sc-if value="{{ filtriAttivi }}" hint-placeholder-val="{{ false }}"><button type="button" class="filtro filtro-azzera" onClick="{{ azzera }}">Azzera i filtri</button></sc-if>
+                  </div>
+                </div>
+                </sc-if>
+                <sc-if value="{{ regVuota }}" hint-placeholder-val="{{ false }}">
+                  <h2>{{ titoloElenco }}</h2>
+                </sc-if>
+
+                <!-- Schede strette, SOLO in questo elenco. La scheda intera porta alla pagina dell'iniziativa.
+                     Le schede delle pagine screening (#scr-regione) restano card-ini. -->
+                <div class="ini-griglia">
+                <sc-for list="{{ schede }}" as="i" hint-placeholder-count="3">
+                  <a class="card card-reg card-vai" href="{{ i.hrefDettaglio }}">
+                    <sc-if value="{{ i.haImmagine }}" hint-placeholder-val="{{ false }}"><img class="ini-img-card" src="{{ i.immagine }}" alt="" loading="lazy" decoding="async"></sc-if>
+                    <span class="ini-origine">{{ i.origineBreve }}</span>
+                    <span class="ini-tipo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ i.icona }}"></path></svg>{{ i.tipo }}</span>
+                    <h3 class="ini-nome">{{ i.titolo }}</h3>
+                    <sc-if value="{{ i.haEnte }}" hint-placeholder-val="{{ true }}">
+                    <span class="ini-ente">{{ i.ente }}</span>
+                    </sc-if>
+                    <sc-if value="{{ i.haDove }}" hint-placeholder-val="{{ true }}">
+                    <span class="ini-luogo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.4 7-11a7 7 0 10-14 0c0 5.6 7 11 7 11zM12 12.4a2.6 2.6 0 100-5.2 2.6 2.6 0 000 5.2"></path></svg>{{ i.dove }}</span>
+                    </sc-if>
+                    <sc-if value="{{ i.haAslCard }}" hint-placeholder-val="{{ true }}">
+                    <span class="ini-luogo ini-asl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1M14 9h1M9 13h1M14 13h1M10 21v-4h4v4"></path></svg>{{ i.asl }}</span>
+                    </sc-if>
+                    <sc-if value="{{ i.haPeriodo }}" hint-placeholder-val="{{ true }}">
+                      <span class="ini-periodo">{{ i.periodo }}</span>
+                    </sc-if>
+                    <span class="ini-riga">
+                      <sc-if value="{{ i.haUltimi }}" hint-placeholder-val="{{ false }}">
+                        <span class="pill-ultimi">{{ i.ultimi }}</span>
+                      </sc-if>
+                      <span class="{{ i.tagCls }}">{{ i.tagTesto }}</span>
+                      <sc-if value="{{ i.haPosti }}" hint-placeholder-val="{{ false }}">
+                        <span class="ini-posti">{{ i.posti }}</span>
+                      </sc-if>
+                    </span>
+                    <span class="ini-piede" aria-hidden="true">Approfondisci →</span>
+                  </a>
+                </sc-for>
+                </div>
+
+                <sc-if value="{{ vuotoPerScelta }}" hint-placeholder-val="{{ false }}">
+                  <div class="avviso fx col gap12">
+                    <h3>Nessuna scheda corrisponde ai filtri.</h3>
+                    <p>Prova a togliere un filtro, oppure guarda tutte le schede della regione.</p>
+                    <button type="button" class="cta-2" onClick="{{ azzera }}">Azzera i filtri</button>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+
+            <!-- Contatti delle ASL/ATS (Angelo 19/10/2026; icone e contrasto Florbo 22/10/2026). Senza dati la banda non c'e. -->
+            <sc-if value="{{ haAsl }}" hint-placeholder-val="{{ true }}">
+            <div class="banda b-bianco wrap banda-larga sezione asl-larga" id="asl-contatti" data-screen-label="Offerta ASL">
+              <div class="fx col gap20">
+                <div class="fx col gap8">
+                  <p class="occhiello">Servizio sanitario</p>
+                  <h2>I centri screening delle aziende sanitarie in {{ reg }}</h2>
+                  <p class="nota">{{ asl.cosa }}. Sono i programmi stabili del servizio sanitario. Numeri e orari li ricontrolliamo ogni quattro mesi.</p>
+                  <p class="asl-controllo">{{ asl.controlloTesto }}</p>
+                </div>
+                <ul class="asl-lista" aria-label="Centri screening delle ASL in {{ reg }}">
+                  <sc-for list="{{ asl.righe }}" as="r" hint-placeholder-count="3">
+                    <li class="asl-card">
+                      <h3 class="asl-ente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1M14 9h1M9 13h1M14 13h1M10 21v-4h4v4"></path></svg>{{ r.ente }}</h3>
+                      <div class="asl-voce">
+                        <span class="asl-ico ico-tel" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"></path></svg></span>
+                        <div class="asl-corpo"><span class="asl-et">Telefono</span>
+                          <sc-for list="{{ r.tel }}" as="t" hint-placeholder-count="2">
+                            <span class="asl-tel"><span class="asl-sub">{{ t.et }}</span>
+                              <sc-for list="{{ t.nums }}" as="n" hint-placeholder-count="1"><a class="asl-num" href="{{ n.href }}">{{ n.n }}</a></sc-for>
+                            </span>
+                          </sc-for>
+                        </div>
+                      </div>
+                      <sc-if value="{{ r.haOrari }}" hint-placeholder-val="{{ true }}">
+                      <div class="asl-voce">
+                        <span class="asl-ico ico-orari" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 100-20 10 10 0 000 20zM12 6v6l4 2"></path></svg></span>
+                        <div class="asl-corpo"><span class="asl-et">Giorni e orari</span><span class="asl-testo">{{ r.orari }}</span></div>
+                      </div>
+                      </sc-if>
+                      <sc-if value="{{ r.haMail }}" hint-placeholder-val="{{ true }}">
+                      <div class="asl-voce">
+                        <span class="asl-ico ico-mail" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2zM22 6l-10 7L2 6"></path></svg></span>
+                        <div class="asl-corpo"><span class="asl-et">E-mail</span>
+                          <sc-for list="{{ r.mail }}" as="m" hint-placeholder-count="2">
+                            <a class="asl-mail" href="{{ m.href }}"><span>{{ m.utente }}</span><span>@{{ m.dominio }}</span></a>
+                          </sc-for>
+                        </div>
+                      </div>
+                      </sc-if>
+                      <sc-if value="{{ r.haSito }}" hint-placeholder-val="{{ true }}">
+                      <div class="asl-voce">
+                        <span class="asl-ico ico-sito" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 100-20 10 10 0 000 20zM2 12h20M12 2a15.3 15.3 0 010 20 15.3 15.3 0 010-20z"></path></svg></span>
+                        <div class="asl-corpo"><span class="asl-et">Sito</span><span class="asl-testo asl-sito">{{ r.sito }}</span></div>
+                      </div>
+                      </sc-if>
+                    </li>
+                  </sc-for>
+                </ul>
+                <!-- Sotto le schede: documenti (PDF, volantini) e mappa dei centri. Arrivano dal pannello. -->
+                <sc-if value="{{ asl.haExtra }}" hint-placeholder-val="{{ false }}">
+                <div class="asl-extra">
+                  <sc-if value="{{ asl.haDocumenti }}" hint-placeholder-val="{{ false }}"><div class="asl-box"><h3>Documenti e volantini</h3><p class="nota">Moduli, volantini e guide delle aziende sanitarie, in PDF.</p></div></sc-if>
+                  <sc-if value="{{ asl.haMappa }}" hint-placeholder-val="{{ false }}"><div class="asl-box"><h3>Mappa dei centri</h3><p class="nota">Gli indirizzi dei centri dove si fa l&rsquo;esame.</p></div></sc-if>
+                </div>
+                </sc-if>
+              </div>
+            </div>
+            </sc-if>
+
+            <div class="banda b-blu wrap sezione" data-screen-label="Le due porte">
+              <div class="fx col gap16">
+                <h2>Nessuna iniziativa nelle tue vicinanze?</h2>
+                <p>Le iniziative vengono attivate e chiuse con frequenza: torna a controllare più avanti.</p>
+                <p class="nota">Organizzi un’iniziativa? <a href="/contatti">Segnalacela</a>: dopo la verifica dei dati sarà pubblicata.</p>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Cambia regione">
+              <div class="fx col gap20">
+                <h2>Cambia regione</h2>
+                <p class="nota">Tocca un’altra regione sulla mappa.</p>
+                <div class="mappa" ref="{{ mappaRef }}"></div>
+                <div class="fx col gap8 cambia-sel">
+                  <label class="etichetta-sel" for="scegli-reg">Oppure scegli dall’elenco</label>
+                  <div class="sel-box">
+                    <select class="campo campo-sel" id="scegli-reg" value="{{ reg }}" onChange="{{ vaiA }}">
+                      <sc-for list="{{ elencoRegioni }}" as="o" hint-placeholder-count="20">
+                        <option value="{{ o.nome }}">{{ o.etichetta }}</option>
+                      </sc-for>
+                    </select>
+                    <svg class="sel-frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ vistaIniziativa }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Dettaglio iniziativa">
+
+            <sc-if value="{{ iniTrovata }}" hint-placeholder-val="{{ true }}">
+            <!-- Florbo 22/10/2026: pagina dell'iniziativa a blocchi. In breve (campi presenti, mai righe vuote),
+                 poi il testo libero in paragrafi, elenchi e schede contatto con link. -->
+            <div class="banda b-bianco wrap sezione ini-apertura" data-screen-label="Apertura iniziativa">
+              <div class="fx col gap20">
+                <p class="nota art-torna"><a href="{{ ini.hrefRegione }}">← Torna alle iniziative</a></p>
+                <p class="ini-occhiello">{{ ini.occhiello }}</p>
+                <h1 class="ini-fuoco" tabindex="-1">{{ ini.titolo }}</h1>
+                <p class="ini-riassunto">{{ ini.riassunto }}<sc-if value="{{ ini.haUltimi }}" hint-placeholder-val="{{ false }}"> <span class="pill-ultimi">{{ ini.ultimi }}</span></sc-if></p>
+                <sc-if value="{{ ini.haImmagine }}" hint-placeholder-val="{{ false }}"><img class="ini-img-pagina" src="{{ ini.immagine }}" alt="" decoding="async"></sc-if>
+                <div class="ini-chiama">
+                  <sc-if value="{{ ini.haTel }}" hint-placeholder-val="{{ true }}">
+                    <sc-for list="{{ ini.tels }}" as="tt" hint-placeholder-count="1"><a class="tel tel-grande" href="{{ tt.href }}">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.2 3.5H4.9a1.4 1.4 0 00-1.4 1.5c.5 8.2 7.3 15 15.5 15.5a1.4 1.4 0 001.5-1.4v-2.3a1.4 1.4 0 00-1.2-1.4l-2.8-.4a1.4 1.4 0 00-1.4.7l-.8 1.4a11.6 11.6 0 01-5.6-5.6l1.4-.8a1.4 1.4 0 00.7-1.4l-.4-2.8a1.4 1.4 0 00-1.4-1.2z"></path></svg>
+                      {{ tt.tel }}</a></sc-for>
+                    <p class="nota">La prenotazione avviene telefonicamente al numero indicato. Il portale non gestisce appuntamenti.</p>
+                  </sc-if>
+                  <sc-if value="{{ ini.senzaTelConContatti }}" hint-placeholder-val="{{ false }}">
+                    <button type="button" class="cta-2 ini-vai" onClick="{{ vaiAiContattiIni }}">Vai ai contatti per prenotare</button>
+                    <p class="nota">Il portale non gestisce appuntamenti: per prenotare o chiedere informazioni si usano i recapiti indicati più sotto.</p>
+                  </sc-if>
+                  <sc-if value="{{ ini.senzaContatti }}" hint-placeholder-val="{{ false }}">
+                    <p class="nota">Per questa iniziativa non è indicato un numero di telefono. Il portale non gestisce appuntamenti: informati presso l&rsquo;ente che la organizza.</p>
+                  </sc-if>
+                  <sc-if value="{{ ini.haAslUrl }}" hint-placeholder-val="{{ false }}">
+                    <a class="cta-2 ini-vai" href="{{ ini.aslUrl }}" target="_blank" rel="noopener noreferrer" aria-label="Vai al sito dell&rsquo;ASL (si apre in una nuova scheda)">Vai al sito dell&rsquo;ASL</a>
+                  </sc-if>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" data-screen-label="In breve">
+              <div class="fx col gap20">
+                <h2>In breve</h2>
+                <div class="ini-info">
+                    <sc-if value="{{ ini.haQuando }}" hint-placeholder-val="{{ true }}"><div class="ini-tassello"><span class="asl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v3M17 3v3M3.5 9.5h17M4.5 6h15a1 1 0 011 1v12a1 1 0 01-1 1h-15a1 1 0 01-1-1V7a1 1 0 011-1z"></path></svg></span><div class="ini-t-corpo"><span class="ini-t-et">Quando</span><span class="ini-t-val"><sc-if value="{{ ini.quandoUnaRiga }}" hint-placeholder-val="{{ true }}">{{ ini.quando }}</sc-if><sc-if value="{{ ini.quandoPiuRighe }}" hint-placeholder-val="{{ false }}"><span class="vl-righe"><sc-for list="{{ ini.quandoRighe }}" as="q" hint-placeholder-count="2"><span class="vl-riga">{{ q.t }}</span></sc-for></span></sc-if></span></div></div></sc-if>
+                    <sc-if value="{{ ini.soloPeriodo }}" hint-placeholder-val="{{ false }}"><div class="ini-tassello"><span class="asl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v3M17 3v3M3.5 9.5h17M4.5 6h15a1 1 0 011 1v12a1 1 0 01-1 1h-15a1 1 0 01-1-1V7a1 1 0 011-1z"></path></svg></span><div class="ini-t-corpo"><span class="ini-t-et">Quando</span><span class="ini-t-val">{{ ini.periodoTile }}</span></div></div></sc-if>
+                    <sc-if value="{{ ini.haDove }}" hint-placeholder-val="{{ true }}"><div class="ini-tassello"><span class="asl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.4 7-11a7 7 0 10-14 0c0 5.6 7 11 7 11zM12 12.4a2.6 2.6 0 100-5.2 2.6 2.6 0 000 5.2"></path></svg></span><div class="ini-t-corpo"><span class="ini-t-et">Dove</span><span class="ini-t-val">{{ ini.dove }}</span></div></div></sc-if>
+                    <sc-if value="{{ ini.haAsl }}" hint-placeholder-val="{{ true }}"><div class="ini-tassello"><span class="asl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.4 7-11a7 7 0 10-14 0c0 5.6 7 11 7 11zM12 12.4a2.6 2.6 0 100-5.2 2.6 2.6 0 000 5.2"></path></svg></span><div class="ini-t-corpo"><span class="ini-t-et">Azienda sanitaria</span><span class="ini-t-val">{{ ini.asl }}</span></div></div></sc-if>
+                    <sc-if value="{{ ini.haChi }}" hint-placeholder-val="{{ true }}"><div class="ini-tassello"><span class="asl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21a9 9 0 100-18 9 9 0 000 18M8.5 12.2l2.4 2.4 4.6-5.2"></path></svg></span><div class="ini-t-corpo"><span class="ini-t-et">Chi può partecipare</span><span class="ini-t-val">{{ ini.chi }}</span></div></div></sc-if>
+                    <sc-if value="{{ ini.costo }}" hint-placeholder-val="{{ true }}"><div class="ini-tassello"><span class="asl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a10 10 0 100-20 10 10 0 000 20zM15.5 9a3.5 3.5 0 100 6M8 11h5M8 13h5"></path></svg></span><div class="ini-t-corpo"><span class="ini-t-et">Costo</span><span class="ini-t-val">{{ ini.costo }}</span></div></div></sc-if>
+                    <div class="ini-tassello"><span class="asl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-8-5-8-11a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 10c0 6-8 11-8 11z"></path></svg></span><div class="ini-t-corpo"><span class="ini-t-et">Tipo di screening</span><span class="ini-t-val">{{ ini.tipo }}</span></div></div>
+                    <sc-if value="{{ ini.haEnte }}" hint-placeholder-val="{{ true }}"><div class="{{ ini.enteCls }}"><span class="asl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1M14 9h1M9 13h1M14 13h1M10 21v-4h4v4"></path></svg></span><div class="ini-t-corpo"><span class="ini-t-et">Organizzato da</span><span class="ini-t-val">{{ ini.ente }}</span></div></div></sc-if>
+                </div>
+              </div>
+            </div>
+
+            <sc-if value="{{ ini.haDescrizione }}" hint-placeholder-val="{{ true }}">
+            <div class="banda b-bianco wrap sezione" id="ini-dettagli" data-screen-label="Dettagli iniziativa">
+              <div class="fx col gap20 ini-testo">
+                <h2>Tutti i dettagli</h2>
+                <sc-if value="{{ ini.haHtml }}" hint-placeholder-val="{{ false }}"><div class="ini-html fx col gap12" data-html="{{ ini.descrizioneHtml }}"></div></sc-if>
+                <sc-for list="{{ ini.blocchi }}" as="b" hint-placeholder-count="4">
+                  <div class="ini-blocco">
+                    <sc-if value="{{ b.isTitolo }}" hint-placeholder-val="{{ false }}"><h3 class="ini-sottotit">{{ b.t }}</h3></sc-if>
+                    <sc-if value="{{ b.isP }}" hint-placeholder-val="{{ true }}"><p class="ini-par"><sc-for list="{{ b.segs }}" as="g" hint-placeholder-count="2"><sc-if value="{{ g.link }}" hint-placeholder-val="{{ false }}"><a class="ini-link" href="{{ g.href }}">{{ g.t }}</a></sc-if><sc-if value="{{ g.testo }}" hint-placeholder-val="{{ true }}"><span>{{ g.t }}</span></sc-if></sc-for></p></sc-if>
+                    <sc-if value="{{ b.isElenco }}" hint-placeholder-val="{{ false }}">
+                      <ul class="ini-elenco"><sc-for list="{{ b.voci }}" as="v" hint-placeholder-count="3"><li><sc-for list="{{ v.segs }}" as="g" hint-placeholder-count="2"><sc-if value="{{ g.link }}" hint-placeholder-val="{{ false }}"><a class="ini-link" href="{{ g.href }}">{{ g.t }}</a></sc-if><sc-if value="{{ g.testo }}" hint-placeholder-val="{{ true }}"><span>{{ g.t }}</span></sc-if></sc-for></li></sc-for></ul>
+                    </sc-if>
+                    <sc-if value="{{ b.isContatti }}" hint-placeholder-val="{{ false }}">
+                      <div class="ini-contatti">
+                        <sc-for list="{{ b.righe }}" as="r" hint-placeholder-count="2">
+                          <div class="asl-voce">
+                            <span class="{{ r.icoCls }}" aria-hidden="true"><sc-if value="{{ r.isTel }}" hint-placeholder-val="{{ true }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"></path></svg></sc-if><sc-if value="{{ r.isMail }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2zM22 6l-10 7L2 6"></path></svg></sc-if><sc-if value="{{ r.isSito }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a10 10 0 100-20 10 10 0 000 20zM2 12h20M12 2a15.3 15.3 0 010 20 15.3 15.3 0 010-20z"></path></svg></sc-if></span>
+                            <div class="asl-corpo"><span class="asl-et">{{ r.et }}</span><span class="ini-c-val"><sc-for list="{{ r.segs }}" as="g" hint-placeholder-count="2"><sc-if value="{{ g.link }}" hint-placeholder-val="{{ false }}"><a class="ini-link" href="{{ g.href }}">{{ g.t }}</a></sc-if><sc-if value="{{ g.testo }}" hint-placeholder-val="{{ true }}"><span>{{ g.t }}</span></sc-if></sc-for></span></div>
+                          </div>
+                        </sc-for>
+                      </div>
+                    </sc-if>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            </sc-if>
+            </sc-if>
+
+            <sc-if value="{{ iniMancante }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-bianco wrap sezione" data-screen-label="Iniziativa non trovata">
+              <div class="avviso fx col gap12">
+                <h2 class="ini-fuoco" tabindex="-1">Questa iniziativa non è più in elenco</h2>
+                <p>Le iniziative vengono attivate e chiuse con frequenza. Quelle attive sono tutte negli elenchi per regione.</p>
+                <a class="cta-2" href="/trova">Scegli la regione</a>
+              </div>
+            </div>
+            </sc-if>
+
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ vistaVuota }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Regione senza iniziative">
+
+            <div class="banda hero wrap sezione" data-screen-label="Non c e niente">
+              <div class="hero-sfondo" aria-hidden="true">
+                <img src="./img/foto/foto-74855-23397.webp" alt="" loading="lazy" decoding="async">
+                <span class="hero-velo"></span>
+              </div>
+              <div class="fx col gap16">
+                <p class="nota"><a href="/trova">← Torna a tutte le regioni</a></p>
+                <h1>In {{ reg }} non risultano iniziative segnalate.</h1>
+                <p>Significa che nessuna iniziativa ci è stata segnalata, non che in {{ reg }} manchi l’attività di prevenzione: i programmi di screening dell’azienda sanitaria proseguono comunque. Di seguito le modalità di accesso.</p>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" data-screen-label="Cosa puoi fare comunque">
+              <div class="fx col gap20">
+                <h2>Il programma pubblico è attivo anche nella tua regione</h2>
+                <p>È gratuito e, per legge, deve essere garantito in tutte le regioni. Si articola in tre passaggi:</p>
+                <div class="fx col gap16">
+                  <div class="passo"><span class="num">1</span><p>L’azienda sanitaria invia una lettera di invito al domicilio al raggiungimento dell’età prevista. Non occorre farne richiesta.</p></div>
+                  <div class="passo"><span class="num">2</span><p>La lettera contiene un appuntamento già fissato, oppure il recapito telefonico per concordarlo.</p></div>
+                  <div class="passo"><span class="num">3</span><p>L’esame è gratuito e non richiede l’impegnativa del medico di medicina generale.</p></div>
+                </div>
+                <div class="avviso fx col gap12">
+                  <h3>La lettera di invito non è pervenuta?</h3>
+                  <p>Accade di frequente: cambio di domicilio, residenza non aggiornata, mancato recapito postale. La tua posizione è recuperabile e non perdi il turno.</p>
+                  <a class="cta-2" href="/articolo/faq-1"><span>Come procedere in caso di mancato recapito</span></a>
+                  <a class="cta-2 cta-portale" href="/faq"><span>Il portale screening della Regione {{ reg }}</span></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Pubblica un iniziativa">
+              <div class="fx col gap16">
+                <h2>Enti e associazioni</h2>
+                <p>Aziende sanitarie, ospedali, ambulatori e associazioni possono segnalare le proprie iniziative: dopo la verifica dei dati vengono pubblicate su questo portale.</p>
+                <a class="cta-2" href="/contatti">Segnala un’iniziativa</a>
+                <p class="nota">Il servizio è riservato agli enti organizzatori.</p>
+              </div>
+            </div>
+
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ vistaEnti }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Per ASL ed enti">
+
+            <div class="banda hero wrap sezione" data-screen-label="Apertura enti">
+              <div class="hero-sfondo" aria-hidden="true">
+                <img src="./img/foto/foto-si-balcone.webp" alt="" loading="lazy" decoding="async">
+                <span class="hero-velo"></span>
+              </div>
+              <div class="fx col gap16">
+                <div class="occhiello">Per ASL, ospedali e associazioni</div>
+                <h1>Pubblica le tue iniziative in autonomia</h1>
+                <p>Se organizzi screening, puoi caricare le tue iniziative direttamente sul portale: ti diamo un accesso riservato e le pubblichi quando vuoi, senza passare da noi ogni volta.</p>
+                <a class="cta" href="/contatti">Richiedi un accesso</a>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Come si ottiene l accesso">
+              <div class="fx col gap24">
+                <h2>Come si ottiene l’accesso</h2>
+                <ol class="passi">
+                  <li class="passo">
+                    <span class="num">1</span>
+                    <span class="passo-txt">
+                      <span class="passo-tit">Contatti gli amministratori</span>
+                      <span class="passo-desc">Ci scrivi indicando l’ente, il referente e un recapito istituzionale. Serve solo a verificare che la richiesta arrivi davvero dall’ente.</span>
+                    </span>
+                  </li>
+                  <li class="passo">
+                    <span class="num">2</span>
+                    <span class="passo-txt">
+                      <span class="passo-tit">Ricevi le credenziali</span>
+                      <span class="passo-desc">Ti inviamo i dati di accesso all’area riservata, da cui carichi le iniziative in autonomia: sede, date, requisiti, recapito e costo.</span>
+                    </span>
+                  </li>
+                  <li class="passo">
+                    <span class="num">3</span>
+                    <span class="passo-txt">
+                      <span class="passo-tit">Online entro 72 ore</span>
+                      <span class="passo-desc">Ogni iniziativa caricata passa un controllo sui dati e viene approvata: entro 72 ore è visibile sul portale, nella pagina della tua regione.</span>
+                    </span>
+                  </li>
+                </ol>
+                <a class="cta" href="/contatti">Contatta gli amministratori</a>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" data-screen-label="Cosa serve">
+              <div class="fx col gap20">
+                <h2>Che dati servono per ogni iniziativa</h2>
+                <p class="nota">Sono gli stessi campi che il cittadino vede nella scheda. Senza uno di questi non pubblichiamo.</p>
+                <div class="card fx col gap8">
+                  <div class="dato"><span class="et">Ente</span><span class="vl">chi organizza, con il nome ufficiale</span></div>
+                  <div class="dato"><span class="et">Sede</span><span class="vl">indirizzo completo del luogo dell’esame</span></div>
+                  <div class="dato"><span class="et">Periodo</span><span class="vl">date di apertura e di chiusura</span></div>
+                  <div class="dato"><span class="et">Requisiti</span><span class="vl">età, sesso, eventuali condizioni di accesso</span></div>
+                  <div class="dato"><span class="et">Costo</span><span class="vl">gratuito, a pagamento o su invito</span></div>
+                  <div class="dato"><span class="et">Recapito</span><span class="vl">il numero da chiamare per prenotare</span></div>
+                  <div class="dato"><span class="et">Fonte</span><span class="vl">link alla pagina ufficiale o alla locandina</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-verde wrap sezione" data-screen-label="Regole e costi">
+              <div class="fx col gap20">
+                <h2>Condizioni</h2>
+                <div class="fx col gap14">
+                  <div class="card fx col gap8">
+                    <h3>Nessuno spazio in evidenza</h3>
+                    <p>L’ordine delle iniziative dipende dalla data di chiusura, non da chi vuole più visibilità.</p>
+                  </div>
+                  <div class="card fx col gap8">
+                    <h3>Ogni dato resta verificabile</h3>
+                    <p>Pubblichiamo solo iniziative riconducibili a una fonte ufficiale. Alla chiusura la scheda viene rimossa automaticamente.</p>
+                  </div>
+                  <div class="card fx col gap8">
+                    <h3>Nessun dato sanitario</h3>
+                    <p>Il portale non raccoglie dati dei pazienti e non gestisce prenotazioni: l’adesione avviene sempre presso l’ente organizzatore.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Domande degli enti">
+              <div class="fx col gap20">
+                <h2>Domande ricorrenti</h2>
+                <div class="fx col gap14">
+                  <details class="elenco">
+                    <summary>
+                      <span>Possiamo caricare più iniziative insieme?</span>
+                      <svg class="frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                    </summary>
+                    <p class="nota">Sì. Dall’area riservata si carica una iniziativa alla volta oppure un elenco in formato tabellare, con gli stessi campi.</p>
+                  </details>
+                  <details class="elenco">
+                    <summary>
+                      <span>Chi può richiedere un accesso?</span>
+                      <svg class="frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                    </summary>
+                    <p class="nota">Aziende sanitarie, ospedali pubblici e privati accreditati, ambulatori, associazioni di volontariato e fondazioni che organizzano screening.</p>
+                  </details>
+                  <details class="elenco">
+                    <summary>
+                      <span>Possiamo modificare o chiudere un’iniziativa già pubblicata?</span>
+                      <svg class="frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                    </summary>
+                    <p class="nota">In qualsiasi momento, dall’area riservata. Le modifiche ai dati di contatto e alle date sono online subito; un cambio di sede passa da un nuovo controllo.</p>
+                  </details>
+                  <details class="elenco">
+                    <summary>
+                      <span>Le 72 ore sono garantite?</span>
+                      <svg class="frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                    </summary>
+                    <p class="nota">È il tempo massimo nei giorni lavorativi. Se un’iniziativa apre a breve, segnalalo nella richiesta: la lavoriamo prima.</p>
+                  </details>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ vistaFaq }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Domande frequenti">
+
+            <!-- Domande frequenti = articoli WordPress (brief LORI 26/09/2026): un elenco solo. -->
+            <div class="banda b-crema wrap sezione" id="elenco-domande" data-screen-label="Domande frequenti">
+              <div class="fx col gap20">
+                <h1 id="titolo-domande">Domande frequenti</h1>
+
+                <!-- Angelo 19/10/2026: tante domande, come quelle del Ministero. Ricerca + filtro per tema. -->
+                <div class="fx col gap8">
+                  <label class="nota" for="cerca-domande">Cerca nelle domande</label>
+                  <div class="cerca">
+                    <svg class="cerca-i" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+                    <input class="campo campo-cerca" id="cerca-domande" type="search" placeholder="Es.: lettera, kit, costo" value="{{ artCerca }}" onInput="{{ artCercaScrivi }}">
+                    <sc-if value="{{ artHaCerca }}" hint-placeholder-val="{{ false }}"><button type="button" class="cerca-x" aria-label="Cancella la ricerca" onClick="{{ artCercaVia }}"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></sc-if>
+                  </div>
+                  <p class="nota" aria-live="polite">{{ artRisultati }}</p>
+                </div>
+
+                <sc-if value="{{ artMostraFiltro }}" hint-placeholder-val="{{ true }}">
+                  <div class="fx col gap8">
+                    <p class="nota" id="et-argomento">Argomento</p>
+                    <div class="fx gap8" style="flex-wrap:wrap" role="group" aria-labelledby="et-argomento">
+                      <sc-for list="{{ artArgomenti }}" as="g" hint-placeholder-count="4">
+                        <button type="button" class="{{ g.cls }}" aria-pressed="{{ g.attivo }}" onClick="{{ g.scegli }}">{{ g.nome }}</button>
+                      </sc-for>
+                    </div>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ artOk }}" hint-placeholder-val="{{ true }}">
+                  <div class="fx col gap20">
+                    <div class="art-griglia">
+                      <sc-for list="{{ articoli }}" as="a" hint-placeholder-count="6">
+                        <div class="art">
+                          <sc-if value="{{ a.haFoto }}" hint-placeholder-val="{{ false }}">
+                            <div class="art-img"><img src="{{ a.foto }}" alt="" loading="lazy" decoding="async"></div>
+                          </sc-if>
+                          <div class="art-corpo">
+                            <p class="art-meta">{{ a.meta }}</p>
+                            <h3 class="art-tit"><a href="{{ a.href }}" aria-label="{{ a.aria }}">{{ a.titolo }}</a></h3>
+                            <p class="art-som">{{ a.estratto }}</p>
+                            <a class="art-vai" href="{{ a.href }}">Leggi la risposta
+                              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+                            </a>
+                            <sc-if value="{{ a.haApprofondisci }}" hint-placeholder-val="{{ false }}">
+                              <a class="art-appr" href="{{ a.approfondisciHref }}" target="_blank" rel="noopener noreferrer">Approfondisci <span class="art-appr-fonte">(sito esterno, si apre in una scheda nuova)</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5"></path></svg></a>
+                            </sc-if>
+                          </div>
+                        </div>
+                      </sc-for>
+                    </div>
+                    <sc-if value="{{ artAltri }}" hint-placeholder-val="{{ true }}">
+                      <button type="button" class="cta-2" onClick="{{ artMostraAltri }}">Mostra altre domande</button>
+                    </sc-if>
+                    <sc-if value="{{ artFiniti }}" hint-placeholder-val="{{ false }}">
+                      <p class="nota" aria-live="polite">Hai visto tutte le domande.</p>
+                    </sc-if>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ artVuotoTutto }}" hint-placeholder-val="{{ false }}">
+                  <div class="avviso fx col gap12" data-screen-label="Stato vuoto - nessuna domanda">
+                    <h3>Stiamo scrivendo le prime risposte</h3>
+                    <p>Intanto puoi già vedere quali screening sono attivi nella tua regione.</p>
+                    <a class="cta" href="/trova">Vai alla tua regione</a>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ artVuotoCerca }}" hint-placeholder-val="{{ false }}">
+                  <div class="avviso fx col gap12" data-screen-label="Stato vuoto - ricerca senza risultati">
+                    <p>Non abbiamo trovato domande con queste parole. Prova con un&rsquo;altra parola.</p>
+                    <button type="button" class="cta-2" onClick="{{ artAzzera }}">Vedi tutte le domande</button>
+                    <a class="link-cta" href="/contatti">Non trovi la tua domanda? Scrivici</a>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ artVuotoFiltro }}" hint-placeholder-val="{{ false }}">
+                  <div class="avviso fx col gap12" data-screen-label="Stato vuoto - filtro senza risultati">
+                    <p>Su questo argomento non abbiamo ancora risposte. Prova con un altro.</p>
+                    <button type="button" class="cta-2" onClick="{{ artAzzera }}">Vedi tutte le domande</button>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ artErrore }}" hint-placeholder-val="{{ false }}">
+                  <div class="avviso fx col gap12" data-screen-label="Stato errore e offline" role="status">
+                    <p>Non riusciamo a mostrare le domande in questo momento. Riprova tra qualche minuto.</p>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+
+          </div>
+        </sc-if>
+
+        <!-- Pagine screening (brief LORI 25/09/2026): tre modelli (ONCO e PROSTATA condividono i blocchi uguali) guidati dai dati di screening-pagine.js. -->
+        <sc-if value="{{ scrAdulti }}" hint-placeholder-val="{{ false }}">
+          <div class="pag-scr" data-screen-label="Screening ONCO e PROSTATA">
+
+            <div class="banda b-carta wrap sezione" data-screen-label="Apertura screening">
+              <div class="fx col gap16">
+                <p class="nota"><a href="/screening">{{ scr.ritorno }}</a></p>
+                <div class="occhiello">{{ scr.occhiello }}</div>
+                <h1>{{ scr.h1 }}</h1>
+                <p>{{ scr.sommario }}</p>
+                <p class="nota">{{ scr.orient }}</p>
+                <button type="button" class="cta" onClick="{{ scr.scendiRegione }}">{{ scr.cta }}</button>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Ti riguarda">
+              <div class="fx col gap20">
+                <h2>{{ scr.s2h2 }}</h2>
+                <p>{{ scr.s2p }}</p>
+                <div class="{{ scr.celleCls }}">
+                  <sc-for list="{{ scr.celle }}" as="c" hint-placeholder-count="3">
+                    <div class="scr-cella">
+                      <div class="scr-ico">
+                        <span class="scr-ico-c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ c.icona }}"></path></svg></span>
+                        <span class="scr-et">{{ c.et }}</span>
+                      </div>
+                      <div class="scr-testo">
+                        <h3>{{ c.h3 }}</h3>
+                        <p>{{ c.p }}</p>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ scrSenzaInvito }}" hint-placeholder-val="{{ false }}">
+                  <div class="fx col gap12">
+                    <h3>{{ scr.bish2 }}</h3>
+                    <p>{{ scr.bisp }}</p>
+                    <ul class="scr-lista">
+                      <sc-for list="{{ scr.bisVoci }}" as="v" hint-placeholder-count="3">
+                        <li class="{{ v.cls }}">{{ v.t }}</li>
+                      </sc-for>
+                    </ul>
+                  </div>
+                </sc-if>
+                <!-- Angelo 19/10/2026: «Approfondisci» a fine sezione descrittiva, link scelto da lui. -->
+                <sc-if value="{{ scr.haAppr2 }}" hint-placeholder-val="{{ false }}">
+                  <a class="cta-2 appr" href="{{ scr.appr2Href }}" target="_blank" rel="noopener noreferrer">{{ scr.appr2Et }}<span class="appr-nota">Si apre in una scheda nuova</span></a>
+                </sc-if>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione scr-bersaglio" id="scr-regione" data-screen-label="Nella tua regione">
+              <div class="fx col gap20">
+                <h2 tabindex="-1">{{ scr.s8h2 }}</h2>
+                <p>{{ scr.s8p }}</p>
+                <div class="trova-due">
+                  <div class="mappa mappa-scr"></div>
+                </div>
+                <p class="nota mappa-leg"><span class="leg-sw leg-piena" aria-hidden="true"></span>In blu: regioni con iniziative aperte per questo screening. <span class="leg-sw leg-vuota" aria-hidden="true"></span>In grigio: nessuna iniziativa segnalata per ora; la regione si apre lo stesso.</p>
+                <div class="fx col gap8 cambia-sel">
+                  <label class="etichetta-sel" for="scegli-reg-scr">Oppure scegli dal menu</label>
+                  <div class="sel-box">
+                    <select class="campo campo-sel" id="scegli-reg-scr" onChange="{{ scr.sceltaRegione }}">
+                      <option value="">Scegli la regione</option>
+                      <sc-for list="{{ scr.regioni }}" as="r" hint-placeholder-count="20">
+                        <option value="{{ r.nome }}">{{ r.vis }}</option>
+                      </sc-for>
+                    </select>
+                    <svg class="sel-frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                  </div>
+                </div>
+                <sc-if value="{{ scr.esempi }}" hint-placeholder-val="{{ false }}">
+                  <div class="finto">Dati dimostrativi. Le iniziative riportate non sono reali: servono a verificare il funzionamento della pagina.</div>
+                </sc-if>
+                <sc-if value="{{ scr.haCarte }}" hint-placeholder-val="{{ false }}">
+                  <div class="fx col gap20">
+                  <sc-for list="{{ scr.carte }}" as="i" hint-placeholder-count="3">
+                    <div class="card card-ini fx col gap14 scr-ris">
+                      <div class="fx gap8" style="flex-wrap:wrap">
+                        <span class="{{ i.tagCls }}">{{ i.tagTesto }}</span>
+                        <span class="tag tag-tipo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{ i.icona }}"></path></svg>{{ i.tipo }}</span>
+                        <sc-if value="{{ i.haScadenza }}" hint-placeholder-val="{{ true }}">
+                          <span class="{{ i.scadenzaCls }}">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"></circle><path d="M12 7.6V12l3 2"></path></svg>{{ i.scadenza }}
+                          </span>
+                        </sc-if>
+                        <sc-if value="{{ i.haPosti }}" hint-placeholder-val="{{ false }}">
+                          <span class="scad scad-posti">{{ i.posti }}</span>
+                        </sc-if>
+                      </div>
+                      <h3 class="ini-tit"><a href="{{ i.hrefDettaglio }}">{{ i.titolo }}</a></h3>
+                      <div class="fx col gap8">
+                        <sc-if value="{{ i.haDove }}" hint-placeholder-val="{{ true }}">
+                        <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.4 7-11a7 7 0 10-14 0c0 5.6 7 11 7 11zM12 12.4a2.6 2.6 0 100-5.2 2.6 2.6 0 000 5.2"></path></svg>Dove</span><span class="vl">{{ i.dove }}</span></div>
+                        </sc-if>
+                        <sc-if value="{{ i.haQuando }}" hint-placeholder-val="{{ true }}">
+                        <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v3M17 3v3M3.5 9.5h17M4.5 6h15a1 1 0 011 1v12a1 1 0 01-1 1h-15a1 1 0 01-1-1V7a1 1 0 011-1z"></path></svg>Quando</span><span class="vl">{{ i.quando }}</span></div>
+                        </sc-if>
+                        <sc-if value="{{ i.haChi }}" hint-placeholder-val="{{ true }}">
+                        <div class="dato"><span class="et"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21a9 9 0 100-18 9 9 0 000 18M8.5 12.2l2.4 2.4 4.6-5.2"></path></svg>Chi può</span><span class="vl">{{ i.chi }}</span></div>
+                        </sc-if>
+                      </div>
+                      <sc-if value="{{ i.haTel }}" hint-placeholder-val="{{ true }}">
+                      <sc-for list="{{ i.tels }}" as="tt" hint-placeholder-count="1"><a class="tel" href="{{ tt.href }}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.2 3.5H4.9a1.4 1.4 0 00-1.4 1.5c.5 8.2 7.3 15 15.5 15.5a1.4 1.4 0 001.5-1.4v-2.3a1.4 1.4 0 00-1.2-1.4l-2.8-.4a1.4 1.4 0 00-1.4.7l-.8 1.4a11.6 11.6 0 01-5.6-5.6l1.4-.8a1.4 1.4 0 00.7-1.4l-.4-2.8a1.4 1.4 0 00-1.4-1.2z"></path></svg>
+                        {{ tt.tel }}</a></sc-for>
+                      </sc-if>
+                      <span class="link-cta ini-vai" aria-hidden="true">Mostra i dettagli
+                        <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+                      </span>
+                    </div>
+                  </sc-for>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ scr.vuoto }}" hint-placeholder-val="{{ false }}">
+                  <div class="avviso fx col gap12 scr-ris">
+                    <h2>{{ scr.s8bh2 }}</h2>
+                    <p>{{ scr.s8bp }}</p>
+                    <a class="cta" href="/contatti">{{ scr.s8bPiena }}</a>
+                    <button type="button" class="cta-2" onClick="{{ scr.tornaMappa }}">{{ scr.s8bContorno }}</button>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+
+            <sc-if value="{{ scrOnco }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-bianco wrap sezione" data-screen-label="Passi">
+              <div class="fx col gap20">
+                <h2>{{ scr.s3h2 }}</h2>
+                <ol class="passi">
+                  <sc-for list="{{ scr.passi }}" as="s" hint-placeholder-count="4">
+                    <li class="passo">
+                      <span class="num">{{ s.n }}</span>
+                      <div class="passo-txt">
+                        <h3 class="passo-tit">{{ s.h3 }}</h3>
+                        <span class="passo-desc">{{ s.p }}</span>
+                      </div>
+                    </li>
+                  </sc-for>
+                </ol>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" data-screen-label="Dentro l ambulatorio">
+              <div class="fx col gap20">
+                <h2>{{ scr.s4h2 }}</h2>
+                <p>{{ scr.s4p }}</p>
+                <ul class="scr-lista">
+                  <sc-for list="{{ scr.s4Voci }}" as="v" hint-placeholder-count="3">
+                    <li class="{{ v.cls }}">{{ v.t }}</li>
+                  </sc-for>
+                </ul>
+              </div>
+            </div>
+            </sc-if>
+            <div class="banda b-verde wrap sezione" data-screen-label="La risposta">
+              <div class="fx col gap20">
+                <h2>{{ scr.s5h2 }}</h2>
+                <p>{{ scr.s5p }}</p>
+                <div class="avviso fx col gap8">
+                  <h3>{{ scr.s5h3 }}</h3>
+                  <p>{{ scr.s5prosa }}</p>
+                </div>
+                <sc-if value="{{ scr.haS5Voci }}" hint-placeholder-val="{{ false }}">
+                  <ul class="scr-lista">
+                    <sc-for list="{{ scr.s5Voci }}" as="v" hint-placeholder-count="3">
+                      <li class="{{ v.cls }}">{{ v.t }}</li>
+                    </sc-for>
+                  </ul>
+                </sc-if>
+                <sc-if value="{{ scr.haHpv }}" hint-placeholder-val="{{ false }}">
+                  <p class="nota"><a href="{{ scr.hrefHpv }}">{{ scr.hpv }}</a></p>
+                </sc-if>
+              </div>
+            </div>
+
+            <sc-if value="{{ scr.haInvito }}" hint-placeholder-val="{{ false }}">
+              <div class="banda b-bianco wrap sezione" data-screen-label="Lettera non arrivata">
+                <div class="fx col gap20">
+                  <h2>{{ scr.s6h2 }}</h2>
+                  <p>{{ scr.s6p }}</p>
+                  <a class="cta-2" href="{{ scr.hrefInvito }}">{{ scr.s6btn }}</a>
+                </div>
+              </div>
+            </sc-if>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Domande">
+              <div class="fx col gap20">
+                <h2>{{ scr.s7h2 }}</h2>
+                <div class="scr-domande fx col gap14">
+                  <sc-for list="{{ scr.domande }}" as="q" hint-placeholder-count="4">
+                    <details class="elenco">
+                      <summary>
+                        <h3>{{ q.d }}</h3>
+                        <svg class="frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                      </summary>
+                      <p>{{ q.r }}</p>
+                    </details>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-crema b-avvertenza wrap sezione" data-screen-label="Avvertenze">
+              <div class="fx col gap12">
+                <sc-for list="{{ scr.avvisi }}" as="t" hint-placeholder-count="3">
+                  <p class="nota">{{ t.t }}</p>
+                </sc-for>
+              </div>
+            </div>
+
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ vistaChi }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Chi siamo">
+
+            <div class="banda hero wrap sezione" data-screen-label="Chi siamo apertura">
+              <div class="hero-sfondo" aria-hidden="true">
+                <img src="./img/foto/foto-si-panchina.webp" alt="" loading="lazy" decoding="async">
+                <span class="hero-velo"></span>
+              </div>
+              <div class="fx col gap16">
+                <div class="occhiello">Chi siamo</div>
+                <h1>Screening Italia</h1>
+                <p>Un’iniziativa di Angelo Zaglio &amp; Partners.</p>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Chi è Angelo Zaglio">
+              <div class="fx col gap16">
+                <p>Angelo Zaglio è un medico specialista in medicina preventiva, igiene e organizzazione dei servizi ospedalieri.</p>
+                <p>Attualmente è Direttore Sanitario.</p>
+                <p>È stato Funzionario dell’Organizzazione Mondiale della Sanità, Esperto senior della Commissione europea e del Ministero degli affari esteri.</p>
+                <p>Ha istituzionalizzato in Italia il Diritto Ospedaliero, nella prima decade degli anni duemila, con i primi 2 Trattati di diritto ospedaliero della storia d’Italia: Le leggi dell'ospedale (Library of Congress, 2001), e il Trattato di legislazione Ospedaliera (Biblioteca Centrale Giuridica Ministero della giustizia, Ministero della Salute, Istituto Superiore di Sanità, 2009). E con il primo Congresso di Diritto Ospedaliero nella storia d’Italia. Il Trattato “Le leggi dell’ospedale”, è inserito quale riferimento per la parte “Documentazione Sanitaria”, nell’ Enciclopedia di Bioetica e Scienza Giuridica.</p>
+                <p>Recentemente è stato selezionato da ATS Pavia per apportare un valore strategico e di alto profilo nell’ambito del progetto CCM “valutazione della fattibilità di programmi organizzati sullo screening della prostata e loro efficacia nel ridurre l’inappropriatezza dell’uso del test PSA nel contesto italiano. programma ccm 2023”.</p>
+                <p>I Partners sono avvocati, imprenditori, cittadini, studenti, medici, infermieri, assistenti sanitari di tutta Italia.</p>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" data-screen-label="Come lavoriamo">
+              <div class="fx col gap20">
+                <h2>Un elenco curato e verificato, non un algoritmo</h2>
+                <p>Consultiamo e controlliamo le informazioni delle Istituzioni, delle ASL, degli ospedali e delle associazioni.</p>
+                <h2>Il procedimento di verifica</h2>
+                <div class="fx col gap14">
+                  <div class="card fx col gap8">
+                    <h3>1. Ricezione della segnalazione</h3>
+                    <p>Dall’ente organizzatore o da chi ne è venuto a conoscenza.</p>
+                  </div>
+                  <div class="card fx col gap8">
+                    <h3>2. Riscontro sulla fonte ufficiale</h3>
+                    <p>Il sito dell’azienda sanitaria, dell’ospedale o dell’associazione. In assenza di riscontro contattiamo il numero indicato.</p>
+                  </div>
+                  <div class="card fx col gap8">
+                    <h3>3. Pubblicazione, con la data</h3>
+                    <p>Le informazioni non verificate non vengono pubblicate. Alla chiusura dell’iniziativa la scheda viene rimossa.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-blu wrap sezione" data-screen-label="Cosa non facciamo">
+              <div class="fx col gap16">
+                <h2>Ambito del servizio</h2>
+                <p>Non gestiamo prenotazioni, non vendiamo prestazioni, non raccogliamo dati sanitari e non diamo pareri clinici: per quelli la competenza è del tuo medico di medicina generale.</p>
+                <a class="cta-2" href="/contatti">Contatti</a>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" data-screen-label="Sito privato e indipendente">
+              <div class="fx col gap12">
+                <div class="avviso fx col gap8">
+                  <h3>Sito privato e indipendente</h3>
+                  <p>Screening Italia è un sito privato e indipendente. NON è affiliato né convenzionato con Servizio Sanitario Nazionale, Regioni, ASL, Ministero della Salute o Istituto Superiore di Sanità. NON parla a loro nome.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ vistaCarta }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Carta dei servizi">
+
+            <div class="banda hero wrap sezione" data-screen-label="Carta apertura">
+              <div class="hero-sfondo" aria-hidden="true">
+                <img src="./img/foto/foto-si-panchina.webp" alt="" loading="lazy" decoding="async">
+                <span class="hero-velo"></span>
+              </div>
+              <div class="fx col gap16">
+                <div class="occhiello">Carta dei servizi SI</div>
+                <h1>Carta dei servizi di Screening Italia</h1>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Vision">
+              <div class="fx col gap20">
+                <div class="cs-mission">
+                  <div class="occhiello">Vision</div>
+                  <p class="cs-lead"><strong>Screening Italia facilita i processi degli screening sanitari pubblici e privati</strong>: oncologici (mammella, colon-retto, prostata [PSA], polmone, cervice uterina [HPV, Pap test]) e non oncologici: HCV [Epatite C], diabete, neonatali, nutrizionali, cardiovascolari (INPS).</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Mission">
+              <div class="fx col gap20">
+                <nav class="cs-tabs" aria-label="Carta dei servizi"><a class="cs-tab" href="/carta" aria-current="page">Presentazione (Carta dei servizi)</a><a class="cs-tab" href="/razionale">Razionale</a></nav>
+                <div class="cs-mission">
+                  <div class="occhiello">Mission</div>
+                  <p class="cs-lead">Partner strategico delle Istituzioni, dei cittadini, e degli stakeholders, con l'obiettivo di migliorare la gestione globale degli screening sanitari, dalla pianificazione, all’esecuzione, al follow up.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" data-screen-label="Cosa fa Screening Italia">
+              <div class="fx col gap20">
+                <h2>Screening Italia</h2>
+                <p class="cs-lead">Una «Visibility Room» unica per le 10 tipologie di screening esistenti in Italia.</p>
+                <ul class="cs-elenco"><li>Si occupa di tutte le tipologie di screening (oncologici, nutrizionali, neonatali, diabete, cardiovascolari, HCV), per evidenziare l’importanza strategica del concetto globale di prevenzione secondaria strutturata, ovvero il concetto di Screening.</li><li>Opera in stretta sinergia e sintonia con le Istituzioni, il mondo del lavoro e le associazioni sindacali.</li><li>Agisce attraverso un modus operandi bottom-up, top down e trasversale, tramite il coinvolgimento attivo di tutti i portatori di interesse.</li><li>Sensibilizza, divulga, promuove, comunica, creando un ponte informativo chiaro ed efficace tra Istituzioni e Cittadini</li><li>Ha un ruolo sociale perché sensibilizza anche le fasce più giovani affinché lo screening diventi una scelta naturale e consapevole nel futuro, “Quando sarò grande farò gli screening”.</li><li>Pubblica online le iniziative dei portatori di interesse</li><li>Affianca e assiste le Istituzioni, diffondendo le loro iniziative, le best practices e le loro criticità</li><li>Affianca e assiste i cittadini e le associazioni ed è portavoce delle loro difficoltà, delle loro critiche e delle loro esperienze positive</li><li>Aiuta le associazioni a diffondere le proprie iniziative, a farle conoscere, a monetizzarle</li><li>Evidenzia le difficoltà esecutive e le congestioni operative, condividendo le problematiche emergenti</li><li>È tavolo di confronto e stakeholders forum</li><li>Genera nella popolazione Awareness, Commitment, Empowerment e Compliance, contribuendo così a favorire l’aumento della partecipazione dei cittadini agli Screening.</li></ul>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Domini">
+              <div class="fx col gap20">
+                <div class="card cs-evid">
+                  <p>Controlla il mercato italiano relativo ai domini di primo livello (TLD) screening related, essendo titolare dei diritti esclusivi di proprietà industriale di fondamentali nomi a dominio e relative estensioni, esclusivi e focalizzati sullo Screening: ciò permette di raggiungere uno dei suoi obiettivi: capillarizzare, amplificare e mirare l’azione e l’efficacia di divulgazione del “messaggio screening”.</p>
+                </div>
+                <div class="cs-fine">
+                  <a class="cta-2" href="/razionale">Leggi il Razionale</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" data-screen-label="Sito privato e indipendente">
+              <div class="fx col gap12">
+                <div class="avviso fx col gap8">
+                  <h3>Sito privato e indipendente</h3>
+                  <p>Screening Italia è un sito privato e indipendente. NON è affiliato né convenzionato con Servizio Sanitario Nazionale, Regioni, ASL, Ministero della Salute o Istituto Superiore di Sanità. NON parla a loro nome.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ vistaRazionale }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Razionale">
+
+            <div class="banda hero wrap sezione" data-screen-label="Razionale apertura">
+              <div class="hero-sfondo" aria-hidden="true">
+                <img src="./img/foto/foto-si-panchina.webp" alt="" loading="lazy" decoding="async">
+                <span class="hero-velo"></span>
+              </div>
+              <div class="fx col gap16">
+                <div class="occhiello">Carta dei servizi SI</div>
+                <h1>Razionale</h1>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Indice razionale">
+              <div class="fx col gap20">
+                <nav class="cs-tabs" aria-label="Carta dei servizi"><a class="cs-tab" href="/carta">Presentazione (Carta dei servizi)</a><a class="cs-tab" href="/razionale" aria-current="page">Razionale</a></nav>
+                <nav class="cs-indice" aria-label="In questa pagina">
+                  <span class="occhiello">In questa pagina</span>
+                  <button type="button" class="filtro" onClick="{{ vaiRazG }}">Razionale giuridico</button>
+                  <button type="button" class="filtro" onClick="{{ vaiRazS }}">Razionale scientifico</button>
+                  <button type="button" class="filtro" onClick="{{ vaiRazE }}">Razionale etico ed equity</button>
+                </nav>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" id="raz-g" tabindex="-1" data-screen-label="Razionale giuridico">
+              <div class="fx col gap20">
+                <h2>Razionale giuridico</h2>
+                <div class="card cs-sub"><h3>OMS</h3><ul class="cs-elenco cs-link"><li><a href="https://www.who.int/europe/publications/i/item/9789289057561" target="_blank" rel="noopener noreferrer">Linee guida screening</a></li><li><a href="https://www.who.int/publications/i/item/9789240030824" target="_blank" rel="noopener noreferrer">Screening cancro cervice</a></li></ul><p class="cs-intro">Molte Raccomandazioni e Linee Guida dell'OMS riguardano gli screening, ad esempio:</p><ul class="cs-elenco"><li><a href="https://www.who.int/publications/i/item/9789240102248" target="_blank" rel="noopener noreferrer">le nuove linee guida per il monitoraggio globale della prevenzione e del controllo del diabete.</a> Inoltre il <a href="https://www.who.int/initiatives/the-who-global-diabetes-compact" target="_blank" rel="noopener noreferrer">Global Diabetes Compact,</a> introdotto nel 2021, rimane al centro delle iniziative globali per migliorare la prevenzione, la diagnosi precoce e la gestione del diabete</li><li><a href="https://www.who.int/teams/noncommunicable-diseases/on-the-road-to-2025" target="_blank" rel="noopener noreferrer">Il quarto incontro di alto livello dell'Assemblea generale delle Nazioni Unite sulla prevenzione e il controllo delle malattie non trasmissibili (NCD)</a></li><li>Le Linee guida OMS per lo screening e il trattamento delle lesioni pre-cancerose del collo dell'utero nella prevenzione del cancro della cervice.</li><li>L'ufficio regionale europeo dell'OMS ha pubblicato una guida dal titolo "A short guide to cancer screening" finalizzata ad aiutare i policy maker ad aumentare i benefici dei programmi di screening del cancro esistenti e continuare a promuovere nuovi programmi. Viene evidenziato inoltre che, lo screening del cancro non è semplicemente un test ma, parte di un percorso di screening.</li><li>La 77ª Assemblea Mondiale della Sanità ha approvato una risoluzione che sollecita i Governi a rafforzare e ampliare i programmi di screening neonatale, riconoscendone il ruolo cruciale nella prevenzione e nella salute pubblica.</li></ul></div>
+                <div class="card cs-sub"><h3>Commissione Europea</h3><ul class="cs-elenco"><li>Piano europeo di lotta contro il cancro (2022)</li><li>Raccomandazioni su screening cervicale e colorettale</li></ul><h4><a href="https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX%3A52022DC0474" target="_blank" rel="noopener noreferrer">Nuovo approccio dell'UE allo screening dei tumori (Raccomandazione 2022)</a></h4><ul class="cs-elenco"><li>Molte Raccomandazioni e Linee Guida della Commissione Europea riguardano gli screening</li><li>Nell'ambito del piano europeo di lotta contro il cancro, nel 2022 I'UE ha accelerato il passo per aumentare l'accesso agli screening e migliorarne la qualità, coprendo un maggior numero di gruppi bersaglio e di tumori. Per quanto riguarda il cancro al seno, la Commissione aiuterà i paesi dell'UE a garantire che il 90% dei gruppi destinatari ammissibili abbia accesso a screening basati su dati concreti e di qualità garantita.</li><li>Screening cervicale e colorettale: <a href="https://cancer-screening-and-care.jrc.ec.europa.eu/en/ecicc" target="_blank" rel="noopener noreferrer">le raccomandazioni europee.</a></li><li><a href="https://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX%3A32022H1213%2801%29" target="_blank" rel="noopener noreferrer">Raccomandazione</a> del Consiglio del 9 dicembre 2022 relativa al rafforzamento della prevenzione attraverso l'individuazione precoce: un nuovo approccio dell'UE allo screening dei tumori.</li></ul><h4><a href="https://www.epicentro.iss.it/screening/jaeucanscreen" target="_blank" rel="noopener noreferrer">EUCanScreen: la JA europea sugli screening oncologici</a></h4><p>Lanciata nell’ambito del Programma EU4Health a giugno 2024, con una durata di quattro anni, l’Azione congiunta europea EUCanScreen (Joint Action on the new EU cancer screening scheme implementation) si prefigge l’obiettivo di garantire un'implementazione sostenibile di screening di alta qualità per il cancro al seno, al collo dell'utero e al colon retto e l'attuazione dei programmi di screening recentemente raccomandati per i tumori del polmone, della prostata e dello stomaco.</p></div>
+                <div class="card cs-sub"><h3>Legislazione Nazionale</h3><ul class="cs-elenco"><li>Gli screening rientrano nei Livelli Essenziali di Assistenza (LEA) come programmi di prevenzione e diagnosi precoce di malattie, che il Servizio Sanitario Nazionale (SSN) è tenuto a fornire a tutti i cittadini: un LEA è lo strumento attraverso cui si concretizzano i diritti costituzionali, in particolare il diritto alla salute sancito dal<a href="https://www.senato.it/istituzione/la-costituzione/parte-i/titolo-ii/articolo-32" target="_blank" rel="noopener noreferrer">l'articolo 32 della Costituzione.</a> Essi garantiscono un livello minimo uniforme di prestazioni e servizi sanitari su tutto il territorio nazionale, realizzando così il principio di uguaglianza e tutela della salute a carico del Servizio Sanitario Nazionale e quindi gratuiti</li><li>L'Italia è impegnata attivamente nei programmi di screening oncologico dall'inizio degli anni '90, negli screening oncologici.</li><li>L'Italia è considerato un leader in Europa per quanto riguarda lo screening dei tumori e contribuisce attivamente alle raccomandazioni europee.</li><li>Gli screening rientrano fra le strategie per "ridurre il carico prevenibile di morbosità, mortalità e disabilità delle malattie non trasmissibili". Gli obiettivi centrali per le Regioni: aumentare l'estensione reale dei programmi di screening alla popolazione target (per ognuno dei 3 tumori oggetto di screening), aumentare i soggetti a rischio sottoposti a screening oncologico, riorientare/avviare i programmi di screening per il cancro della cervice uterina introducendo il test Hpv-Dna.</li><li>Vengono definite modalità e criteri di realizzazione dei programmi per il superamento delle criticità nelle Regioni meridionali e insulari.</li></ul><p class="cs-intro">La partecipazione dei cittadini e della nostra iniziativa in Sanità è legittimata e auspicata dai più importanti presupposti di legge:</p><ul class="cs-elenco"><li>Legge 833/1978 (Istitutiva del SSN): Sancisce che l'attuazione del servizio sanitario compete allo Stato garantendo la partecipazione dei cittadini.</li><li>D.Lgs. 502/1992 (Art. 14 - Partecipazione e tutela dei diritti): Prevede esplicitamente che le Regioni promuovano consultazioni con i cittadini e le organizzazioni di volontariato per la programmazione, il controllo e la valutazione dei servizi. Questo ha portato all'istituzione dei CCM (Comitati Consultivi Misti).</li></ul><ul class="cs-elenco"><li><a href="https://www.normattiva.it/uri-res/N2Ls?urn%3Anir%3Astato%3Adecreto.legge%3A2025-10-31%3B159" target="_blank" rel="noopener noreferrer">Il 31 ottobre 2025 è entrato in vigore il decreto legge 159/2025,</a> che introduce permessi specifici e retribuiti per chi si sottopone a screening oncologici in orario di lavoro. Uno degli obiettivi del dl è potenziare la partecipazione dei cittadini agli screening oncologici, peraltro gratuiti e garantiti dal Servizio Sanitario Nazionale. Vengono introdotti permessi retribuiti per coloro che hanno intenzione di sottoporsi agli screening per i tumori del seno, i tumori della cervice uterina, i tumori del colon retto, che sono i tre principali programmi di prevenzione oncologica organizzata del SSN. Il medico aziendale (chiamato medico competente), fornirà informazioni ai lavoratori sull'importanza della prevenzione oncologica, promuovendo l'adesione ai programmi di screening oncologici previsti dai livelli essenziali di Assistenza (LEA), informando le lavoratrici e i lavoratori sulla loro finalità ed utilità anche con il supporto di campagne informative a tale scopo promosse dal Ministero della Salute.</li><li>Il 23 ottobre 2025 la Conferenza Stato-Regioni ha approvato un nuovo aggiornamento dei Livelli essenziali di assistenza (LEA) che include importanti novità per gli screening, come l'ampliamento dello screening neonatale esteso a 8 nuove patologie, l'introduzione di un programma di sorveglianza per i tumori BRCA- correlati e la standardizzazione nazionale dello screening per la SM-SMA. Questo aggiornamento modifica il DPCM del 12 gennaio 2017.</li><li>La legge 15 settembre 2023, n. 130, definisce un programma diagnostico per l'individuazione del diabete di tipo 1 e della celiachia nella popolazione pediatrica. E' la prima legge al mondo di questo tipo. Dopo un anno di sperimentazione, si è visto che lo screening sui bambini per il diabete di tipo 1 e la celiachia funziona e riesce a intercettare precocemente i possibili casi. Lo affermano i primi risultati del progetto coordinato dal Ministero della Salute e dall'Istituto Superiore di Sanità.</li><li>Numerosissime disposizioni di legge, comprendenti il Piano oncologico nazionale, il Piano nazionale della prevenzione, il Piano Sanitario Nazionale, riguardano gli screening, definendo obiettivi ambiziosi ma perseguibili e misurabili in tema di promozione della salute e prevenzione, e rafforzano la necessità di investire sulla messa a sistema in tutte le Regioni dei programmi di prevenzione collettiva di provata efficacia come gli screening oncologici, che rientrano fra le strategie per ridurre la mortalità e morbilità dovuta alle tre patologie oncologiche attualmente oggetto di screening (carcinoma della cervice uterina, mammario e del colon retto).</li><li>Il Piano Sanitario Nazionale 1998-2000 estende inoltre a tutto il territorio nazionale gli screening che si sono dimostrati efficaci nel modificare la storia naturale di una malattia.</li></ul></div>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" id="raz-s" tabindex="-1" data-screen-label="Razionale scientifico">
+              <div class="fx col gap20">
+                <h2>Razionale scientifico</h2>
+                <ul class="cs-elenco"><li>Gli screening sono efficaci e riducono mortalità e morbilità.</li><li>È dimostrato che lo screening mammografico può ridurre di più del 30% la mortalità per cancro al seno nelle donne che lo effettuano ogni due anni fra i 50 e i 69 anni. (AIRC)</li><li>Secondo le nuove <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022H1213(01)" target="_blank" rel="noopener noreferrer">raccomandazioni della Commissione Europea,</a> pubblicate nel 2022, i programmi di screening dovrebbero essere potenziati e ampliati per includere nuove fasce di età e nuovi esami diagnostici. Questo dimostra quanto il loro impatto sia riconosciuto a livello internazionale come una delle strategie più efficaci per combattere il cancro.</li><li>Gli screening oncologici rappresentano uno strumento fondamentale di Sanità pubblica per la prevenzione secondaria, permettendo la diagnosi precoce dei tumori e, di conseguenza, migliorando significativamente le possibilità di trattamento e sopravvivenza dei pazienti.</li><li>Lo screening neonatale permette di identificare precocemente numerose malattie, anche gravissime, entro i primi giorni di vita dei neonati.</li><li>Questo test, oltre ad essere obbligatorio, è un diritto per tutti i nuovi nati e viene eseguito presso il centro nascita prima che il bambino lasci l’ospedale: in Italia, per legge, fra le 48 e le 72 ore di vita. Con lo screening neonatale esteso in Italia oggi si ricerca la possibile presenza di <a href="https://www.osservatorioscreening.it/screening-neonatale-malattie-metaboliche/" target="_blank" rel="noopener noreferrer">49 diverse malattie.</a></li><li>La Legge 130/2023 ha istituito un programma nazionale di screening gratuito e volontario per il diabete di tipo 1 e la celiachia nella popolazione pediatrica (1-17 anni), un primato mondiale, per permettere una diagnosi precoce e prevenire complicanze gravi come la chetoacidosi diabetica. I dati del progetto pilota mostrano una riduzione del 49% dei casi di chetoacidosi grave</li></ul>
+                <div class="card cs-evid">
+                  <div class="occhiello"><a href="https://www.rainews.it/articoli/2026/02/tumori-aumentano-nei-giovani-in-crescita-neoplasie-colon-pancreas-e-polmone-7c669b72-4c80-40c8-87a8-4039e45e9494.html" target="_blank" rel="noopener noreferrer">2026. Giornata mondiale contro il cancro</a></div>
+                  <h3>Tumori, aumentano nei giovani: in crescita neoplasie colon, pancreas e polmone</h3>
+                  <p>L'allarme del Policlinico Gemelli: "Per il colon +80% di casi under 50 entro il 2040"</p>
+                  <p>Alla luce dell'aumento dei casi di cancro prima dei 50 anni il Consiglio d'Europa ha già raccomandato l'anticipazione dei programmi di screening oncologico, in particolare per i tumori del colon e della mammella</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" id="raz-e" tabindex="-1" data-screen-label="Razionale etico ed equity">
+              <div class="fx col gap20">
+                <h2>Razionale etico ed equity</h2>
+                <ul class="cs-elenco"><li>Nonostante l'importanza riconosciuta, persistono criticità legate alla copertura, all'adesione della popolazione, alla sostenibilità economica e all'efficacia complessiva degli screening, che richiedono un approfondimento e un confronto tra gli operatori del settore.</li><li>L’introduzione di nuove tecnologie e metodologie, come l’Intelligenza artificiale e l'uso di biomarcatori, sta trasformando il panorama della diagnosi precoce, rendendo necessario un aggiornamento costante per i professionisti coinvolti nei programmi di screening. <a href="https://www.sanita.puglia.it/documents/47906/606722/Locandina%2Bevento%2Bscreening%2B13%2Bdicembre%2B2024.pdf/1391bc08-4388-6de6-cb4a-edc58a524584?t=1751122513267" target="_blank" rel="noopener noreferrer">(Congresso 13 dicembre 2024, Brindisi)</a></li><li>È necessario affrontare le disuguaglianze nell’accesso agli screening, garantendo che i servizi siano equamente disponibili per tutta la popolazione, indipendentemente da fattori socio-economici o geografici. <a href="https://www.sanita.puglia.it/documents/47906/606722/Locandina%2Bevento%2Bscreening%2B13%2Bdicembre%2B2024.pdf/1391bc08-4388-6de6-cb4a-edc58a524584?t=1751122513267" target="_blank" rel="noopener noreferrer">(Congresso 13 dicembre 2024, Brindisi)</a></li></ul>
+                <div class="cs-fine">
+                  <a class="cta-2" href="/carta">Torna alla Presentazione</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ vistaContatti }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Contatti">
+
+            <div class="banda hero wrap sezione" data-screen-label="Contatti apertura">
+              <div class="hero-sfondo" aria-hidden="true">
+                <img src="./img/foto/foto-si-lettera.webp" alt="" loading="lazy" decoding="async">
+                <span class="hero-velo"></span>
+              </div>
+              <div class="fx col gap16">
+                <div class="occhiello">Contatti</div>
+                <h1>Contatti</h1>
+                <p>Segnala un’iniziativa o un dato sbagliato, racconta la tua esperienza o lasciaci un feedback: ogni messaggio viene letto e, se serve, la pagina si aggiorna.</p>
+              </div>
+            </div>
+
+            <div class="banda b-verde wrap sezione" data-screen-label="Modulo">
+              <div class="fx col gap20 modulo-colonna">
+                <h2>Scrivici</h2>
+                <sc-if value="{{ msgInviato }}" hint-placeholder-val="{{ false }}">
+                  <div class="fatto" role="status">Si è aperta la tua posta? Controlla il messaggio e premi «Invia». Se non si è aperta, scrivici a info@screeningitalia.it e copia in fondo la frase del consenso.</div>
+                </sc-if>
+                <sc-if value="{{ msgDaCompilare }}" hint-placeholder-val="{{ true }}">
+                  <div class="modulo fx col gap16">
+                    <div class="fx col gap6">
+                      <label class="sr" for="m-nome">Nome e cognome</label>
+                      <input class="campo" id="m-nome" type="text" placeholder="Nome e cognome" autocomplete="name" value="{{ mNome }}" onInput="{{ scriviNome }}">
+                    </div>
+                    <div class="fx col gap6">
+                      <label class="sr" for="m-mail">Email</label>
+                      <input class="campo" id="m-mail" type="email" placeholder="Email" autocomplete="email" value="{{ mMail }}" onInput="{{ scriviIndirizzo }}">
+                    </div>
+                    <!-- QA 390 LORI 21/10: niente tendina, scelta con pulsanti radio grandi. Stessi valori nella mail. -->
+                    <fieldset class="campo-gruppo fx col gap6">
+                      <legend class="etichetta">Di cosa si tratta</legend>
+                      <div class="scelte scelte-radio">
+                        <label class="scelta scelta-radio">
+                          <input class="sr" type="radio" name="m-tipo" id="m-tipo-5" value="Racconto la mia esperienza" checked="{{ mTipo5 }}" onChange="{{ scriviTipo }}">
+                          <span class="pallino" aria-hidden="true"></span>
+                          <span class="scelta-nome">Racconto la mia esperienza</span>
+                        </label>
+                        <label class="scelta scelta-radio">
+                          <input class="sr" type="radio" name="m-tipo" id="m-tipo-1" value="Segnalo un’iniziativa" checked="{{ mTipo1 }}" onChange="{{ scriviTipo }}">
+                          <span class="pallino" aria-hidden="true"></span>
+                          <span class="scelta-nome">Segnalo un’iniziativa</span>
+                        </label>
+                        <label class="scelta scelta-radio">
+                          <input class="sr" type="radio" name="m-tipo" id="m-tipo-6" value="Lascio un feedback" checked="{{ mTipo6 }}" onChange="{{ scriviTipo }}">
+                          <span class="pallino" aria-hidden="true"></span>
+                          <span class="scelta-nome">Lascio un feedback</span>
+                        </label>
+                        <label class="scelta scelta-radio">
+                          <input class="sr" type="radio" name="m-tipo" id="m-tipo-2" value="Segnalo un dato sbagliato" checked="{{ mTipo2 }}" onChange="{{ scriviTipo }}">
+                          <span class="pallino" aria-hidden="true"></span>
+                          <span class="scelta-nome">Segnalo un dato sbagliato</span>
+                        </label>
+                        <label class="scelta scelta-radio">
+                          <input class="sr" type="radio" name="m-tipo" id="m-tipo-3" value="Ho una domanda" checked="{{ mTipo3 }}" onChange="{{ scriviTipo }}">
+                          <span class="pallino" aria-hidden="true"></span>
+                          <span class="scelta-nome">Ho una domanda</span>
+                        </label>
+                        <label class="scelta scelta-radio">
+                          <input class="sr" type="radio" name="m-tipo" id="m-tipo-4" value="Altro" checked="{{ mTipo4 }}" onChange="{{ scriviTipo }}">
+                          <span class="pallino" aria-hidden="true"></span>
+                          <span class="scelta-nome">Altro</span>
+                        </label>
+                      </div>
+                    </fieldset>
+                    <div class="fx col gap6">
+                      <label class="etichetta" for="m-testo">Il tuo messaggio</label>
+                      <textarea class="campo campo-area" id="m-testo" rows="5" maxLength="1200" required="required" placeholder="Scrivi qui il tuo messaggio. Se segnali un’iniziativa, indica ente, sede, date e recapito." value="{{ mTesto }}" onInput="{{ scriviTesto }}" aria-invalid="{{ mInvTesto }}" aria-describedby="{{ mDescTesto }}"></textarea>
+                      <p class="nota" id="m-conta">{{ mConta }}</p>
+                      <sc-if value="{{ mErrTesto }}" hint-placeholder-val="{{ false }}">
+                        <p class="errore" id="m-err-testo" role="alert">Scrivi il tuo messaggio prima di andare avanti.</p>
+                      </sc-if>
+                    </div>
+                    <div class="fx col gap6">
+                      <label class="consenso">
+                        <input type="checkbox" id="m-ok" required="required" checked="{{ mOk }}" onChange="{{ mSpunta }}" aria-invalid="{{ mInvOk }}" aria-describedby="{{ mDescOk }}">
+                        <sc-if value="{{ mTipo5 }}" hint-placeholder-val="{{ false }}">
+                          <span>Ho letto l'informativa e acconsento esplicitamente al trattamento dei dati sulla salute contenuti nel mio racconto e alla sua pubblicazione in forma anonima.</span>
+                        </sc-if>
+                        <sc-if value="{{ mNonTipo5 }}" hint-placeholder-val="{{ true }}">
+                          <span>Ho letto l'informativa e acconsento al trattamento dei miei dati per ricevere una risposta.</span>
+                        </sc-if>
+                      </label>
+                      <sc-if value="{{ mErrOk }}" hint-placeholder-val="{{ false }}">
+                        <p class="errore" id="m-err-ok" role="alert">Per mandare il messaggio devi spuntare la casella del consenso.</p>
+                      </sc-if>
+                    </div>
+                    <button type="button" class="cta" onClick="{{ inviaModulo }}">Apri la mail con il messaggio</button>
+                    <p class="nota">Si apre la tua posta con il testo già scritto. Il messaggio parte solo quando premi «Invia» lì. Dal sito non salviamo nulla.</p>
+                    <p class="nota">Il messaggio arriva a info@screeningitalia.it. Usiamo questi dati solo per risponderti: non chiediamo né registriamo informazioni sanitarie.</p>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" data-screen-label="Sito privato e indipendente">
+              <div class="fx col gap12">
+                <div class="avviso fx col gap8">
+                  <h3>Sito privato e indipendente</h3>
+                  <p>Screening Italia è un sito privato e indipendente. NON è affiliato né convenzionato con Servizio Sanitario Nazionale, Regioni, ASL, Ministero della Salute o Istituto Superiore di Sanità. NON parla a loro nome.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </sc-if>
+
+
+        <sc-if value="{{ vistaTesti }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Testimonianze">
+
+            <!-- Apertura senza foto (brief LORI §1.5): resta il fondo scuro con il velo. -->
+            <div class="banda hero wrap sezione" data-screen-label="Apertura testimonianze">
+              <div class="hero-sfondo" aria-hidden="true">
+                <span class="hero-velo"></span>
+              </div>
+              <div class="fx col gap16">
+                <div class="occhiello testi-occhiello">Testimonianze</div>
+                <h1>Storie di chi ci è passato</h1>
+                <p>Chi ha fatto uno screening racconta com'è andata, con parole sue.</p>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap banda-larga sezione" data-screen-label="Tutte le testimonianze">
+              <div class="fx col gap20">
+                <p class="testi-intro">Sono esperienze personali: nessuna ti promette lo stesso risultato e nessuna vale come consiglio medico, per decidere c'è il tuo medico. Le pubblichiamo anonime, con il permesso di chi scrive, che non riceve compensi.</p>
+                <sc-if value="{{ testiEsempi }}" hint-placeholder-val="{{ false }}">
+                <div class="finto">Testimonianze di esempio: nel prototipo non sono persone reali.</div>
+                </sc-if>
+                <div class="testi-griglia">
+                  <sc-for list="{{ testiTutte }}" as="t" hint-placeholder-count="2">
+                    <figure class="testi">
+                      <svg class="testi-virg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M9 7H5v6h4v-2c0 2-1 3-3 3v2c3 0 5-2 5-5V7zm10 0h-4v6h4v-2c0 2-1 3-3 3v2c3 0 5-2 5-5V7z"></path></svg>
+                      <blockquote class="testi-txt">
+                        <sc-for list="{{ t.paragrafi }}" as="q" hint-placeholder-count="1"><p>{{ q.t }}</p></sc-for>
+                      </blockquote>
+                      <figcaption class="testi-chi">
+                        <span class="testi-nome">{{ t.nome }}</span>
+                        <span class="testi-ruolo">{{ t.riga }}</span>
+                      </figcaption>
+                    </figure>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Racconta la tua">
+              <div class="fx col gap16">
+                <h2>Hai fatto uno screening?</h2>
+                <p>Racconta com'è andata: la tua storia può aiutare chi non sa da dove iniziare. Esce solo anonima, e solo dopo che hai approvato il testo finale.</p>
+                <a class="cta" href="/contatti">Racconta la tua storia</a>
+              </div>
+            </div>
+
+          </div>
+        </sc-if>
+
+
+        <!-- Centri screening delle ASL (note di Angelo, 17/10/2026). Dati dal pannello (centri-wp.js):
+             schede per regione, ogni riga solo se il dato c'e. Testi da far rivedere a MUSE. -->
+        <sc-if value="{{ vistaCentri }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Centri screening">
+
+            <div class="banda hero wrap sezione" data-screen-label="Apertura Centri screening">
+              <div class="hero-sfondo" aria-hidden="true">
+                <span class="hero-velo"></span>
+              </div>
+              <div class="fx col gap16">
+                <div class="occhiello">Centri Screening ASL</div>
+                <h1>I centri screening delle ASL</h1>
+                <p>Gli indirizzi e i recapiti dei centri screening, regione per regione. Per prenotare o chiedere informazioni si contatta direttamente il centro.</p>
+              </div>
+            </div>
+
+            <sc-if value="{{ haCentri }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-crema wrap sezione" data-screen-label="Elenco centri">
+              <div class="fx col gap32">
+                <sc-for list="{{ centriGruppi }}" as="g" hint-placeholder-count="1">
+                  <section class="centri-reg fx col gap16">
+                    <h2>{{ g.reg }}</h2>
+                    <div class="centri-griglia">
+                      <sc-for list="{{ g.centri }}" as="c" hint-placeholder-count="2">
+                        <article class="centro">
+                          <h3>{{ c.nome }}</h3>
+                          <sc-if value="{{ c.haAsl }}" hint-placeholder-val="{{ true }}"><p class="centro-asl">{{ c.asl }}</p></sc-if>
+                          <sc-if value="{{ c.haScreening }}" hint-placeholder-val="{{ true }}"><p class="centro-scr">{{ c.screening }}</p></sc-if>
+                          <dl class="centro-dati">
+                            <sc-if value="{{ c.haIndirizzo }}" hint-placeholder-val="{{ true }}"><div><dt>Dove</dt><dd>{{ c.indirizzo }}</dd></div></sc-if>
+                            <sc-if value="{{ c.haOrari }}" hint-placeholder-val="{{ false }}"><div><dt>Orari</dt><dd><sc-for list="{{ c.orari }}" as="o" hint-placeholder-count="1"><span class="centro-riga">{{ o.t }}</span></sc-for></dd></div></sc-if>
+                            <sc-if value="{{ c.haEmail }}" hint-placeholder-val="{{ false }}"><div><dt>Email</dt><dd><a href="{{ c.hrefEmail }}">{{ c.email }}</a></dd></div></sc-if>
+                            <sc-if value="{{ c.haSito }}" hint-placeholder-val="{{ false }}"><div><dt>Sito</dt><dd><a href="{{ c.sito }}" target="_blank" rel="noopener noreferrer">Apri il sito del centro</a></dd></div></sc-if>
+                          </dl>
+                          <sc-if value="{{ c.haNote }}" hint-placeholder-val="{{ false }}"><p class="centro-note">{{ c.note }}</p></sc-if>
+                          <sc-if value="{{ c.haTel }}" hint-placeholder-val="{{ true }}"><a class="cta centro-tel" href="{{ c.hrefTel }}">Chiama {{ c.tel }}</a></sc-if>
+                        </article>
+                      </sc-for>
+                    </div>
+                  </section>
+                </sc-for>
+              </div>
+            </div>
+            </sc-if>
+
+            <sc-if value="{{ centriVuota }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-crema wrap sezione" data-screen-label="Stato vuoto Centri screening">
+              <div class="fx col gap16">
+                <div class="avviso fx col gap12">
+                  <h2>Stiamo raccogliendo i centri</h2>
+                  <p>L’elenco dei centri screening delle ASL è in preparazione. Intanto trovi le iniziative aperte regione per regione.</p>
+                  <a class="cta" href="/trova">Vedi le iniziative per regione</a>
+                </div>
+              </div>
+            </div>
+            </sc-if>
+
+          </div>
+        </sc-if>
+
+
+        <sc-if value="{{ vistaBp }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Buone pratiche">
+
+            <div class="banda hero wrap sezione" data-screen-label="Apertura Buone pratiche">
+              <div class="hero-sfondo" aria-hidden="true">
+                <span class="hero-velo"></span>
+              </div>
+              <div class="fx col gap16">
+                <div class="occhiello testi-occhiello">Esperienze</div>
+                <h1>Buone pratiche</h1>
+              </div>
+            </div>
+
+            <sc-if value="{{ haBp }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-crema wrap banda-larga sezione" data-screen-label="Elenco Buone pratiche">
+              <div class="fx col gap20">
+                <p class="testi-intro">Qui trovi le cose che nel servizio di screening hanno funzionato bene: una lettera chiara, un kit arrivato in tempo, una prenotazione semplice. Le raccontano i lettori, noi le riscriviamo senza nomi.</p>
+                <sc-if value="{{ espEsempi }}" hint-placeholder-val="{{ false }}">
+                <div class="finto">Esperienze di esempio: nel prototipo non sono casi reali.</div>
+                </sc-if>
+                <div class="testi-griglia">
+                  <sc-for list="{{ bpTutte }}" as="e" hint-placeholder-count="1">
+                    <article class="testi esp esp-bp">
+                      <span class="tag tag-tipo tag-bp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Ha funzionato</span>
+                      <p class="testi-ruolo">{{ e.riga }}</p>
+                      <h3>{{ e.titolo }}</h3>
+                      <div class="testi-txt">
+                        <sc-for list="{{ e.paragrafi }}" as="q" hint-placeholder-count="1"><p>{{ q.t }}</p></sc-for>
+                      </div>
+                    </article>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Racconta la tua">
+              <div class="fx col gap16">
+                <h2>Se qualcosa ha funzionato bene anche per te, puoi raccontarlo.</h2>
+                <a class="cta" href="/racconta?tipo=buona">Racconta la tua esperienza</a>
+              </div>
+            </div>
+            </sc-if>
+
+            <!-- Pagina vuota raggiunta da un link salvato (LORI §3): stato vuoto con due uscite. -->
+            <sc-if value="{{ bpVuota }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-crema wrap sezione" data-screen-label="Stato vuoto Buone pratiche">
+              <div class="fx col gap16">
+                <p class="testi-intro">Qui trovi le cose che nel servizio di screening hanno funzionato bene: una lettera chiara, un kit arrivato in tempo, una prenotazione semplice. Le raccontano i lettori, noi le riscriviamo senza nomi.</p>
+                <div class="avviso fx col gap12">
+                  <p>Non abbiamo ancora pubblicato buone pratiche. La prima può essere la tua.</p>
+                  <a class="cta" href="/racconta?tipo=buona">Racconta la tua esperienza</a>
+                  <a class="cta-2" href="/">Torna alla home</a>
+                </div>
+              </div>
+            </div>
+            </sc-if>
+
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ vistaDiff }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Difficoltà e disservizi">
+
+            <div class="banda hero wrap sezione" data-screen-label="Apertura Difficoltà e disservizi">
+              <div class="hero-sfondo" aria-hidden="true">
+                <span class="hero-velo"></span>
+              </div>
+              <div class="fx col gap16">
+                <div class="occhiello testi-occhiello">Esperienze</div>
+                <h1>Difficoltà e disservizi</h1>
+              </div>
+            </div>
+
+            <sc-if value="{{ haDiff }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-crema wrap banda-larga sezione" data-screen-label="Elenco Difficoltà e disservizi">
+              <div class="fx col gap20">
+                <p class="testi-intro">Qui trovi le cose che nel servizio di screening si sono inceppate: un invito mai arrivato, una lettera difficile da capire, un numero che non risponde. Le pubblichiamo per far vedere dove il servizio si può migliorare, non per accusare qualcuno. Per questo non trovi nomi di persone né di strutture.</p>
+                <sc-if value="{{ espEsempi }}" hint-placeholder-val="{{ false }}">
+                <div class="finto">Esperienze di esempio: nel prototipo non sono casi reali.</div>
+                </sc-if>
+                <div class="testi-griglia">
+                  <sc-for list="{{ diffTutte }}" as="e" hint-placeholder-count="1">
+                    <article class="testi esp esp-diff">
+                      <span class="tag tag-tipo tag-diff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 11.5a7.5 7.5 0 0 1-10.9 6.7L4 19.5l1.4-4.4A7.5 7.5 0 1 1 20 11.5z"></path></svg>Da migliorare</span>
+                      <p class="testi-ruolo">{{ e.riga }}</p>
+                      <h3>{{ e.titolo }}</h3>
+                      <div class="testi-txt">
+                        <sc-for list="{{ e.paragrafi }}" as="q" hint-placeholder-count="1"><p>{{ q.t }}</p></sc-for>
+                      </div>
+                    </article>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Racconta la tua">
+              <div class="fx col gap16">
+                <h2>Se qualcosa non ha funzionato, puoi raccontarlo.</h2>
+                <a class="cta" href="/racconta?tipo=difficolta">Racconta la tua esperienza</a>
+              </div>
+            </div>
+            </sc-if>
+
+            <!-- Pagina vuota raggiunta da un link salvato (LORI §3): stato vuoto con due uscite. -->
+            <sc-if value="{{ diffVuota }}" hint-placeholder-val="{{ false }}">
+            <div class="banda b-crema wrap sezione" data-screen-label="Stato vuoto Difficoltà e disservizi">
+              <div class="fx col gap16">
+                <p class="testi-intro">Qui trovi le cose che nel servizio di screening si sono inceppate: un invito mai arrivato, una lettera difficile da capire, un numero che non risponde. Le pubblichiamo per far vedere dove il servizio si può migliorare, non per accusare qualcuno. Per questo non trovi nomi di persone né di strutture.</p>
+                <div class="avviso fx col gap12">
+                  <p>Non abbiamo ancora pubblicato segnalazioni.</p>
+                  <a class="cta" href="/racconta?tipo=difficolta">Racconta la tua esperienza</a>
+                  <a class="cta-2" href="/">Torna alla home</a>
+                </div>
+              </div>
+            </div>
+            </sc-if>
+
+          </div>
+        </sc-if>
+
+        <!-- #/racconta (brief esperienze 13/10/2026, copy MUSE, struttura LORI §4).
+             Nessun dato salvato, nessuna fetch: il bottone apre la posta di chi scrive
+             con una mail gia scritta (mailto), che parte solo se lei o lui preme Invia. -->
+        <sc-if value="{{ vistaRacconta }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Racconta la tua esperienza">
+
+            <div class="banda hero wrap sezione" data-screen-label="Apertura racconta">
+              <div class="hero-sfondo" aria-hidden="true">
+                <span class="hero-velo"></span>
+              </div>
+              <div class="fx col gap16">
+                <div class="occhiello testi-occhiello">Esperienze</div>
+                <h1>Racconta la tua esperienza</h1>
+                <p>Una cosa che ha funzionato bene o una che è andata storta: tutte e due aiutano chi viene dopo di te. Leggiamo ogni racconto e, se lo pubblichiamo, lo riscriviamo senza alcun dato che ti identifichi.</p>
+              </div>
+            </div>
+
+            <div class="banda b-verde wrap sezione" data-screen-label="Modulo racconto">
+              <div class="fx col gap20">
+                <sc-if value="{{ rcAperta }}" hint-placeholder-val="{{ false }}">
+                  <div class="fatto" role="status">Si è aperta la tua posta? Controlla il messaggio e premi «Invia». Se non si è aperta, scrivici a info@screeningitalia.it e copia in fondo la frase del consenso.</div>
+                </sc-if>
+                <sc-if value="{{ rcDaCompilare }}" hint-placeholder-val="{{ true }}">
+                  <div class="modulo fx col gap16">
+                    <fieldset class="campo-gruppo fx col gap6" aria-describedby="{{ rcDescTipo }}">
+                      <legend class="etichetta">Cosa vuoi raccontare?</legend>
+                      <div class="scelte">
+                        <label class="scelta">
+                          <input class="sr" type="radio" name="rc-tipo" id="rc-tipo-bp" value="bp" checked="{{ rcTipoBp }}" onChange="{{ rcScegliBp }}" aria-invalid="{{ rcInvTipo }}">
+                          <svg class="scelta-icona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+                          <span class="scelta-nome">Una cosa che ha funzionato</span>
+                        </label>
+                        <label class="scelta">
+                          <input class="sr" type="radio" name="rc-tipo" id="rc-tipo-diff" value="diff" checked="{{ rcTipoDiff }}" onChange="{{ rcScegliDiff }}" aria-invalid="{{ rcInvTipo }}">
+                          <svg class="scelta-icona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 11.5a7.5 7.5 0 0 1-10.9 6.7L4 19.5l1.4-4.4A7.5 7.5 0 1 1 20 11.5z"></path></svg>
+                          <span class="scelta-nome">Un disservizio</span>
+                        </label>
+                      </div>
+                      <sc-if value="{{ rcErrTipo }}" hint-placeholder-val="{{ false }}">
+                        <p class="errore" id="rc-err-tipo" role="alert">Scegli se racconti una cosa che ha funzionato o un disservizio.</p>
+                      </sc-if>
+                    </fieldset>
+                    <!-- QA 390 LORI 21/10: niente tendine (sistema_visivo §7 divieto 10). Regione con la griglia .btn-reg,
+                         screening con radio grandi. Stesso stato rcReg/rcScr, stessi valori nella mail. -->
+                    <fieldset class="campo-gruppo fx col gap6">
+                      <legend class="etichetta">Regione (facoltativa)</legend>
+                      <div class="griglia-reg rc-reg-griglia" id="rc-reg-griglia">
+                        <sc-for list="{{ rcRegioni }}" as="r" hint-placeholder-count="21">
+                          <button type="button" class="{{ r.cls }}" value="{{ r.nome }}" data-val="{{ r.nome }}" onClick="{{ rcScriviReg }}" aria-pressed="{{ r.on }}">
+                            <span>{{ r.vis }}</span>
+                            <svg class="spunta" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+                          </button>
+                        </sc-for>
+                      </div>
+                    </fieldset>
+                    <fieldset class="campo-gruppo fx col gap6">
+                      <legend class="etichetta">Screening (facoltativo)</legend>
+                      <div class="scelte scelte-radio rc-scr-scelte">
+                        <sc-for list="{{ rcScreeningOpz }}" as="o" hint-placeholder-count="11">
+                          <label class="scelta scelta-radio">
+                            <input class="sr" type="radio" name="rc-scr" id="{{ o.id }}" value="{{ o.nome }}" checked="{{ o.on }}" onChange="{{ rcScriviScr }}">
+                            <span class="pallino" aria-hidden="true"></span>
+                            <span class="scelta-nome">{{ o.et }}</span>
+                          </label>
+                        </sc-for>
+                      </div>
+                    </fieldset>
+                    <div class="avviso fx col gap8" id="rc-regole">
+                      <h3>Prima di scrivere</h3>
+                      <ul>
+                        <li>Niente nomi di persone, di medici o di strutture.</li>
+                        <li>Niente date, luoghi o dettagli che rendano riconoscibile te o qualcun altro.</li>
+                        <li>Niente esiti, diagnosi, farmaci, giudizi medici o consigli.</li>
+                        <li>Se scrivi per un figlio o un altro minore, non mettere nessun dato del bambino.</li>
+                        <li>Leggiamo ogni testo. Possiamo accorciarlo o non pubblicarlo: non esce nulla in automatico.</li>
+                        <li>Puoi chiederci di toglierlo quando vuoi.</li>
+                      </ul>
+                    </div>
+                    <div class="fx col gap6">
+                      <label class="etichetta" for="rc-testo">Il tuo racconto</label>
+                      <textarea class="campo campo-area" id="rc-testo" rows="6" maxLength="1200" placeholder="Cosa è successo, in poche righe. Per esempio: com'è arrivato l'invito, se la lettera era chiara, com'è andata la prenotazione o il ritiro del referto." value="{{ rcTesto }}" onInput="{{ rcScriviTesto }}" aria-invalid="{{ rcInvTesto }}" aria-describedby="{{ rcDescTesto }}"></textarea>
+                      <p class="nota" id="rc-avv"><strong>Non scrivere nomi di persone né di strutture.</strong></p>
+                      <p class="nota" id="rc-conta">{{ rcConta }}</p>
+                      <sc-if value="{{ rcErrTesto }}" hint-placeholder-val="{{ false }}">
+                        <p class="errore" id="rc-err-testo" role="alert">Scrivi il tuo racconto prima di andare avanti.</p>
+                      </sc-if>
+                    </div>
+                    <div class="fx col gap8" id="rc-info">
+                      <h3>Come usiamo i tuoi dati</h3>
+                      <p class="nota">Titolare del trattamento: Angelo Zaglio, info@screeningitalia.it.</p>
+                      <p class="nota">Raccogliamo il tuo indirizzo email e il tuo racconto, che può contenere dati sulla salute.</p>
+                      <p class="nota">Li usiamo solo per valutare il racconto e, se lo scegliamo, pubblicarlo senza alcun dato che ti identifichi. La base è il tuo consenso esplicito (artt. 6.1.a e 9.2.a GDPR).</p>
+                      <p class="nota">Non li diamo a nessuno e non li usiamo per altro. Teniamo la tua mail al massimo 12 mesi.</p>
+                      <p class="nota">Puoi ritirare il consenso, chiedere la cancellazione o la rimozione del testo pubblicato scrivendo a info@screeningitalia.it. Puoi anche fare reclamo al Garante per la protezione dei dati personali.</p>
+                    </div>
+                    <div class="fx col gap6">
+                      <label class="consenso">
+                        <input type="checkbox" id="rc-ok" required="required" checked="{{ rcOk }}" onChange="{{ rcSpunta }}" aria-invalid="{{ rcInvOk }}" aria-describedby="{{ rcDescOk }}">
+                        <span>Ho letto l'informativa e acconsento esplicitamente al trattamento dei dati sulla salute contenuti nel mio racconto e alla sua pubblicazione in forma anonima.</span>
+                      </label>
+                      <sc-if value="{{ rcErrOk }}" hint-placeholder-val="{{ false }}">
+                        <p class="errore" id="rc-err-ok" role="alert">Per mandare il racconto devi spuntare la casella del consenso.</p>
+                      </sc-if>
+                    </div>
+                    <button type="button" class="cta" onClick="{{ rcInvia }}">Apri la mail con il racconto</button>
+                    <p class="nota">Si apre la tua posta con il messaggio già scritto. Il racconto parte solo quando premi «Invia» lì. Dal sito non salviamo nulla.</p>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ vistaArticolo }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Articolo">
+
+            <!-- Articoli da WordPress (#/articolo/<slug>): mentre carica la vista resta vuota (24/09/2026). -->
+            <sc-if value="{{ artPronto }}" hint-placeholder-val="{{ true }}">
+            <div class="banda b-bianco wrap sezione art-testa" data-screen-label="Apertura articolo">
+              <div class="lettura fx col gap16">
+                <!-- Foto solo se è quella vera dell'articolo (non di repertorio), piccola e sopra il titolo. -->
+                <sc-if value="{{ art.haFoto }}" hint-placeholder-val="{{ false }}">
+                <figure class="art-figura">
+                  <span class="art-figura-img"><img src="{{ art.foto }}" alt="" loading="lazy" decoding="async"></span>
+                </figure>
+                </sc-if>
+                <p class="nota art-torna"><a href="{{ art.tornaHref }}">{{ art.tornaTesto }}</a></p>
+                <p class="art-cat">{{ art.cat }}</p>
+                <h1 class="art-headline">{{ art.titolo }}</h1>
+                <p class="art-firma">Redazione Screening Italia · {{ art.data }}</p>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione-corpo" data-screen-label="Corpo dell articolo">
+              <div class="lettura fx col gap28">
+                <!-- testoHtml gia passato da ripulisciHtml() (articoli.js): lo inserisce artTestoRef. -->
+                <sc-if value="{{ artHaTesto }}" hint-placeholder-val="{{ false }}">
+                  <div class="art-wp fx col gap28" ref="{{ artTestoRef }}"></div>
+                </sc-if>
+                <p class="art-avvertenza"><em>Qui trovi informazioni generali. Non sostituiscono il medico né le indicazioni della tua ASL: per il tuo caso, chiedi a loro.</em></p>
+              </div>
+            </div>
+            </sc-if>
+
+            <sc-if value="{{ artNonTrovato }}" hint-placeholder-val="{{ false }}">
+              <div class="banda b-bianco wrap sezione" data-screen-label="Articolo non disponibile">
+                <div class="avviso fx col gap12" role="status">
+                  <p>Non riusciamo a mostrare gli articoli in questo momento. Riprova tra qualche minuto.</p>
+                </div>
+              </div>
+            </sc-if>
+
+            <!-- Invito a fine articolo (blocco 3, brief LORI §2): prende il posto della banda
+                 «Ora scegli la tua regione». Solo ad articolo caricato; variante per categoria WP. -->
+            <sc-if value="{{ artPronto }}" hint-placeholder-val="{{ true }}">
+            <div class="banda b-verde wrap sezione invito-banda" data-screen-label="Invito a fine articolo" data-variante="{{ invito.variante }}">
+              <div class="lettura invito">
+                <h2 class="invito-tit">{{ invito.titolo }}</h2>
+                <p class="invito-p">{{ invito.frase }}</p>
+                <a class="cta" href="{{ invito.href }}">{{ invito.bottone }}</a>
+              </div>
+            </div>
+            </sc-if>
+
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ vistaPrivacy }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Informativa privacy">
+
+            <div class="banda hero wrap sezione" data-screen-label="Apertura privacy">
+              <div class="hero-sfondo" aria-hidden="true">
+                <span class="hero-velo"></span>
+              </div>
+              <div class="fx col gap16">
+                <h1>Informativa privacy</h1>
+              </div>
+            </div>
+
+            <!-- Testo LEX (bozza 13/10/2026), inserito testualmente. -->
+            <div class="banda b-bianco wrap sezione" data-screen-label="Testo informativa">
+              <div class="lettura fx col gap16" id="privacy-testo">
+                <h2>Informativa privacy di screeningitalia.it</h2>
+                <p>Questa pagina spiega quali dati personali tratta il sito screeningitalia.it, perché, per quanto tempo e quali sono i tuoi diritti. Vale per il sito e per le mail che ci mandi partendo dal sito.</p>
+                <p>Il sito informa sugli screening. Non prenota esami, non dà consigli medici, non è affiliato al Servizio Sanitario Nazionale.</p>
+
+                <h2>Chi è il titolare del trattamento</h2>
+                <p>Il titolare è <strong>Angelo Zaglio</strong>, medico.</p>
+                <ul>
+                <li>Partita IVA: 03898940980</li>
+                <li>Indirizzo: Via Manzoni 8, Firenze</li>
+                <li>Iscritto all'Ordine dei Medici Chirurghi e degli Odontoiatri della Provincia di Brescia, n. 5305</li>
+                <li>Email: <a href="mailto:info@screeningitalia.it">info@screeningitalia.it</a></li>
+                </ul>
+                <p>Non abbiamo nominato un responsabile della protezione dei dati (DPO), perché non è obbligatorio per questo sito. Per qualsiasi richiesta o domanda sui tuoi dati ci si rivolge al titolare, Angelo Zaglio, all'indirizzo <a href="mailto:info@screeningitalia.it">info@screeningitalia.it</a>.</p>
+
+                <h2>Quali dati trattiamo</h2>
+                <p><strong>Dati di navigazione.</strong> Quando apri il sito, il server registra in automatico alcuni dati tecnici: indirizzo IP, data e ora, pagina richiesta, tipo di browser. Servono a far funzionare il sito e a proteggerlo. Non li usiamo per sapere chi sei.</p>
+                <p><strong>Preferenze salvate sul tuo dispositivo.</strong> Il sito ricorda la regione che hai aperto, le preferenze di lettura (testo più grande, contrasto) e la tua scelta sui cookie. Restano nel tuo browser: non ci arrivano.</p>
+                <p><strong>Statistiche, solo se le accetti.</strong> Se dici sì ai cookie di statistica, usiamo Google Analytics per contare le visite, le pagine lette e la regione di provenienza. Non lo usiamo per pubblicità né per profilarti. Se dici no, Google Analytics non parte.</p>
+                <p><strong>Dati richiesti dal sito ai nostri server.</strong> Per mostrarti articoli, iniziative e testimonianze, il tuo browser le chiede al pannello di gestione dei contenuti (pannello.screeningitalia.it), che sta sullo stesso hosting del sito. Anche in questo caso il server vede il tuo indirizzo IP e i dati tecnici del browser, e basta.</p>
+                <p><strong>Modulo Contatti.</strong> Nella pagina <a href="/contatti">Contatti</a> scegli di cosa si tratta: segnalare un'iniziativa o un dato sbagliato, raccontare la tua esperienza, lasciare un feedback, fare una domanda, altro. Il modulo non salva nulla sul sito: prepara una mail, che si apre nel tuo programma di posta e parte solo quando premi Invia. Ci arrivano il tuo indirizzo email, il nome se lo indichi, il tipo di messaggio e il testo che scrivi. Se segnali un'iniziativa, il testo contiene i recapiti dell'ente che la organizza (sede, date, telefono): sono dati dell'ente, non tuoi. Per le domande, le segnalazioni e i feedback ti chiediamo di non scrivere informazioni sulla tua salute: non ci servono per rispondere.</p>
+                <p><strong>Racconti di esperienze.</strong> Se scegli «Racconto la mia esperienza» nel modulo Contatti, o usi la pagina <a href="/racconta">Racconta la tua esperienza</a>, riceviamo il tuo indirizzo email e il tuo racconto, con regione e tipo di screening. Il racconto può contenere dati sulla salute: per questo ti chiediamo un consenso esplicito, con una casella apposita.</p>
+                <p>Non raccogliamo liste di indirizzi della popolazione e non riceviamo dati dalle ASL.</p>
+
+                <h2>Perché li trattiamo e su quale base</h2>
+                <ul>
+                <li><strong>Far funzionare e proteggere il sito</strong> (dati di navigazione): legittimo interesse a offrire un sito sicuro e funzionante, art. 6.1.f GDPR.</li>
+                <li><strong>Statistiche di visita</strong>: il tuo consenso, art. 6.1.a GDPR. Lo dai o lo neghi nel banner, e lo cambi quando vuoi dal collegamento «Preferenze cookie» in fondo a ogni pagina.</li>
+                <li><strong>Rispondere alle tue mail e ai messaggi del modulo Contatti</strong> (domande, altro): la tua richiesta, art. 6.1.b GDPR, e il tuo consenso alla casella del modulo.</li>
+                <li><strong>Segnalazioni di iniziative e di dati sbagliati, feedback</strong>: il nostro legittimo interesse a tenere corrette le informazioni del sito e a migliorarlo, art. 6.1.f GDPR. Usiamo il messaggio solo per verificare la segnalazione, aggiornare la pagina e, se serve, risponderti. Puoi opporti in ogni momento (art. 21).</li>
+                <li><strong>Valutare e pubblicare i racconti</strong>: il tuo consenso esplicito, artt. 6.1.a e 9.2.a GDPR. Vale sia per il racconto mandato dalla pagina «Racconta» sia per quello mandato dal modulo Contatti. Usiamo email e racconto solo per valutare il racconto e, se lo scegliamo, pubblicarlo senza alcun dato che ti identifichi.</li>
+                </ul>
+                <p>Non usiamo i tuoi dati per pubblicità, non li vendiamo e non li usiamo per altri scopi.</p>
+
+                <h2>Come trattiamo i racconti</h2>
+                <p>Il racconto ci arriva per mail, dalla tua casella di posta, da una delle due pagine. Il sito non lo salva: la mail parte solo quando premi Invia nel tuo programma di posta.</p>
+                <p>In fondo alla mail c'è la frase con cui dai il consenso. Senza quella frase il racconto non si pubblica.</p>
+                <p>Ogni racconto viene letto da una persona. Può essere accorciato, riscritto in terza persona o non pubblicato. Non c'è nulla di automatico.</p>
+                <p>Se lo pubblichiamo, togliamo tutto ciò che può renderti riconoscibile: nomi, strutture, medici, date, luoghi precisi. Restano solo regione, tipo di screening e mese e anno.</p>
+                <p>Puoi chiedere la rimozione del testo pubblicato in ogni momento.</p>
+
+                <h2>A chi arrivano i dati</h2>
+                <p>Non cediamo i tuoi dati a nessuno. Li vedono solo il titolare e i fornitori tecnici che ci servono per far funzionare il sito e la posta. Questi fornitori agiscono come responsabili del trattamento, con un contratto che li obbliga a usare i dati solo per noi.</p>
+                <ul>
+                <li><strong>Hosting del sito e del pannello di gestione dei contenuti</strong>: Hostinger International Ltd., con sede legale in 61 Lordou Vironos str., 6023 Larnaca, Cipro (Unione Europea).</li>
+                <li><strong>Posta elettronica</strong> (casella info@screeningitalia.it): Hostinger International Ltd.</li>
+                <li><strong>Statistiche</strong>, solo col tuo consenso: Google Ireland Limited (Google Analytics).</li>
+                </ul>
+                <p>Possiamo comunicare dati alle autorità solo se la legge lo impone.</p>
+
+                <h2>Dati fuori dall'Unione Europea</h2>
+                <p>Alcuni fornitori, in particolare Google, possono trattare dati negli Stati Uniti. In quel caso il trasferimento si basa sulla decisione di adeguatezza della Commissione Europea per le aziende aderenti all'EU-US Data Privacy Framework, o sulle clausole contrattuali standard approvate dalla Commissione.</p>
+
+                <h2>Per quanto tempo li conserviamo</h2>
+                <ul>
+                <li><strong>Dati di navigazione</strong> nei registri del server: al massimo 12 mesi, poi si cancellano da soli.</li>
+                <li><strong>Statistiche</strong>: fino a 14 mesi, poi Google Analytics le cancella.</li>
+                <li><strong>Preferenze sul tuo dispositivo</strong>: fino a 12 mesi, oppure finché non le cancelli dal browser.</li>
+                <li><strong>Mail di contatto, segnalazioni e feedback</strong>: il tempo necessario a rispondere e a chiudere la richiesta, e al massimo 24 mesi. Le informazioni corrette nelle pagine del sito restano, perché sono dati dell'ente e non tuoi.</li>
+                <li><strong>Racconti</strong>: conserviamo la mail al massimo 12 mesi. Il testo pubblicato, che non contiene dati che ti identificano, resta online finché non chiedi di toglierlo.</li>
+                </ul>
+
+                <h2>I tuoi diritti</h2>
+                <p>Hai diritto di:</p>
+                <ul>
+                <li>sapere quali dati abbiamo su di te e averne una copia (art. 15 GDPR);</li>
+                <li>farli correggere se sono sbagliati (art. 16);</li>
+                <li>farli cancellare (art. 17);</li>
+                <li>chiedere che li usiamo solo in modo limitato (art. 18);</li>
+                <li>riceverli in un formato leggibile per darli a un altro titolare, quando la base è il consenso o la tua richiesta (art. 20);</li>
+                <li>opporti al trattamento basato sul nostro legittimo interesse (art. 21).</li>
+                </ul>
+                <p><strong>Puoi revocare il consenso in ogni momento</strong>, per le statistiche, per i racconti e per gli avvisi. La revoca vale da quel momento in poi: non rende illegittimo quello che abbiamo fatto prima. Per i racconti, revocare vuol dire anche chiedere la rimozione del testo pubblicato.</p>
+                <p>Per esercitare i tuoi diritti scrivi a <a href="mailto:info@screeningitalia.it">info@screeningitalia.it</a>. Rispondiamo entro 30 giorni. Non costa nulla.</p>
+
+                <h2>Reclamo al Garante</h2>
+                <p>Se pensi che trattiamo i tuoi dati in modo scorretto, puoi fare reclamo al Garante per la protezione dei dati personali, sul sito <a href="https://www.garanteprivacy.it">garanteprivacy.it</a>. Puoi anche scriverci prima: spesso si risolve più in fretta.</p>
+
+                <h2>Nessuna decisione automatica</h2>
+                <p>Non prendiamo decisioni su di te in modo automatico e non creiamo profili. Ogni racconto, segnalazione e feedback li legge una persona.</p>
+
+                <h2>Minori</h2>
+                <p>Il sito non è pensato per chi ha meno di 14 anni, e non raccogliamo consapevolmente i loro dati. Se scrivi un racconto che riguarda un minore, per esempio uno screening neonatale, non indicare nessun dato del bambino. Se ci accorgiamo di aver ricevuto dati di un minore, li cancelliamo.</p>
+
+                <h2>Cookie</h2>
+                <p>Quali cookie usiamo, a cosa servono e come si spengono lo trovi nella pagina <a href="/cookie">Cookie e dati</a>.</p>
+
+                <h2>Modifiche a questa informativa</h2>
+                <p>Se cambiamo il modo in cui trattiamo i dati, aggiorniamo questa pagina e la data qui sotto.</p>
+                <p>Ultimo aggiornamento: 10/11/2026.</p>
+              </div>
+            </div>
+
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ vistaCookie }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="Cookie e dati">
+
+            <div class="banda hero wrap sezione" data-screen-label="Apertura cookie">
+              <div class="hero-sfondo" aria-hidden="true">
+                <img src="./img/foto/foto-si-caffe.webp" alt="" />
+                <span class="hero-velo"></span>
+              </div>
+              <div class="fx col gap16">
+                <div class="occhiello">Cookie e dati</div>
+                <h1>Cosa registriamo, e cosa no</h1>
+                <p>In parole semplici, senza formule legali: quali cookie usiamo, a cosa servono e come si spengono.</p>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Le tue preferenze">
+              <div class="fx col gap16">
+                <h2>La tua scelta, adesso</h2>
+                <p class="nota" aria-live="polite">{{ statoConsenso }}</p>
+                <button type="button" class="cta" onClick="{{ apriScelte }}">Cambia le preferenze</button>
+              </div>
+            </div>
+
+            <div class="banda b-crema wrap sezione" data-screen-label="Cosa usiamo">
+              <div class="fx col gap20">
+                <h2>I cookie che usiamo</h2>
+
+                <div class="card fx col gap12">
+                  <span class="tag tag-gratis">Sempre attivi</span>
+                  <h3>Cookie tecnici</h3>
+                  <p>Ricordano la regione che hai aperto, la dimensione del testo se l&rsquo;hai ingrandito, il contrasto se l&rsquo;hai alzato, e la scelta che fai su questa pagina. Restano sul tuo dispositivo e non li vede nessun altro.</p>
+                  <div class="dato"><span class="et">Durata</span><span class="vl">fino a 12 mesi</span></div>
+                </div>
+
+                <div class="card fx col gap12">
+                  <span class="tag tag-invito">Solo col tuo s&igrave;</span>
+                  <h3>Cookie di statistica</h3>
+                  <p>Google Analytics, in forma aggregata: quante persone arrivano, da quali pagine e da quali regioni. Ci serve per capire se l&rsquo;informazione arriva davvero dove serve. Non ti profila e non alimenta pubblicit&agrave;.</p>
+                  <div class="dato"><span class="et">Durata</span><span class="vl">fino a 14 mesi</span></div>
+                  <div class="dato"><span class="et">Titolare</span><span class="vl">Google Ireland Limited</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="banda b-bianco wrap sezione" data-screen-label="Cosa non facciamo mai">
+              <div class="fx col gap16">
+                <h2>Cosa non facciamo mai</h2>
+                <div class="fx col gap12">
+                  <div class="dato"><span class="et">Salute</span><span class="vl">Mentre navighi non registriamo quale screening guardi, n&eacute; nulla che riguardi la tua salute. Se ci mandi un racconto per mail, valgono le regole scritte nella pagina <a href="/racconta">Racconta la tua esperienza</a>.</span></div>
+                  <div class="dato"><span class="et">Pubblicit&agrave;</span><span class="vl">Nessun cookie pubblicitario, nessun pubblico da rivendere.</span></div>
+                  <div class="dato"><span class="et">Liste</span><span class="vl">Nessuna lista di indirizzi della popolazione: non &egrave; percorribile e non ci serve.</span></div>
+                </div>
+                <div class="finto">Prototipo: la misurazione &egrave; predisposta ma non attiva. L&rsquo;identificativo reale viene inserito solo alla pubblicazione.</div>
+              </div>
+            </div>
+
+            <div class="banda b-verde wrap sezione" data-screen-label="Diritti">
+              <div class="fx col gap16">
+                <h2>I tuoi diritti</h2>
+                <p>Puoi chiedere quali dati abbiamo, farli correggere o farli cancellare. Si scrive a <a href="mailto:info@screeningitalia.it">info@screeningitalia.it</a> e rispondiamo entro 30 giorni.</p>
+                <a class="link-cta" href="/contatti">Scrivici
+                  <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"></path></svg>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ bannerAperto }}" hint-placeholder-val="{{ false }}">
+          <div class="ck" role="dialog" aria-modal="false" aria-labelledby="ck-tit" aria-describedby="ck-txt">
+            <div class="ck-corpo">
+              <div class="ck-testo">
+                <h2 class="ck-tit" id="ck-tit">Prima di continuare</h2>
+                <p class="ck-txt" id="ck-txt">Usiamo cookie tecnici, che servono a far funzionare il sito, e cookie di statistica, che ci dicono quante persone leggono queste pagine. I cookie di statistica partono solo se li accetti. <a href="/cookie">Come li usiamo</a></p>
+              </div>
+              <div class="ck-azioni">
+                <button type="button" class="ck-btn ck-btn-si" onClick="{{ accettaTutti }}">Accetta tutti</button>
+                <button type="button" class="ck-btn ck-btn-no" onClick="{{ rifiutaTutti }}">Solo necessari</button>
+                <button type="button" class="ck-link" onClick="{{ apriScelte }}">Scegli tu</button>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ scelteAperte }}" hint-placeholder-val="{{ false }}">
+          <div class="ck-velo" onClick="{{ chiudiScelte }}"></div>
+          <div class="ck-pannello" role="dialog" aria-modal="true" aria-labelledby="ck-p-tit">
+            <div class="ck-p-testa">
+              <h2 class="ck-tit" id="ck-p-tit">Le tue preferenze</h2>
+              <button type="button" class="ck-x" onClick="{{ chiudiScelte }}" aria-label="Chiudi le preferenze">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"></path></svg>
+              </button>
+            </div>
+
+            <div class="ck-voce">
+              <div class="ck-voce-testo">
+                <p class="ck-voce-tit">Cookie tecnici</p>
+                <p class="ck-voce-txt">Tengono in piedi il sito: la regione che hai scelto, le preferenze di lettura, il consenso che stai dando adesso. Senza questi il sito non funziona, e non si possono disattivare.</p>
+              </div>
+              <p class="ck-sempre">Sempre attivi</p>
+            </div>
+
+            <div class="ck-voce">
+              <div class="ck-voce-testo">
+                <p class="ck-voce-tit">Cookie di statistica</p>
+                <p class="ck-voce-txt">Google Analytics, in forma aggregata: quante persone arrivano, da quali pagine e da quale regione. Non serve a profilarti e non viene usato per mostrarti pubblicit&agrave;.</p>
+              </div>
+              <button type="button" class="{{ statCls }}" onClick="{{ giraStat }}" role="switch" aria-checked="{{ statOn }}" aria-label="Cookie di statistica">
+                <span class="ck-sw-pallina"></span>
+              </button>
+            </div>
+
+            <div class="ck-p-fondo">
+              <button type="button" class="ck-btn ck-btn-si" onClick="{{ salvaScelte }}">Salva le preferenze</button>
+              <p class="ck-nota">Puoi cambiare idea quando vuoi: il collegamento &laquo;Preferenze cookie&raquo; sta in fondo a ogni pagina.</p>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ floaterMail }}" hint-placeholder-val="{{ true }}">
+        <a class="wa-float" href="mailto:info@screeningitalia.it?subject=Messaggio%20dal%20sito%20Screening%20Italia" aria-label="Contattaci via mail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg>
+          <span>Contattaci</span>
+        </a>
+        </sc-if>
+
+        <div class="ftr">
+          <div class="wrap">
+
+            <div class="ftr-alto">
+              <div class="ftr-marchio fx col gap12">
+                <img class="ftr-marchio-img" src="./marchio/screening-italia-completo.png?v=tpl1114" alt="Screening Italia: facilitatore dei processi di screening e partner strategico di cittadini e stakeholders. SI alla prevenzione" width="880" height="674">
+                <a class="ftr-wa" href="mailto:info@screeningitalia.it?subject=Messaggio%20dal%20sito%20Screening%20Italia">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg>
+                  Scrivici una mail
+                </a>
+              </div>
+
+              <nav class="ftr-col" aria-label="Il portale">
+                <h3 class="ftr-tit">Il portale</h3>
+                <a href="/chi">Chi siamo</a>
+                <a href="/carta">Carta dei servizi SI</a>
+                <a href="/contatti">Contatti</a>
+                <a href="/enti">Pubblica le tue iniziative</a>
+                <a href="/contatti">Segnala un’iniziativa</a>
+                <a href="/contatti">Segnala un dato sbagliato</a>
+                <a href="/racconta">Racconta la tua esperienza</a>
+                <a href="/chi">Come verifichiamo</a>
+              </nav>
+            </div>
+
+            <div class="ftr-avviso">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2a8.8 8.8 0 100 17.6 8.8 8.8 0 000-17.6M12 8v5.2M12 16.4h.01"></path></svg>
+              <p>Il portale non effettua prenotazioni, non vende prestazioni e non sostituisce il parere del medico. Per prenotare, chiama il numero indicato nella scheda dell’iniziativa. In caso di sintomi rivolgiti al medico di medicina generale o al 112.</p>
+            </div>
+
+            <div class="ftr-basso">
+              <p class="ftr-legale">© 2026 Screening Italia · Angelo Zaglio, medico chirurgo, specialista in medicina preventiva · P.IVA 03898940980 · Iscrizione Ordine dei Medici di Brescia n. 5305<br>Ultimo aggiornamento: {{ aggiornato }}</p>
+              <p class="ftr-legale ftr-legale-link">
+                <a href="/privacy">Privacy</a>
+                <span aria-hidden="true">·</span>
+                <a href="/cookie">Cookie</a>
+                <span aria-hidden="true">·</span>
+                <button type="button" class="ftr-btn-link" onClick="{{ apriScelte }}">Preferenze cookie</button>
+                <span aria-hidden="true">·</span>
+                <a href="/chi">Fonti e metodo</a>
+                <span aria-hidden="true">·</span>
+                <a href="/chi">Accessibilità</a>
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+</template>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844},&quot;statoArticoli&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;vuoto&quot;,&quot;ok&quot;,&quot;offline&quot;,&quot;errore&quot;],&quot;default&quot;:&quot;vuoto&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;filtroArticoli&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const Component = window.__siLogica(DCLogic);
+</script>
+</body>
+</html>
+
+
