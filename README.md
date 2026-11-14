@@ -59,7 +59,9 @@ L'immagine principale della home ha tre misure (`foto-si-piazza-800/1280.webp` e
 
 ## Pagine pre-renderizzate (`_pre/`)
 
-Chi non esegue JavaScript (crawler AI, lettori automatici, anteprime) riceve il testo vero: `.htaccess` serve `/_pre/<percorso>.html` al posto della shell vuota; con JS acceso la copia viene sostituita all'avvio e il sito funziona come prima. Se manca la copia di una rotta, resta la shell di sempre.
+Chi non esegue JavaScript (crawler AI, lettori automatici, anteprime) riceve il testo vero: `.htaccess` serve `/_pre/<percorso>.html` al posto della shell vuota; con JS acceso la copia viene sostituita all'avvio e il sito funziona come prima. Se manca la copia di una rotta, resta la shell di sempre. Vale anche con lo slash finale (`/domande/`).
+
+Rigenerazione: `node scripts/serve.js . 8099 &` poi `node scripts/prerender.js http://localhost:8099` (serve playwright-core e Chrome), poi commit di `_pre/`. Il workflow `.github/workflows/prerender.yml` fa lo stesso su GitHub, per ora solo a mano; la schedulazione notturna resta spenta finché non è approvata.
 
 Rigenerare dopo ogni modifica ai testi/template o alle iniziative (richiede `playwright-core` e Google Chrome; il sito va servito in locale):
 

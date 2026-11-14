@@ -23,6 +23,11 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{DOCUMENT_ROOT}/_pre/$0.html -f
 RewriteRule ^.+$ /_pre/$0.html [L]
+# stesso indirizzo con slash finale (/domande/): stessa copia, senza redirect
+RewriteCond %{REQUEST_URI} !^/_pre/
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/_pre/$1.html -f
+RewriteRule ^(.+)/$ /_pre/$1.html [L]
 </IfModule>
 
 # Indirizzi puliti (31/10/2026, decisione Davide): il sito e una sola pagina (index.html) che

@@ -33,6 +33,78 @@
 <link rel="stylesheet" href="./fonts/fonts.css">
 <link rel="stylesheet" href="./stile.css?v=tab1113">
 <link rel="stylesheet" href="./screening.css?v=tpl1114">
+<style>
+    .sc-placeholder{background:color-mix(in srgb,currentColor 8%,transparent);
+      border:1px solid color-mix(in srgb,currentColor 50%,transparent);
+      border-radius:2px;box-sizing:border-box;overflow:hidden}
+    @keyframes sc-shine{0%{background-position:100% 50%}100%{background-position:0% 50%}}
+    html.sc-dc-streaming .sc-placeholder,
+    html.sc-dc-streaming .sc-interp.sc-missing{position:relative;
+      background:color-mix(in srgb,currentColor 5%,transparent);
+      border-color:transparent}
+    html.sc-dc-streaming .sc-placeholder::before,
+    html.sc-dc-streaming .sc-interp.sc-missing::before{content:'';
+      position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(90deg,rgba(217,119,87,0) 25%,rgba(247,225,211,.95) 37%,rgba(217,119,87,0) 63%);
+      background-size:400% 100%;animation:sc-shine 1.4s ease infinite}
+    html.sc-dc-streaming .sc-placeholder:nth-child(n+9 of .sc-placeholder)::before,
+    html.sc-dc-streaming .sc-interp.sc-missing:nth-child(n+9 of .sc-interp.sc-missing)::before{animation:none;
+      background:color-mix(in srgb,currentColor 8%,transparent)}
+    .sc-placeholder-error{padding:4px 8px;font:11px/1.4 ui-monospace,monospace;
+      color:color-mix(in srgb,currentColor 70%,transparent);word-break:break-word}
+    .sc-interp.sc-missing{display:inline-block;width:2em;height:1em;overflow:hidden;
+      vertical-align:text-bottom;background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;color:transparent;
+      user-select:none}
+    .sc-interp.sc-unresolved{font-family:ui-monospace,monospace;font-size:.85em;
+      color:color-mix(in srgb,currentColor 50%,transparent);
+      background:color-mix(in srgb,currentColor 10%,transparent);border-radius:3px;
+      padding:0 3px}
+    .sc-host.sc-has-error{position:relative}
+    .sc-logic-error{position:absolute;top:8px;left:8px;z-index:2147483647;max-width:60ch;
+      padding:6px 10px;background:#b00020;color:#fff;font:12px/1.4 ui-monospace,monospace;
+      border-radius:4px;white-space:pre-wrap;pointer-events:none}
+    /* Mirrors PRINT_BASELINE_CSS in apps/web deck-stage-export.ts — keep both
+       in sync until dc-runtime regains a build step. */
+    @media print {
+      @page { margin: 0.5cm; }
+      figure, table { break-inside: avoid; }
+      #dc-root, #dc-root > .sc-host { height: auto; }
+      *, *::before, *::after {
+        print-color-adjust: exact; -webkit-print-color-adjust: exact;
+        backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+        animation-delay: -99s !important; animation-duration: .001s !important;
+        animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+        animation-play-state: running !important; transition-duration: 0s !important;
+      }
+    }
+  </style>
+<style>x-dc{display:none!important}</style>
+<style id="__dc-atomics">.fx{display:flex}.col{display:flex;flex-direction:column}.grid{display:grid}.ac{align-items:center}.jc{justify-content:center}.jb{justify-content:space-between}.f1{flex:1}.noshrink{flex-shrink:0}.wrap{flex-wrap:wrap}.fw5{font-weight:500}.fw6{font-weight:600}.fw7{font-weight:700}.fw8{font-weight:800}.fs11{font-size:11px}.fs12{font-size:12px}.fs13{font-size:13px}.fs14{font-size:14px}.fs15{font-size:15px}.fs16{font-size:16px}.fs20{font-size:20px}.fs22{font-size:22px}.upper{text-transform:uppercase}.tc{text-align:center}.nowrap{white-space:nowrap}.gap8{gap:8px}.gap10{gap:10px}.gap12{gap:12px}.gap16{gap:16px}.gap24{gap:24px}.m0{margin:0}.mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.mb8{margin-bottom:8px}.mb12{margin-bottom:12px}.mb16{margin-bottom:16px}.posrel{position:relative}.posabs{position:absolute}.round{border-radius:50%}.ohide{overflow:hidden}.bbox{box-sizing:border-box}.pointer{cursor:pointer}.w100{width:100%}.b0{border:none}</style>
+<style data-dc-tpl="34">
+          /* Marcatore di bozza (sezione articoli sotto le Domande frequenti, 23/09/2026):
+             esce insieme al testo di prova, prima del build. */
+          .prova{align-self:flex-start;font-size:15px;line-height:1.35;font-weight:700;
+            letter-spacing:.06em;text-transform:uppercase;color:var(--terracotta);
+            background:#fff;border:1.5px solid var(--terracotta);border-radius:8px;padding:4px 8px}
+          /* Testo da WordPress (.art-wp), LORI giro 1 del 24/09/2026: stesso aspetto del corpo FAQ.
+             Liste: corpo e interlinea di .art-p (stesse soglie), margine 0, rientro 20, 8 fra le voci. */
+          .art-wp ul,.art-wp ol{margin:0;padding-left:20px;font-size:19px;line-height:1.68}
+          @media (min-width:860px){.art-wp ul,.art-wp ol{font-size:20px}}
+          @media (max-width:699px){.art-wp ul,.art-wp ol{font-size:18px;line-height:1.62}}
+          .art-wp li + li{margin-top:8px}
+          /* Citazione = frase chiave (brief LORI 26/09/2026, sostituisce la regola del 24/09):
+             il blockquote e solo un contenitore, l'aspetto lo da .art-chiave messa da mettiTesto(). */
+          .art-wp blockquote{margin:0;padding:0;border:0;font-style:normal}
+          /* Immagini nel testo: piena larghezza, proporzioni del file, nessun aspect-ratio. */
+          .art-wp figure{margin:0}
+          .art-wp img{width:100%;height:auto;border-radius:10px}
+          .art-wp figcaption{font-size:15px;color:var(--soft);line-height:1.4}
+          /* Card delle domande (elenco e home): altezza propria, allineate in alto (LORI giro 1, 26/09/2026). */
+          #elenco-domande .art-griglia,#ultimi-aggiornamenti .art-griglia{align-items:start}
+          /* Home «Ultimi aggiornamenti»: quattro card, 2x2 anche da desktop (brief LORI 26/09/2026). */
+          @media (min-width:1000px){#ultimi-aggiornamenti .art-griglia{grid-template-columns:1fr 1fr}}
+        </style>
 <style>#si-pre~#dc-root{height:0;overflow:hidden}</style>
 </head>
 <body>

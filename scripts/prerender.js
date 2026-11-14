@@ -59,9 +59,11 @@ async function rotte(b) {
       const cl = host.cloneNode(true);
       cl.querySelectorAll('script,noscript,template,.ck,.ck-pannello').forEach(e => e.remove());
       cl.querySelectorAll('[data-dc-tpl]').forEach(e => e.removeAttribute('data-dc-tpl'));
+      // stili iniettati dal runtime (classi atomiche .fx/.col/.gr...): senza, la copia cambia layout quando parte JS
+      const stili = [...document.head.querySelectorAll('style')].map(e => e.outerHTML).filter(h => !/si-pre/.test(h));
       const m = s => { const e = document.head.querySelector(s); return e ? e.getAttribute('content') || e.getAttribute('href') : null; };
       return {
-        html: cl.outerHTML, title: document.title,
+        html: cl.outerHTML, stili, title: document.title,
         desc: m('meta[name=description]'), canon: m('link[rel=canonical]'), ogt: m('meta[property="og:title"]'), ogd: m('meta[property="og:description"]'), ogu: m('meta[property="og:url"]')
       };
     });
@@ -77,7 +79,7 @@ async function rotte(b) {
     out = out.replace(/<meta property="og:url" content="[^"]*">/, '<meta property="og:url" content="' + url + '">');
     if (!/rel="canonical"/.test(out)) out = out.replace('<base href="/">', '<link rel="canonical" href="' + url + '">\n<base href="/">');
     else out = out.replace(/<link rel="canonical" href="[^"]*">/, '<link rel="canonical" href="' + url + '">');
-    const head = css.map(h => '<link rel="stylesheet" href="' + h + '">').join('\n') + '\n' + STILE_NASCONDI + '\n';
+    const head = css.map(h => '<link rel="stylesheet" href="' + h + '">').join('\n') + '\n' + d.stili.filter(h => !shell.includes(h)).join('\n') + '\n' + STILE_NASCONDI + '\n';
     out = out.replace('</head>', head + '</head>');
     out = out.replace('<body>\n<x-dc>', '<body>\n<div id="si-pre">' + d.html + '</div>\n' + SCRIPT_SPARISCI + '\n<x-dc>');
     if (!out.includes('id="si-pre"')) throw new Error('inserimento fallito su ' + r);
