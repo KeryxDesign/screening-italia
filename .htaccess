@@ -30,6 +30,22 @@ RewriteCond %{DOCUMENT_ROOT}/_pre/$1.html -f
 RewriteRule ^(.+)/$ /_pre/$1.html [L]
 </IfModule>
 
+# Indirizzi che non esistono (15/11/2026): 404 vero con la pagina /404.html, invece della home.
+# Regole sulle parti FISSE del sito: primo pezzo del percorso fra le viste note, regione fra le venti,
+# pagina screening fra le sette. Articoli e iniziative arrivano da WordPress (cambiano senza deploy):
+# il server non li conosce, li dichiara «non trovati» la pagina stessa (stato 200). _pre/ e file veri passano prima.
+ErrorDocument 404 /404.html
+<IfModule mod_rewrite.c>
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !\.[A-Za-z0-9]+$
+RewriteRule ^(?!(regione|vuota|faq|prostata|chi|contatti|testimonianze|articolo|enti|cookie|domande|articoli|iniziativa|trova|screening|buone-pratiche|difficolta|racconta|privacy|centri|carta|razionale)(/|$)). - [R=404,L,NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(regione|vuota)/(?!(Abruzzo|Basilicata|Calabria|Campania|Emilia-Romagna|Friuli-Venezia\ Giulia|Lazio|Liguria|Lombardia|Marche|Molise|Piemonte|Puglia|Sardegna|Sicilia|Toscana|Trentino-Alto\ Adige|Umbria|Valle\ d'Aosta|Veneto)/?$) - [R=404,L,NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^screening/(?!(diabete-celiachia|neonatale|mammografico|cardiovascolare|prostata|cervicale|colon-retto)/?$). - [R=404,L,NC]
+</IfModule>
+
 # Indirizzi puliti (31/10/2026, decisione Davide): il sito e una sola pagina (index.html) che
 # legge il percorso (/regione/Lazio, /articolo/<slug>, /faq ...). Ogni percorso senza file o
 # cartella reale e senza estensione torna a index.html (stato 200: e la stessa pagina, non un 404).
