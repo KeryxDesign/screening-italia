@@ -228,14 +228,15 @@ class Component extends DCLogic {
     if (this.voceChiesta === r.arg || !window.Articoli) { return; }
     const slug = r.arg;
     this.voceChiesta = slug;
-    this.setState({ voceSlug: slug, voceStato: "attesa", voce: null });
-    const fine = (a) => {
+    this.setState({ voceSlug: slug, voceStato: "attesa", voce: null, voceVuota: false });
+    const fine = (a, vuota) => {
       if (this.voceChiesta !== slug) { return; }
       // Gli articoli protetti da password non si mostrano: il contenuto arriva vuoto.
       const buono = a && !a.protetto;
-      this.setState({ voceStato: buono ? "ok" : "errore", voce: buono ? a : null });
+      // voceVuota: WordPress ha risposto e quello slug non esiste (non un errore di rete): serve al noindex.
+      this.setState({ voceStato: buono ? "ok" : "errore", voce: buono ? a : null, voceVuota: !!vuota });
     };
-    window.Articoli.perSlug(slug).then((x) => fine(x.esito === "ok" ? x.articolo : null), () => fine(null));
+    window.Articoli.perSlug(slug).then((x) => fine(x.esito === "ok" ? x.articolo : null, x.esito === "vuoto"), () => fine(null, false));
   }
   // Stato della vista articolo: «attesa» finche la risposta per QUESTO slug non c'e.
   statoVoce() {
@@ -873,8 +874,28 @@ class Component extends DCLogic {
     const spazio = Math.max(1, TETTO - lung(sep + regione) - 1);
     return Array.from(titolo).slice(0, spazio).join("") + "…" + sep + regione;
   }
+  /* Indirizzi che il server non puo giudicare (iniziative e articoli vengono da WordPress) ma che qui
+     risultano inesistenti: il sito risponde 200, quindi si dice a Google di non indicizzarli (soft 404).
+     Solo quando la risposta e certa: dati arrivati e slug assente. Un errore di rete non mette noindex. */
+  segnaRobots() {
+    const r = this.state.rotta;
+    let no = false;
+    if (r.vista === "iniziativa") {
+      const dati = window.INIZIATIVE || [];
+      no = dati.length > 0 && window.__siIniziativeStato !== "attesa" && !dati.some((x) => x.id === r.arg);
+    } else if (r.vista === "articolo") {
+      no = this.state.voceSlug === r.arg && this.state.voceVuota === true;
+    }
+    let m = document.querySelector('meta[name="robots"][data-si-auto]');
+    if (no && !m) {
+      m = document.createElement("meta");
+      m.name = "robots"; m.content = "noindex"; m.setAttribute("data-si-auto", "1");
+      document.head.appendChild(m);
+    } else if (!no && m) { m.remove(); }
+  }
   curaDettaglio() {
     if (this.titoloBase === undefined) { this.titoloBase = document.title; }
+    this.segnaRobots();
     const r = this.state.rotta;
     // Pagine screening: titolo e descrizione per Google dal copy (logica-screening.js).
     if (window.__siScreening && window.__siScreening.titolo(this)) { this.fuocoFatto = null; return; }
