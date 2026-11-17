@@ -2,10 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://screeningitalia.it/</loc></url>
   <url><loc>https://screeningitalia.it/domande</loc></url>
-  <url><loc>https://screeningitalia.it/articoli</loc></url>
   <url><loc>https://screeningitalia.it/chi</loc></url>
   <url><loc>https://screeningitalia.it/contatti</loc></url>
-  <url><loc>https://screeningitalia.it/testimonianze</loc></url>
   <url><loc>https://screeningitalia.it/privacy</loc></url>
   <url><loc>https://screeningitalia.it/cookie</loc></url>
   <url><loc>https://screeningitalia.it/screening/mammografico</loc></url>
@@ -15,4 +13,25 @@
   <url><loc>https://screeningitalia.it/screening/neonatale</loc></url>
   <url><loc>https://screeningitalia.it/screening/cardiovascolare</loc></url>
   <url><loc>https://screeningitalia.it/screening/diabete-celiachia</loc></url>
+  <url><loc>https://screeningitalia.it/centri</loc></url>
+  <url><loc>https://screeningitalia.it/regione/Abruzzo</loc></url>
+  <url><loc>https://screeningitalia.it/regione/Basilicata</loc></url>
+  <url><loc>https://screeningitalia.it/regione/Calabria</loc></url>
+  <url><loc>https://screeningitalia.it/regione/Campania</loc></url>
+  <url><loc>https://screeningitalia.it/regione/Emilia-Romagna</loc></url>
+  <url><loc>https://screeningitalia.it/regione/Friuli-Venezia%20Giulia</loc></url>
+  <url><loc>https://screeningitalia.it/regione/Lazio</loc></url>
+  <url><loc>https://screeningitalia.it/regione/Liguria</loc></url>
+  <url><loc>https://screeningitalia.it/regione/Lombardia</loc></url>
+  <url><loc>https://screeningitalia.it/regione/Marche</loc></url>
+  <url><loc>https://screeningitalia.it/regione/Molise</loc></url>
+  <url><loc>https://screeningitalia.it/regione/Piemonte</loc></url>
+  <url><loc>https://screeningitalia.it/regione/Puglia</loc></url>
+  <url><loc>https://screeningitalia.it/regione/Sardegna</loc></url>
+  <url><loc>https://screeningitalia.it/regione/Sicilia</loc></url>
+  <url><loc>https://screeningitalia.it/regione/Toscana</loc></url>
+  <url><loc>https://screeningitalia.it/regione/Trentino-Alto%20Adige</loc></url>
+  <url><loc>https://screeningitalia.it/regione/Umbria</loc></url>
+  <url><loc>https://screeningitalia.it/regione/Valle%20d'Aosta</loc></url>
+  <url><loc>https://screeningitalia.it/regione/Veneto</loc></url>
 </urlset>

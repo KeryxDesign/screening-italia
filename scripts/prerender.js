@@ -57,19 +57,26 @@ async function rotte(b) {
       const host = document.querySelector('#dc-root > .sc-host');
       if (!host) return null;
       const cl = host.cloneNode(true);
-      cl.querySelectorAll('script,noscript,template,.ck,.ck-pannello').forEach(e => e.remove());
+      cl.querySelectorAll('script,noscript,template,.ck,.ck-pannello,.finto').forEach(e => e.remove());
+      const h1 = (cl.querySelector('h1') || {}).textContent;
+      const el = [...cl.querySelectorAll('h1,p')]; const i1 = el.findIndex(e => e.tagName === 'H1');
+      const par = i1 < 0 ? '' : (el.slice(i1 + 1).filter(e => e.tagName === 'P' && !e.closest('a,article,figure,li,button,summary')).map(e => e.textContent.replace(/\s+/g, ' ').trim()).find(t => t.length >= 50) || '');
       cl.querySelectorAll('[data-dc-tpl]').forEach(e => e.removeAttribute('data-dc-tpl'));
       // stili iniettati dal runtime (classi atomiche .fx/.col/.gr...): senza, la copia cambia layout quando parte JS
       const stili = [...document.head.querySelectorAll('style')].map(e => e.outerHTML).filter(h => !/si-pre/.test(h));
       const m = s => { const e = document.head.querySelector(s); return e ? e.getAttribute('content') || e.getAttribute('href') : null; };
       return {
-        html: cl.outerHTML, stili, title: document.title,
+        html: cl.outerHTML, stili, title: document.title, h1: h1 ? h1.replace(/\s+/g, ' ').trim() : '', par: par || '',
         desc: m('meta[name=description]'), canon: m('link[rel=canonical]'), ogt: m('meta[property="og:title"]'), ogd: m('meta[property="og:description"]'), ogu: m('meta[property="og:url"]')
       };
     });
     await c.close();
     if (!d || d.html.includes('{{')) { esiti.push([r, 'SALTATA (vuota o con segnaposto)']); continue; }
     let out = shell;
+    // titolo e descrizione propri di ogni pagina: se la pagina non li imposta (restano quelli generici della shell) si ricavano da h1 e primo paragrafo reale, senza testi scritti a mano
+    const gt = (shell.match(/<title>([^<]*)<\/title>/) || [])[1], gd = (shell.match(/<meta name="description" content="([^"]*)">/) || [])[1];
+    if (r !== '/' && d.h1 && esc(d.title) === gt) d.title = /^Screening Italia/.test(d.h1) ? d.h1 : d.h1 + ' · Screening Italia';
+    if (r !== '/' && d.par && d.desc === gd) { d.desc = d.par.length > 155 ? d.par.slice(0, 152).replace(/\s+\S*$/, '') + '…' : d.par; d.ogd = null; d.ogt = null; }
     out = out.replace(/<title>[^<]*<\/title>/, '<title>' + esc(d.title).replace(/&quot;/g, '"') + '</title>');
     const setMeta = (re, val, tag) => { if (val != null) out = out.replace(re, tag(esc(val))); };
     setMeta(/<meta name="description" content="[^"]*">/, d.desc, v => '<meta name="description" content="' + v + '">');
@@ -77,7 +84,7 @@ async function rotte(b) {
     setMeta(/<meta property="og:description" content="[^"]*">/, d.ogd || d.desc, v => '<meta property="og:description" content="' + v + '">');
     const url = 'https://screeningitalia.it' + (r === '/' ? '/' : r);
     out = out.replace(/<meta property="og:url" content="[^"]*">/, '<meta property="og:url" content="' + url + '">');
-    if (!/rel="canonical"/.test(out)) out = out.replace('<base href="/">', '<link rel="canonical" href="' + url + '">\n<base href="/">');
+    if (!/<link rel="canonical"/.test(out)) out = out.replace('<base href="/">', '<link rel="canonical" href="' + url + '">\n<base href="/">');
     else out = out.replace(/<link rel="canonical" href="[^"]*">/, '<link rel="canonical" href="' + url + '">');
     const head = css.map(h => '<link rel="stylesheet" href="' + h + '">').join('\n') + '\n' + d.stili.filter(h => !shell.includes(h)).join('\n') + '\n' + STILE_NASCONDI + '\n';
     out = out.replace('</head>', head + '</head>');
