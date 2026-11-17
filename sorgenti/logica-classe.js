@@ -604,7 +604,7 @@ class Component extends DCLogic {
     let vista = q0[0];
     const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening", "buone-pratiche", "difficolta", "racconta", "privacy", "centri", "carta", "razionale"];
     if (note.indexOf(vista) === -1) { vista = ""; }
-    let arg = p[1] ? decodeURIComponent(p[1]) : "";
+    let arg = p[1] ? decodeURIComponent(p[1].split("?")[0]) : "";
     if (vista === "racconta") { arg = this.tipoDaDomanda(q0[1]); }
     if (vista === "contatti") { arg = this.ctTipoArg(q0[1]); }
     // Alias permanente (brief LORI 25/09/2026): #/prostata e ora #/screening/prostata.
@@ -640,7 +640,7 @@ class Component extends DCLogic {
     const p = h.split("/");
     const q0 = (p[0] || "").split("?");
     let vista = q0[0];
-    let arg = p[1] ? decodeURIComponent(p[1]) : "";
+    let arg = p[1] ? decodeURIComponent(p[1].split("?")[0]) : "";
     const note = ["", "regione", "vuota", "faq", "prostata", "chi", "contatti", "testimonianze", "articolo", "enti", "cookie", "domande", "articoli", "iniziativa", "trova", "screening", "buone-pratiche", "difficolta", "racconta", "privacy", "centri", "carta", "razionale"];
     if (note.indexOf(vista) === -1) {
       // Percorso sconosciuto (anche /index.html): vale come Home, con indirizzo "/".
