@@ -680,9 +680,6 @@
               <div class="fx col gap20">
                 <h2>Storie di chi ci è passato</h2>
                 <p class="testi-intro">Sono esperienze personali: nessuna ti promette lo stesso risultato e nessuna vale come consiglio medico, per decidere c'è il tuo medico. Le pubblichiamo anonime, con il permesso di chi scrive, che non riceve compensi.</p>
-                <sc-if value="{{ testiEsempi }}" hint-placeholder-val="{{ false }}">
-                <div class="finto">Testimonianze di esempio: nel prototipo non sono persone reali.</div>
-                </sc-if>
                 <div class="testi-griglia">
                   <sc-for list="{{ testiHome }}" as="t" hint-placeholder-count="2">
                     <figure class="testi">
@@ -711,9 +708,6 @@
               <div class="fx col gap20">
                 <h2>{{ espHomeTitolo }}</h2>
                 <p class="testi-intro">Esperienze vere con il servizio di screening: inviti, kit, prenotazioni, referti. Senza nomi.</p>
-                <sc-if value="{{ espEsempi }}" hint-placeholder-val="{{ false }}">
-                <div class="finto">Esperienze di esempio: nel prototipo non sono casi reali.</div>
-                </sc-if>
                 <div class="testi-griglia">
                   <sc-for list="{{ espHomeBp }}" as="b" hint-placeholder-count="1">
                     <article class="testi esp esp-bp">
@@ -1390,9 +1384,6 @@
                     <svg class="sel-frecciona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
                   </div>
                 </div>
-                <sc-if value="{{ scr.esempi }}" hint-placeholder-val="{{ false }}">
-                  <div class="finto">Dati dimostrativi. Le iniziative riportate non sono reali: servono a verificare il funzionamento della pagina.</div>
-                </sc-if>
                 <sc-if value="{{ scr.haCarte }}" hint-placeholder-val="{{ false }}">
                   <div class="fx col gap20">
                   <sc-for list="{{ scr.carte }}" as="i" hint-placeholder-count="3">
@@ -1854,9 +1845,6 @@
             <div class="banda b-crema wrap banda-larga sezione" data-screen-label="Tutte le testimonianze">
               <div class="fx col gap20">
                 <p class="testi-intro">Sono esperienze personali: nessuna ti promette lo stesso risultato e nessuna vale come consiglio medico, per decidere c'è il tuo medico. Le pubblichiamo anonime, con il permesso di chi scrive, che non riceve compensi.</p>
-                <sc-if value="{{ testiEsempi }}" hint-placeholder-val="{{ false }}">
-                <div class="finto">Testimonianze di esempio: nel prototipo non sono persone reali.</div>
-                </sc-if>
                 <div class="testi-griglia">
                   <sc-for list="{{ testiTutte }}" as="t" hint-placeholder-count="2">
                     <figure class="testi">
@@ -1964,9 +1952,6 @@
             <div class="banda b-crema wrap banda-larga sezione" data-screen-label="Elenco Buone pratiche">
               <div class="fx col gap20">
                 <p class="testi-intro">Qui trovi le cose che nel servizio di screening hanno funzionato bene: una lettera chiara, un kit arrivato in tempo, una prenotazione semplice. Le raccontano i lettori, noi le riscriviamo senza nomi.</p>
-                <sc-if value="{{ espEsempi }}" hint-placeholder-val="{{ false }}">
-                <div class="finto">Esperienze di esempio: nel prototipo non sono casi reali.</div>
-                </sc-if>
                 <div class="testi-griglia">
                   <sc-for list="{{ bpTutte }}" as="e" hint-placeholder-count="1">
                     <article class="testi esp esp-bp">
@@ -2024,9 +2009,6 @@
             <div class="banda b-crema wrap banda-larga sezione" data-screen-label="Elenco Difficoltà e disservizi">
               <div class="fx col gap20">
                 <p class="testi-intro">Qui trovi le cose che nel servizio di screening si sono inceppate: un invito mai arrivato, una lettera difficile da capire, un numero che non risponde. Le pubblichiamo per far vedere dove il servizio si può migliorare, non per accusare qualcuno. Per questo non trovi nomi di persone né di strutture.</p>
-                <sc-if value="{{ espEsempi }}" hint-placeholder-val="{{ false }}">
-                <div class="finto">Esperienze di esempio: nel prototipo non sono casi reali.</div>
-                </sc-if>
                 <div class="testi-griglia">
                   <sc-for list="{{ diffTutte }}" as="e" hint-placeholder-count="1">
                     <article class="testi esp esp-diff">
@@ -2397,7 +2379,6 @@
                   <div class="dato"><span class="et">Pubblicit&agrave;</span><span class="vl">Nessun cookie pubblicitario, nessun pubblico da rivendere.</span></div>
                   <div class="dato"><span class="et">Liste</span><span class="vl">Nessuna lista di indirizzi della popolazione: non &egrave; percorribile e non ci serve.</span></div>
                 </div>
-                <div class="finto">Prototipo: la misurazione &egrave; predisposta ma non attiva. L&rsquo;identificativo reale viene inserito solo alla pubblicazione.</div>
               </div>
             </div>
 

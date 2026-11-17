@@ -60,13 +60,14 @@ async function rotte(b) {
       cl.querySelectorAll('script,noscript,template,.ck,.ck-pannello,.finto').forEach(e => e.remove());
       const h1 = (cl.querySelector('h1') || {}).textContent;
       const el = [...cl.querySelectorAll('h1,p')]; const i1 = el.findIndex(e => e.tagName === 'H1');
-      const par = i1 < 0 ? '' : (el.slice(i1 + 1).filter(e => e.tagName === 'P' && !e.closest('a,article,figure,li,button,summary')).map(e => e.textContent.replace(/\s+/g, ' ').trim()).find(t => t.length >= 50) || '');
+      const par = i1 < 0 ? '' : (el.slice(i1 + 1).filter(e => e.tagName === 'P' && !e.closest('a,article,figure,li,button,summary,.art,footer,.ftr')).map(e => e.textContent.replace(/\s+/g, ' ').trim()).find(t => t.length >= 50) || '');
       cl.querySelectorAll('[data-dc-tpl]').forEach(e => e.removeAttribute('data-dc-tpl'));
       // stili iniettati dal runtime (classi atomiche .fx/.col/.gr...): senza, la copia cambia layout quando parte JS
       const stili = [...document.head.querySelectorAll('style')].map(e => e.outerHTML).filter(h => !/si-pre/.test(h));
       const m = s => { const e = document.head.querySelector(s); return e ? e.getAttribute('content') || e.getAttribute('href') : null; };
       return {
         html: cl.outerHTML, stili, title: document.title, h1: h1 ? h1.replace(/\s+/g, ' ').trim() : '', par: par || '',
+        h3: [...cl.querySelectorAll('h3')].map(e => e.textContent.replace(/\s+/g, ' ').trim()).filter(Boolean).slice(0, 3),
         desc: m('meta[name=description]'), canon: m('link[rel=canonical]'), ogt: m('meta[property="og:title"]'), ogd: m('meta[property="og:description"]'), ogu: m('meta[property="og:url"]')
       };
     });
@@ -76,6 +77,8 @@ async function rotte(b) {
     // titolo e descrizione propri di ogni pagina: se la pagina non li imposta (restano quelli generici della shell) si ricavano da h1 e primo paragrafo reale, senza testi scritti a mano
     const gt = (shell.match(/<title>([^<]*)<\/title>/) || [])[1], gd = (shell.match(/<meta name="description" content="([^"]*)">/) || [])[1];
     if (r !== '/' && d.h1 && esc(d.title) === gt) d.title = /^Screening Italia/.test(d.h1) ? d.h1 : d.h1 + ' · Screening Italia';
+    // pagina senza paragrafo introduttivo (es. /domande, solo schede): h1 più i primi titoli delle schede, mai il riassunto di una scheda
+    if (r !== '/' && !d.par && d.h1 && d.h3.length) d.par = d.h1 + ': ' + d.h3.join('; ');
     if (r !== '/' && d.par && d.desc === gd) { const pr = /^\/regione\//.test(r) && d.h1 ? d.h1 + ': ' + d.par : d.par; d.desc = pr.length > 155 ? pr.slice(0, 152).replace(/\s+\S*$/, '') + '…' : pr; d.ogd = null; d.ogt = null; }
     out = out.replace(/<title>[^<]*<\/title>/, '<title>' + esc(d.title).replace(/&quot;/g, '"') + '</title>');
     const setMeta = (re, val, tag) => { if (val != null) out = out.replace(re, tag(esc(val))); };
