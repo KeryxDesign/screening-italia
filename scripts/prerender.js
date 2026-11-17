@@ -77,6 +77,8 @@ async function rotte(b) {
     const gt = (shell.match(/<title>([^<]*)<\/title>/) || [])[1], gd = (shell.match(/<meta name="description" content="([^"]*)">/) || [])[1];
     if (r !== '/' && d.h1 && esc(d.title) === gt) d.title = /^Screening Italia/.test(d.h1) ? d.h1 : d.h1 + ' · Screening Italia';
     if (r !== '/' && d.par && d.desc === gd) { d.desc = d.par.length > 155 ? d.par.slice(0, 152).replace(/\s+\S*$/, '') + '…' : d.par; d.ogd = null; d.ogt = null; }
+    // regioni: il primo paragrafo reale e' quello dello stato vuoto, uguale per tutte; descrizione propria per regione (17/11/2026)
+    if (/^\/regione\//.test(r)) { const nome = decodeURIComponent(r.split('/')[2]); d.desc = 'Screening in ' + nome + ': le iniziative aperte nella regione e come funzionano i programmi. Informazione indipendente, non sostituisce il medico.'; d.ogd = null; }
     out = out.replace(/<title>[^<]*<\/title>/, '<title>' + esc(d.title).replace(/&quot;/g, '"') + '</title>');
     const setMeta = (re, val, tag) => { if (val != null) out = out.replace(re, tag(esc(val))); };
     setMeta(/<meta name="description" content="[^"]*">/, d.desc, v => '<meta name="description" content="' + v + '">');
