@@ -76,7 +76,7 @@ async function rotte(b) {
     // titolo e descrizione propri di ogni pagina: se la pagina non li imposta (restano quelli generici della shell) si ricavano da h1 e primo paragrafo reale, senza testi scritti a mano
     const gt = (shell.match(/<title>([^<]*)<\/title>/) || [])[1], gd = (shell.match(/<meta name="description" content="([^"]*)">/) || [])[1];
     if (r !== '/' && d.h1 && esc(d.title) === gt) d.title = /^Screening Italia/.test(d.h1) ? d.h1 : d.h1 + ' · Screening Italia';
-    if (r !== '/' && d.par && d.desc === gd) { d.desc = d.par.length > 155 ? d.par.slice(0, 152).replace(/\s+\S*$/, '') + '…' : d.par; d.ogd = null; d.ogt = null; }
+    if (r !== '/' && d.par && d.desc === gd) { const pr = /^\/regione\//.test(r) && d.h1 ? d.h1 + ': ' + d.par : d.par; d.desc = pr.length > 155 ? pr.slice(0, 152).replace(/\s+\S*$/, '') + '…' : pr; d.ogd = null; d.ogt = null; }
     out = out.replace(/<title>[^<]*<\/title>/, '<title>' + esc(d.title).replace(/&quot;/g, '"') + '</title>');
     const setMeta = (re, val, tag) => { if (val != null) out = out.replace(re, tag(esc(val))); };
     setMeta(/<meta name="description" content="[^"]*">/, d.desc, v => '<meta name="description" content="' + v + '">');
