@@ -468,7 +468,8 @@
   function compileTemplate(html, host) {
     const tpl = document.createElement("template");
     //! nosemgrep: direct-inner-html-assignment
-    tpl.innerHTML = encodeCase(html);
+    // href/src con segnaposto stanno nel sorgente come data-sc-href/data-sc-src: cosi i crawler non leggono "{{ ... }}" come indirizzi
+    tpl.innerHTML = encodeCase(html.replace(/(\s)data-sc-(href|src)=/g, "$1$2="));
     let tplN = 0;
     (function stamp(node) {
       if (node.nodeType === Node.ELEMENT_NODE) {
