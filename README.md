@@ -41,6 +41,9 @@ Una sola pagina con indirizzi puliti (senza #): il server riporta ogni percorso 
 | `/faq` | Domande frequenti, con ricerca e filtri per argomento |
 | `/articolo/<id>` | Singola risposta impaginata come articolo |
 | `/prostata` | Approfondimento sullo screening della prostata |
+| `/polmonare` | Screening del polmone (TC a bassa dose, programma sperimentale) |
+| `/nutrizionale` | Screening nutrizionale: come si chiede |
+| `/hcv` | Test epatite C per i nati 1969-1989 |
 | `/testimonianze` | Tutte le testimonianze |
 | `/chi`, `/contatti` | Chi siamo, contatti con modulo e WhatsApp |
 

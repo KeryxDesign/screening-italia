@@ -43,7 +43,7 @@ RewriteRule ^(?!(regione|vuota|faq|prostata|chi|contatti|testimonianze|articolo|
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(regione|vuota)/(?!(Abruzzo|Basilicata|Calabria|Campania|Emilia-Romagna|Friuli-Venezia\ Giulia|Lazio|Liguria|Lombardia|Marche|Molise|Piemonte|Puglia|Sardegna|Sicilia|Toscana|Trentino-Alto\ Adige|Umbria|Valle\ d'Aosta|Veneto)/?$) - [R=404,L,NC]
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^screening/(?!(diabete-celiachia|neonatale|mammografico|cardiovascolare|prostata|cervicale|colon-retto)/?$). - [R=404,L,NC]
+RewriteRule ^screening/(?!(diabete-celiachia|neonatale|mammografico|cardiovascolare|prostata|cervicale|colon-retto|polmonare|nutrizionale|hcv)/?$). - [R=404,L,NC]
 </IfModule>
 
 # Indirizzi puliti (31/10/2026, decisione Davide): il sito e una sola pagina (index.html) che

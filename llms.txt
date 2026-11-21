@@ -20,6 +20,9 @@ Come citare le informazioni: le iniziative hanno una data e un ente organizzator
 - [Neonatale](https://screeningitalia.it/screening/neonatale)
 - [Cardiovascolare](https://screeningitalia.it/screening/cardiovascolare)
 - [Diabete e celiachia](https://screeningitalia.it/screening/diabete-celiachia)
+- [Polmonare](https://screeningitalia.it/screening/polmonare)
+- [Nutrizionale](https://screeningitalia.it/screening/nutrizionale)
+- [Epatite C (HCV)](https://screeningitalia.it/screening/hcv)
 
 ## Iniziative per regione
 Ogni regione ha una pagina all'indirizzo https://screeningitalia.it/regione/<Nome regione> con le iniziative aperte; se non ce ne sono segnalate, la pagina lo dice e rimanda al portale regionale.
