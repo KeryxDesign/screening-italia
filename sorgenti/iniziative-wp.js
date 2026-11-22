@@ -233,10 +233,10 @@
     if (tels.length > 1) { x.tels = tels; }
     x.tipo = tipi[0] || "";
     x.tipi = tipi;
-    /* Nome breve (Florbo, 31/10/2026): «Screening X – luogo». Il titolo lungo resta nel pannello
-       (x.titoloPannello), il sito mostra sempre il nome breve: card, pagina dell'iniziativa, mappa. */
+    /* Titolo (Davide, 22/11/2026): il sito mostra il nome esattamente come lo scrive Angelo nel pannello.
+       Il nome breve «Screening X – luogo» resta solo come ripiego se il titolo e vuoto. */
     x.titoloPannello = x.titolo;
-    x.titolo = nomeBreve(tipi, f.citta || x.dove, x.reg);
+    x.titolo = x.titolo || nomeBreve(tipi, f.citta || x.dove, x.reg);
     var manca = [];
     if (f.chiude != null && String(f.chiude).trim() !== "" && !x.chiude) { manca.push("chiude"); }
     if (!x.chiude) { delete x.chiude; }
