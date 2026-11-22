@@ -11,8 +11,8 @@
   const HREF_HPV = null;     // S5, rimando «/hpv/» (cervicale)
   const HREF_INVITO = null;  // S6, «/invito/»
 
-  const SLUG = ["mammografico", "cervicale", "colon-retto", "prostata", "neonatale", "diabete-celiachia", "cardiovascolare"];
-  const TIPO = { "mammografico": "Mammografico", "cervicale": "Cervice uterina", "colon-retto": "Colon-retto", "prostata": "Prostata", "cardiovascolare": "Cardiovascolare", "neonatale": "Neonatale", "diabete-celiachia": "Diabete e celiachia pediatrici" };
+  const SLUG = ["mammografico", "cervicale", "colon-retto", "prostata", "neonatale", "diabete-celiachia", "cardiovascolare", "polmonare", "nutrizionale", "hcv"];
+  const TIPO = { "mammografico": "Mammografico", "cervicale": "Cervice uterina", "colon-retto": "Colon-retto", "prostata": "Prostata", "cardiovascolare": "Cardiovascolare", "neonatale": "Neonatale", "diabete-celiachia": "Diabete e celiachia pediatrici", "polmonare": "Polmonare", "nutrizionale": "Nutrizionale", "hcv": "Epatite C" };
 
   // Icone (brief §3.5): SVG inline, tratto 2px, sempre accanto a un'etichetta scritta.
   const PERSONA = "M12 12.6a4.05 4.05 0 100-8.1 4.05 4.05 0 000 8.1M4.5 20.2c0-3.3 3.4-5.2 7.5-5.2s7.5 1.9 7.5 5.2";
@@ -31,7 +31,10 @@
     "prostata": "M10.5 9.5a5 5 0 100 10 5 5 0 000-10zM14 12l6-6M15 5.5h5v5",
     "neonatale": BABY,
     "diabete-celiachia": "M12 3.5s6 6.2 6 10.5a6 6 0 01-12 0c0-4.3 6-10.5 6-10.5z",
-    "cardiovascolare": "M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0112 7.2 4.3 4.3 0 0119.5 10c0 5.4-7.5 10-7.5 10z"
+    "cardiovascolare": "M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0112 7.2 4.3 4.3 0 0119.5 10c0 5.4-7.5 10-7.5 10z",
+    "polmonare": "M12 4v9M12 13c-1.5 2-3 3-5 3-1.7 0-3-1.3-3-3 0-3 2-7 5-8.5M12 13c1.5 2 3 3 5 3 1.7 0 3-1.3 3-3 0-3-2-7-5-8.5",
+    "nutrizionale": "M12 8c-3.5-2-7 0-7 4.5C5 16.5 8 20 10 20c1 0 1.5-.5 2-.5s1 .5 2 .5c2 0 5-3.5 5-7.5C19 8 15.500 6 12 8zM12 8c0-2 1-3.500 3-4",
+    "hcv": "M12 3.5s6 6.2 6 10.5a6 6 0 01-12 0c0-4.3 6-10.5 6-10.5zM9.500 14.500a2.500 2.500 0 002.500 2.500"
   };
   function cartaHome(m, s, i) {
     return {
@@ -182,7 +185,7 @@
       scrOnco: dentro,
       scrProstata: slug === "prostata",
       // Senza invito nazionale: prostata e cardiovascolare (17/10/2026) usano le stesse bande.
-      scrSenzaInvito: slug === "prostata" || slug === "cardiovascolare",
+      scrSenzaInvito: ["prostata", "cardiovascolare", "polmonare", "nutrizionale", "hcv"].indexOf(slug) !== -1,
       scrGenitori: false,
                   scrHome: {
         h2: m["H·Titolo h2"],

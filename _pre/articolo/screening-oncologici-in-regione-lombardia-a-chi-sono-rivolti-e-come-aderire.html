@@ -27,10 +27,10 @@
 <link rel="icon" type="image/png" sizes="192x192" href="./marchio/icona-192.png">
 <link rel="apple-touch-icon" href="./marchio/apple-touch-icon.png">
 <script src="./support.js?v=tpl1118" defer></script>
-<script src="./logica-render.js?v=tpl1114" defer></script>
+<script src="./logica-render.js?v=pol1121" defer></script>
 <script src="./logica-classe.js?v=noq1117" defer></script>
-<script src="./screening-pagine.js?v=tpl1114" defer></script>
-<script src="./logica-screening.js?v=tpl1114" defer></script>
+<script src="./screening-pagine.js?v=pol1121" defer></script>
+<script src="./logica-screening.js?v=pol1121" defer></script>
 <link rel="stylesheet" href="./fonts/fonts.css">
 <link rel="stylesheet" href="./stile.css?v=tab1113">
 <link rel="stylesheet" href="./screening.css?v=tpl1114">
@@ -134,11 +134,11 @@
                   <a href="/screening/colon-retto" aria-current="false">Colon-retto</a>
                   <a href="/screening/cervicale" aria-current="false">Cervice uterina (HPV, PAP Test)</a>
                   <a href="/screening/prostata" aria-current="false">Prostatico (PSA, TAC multiparametrica)</a>
-                  <span class="nav-presto">Polmonare <small>in arrivo</small></span>
+                  <a href="/screening/polmonare" aria-current="false">Polmonare</a>
                   <a href="/screening/diabete-celiachia" aria-current="false">Diabete</a>
-                  <span class="nav-presto">Nutrizionale <small>in arrivo</small></span>
+                  <a href="/screening/nutrizionale" aria-current="false">Nutrizionale</a>
                   <a href="/screening/neonatale" aria-current="false">Neonatale</a>
-                  <span class="nav-presto">HCV (epatite C) <small>in arrivo</small></span>
+                  <a href="/screening/hcv" aria-current="false">HCV (epatite C)</a>
                   <a href="/screening/cardiovascolare" aria-current="false">Cardiovascolare (INPS)</a>
                 </div>
               </div>
@@ -333,7 +333,7 @@
             </div>
 
             <div class="ftr-basso">
-              <p class="ftr-legale">© 2026 Screening Italia · Angelo Zaglio, medico chirurgo, specialista in medicina preventiva · P.IVA 03898940980 · Iscrizione Ordine dei Medici di Brescia n. 5305<br>Ultimo aggiornamento: <span class="sc-interp">14 novembre</span></p>
+              <p class="ftr-legale">© 2026 Screening Italia · Angelo Zaglio, medico chirurgo, specialista in medicina preventiva · P.IVA 03898940980 · Iscrizione Ordine dei Medici di Brescia n. 5305<br>Ultimo aggiornamento: <span class="sc-interp">21 novembre</span></p>
               <p class="ftr-legale ftr-legale-link">
                 <a href="/privacy">Privacy</a>
                 <span aria-hidden="true">·</span>
@@ -438,11 +438,11 @@
                   <a href="/screening/colon-retto" aria-current="{{ navScrColon }}">Colon-retto</a>
                   <a href="/screening/cervicale" aria-current="{{ navScrCervicale }}">Cervice uterina (HPV, PAP Test)</a>
                   <a href="/screening/prostata" aria-current="{{ navScrProstata }}">Prostatico (PSA, TAC multiparametrica)</a>
-                  <span class="nav-presto">Polmonare <small>in arrivo</small></span>
+                  <a href="/screening/polmonare" aria-current="{{ navScrPolmonare }}">Polmonare</a>
                   <a href="/screening/diabete-celiachia" aria-current="{{ navScrDiabete }}">Diabete</a>
-                  <span class="nav-presto">Nutrizionale <small>in arrivo</small></span>
+                  <a href="/screening/nutrizionale" aria-current="{{ navScrNutri }}">Nutrizionale</a>
                   <a href="/screening/neonatale" aria-current="{{ navScrNeonatale }}">Neonatale</a>
-                  <span class="nav-presto">HCV (epatite C) <small>in arrivo</small></span>
+                  <a href="/screening/hcv" aria-current="{{ navScrHcv }}">HCV (epatite C)</a>
                   <a href="/screening/cardiovascolare" aria-current="{{ navScrCardio }}">Cardiovascolare (INPS)</a>
                 </div>
               </div>
@@ -600,7 +600,6 @@
                   </sc-for>
                 </div>
                 </div>
-                <p class="scr-arrivo">Pagine in arrivo: <strong>Polmonare</strong>, <strong>Nutrizionale</strong>, <strong>HCV (epatite C)</strong>.</p>
               </div>
             </div>
 
