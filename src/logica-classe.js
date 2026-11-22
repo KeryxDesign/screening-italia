@@ -1064,7 +1064,7 @@ class Component extends DCLogic {
   }
   rcTipoNome(t) { return t === "bp" ? "Una cosa che ha funzionato" : (t === "diff" ? "Un disservizio" : ""); }
   rcScreening() {
-    return ["Mammografico", "Cervice uterina", "Colon-retto", "Prostata", "Neonatale", "Diabete e celiachia pediatrici", "Polmonare", "Epatite C (HCV)", "Cardiovascolare", "Altro"];
+    return ["Mammografico", "Cervice uterina", "Colon-retto", "Prostata", "Neonatale", "Diabete e celiachia pediatrici", "Polmonare", "Epatite C (HCV)", "Nutrizionale", "Cardiovascolare", "Altro"];
   }
   rcInvia() {
     const s = this.state;

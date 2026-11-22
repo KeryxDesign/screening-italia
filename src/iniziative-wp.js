@@ -44,10 +44,10 @@
   };
 
   /* Liste chiuse. Fuori da qui l'iniziativa si scarta.
-     tipo: le voci con una pagina sul sito. Cardiovascolare aggiunta il 17/10/2026 (Angelo). */
+     tipo: le voci con una pagina sul sito. Cardiovascolare aggiunta il 17/10/2026 (Angelo), Nutrizionale il 22/11/2026 (Davide). */
   var TIPI = ["Mammografico", "Cervice uterina", "Colon-retto", "Prostata",
               "Neonatale", "Diabete e celiachia pediatrici", "Cardiovascolare",
-              "Polmonare", "Epatite C (HCV)", "Altro (spiegare nella descrizione)"];
+              "Polmonare", "Epatite C (HCV)", "Nutrizionale", "Altro (spiegare nella descrizione)"];
   var REGIONI = ["Abruzzo", "Basilicata", "Calabria", "Campania", "Emilia-Romagna",
                  "Friuli-Venezia Giulia", "Lazio", "Liguria", "Lombardia", "Marche",
                  "Molise", "Piemonte", "Puglia", "Sardegna", "Sicilia", "Toscana",
@@ -159,7 +159,8 @@
     "Colon-retto": "Screening colon-retto", "Prostata": "Screening prostata (PSA)",
     "Neonatale": "Screening neonatale", "Diabete e celiachia pediatrici": "Screening diabete e celiachia",
     "Cardiovascolare": "Screening cardiovascolare", "Polmonare": "Screening polmonare",
-    "Epatite C (HCV)": "Screening epatite C"
+    "Epatite C (HCV)": "Screening epatite C",
+    "Nutrizionale": "Screening nutrizionale"
   };
   function nomeBreve(tipi, luogo, reg) {
     var primo = tipi[0] || "";
